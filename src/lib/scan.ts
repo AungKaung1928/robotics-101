@@ -1,4 +1,5 @@
-import type { Shape } from '../content/world'
+import { BASE_TO_SCAN, type Shape } from '../content/world'
+import { compose } from './tf2d'
 
 export type Pose = { x: number; y: number; yaw: number }
 
@@ -63,4 +64,9 @@ export function castRayHit(pose: Pose, angle: number, world: Shape[], minRange: 
 /** Range reading of one beam: nearest hit, or Infinity outside [minRange, maxRange] (no return). */
 export function castRay(pose: Pose, angle: number, world: Shape[], minRange: number, maxRange: number): number {
   return castRayHit(pose, angle, world, minRange, maxRange).d
+}
+
+/** Pose of the LiDAR (base_scan) for a robot (base_link) pose: 3.2 cm behind the centre (URDF scan_joint). */
+export function sensorPose(robot: Pose): Pose {
+  return compose(robot, BASE_TO_SCAN)
 }

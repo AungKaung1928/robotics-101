@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { LIDAR, NAV2, WORLD } from '../content/world'
-import { beamAngles, beamGap, castRay, movePerScan } from './scan'
+import { beamAngles, beamGap, castRay, movePerScan, sensorPose } from './scan'
 
 const L = LIDAR
 describe('scan geometry', () => {
@@ -37,5 +37,14 @@ describe('castRay in the arena', () => {
   })
   it('a hit closer than min range is dropped', () => {
     expect(castRay({ x: 1.45, y: 2, yaw: 0 }, 0, WORLD, L.minRange, L.maxRange)).toBe(Infinity)
+  })
+})
+
+describe('sensorPose', () => {
+  it('base_scan sits 3.2 cm behind the centre, along the heading', () => {
+    const s = sensorPose({ x: 1, y: 2, yaw: Math.PI / 2 })
+    expect(s.x).toBeCloseTo(1, 12)
+    expect(s.y).toBeCloseTo(2 - 0.032, 12)
+    expect(s.yaw).toBeCloseTo(Math.PI / 2, 12)
   })
 })
