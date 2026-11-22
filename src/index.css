@@ -129,6 +129,10 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
   .overview, .chapter { grid-template-columns: minmax(0, 1fr); padding: var(--s3); gap: var(--s3); }
   .console { gap: var(--s3); padding: var(--s2) var(--s3); }
   .steps { flex-direction: column; }
+  /* The plan shrinks to ~350 px: larger label units keep them near 12 px. */
+  .wp .wp-title { font-size: 0.4px; }
+  .wp .wp-value { font-size: 0.3px; }
+  .wp .wp-kind { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
