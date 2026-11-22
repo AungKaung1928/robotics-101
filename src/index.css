@@ -89,6 +89,8 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .inspect { fill: none; stroke: var(--ray); stroke-width: 0.025; }
 .rays { stroke: var(--ray); stroke-width: 0.008; opacity: 0.45; }
 .hit { fill: var(--ray); }
+.hit-target { fill: transparent; cursor: crosshair; }
+.sel-ray { stroke: var(--ray); stroke-width: 0.03; }
 .robot { fill: var(--robot); fill-opacity: 0.2; stroke: var(--robot); stroke-width: 0.03; }
 .heading { stroke: var(--robot); stroke-width: 0.05; }
 

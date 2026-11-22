@@ -38,6 +38,7 @@ const en = {
     gap: 'gap between beams',
     move: 'moved per scan at 0.26 m/s',
     measured: 'measured /scan rate (config 5 Hz)',
+    beam: 'beam (hover a dot)',
   },
   tf: {
     lines: [
@@ -165,6 +166,7 @@ const ja: typeof en = {
     gap: 'ビームの間隔',
     move: '0.26 m/s で 1 スキャン間に進む距離',
     measured: '実測の /scan 周期 (設定 5 Hz)',
+    beam: 'ビーム (点にカーソル)',
   },
   tf: {
     lines: [
