@@ -61,6 +61,7 @@ a.is-peek .wp circle { r: 0.4; }
 .arena { width: 100%; height: auto; display: block; background: var(--surface); border: 1px solid var(--rule); }
 .arena .grid { fill: none; stroke: var(--grid); stroke-width: 0.012; }
 .arena .occ { fill: var(--occ); }
+.arena .obs-name { font-size: 0.22px; fill: var(--ink-2); }
 .scalebar path { stroke: var(--ink); stroke-width: 0.04; }
 .scalebar text, .arena text { font-family: var(--mono); font-size: 0.26px; fill: var(--ink); }
 .patrol { fill: none; stroke: var(--free); stroke-width: 0.05; stroke-dasharray: 0.2 0.12; }

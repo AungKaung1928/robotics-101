@@ -43,7 +43,7 @@ export default function Overview({ t }: { t: Strings }) {
         </a>
         <p className="note">{t.pathNote}</p>
       </div>
-      <Arena label={t.open} overlay={labels} role="group">
+      <Arena label={t.open} overlay={labels} role="group" names={false}>
         <path className="patrol" d={path} />
         <circle className="patrol-bot" r="0.22" style={{ offsetPath: `path('${path}')` }} aria-hidden="true" />
       </Arena>
