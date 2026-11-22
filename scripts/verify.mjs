@@ -16,7 +16,8 @@ const ROUTES = [
   { hash: '#/tf', readouts: ['hit-map', 'hit-base_scan'], words: { verdict: /healthy|正常/ } },
   { hash: '#/scan', readouts: ['hits', 'gap', 'move'] },
   { hash: '#/detect', readouts: ['found', 'truth'] },
-  { hash: '#/grid', readouts: ['cells', 'scans', 'known'] },
+  { hash: '#/grid', readouts: ['cells', 'scans', 'known'], equals: { scans: '1' } },
+  { hash: '#/grid/7', readouts: ['known'], equals: { scans: '7' }, moreThan: { known: ['#/grid', 'known'] } },
   { hash: '#/costmap', readouts: ['cost', 'edge'] },
   { hash: '#/goal', readouts: ['tick', 'drive', 'time', 'ticks'] },
 ]
@@ -48,6 +49,7 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
   document.body.append('PHONE ' + d.scrollWidth + ' ' + d.clientWidth) }, 800)</script>`)
   const vite = spawn(join(ROOT, 'node_modules/.bin/vite'), ['preview', '--port', String(PORT), '--strictPort'], { cwd: ROOT, stdio: 'ignore' })
   const fails = []
+  const seen = {} // dom per route and language, for checks that compare two pages
   try {
     let up = false
     for (let i = 0; i < 50 && !up; i++) {
@@ -71,6 +73,13 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
         }
         if (!/<(svg|canvas)[^>]*role="img"/.test(dom)) fails.push(`${name}: no figure`)
         if (r.readouts && (dom.match(/aria-current="step"/g) ?? []).length !== 1) fails.push(`${name}: mini plan does not light exactly one waypoint`)
+        const read = (k, d = dom) => d.match(new RegExp(`data-k="${k}"[^>]*>([^<]*)`))?.[1]
+        for (const [k, want] of Object.entries(r.equals ?? {})) if (read(k) !== want) fails.push(`${name}: readout ${k} '${read(k)}', want '${want}'`)
+        for (const [k, [hash, k2]] of Object.entries(r.moreThan ?? {})) {
+          const other = parseFloat(read(k2, seen[`${hash} ${lang}`] ?? '') ?? 'NaN')
+          if (!(parseFloat(read(k) ?? 'NaN') > other)) fails.push(`${name}: readout ${k} ${read(k)} not above ${hash} (${other})`)
+        }
+        seen[`${r.hash} ${lang}`] = dom
         if (r.off !== undefined) {
           const n = (dom.match(/is-off/g) ?? []).length
           if (n !== r.off) fails.push(`${name}: ${n} timeline rows dimmed, want ${r.off}`)
