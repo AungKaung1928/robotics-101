@@ -6,7 +6,7 @@ export const CHAPTERS = [
   { id: 'detect', built: false },
   { id: 'grid', built: false },
   { id: 'costmap', built: true },
-  { id: 'goal', built: false },
+  { id: 'goal', built: true },
 ] as const
 
 export type ChapterId = (typeof CHAPTERS)[number]['id']

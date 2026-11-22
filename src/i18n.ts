@@ -54,6 +54,19 @@ const en = {
     verdict: 'detector says',
     v: { healthy: 'healthy', stale: 'STALE', jump: 'JUMP' },
   },
+  goal: {
+    lines: [
+      'The DWB controller runs at 20 Hz; at the 0.26 m/s speed limit each tick moves 1.3 cm.',
+      'The goal counts as reached anywhere inside 0.25 m: patrol can "arrive" up to 25 cm short.',
+      'Times are a lower bound: full speed from the first tick, no acceleration limit.',
+    ],
+    d: 'Goal distance (m)',
+    tick: 'per control tick',
+    drive: 'distance to drive',
+    time: 'minimum time',
+    ticks: 'control ticks',
+    every: 'dots: every 10th tick',
+  },
   costmap: {
     lines: [
       'Nav2 inflates every obstacle: cost falls off with distance, so the planner keeps clear of walls.',
@@ -119,6 +132,19 @@ const ja: typeof en = {
     age: '変換の古さ (秒)',
     verdict: '検出器の判定',
     v: { healthy: '正常', stale: 'STALE', jump: 'JUMP' },
+  },
+  goal: {
+    lines: [
+      'DWB コントローラは 20 Hz。速度上限 0.26 m/s で 1 周期に 1.3 cm 進む。',
+      'ゴールは 0.25 m 以内に入れば到着扱い。巡回は最大 25 cm 手前で「着く」。',
+      '時間は下限値: 最初の周期から最高速、加速度制限なし。',
+    ],
+    d: 'ゴールまでの距離 (m)',
+    tick: '制御 1 周期あたり',
+    drive: '走る距離',
+    time: '最短時間',
+    ticks: '制御周期の数',
+    every: '点: 10 周期ごと',
   },
   costmap: {
     lines: [

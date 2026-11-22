@@ -15,6 +15,7 @@ describe('neighbour', () => {
     expect(neighbour('scan', 1)).toBe('costmap')
     expect(neighbour('scan', -1)).toBe('tf')
     expect(neighbour('tf', -1)).toBeNull()
-    expect(neighbour('costmap', 1)).toBeNull()
+    expect(neighbour('costmap', 1)).toBe('goal')
+    expect(neighbour('goal', 1)).toBeNull()
   })
 })

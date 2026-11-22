@@ -10,10 +10,11 @@ const BASE = `http://localhost:${PORT}/`
 const OUT = join(ROOT, 'verify-out')
 // Route, then the readouts (data-k) its page must show with a number in them.
 const ROUTES = [
-  { hash: '', h1: { en: 'Robotics First Steps', ja: 'ロボティクス はじめの一歩' }, links: ['#/tf', '#/scan', '#/costmap'], planned: 4 },
+  { hash: '', h1: { en: 'Robotics First Steps', ja: 'ロボティクス はじめの一歩' }, links: ['#/tf', '#/scan', '#/costmap', '#/goal'], planned: 3 },
   { hash: '#/tf', readouts: ['hit-map', 'hit-base_scan'], words: { verdict: /healthy|正常/ } },
   { hash: '#/scan', readouts: ['hits', 'gap', 'move'] },
   { hash: '#/costmap', readouts: ['cost', 'edge'] },
+  { hash: '#/goal', readouts: ['tick', 'drive', 'time', 'ticks'] },
 ]
 const JA_TEXT = /[぀-ヿ一-龯]/
 

@@ -85,6 +85,10 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .frames { width: 100%; border-collapse: collapse; margin: 0 0 var(--s3); font-size: var(--t-small); }
 .frames th { text-align: left; color: var(--ink-2); font-weight: 400; border-bottom: 1px solid var(--rule); padding: var(--s1) 0; }
 .frames td { font-family: var(--mono); padding: var(--s1) 0; border-bottom: 1px solid var(--rule); }
+.tol { fill: var(--free); fill-opacity: 0.15; stroke: var(--free); stroke-width: 0.03; }
+.goal-x { stroke: var(--free); stroke-width: 0.05; }
+.track { stroke: var(--robot); stroke-width: 0.02; }
+.tickdot { fill: var(--robot); }
 .v-stale, .v-jump { color: var(--ray); }
 .chart { width: 100%; height: auto; background: var(--surface); border: 1px solid var(--rule); }
 .chart .axis { fill: none; stroke: var(--ink-2); }

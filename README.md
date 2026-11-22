@@ -9,8 +9,9 @@ A mobile robot's first ideas, seen top-down on the floor plan of a real ROS 2 se
 | 2. The TF tree | drift of odom in map, robot pose in odom; odom jump and transform age | one LiDAR hit written in map, odom, base_link, base_scan; the anomaly detector's verdict (stale over 1.0 s, jump over 0.5 m) |
 | 3. One LiDAR scan | robot pose, range, scan rate | beams with a return; gap between beams (6.1 cm at 3.5 m); distance moved per scan |
 | 6. Costmap inflation | Nav2 `cost_scaling_factor`, distance to obstacle | cost of the cell (253 inside the 0.22 m radius, 93 at the 0.55 m edge, then 0) |
+| 7. Reaching a goal | goal distance | 1.3 cm per 20 Hz control tick at 0.26 m/s; distance left after the 0.25 m tolerance; minimum time and ticks |
 
-Four more waypoints (bring-up order, a simple detector, occupancy grid, reaching a goal) are on the plan, marked planned.
+Three more waypoints (bring-up order, a simple detector, occupancy grid) are on the plan, marked planned.
 
 ## Run
 
@@ -21,8 +22,8 @@ git clone https://github.com/AungKaung1928/robotics-first-steps
 cd robotics-first-steps
 npm ci
 npm run dev          # open the printed localhost URL
-npm test             # ray cast, transforms, detector rule, inflation cost, routes, patrol path
-scripts/verify.sh    # builds, loads every page in headless Chrome (EN/JA, 390 px); ends with "PASS 8 pages"
+npm test             # ray cast, transforms, detector rule, time to goal, inflation cost, routes, patrol path
+scripts/verify.sh    # builds, loads every page in headless Chrome (EN/JA, 390 px); ends with "PASS 10 pages"
 ```
 
 ## Sources
