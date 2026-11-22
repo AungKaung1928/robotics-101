@@ -112,6 +112,7 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
     }
     chrome(BASE + 'phone.html#/scan', { size: '390,844', shot: 'scan-390.png' })
     chrome(BASE + 'phone.html', { size: '390,844', shot: 'plan-390.png' })
+    for (const h of ['bringup', 'tf', 'costmap']) chrome(BASE + `phone.html#/${h}`, { size: '390,844', shot: `${h}-390.png` })
   } finally {
     vite.kill()
   }
