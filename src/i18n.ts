@@ -4,7 +4,7 @@ export type Lang = 'en' | 'ja'
 
 const en = {
   title: 'Robotics First Steps',
-  lede: 'One TurtleBot3 in a 10 × 10 m arena. Each waypoint is one idea of a mobile robot, with its value from a real ROS 2 Nav2 setup.',
+  lede: 'One simulated TurtleBot3 in a 10 × 10 m Gazebo arena. Each waypoint is one idea of a mobile robot, with its value from that setup’s ROS 2 Nav2 config.',
   open: 'Open a waypoint',
   start: 'Start at waypoint 1',
   drag: '← drag me →',
@@ -61,7 +61,7 @@ const en = {
     drive: 'most it can drive between checks (0.26 m/s)',
     mapOdom: 'SLAM publishes map → odom every',
     odom: '/odom rate (≈ updates per check)',
-    driveNote: 'So a move over 0.5 m between checks is never driving: it is a relocalization or an error.',
+    driveNote: 'Under the 0.26 m/s Nav2 limit the robot moves at most 0.13 m between checks, so a jump over 0.5 m points to a map → odom correction, a late check or a fault.',
     gFrames: 'Frames',
     gDetector: 'Anomaly detector (every 0.5 s)',
     v: { healthy: 'healthy', stale: 'STALE', jump: 'JUMP' },
@@ -69,8 +69,8 @@ const en = {
   goal: {
     lines: [
       'The DWB controller runs at 20 Hz; at the 0.26 m/s speed limit each tick moves 1.3 cm.',
-      'The goal counts as reached anywhere inside 0.25 m: patrol can "arrive" up to 25 cm short.',
-      'Minimum time first ignores acceleration; his 2.5 m/s² limit reaches full speed in 0.1 s, so it barely matters here.',
+      'The goal counts as reached once the robot is within 0.25 m and its heading within 0.25 rad: patrol can stop up to 25 cm short.',
+      'Minimum time first ignores acceleration. Nav2’s 2.5 m/s² limit reaches full speed in 0.1 s, the simulated drive’s 1.0 m/s² in 0.26 s: either way it barely matters here.',
       'Measured in the source repo: 12 patrol goals reached in two 50 s windows, 0 aborts.',
     ],
     d: 'Goal distance (m)',
@@ -83,14 +83,14 @@ const en = {
     gChecks: 'Nav2 checks',
     progress: 'progress checker: must move 0.5 m within 10 s; at full speed',
     planner: 'global planner',
-    recover: 'when stuck, recovery behaviours',
+    recover: 'recovery behaviours loaded (the behavior tree sets the order)',
     ticks: 'control ticks',
     measured: '/cmd_vel rate',
     every: 'dots: every 10th tick',
   },
   bringup: {
     lines: [
-      'One launch file starts everything, each stage on a timer, so a stage only starts after what it needs.',
+      'One launch file starts everything. Most stages wait on fixed timers chosen so their inputs should exist first; nothing checks that they do.',
       'Drag SLAM or Nav2 earlier: a stage that starts no later than its input waits on a frame or topic that is not there yet.',
     ],
     slam: 'SLAM starts at (s)',
@@ -104,14 +104,14 @@ const en = {
   },
   grid: {
     lines: [
-      'SLAM keeps a grid of cells; each holds the log-odds that it is occupied. Grey is unknown.',
+      'This page keeps the textbook grid: each cell holds the log-odds that it is occupied; grey is unknown. slam_toolbox instead redraws its map from stored scan poses, so a loop closure can move walls.',
       'Each scan makes the cells along a beam a little more free and the hit cell more occupied.',
       'Press Add scan: the robot scans from each waypoint in turn and the map fills in.',
     ],
     res: 'Resolution (m per cell)',
     add: 'Add scan',
     reset: 'Reset',
-    cells: 'cells in the 10 × 10 m map',
+    cells: 'cells in the page grid (10 × 10 m)',
     scans: 'scans added',
     known: 'cells no longer unknown',
     limit: (slam: number, sensor: number) => `SLAM may use beams up to ${slam} m (max_laser_range), but the LiDAR returns nothing past ${sensor} m: the sensor sets the limit.`,
@@ -119,7 +119,7 @@ const en = {
     kept: 'one scan joins the map per 0.5 m (or 0.5 rad); at full speed every',
     between: 'LiDAR scans in that time (measured rate)',
     republish: 'map republished every',
-    unknown: 'His global planner may route through grey unknown cells (allow_unknown: true), so a half-built map is enough to start driving.',
+    unknown: 'His NavFn planner may route through grey unknown cells (allow_unknown: true), so it can plan before the map is complete; the local costmap handles what the sensor sees on the way.',
     same: 'The SLAM map, the local and the global costmap all use this 0.05 m cell, so one map cell is one cost cell.',
     model: 'Model: hit p = 0.7, pass p = 0.4 (page choice); beams with no return change nothing.',
   },
@@ -138,8 +138,8 @@ const en = {
   },
   costmap: {
     lines: [
-      'Nav2 inflates every obstacle: cost falls off with distance, so the planner keeps clear of walls.',
-      'Inside the robot radius (0.22 m) the cost is 253: the centre there means a collision.',
+      'Nav2 inflates every obstacle: cost falls off with distance, so the planner prefers paths clear of walls.',
+      'Inside the configured robot radius (0.22 m) the cost is 253: in the costmap’s circle model the centre there collides.',
     ],
     k: 'cost_scaling_factor k',
     d: 'Robot centre to obstacle (m)',
@@ -156,7 +156,7 @@ const en = {
 
 const ja: typeof en = {
   title: 'ロボティクス はじめの一歩',
-  lede: '10 × 10 m のアリーナに TurtleBot3 が 1 台。各ウェイポイントで移動ロボットの考え方を 1 つずつ扱い、値は実際の ROS 2 Nav2 設定から取る。',
+  lede: '10 × 10 m の Gazebo アリーナにシミュレーションの TurtleBot3 が 1 台。各ウェイポイントで移動ロボットの考え方を 1 つずつ扱い、値はその ROS 2 Nav2 設定から取る。',
   open: 'ウェイポイントを開く',
   start: 'ウェイポイント 1 から始める',
   drag: '← ドラッグ →',
@@ -213,7 +213,7 @@ const ja: typeof en = {
     drive: '確認の間に走れる最大距離 (0.26 m/s)',
     mapOdom: 'SLAM が map → odom を配信する間隔',
     odom: '/odom レート (≈ 確認 1 回あたりの更新数)',
-    driveNote: 'つまり確認の間に 0.5 m を超える移動は走行ではなく、再位置推定かエラー。',
+    driveNote: 'Nav2 の速度上限 0.26 m/s なら確認の間に最大 0.13 m。0.5 m を超える jump は map → odom の補正、確認の遅れ、または故障を示す。',
     gFrames: 'フレーム',
     gDetector: '異常検出器 (0.5 秒ごと)',
     v: { healthy: '正常', stale: 'STALE', jump: 'JUMP' },
@@ -221,8 +221,8 @@ const ja: typeof en = {
   goal: {
     lines: [
       'DWB コントローラは 20 Hz。速度上限 0.26 m/s で 1 周期に 1.3 cm 進む。',
-      'ゴールは 0.25 m 以内に入れば到着扱い。巡回は最大 25 cm 手前で「着く」。',
-      '最短時間はまず加速度を無視。加速度制限 2.5 m/s² なら 0.1 秒で最高速に達するので、ここではほぼ影響しない。',
+      '位置が 0.25 m 以内、向きが 0.25 rad 以内で到着扱い。巡回は最大 25 cm 手前で止まりうる。',
+      '最短時間はまず加速度を無視。Nav2 の 2.5 m/s² なら 0.1 秒、シミュレーションの駆動 1.0 m/s² なら 0.26 秒で最高速。どちらでもほぼ影響しない。',
       '元リポジトリでの実測: 50 秒の区間 2 回で巡回ゴール 12 個に到着、アボート 0。',
     ],
     d: 'ゴールまでの距離 (m)',
@@ -235,14 +235,14 @@ const ja: typeof en = {
     gChecks: 'Nav2 の判定',
     progress: '進捗チェック: 10 秒以内に 0.5 m 動くこと。最高速なら',
     planner: 'グローバルプランナ',
-    recover: '行き詰まったときの回復動作',
+    recover: '読み込まれた回復動作 (順番はビヘイビアツリーが決める)',
     ticks: '制御周期の数',
     measured: '/cmd_vel レート',
     every: '点: 10 周期ごと',
   },
   bringup: {
     lines: [
-      '1 つの launch ファイルが全部を起動する。各段はタイマーつきで、必要なものの後にだけ始まる。',
+      '1 つの launch ファイルが全部を起動する。多くの段は固定タイマーで待ち、入力が先にあるはずの時刻に始まる。実際にあるかは確認しない。',
       'SLAM や Nav2 を早めると、入力元と同時か、それより前に始まる段は、まだ存在しないフレームやトピックを待つことになる。',
     ],
     slam: 'SLAM の開始 (秒)',
@@ -256,14 +256,14 @@ const ja: typeof en = {
   },
   grid: {
     lines: [
-      'SLAM はセルの格子を持つ。各セルは占有の対数オッズを持つ。灰色は未知。',
+      'このページは教科書どおりの格子: 各セルが占有の対数オッズを持ち、灰色は未知。slam_toolbox は保存したスキャン姿勢から地図を描き直すので、ループ閉じ込みで壁が動くことがある。',
       'スキャンのたびに、ビームが通ったセルは少し空きに、当たったセルは占有に近づく。',
       '「スキャン追加」を押すと、ロボットが各ウェイポイントから順にスキャンし、地図が埋まる。',
     ],
     res: '解像度 (m/セル)',
     add: 'スキャン追加',
     reset: 'リセット',
-    cells: '10 × 10 m 地図のセル数',
+    cells: 'ページの格子のセル数 (10 × 10 m)',
     scans: '追加したスキャン',
     known: '未知でなくなったセル',
     limit: (slam: number, sensor: number) => `SLAM は ${slam} m までのビームを使える設定 (max_laser_range) だが、LiDAR は ${sensor} m より先を返さない。限界はセンサの方。`,
@@ -271,7 +271,7 @@ const ja: typeof en = {
     kept: '0.5 m (または 0.5 rad) ごとに 1 スキャンを地図へ。最高速なら',
     between: 'その間に届く LiDAR スキャン (実測レート)',
     republish: '地図の再配信間隔',
-    unknown: 'グローバルプランナは灰色の未知セルも通る経路を引ける (allow_unknown: true)。地図が途中でも走り出せる。',
+    unknown: 'NavFn は灰色の未知セルも通る経路を引ける (allow_unknown: true)。地図が完成する前に計画でき、途中で見えたものはローカルコストマップが扱う。',
     same: 'SLAM 地図・ローカル/グローバルコストマップはすべて 0.05 m のセル。地図の 1 セルがコストの 1 セルに対応する。',
     model: 'モデル: 当たり p = 0.7、通過 p = 0.4 (このページの選択)。反射のないビームは何も変えない。',
   },
@@ -290,8 +290,8 @@ const ja: typeof en = {
   },
   costmap: {
     lines: [
-      'Nav2 は障害物を膨張させる。距離とともにコストが下がり、プランナは壁から離れた経路を選ぶ。',
-      'ロボット半径 (0.22 m) 以内はコスト 253。中心がそこに入れば衝突。',
+      'Nav2 は障害物を膨張させる。距離とともにコストが下がり、プランナは壁から離れた経路を好む。',
+      '設定上のロボット半径 (0.22 m) 以内はコスト 253。コストマップの円モデルでは中心がそこに入ると衝突。',
     ],
     k: 'cost_scaling_factor k',
     d: 'ロボット中心から障害物までの距離 (m)',
