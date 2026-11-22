@@ -34,3 +34,10 @@ describe('with his acceleration limit (2.5 m/s²)', () => {
     expect((NAV2.yawGoalTolerance * 180) / Math.PI).toBeCloseTo(14.3, 1)
   })
 })
+
+describe('progress checker', () => {
+  it('0.5 m within 10 s; at 0.26 m/s that takes 1.9 s', () => {
+    expect(NAV2.progressRadius / NAV2.maxVelX).toBeCloseTo(1.923, 3)
+    expect(NAV2.progressRadius / NAV2.maxVelX).toBeLessThan(NAV2.progressTime)
+  })
+})

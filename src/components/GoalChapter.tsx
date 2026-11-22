@@ -37,6 +37,7 @@ export default function GoalChapter({ t }: { t: Strings }) {
           <div><dt>{s.time}</dt><dd data-k="time">{minTime(d, TOL, V).toFixed(1)} s</dd></div>
           <div><dt>{s.timeAccel}</dt><dd data-k="timeaccel">{minTimeAccel(d, TOL, V, NAV2.accLimX).toFixed(1)} s</dd></div>
           <div><dt>{s.yaw}</dt><dd data-k="yaw">{NAV2.yawGoalTolerance} rad = {((NAV2.yawGoalTolerance * 180) / Math.PI).toFixed(1)}°</dd></div>
+          <div><dt>{s.progress}</dt><dd data-k="progress">{(NAV2.progressRadius / V).toFixed(1)} s</dd></div>
           <div><dt>{s.ticks}</dt><dd data-k="ticks">{ticks}</dd></div>
           <div><dt>{s.measured} <b className="kind">{t.kind.measured}</b></dt><dd data-k="cmdhz">{MEASURED.cmdVelHz.toFixed(1)} Hz</dd></div>
         </dl>

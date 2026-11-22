@@ -41,6 +41,8 @@ export const NAV2 = {
   goalTolerance: 0.25, // :31
   yawGoalTolerance: 0.25, // :32 (rad)
   accLimX: 2.5, // :45 (decel_lim_x -2.5 at :48)
+  progressRadius: 0.5, // :27 required_movement_radius
+  progressTime: 10.0, // :28 movement_time_allowance (s)
   costmapResolution: 0.05, // :81 (local costmap)
   globalCostmapResolution: 0.05, // :119
   globalRobotRadius: 0.22, // :118
