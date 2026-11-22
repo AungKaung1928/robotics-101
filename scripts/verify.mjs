@@ -13,7 +13,7 @@ const ROUTES = [
   { hash: '', h1: { en: 'Robotics First Steps', ja: 'ロボティクス はじめの一歩' }, links: ['#/bringup', '#/tf', '#/scan', '#/detect', '#/grid', '#/costmap', '#/goal'], words: { peek: /^1 \/ 7 · Nav2 @ 10 s$/ } },
   { hash: '#/bringup', readouts: ['patrol', 'step'], words: { early: /none|なし/ } },
   { hash: '#/bringup/3', readouts: ['step'], off: 4 },
-  { hash: '#/tf', readouts: ['hit-map', 'hit-base_scan'], words: { verdict: /healthy|正常/ } },
+  { hash: '#/tf', readouts: ['hit-map', 'hit-base_scan', 'odomhz'], equals: { drive: '0.13 m' }, words: { verdict: /healthy|正常/ } },
   { hash: '#/tf?jump=0.6', readouts: ['hit-map'], words: { verdict: /JUMP/ }, has: 'ghost-move is-bad' },
   { hash: '#/detect?th=0.5', readouts: ['truth'], equals: { found: '3' } },
   { hash: '#/costmap?d=0.1', readouts: ['cost'], words: { cost: /^253 \((inscribed|内接)\)$/ } },
