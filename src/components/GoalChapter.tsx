@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { MEASURED, NAV2, SOURCE_REPO } from '../content/world'
 import type { Strings } from '../i18n'
-import { driveDistance, minTime, ticksToGoal } from '../lib/goal'
+import { driveDistance, minTime, minTimeAccel, ticksToGoal } from '../lib/goal'
 import Arena from './Arena'
 import { routeParam } from '../lib/route'
 import Slider from './Slider'
@@ -35,11 +35,13 @@ export default function GoalChapter({ t }: { t: Strings }) {
           <div><dt>{s.tick}</dt><dd data-k="tick">{(STEP * 100).toFixed(1)} cm</dd></div>
           <div><dt>{s.drive}</dt><dd data-k="drive">{drive.toFixed(2)} m</dd></div>
           <div><dt>{s.time}</dt><dd data-k="time">{minTime(d, TOL, V).toFixed(1)} s</dd></div>
+          <div><dt>{s.timeAccel}</dt><dd data-k="timeaccel">{minTimeAccel(d, TOL, V, NAV2.accLimX).toFixed(1)} s</dd></div>
+          <div><dt>{s.yaw}</dt><dd data-k="yaw">{NAV2.yawGoalTolerance} rad = {((NAV2.yawGoalTolerance * 180) / Math.PI).toFixed(1)}°</dd></div>
           <div><dt>{s.ticks}</dt><dd data-k="ticks">{ticks}</dd></div>
           <div><dt>{s.measured} <b className="kind">{t.kind.measured}</b></dt><dd data-k="cmdhz">{MEASURED.cmdVelHz.toFixed(1)} Hz</dd></div>
         </dl>
         <p className="note">{s.every}</p>
-        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L18-L39`}>nav2_params.yaml:18-39</a>, <a href={`${SOURCE_REPO}/blob/main/README.md`}>README (patrol result)</a></p>
+        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L18-L48`}>nav2_params.yaml:18-48</a>, <a href={`${SOURCE_REPO}/blob/main/README.md`}>README (patrol result)</a></p>
       </div>
     </>
   )
