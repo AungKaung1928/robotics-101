@@ -29,6 +29,10 @@ npm test             # launch order, ray cast, clustering, occupancy update, tra
 scripts/verify.sh    # builds, loads every page in headless Chrome (EN/JA, 390 px); ends with "PASS 34 pages"
 ```
 
+## How it is checked
+
+`npm test` pins every number on the pages and in this README to the code. `scripts/verify.sh` opens 34 pages and states (`#/bringup/3`, `#/tf?jump=0.6`, ...) in English and Japanese, plus a 390 px phone frame (feature map: [docs/FEATURES.md](docs/FEATURES.md)). CI also runs `scripts/keys.mjs`, which uses real keys, clicks and hover.
+
 ## Sources
 
 - Robot, sensor, Nav2 values and the arena: [TF-Transform-Explorer](https://github.com/AungKaung1928/TF-Transform-Explorer) (`description/turtlebot3_burger.urdf.xacro`, `config/nav2_params.yaml`, `worlds/explorer_world.sdf`).
