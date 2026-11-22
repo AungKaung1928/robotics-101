@@ -9,7 +9,7 @@ export type Stage = { id: StageId; t: number; needs: StageId[]; gives: string }
 
 export const STAGES: Stage[] = [
   { id: 'gazebo', t: 0, needs: [], gives: '/clock, base_link → base_scan' },
-  { id: 'spawn', t: 3, needs: ['gazebo'], gives: '/scan, odom → base_link' },
+  { id: 'spawn', t: 3, needs: ['gazebo'], gives: '/scan, odom → base_footprint' },
   { id: 'slam', t: 8, needs: ['spawn'], gives: 'map → odom' },
   { id: 'detector', t: 9, needs: ['slam'], gives: 'TF diagnostics' },
   { id: 'nav2', t: LAUNCH_NAV2_S, needs: ['slam'], gives: 'navigate_to_pose' },
