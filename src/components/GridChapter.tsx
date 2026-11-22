@@ -52,7 +52,8 @@ export default function GridChapter({ t }: { t: Strings }) {
     <>
       <div className="figure">
         <div className="gridwrap">
-          <canvas ref={canvas} className="gridmap" width={g.n} height={g.n} role="img" aria-label={t.chapters.grid} />
+          <canvas ref={canvas} className="gridmap" width={g.n} height={g.n} role="img"
+            aria-label={`${t.chapters.grid}: ${s.scans} ${scans}, ${s.known} ${((known / (g.n * g.n)) * 100).toFixed(1)} %`} />
           <i className="gridrobot" style={{ left: `${((last.x + SIZE / 2) / SIZE) * 100}%`, top: `${((SIZE / 2 - last.y) / SIZE) * 100}%` }} aria-hidden="true" />
         </div>
         <p className="note">{s.model}</p>

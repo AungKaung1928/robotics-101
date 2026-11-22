@@ -27,7 +27,7 @@ export default function DetectChapter({ t }: { t: Strings }) {
   return (
     <>
       <div className="figure">
-        <Arena label={t.chapters.detect}>
+        <Arena label={`${t.chapters.detect}: ${s.found} ${clusterCount(label)}, ${s.truth} ${truth}`}>
           <circle className="range" cx={sp.x} cy={sp.y} r={L.maxRange} />
           {pts.map((p, i) => p && <circle key={i} className="cl" style={{ '--h': hue(label[i]) } as React.CSSProperties} cx={p[0]} cy={p[1]} r="0.07" />)}
           <circle className="robot" cx={x} cy={y} r="0.22" />
