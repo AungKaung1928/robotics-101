@@ -63,7 +63,17 @@ a:focus-visible { outline: none; }
 a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 
 .chapter { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: var(--s4) var(--s5); padding: var(--s4) var(--s5); max-width: 1280px; margin: 0 auto; }
-.chapter h1, .steps { grid-column: 1 / -1; }
+.chapter .chead, .steps { grid-column: 1 / -1; }
+.chead { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); }
+.chead h1 { margin: 0; }
+.miniplan svg { width: 96px; height: 96px; display: block; }
+.mp-wall { fill: var(--surface); stroke: var(--occ); stroke-width: 0.3; }
+.mp-occ { fill: var(--occ); }
+.mp-path { fill: none; stroke: var(--free); stroke-width: 0.15; stroke-dasharray: 0.4 0.25; }
+.mp-wp { fill: var(--free); }
+.mp-here { fill: var(--robot); stroke: var(--surface); stroke-width: 0.2; }
+.miniplan a:focus-visible { outline: none; }
+.miniplan a:focus-visible .mp-wp { stroke: var(--robot); stroke-width: 0.25; }
 .num { font-family: var(--mono); color: var(--free); }
 .panel p { margin: 0 0 var(--s3); }
 .range { fill: none; stroke: var(--rule); stroke-width: 0.02; stroke-dasharray: 0.1 0.08; }

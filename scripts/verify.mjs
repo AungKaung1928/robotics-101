@@ -69,6 +69,7 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
           for (const t of prose) if (!JA_TEXT.test(t)) fails.push(`${name}: English left on the Japanese page: '${t.slice(0, 50)}'`)
         }
         if (!/<(svg|canvas)[^>]*role="img"/.test(dom)) fails.push(`${name}: no figure`)
+        if (r.readouts && (dom.match(/aria-current="step"/g) ?? []).length !== 1) fails.push(`${name}: mini plan does not light exactly one waypoint`)
         for (const l of r.links ?? []) if (!dom.includes(`href="${l}"`)) fails.push(`${name}: no waypoint link ${l}`)
         for (const k of r.readouts ?? []) {
           const v = dom.match(new RegExp(`data-k="${k}"[^>]*>([^<]*)`))?.[1]

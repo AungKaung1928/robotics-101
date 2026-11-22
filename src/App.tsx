@@ -4,6 +4,7 @@ import CostmapChapter from './components/CostmapChapter'
 import DetectChapter from './components/DetectChapter'
 import GoalChapter from './components/GoalChapter'
 import GridChapter from './components/GridChapter'
+import MiniPlan from './components/MiniPlan'
 import Overview from './components/Overview'
 import ScanChapter from './components/ScanChapter'
 import TfChapter from './components/TfChapter'
@@ -56,7 +57,10 @@ export default function App() {
       </header>
       {route.page === 'overview' || !Body ? <Overview t={t} /> : (
         <main className="chapter">
-          <h1><span className="num">{idx + 1}</span> {t.chapters[route.id]}</h1>
+          <div className="chead">
+            <h1><span className="num">{idx + 1}</span> {t.chapters[route.id]}</h1>
+            <MiniPlan current={route.id} t={t} />
+          </div>
           <Body t={t} />
           <nav className="steps" aria-label={t.plan}>
             {prev ? <a href={`#/${prev}`}>← {t.back}: {t.chapters[prev]}</a> : <a href="#/">← {t.plan}</a>}
