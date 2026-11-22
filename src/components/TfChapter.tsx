@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BASE_TO_SCAN, MEASURED, NAV2, SOURCE_REPO, TF_CHECK_PERIOD, TF_MAX_AGE, TF_MAX_JUMP } from '../content/world'
+import { BASE_TO_SCAN, MEASURED, NAV2, SLAM, SOURCE_REPO, TF_CHECK_PERIOD, TF_MAX_AGE, TF_MAX_JUMP } from '../content/world'
 import type { Strings } from '../i18n'
 import { maxDrivePerCheck, verdict } from '../lib/anomaly'
 import { apply, compose, invert, type TF } from '../lib/tf2d'
@@ -76,12 +76,13 @@ export default function TfChapter({ t }: { t: Strings }) {
         <Slider label={s.age} value={age} min={0} max={2} step={0.1} mark={TF_MAX_AGE} onChange={setAge} fmt={(v) => v.toFixed(1)} />
         <dl className="readout">
           <div><dt>{s.verdict}</dt><dd data-k="verdict" className={`v-${v}`}>{s.v[v]}</dd></div>
+          <div><dt>{s.mapOdom}</dt><dd data-k="mapodom">{SLAM.tfPublishS} s ({(1 / SLAM.tfPublishS).toFixed(0)} Hz)</dd></div>
           <div><dt>{s.drive}</dt><dd data-k="drive">{maxDrivePerCheck(NAV2.maxVelX, TF_CHECK_PERIOD).toFixed(2)} m</dd></div>
           <div><dt>{s.odom} <b className="kind">{t.kind.measured}</b></dt><dd data-k="odomhz">{MEASURED.odomHz.join('–')} Hz (≈ {Math.round(MEASURED.odomHz[0] * TF_CHECK_PERIOD)}–{Math.round(MEASURED.odomHz[1] * TF_CHECK_PERIOD)})</dd></div>
         </dl>
         <p className="note">{s.driveNote}</p>
         </fieldset>
-        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/src/tf_anomaly_detector.cpp#L10-L97`}>tf_anomaly_detector.cpp:10-97</a>, <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L115-L119`}>turtlebot3_burger.urdf.xacro:115-119</a>, <a href="https://www.ros.org/reps/rep-0105.html">REP 105</a></p>
+        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/src/tf_anomaly_detector.cpp#L10-L97`}>tf_anomaly_detector.cpp:10-97</a>, <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L115-L119`}>turtlebot3_burger.urdf.xacro:115-119</a>, <a href={`${SOURCE_REPO}/blob/main/config/slam_params.yaml#L47`}>slam_params.yaml:47</a>, <a href="https://www.ros.org/reps/rep-0105.html">REP 105</a></p>
       </div>
     </>
   )
