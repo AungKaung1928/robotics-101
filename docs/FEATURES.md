@@ -4,6 +4,7 @@
 |---|---|
 | `#/` | h1, the arena plan, links to all 7 waypoints |
 | `#/bringup` | h1, launch timeline, readouts: patrol start (25 s), early starts "none" at his delays |
+| `#/bringup/3` | step 3 of 7: time cursor at SLAM, the 4 later stages dimmed |
 | `#/tf` | h1, arena with map/odom/base_link axes, the box1 hit in map and base_scan, detector verdict "healthy" at the start values |
 | `#/scan` | h1, arena figure, readouts: beams with a return, gap between beams, distance per scan |
 | `#/goal` | h1, arena with tolerance circle and tick dots, readouts: per tick, distance to drive, minimum time, ticks |

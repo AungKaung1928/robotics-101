@@ -8,7 +8,7 @@ The GIF is rebuilt from the page check's screenshots: `scripts/verify.sh && pyth
 
 | Waypoint | What you change | What you read |
 |---|---|---|
-| 1. Bring-up order | SLAM and Nav2 start times | patrol start (25 s with the launch file's delays); which stage starts before what it needs |
+| 1. Bring-up order | SLAM and Nav2 start times; step through the launch (Back / Play / Next) | patrol start (25 s with the launch file's delays); which stage starts before what it needs |
 | 2. The TF tree | drift of odom in map, robot pose in odom; odom jump and transform age | one LiDAR hit written in map, odom, base_link, base_scan; the anomaly detector's verdict (stale over 1.0 s, jump over 0.5 m) |
 | 3. One LiDAR scan | robot pose, range, scan rate | beams with a return; gap between beams (6.1 cm at 3.5 m); distance moved per scan |
 | 4. A simple detector | robot position, break threshold | objects found vs objects in view: 0.1 m gives 6 pieces, 0.5 m the 3 objects (start pose) |
@@ -26,7 +26,7 @@ cd robotics-first-steps
 npm ci
 npm run dev          # open the printed localhost URL
 npm test             # launch order, ray cast, clustering, occupancy update, transforms, detector rule, time to goal, inflation cost, routes, patrol path
-scripts/verify.sh    # builds, loads every page in headless Chrome (EN/JA, 390 px); ends with "PASS 16 pages"
+scripts/verify.sh    # builds, loads every page in headless Chrome (EN/JA, 390 px); ends with "PASS 18 pages"
 ```
 
 ## Sources
