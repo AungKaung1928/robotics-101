@@ -89,7 +89,14 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .goal-x { stroke: var(--free); stroke-width: 0.05; }
 .track { stroke: var(--robot); stroke-width: 0.02; }
 .tickdot { fill: var(--robot); }
-.v-stale, .v-jump { color: var(--ray); }
+.timeline { width: 100%; height: auto; background: var(--surface); border: 1px solid var(--rule); }
+.timeline text { font: 12px var(--mono); fill: var(--ink); }
+.timeline .gives { fill: var(--ink-2); }
+.timeline .lane { stroke: var(--grid); }
+.timeline .run { stroke: var(--free); stroke-width: 6; }
+.timeline .is-early .run { stroke: var(--ray); }
+.timeline .is-early text { fill: var(--ray); }
+.v-stale, .v-jump, .early { color: var(--ray); }
 .chart { width: 100%; height: auto; background: var(--surface); border: 1px solid var(--rule); }
 .chart .axis { fill: none; stroke: var(--ink-2); }
 .chart .tick { font: 12px var(--mono); fill: var(--ink-2); }

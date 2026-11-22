@@ -1,6 +1,6 @@
 /** Chapters in patrol order. `built: false` waypoints show on the plan but do not open yet. */
 export const CHAPTERS = [
-  { id: 'bringup', built: false },
+  { id: 'bringup', built: true },
   { id: 'tf', built: true },
   { id: 'scan', built: true },
   { id: 'detect', built: false },

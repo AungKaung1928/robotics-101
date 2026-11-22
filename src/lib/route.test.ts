@@ -14,7 +14,8 @@ describe('neighbour', () => {
   it('walks built chapters only and stops at the ends', () => {
     expect(neighbour('scan', 1)).toBe('costmap')
     expect(neighbour('scan', -1)).toBe('tf')
-    expect(neighbour('tf', -1)).toBeNull()
+    expect(neighbour('tf', -1)).toBe('bringup')
+    expect(neighbour('bringup', -1)).toBeNull()
     expect(neighbour('costmap', 1)).toBe('goal')
     expect(neighbour('goal', 1)).toBeNull()
   })

@@ -67,6 +67,18 @@ const en = {
     ticks: 'control ticks',
     every: 'dots: every 10th tick',
   },
+  bringup: {
+    lines: [
+      'One launch file starts everything, each stage on a timer, so a stage only starts after what it needs.',
+      'Drag SLAM or Nav2 earlier: a stage that starts no later than its input waits on a frame or topic that is not there yet.',
+    ],
+    slam: 'SLAM starts at (s)',
+    nav2: 'Nav2 starts at (s)',
+    patrol: 'patrol starts (Nav2 + 15 s)',
+    early: 'stages started too early',
+    waits: 'starts before',
+    ok: 'none',
+  },
   costmap: {
     lines: [
       'Nav2 inflates every obstacle: cost falls off with distance, so the planner keeps clear of walls.',
@@ -145,6 +157,18 @@ const ja: typeof en = {
     time: '最短時間',
     ticks: '制御周期の数',
     every: '点: 10 周期ごと',
+  },
+  bringup: {
+    lines: [
+      '1 つの launch ファイルが全部を起動する。各段はタイマーつきで、必要なものの後にだけ始まる。',
+      'SLAM や Nav2 を早めると、入力より先に（または同時に）始まった段はまだ無いフレームやトピックを待つ。',
+    ],
+    slam: 'SLAM の開始 (秒)',
+    nav2: 'Nav2 の開始 (秒)',
+    patrol: '巡回の開始 (Nav2 + 15 秒)',
+    early: '早すぎる段',
+    waits: 'より先に開始',
+    ok: 'なし',
   },
   costmap: {
     lines: [

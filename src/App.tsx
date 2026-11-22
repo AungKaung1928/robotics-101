@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import BringupChapter from './components/BringupChapter'
 import CostmapChapter from './components/CostmapChapter'
 import GoalChapter from './components/GoalChapter'
 import Overview from './components/Overview'
@@ -7,7 +8,7 @@ import TfChapter from './components/TfChapter'
 import { STRINGS, initialLang, type Lang } from './i18n'
 import { CHAPTERS, neighbour, parseRoute, type ChapterId } from './lib/route'
 
-const BODY: Partial<Record<ChapterId, typeof ScanChapter>> = { tf: TfChapter, scan: ScanChapter, costmap: CostmapChapter, goal: GoalChapter }
+const BODY: Partial<Record<ChapterId, typeof ScanChapter>> = { bringup: BringupChapter, tf: TfChapter, scan: ScanChapter, costmap: CostmapChapter, goal: GoalChapter }
 
 export default function App() {
   const [route, setRoute] = useState(() => parseRoute(location.hash))
