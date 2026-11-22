@@ -40,6 +40,7 @@ const en = {
     moveMeasured: 'moved per scan at the measured rate',
     measured: '/scan rate (config 5 Hz)',
     beam: 'beam (hover a dot)',
+    noiseRes: 'range noise σ / resolution (URDF)',
   },
   tf: {
     lines: [
@@ -128,6 +129,7 @@ const en = {
     y: 'Robot y (m)',
     th: 'Break threshold (m)',
     found: 'objects found',
+    noise: 'add his sensor noise (σ 1 cm, Gaussian, URDF)',
     truth: 'objects in view (ground truth)',
     next: 'Borges & Aldon (2004) propose a threshold that grows with range and sensor noise; it is added once the formula is read from the paper itself.',
   },
@@ -187,6 +189,7 @@ const ja: typeof en = {
     moveMeasured: '実測レートでの 1 スキャン間の移動',
     measured: '/scan レート (設定 5 Hz)',
     beam: 'ビーム (点にカーソル)',
+    noiseRes: '距離の雑音 σ / 分解能 (URDF)',
   },
   tf: {
     lines: [
@@ -275,6 +278,7 @@ const ja: typeof en = {
     y: 'ロボット y (m)',
     th: '区切りのしきい値 (m)',
     found: '見つかった物体',
+    noise: 'センサ雑音を加える (σ 1 cm、ガウス、URDF)',
     truth: '視野内の物体 (真値)',
     next: 'Borges & Aldon (2004) は距離とセンサ雑音で大きくなるしきい値を提案している。式を論文本体で確認してから追加する。',
   },

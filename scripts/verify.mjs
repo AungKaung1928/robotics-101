@@ -16,11 +16,12 @@ const ROUTES = [
   { hash: '#/tf', readouts: ['hit-map', 'hit-base_footprint', 'hit-base_scan', 'odomhz'], equals: { drive: '0.13 m', mapodom: '0.02 s (50 Hz)' }, words: { verdict: /healthy|正常/ } },
   { hash: '#/tf?jump=0.6', readouts: ['hit-map'], words: { verdict: /JUMP/ }, has: 'ghost-move is-bad' },
   { hash: '#/detect?th=0.5', readouts: ['truth'], equals: { found: '3' } },
+  { hash: '#/detect?noise=1', readouts: ['truth'], equals: { found: '7' } },
   { hash: '#/costmap?d=0.1', readouts: ['cost'], words: { cost: /^253 \((inscribed|内接)\)$/ } },
   { hash: '#/costmap?k=9.8&d=0.54', readouts: ['cost'], words: { cost: /^1[01]$/ } },
   { hash: '#/goal?d=0.2', readouts: ['tick'], equals: { ticks: '0', drive: '0.00 m' } },
   { hash: '#/scan?x=1.2&y=2&yaw=0', readouts: ['beam'], words: { beam: /^-?[01]° → 0\.33 m$/ } },
-  { hash: '#/scan', equals: { movemeasured: '5.4–5.8 cm' }, readouts: ['hits', 'gap', 'move', 'scanhz', 'beam'], words: { beam: /^-?[01]° → 1\.4\d m$/ } },
+  { hash: '#/scan', equals: { movemeasured: '5.4–5.8 cm', noise: '1 / 1.5 cm' }, readouts: ['hits', 'gap', 'move', 'scanhz', 'beam'], words: { beam: /^-?[01]° → 1\.4\d m$/ } },
   { hash: '#/detect', readouts: ['found', 'truth'] },
   { hash: '#/grid', readouts: ['cells', 'scans', 'known'], equals: { scans: '1', kept: '1.9 s', between: '8.7–9.2', republish: '5 s' }, has: ' %"' }, // canvas label carries the result
   { hash: '#/grid?res=0.1', readouts: ['cells'], equals: { cells: '10,000' } },
