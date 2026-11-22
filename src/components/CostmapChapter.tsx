@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { NAV2, OBSTACLES, SOURCE_REPO, type Box } from '../content/world'
 import type { Strings } from '../i18n'
 import { INSCRIBED, LETHAL, distToBox, inflationCost, kForEdgeCost } from '../lib/inflation'
+import { routeParam } from '../lib/route'
 import Slider from './Slider'
 
 const R = NAV2.robotRadius, RAD = NAV2.inflationRadius
@@ -18,8 +19,8 @@ const CELLS = Array.from({ length: N * N }, (_, k) => {
 
 export default function CostmapChapter({ t }: { t: Strings }) {
   const c = t.costmap
-  const [k, setK] = useState(NAV2.costScaling)
-  const [d, setD] = useState(0.35)
+  const [k, setK] = useState(() => routeParam(location.hash, 'k', NAV2.costScaling, 0.5, 10))
+  const [d, setD] = useState(() => routeParam(location.hash, 'd', 0.35, 0, DMAX))
   const cost = (x: number) => inflationCost(x, k, R, RAD)
   const xs = Array.from({ length: 321 }, (_, i) => (i / 320) * DMAX)
   const curve = xs.map((x, i) => `${i ? 'L' : 'M'}${sx(x).toFixed(1)} ${sy(cost(x)).toFixed(1)}`).join('')

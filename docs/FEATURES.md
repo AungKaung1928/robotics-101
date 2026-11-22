@@ -8,6 +8,9 @@
 | `#/tf` | h1, arena with map/odom/base_link axes, the box1 hit in map and base_scan, detector verdict "healthy" at the start values |
 | `#/tf?jump=0.6` | detector verdict JUMP, ghost drawn red |
 | `#/detect?th=0.5` | 3 objects found = 3 in view |
+| `#/costmap?d=0.1` | cost 253 (inscribed) |
+| `#/costmap?k=9.8&d=0.54` | cost 10 near the edge (the "no cliff" k) |
+| `#/goal?d=0.2` | goal inside the tolerance: 0 ticks, 0.00 m to drive |
 | `#/scan` | h1, arena figure, readouts: beams with a return, gap between beams, distance per scan |
 | `#/goal` | h1, arena with tolerance circle and tick dots, readouts: per tick, distance to drive, minimum time, ticks |
 | `#/detect` | h1, arena with coloured clusters, readouts: objects found, objects in view |

@@ -3,6 +3,7 @@ import { MEASURED, NAV2, SOURCE_REPO } from '../content/world'
 import type { Strings } from '../i18n'
 import { driveDistance, minTime, ticksToGoal } from '../lib/goal'
 import Arena from './Arena'
+import { routeParam } from '../lib/route'
 import Slider from './Slider'
 
 const START: [number, number] = [-3.5, -0.8]
@@ -11,7 +12,7 @@ const STEP = V / HZ
 
 export default function GoalChapter({ t }: { t: Strings }) {
   const s = t.goal
-  const [d, setD] = useState(4)
+  const [d, setD] = useState(() => routeParam(location.hash, 'd', 4, 0, 8))
   const drive = driveDistance(d, TOL)
   const ticks = ticksToGoal(d, TOL, V, HZ)
   const [sx, sy] = START

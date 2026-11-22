@@ -16,6 +16,9 @@ const ROUTES = [
   { hash: '#/tf', readouts: ['hit-map', 'hit-base_scan'], words: { verdict: /healthy|正常/ } },
   { hash: '#/tf?jump=0.6', readouts: ['hit-map'], words: { verdict: /JUMP/ }, has: 'ghost-move is-bad' },
   { hash: '#/detect?th=0.5', readouts: ['truth'], equals: { found: '3' } },
+  { hash: '#/costmap?d=0.1', readouts: ['cost'], words: { cost: /^253 \((inscribed|内接)\)$/ } },
+  { hash: '#/costmap?k=9.8&d=0.54', readouts: ['cost'], words: { cost: /^1[01]$/ } },
+  { hash: '#/goal?d=0.2', readouts: ['tick'], equals: { ticks: '0', drive: '0.00 m' } },
   { hash: '#/scan', readouts: ['hits', 'gap', 'move', 'scanhz', 'beam'], words: { beam: /^-?[01]° → 1\.4\d m$/ } },
   { hash: '#/detect', readouts: ['found', 'truth'] },
   { hash: '#/grid', readouts: ['cells', 'scans', 'known'], equals: { scans: '1' } },
@@ -62,7 +65,7 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
     for (const r of ROUTES) {
       for (const lang of ['en', 'ja']) {
         const name = `${r.hash || '#/'} (${lang})`
-        const dom = chrome(BASE + r.hash, { lang, shot: `${(r.hash.slice(2).replace(/[/?=]/g, '-') || 'plan')}-${lang}.png` })
+        const dom = chrome(BASE + r.hash, { lang, shot: `${(r.hash.slice(2).replace(/[/?=&]/g, '-') || 'plan')}-${lang}.png` })
         const h1 = dom.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1]?.replace(/<[^>]+>/g, '').trim()
         if (!h1) fails.push(`${name}: no h1`)
         if (r.h1 && h1 !== r.h1[lang]) fails.push(`${name}: h1 '${h1}'`)
