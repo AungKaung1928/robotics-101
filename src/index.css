@@ -59,6 +59,8 @@ a.is-peek .wp circle { r: 0.4; }
 .scalebar path { stroke: var(--ink); stroke-width: 0.04; }
 .scalebar text, .arena text { font-family: var(--mono); font-size: 0.26px; fill: var(--ink); }
 .patrol { fill: none; stroke: var(--free); stroke-width: 0.05; stroke-dasharray: 0.2 0.12; }
+.patrol-bot { fill: var(--robot); fill-opacity: 0.85; offset-rotate: 0deg; animation: patrol 42s linear infinite; }
+@keyframes patrol { to { offset-distance: 100%; } }
 .wp circle { fill: var(--surface); stroke: var(--free); stroke-width: 0.06; }
 .wp .wp-n { text-anchor: middle; font-weight: 700; font-size: 0.3px; }
 .wp .wp-title { font-family: var(--font); font-weight: 600; font-size: 0.3px; paint-order: stroke; stroke: var(--surface); stroke-width: 0.08px; }
@@ -166,5 +168,5 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
   .peek { display: none; } /* no hover on touch; the map labels carry the same values */
 }
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; }
+  * { transition: none !important; animation: none !important; }
 }
