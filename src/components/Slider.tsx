@@ -12,7 +12,7 @@ export default function Slider(p: {
       <span>{p.label} <output>{(p.fmt ?? String)(p.value)}</output></span>
       <input type="range" min={p.min} max={p.max} step={p.step} value={p.value}
         onChange={(e) => { setTouched(true); p.onChange(Number(e.target.value)) }} />
-      {p.hint && !touched && <em className="hint">{p.hint}</em>}
+      {p.hint && !touched && <em className="hint" aria-hidden="true">{p.hint}</em>}
       {pct !== null && <i className="mark" style={{ left: `${pct}%` }} aria-hidden="true" />}
     </label>
   )
