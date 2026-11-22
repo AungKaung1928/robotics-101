@@ -28,7 +28,7 @@ export default function BringupChapter({ t }: { t: Strings }) {
   const now = order[step]
   const cursor = times[now]
   const bad = new Set(early.map(([a]) => a))
-  const H = STAGES.length * ROW + 40
+  const H = STAGES.length * ROW + 50
   return (
     <>
       <div className="figure">
@@ -37,7 +37,7 @@ export default function BringupChapter({ t }: { t: Strings }) {
             <g key={v}><line className="lane" x1={x(v)} x2={x(v)} y1={10} y2={H - 24} /><text x={x(v)} y={H - 8} textAnchor="middle">{v} s</text></g>
           ))}
           {STAGES.map((st, i) => (
-            <g key={st.id} className={`${bad.has(st.id) ? 'is-early' : ''}${started.has(st.id) ? '' : ' is-off'}${st.id === now ? ' is-now' : ''}`} transform={`translate(0 ${20 + i * ROW})`}>
+            <g key={st.id} className={`${bad.has(st.id) ? 'is-early' : ''}${started.has(st.id) ? '' : ' is-off'}${st.id === now ? ' is-now' : ''}`} transform={`translate(0 ${30 + i * ROW})`}>
               <text x={8} y={5}>{st.id}</text>
               <line className="run" x1={x(times[st.id])} x2={x(T)} y1={0} y2={0} />
               <text className="gives" x={x(times[st.id]) + 4} y={-8}>{st.gives}</text>
