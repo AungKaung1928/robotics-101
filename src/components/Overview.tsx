@@ -41,6 +41,7 @@ export default function Overview({ t }: { t: Strings }) {
       <div className="ov-text">
         <h1>{t.title}</h1>
         <p className="lede">{t.lede}</p>
+        <p className="cta"><a className="btn" href={`#/${CHAPTERS[0]}`}>{t.start} →</a> <span className="note">{t.keys}</span></p>
         <p className="note">{t.pathNote}</p>
       </div>
       <Arena label={t.open} overlay={labels}>

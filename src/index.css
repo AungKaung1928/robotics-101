@@ -44,6 +44,9 @@ a { color: var(--robot); }
 h1 { font-size: var(--t-h1); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 var(--s3); }
 .overview { display: grid; grid-template-columns: minmax(0, 22rem) minmax(0, 1fr); gap: var(--s5); padding: var(--s5); max-width: 1280px; margin: 0 auto; align-items: start; }
 .lede { font-size: 1.125rem; }
+.cta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); margin: var(--s4) 0; }
+.btn { display: inline-block; padding: var(--s2) var(--s4); background: var(--robot); color: var(--surface); text-decoration: none; font: 600 var(--t-small) var(--mono); border-radius: var(--radius); }
+.btn:hover { background: var(--ink); }
 .note, .src { color: var(--ink-2); font-size: var(--t-small); }
 
 .arena { width: 100%; height: auto; display: block; background: var(--surface); border: 1px solid var(--rule); }
