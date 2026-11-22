@@ -21,3 +21,8 @@ export function distToBox(px: number, py: number, b: { x: number; y: number; w: 
   const dx = Math.max(Math.abs(lx) - b.w / 2, 0), dy = Math.max(Math.abs(ly) - b.h / 2, 0)
   return Math.hypot(dx, dy)
 }
+
+/** cost_scaling_factor k at which the cost just inside the inflation radius falls to `edgeCost` (from 252 e^(−k(r−r_i)) = edgeCost). */
+export function kForEdgeCost(edgeCost: number, inscribed: number, inflationRadius: number): number {
+  return Math.log((INSCRIBED - 1) / edgeCost) / (inflationRadius - inscribed)
+}

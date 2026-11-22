@@ -34,3 +34,12 @@ describe('distToBox', () => {
     expect(distToBox(2 + 1, 2, { ...box1, w: 2, yaw: Math.PI / 2 })).toBeCloseTo(0.5, 12)
   })
 })
+
+import { kForEdgeCost } from './inflation'
+describe('kForEdgeCost', () => {
+  it('his geometry: k ≈ 9.8 brings the 0.55 m edge down to 10; that k gives cost 10 there', () => {
+    const k = kForEdgeCost(10, NAV2.robotRadius, NAV2.inflationRadius)
+    expect(k).toBeCloseTo(9.78, 2)
+    expect(252 * Math.exp(-k * (NAV2.inflationRadius - NAV2.robotRadius))).toBeCloseTo(10, 9)
+  })
+})
