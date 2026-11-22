@@ -75,10 +75,11 @@ try {
       ws.send(JSON.stringify({ id: n, method, params }))
     })
   const js = async (expr) => (await send('Runtime.evaluate', { expression: expr, returnByValue: true })).result.value
-  const KEYS = { ArrowRight: 39, ArrowLeft: 37, Tab: 9 }
+  const KEYS = { ArrowRight: 39, ArrowLeft: 37, Tab: 9, 5: 53 }
   const press = async (key) => {
     for (const type of ['rawKeyDown', 'keyUp']) {
-      await send('Input.dispatchKeyEvent', { type, key, code: key, windowsVirtualKeyCode: KEYS[key], nativeVirtualKeyCode: KEYS[key] })
+      const code = /^\d$/.test(key) ? `Digit${key}` : key
+      await send('Input.dispatchKeyEvent', { type, key, code, text: /^\d$/.test(key) && type === 'rawKeyDown' ? key : undefined, windowsVirtualKeyCode: KEYS[key], nativeVirtualKeyCode: KEYS[key] })
     }
     await sleep(150)
   }
@@ -107,6 +108,10 @@ try {
   await press('ArrowLeft')
   const first = await js('location.hash')
   report('arrow left on waypoint 1 stays there', first === '#/bringup' ? [] : [`went to ${first}`])
+  await open('#/')
+  await press('5')
+  const jumped = await js('location.hash')
+  report('key 5 on the overview opens waypoint 5', jumped === '#/grid' ? [] : [`went to ${jumped}`])
 
   // Arrows inside a slider move the slider, not the chapter; the drag hint goes after the first move.
   await open('#/scan')

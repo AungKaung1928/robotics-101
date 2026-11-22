@@ -10,7 +10,7 @@ import Overview from './components/Overview'
 import ScanChapter from './components/ScanChapter'
 import TfChapter from './components/TfChapter'
 import { STRINGS, initialLang, type Lang } from './i18n'
-import { CHAPTERS, neighbour, parseRoute, type ChapterId } from './lib/route'
+import { CHAPTERS, keyTarget, neighbour, parseRoute, type ChapterId } from './lib/route'
 
 const BODY: Record<ChapterId, typeof ScanChapter> = { bringup: BringupChapter, tf: TfChapter, scan: ScanChapter, detect: DetectChapter, grid: GridChapter, costmap: CostmapChapter, goal: GoalChapter }
 
@@ -29,11 +29,10 @@ export default function App() {
     localStorage.setItem('rfs-lang', lang)
   }, [lang])
   useEffect(() => {
-    if (route.page !== 'chapter') return
     const on = (e: KeyboardEvent) => {
       if ((e.target as HTMLElement).tagName === 'INPUT') return // arrows move the slider there
-      const dir = e.key === 'ArrowLeft' ? -1 : e.key === 'ArrowRight' ? 1 : 0
-      const to = dir && neighbour(route.id, dir)
+      if (e.ctrlKey || e.metaKey || e.altKey) return // leave browser shortcuts alone
+      const to = keyTarget(e.key, route)
       if (to) location.hash = `#/${to}`
     }
     addEventListener('keydown', on)
