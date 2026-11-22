@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NAV2, SOURCE_REPO } from '../content/world'
+import { MEASURED, NAV2, SOURCE_REPO } from '../content/world'
 import type { Strings } from '../i18n'
 import { driveDistance, minTime, ticksToGoal } from '../lib/goal'
 import Arena from './Arena'
@@ -35,6 +35,7 @@ export default function GoalChapter({ t }: { t: Strings }) {
           <div><dt>{s.drive}</dt><dd data-k="drive">{drive.toFixed(2)} m</dd></div>
           <div><dt>{s.time}</dt><dd data-k="time">{minTime(d, TOL, V).toFixed(1)} s</dd></div>
           <div><dt>{s.ticks}</dt><dd data-k="ticks">{ticks}</dd></div>
+          <div><dt>{s.measured}</dt><dd data-k="cmdhz">{MEASURED.cmdVelHz.toFixed(1)} Hz</dd></div>
         </dl>
         <p className="note">{s.every}</p>
         <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L18-L39`}>nav2_params.yaml:18-39</a>, <a href={`${SOURCE_REPO}/blob/main/README.md`}>README (patrol result)</a></p>

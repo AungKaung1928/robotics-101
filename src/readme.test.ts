@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { LAUNCH_NAV2_S, LIDAR, NAV2, PATROL_WAIT_S, WORLD } from './content/world'
+import { LAUNCH_NAV2_S, LIDAR, MEASURED, NAV2, PATROL_WAIT_S, WORLD } from './content/world'
 import { clusterCount, clusters } from './lib/cluster'
 import { cellCount } from './lib/grid'
 import { inflationCost } from './lib/inflation'
@@ -32,5 +32,8 @@ describe('README numbers match the code', () => {
   })
   it('patrol start with the launch delays', () => {
     expect(README).toContain(`patrol start (${LAUNCH_NAV2_S + PATROL_WAIT_S} s with the launch file's delays)`)
+  })
+  it('measured scan rate', () => {
+    expect(README).toContain(`measured /scan ${MEASURED.scanHz.join('–')} Hz against ${LIDAR.hz} Hz configured`)
   })
 })

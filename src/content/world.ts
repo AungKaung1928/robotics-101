@@ -20,6 +20,9 @@ export const OBSTACLES: Shape[] = [
 ]
 export const WORLD: Shape[] = [...WALLS, ...OBSTACLES]
 
+// Measured in the source repo (README 'Measured', two ~2 min runs, RTF ~1).
+export const MEASURED = { scanHz: [4.5, 4.8], cmdVelHz: 20.0 }
+
 export const SLAM_MAX_LASER_RANGE = 12.0 // config/slam_params.yaml:12
 
 export const LIDAR = {

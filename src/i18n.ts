@@ -36,6 +36,7 @@ const en = {
     hits: 'beams with a return',
     gap: 'gap between beams',
     move: 'moved per scan at 0.26 m/s',
+    measured: 'measured /scan rate (config 5 Hz)',
   },
   tf: {
     lines: [
@@ -69,6 +70,7 @@ const en = {
     drive: 'distance to drive',
     time: 'minimum time',
     ticks: 'control ticks',
+    measured: 'measured /cmd_vel rate',
     every: 'dots: every 10th tick',
   },
   bringup: {
@@ -160,6 +162,7 @@ const ja: typeof en = {
     hits: '反射のあったビーム',
     gap: 'ビームの間隔',
     move: '0.26 m/s で 1 スキャン間に進む距離',
+    measured: '実測の /scan 周期 (設定 5 Hz)',
   },
   tf: {
     lines: [
@@ -193,6 +196,7 @@ const ja: typeof en = {
     drive: '走る距離',
     time: '最短時間',
     ticks: '制御周期の数',
+    measured: '実測の /cmd_vel 周期',
     every: '点: 10 周期ごと',
   },
   bringup: {

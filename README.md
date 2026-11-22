@@ -10,7 +10,7 @@ The GIF is rebuilt from the page check's screenshots: `scripts/verify.sh && pyth
 |---|---|---|
 | 1. Bring-up order | SLAM and Nav2 start times; step through the launch (Back / Play / Next) | patrol start (25 s with the launch file's delays); which stage starts before what it needs |
 | 2. The TF tree | drift of odom in map, robot pose in odom; odom jump and transform age | one LiDAR hit written in map, odom, base_link, base_scan; the anomaly detector's verdict (stale over 1.0 s, jump over 0.5 m) |
-| 3. One LiDAR scan | robot pose, range, scan rate | beams with a return; gap between beams (6.1 cm at 3.5 m); distance moved per scan |
+| 3. One LiDAR scan | robot pose, range, scan rate | beams with a return; gap between beams (6.1 cm at 3.5 m); distance moved per scan; measured /scan 4.5–4.8 Hz against 5 Hz configured |
 | 4. A simple detector | robot position, break threshold | objects found vs objects in view: 0.1 m gives 6 pieces, 0.5 m the 3 objects (start pose) |
 | 5. Occupancy grid | resolution; Add scan from each waypoint | cells in the map (40,000 at his 0.05 m); share of cells no longer unknown |
 | 6. Costmap inflation | Nav2 `cost_scaling_factor`, distance to obstacle | cost of the cell (253 inside the 0.22 m radius, 93 at the 0.55 m edge, then 0) |

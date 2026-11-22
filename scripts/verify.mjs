@@ -14,12 +14,12 @@ const ROUTES = [
   { hash: '#/bringup', readouts: ['patrol', 'step'], words: { early: /none|なし/ } },
   { hash: '#/bringup/3', readouts: ['step'], off: 4 },
   { hash: '#/tf', readouts: ['hit-map', 'hit-base_scan'], words: { verdict: /healthy|正常/ } },
-  { hash: '#/scan', readouts: ['hits', 'gap', 'move'] },
+  { hash: '#/scan', readouts: ['hits', 'gap', 'move', 'scanhz'] },
   { hash: '#/detect', readouts: ['found', 'truth'] },
   { hash: '#/grid', readouts: ['cells', 'scans', 'known'], equals: { scans: '1' } },
   { hash: '#/grid/7', readouts: ['known'], equals: { scans: '7' }, moreThan: { known: ['#/grid', 'known'] } },
   { hash: '#/costmap', readouts: ['cost', 'edge'] },
-  { hash: '#/goal', readouts: ['tick', 'drive', 'time', 'ticks'] },
+  { hash: '#/goal', readouts: ['tick', 'drive', 'time', 'ticks', 'cmdhz'] },
 ]
 const JA_TEXT = /[぀-ヿ一-龯]/
 
