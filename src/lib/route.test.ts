@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { neighbour, parseRoute, routeParam, routeStep } from './route'
+import { keyTarget, neighbour, parseRoute, routeParam, routeStep } from './route'
 
 describe('parseRoute', () => {
   it('opens built chapters, with or without a step suffix', () => {
@@ -37,5 +37,20 @@ describe('neighbour', () => {
     expect(neighbour('bringup', -1)).toBeNull()
     expect(neighbour('costmap', 1)).toBe('goal')
     expect(neighbour('goal', 1)).toBeNull()
+  })
+})
+
+describe('keyTarget', () => {
+  const scan = parseRoute('#/scan')
+  it('number keys jump to that waypoint, also from the overview', () => {
+    expect(keyTarget('5', scan)).toBe('grid')
+    expect(keyTarget('1', { page: 'overview' })).toBe('bringup')
+    expect(keyTarget('8', scan)).toBeNull()
+    expect(keyTarget('0', scan)).toBeNull()
+  })
+  it('arrows step only on chapter pages', () => {
+    expect(keyTarget('ArrowRight', scan)).toBe('detect')
+    expect(keyTarget('ArrowRight', { page: 'overview' })).toBeNull()
+    expect(keyTarget('a', scan)).toBeNull()
   })
 })
