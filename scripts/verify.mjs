@@ -20,7 +20,7 @@ const ROUTES = [
   { hash: '#/costmap?k=9.8&d=0.54', readouts: ['cost'], words: { cost: /^1[01]$/ } },
   { hash: '#/goal?d=0.2', readouts: ['tick'], equals: { ticks: '0', drive: '0.00 m' } },
   { hash: '#/scan?x=1.2&y=2&yaw=0', readouts: ['beam'], words: { beam: /^-?[01]° → 0\.33 m$/ } },
-  { hash: '#/scan', readouts: ['hits', 'gap', 'move', 'scanhz', 'beam'], words: { beam: /^-?[01]° → 1\.4\d m$/ } },
+  { hash: '#/scan', equals: { movemeasured: '5.4–5.8 cm' }, readouts: ['hits', 'gap', 'move', 'scanhz', 'beam'], words: { beam: /^-?[01]° → 1\.4\d m$/ } },
   { hash: '#/detect', readouts: ['found', 'truth'] },
   { hash: '#/grid', readouts: ['cells', 'scans', 'known'], equals: { scans: '1' }, has: ' %"' }, // canvas label carries the result
   { hash: '#/grid?res=0.1', readouts: ['cells'], equals: { cells: '10,000' } },
