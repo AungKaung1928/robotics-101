@@ -147,7 +147,7 @@ try {
 
   // Overview: hovering waypoint 3 shows its preview.
   await open('#/')
-  const box = await js(`(() => { const r = document.querySelectorAll('.overview svg a')[2].getBoundingClientRect(); return [r.x + 8, r.y + r.height / 2] })()`)
+  const box = await js(`(() => { const r = document.querySelectorAll('.overview svg a')[2].querySelector('circle').getBoundingClientRect(); return [r.x + r.width / 2, r.y + r.height / 2] })()`)
   await send('Input.dispatchMouseEvent', { type: 'mouseMoved', x: box[0], y: box[1] })
   await sleep(200)
   const peek = await js(readout('peek'))
