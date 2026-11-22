@@ -112,6 +112,13 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .buttons button:first-child { background: var(--robot); border-color: var(--robot); color: var(--surface); }
 .cl { fill: hsl(var(--h) 70% 38%); }
 @media (prefers-color-scheme: dark) { .cl { fill: hsl(var(--h) 75% 65%); } }
+.timeline .is-off { opacity: 0.25; }
+.timeline .is-now text:first-child { font-weight: 700; }
+.timeline .cursor { stroke: var(--robot); stroke-width: 2; }
+.stepper { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); margin-top: var(--s2); font: var(--t-small) var(--mono); }
+.stepper button { font: inherit; padding: var(--s1) var(--s3); border: 1px solid var(--rule); background: var(--surface); color: var(--ink); border-radius: var(--radius); cursor: pointer; }
+.stepper button:disabled { color: var(--ink-2); cursor: default; }
+.stepper .caption { color: var(--ink-2); }
 .v-stale, .v-jump, .early { color: var(--ray); }
 .chart { width: 100%; height: auto; background: var(--surface); border: 1px solid var(--rule); }
 .chart .axis { fill: none; stroke: var(--ink-2); }

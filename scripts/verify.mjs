@@ -11,7 +11,8 @@ const OUT = join(ROOT, 'verify-out')
 // Route, then the readouts (data-k) its page must show with a number in them.
 const ROUTES = [
   { hash: '', h1: { en: 'Robotics First Steps', ja: 'ロボティクス はじめの一歩' }, links: ['#/bringup', '#/tf', '#/scan', '#/detect', '#/grid', '#/costmap', '#/goal'] },
-  { hash: '#/bringup', readouts: ['patrol'], words: { early: /none|なし/ } },
+  { hash: '#/bringup', readouts: ['patrol', 'step'], words: { early: /none|なし/ } },
+  { hash: '#/bringup/3', readouts: ['step'], off: 4 },
   { hash: '#/tf', readouts: ['hit-map', 'hit-base_scan'], words: { verdict: /healthy|正常/ } },
   { hash: '#/scan', readouts: ['hits', 'gap', 'move'] },
   { hash: '#/detect', readouts: ['found', 'truth'] },
@@ -57,7 +58,7 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
     for (const r of ROUTES) {
       for (const lang of ['en', 'ja']) {
         const name = `${r.hash || '#/'} (${lang})`
-        const dom = chrome(BASE + r.hash, { lang, shot: `${(r.hash.slice(2) || 'plan')}-${lang}.png` })
+        const dom = chrome(BASE + r.hash, { lang, shot: `${(r.hash.slice(2).replace('/', '-') || 'plan')}-${lang}.png` })
         const h1 = dom.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1]?.replace(/<[^>]+>/g, '').trim()
         if (!h1) fails.push(`${name}: no h1`)
         if (r.h1 && h1 !== r.h1[lang]) fails.push(`${name}: h1 '${h1}'`)
@@ -70,6 +71,10 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
         }
         if (!/<(svg|canvas)[^>]*role="img"/.test(dom)) fails.push(`${name}: no figure`)
         if (r.readouts && (dom.match(/aria-current="step"/g) ?? []).length !== 1) fails.push(`${name}: mini plan does not light exactly one waypoint`)
+        if (r.off !== undefined) {
+          const n = (dom.match(/is-off/g) ?? []).length
+          if (n !== r.off) fails.push(`${name}: ${n} timeline rows dimmed, want ${r.off}`)
+        }
         for (const l of r.links ?? []) if (!dom.includes(`href="${l}"`)) fails.push(`${name}: no waypoint link ${l}`)
         for (const k of r.readouts ?? []) {
           const v = dom.match(new RegExp(`data-k="${k}"[^>]*>([^<]*)`))?.[1]

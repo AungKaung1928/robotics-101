@@ -80,6 +80,8 @@ const en = {
     early: 'stages started too early',
     waits: 'starts before',
     ok: 'none',
+    play: 'Play',
+    pause: 'Pause',
   },
   grid: {
     lines: [
@@ -199,6 +201,8 @@ const ja: typeof en = {
     early: '早すぎる段',
     waits: 'より先に開始',
     ok: 'なし',
+    play: '再生',
+    pause: '一時停止',
   },
   grid: {
     lines: [
