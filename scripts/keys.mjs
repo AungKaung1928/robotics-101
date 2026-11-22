@@ -36,7 +36,7 @@ const profile = mkdtempSync(join(tmpdir(), 'keys-'))
 const vite = spawn(join(ROOT, 'node_modules/.bin/vite'), ['preview', '--port', String(PORT), '--strictPort'], { cwd: ROOT, stdio: 'ignore' })
 const chrome = spawn(
   CHROME,
-  ['--headless=new', '--disable-gpu', '--no-first-run', `--remote-debugging-port=${DEBUG}`, `--user-data-dir=${profile}`, '--window-size=1280,1600', 'about:blank'],
+  ['--headless=new', '--disable-gpu', '--no-first-run', '--lang=en-US', `--remote-debugging-port=${DEBUG}`, `--user-data-dir=${profile}`, '--window-size=1280,1600', 'about:blank'],
   { stdio: 'ignore' },
 )
 
@@ -165,7 +165,7 @@ try {
     await press('Tab')
     const f = await js(`(() => { const a = document.activeElement; if (!a || a === document.body) return 'body'
       const mp = a.closest('.miniplan'); const s = getComputedStyle(a)
-      const ok = mp ? parseFloat(getComputedStyle(a.querySelector('circle')).strokeWidth) > 0 : s.outlineStyle !== 'none' && parseFloat(s.outlineWidth) >= 2
+      const ok = mp ? getComputedStyle(a.querySelector('circle')).strokeWidth === '0.25px' : s.outlineStyle !== 'none' && parseFloat(s.outlineWidth) >= 2
       return (ok ? 'ok ' : 'NO ') + (a.getAttribute('aria-label') || a.textContent.trim().slice(0, 20) || a.tagName) })()`)
     if (f.startsWith('NO')) hidden.push(f.slice(3))
   }
