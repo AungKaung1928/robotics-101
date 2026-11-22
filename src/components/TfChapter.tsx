@@ -4,6 +4,7 @@ import type { Strings } from '../i18n'
 import { verdict } from '../lib/anomaly'
 import { apply, compose, invert, type TF } from '../lib/tf2d'
 import Arena from './Arena'
+import { routeParam } from '../lib/route'
 import Slider from './Slider'
 
 const HIT: [number, number] = [1.5, 1.5] // box1's south-west corner in map (explorer_world.sdf:106-109)
@@ -27,7 +28,7 @@ export default function TfChapter({ t }: { t: Strings }) {
   const [x, setX] = useState(-1)
   const [y, setY] = useState(-2.5)
   const [yaw, setYaw] = useState(30)
-  const [jump, setJump] = useState(0.1)
+  const [jump, setJump] = useState(() => routeParam(location.hash, 'jump', 0.1, 0, 1))
   const [age, setAge] = useState(0.2)
   const mapOdom = { x: dx, y: 0, yaw: rad(dyaw) }
   const mapBase = compose(mapOdom, { x, y, yaw: rad(yaw) })

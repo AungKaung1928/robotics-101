@@ -26,7 +26,7 @@ cd robotics-first-steps
 npm ci
 npm run dev          # open the printed localhost URL
 npm test             # launch order, ray cast, clustering, occupancy update, transforms, detector rule, time to goal, inflation cost, routes, patrol path
-scripts/verify.sh    # builds, loads every page in headless Chrome (EN/JA, 390 px); ends with "PASS 20 pages"
+scripts/verify.sh    # builds, loads every page in headless Chrome (EN/JA, 390 px); ends with "PASS 24 pages"
 ```
 
 ## Sources

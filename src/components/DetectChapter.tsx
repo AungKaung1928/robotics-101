@@ -4,6 +4,7 @@ import type { Strings } from '../i18n'
 import { clusterCount, clusters, objectsInView } from '../lib/cluster'
 import { beamAngles, castRayHit, sensorPose } from '../lib/scan'
 import Arena from './Arena'
+import { routeParam } from '../lib/route'
 import Slider from './Slider'
 
 const L = LIDAR
@@ -16,7 +17,7 @@ export default function DetectChapter({ t }: { t: Strings }) {
   const s = t.detect
   const [x, setX] = useState(0.5)
   const [y, setY] = useState(0.5)
-  const [th, setTh] = useState(0.1)
+  const [th, setTh] = useState(() => routeParam(location.hash, 'th', 0.1, 0.01, 1.5))
   const sp = sensorPose({ x, y, yaw: YAW }) // rays start at base_scan, not the robot centre
   const hits = ANGLES.map((a) => castRayHit(sp, a, WORLD, L.minRange, L.maxRange))
   const pts = hits.map((h, i): [number, number] | null =>

@@ -14,6 +14,8 @@ const ROUTES = [
   { hash: '#/bringup', readouts: ['patrol', 'step'], words: { early: /none|なし/ } },
   { hash: '#/bringup/3', readouts: ['step'], off: 4 },
   { hash: '#/tf', readouts: ['hit-map', 'hit-base_scan'], words: { verdict: /healthy|正常/ } },
+  { hash: '#/tf?jump=0.6', readouts: ['hit-map'], words: { verdict: /JUMP/ }, has: 'ghost-move is-bad' },
+  { hash: '#/detect?th=0.5', readouts: ['truth'], equals: { found: '3' } },
   { hash: '#/scan', readouts: ['hits', 'gap', 'move', 'scanhz', 'beam'], words: { beam: /^-?[01]° → 1\.4\d m$/ } },
   { hash: '#/detect', readouts: ['found', 'truth'] },
   { hash: '#/grid', readouts: ['cells', 'scans', 'known'], equals: { scans: '1' } },
@@ -60,7 +62,7 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
     for (const r of ROUTES) {
       for (const lang of ['en', 'ja']) {
         const name = `${r.hash || '#/'} (${lang})`
-        const dom = chrome(BASE + r.hash, { lang, shot: `${(r.hash.slice(2).replace('/', '-') || 'plan')}-${lang}.png` })
+        const dom = chrome(BASE + r.hash, { lang, shot: `${(r.hash.slice(2).replace(/[/?=]/g, '-') || 'plan')}-${lang}.png` })
         const h1 = dom.match(/<h1[^>]*>([\s\S]*?)<\/h1>/)?.[1]?.replace(/<[^>]+>/g, '').trim()
         if (!h1) fails.push(`${name}: no h1`)
         if (r.h1 && h1 !== r.h1[lang]) fails.push(`${name}: h1 '${h1}'`)
@@ -74,6 +76,7 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
         if (!/<(svg|canvas)[^>]*role="img"/.test(dom)) fails.push(`${name}: no figure`)
         if (r.readouts && (dom.match(/class="hint"/g) ?? []).length !== 1) fails.push(`${name}: want exactly one drag hint`)
         if (r.readouts && (dom.match(/aria-current="step"/g) ?? []).length !== 1) fails.push(`${name}: mini plan does not light exactly one waypoint`)
+        if (r.has && !dom.includes(r.has)) fails.push(`${name}: no '${r.has}' in the page`)
         const read = (k, d = dom) => d.match(new RegExp(`data-k="${k}"[^>]*>([^<]*)`))?.[1]
         for (const [k, want] of Object.entries(r.equals ?? {})) if (read(k) !== want) fails.push(`${name}: readout ${k} '${read(k)}', want '${want}'`)
         for (const [k, [hash, k2]] of Object.entries(r.moreThan ?? {})) {
