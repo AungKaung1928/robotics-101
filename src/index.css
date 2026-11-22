@@ -101,6 +101,9 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .ax-x { stroke: var(--axis-x); }
 .ax-y { stroke: var(--axis-y); }
 .frame text { font-size: 0.24px; }
+.ghost { fill: none; stroke: var(--ink-2); stroke-width: 0.02; stroke-dasharray: 0.06 0.05; }
+.ghost-move { stroke: var(--ink-2); stroke-width: 0.03; }
+.ghost.is-bad, .ghost-move.is-bad { stroke: var(--ray); }
 .chain { fill: none; stroke: var(--ink-2); stroke-width: 0.025; stroke-dasharray: 0.08 0.06; }
 .beam { stroke: var(--ray); stroke-width: 0.025; }
 .frames { width: 100%; border-collapse: collapse; margin: 0 0 var(--s3); font-size: var(--t-small); }

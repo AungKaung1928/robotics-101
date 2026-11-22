@@ -43,6 +43,9 @@ export default function TfChapter({ t }: { t: Strings }) {
           <circle className="hit" cx={HIT[0]} cy={HIT[1]} r="0.07" />
           <Axes t={rows[0][1]} name="map" size={1} at={[-0.6, -0.3]} />
           <Axes t={mapOdom} name="odom" size={0.8} at={[0.15, -0.3]} />
+          {/* where base_link was at the previous check: `jump` m back along the heading */}
+          <circle className={`ghost${v === 'jump' ? ' is-bad' : ''}`} cx={mapBase.x - jump * Math.cos(mapBase.yaw)} cy={mapBase.y - jump * Math.sin(mapBase.yaw)} r="0.22" />
+          <path className={`ghost-move${v === 'jump' ? ' is-bad' : ''}`} d={`M${mapBase.x - jump * Math.cos(mapBase.yaw)} ${mapBase.y - jump * Math.sin(mapBase.yaw)}L${mapBase.x} ${mapBase.y}`} />
           <circle className="robot" cx={mapBase.x} cy={mapBase.y} r="0.22" />
           <Axes t={mapBase} name="base_link" />
         </Arena>
