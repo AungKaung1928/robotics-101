@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { LAUNCH_NAV2_S, LIDAR, NAV2, OBSTACLES, TF_MAX_JUMP, WAYPOINTS } from '../content/world'
 import type { Strings } from '../i18n'
 import { beamGap } from '../lib/scan'
@@ -17,6 +18,7 @@ const VALUE: Record<ChapterId, { v: string; kind: 'config' | 'formula' }> = {
 }
 
 export default function Overview({ t }: { t: Strings }) {
+  const [peek, setPeek] = useState<ChapterId>(CHAPTERS[0])
   const path = WAYPOINTS.map(({ x, y }, i) => `${i ? 'L' : 'M'}${x} ${y}`).join('') + 'Z'
   const labels = CHAPTERS.map((c, i) => {
     const { x, y, side } = WAYPOINTS[i]
@@ -34,7 +36,10 @@ export default function Overview({ t }: { t: Strings }) {
         </g>
       </g>
     )
-    return <a key={c} href={`#/${c}`} aria-label={`${i + 1}. ${t.chapters[c]}`}>{body}</a>
+    return (
+      <a key={c} href={`#/${c}`} aria-label={`${i + 1}. ${t.chapters[c]}`} className={c === peek ? 'is-peek' : undefined}
+        onMouseEnter={() => setPeek(c)} onFocus={() => setPeek(c)}>{body}</a>
+    )
   })
   return (
     <main className="overview">
@@ -42,6 +47,11 @@ export default function Overview({ t }: { t: Strings }) {
         <h1>{t.title}</h1>
         <p className="lede">{t.lede}</p>
         <p className="cta"><a className="btn" href={`#/${CHAPTERS[0]}`}>{t.start} →</a> <span className="note">{t.keys}</span></p>
+        <a className="peek" href={`#/${peek}`}>
+          <span className="peek-n" data-k="peek">{CHAPTERS.indexOf(peek) + 1} / {CHAPTERS.length} · {VALUE[peek].v}</span>
+          <strong>{t.chapters[peek]}</strong>
+          <span>{t[peek].lines[0]}</span>
+        </a>
         <p className="note">{t.pathNote}</p>
       </div>
       <Arena label={t.open} overlay={labels}>
