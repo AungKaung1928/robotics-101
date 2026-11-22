@@ -32,8 +32,9 @@ describe('text contrast (WCAG AA 4.5:1)', () => {
         expect(contrast(theme[fg], theme[bg])).toBeGreaterThanOrEqual(4.5)
       })
     }
-    it(`${name}: primary button text (--surface on --robot)`, () => {
-      expect(contrast(theme['--surface'], theme['--robot'])).toBeGreaterThanOrEqual(4.5)
+    it(`${name}: primary button text (--surface on --ink, hover --ink-2)`, () => {
+      expect(contrast(theme['--surface'], theme['--ink'])).toBeGreaterThanOrEqual(4.5)
+      expect(contrast(theme['--surface'], theme['--ink-2'])).toBeGreaterThanOrEqual(4.5)
     })
   }
 })

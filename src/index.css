@@ -8,7 +8,7 @@
   --grid: #dfe5e2;
   --occ: #15191a; /* occupied: the map's own black */
   --free: #1d7a4a; /* free / reachable */
-  --robot: #1f4fd1; /* the robot and everything you move */
+  --robot: #1f4fd1; /* the robot (footprint, heading, probe, cursor); controls are ink */
   --ray: #c4410c; /* sensor returns */
   --cost: #8a2a9e; /* costmap */
   --axis-x: #c62828; /* frame x axis (REP 103 colour convention: x red, y green) */
@@ -29,7 +29,7 @@
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--paper); color: var(--ink); font: var(--t-body)/1.55 var(--font); }
-a { color: var(--robot); }
+a { color: var(--ink); text-underline-offset: 3px; }
 :focus-visible { outline: 3px solid var(--robot); outline-offset: 2px; }
 
 .console {
@@ -47,8 +47,8 @@ h1 { font-size: var(--t-h1); line-height: 1.1; letter-spacing: -0.02em; margin: 
 :lang(ja) .overview h1 { letter-spacing: 0; line-height: 1.1; word-break: keep-all; } /* negative tracking crowds kana */
 .lede { font-size: 1.125rem; }
 .cta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); margin: var(--s4) 0; }
-.btn { display: inline-block; padding: var(--s2) var(--s4); background: var(--robot); color: var(--surface); text-decoration: none; font: 600 var(--t-small) var(--mono); border-radius: var(--radius); }
-.btn:hover { background: var(--ink); }
+.btn { display: inline-block; padding: var(--s2) var(--s4); background: var(--ink); color: var(--surface); text-decoration: none; font: 600 var(--t-small) var(--mono); border-radius: var(--radius); }
+.btn:hover { background: var(--ink-2); }
 .peek { display: grid; gap: var(--s1); padding: var(--s3); margin-bottom: var(--s3); border: 1px solid var(--rule); border-left: 4px solid var(--free); background: var(--surface); color: var(--ink); text-decoration: none; font-size: var(--t-small); }
 .peek-n { font-family: var(--mono); color: var(--ink-2); }
 .peek strong { font-size: 1rem; }
@@ -122,7 +122,7 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .gridmap { width: 100%; height: auto; display: block; border: 1px solid var(--rule); image-rendering: pixelated; }
 .buttons { display: flex; gap: var(--s2); margin-bottom: var(--s3); }
 .buttons button { font: var(--t-small) var(--mono); padding: var(--s2) var(--s3); border: 1px solid var(--ink); background: var(--surface); color: var(--ink); border-radius: var(--radius); cursor: pointer; }
-.buttons button:first-child { background: var(--robot); border-color: var(--robot); color: var(--surface); }
+.buttons button:first-child { background: var(--ink); border-color: var(--ink); color: var(--surface); }
 .cl { fill: hsl(var(--h) 70% 38%); }
 @media (prefers-color-scheme: dark) { .cl { fill: hsl(var(--h) 75% 65%); } }
 .timeline .is-off { opacity: 0.25; }
@@ -149,10 +149,11 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .slider { display: block; position: relative; margin-bottom: var(--s3); font-size: var(--t-small); }
 .slider span { display: flex; justify-content: space-between; color: var(--ink-2); }
 .slider output { font-family: var(--mono); color: var(--ink); }
-.slider input { width: 100%; accent-color: var(--robot); }
-.slider .hint { position: absolute; right: 0; top: 0; transform: translateY(-110%); font: italic var(--t-small) var(--font); color: var(--robot); pointer-events: none; }
+.slider input { width: 100%; accent-color: var(--ink); }
+.slider .hint { position: absolute; right: 0; top: 0; transform: translateY(-110%); font: italic var(--t-small) var(--font); color: var(--ink-2); pointer-events: none; }
 .slider .mark { position: absolute; bottom: -2px; width: 2px; height: 8px; background: var(--free); transform: translateX(-1px); }
 .seg { border: 0; padding: 0; margin: 0 0 var(--s3); font-size: var(--t-small); display: flex; gap: var(--s3); }
+.seg input { accent-color: var(--ink); }
 .seg legend { color: var(--ink-2); padding: 0; margin-bottom: var(--s1); }
 .group { border: 0; border-top: 2px solid var(--ink); margin: 0 0 var(--s4); padding: var(--s2) 0 0; }
 .group legend { font: 600 var(--t-small) var(--mono); text-transform: uppercase; letter-spacing: 0.06em; padding: 0 var(--s2) 0 0; }
