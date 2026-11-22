@@ -3,6 +3,7 @@ import { LIDAR, MEASURED, NAV2, SOURCE_REPO, WORLD } from '../content/world'
 import type { Strings } from '../i18n'
 import { beamAngles, beamGap, castRay, movePerScan, sensorPose } from '../lib/scan'
 import Arena from './Arena'
+import { routeParam } from '../lib/route'
 import Slider from './Slider'
 
 const L = LIDAR
@@ -10,9 +11,9 @@ const ANGLES = beamAngles(L.samples, L.minAngle, L.maxAngle)
 
 export default function ScanChapter({ t }: { t: Strings }) {
   const s = t.scan
-  const [x, setX] = useState(0.5)
-  const [y, setY] = useState(0.5)
-  const [yaw, setYaw] = useState(45)
+  const [x, setX] = useState(() => routeParam(location.hash, 'x', 0.5, -4.5, 4.5))
+  const [y, setY] = useState(() => routeParam(location.hash, 'y', 0.5, -4.5, 4.5))
+  const [yaw, setYaw] = useState(() => routeParam(location.hash, 'yaw', 45, -180, 180))
   const [r, setR] = useState(L.maxRange)
   const [hz, setHz] = useState(L.hz)
   const pose = { x, y, yaw: (yaw * Math.PI) / 180 }

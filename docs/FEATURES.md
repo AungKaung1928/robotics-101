@@ -11,6 +11,7 @@
 | `#/costmap?d=0.1` | cost 253 (inscribed) |
 | `#/costmap?k=9.8&d=0.54` | cost 10 near the edge (the "no cliff" k) |
 | `#/goal?d=0.2` | goal inside the tolerance: 0 ticks, 0.00 m to drive |
+| `#/scan?x=1.2&y=2&yaw=0` | beam ahead 0.33 m to box1 (cast from base_scan, 3.2 cm behind the centre) |
 | `#/scan` | h1, arena figure, readouts: beams with a return, gap between beams, distance per scan |
 | `#/goal` | h1, arena with tolerance circle and tick dots, readouts: per tick, distance to drive, minimum time, ticks |
 | `#/detect` | h1, arena with coloured clusters, readouts: objects found, objects in view |
