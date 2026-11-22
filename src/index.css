@@ -80,6 +80,8 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .chapter .chead, .steps { grid-column: 1 / -1; }
 .chead { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); }
 .chead h1 { margin: 0; }
+.spot { margin: var(--s2) 0 0; font: 600 1.375rem var(--mono); }
+.spot .kind { font: 600 0.6875rem var(--mono); color: var(--free); border: 1px solid currentColor; border-radius: var(--radius); padding: 0 var(--s1); vertical-align: middle; }
 .miniplan svg { width: 96px; height: 96px; display: block; }
 .mp-wall { fill: var(--surface); stroke: var(--occ); stroke-width: 0.3; }
 .mp-occ { fill: var(--occ); }

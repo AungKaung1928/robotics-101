@@ -81,6 +81,7 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
         if (!/<(svg|canvas)[^>]*role="(img|group)"/.test(dom)) fails.push(`${name}: no figure`)
         // Links inside role="img" are hidden from screen readers.
         for (const m of dom.matchAll(/<svg[^>]*role="img"[^>]*>([\s\S]*?)<\/svg>/g)) if (m[1].includes('<a ')) fails.push(`${name}: link inside an svg with role="img"`)
+        if (r.readouts && !/data-k="spot"[^>]*>[^<]*\d/.test(dom)) fails.push(`${name}: no headline value under the title`)
         if (r.readouts && (dom.match(/class="hint"/g) ?? []).length !== 1) fails.push(`${name}: want exactly one drag hint`)
         if (r.readouts && (dom.match(/aria-current="step"/g) ?? []).length !== 1) fails.push(`${name}: mini plan does not light exactly one waypoint`)
         if (r.has && !dom.includes(r.has)) fails.push(`${name}: no '${r.has}' in the page`)

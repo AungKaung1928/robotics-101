@@ -5,6 +5,7 @@ import DetectChapter from './components/DetectChapter'
 import GoalChapter from './components/GoalChapter'
 import GridChapter from './components/GridChapter'
 import MiniPlan from './components/MiniPlan'
+import { WAYPOINT_VALUE } from './content/waypoints'
 import Overview from './components/Overview'
 import ScanChapter from './components/ScanChapter'
 import TfChapter from './components/TfChapter'
@@ -58,7 +59,10 @@ export default function App() {
       {route.page === 'overview' || !Body ? <Overview t={t} /> : (
         <main className="chapter">
           <div className="chead">
-            <h1><span className="num">{idx + 1}</span> {t.chapters[route.id]}</h1>
+            <div>
+              <h1><span className="num">{idx + 1}</span> {t.chapters[route.id]}</h1>
+              <p className="spot" data-k="spot">{WAYPOINT_VALUE[route.id].v} <b className="kind">{t.kind[WAYPOINT_VALUE[route.id].kind]}</b></p>
+            </div>
             <MiniPlan current={route.id} t={t} />
           </div>
           <Body t={t} />
