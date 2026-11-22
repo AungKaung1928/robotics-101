@@ -160,6 +160,7 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .readout { margin: 0 0 var(--s3); border-top: 1px solid var(--rule); }
 .readout div { display: flex; justify-content: space-between; gap: var(--s3); padding: var(--s2) 0; border-bottom: 1px solid var(--rule); }
 .readout dt { color: var(--ink-2); font-size: var(--t-small); }
+.readout .kind { font: 600 0.6875rem var(--mono); color: var(--free); border: 1px solid currentColor; border-radius: var(--radius); padding: 0 var(--s1); margin-left: var(--s1); }
 .readout dd { margin: 0; font: 600 1.125rem var(--mono); }
 .steps { display: flex; justify-content: space-between; gap: var(--s3); border-top: 1px solid var(--rule); padding-top: var(--s3); font-family: var(--mono); font-size: var(--t-small); }
 

@@ -53,7 +53,7 @@ export default function ScanChapter({ t }: { t: Strings }) {
           <div><dt>{s.beam}</dt><dd data-k="beam">{sel ? `${Math.round((sel.rel * 180) / Math.PI)}° → ${sel.d.toFixed(2)} m` : '–'}</dd></div>
           <div><dt>{s.hits}</dt><dd data-k="hits">{hits.length} / {L.samples}</dd></div>
           <div><dt>{s.gap} @ {r.toFixed(1)} m</dt><dd data-k="gap">{(gap * 100).toFixed(1)} cm</dd></div>
-          <div><dt>{s.measured}</dt><dd data-k="scanhz">{MEASURED.scanHz.join('–')} Hz</dd></div>
+          <div><dt>{s.measured} <b className="kind">{t.kind.measured}</b></dt><dd data-k="scanhz">{MEASURED.scanHz.join('–')} Hz</dd></div>
           <div><dt>{s.move}</dt><dd data-k="move">{(movePerScan(NAV2.maxVelX, hz) * 100).toFixed(1)} cm</dd></div>
         </dl>
         <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L168-L182`}>turtlebot3_burger.urdf.xacro:168-182</a>, <a href={`${SOURCE_REPO}/blob/main/worlds/explorer_world.sdf#L47-L140`}>explorer_world.sdf:47-140</a>, <a href={`${SOURCE_REPO}/blob/main/README.md`}>README (measured)</a></p>

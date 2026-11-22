@@ -10,7 +10,7 @@ const en = {
   drag: '← drag me →',
   keys: 'Then ← → between waypoints.',
   pathNote: 'Patrol path drawn for this page; obstacles and walls from the Gazebo world file.',
-  kind: { config: 'config', formula: 'formula' },
+  kind: { config: 'config', formula: 'formula', measured: 'measured' },
   back: 'Back',
   next: 'Next',
   plan: 'Plan',
@@ -37,7 +37,7 @@ const en = {
     hits: 'beams with a return',
     gap: 'gap between beams',
     move: 'moved per scan at 0.26 m/s',
-    measured: 'measured /scan rate (config 5 Hz)',
+    measured: '/scan rate (config 5 Hz)',
     beam: 'beam (hover a dot)',
   },
   tf: {
@@ -72,7 +72,7 @@ const en = {
     drive: 'distance to drive',
     time: 'minimum time',
     ticks: 'control ticks',
-    measured: 'measured /cmd_vel rate',
+    measured: '/cmd_vel rate',
     every: 'dots: every 10th tick',
   },
   bringup: {
@@ -138,7 +138,7 @@ const ja: typeof en = {
   drag: '← ドラッグ →',
   keys: 'その後は ← → で移動。',
   pathNote: '巡回経路はこのページ用の図。障害物と壁は Gazebo のワールドファイルから。',
-  kind: { config: '設定値', formula: '式' },
+  kind: { config: '設定値', formula: '式', measured: '実測' },
   back: '戻る',
   next: '次へ',
   plan: '全体図',
@@ -165,7 +165,7 @@ const ja: typeof en = {
     hits: '反射のあったビーム',
     gap: 'ビームの間隔',
     move: '0.26 m/s で 1 スキャン間に進む距離',
-    measured: '実測の /scan 周期 (設定 5 Hz)',
+    measured: '/scan 周期 (設定 5 Hz)',
     beam: 'ビーム (点にカーソル)',
   },
   tf: {
@@ -200,7 +200,7 @@ const ja: typeof en = {
     drive: '走る距離',
     time: '最短時間',
     ticks: '制御周期の数',
-    measured: '実測の /cmd_vel 周期',
+    measured: '/cmd_vel 周期',
     every: '点: 10 周期ごと',
   },
   bringup: {
