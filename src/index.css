@@ -146,6 +146,7 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .slider span { display: flex; justify-content: space-between; color: var(--ink-2); }
 .slider output { font-family: var(--mono); color: var(--ink); }
 .slider input { width: 100%; accent-color: var(--robot); }
+.slider .hint { position: absolute; right: 0; top: 0; transform: translateY(-110%); font: italic var(--t-small) var(--font); color: var(--robot); pointer-events: none; }
 .slider .mark { position: absolute; bottom: -2px; width: 2px; height: 8px; background: var(--free); transform: translateX(-1px); }
 .seg { border: 0; padding: 0; margin: 0 0 var(--s3); font-size: var(--t-small); display: flex; gap: var(--s3); }
 .seg legend { color: var(--ink-2); padding: 0; margin-bottom: var(--s1); }

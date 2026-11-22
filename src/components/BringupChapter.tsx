@@ -54,7 +54,7 @@ export default function BringupChapter({ t }: { t: Strings }) {
       </div>
       <div className="panel">
         {s.lines.map((l) => <p key={l}>{l}</p>)}
-        <Slider label={s.slam} value={slam} min={0} max={20} step={0.5} mark={DEFAULT.slam} onChange={setSlam} />
+        <Slider hint={t.drag} label={s.slam} value={slam} min={0} max={20} step={0.5} mark={DEFAULT.slam} onChange={setSlam} />
         <Slider label={s.nav2} value={nav2} min={0} max={20} step={0.5} mark={DEFAULT.nav2} onChange={setNav2} />
         <dl className="readout">
           <div><dt>{s.patrol}</dt><dd data-k="patrol">{times.patrol} s</dd></div>

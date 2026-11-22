@@ -29,7 +29,7 @@ export default function GoalChapter({ t }: { t: Strings }) {
       </div>
       <div className="panel">
         {s.lines.map((l) => <p key={l}>{l}</p>)}
-        <Slider label={s.d} value={d} min={0} max={8} step={0.05} mark={TOL} onChange={setD} fmt={(v) => v.toFixed(2)} />
+        <Slider hint={t.drag} label={s.d} value={d} min={0} max={8} step={0.05} mark={TOL} onChange={setD} fmt={(v) => v.toFixed(2)} />
         <dl className="readout">
           <div><dt>{s.tick}</dt><dd data-k="tick">{(STEP * 100).toFixed(1)} cm</dd></div>
           <div><dt>{s.drive}</dt><dd data-k="drive">{drive.toFixed(2)} m</dd></div>

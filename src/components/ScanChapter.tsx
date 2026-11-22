@@ -32,7 +32,7 @@ export default function ScanChapter({ t }: { t: Strings }) {
       </div>
       <div className="panel">
         {s.lines.map((l) => <p key={l}>{l}</p>)}
-        <Slider label={s.x} value={x} min={-4.5} max={4.5} step={0.05} onChange={setX} fmt={(v) => v.toFixed(2)} />
+        <Slider hint={t.drag} label={s.x} value={x} min={-4.5} max={4.5} step={0.05} onChange={setX} fmt={(v) => v.toFixed(2)} />
         <Slider label={s.y} value={y} min={-4.5} max={4.5} step={0.05} onChange={setY} fmt={(v) => v.toFixed(2)} />
         <Slider label={s.yaw} value={yaw} min={-180} max={180} step={1} onChange={setYaw} />
         <Slider label={s.range} value={r} min={0.5} max={L.maxRange} step={0.1} mark={L.maxRange} onChange={setR} fmt={(v) => v.toFixed(1)} />

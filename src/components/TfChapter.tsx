@@ -51,7 +51,7 @@ export default function TfChapter({ t }: { t: Strings }) {
         {s.lines.map((l) => <p key={l}>{l}</p>)}
         <fieldset className="group">
         <legend>{s.gFrames}</legend>
-        <Slider label={s.drift} value={dx} min={-1} max={1} step={0.05} mark={0} onChange={setDx} fmt={(v) => v.toFixed(2)} />
+        <Slider hint={t.drag} label={s.drift} value={dx} min={-1} max={1} step={0.05} mark={0} onChange={setDx} fmt={(v) => v.toFixed(2)} />
         <Slider label={s.driftYaw} value={dyaw} min={-30} max={30} step={1} mark={0} onChange={setDyaw} />
         <Slider label={s.x} value={x} min={-3} max={3} step={0.05} onChange={setX} fmt={(v) => v.toFixed(2)} />
         <Slider label={s.y} value={y} min={-3} max={3} step={0.05} onChange={setY} fmt={(v) => v.toFixed(2)} />

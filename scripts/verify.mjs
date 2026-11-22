@@ -72,6 +72,7 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
           for (const t of prose) if (!JA_TEXT.test(t)) fails.push(`${name}: English left on the Japanese page: '${t.slice(0, 50)}'`)
         }
         if (!/<(svg|canvas)[^>]*role="img"/.test(dom)) fails.push(`${name}: no figure`)
+        if (r.readouts && (dom.match(/class="hint"/g) ?? []).length !== 1) fails.push(`${name}: want exactly one drag hint`)
         if (r.readouts && (dom.match(/aria-current="step"/g) ?? []).length !== 1) fails.push(`${name}: mini plan does not light exactly one waypoint`)
         const read = (k, d = dom) => d.match(new RegExp(`data-k="${k}"[^>]*>([^<]*)`))?.[1]
         for (const [k, want] of Object.entries(r.equals ?? {})) if (read(k) !== want) fails.push(`${name}: readout ${k} '${read(k)}', want '${want}'`)

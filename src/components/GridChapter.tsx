@@ -63,7 +63,7 @@ export default function GridChapter({ t }: { t: Strings }) {
           <button type="button" onClick={() => setScans(scans + 1)}>{s.add}</button>
           <button type="button" onClick={() => setScans(1)}>{s.reset}</button>
         </div>
-        <Slider label={s.res} value={res} min={0.025} max={0.2} step={0.025} mark={NAV2.costmapResolution} onChange={setRes} fmt={(v) => v.toFixed(3)} />
+        <Slider hint={t.drag} label={s.res} value={res} min={0.025} max={0.2} step={0.025} mark={NAV2.costmapResolution} onChange={setRes} fmt={(v) => v.toFixed(3)} />
         <dl className="readout">
           <div><dt>{s.cells}</dt><dd data-k="cells">{cellCount(SIZE, res).toLocaleString('en-US')}</dd></div>
           <div><dt>{s.scans}</dt><dd data-k="scans">{scans}</dd></div>

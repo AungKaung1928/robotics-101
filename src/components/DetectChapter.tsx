@@ -33,7 +33,7 @@ export default function DetectChapter({ t }: { t: Strings }) {
       </div>
       <div className="panel">
         {s.lines.map((l) => <p key={l}>{l}</p>)}
-        <Slider label={s.x} value={x} min={-4.5} max={4.5} step={0.05} onChange={setX} fmt={(v) => v.toFixed(2)} />
+        <Slider hint={t.drag} label={s.x} value={x} min={-4.5} max={4.5} step={0.05} onChange={setX} fmt={(v) => v.toFixed(2)} />
         <Slider label={s.y} value={y} min={-4.5} max={4.5} step={0.05} onChange={setY} fmt={(v) => v.toFixed(2)} />
         <Slider label={s.th} value={th} min={0.01} max={1.5} step={0.01} onChange={setTh} fmt={(v) => v.toFixed(2)} />
         <dl className="readout">

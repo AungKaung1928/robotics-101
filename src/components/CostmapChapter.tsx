@@ -52,7 +52,7 @@ export default function CostmapChapter({ t }: { t: Strings }) {
       </div>
       <div className="panel">
         {c.lines.map((l) => <p key={l}>{l}</p>)}
-        <Slider label={c.k} value={k} min={0.5} max={10} step={0.5} mark={NAV2.costScaling} onChange={setK} fmt={(v) => v.toFixed(1)} />
+        <Slider hint={t.drag} label={c.k} value={k} min={0.5} max={10} step={0.5} mark={NAV2.costScaling} onChange={setK} fmt={(v) => v.toFixed(1)} />
         <Slider label={c.d} value={d} min={0} max={DMAX} step={0.01} mark={R} onChange={setD} fmt={(v) => v.toFixed(2)} />
         <dl className="readout">
           <div><dt>{c.cost}</dt><dd data-k="cost">{cost(d)}{cost(d) === LETHAL ? ` (${c.lethal})` : cost(d) === INSCRIBED ? ` (${c.inscribed})` : ''}</dd></div>
