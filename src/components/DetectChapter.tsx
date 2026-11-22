@@ -51,7 +51,7 @@ export default function DetectChapter({ t }: { t: Strings }) {
           <div><dt>{s.truth}</dt><dd data-k="truth">{truth}</dd></div>
         </dl>
         <p className="note">{s.next}</p>
-        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/worlds/explorer_world.sdf#L104-L140`}>explorer_world.sdf:104-140</a>, Borges &amp; Aldon, J. Intell. Robot. Syst. 40 (2004) 267–297, <a href="https://doi.org/10.1023/B:JINT.0000038945.55712.65">doi</a></p>
+        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/worlds/explorer_world.sdf#L104-L140`}>explorer_world.sdf:104-140</a>, <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L185-L188`}>turtlebot3_burger.urdf.xacro:185-188</a> (noise), Borges &amp; Aldon, J. Intell. Robot. Syst. 40 (2004) 267–297, <a href="https://doi.org/10.1023/B:JINT.0000038945.55712.65">doi</a></p>
       </div>
     </>
   )
