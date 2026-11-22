@@ -24,3 +24,5 @@ jobs:
       - run: npm run build
       - name: Load the built site in headless Chrome (docs/FEATURES.md)
         run: node scripts/verify.mjs
+      - name: Real keys, clicks and hover in headless Chrome
+        run: node scripts/keys.mjs
