@@ -70,7 +70,7 @@ a.is-peek .wp circle { r: 0.4; }
 a .wp circle { fill: var(--free); transition: r var(--motion); }
 a .wp .wp-n { fill: var(--surface); }
 a:hover .wp circle, a:focus-visible .wp circle { r: 0.4; }
-a:focus-visible { outline: none; }
+.arena a:focus-visible { outline: none; } /* waypoint links: the circle stroke below shows focus */
 a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 
 .chapter { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: var(--s4) var(--s5); padding: var(--s4) var(--s5); max-width: 1280px; margin: 0 auto; }

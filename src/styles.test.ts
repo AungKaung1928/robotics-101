@@ -46,3 +46,13 @@ describe('reduced motion', () => {
     if (/animation(-name)?:\s*(?!none)\w/.test(css)) expect(reduce).toMatch(/animation:\s*none/)
   })
 })
+
+describe('focus stays visible', () => {
+  it('no rule removes the outline from all links; only scoped ones (map, mini plan) may', () => {
+    for (const m of css.matchAll(/([^{}]+)\{[^}]*outline:\s*none/g)) {
+      for (const sel of m[1].split(',').map((x) => x.trim()).filter((x) => x.includes(':focus'))) {
+        expect(sel, `unscoped outline removal: ${sel}`).toMatch(/^\.(arena|miniplan) /)
+      }
+    }
+  })
+})
