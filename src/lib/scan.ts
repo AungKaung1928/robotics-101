@@ -48,14 +48,19 @@ function hitDisc(ox: number, oy: number, dx: number, dy: number, d: Extract<Shap
   return t >= 0 ? t : Infinity
 }
 
-/** Range reading of one beam: nearest hit, or Infinity outside [minRange, maxRange] (no return). */
-export function castRay(pose: Pose, angle: number, world: Shape[], minRange: number, maxRange: number): number {
+/** One beam: range to the nearest hit and the index of the shape hit; range Infinity and shape -1 outside [minRange, maxRange]. */
+export function castRayHit(pose: Pose, angle: number, world: Shape[], minRange: number, maxRange: number): { d: number; shape: number } {
   const a = pose.yaw + angle
   const dx = Math.cos(a), dy = Math.sin(a)
-  let best = Infinity
-  for (const s of world) {
+  let best = Infinity, shape = -1
+  world.forEach((s, i) => {
     const t = s.kind === 'box' ? hitBox(pose.x, pose.y, dx, dy, s) : hitDisc(pose.x, pose.y, dx, dy, s)
-    if (t < best) best = t
-  }
-  return best >= minRange && best <= maxRange ? best : Infinity
+    if (t < best) [best, shape] = [t, i]
+  })
+  return best >= minRange && best <= maxRange ? { d: best, shape } : { d: Infinity, shape: -1 }
+}
+
+/** Range reading of one beam: nearest hit, or Infinity outside [minRange, maxRange] (no return). */
+export function castRay(pose: Pose, angle: number, world: Shape[], minRange: number, maxRange: number): number {
+  return castRayHit(pose, angle, world, minRange, maxRange).d
 }
