@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { LIDAR, WALLS, WORLD } from '../content/world'
 import { clusterCount, clusters, objectsInView } from './cluster'
-import { beamAngles, castRayHit } from './scan'
+import { beamAngles, castRayHit, sensorPose } from './scan'
 
 const P = (x: number, y: number): [number, number] => [x, y]
 describe('clusters', () => {
@@ -20,7 +20,7 @@ describe('clusters', () => {
 })
 
 describe('one scan of the arena (robot at 0.5, 0.5, heading 45°: the chapter start)', () => {
-  const pose = { x: 0.5, y: 0.5, yaw: Math.PI / 4 }
+  const pose = sensorPose({ x: 0.5, y: 0.5, yaw: Math.PI / 4 }) // the page casts from base_scan
   const angles = beamAngles(LIDAR.samples, LIDAR.minAngle, LIDAR.maxAngle)
   const hits = angles.map((a) => castRayHit(pose, a, WORLD, LIDAR.minRange, LIDAR.maxRange))
   const pts = hits.map((h, i) => (h.d === Infinity ? null : P(pose.x + h.d * Math.cos(pose.yaw + angles[i]), pose.y + h.d * Math.sin(pose.yaw + angles[i]))))
@@ -28,10 +28,10 @@ describe('one scan of the arena (robot at 0.5, 0.5, heading 45°: the chapter st
   it('sees the 3 obstacles and no wall (walls beyond 3.5 m)', () => {
     expect(seen).toBe(3)
   })
-  it('0.5 m finds exactly the 3 objects; 0.3 m splits one; 0.1 m gives 6', () => {
+  it('0.2 m and up find exactly the 3 objects; 0.1 m gives 5', () => {
     expect(clusterCount(clusters(pts, 0.5))).toBe(seen)
-    expect(clusterCount(clusters(pts, 0.3))).toBe(4)
-    expect(clusterCount(clusters(pts, 0.1))).toBe(6)
+    expect(clusterCount(clusters(pts, 0.2))).toBe(seen)
+    expect(clusterCount(clusters(pts, 0.1))).toBe(5)
   })
   it('a 1 cm threshold over-segments: beams on one object are farther apart than that', () => {
     expect(clusterCount(clusters(pts, 0.01))).toBeGreaterThan(seen)

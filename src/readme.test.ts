@@ -3,7 +3,7 @@ import { LAUNCH_NAV2_S, LIDAR, MEASURED, NAV2, PATROL_WAIT_S, WORLD } from './co
 import { clusterCount, clusters } from './lib/cluster'
 import { cellCount } from './lib/grid'
 import { inflationCost } from './lib/inflation'
-import { beamAngles, beamGap, castRayHit } from './lib/scan'
+import { beamAngles, beamGap, castRayHit, sensorPose } from './lib/scan'
 import README from '../README.md?raw'
 
 describe('README numbers match the code', () => {
@@ -22,7 +22,7 @@ describe('README numbers match the code', () => {
     expect(README).toContain(`${((NAV2.maxVelX / NAV2.controllerHz) * 100).toFixed(1)} cm per ${NAV2.controllerHz} Hz control tick`)
   })
   it('detector counts at the chapter start pose', () => {
-    const pose = { x: 0.5, y: 0.5, yaw: Math.PI / 4 } // DetectChapter start values
+    const pose = sensorPose({ x: 0.5, y: 0.5, yaw: Math.PI / 4 }) // DetectChapter start values, cast from base_scan
     const angles = beamAngles(LIDAR.samples, LIDAR.minAngle, LIDAR.maxAngle)
     const pts = angles.map((a): [number, number] | null => {
       const d = castRayHit(pose, a, WORLD, LIDAR.minRange, LIDAR.maxRange).d

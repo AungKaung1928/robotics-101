@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { LIDAR, SOURCE_REPO, WALLS, WORLD } from '../content/world'
 import type { Strings } from '../i18n'
 import { clusterCount, clusters, objectsInView } from '../lib/cluster'
-import { beamAngles, castRayHit } from '../lib/scan'
+import { beamAngles, castRayHit, sensorPose } from '../lib/scan'
 import Arena from './Arena'
 import Slider from './Slider'
 
@@ -17,16 +17,17 @@ export default function DetectChapter({ t }: { t: Strings }) {
   const [x, setX] = useState(0.5)
   const [y, setY] = useState(0.5)
   const [th, setTh] = useState(0.1)
-  const hits = ANGLES.map((a) => castRayHit({ x, y, yaw: YAW }, a, WORLD, L.minRange, L.maxRange))
+  const sp = sensorPose({ x, y, yaw: YAW }) // rays start at base_scan, not the robot centre
+  const hits = ANGLES.map((a) => castRayHit(sp, a, WORLD, L.minRange, L.maxRange))
   const pts = hits.map((h, i): [number, number] | null =>
-    h.d === Infinity ? null : [x + h.d * Math.cos(YAW + ANGLES[i]), y + h.d * Math.sin(YAW + ANGLES[i])])
+    h.d === Infinity ? null : [sp.x + h.d * Math.cos(YAW + ANGLES[i]), sp.y + h.d * Math.sin(YAW + ANGLES[i])])
   const label = clusters(pts, th)
   const truth = objectsInView(hits.map((h) => h.shape), WALLS.length)
   return (
     <>
       <div className="figure">
         <Arena label={t.chapters.detect}>
-          <circle className="range" cx={x} cy={y} r={L.maxRange} />
+          <circle className="range" cx={sp.x} cy={sp.y} r={L.maxRange} />
           {pts.map((p, i) => p && <circle key={i} className="cl" style={{ '--h': hue(label[i]) } as React.CSSProperties} cx={p[0]} cy={p[1]} r="0.05" />)}
           <circle className="robot" cx={x} cy={y} r="0.22" />
         </Arena>

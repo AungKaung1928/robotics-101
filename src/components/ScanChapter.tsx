@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { LIDAR, MEASURED, NAV2, SOURCE_REPO, WORLD } from '../content/world'
 import type { Strings } from '../i18n'
-import { beamAngles, beamGap, castRay, movePerScan } from '../lib/scan'
+import { beamAngles, beamGap, castRay, movePerScan, sensorPose } from '../lib/scan'
 import Arena from './Arena'
 import Slider from './Slider'
 
@@ -16,7 +16,8 @@ export default function ScanChapter({ t }: { t: Strings }) {
   const [r, setR] = useState(L.maxRange)
   const [hz, setHz] = useState(L.hz)
   const pose = { x, y, yaw: (yaw * Math.PI) / 180 }
-  const hits = ANGLES.map((rel) => ({ rel, a: pose.yaw + rel, d: castRay(pose, rel, WORLD, L.minRange, L.maxRange) })).filter((h) => h.d < Infinity)
+  const sp = sensorPose(pose) // rays start at base_scan, 3.2 cm behind the centre
+  const hits = ANGLES.map((rel) => ({ rel, a: pose.yaw + rel, d: castRay(sp, rel, WORLD, L.minRange, L.maxRange) })).filter((h) => h.d < Infinity)
   const [hover, setHover] = useState<number | null>(null)
   // Shown beam: the hovered one, else the return closest to straight ahead.
   const ahead = hits.reduce((b, h, i) => (b < 0 || Math.abs(h.rel) < Math.abs(hits[b].rel) ? i : b), -1)
@@ -26,12 +27,12 @@ export default function ScanChapter({ t }: { t: Strings }) {
     <>
       <div className="figure">
         <Arena label={t.chapters.scan}>
-          <circle className="range" cx={x} cy={y} r={L.maxRange} />
-          <circle className="inspect" cx={x} cy={y} r={r} />
-          <path className="rays" d={hits.map((h) => `M${x} ${y}L${x + h.d * Math.cos(h.a)} ${y + h.d * Math.sin(h.a)}`).join('')} />
-          {hits.map((h, i) => <circle key={i} className="hit" cx={x + h.d * Math.cos(h.a)} cy={y + h.d * Math.sin(h.a)} r="0.035" />)}
-          {sel && <path className="sel-ray" d={`M${x} ${y}L${x + sel.d * Math.cos(sel.a)} ${y + sel.d * Math.sin(sel.a)}`} />}
-          {hits.map((h, i) => <circle key={`t${i}`} className="hit-target" cx={x + h.d * Math.cos(h.a)} cy={y + h.d * Math.sin(h.a)} r="0.12"
+          <circle className="range" cx={sp.x} cy={sp.y} r={L.maxRange} />
+          <circle className="inspect" cx={sp.x} cy={sp.y} r={r} />
+          <path className="rays" d={hits.map((h) => `M${sp.x} ${sp.y}L${sp.x + h.d * Math.cos(h.a)} ${sp.y + h.d * Math.sin(h.a)}`).join('')} />
+          {hits.map((h, i) => <circle key={i} className="hit" cx={sp.x + h.d * Math.cos(h.a)} cy={sp.y + h.d * Math.sin(h.a)} r="0.035" />)}
+          {sel && <path className="sel-ray" d={`M${sp.x} ${sp.y}L${sp.x + sel.d * Math.cos(sel.a)} ${sp.y + sel.d * Math.sin(sel.a)}`} />}
+          {hits.map((h, i) => <circle key={`t${i}`} className="hit-target" cx={sp.x + h.d * Math.cos(h.a)} cy={sp.y + h.d * Math.sin(h.a)} r="0.12"
             onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)} />)}
           <circle className="robot" cx={x} cy={y} r={NAV2.robotRadius} />
           <path className="heading" d={`M${x} ${y}l${0.35 * Math.cos(pose.yaw)} ${0.35 * Math.sin(pose.yaw)}`} />
