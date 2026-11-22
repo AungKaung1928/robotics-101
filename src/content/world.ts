@@ -41,6 +41,10 @@ export const NAV2 = {
   goalTolerance: 0.25, // :31
   costmapResolution: 0.05, // :81 (local costmap)
   globalCostmapResolution: 0.05, // :119
+  globalRobotRadius: 0.22, // :118
+  globalCostScaling: 3.0, // :143
+  globalInflationRadius: 0.55, // :144
+  localWindow: 3, // :78-80, rolling_window: true, width = height = 3 m
   robotRadius: 0.22, // :82
   costScaling: 3.0, // :86
   inflationRadius: 0.55, // :87

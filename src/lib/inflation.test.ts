@@ -43,3 +43,11 @@ describe('kForEdgeCost', () => {
     expect(252 * Math.exp(-k * (NAV2.inflationRadius - NAV2.robotRadius))).toBeCloseTo(10, 9)
   })
 })
+
+describe('local and global costmaps inflate the same way', () => {
+  it('k, inflation radius and robot radius match (nav2_params.yaml:82-87 vs :118-144)', () => {
+    expect(NAV2.globalCostScaling).toBe(NAV2.costScaling)
+    expect(NAV2.globalInflationRadius).toBe(NAV2.inflationRadius)
+    expect(NAV2.globalRobotRadius).toBe(NAV2.robotRadius)
+  })
+})

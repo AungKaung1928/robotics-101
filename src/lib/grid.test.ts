@@ -67,3 +67,9 @@ describe('one cell size everywhere', () => {
     expect(SLAM_RESOLUTION).toBe(NAV2.globalCostmapResolution)
   })
 })
+
+describe('local costmap window', () => {
+  it('3 x 3 m rolling window at 0.05 m is 3,600 cells', () => {
+    expect(cellCount(NAV2.localWindow, NAV2.costmapResolution)).toBe(3600)
+  })
+})
