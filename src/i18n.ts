@@ -95,6 +95,7 @@ const en = {
     cells: 'cells in the 10 × 10 m map',
     scans: 'scans added',
     known: 'cells no longer unknown',
+    limit: (slam: number, sensor: number) => `SLAM may use beams up to ${slam} m (max_laser_range), but the LiDAR returns nothing past ${sensor} m: the sensor sets the limit.`,
     model: 'Model: hit p = 0.7, pass p = 0.4 (page choice); beams with no return change nothing.',
   },
   detect: {
@@ -216,6 +217,7 @@ const ja: typeof en = {
     cells: '10 × 10 m 地図のセル数',
     scans: '追加したスキャン',
     known: '未知でなくなったセル',
+    limit: (slam: number, sensor: number) => `SLAM は ${slam} m までのビームを使える設定 (max_laser_range) だが、LiDAR は ${sensor} m より先を返さない。限界はセンサの方。`,
     model: 'モデル: 当たり p = 0.7、通過 p = 0.4 (このページの選択)。反射のないビームは何も変えない。',
   },
   detect: {

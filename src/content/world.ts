@@ -20,6 +20,8 @@ export const OBSTACLES: Shape[] = [
 ]
 export const WORLD: Shape[] = [...WALLS, ...OBSTACLES]
 
+export const SLAM_MAX_LASER_RANGE = 12.0 // config/slam_params.yaml:12
+
 export const LIDAR = {
   hz: 5, // description/turtlebot3_burger.urdf.xacro:168
   samples: 360, // :174

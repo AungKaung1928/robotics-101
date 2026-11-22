@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { LIDAR, NAV2, WAYPOINTS, WORLD } from '../content/world'
+import { LIDAR, NAV2, SLAM_MAX_LASER_RANGE, WAYPOINTS, WORLD } from '../content/world'
 import type { Strings } from '../i18n'
 import { addBeam, cellCount, makeGrid, prob } from '../lib/grid'
 import { beamAngles, castRay } from '../lib/scan'
@@ -7,6 +7,7 @@ import { routeStep } from '../lib/route'
 import Slider from './Slider'
 
 const SIZE = 10
+const L_MAX = LIDAR.maxRange
 const ANGLES = beamAngles(LIDAR.samples, LIDAR.minAngle, LIDAR.maxAngle)
 const P_HIT = 0.7, P_FREE = 0.4 // page choice, shown under the figure
 
@@ -68,7 +69,8 @@ export default function GridChapter({ t }: { t: Strings }) {
           <div><dt>{s.scans}</dt><dd data-k="scans">{scans}</dd></div>
           <div><dt>{s.known}</dt><dd data-k="known">{((known / (g.n * g.n)) * 100).toFixed(1)} %</dd></div>
         </dl>
-        <p className="src">{t.source}: <a href="https://github.com/AungKaung1928/TF-Transform-Explorer/blob/main/config/slam_params.yaml#L11">slam_params.yaml:11</a> (0.05 m), Thrun, Burgard, Fox, <i>Probabilistic Robotics</i>, ch. 9</p>
+        <p className="note">{s.limit(SLAM_MAX_LASER_RANGE, L_MAX)}</p>
+        <p className="src">{t.source}: <a href="https://github.com/AungKaung1928/TF-Transform-Explorer/blob/main/config/slam_params.yaml#L11-L12">slam_params.yaml:11-12</a>, Thrun, Burgard, Fox, <i>Probabilistic Robotics</i>, ch. 9</p>
       </div>
     </>
   )
