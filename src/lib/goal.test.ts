@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { NAV2 } from '../content/world'
-import { driveDistance, minTime, ticksToGoal } from './goal'
+import { driveDistance, minTime, minTimeAccel, ticksToGoal } from './goal'
 
 const { goalTolerance: tol, maxVelX: v, controllerHz: hz } = NAV2
 describe('reaching a goal (0.26 m/s, 20 Hz, 0.25 m tolerance)', () => {
@@ -17,5 +17,20 @@ describe('reaching a goal (0.26 m/s, 20 Hz, 0.25 m tolerance)', () => {
   })
   it('a partial tick still costs a tick', () => {
     expect(ticksToGoal(0.25 + 0.014, tol, v, hz)).toBe(2)
+  })
+})
+
+describe('with his acceleration limit (2.5 m/s²)', () => {
+  const a = NAV2.accLimX
+  it('full speed after 0.104 s, so 2.6 m takes 10.104 s (0.104 s over the no-acceleration bound)', () => {
+    expect(NAV2.maxVelX / a).toBeCloseTo(0.104, 12)
+    expect(minTimeAccel(2.85, tol, v, a)).toBeCloseTo(10.104, 9)
+  })
+  it('a short move never reaches full speed: triangle profile', () => {
+    // drive 0.02 m < v²/a = 0.027 m
+    expect(minTimeAccel(0.27, tol, v, a)).toBeCloseTo(2 * Math.sqrt(0.02 / a), 9)
+  })
+  it('heading tolerance 0.25 rad is 14.3°', () => {
+    expect((NAV2.yawGoalTolerance * 180) / Math.PI).toBeCloseTo(14.3, 1)
   })
 })
