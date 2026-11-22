@@ -159,6 +159,7 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .seg input { accent-color: var(--ink); }
 .seg legend { color: var(--ink-2); padding: 0; margin-bottom: var(--s1); }
 .group { border: 0; border-top: 2px solid var(--ink); margin: 0 0 var(--s4); padding: var(--s2) 0 0; }
+.group .slider:first-of-type { margin-top: var(--s4); } /* room for the drag hint above it */
 .group legend { font: 600 var(--t-small) var(--mono); text-transform: uppercase; letter-spacing: 0.06em; padding: 0 var(--s2) 0 0; }
 .readout { margin: 0 0 var(--s3); border-top: 1px solid var(--rule); }
 .readout div { display: flex; justify-content: space-between; gap: var(--s3); padding: var(--s2) 0; border-bottom: 1px solid var(--rule); }
