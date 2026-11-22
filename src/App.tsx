@@ -2,10 +2,11 @@ import { useEffect, useState } from 'react'
 import CostmapChapter from './components/CostmapChapter'
 import Overview from './components/Overview'
 import ScanChapter from './components/ScanChapter'
+import TfChapter from './components/TfChapter'
 import { STRINGS, initialLang, type Lang } from './i18n'
 import { CHAPTERS, neighbour, parseRoute, type ChapterId } from './lib/route'
 
-const BODY: Partial<Record<ChapterId, typeof ScanChapter>> = { scan: ScanChapter, costmap: CostmapChapter }
+const BODY: Partial<Record<ChapterId, typeof ScanChapter>> = { tf: TfChapter, scan: ScanChapter, costmap: CostmapChapter }
 
 export default function App() {
   const [route, setRoute] = useState(() => parseRoute(location.hash))

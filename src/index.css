@@ -11,6 +11,8 @@
   --robot: #1f4fd1; /* the robot and everything you move */
   --ray: #c4410c; /* sensor returns */
   --cost: #8a2a9e; /* costmap */
+  --axis-x: #c62828; /* frame x axis (REP 103 colour convention: x red, y green) */
+  --axis-y: #2e7d32;
   --font: system-ui, -apple-system, 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif;
   --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
   --s1: 4px; --s2: 8px; --s3: 16px; --s4: 24px; --s5: 40px;
@@ -22,7 +24,7 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --paper: #0e1212; --surface: #141a19; --ink: #e5ebe8; --ink-2: #a3b0ab; --rule: #34403c; --grid: #1d2624;
-    --occ: #d7dfdb; --free: #4cc487; --robot: #7d9cff; --ray: #ff8a4c; --cost: #d68cf0;
+    --occ: #d7dfdb; --free: #4cc487; --robot: #7d9cff; --ray: #ff8a4c; --cost: #d68cf0; --axis-x: #ff6b6b; --axis-y: #66d17a;
   }
 }
 * { box-sizing: border-box; }
@@ -73,6 +75,17 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .robot { fill: var(--robot); fill-opacity: 0.2; stroke: var(--robot); stroke-width: 0.03; }
 .heading { stroke: var(--robot); stroke-width: 0.05; }
 
+
+.frame path { stroke-width: 0.05; stroke-linecap: round; }
+.ax-x { stroke: var(--axis-x); }
+.ax-y { stroke: var(--axis-y); }
+.frame text { font-size: 0.24px; }
+.chain { fill: none; stroke: var(--ink-2); stroke-width: 0.025; stroke-dasharray: 0.08 0.06; }
+.beam { stroke: var(--ray); stroke-width: 0.025; }
+.frames { width: 100%; border-collapse: collapse; margin: 0 0 var(--s3); font-size: var(--t-small); }
+.frames th { text-align: left; color: var(--ink-2); font-weight: 400; border-bottom: 1px solid var(--rule); padding: var(--s1) 0; }
+.frames td { font-family: var(--mono); padding: var(--s1) 0; border-bottom: 1px solid var(--rule); }
+.v-stale, .v-jump { color: var(--ray); }
 .chart { width: 100%; height: auto; background: var(--surface); border: 1px solid var(--rule); }
 .chart .axis { fill: none; stroke: var(--ink-2); }
 .chart .tick { font: 12px var(--mono); fill: var(--ink-2); }

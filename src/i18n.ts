@@ -36,6 +36,24 @@ const en = {
     gap: 'gap between beams',
     move: 'moved per scan at 0.26 m/s',
   },
+  tf: {
+    lines: [
+      'Every position is relative to a frame: map → odom → base_link → base_scan. Composing the chain gives the robot in the map.',
+      'One LiDAR hit on box1, written in each frame: same point, four sets of numbers.',
+      'The anomaly detector checks every 0.5 s: older than 1.0 s is stale, a move over 0.5 m is a jump.',
+    ],
+    drift: 'odom drift in map, x (m)',
+    driftYaw: 'odom drift in map, yaw (deg)',
+    x: 'base_link in odom, x (m)',
+    y: 'base_link in odom, y (m)',
+    yaw: 'base_link in odom, yaw (deg)',
+    frame: 'frame',
+    point: 'hit at box1 corner',
+    jump: 'odom move since last check (m)',
+    age: 'transform age (s)',
+    verdict: 'detector says',
+    v: { healthy: 'healthy', stale: 'STALE', jump: 'JUMP' },
+  },
   costmap: {
     lines: [
       'Nav2 inflates every obstacle: cost falls off with distance, so the planner keeps clear of walls.',
@@ -83,6 +101,24 @@ const ja: typeof en = {
     hits: '反射のあったビーム',
     gap: 'ビームの間隔',
     move: '0.26 m/s で 1 スキャン間に進む距離',
+  },
+  tf: {
+    lines: [
+      '位置はすべてフレームからの相対値: map → odom → base_link → base_scan。連鎖を合成すると map の中のロボットになる。',
+      'box1 に当たった LiDAR の点 1 つを各フレームで書く。同じ点で数字は 4 通り。',
+      '異常検出器は 0.5 秒ごとに確認: 1.0 秒より古いと stale、0.5 m を超える移動は jump。',
+    ],
+    drift: 'map 内の odom のずれ x (m)',
+    driftYaw: 'map 内の odom のずれ yaw (度)',
+    x: 'odom 内の base_link x (m)',
+    y: 'odom 内の base_link y (m)',
+    yaw: 'odom 内の base_link yaw (度)',
+    frame: 'フレーム',
+    point: 'box1 の角に当たった点',
+    jump: '前回確認からの odom の移動 (m)',
+    age: '変換の古さ (秒)',
+    verdict: '検出器の判定',
+    v: { healthy: '正常', stale: 'STALE', jump: 'JUMP' },
   },
   costmap: {
     lines: [

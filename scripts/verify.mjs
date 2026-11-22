@@ -10,7 +10,8 @@ const BASE = `http://localhost:${PORT}/`
 const OUT = join(ROOT, 'verify-out')
 // Route, then the readouts (data-k) its page must show with a number in them.
 const ROUTES = [
-  { hash: '', h1: { en: 'Robotics First Steps', ja: 'ロボティクス はじめの一歩' }, links: ['#/scan', '#/costmap'], planned: 5 },
+  { hash: '', h1: { en: 'Robotics First Steps', ja: 'ロボティクス はじめの一歩' }, links: ['#/tf', '#/scan', '#/costmap'], planned: 4 },
+  { hash: '#/tf', readouts: ['hit-map', 'hit-base_scan'], words: { verdict: /healthy|正常/ } },
   { hash: '#/scan', readouts: ['hits', 'gap', 'move'] },
   { hash: '#/costmap', readouts: ['cost', 'edge'] },
 ]
@@ -67,6 +68,10 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
         for (const k of r.readouts ?? []) {
           const v = dom.match(new RegExp(`data-k="${k}"[^>]*>([^<]*)`))?.[1]
           if (!v || !/\d/.test(v)) fails.push(`${name}: readout ${k} empty`)
+        }
+        for (const [k, want] of Object.entries(r.words ?? {})) {
+          const v = dom.match(new RegExp(`data-k="${k}"[^>]*>([^<]*)`))?.[1]
+          if (!want.test(v ?? '')) fails.push(`${name}: readout ${k} '${v}', want ${want}`)
         }
         const phone = chrome(BASE + 'phone.html' + r.hash, { lang, size: '390,844' }).match(/PHONE (\d+) (\d+)/)
         if (!phone) fails.push(`${name}: 390 px frame not measured`)

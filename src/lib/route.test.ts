@@ -7,13 +7,14 @@ describe('parseRoute', () => {
     expect(parseRoute('#/costmap/2')).toEqual({ page: 'chapter', id: 'costmap' })
   })
   it('falls back to the overview', () => {
-    for (const h of ['', '#/', '#/nope', '#/tf']) expect(parseRoute(h)).toEqual({ page: 'overview' })
+    for (const h of ['', '#/', '#/nope', '#/grid']) expect(parseRoute(h)).toEqual({ page: 'overview' })
   })
 })
 describe('neighbour', () => {
   it('walks built chapters only and stops at the ends', () => {
     expect(neighbour('scan', 1)).toBe('costmap')
-    expect(neighbour('scan', -1)).toBeNull()
+    expect(neighbour('scan', -1)).toBe('tf')
+    expect(neighbour('tf', -1)).toBeNull()
     expect(neighbour('costmap', 1)).toBeNull()
   })
 })
