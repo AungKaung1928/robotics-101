@@ -37,7 +37,7 @@ export default function GoalChapter({ t }: { t: Strings }) {
           <div><dt>{s.ticks}</dt><dd data-k="ticks">{ticks}</dd></div>
         </dl>
         <p className="note">{s.every}</p>
-        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L18-L39`}>nav2_params.yaml:18-39</a></p>
+        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L18-L39`}>nav2_params.yaml:18-39</a>, <a href={`${SOURCE_REPO}/blob/main/README.md`}>README (patrol result)</a></p>
       </div>
     </>
   )
