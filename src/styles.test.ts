@@ -37,3 +37,11 @@ describe('text contrast (WCAG AA 4.5:1)', () => {
     })
   }
 })
+
+describe('reduced motion', () => {
+  const reduce = css.slice(css.indexOf('@media (prefers-reduced-motion: reduce)'))
+  it('turns off every transition, and every animation if the sheet has any', () => {
+    expect(reduce).toMatch(/transition:\s*none/)
+    if (/animation(-name)?:\s*(?!none)\w/.test(css)) expect(reduce).toMatch(/animation:\s*none/)
+  })
+})
