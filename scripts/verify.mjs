@@ -25,7 +25,7 @@ const ROUTES = [
   { hash: '#/grid', readouts: ['cells', 'scans', 'known'], equals: { scans: '1' }, has: ' %"' }, // canvas label carries the result
   { hash: '#/grid?res=0.1', readouts: ['cells'], equals: { cells: '10,000' } },
   { hash: '#/grid/7', readouts: ['known'], equals: { scans: '7' }, moreThan: { known: ['#/grid', 'known'] } },
-  { hash: '#/costmap', readouts: ['cost', 'edge', 'smooth'], equals: { window: '3 × 3 m = 3,600' } },
+  { hash: '#/costmap', readouts: ['cost', 'edge', 'smooth'], equals: { window: '3 × 3 m = 3,600', ladder: '3.5 → 3.0 → 2.5 → 1.5 m' } },
   { hash: '#/goal', readouts: ['tick', 'drive', 'time', 'ticks', 'cmdhz'] },
 ]
 const JA_TEXT = /[぀-ヿ一-龯]/

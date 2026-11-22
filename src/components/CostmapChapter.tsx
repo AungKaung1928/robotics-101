@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { NAV2, OBSTACLES, SOURCE_REPO, type Box } from '../content/world'
+import { LIDAR, NAV2, OBSTACLES, SOURCE_REPO, type Box } from '../content/world'
 import type { Strings } from '../i18n'
 import { INSCRIBED, LETHAL, distToBox, inflationCost, kForEdgeCost } from '../lib/inflation'
 import { routeParam } from '../lib/route'
@@ -60,6 +60,7 @@ export default function CostmapChapter({ t }: { t: Strings }) {
           <div><dt>{c.cost}</dt><dd data-k="cost">{cost(d)}{cost(d) === LETHAL ? ` (${c.lethal})` : cost(d) === INSCRIBED ? ` (${c.inscribed})` : ''}</dd></div>
           <div><dt>{c.zero}</dt><dd data-k="edge">{RAD} m ({edge} → 0)</dd></div>
           <div><dt>{c.window}</dt><dd data-k="window">{NAV2.localWindow} × {NAV2.localWindow} m = {cellCount(NAV2.localWindow, NAV2.costmapResolution).toLocaleString('en-US')}</dd></div>
+          <div><dt>{c.ladder}</dt><dd data-k="ladder">{[LIDAR.maxRange, NAV2.raytraceMaxRange, NAV2.obstacleMaxRange, NAV2.localWindow / 2].map((v) => v.toFixed(1)).join(' → ')} m</dd></div>
           <div><dt>{c.smooth}</dt><dd data-k="smooth">{kForEdgeCost(10, R, RAD).toFixed(1)}</dd></div>
         </dl>
         <p className="note">{c.twoMaps}</p>
