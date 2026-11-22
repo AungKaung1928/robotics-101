@@ -10,3 +10,8 @@ export function verdict(age: number, jump: number, maxAge: number, maxJump: numb
   if (jump > maxJump) return 'jump'
   return 'healthy'
 }
+
+/** Farthest the robot can drive between two detector checks at its speed limit. */
+export function maxDrivePerCheck(speed: number, period: number): number {
+  return speed * period
+}

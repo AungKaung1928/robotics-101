@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { TF_MAX_AGE, TF_MAX_JUMP } from '../content/world'
-import { verdict } from './anomaly'
+import { NAV2, TF_CHECK_PERIOD, TF_MAX_AGE, TF_MAX_JUMP } from '../content/world'
+import { maxDrivePerCheck, verdict } from './anomaly'
 import { apply, compose, invert } from './tf2d'
 
 const close = (a: number[], b: number[]) => a.forEach((v, i) => expect(v).toBeCloseTo(b[i], 12))
@@ -34,5 +34,12 @@ describe('anomaly verdict at his thresholds (1.0 s, 0.5 m)', () => {
   })
   it('stale wins over jump', () => {
     expect(v(2, 2)).toBe('stale')
+  })
+})
+
+describe('a jump cannot be driven', () => {
+  it('0.26 m/s for 0.5 s is 0.13 m, under the 0.5 m jump threshold', () => {
+    expect(maxDrivePerCheck(NAV2.maxVelX, TF_CHECK_PERIOD)).toBeCloseTo(0.13, 12)
+    expect(maxDrivePerCheck(NAV2.maxVelX, TF_CHECK_PERIOD)).toBeLessThan(TF_MAX_JUMP)
   })
 })
