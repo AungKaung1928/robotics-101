@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { LIDAR, WORLD } from '../content/world'
-import { clusterCount, clusters } from './cluster'
+import { LIDAR, WALLS, WORLD } from '../content/world'
+import { clusterCount, clusters, objectsInView } from './cluster'
 import { beamAngles, castRayHit } from './scan'
 
 const P = (x: number, y: number): [number, number] => [x, y]
@@ -35,5 +35,20 @@ describe('one scan of the arena (robot at 0.5, 0.5, heading 45°: the chapter st
   })
   it('a 1 cm threshold over-segments: beams on one object are farther apart than that', () => {
     expect(clusterCount(clusters(pts, 0.01))).toBeGreaterThan(seen)
+  })
+})
+
+describe('objectsInView', () => {
+  it('counts all walls as one object', () => {
+    expect(objectsInView([-1, 0, 1, 1, 3, 5, 6], 4)).toBe(3)
+  })
+  it('near the north-east corner two walls meet: one cluster, one object', () => {
+    const pose = { x: 4, y: 4, yaw: 0 }
+    const angles = beamAngles(LIDAR.samples, LIDAR.minAngle, LIDAR.maxAngle)
+    const hits = angles.map((a) => castRayHit(pose, a, WORLD, LIDAR.minRange, LIDAR.maxRange))
+    const pts = hits.map((h, i) => (h.d === Infinity ? null : P(pose.x + h.d * Math.cos(angles[i]), pose.y + h.d * Math.sin(angles[i]))))
+    const walls = new Set(hits.filter((h) => h.shape >= 0 && h.shape < WALLS.length).map((h) => h.shape)).size
+    expect(walls).toBe(2)
+    expect(clusterCount(clusters(pts, 0.5))).toBe(objectsInView(hits.map((h) => h.shape), WALLS.length))
   })
 })

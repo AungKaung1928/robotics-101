@@ -23,3 +23,8 @@ export function clusters(points: ([number, number] | null)[], threshold: number)
 }
 
 export const clusterCount = (label: number[]) => new Set(label.filter((l) => l >= 0)).size
+
+/** Objects a scan sees: the walls form one closed ring, so every wall hit counts as one object; each obstacle hit is its own. */
+export function objectsInView(shapes: number[], wallCount: number): number {
+  return new Set(shapes.filter((s) => s >= 0).map((s) => (s < wallCount ? 'wall' : s))).size
+}
