@@ -6,7 +6,7 @@ export type Route = { page: 'overview' } | { page: 'chapter'; id: ChapterId }
 
 /** '#/scan' → the scan chapter; '', '#/', unknown ids → overview. */
 export function parseRoute(hash: string): Route {
-  const id = hash.replace(/^#\/?/, '').split('/')[0]
+  const id = hash.replace(/^#\/?/, '').split(/[/?]/)[0]
   const ch = CHAPTERS.find((c) => c === id)
   return ch ? { page: 'chapter', id: ch } : { page: 'overview' }
 }
@@ -15,6 +15,13 @@ export function parseRoute(hash: string): Route {
 export function routeStep(hash: string, count: number): number {
   const n = Number(hash.replace(/^#\/?/, '').split('/')[1])
   return Number.isInteger(n) && n >= 1 ? Math.min(n, count) - 1 : count - 1
+}
+
+/** Numeric start value from the query part of the hash ('#/tf?jump=0.6'), clamped to [min, max]; missing or bad → fallback. */
+export function routeParam(hash: string, name: string, fallback: number, min: number, max: number): number {
+  const q = hash.split('?')[1]
+  const v = q === undefined ? NaN : Number(new URLSearchParams(q).get(name) ?? NaN)
+  return Number.isFinite(v) ? Math.min(max, Math.max(min, v)) : fallback
 }
 
 /** The chapter before (-1) or after (+1) `id`, or null at either end. */

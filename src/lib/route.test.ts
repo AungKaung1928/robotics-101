@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { neighbour, parseRoute, routeStep } from './route'
+import { neighbour, parseRoute, routeParam, routeStep } from './route'
 
 describe('parseRoute', () => {
   it('opens built chapters, with or without a step suffix', () => {
@@ -16,6 +16,15 @@ describe('routeStep', () => {
     expect(routeStep('#/bringup/99', 7)).toBe(6)
     expect(routeStep('#/bringup', 7)).toBe(6)
     expect(routeStep('#/bringup/0', 7)).toBe(6)
+  })
+})
+describe('routeParam', () => {
+  it('reads, clamps, falls back', () => {
+    expect(parseRoute('#/tf?jump=0.6')).toEqual({ page: 'chapter', id: 'tf' })
+    expect(routeParam('#/tf?jump=0.6', 'jump', 0.1, 0, 1)).toBe(0.6)
+    expect(routeParam('#/tf?jump=9', 'jump', 0.1, 0, 1)).toBe(1)
+    expect(routeParam('#/tf?jump=x', 'jump', 0.1, 0, 1)).toBe(0.1)
+    expect(routeParam('#/tf', 'jump', 0.1, 0, 1)).toBe(0.1)
   })
 })
 describe('neighbour', () => {
