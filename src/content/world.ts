@@ -43,6 +43,9 @@ export const SOURCE_REPO = 'https://github.com/AungKaung1928/TF-Transform-Explor
 
 export const LAUNCH_NAV2_S = 10 // CONTEXT.md "Stage delays": Nav2 starts 10 s after launch
 export const TF_MAX_JUMP = 0.5 // src/tf_anomaly_detector.cpp:11
+export const TF_MAX_AGE = 1.0 // src/tf_anomaly_detector.cpp:10
+export const TF_CHECK_PERIOD = 0.5 // src/tf_anomaly_detector.cpp:26, 500 ms timer
+export const BASE_TO_SCAN = { x: -0.032, y: 0, yaw: 0 } // description/turtlebot3_burger.urdf.xacro:118
 
 /** Plan positions of the 7 waypoints (m) and the side their label sits on. Drawn for this page, not the robot's patrol code. */
 export const WAYPOINTS: { x: number; y: number; side: 'left' | 'right' }[] = [
