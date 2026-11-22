@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { LIDAR, SOURCE_REPO, WORLD } from '../content/world'
+import { LIDAR, SOURCE_REPO, WALLS, WORLD } from '../content/world'
 import type { Strings } from '../i18n'
-import { clusterCount, clusters } from '../lib/cluster'
+import { clusterCount, clusters, objectsInView } from '../lib/cluster'
 import { beamAngles, castRayHit } from '../lib/scan'
 import Arena from './Arena'
 import Slider from './Slider'
@@ -21,7 +21,7 @@ export default function DetectChapter({ t }: { t: Strings }) {
   const pts = hits.map((h, i): [number, number] | null =>
     h.d === Infinity ? null : [x + h.d * Math.cos(YAW + ANGLES[i]), y + h.d * Math.sin(YAW + ANGLES[i])])
   const label = clusters(pts, th)
-  const truth = new Set(hits.filter((h) => h.shape >= 0).map((h) => h.shape)).size
+  const truth = objectsInView(hits.map((h) => h.shape), WALLS.length)
   return (
     <>
       <div className="figure">
