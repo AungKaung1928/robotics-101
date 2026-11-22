@@ -45,6 +45,8 @@ export const NAV2 = {
   globalCostScaling: 3.0, // :143
   globalInflationRadius: 0.55, // :144
   localWindow: 3, // :78-80, rolling_window: true, width = height = 3 m
+  raytraceMaxRange: 3.0, // :104 (local voxel layer clears free space up to here)
+  obstacleMaxRange: 2.5, // :106 (and marks obstacles up to here)
   robotRadius: 0.22, // :82
   costScaling: 3.0, // :86
   inflationRadius: 0.55, // :87

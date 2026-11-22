@@ -73,3 +73,11 @@ describe('local costmap window', () => {
     expect(cellCount(NAV2.localWindow, NAV2.costmapResolution)).toBe(3600)
   })
 })
+
+describe('range ladder of the local costmap', () => {
+  it('LiDAR 3.5 m > clearing 3.0 m > marking 2.5 m > window edge 1.5 m', () => {
+    const ladder = [LIDAR.maxRange, NAV2.raytraceMaxRange, NAV2.obstacleMaxRange, NAV2.localWindow / 2]
+    expect(ladder).toEqual([3.5, 3.0, 2.5, 1.5])
+    for (let i = 1; i < ladder.length; i++) expect(ladder[i]).toBeLessThan(ladder[i - 1])
+  })
+})
