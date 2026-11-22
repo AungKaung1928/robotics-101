@@ -49,3 +49,8 @@ export function addBeam(g: Grid, x: number, y: number, angle: number, range: num
   }
   if (hit >= 0) g.l[hit] = update(g.l[hit], pHit)
 }
+
+/** LiDAR scans that arrive while the robot drives `travel` m at `speed` (SLAM keeps one of them). */
+export function scansPerKept(travel: number, speed: number, hz: number): number {
+  return (travel / speed) * hz
+}

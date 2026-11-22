@@ -25,6 +25,8 @@ export const MEASURED = { scanHz: [4.5, 4.8], odomHz: [25, 27], cmdVelHz: 20.0 }
 
 export const SLAM_MAX_LASER_RANGE = 12.0 // config/slam_params.yaml:12
 export const SLAM_RESOLUTION = 0.05 // config/slam_params.yaml:11
+// config/slam_params.yaml:13-14, :49: a scan joins the map only after this much motion; the map is republished every 5 s.
+export const SLAM = { minTravel: 0.5, minHeading: 0.5, mapUpdateS: 5.0 }
 
 export const LIDAR = {
   hz: 5, // description/turtlebot3_burger.urdf.xacro:168

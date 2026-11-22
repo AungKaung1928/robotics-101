@@ -81,3 +81,13 @@ describe('range ladder of the local costmap', () => {
     for (let i = 1; i < ladder.length; i++) expect(ladder[i]).toBeLessThan(ladder[i - 1])
   })
 })
+
+import { MEASURED, SLAM } from '../content/world'
+import { scansPerKept } from './grid'
+describe('SLAM keeps one scan per 0.5 m', () => {
+  it('at 0.26 m/s that is every 1.92 s; 8.7–9.2 scans arrive at the measured 4.5–4.8 Hz', () => {
+    expect(SLAM.minTravel / NAV2.maxVelX).toBeCloseTo(1.923, 3)
+    expect(scansPerKept(SLAM.minTravel, NAV2.maxVelX, MEASURED.scanHz[0])).toBeCloseTo(8.65, 2)
+    expect(scansPerKept(SLAM.minTravel, NAV2.maxVelX, MEASURED.scanHz[1])).toBeCloseTo(9.23, 2)
+  })
+})
