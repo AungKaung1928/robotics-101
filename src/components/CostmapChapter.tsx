@@ -1,13 +1,20 @@
 import { useState } from 'react'
-import { NAV2, SOURCE_REPO } from '../content/world'
+import { NAV2, OBSTACLES, SOURCE_REPO, type Box } from '../content/world'
 import type { Strings } from '../i18n'
-import { INSCRIBED, LETHAL, inflationCost } from '../lib/inflation'
+import { INSCRIBED, LETHAL, distToBox, inflationCost } from '../lib/inflation'
 import Slider from './Slider'
 
 const R = NAV2.robotRadius, RAD = NAV2.inflationRadius
 const DMAX = 0.8, W = 640, H = 300, PAD = 36
 const sx = (d: number) => PAD + (d / DMAX) * (W - 2 * PAD)
 const sy = (c: number) => H - PAD - (c / LETHAL) * (H - 2 * PAD)
+// Top-down inset: the costmap cells around box1 at his 0.05 m resolution.
+const BOX1 = OBSTACLES.find((o) => o.name === 'box1') as Box
+const RES = NAV2.costmapResolution, X0 = 0.6, SPAN = 2.8, N = Math.round(SPAN / RES)
+const CELLS = Array.from({ length: N * N }, (_, k) => {
+  const x = X0 + (k % N) * RES, y = X0 + Math.floor(k / N) * RES
+  return { x, y, d: distToBox(x + RES / 2, y + RES / 2, BOX1) }
+})
 
 export default function CostmapChapter({ t }: { t: Strings }) {
   const c = t.costmap
@@ -20,6 +27,16 @@ export default function CostmapChapter({ t }: { t: Strings }) {
   return (
     <>
       <div className="figure">
+        <svg className="inset" viewBox={`${X0} ${-X0 - SPAN} ${SPAN} ${SPAN}`} role="img" aria-label={`${t.chapters.costmap}: box1`}>
+          <g transform="scale(1 -1)">
+            {CELLS.map((c) => {
+              const v = cost(c.d)
+              return v > 0 && <rect key={`${c.x} ${c.y}`} className={v === LETHAL ? 'c-lethal' : 'c-cost'} x={c.x} y={c.y} width={RES} height={RES} opacity={v === LETHAL ? 1 : v / LETHAL} />
+            })}
+            <circle className="robot" cx={BOX1.x - BOX1.w / 2 - d} cy={BOX1.y} r={R} />
+            <circle className="probe-dot" cx={BOX1.x - BOX1.w / 2 - d} cy={BOX1.y} r="0.03" />
+          </g>
+        </svg>
         <svg className="chart" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t.chapters.costmap}>
           <rect className="band-insc" x={sx(0)} y={PAD} width={sx(R) - sx(0)} height={H - 2 * PAD} />
           <rect className="band-infl" x={sx(R)} y={PAD} width={sx(RAD) - sx(R)} height={H - 2 * PAD} />

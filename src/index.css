@@ -106,6 +106,10 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .chart { width: 100%; height: auto; background: var(--surface); border: 1px solid var(--rule); }
 .chart .axis { fill: none; stroke: var(--ink-2); }
 .chart .tick { font: 12px var(--mono); fill: var(--ink-2); }
+.inset { width: 100%; max-width: 360px; height: auto; display: block; margin: 0 auto var(--s3); background: var(--surface); border: 1px solid var(--rule); }
+.c-cost, .c-lethal { shape-rendering: crispEdges; }
+.c-cost { fill: var(--cost); }
+.c-lethal { fill: var(--occ); }
 .band-insc { fill: var(--occ); opacity: 0.12; }
 .band-infl { fill: var(--cost); opacity: 0.1; }
 .cost { fill: none; stroke: var(--cost); stroke-width: 3; }
