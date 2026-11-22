@@ -12,9 +12,10 @@ function ShapeEl({ s }: { s: Shape }) {
 }
 
 /** Top-down 10 x 10 m arena in metres, y up (REP 103). Children draw in world coordinates. */
-export default function Arena({ children, label, overlay }: { children?: ReactNode; label: string; overlay?: ReactNode }) {
+// role 'img' hides children from assistive tech: a map holding links must be a 'group'.
+export default function Arena({ children, label, overlay, role = 'img' }: { children?: ReactNode; label: string; overlay?: ReactNode; role?: 'img' | 'group' }) {
   return (
-    <svg className="arena" viewBox="-5.4 -5.4 10.8 10.8" role="img" aria-label={label}>
+    <svg className="arena" viewBox="-5.4 -5.4 10.8 10.8" role={role} aria-label={label}>
       <defs>
         <pattern id="cell" width="0.5" height="0.5" patternUnits="userSpaceOnUse" x="-5" y="-5">
           <path d="M0.5 0H0V0.5" className="grid" />
