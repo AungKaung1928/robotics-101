@@ -6,7 +6,7 @@ import { routeParam } from '../lib/route'
 import Slider from './Slider'
 
 const R = NAV2.robotRadius, RAD = NAV2.inflationRadius
-const DMAX = 0.8, W = 640, H = 300, PAD = 36
+const DMAX = 0.8, W = 640, H = 300, PAD = 48
 const sx = (d: number) => PAD + (d / DMAX) * (W - 2 * PAD)
 const sy = (c: number) => H - PAD - (c / LETHAL) * (H - 2 * PAD)
 // Top-down inset: the costmap cells around box1 at his 0.05 m resolution.
@@ -42,7 +42,7 @@ export default function CostmapChapter({ t }: { t: Strings }) {
           <rect className="band-insc" x={sx(0)} y={PAD} width={sx(R) - sx(0)} height={H - 2 * PAD} />
           <rect className="band-infl" x={sx(R)} y={PAD} width={sx(RAD) - sx(R)} height={H - 2 * PAD} />
           <path className="axis" d={`M${PAD} ${PAD}V${H - PAD}H${W - PAD}`} />
-          {[0, 0.2, 0.4, 0.6, 0.8].map((v) => <text key={v} className="tick" x={sx(v)} y={H - PAD + 18} textAnchor="middle">{v.toFixed(1)}</text>)}
+          {[0, 0.2, 0.4, 0.6, 0.8].map((v) => <text key={v} className="tick" x={sx(v)} y={H - PAD + 26} textAnchor="middle">{v.toFixed(1)}</text>)}
           {[0, 128, LETHAL].map((v) => <text key={v} className="tick" x={PAD - 6} y={sy(v) + 4} textAnchor="end">{v}</text>)}
           <text className="tick" x={sx(R / 2)} y={PAD - 8} textAnchor="middle">{c.inscribed} {INSCRIBED}</text>
           <text className="tick" x={sx(RAD)} y={PAD - 8} textAnchor="middle">{RAD} m</text>
