@@ -56,8 +56,6 @@ h1 { font-size: var(--t-h1); line-height: 1.1; letter-spacing: -0.02em; margin: 
 .wp .wp-n { text-anchor: middle; font-weight: 700; font-size: 0.3px; }
 .wp .wp-title { font-family: var(--font); font-weight: 600; font-size: 0.3px; paint-order: stroke; stroke: var(--surface); stroke-width: 0.08px; }
 .wp .wp-value { font-size: 0.24px; fill: var(--ink-2); paint-order: stroke; stroke: var(--surface); stroke-width: 0.08px; }
-.wp-planned { opacity: 0.55; }
-.wp-planned circle { stroke: var(--ink-2); stroke-dasharray: 0.08 0.06; }
 a .wp circle { fill: var(--free); transition: r var(--motion); }
 a .wp .wp-n { fill: var(--surface); }
 a:hover .wp circle, a:focus-visible .wp circle { r: 0.4; }

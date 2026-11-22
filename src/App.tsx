@@ -10,7 +10,7 @@ import TfChapter from './components/TfChapter'
 import { STRINGS, initialLang, type Lang } from './i18n'
 import { CHAPTERS, neighbour, parseRoute, type ChapterId } from './lib/route'
 
-const BODY: Partial<Record<ChapterId, typeof ScanChapter>> = { bringup: BringupChapter, tf: TfChapter, scan: ScanChapter, detect: DetectChapter, grid: GridChapter, costmap: CostmapChapter, goal: GoalChapter }
+const BODY: Record<ChapterId, typeof ScanChapter> = { bringup: BringupChapter, tf: TfChapter, scan: ScanChapter, detect: DetectChapter, grid: GridChapter, costmap: CostmapChapter, goal: GoalChapter }
 
 export default function App() {
   const [route, setRoute] = useState(() => parseRoute(location.hash))
@@ -38,8 +38,8 @@ export default function App() {
     return () => removeEventListener('keydown', on)
   }, [route])
 
-  const idx = route.page === 'chapter' ? CHAPTERS.findIndex((c) => c.id === route.id) : -1
-  const Body = route.page === 'chapter' ? BODY[route.id] : undefined
+  const idx = route.page === 'chapter' ? CHAPTERS.indexOf(route.id) : -1
+  const Body = route.page === 'chapter' ? BODY[route.id] : null
   const prev = route.page === 'chapter' ? neighbour(route.id, -1) : null
   const next = route.page === 'chapter' ? neighbour(route.id, 1) : null
   return (

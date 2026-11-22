@@ -2,7 +2,7 @@
 
 | Route | What the page must show (EN and JA) |
 |---|---|
-| `#/` | h1, the arena plan, links to all 7 waypoints, none marked planned |
+| `#/` | h1, the arena plan, links to all 7 waypoints |
 | `#/bringup` | h1, launch timeline, readouts: patrol start (25 s), early starts "none" at his delays |
 | `#/tf` | h1, arena with map/odom/base_link axes, the box1 hit in map and base_scan, detector verdict "healthy" at the start values |
 | `#/scan` | h1, arena figure, readouts: beams with a return, gap between beams, distance per scan |

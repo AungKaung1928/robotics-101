@@ -10,7 +10,7 @@ const BASE = `http://localhost:${PORT}/`
 const OUT = join(ROOT, 'verify-out')
 // Route, then the readouts (data-k) its page must show with a number in them.
 const ROUTES = [
-  { hash: '', h1: { en: 'Robotics First Steps', ja: 'ロボティクス はじめの一歩' }, links: ['#/bringup', '#/tf', '#/scan', '#/detect', '#/grid', '#/costmap', '#/goal'], planned: 0 },
+  { hash: '', h1: { en: 'Robotics First Steps', ja: 'ロボティクス はじめの一歩' }, links: ['#/bringup', '#/tf', '#/scan', '#/detect', '#/grid', '#/costmap', '#/goal'] },
   { hash: '#/bringup', readouts: ['patrol'], words: { early: /none|なし/ } },
   { hash: '#/tf', readouts: ['hit-map', 'hit-base_scan'], words: { verdict: /healthy|正常/ } },
   { hash: '#/scan', readouts: ['hits', 'gap', 'move'] },
@@ -65,10 +65,6 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
         if (lang === 'ja' && !JA_TEXT.test(h1 ?? '')) fails.push(`${name}: h1 not Japanese`)
         if (!/<(svg|canvas)[^>]*role="img"/.test(dom)) fails.push(`${name}: no figure`)
         for (const l of r.links ?? []) if (!dom.includes(`href="${l}"`)) fails.push(`${name}: no waypoint link ${l}`)
-        if (r.planned !== undefined) {
-          const n = (dom.match(/wp-planned/g) ?? []).length
-          if (n !== r.planned) fails.push(`${name}: ${n} planned waypoints, want ${r.planned}`)
-        }
         for (const k of r.readouts ?? []) {
           const v = dom.match(new RegExp(`data-k="${k}"[^>]*>([^<]*)`))?.[1]
           if (!v || !/\d/.test(v)) fails.push(`${name}: readout ${k} empty`)

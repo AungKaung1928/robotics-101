@@ -22,19 +22,19 @@ export default function Overview({ t }: { t: Strings }) {
     const { x, y, side } = WAYPOINTS[i]
     const left = side === 'left'
     const body = (
-      <g className={`wp${c.built ? '' : ' wp-planned'}`} transform={`translate(${x} ${-y})`}>
+      <g className="wp" transform={`translate(${x} ${-y})`}>
         <circle r="0.32" />
         <text className="wp-n" y="0.11">{i + 1}</text>
         <g transform={`translate(${left ? -0.5 : 0.5} 0)`} textAnchor={left ? 'end' : 'start'}>
-          <text className="wp-title" y="-0.08">{t.chapters[c.id]}</text>
+          <text className="wp-title" y="-0.08">{t.chapters[c]}</text>
           <text className="wp-value" y="0.3">
-            {c.built ? VALUE[c.id].v : t.planned}
-            {c.built && <tspan className="wp-kind"> · {t.kind[VALUE[c.id].kind]}</tspan>}
+            {VALUE[c].v}
+            <tspan className="wp-kind"> · {t.kind[VALUE[c].kind]}</tspan>
           </text>
         </g>
       </g>
     )
-    return c.built ? <a key={c.id} href={`#/${c.id}`} aria-label={`${i + 1}. ${t.chapters[c.id]}`}>{body}</a> : <g key={c.id}>{body}</g>
+    return <a key={c} href={`#/${c}`} aria-label={`${i + 1}. ${t.chapters[c]}`}>{body}</a>
   })
   return (
     <main className="overview">

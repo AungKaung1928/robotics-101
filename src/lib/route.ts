@@ -1,26 +1,17 @@
-/** Chapters in patrol order. `built: false` waypoints show on the plan but do not open yet. */
-export const CHAPTERS = [
-  { id: 'bringup', built: true },
-  { id: 'tf', built: true },
-  { id: 'scan', built: true },
-  { id: 'detect', built: true },
-  { id: 'grid', built: true },
-  { id: 'costmap', built: true },
-  { id: 'goal', built: true },
-] as const
+/** Chapters in patrol order: one per waypoint. */
+export const CHAPTERS = ['bringup', 'tf', 'scan', 'detect', 'grid', 'costmap', 'goal'] as const
 
-export type ChapterId = (typeof CHAPTERS)[number]['id']
+export type ChapterId = (typeof CHAPTERS)[number]
 export type Route = { page: 'overview' } | { page: 'chapter'; id: ChapterId }
 
-/** '#/scan' → the scan chapter; '', '#/', unknown or not-yet-built ids → overview. */
+/** '#/scan' → the scan chapter; '', '#/', unknown ids → overview. */
 export function parseRoute(hash: string): Route {
   const id = hash.replace(/^#\/?/, '').split('/')[0]
-  const ch = CHAPTERS.find((c) => c.id === id)
-  return ch?.built ? { page: 'chapter', id: ch.id } : { page: 'overview' }
+  const ch = CHAPTERS.find((c) => c === id)
+  return ch ? { page: 'chapter', id: ch } : { page: 'overview' }
 }
 
-/** The built chapter before (-1) or after (+1) `id`, or null at either end. */
+/** The chapter before (-1) or after (+1) `id`, or null at either end. */
 export function neighbour(id: ChapterId, dir: -1 | 1): ChapterId | null {
-  const built = CHAPTERS.filter((c) => c.built).map((c) => c.id as ChapterId)
-  return built[built.indexOf(id) + dir] ?? null
+  return CHAPTERS[CHAPTERS.indexOf(id) + dir] ?? null
 }
