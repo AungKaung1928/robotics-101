@@ -96,6 +96,12 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .timeline .run { stroke: var(--free); stroke-width: 6; }
 .timeline .is-early .run { stroke: var(--ray); }
 .timeline .is-early text { fill: var(--ray); }
+.gridwrap { position: relative; }
+.gridrobot { position: absolute; width: 4.4%; aspect-ratio: 1; border: 2px solid var(--robot); border-radius: 50%; transform: translate(-50%, -50%); background: color-mix(in srgb, var(--robot) 20%, transparent); }
+.gridmap { width: 100%; height: auto; display: block; border: 1px solid var(--rule); image-rendering: pixelated; }
+.buttons { display: flex; gap: var(--s2); margin-bottom: var(--s3); }
+.buttons button { font: var(--t-small) var(--mono); padding: var(--s2) var(--s3); border: 1px solid var(--ink); background: var(--surface); color: var(--ink); border-radius: var(--radius); cursor: pointer; }
+.buttons button:first-child { background: var(--robot); border-color: var(--robot); color: var(--surface); }
 .v-stale, .v-jump, .early { color: var(--ray); }
 .chart { width: 100%; height: auto; background: var(--surface); border: 1px solid var(--rule); }
 .chart .axis { fill: none; stroke: var(--ink-2); }

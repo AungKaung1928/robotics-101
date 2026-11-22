@@ -4,7 +4,7 @@ export const CHAPTERS = [
   { id: 'tf', built: true },
   { id: 'scan', built: true },
   { id: 'detect', built: false },
-  { id: 'grid', built: false },
+  { id: 'grid', built: true },
   { id: 'costmap', built: true },
   { id: 'goal', built: true },
 ] as const

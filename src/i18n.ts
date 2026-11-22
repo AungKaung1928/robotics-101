@@ -80,6 +80,20 @@ const en = {
     waits: 'starts before',
     ok: 'none',
   },
+  grid: {
+    lines: [
+      'SLAM keeps a grid of cells; each holds the log-odds that it is occupied. Grey is unknown.',
+      'Each scan makes the cells along a beam a little more free and the hit cell more occupied.',
+      'Press Add scan: the robot scans from each waypoint in turn and the map fills in.',
+    ],
+    res: 'Resolution (m per cell)',
+    add: 'Add scan',
+    reset: 'Reset',
+    cells: 'cells in the 10 × 10 m map',
+    scans: 'scans added',
+    known: 'cells no longer unknown',
+    model: 'Model: hit p = 0.7, pass p = 0.4 (page choice); beams with no return change nothing.',
+  },
   costmap: {
     lines: [
       'Nav2 inflates every obstacle: cost falls off with distance, so the planner keeps clear of walls.',
@@ -171,6 +185,20 @@ const ja: typeof en = {
     early: '早すぎる段',
     waits: 'より先に開始',
     ok: 'なし',
+  },
+  grid: {
+    lines: [
+      'SLAM はセルの格子を持つ。各セルは占有の対数オッズを持つ。灰色は未知。',
+      'スキャンのたびに、ビームが通ったセルは少し空きに、当たったセルは占有に近づく。',
+      '「スキャン追加」を押すと、ロボットが各ウェイポイントから順にスキャンし、地図が埋まる。',
+    ],
+    res: '解像度 (m/セル)',
+    add: 'スキャン追加',
+    reset: 'リセット',
+    cells: '10 × 10 m 地図のセル数',
+    scans: '追加したスキャン',
+    known: '未知でなくなったセル',
+    model: 'モデル: 当たり p = 0.7、通過 p = 0.4 (このページの選択)。反射のないビームは何も変えない。',
   },
   costmap: {
     lines: [

@@ -10,10 +10,11 @@ const BASE = `http://localhost:${PORT}/`
 const OUT = join(ROOT, 'verify-out')
 // Route, then the readouts (data-k) its page must show with a number in them.
 const ROUTES = [
-  { hash: '', h1: { en: 'Robotics First Steps', ja: 'ロボティクス はじめの一歩' }, links: ['#/bringup', '#/tf', '#/scan', '#/costmap', '#/goal'], planned: 2 },
+  { hash: '', h1: { en: 'Robotics First Steps', ja: 'ロボティクス はじめの一歩' }, links: ['#/bringup', '#/tf', '#/scan', '#/grid', '#/costmap', '#/goal'], planned: 1 },
   { hash: '#/bringup', readouts: ['patrol'], words: { early: /none|なし/ } },
   { hash: '#/tf', readouts: ['hit-map', 'hit-base_scan'], words: { verdict: /healthy|正常/ } },
   { hash: '#/scan', readouts: ['hits', 'gap', 'move'] },
+  { hash: '#/grid', readouts: ['cells', 'scans', 'known'] },
   { hash: '#/costmap', readouts: ['cost', 'edge'] },
   { hash: '#/goal', readouts: ['tick', 'drive', 'time', 'ticks'] },
 ]
@@ -61,7 +62,7 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
         if (r.h1 && h1 !== r.h1[lang]) fails.push(`${name}: h1 '${h1}'`)
         if (!dom.includes(`<html lang="${lang}"`)) fails.push(`${name}: <html lang> is not ${lang}`)
         if (lang === 'ja' && !JA_TEXT.test(h1 ?? '')) fails.push(`${name}: h1 not Japanese`)
-        if (!/<svg[^>]*role="img"/.test(dom)) fails.push(`${name}: no figure`)
+        if (!/<(svg|canvas)[^>]*role="img"/.test(dom)) fails.push(`${name}: no figure`)
         for (const l of r.links ?? []) if (!dom.includes(`href="${l}"`)) fails.push(`${name}: no waypoint link ${l}`)
         if (r.planned !== undefined) {
           const n = (dom.match(/wp-planned/g) ?? []).length
