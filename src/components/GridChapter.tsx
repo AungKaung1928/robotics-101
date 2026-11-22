@@ -3,7 +3,7 @@ import { LIDAR, NAV2, SLAM_MAX_LASER_RANGE, WAYPOINTS, WORLD } from '../content/
 import type { Strings } from '../i18n'
 import { addBeam, cellCount, makeGrid, prob } from '../lib/grid'
 import { beamAngles, castRay } from '../lib/scan'
-import { routeStep } from '../lib/route'
+import { routeParam, routeStep } from '../lib/route'
 import Slider from './Slider'
 
 const SIZE = 10
@@ -22,7 +22,7 @@ function build(res: number, scans: number) {
 
 export default function GridChapter({ t }: { t: Strings }) {
   const s = t.grid
-  const [res, setRes] = useState(NAV2.costmapResolution)
+  const [res, setRes] = useState(() => routeParam(location.hash, 'res', NAV2.costmapResolution, 0.025, 0.2))
   // '#/grid/7' opens with 7 scans added (one per waypoint); plain '#/grid' with 1.
   const [scans, setScans] = useState(() => (/^#\/grid\/\d/.test(location.hash) ? routeStep(location.hash, 99) + 1 : 1))
   const g = useMemo(() => build(res, scans), [res, scans])

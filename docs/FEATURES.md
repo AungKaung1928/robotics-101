@@ -16,6 +16,7 @@
 | `#/goal` | h1, arena with tolerance circle and tick dots, readouts: per tick, distance to drive, minimum time, ticks |
 | `#/detect` | h1, arena with coloured clusters, readouts: objects found, objects in view |
 | `#/grid` | h1, occupancy canvas, readouts: cells (40,000 at 0.05 m), scans added, known share |
+| `#/grid?res=0.1` | 10,000 cells at 0.1 m |
 | `#/grid/7` | 7 scans added (one per waypoint): known share above the 1-scan page |
 | `#/costmap` | h1, cost chart, readouts: cost at the probe, cost at the inflation edge |
 

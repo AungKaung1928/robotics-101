@@ -23,6 +23,7 @@ const ROUTES = [
   { hash: '#/scan', readouts: ['hits', 'gap', 'move', 'scanhz', 'beam'], words: { beam: /^-?[01]° → 1\.4\d m$/ } },
   { hash: '#/detect', readouts: ['found', 'truth'] },
   { hash: '#/grid', readouts: ['cells', 'scans', 'known'], equals: { scans: '1' } },
+  { hash: '#/grid?res=0.1', readouts: ['cells'], equals: { cells: '10,000' } },
   { hash: '#/grid/7', readouts: ['known'], equals: { scans: '7' }, moreThan: { known: ['#/grid', 'known'] } },
   { hash: '#/costmap', readouts: ['cost', 'edge', 'smooth'] },
   { hash: '#/goal', readouts: ['tick', 'drive', 'time', 'ticks', 'cmdhz'] },
