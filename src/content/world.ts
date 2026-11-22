@@ -24,6 +24,7 @@ export const WORLD: Shape[] = [...WALLS, ...OBSTACLES]
 export const MEASURED = { scanHz: [4.5, 4.8], odomHz: [25, 27], cmdVelHz: 20.0 }
 
 export const SLAM_MAX_LASER_RANGE = 12.0 // config/slam_params.yaml:12
+export const SLAM_RESOLUTION = 0.05 // config/slam_params.yaml:11
 
 export const LIDAR = {
   hz: 5, // description/turtlebot3_burger.urdf.xacro:168
@@ -38,7 +39,8 @@ export const NAV2 = {
   controllerHz: 20, // config/nav2_params.yaml:18
   maxVelX: 0.26, // :39
   goalTolerance: 0.25, // :31
-  costmapResolution: 0.05, // :81
+  costmapResolution: 0.05, // :81 (local costmap)
+  globalCostmapResolution: 0.05, // :119
   robotRadius: 0.22, // :82
   costScaling: 3.0, // :86
   inflationRadius: 0.55, // :87

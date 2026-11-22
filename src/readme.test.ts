@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { LAUNCH_NAV2_S, LIDAR, MEASURED, NAV2, PATROL_WAIT_S, WORLD } from './content/world'
+import { LAUNCH_NAV2_S, LIDAR, MEASURED, NAV2, PATROL_WAIT_S, SLAM_RESOLUTION, WORLD } from './content/world'
 import { clusterCount, clusters } from './lib/cluster'
 import { cellCount } from './lib/grid'
 import { inflationCost } from './lib/inflation'
@@ -16,7 +16,7 @@ describe('README numbers match the code', () => {
     expect(README).toContain(`${edge} at the ${NAV2.inflationRadius} m edge`)
   })
   it('grid cells at his resolution', () => {
-    expect(README).toContain(`${cellCount(10, NAV2.costmapResolution).toLocaleString('en-US')} at his ${NAV2.costmapResolution} m`)
+    expect(README).toContain(`${cellCount(10, SLAM_RESOLUTION).toLocaleString('en-US')} at his ${SLAM_RESOLUTION} m`)
   })
   it('distance per control tick', () => {
     expect(README).toContain(`${((NAV2.maxVelX / NAV2.controllerHz) * 100).toFixed(1)} cm per ${NAV2.controllerHz} Hz control tick`)

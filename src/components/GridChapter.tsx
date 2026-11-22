@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { LIDAR, NAV2, SLAM_MAX_LASER_RANGE, WAYPOINTS, WORLD } from '../content/world'
+import { LIDAR, SLAM_MAX_LASER_RANGE, SLAM_RESOLUTION, WAYPOINTS, WORLD } from '../content/world'
 import type { Strings } from '../i18n'
 import { addBeam, cellCount, makeGrid, prob } from '../lib/grid'
 import { beamAngles, castRay } from '../lib/scan'
@@ -22,7 +22,7 @@ function build(res: number, scans: number) {
 
 export default function GridChapter({ t }: { t: Strings }) {
   const s = t.grid
-  const [res, setRes] = useState(() => routeParam(location.hash, 'res', NAV2.costmapResolution, 0.025, 0.2))
+  const [res, setRes] = useState(() => routeParam(location.hash, 'res', SLAM_RESOLUTION, 0.025, 0.2))
   // '#/grid/7' opens with 7 scans added (one per waypoint); plain '#/grid' with 1.
   const [scans, setScans] = useState(() => (/^#\/grid\/\d/.test(location.hash) ? routeStep(location.hash, 99) + 1 : 1))
   const g = useMemo(() => build(res, scans), [res, scans])
@@ -64,14 +64,15 @@ export default function GridChapter({ t }: { t: Strings }) {
           <button type="button" onClick={() => setScans(scans + 1)}>{s.add}</button>
           <button type="button" onClick={() => setScans(1)}>{s.reset}</button>
         </div>
-        <Slider hint={t.drag} label={s.res} value={res} min={0.025} max={0.2} step={0.025} mark={NAV2.costmapResolution} onChange={setRes} fmt={(v) => v.toFixed(3)} />
+        <Slider hint={t.drag} label={s.res} value={res} min={0.025} max={0.2} step={0.025} mark={SLAM_RESOLUTION} onChange={setRes} fmt={(v) => v.toFixed(3)} />
         <dl className="readout">
           <div><dt>{s.cells}</dt><dd data-k="cells">{cellCount(SIZE, res).toLocaleString('en-US')}</dd></div>
           <div><dt>{s.scans}</dt><dd data-k="scans">{scans}</dd></div>
           <div><dt>{s.known}</dt><dd data-k="known">{((known / (g.n * g.n)) * 100).toFixed(1)} %</dd></div>
         </dl>
         <p className="note">{s.limit(SLAM_MAX_LASER_RANGE, L_MAX)}</p>
-        <p className="src">{t.source}: <a href="https://github.com/AungKaung1928/TF-Transform-Explorer/blob/main/config/slam_params.yaml#L11-L12">slam_params.yaml:11-12</a>, Thrun, Burgard, Fox, <i>Probabilistic Robotics</i>, ch. 9</p>
+        <p className="note">{s.same}</p>
+        <p className="src">{t.source}: <a href="https://github.com/AungKaung1928/TF-Transform-Explorer/blob/main/config/slam_params.yaml#L11-L12">slam_params.yaml:11-12</a>, <a href="https://github.com/AungKaung1928/TF-Transform-Explorer/blob/main/config/nav2_params.yaml#L81">nav2_params.yaml:81, 119</a>, Thrun, Burgard, Fox, <i>Probabilistic Robotics</i>, ch. 9</p>
       </div>
     </>
   )

@@ -106,6 +106,7 @@ const en = {
     scans: 'scans added',
     known: 'cells no longer unknown',
     limit: (slam: number, sensor: number) => `SLAM may use beams up to ${slam} m (max_laser_range), but the LiDAR returns nothing past ${sensor} m: the sensor sets the limit.`,
+    same: 'The SLAM map, the local and the global costmap all use this 0.05 m cell, so one map cell is one cost cell.',
     model: 'Model: hit p = 0.7, pass p = 0.4 (page choice); beams with no return change nothing.',
   },
   detect: {
@@ -239,6 +240,7 @@ const ja: typeof en = {
     scans: '追加したスキャン',
     known: '未知でなくなったセル',
     limit: (slam: number, sensor: number) => `SLAM は ${slam} m までのビームを使える設定 (max_laser_range) だが、LiDAR は ${sensor} m より先を返さない。限界はセンサの方。`,
+    same: 'SLAM 地図・ローカル/グローバルコストマップはすべて 0.05 m のセル。地図の 1 セルがコストの 1 セルに対応する。',
     model: 'モデル: 当たり p = 0.7、通過 p = 0.4 (このページの選択)。反射のないビームは何も変えない。',
   },
   detect: {

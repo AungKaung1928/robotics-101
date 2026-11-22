@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { NAV2 } from '../content/world'
+import { NAV2, SLAM_RESOLUTION } from '../content/world'
 import { cellCount, logOdds, prob, update } from './grid'
 
 describe('occupancy grid', () => {
   it('10 x 10 m at his 0.05 m resolution is 200 x 200 = 40,000 cells', () => {
-    expect(cellCount(10, NAV2.costmapResolution)).toBe(40_000)
+    expect(cellCount(10, SLAM_RESOLUTION)).toBe(40_000)
     expect(cellCount(10, 0.025)).toBe(160_000)
   })
   it('log-odds round-trips and 0.5 is 0', () => {
@@ -58,5 +58,12 @@ describe('addBeam', () => {
     const g = makeGrid(10, 0.05)
     addBeam(g, 0, 0, 0, Infinity, 0.7, 0.4)
     expect(g.l.every((v) => v === 0)).toBe(true)
+  })
+})
+
+describe('one cell size everywhere', () => {
+  it('SLAM map, local and global costmap all use 0.05 m cells', () => {
+    expect(SLAM_RESOLUTION).toBe(NAV2.costmapResolution)
+    expect(SLAM_RESOLUTION).toBe(NAV2.globalCostmapResolution)
   })
 })
