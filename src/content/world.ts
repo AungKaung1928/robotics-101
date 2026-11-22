@@ -44,6 +44,9 @@ export const NAV2 = {
   inflationRadius: 0.55, // :87
 }
 
+// README.md:5 of the source repo
+export const STACK = ['ROS 2 Humble', 'Gazebo Harmonic', 'SLAM', 'Nav2']
+
 export const SOURCE_REPO = 'https://github.com/AungKaung1928/TF-Transform-Explorer'
 
 export const LAUNCH_NAV2_S = 10 // CONTEXT.md "Stage delays": Nav2 starts 10 s after launch

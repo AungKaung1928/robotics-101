@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { LAUNCH_NAV2_S, LIDAR, NAV2, OBSTACLES, TF_MAX_JUMP, WAYPOINTS } from '../content/world'
+import { LAUNCH_NAV2_S, LIDAR, NAV2, OBSTACLES, SOURCE_REPO, STACK, TF_MAX_JUMP, WAYPOINTS } from '../content/world'
 import type { Strings } from '../i18n'
 import { beamGap } from '../lib/scan'
 import { CHAPTERS, type ChapterId } from '../lib/route'
@@ -44,6 +44,7 @@ export default function Overview({ t }: { t: Strings }) {
   return (
     <main className="overview">
       <div className="ov-text">
+        <p className="eyebrow"><a href={SOURCE_REPO}>{STACK.join(' · ')}</a></p>
         <h1>{t.title}</h1>
         <p className="lede">{t.lede}</p>
         <p className="cta"><a className="btn" href={`#/${CHAPTERS[0]}`}>{t.start} →</a> <span className="note">{t.keys}</span></p>
