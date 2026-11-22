@@ -49,6 +49,8 @@ export default function TfChapter({ t }: { t: Strings }) {
       </div>
       <div className="panel">
         {s.lines.map((l) => <p key={l}>{l}</p>)}
+        <fieldset className="group">
+        <legend>{s.gFrames}</legend>
         <Slider label={s.drift} value={dx} min={-1} max={1} step={0.05} mark={0} onChange={setDx} fmt={(v) => v.toFixed(2)} />
         <Slider label={s.driftYaw} value={dyaw} min={-30} max={30} step={1} mark={0} onChange={setDyaw} />
         <Slider label={s.x} value={x} min={-3} max={3} step={0.05} onChange={setX} fmt={(v) => v.toFixed(2)} />
@@ -63,11 +65,15 @@ export default function TfChapter({ t }: { t: Strings }) {
             })}
           </tbody>
         </table>
+        </fieldset>
+        <fieldset className="group">
+        <legend>{s.gDetector}</legend>
         <Slider label={s.jump} value={jump} min={0} max={1} step={0.05} mark={TF_MAX_JUMP} onChange={setJump} fmt={(v) => v.toFixed(2)} />
         <Slider label={s.age} value={age} min={0} max={2} step={0.1} mark={TF_MAX_AGE} onChange={setAge} fmt={(v) => v.toFixed(1)} />
         <dl className="readout">
           <div><dt>{s.verdict}</dt><dd data-k="verdict" className={`v-${v}`}>{s.v[v]}</dd></div>
         </dl>
+        </fieldset>
         <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/src/tf_anomaly_detector.cpp#L10-L97`}>tf_anomaly_detector.cpp:10-97</a>, <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L115-L119`}>turtlebot3_burger.urdf.xacro:115-119</a>, <a href="https://www.ros.org/reps/rep-0105.html">REP 105</a></p>
       </div>
     </>

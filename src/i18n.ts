@@ -51,6 +51,8 @@ const en = {
     jump: 'odom move since last check (m)',
     age: 'transform age (s)',
     verdict: 'detector says',
+    gFrames: 'Frames',
+    gDetector: 'Anomaly detector (every 0.5 s)',
     v: { healthy: 'healthy', stale: 'STALE', jump: 'JUMP' },
   },
   goal: {
@@ -168,6 +170,8 @@ const ja: typeof en = {
     jump: '前回確認からの odom の移動 (m)',
     age: '変換の古さ (秒)',
     verdict: '検出器の判定',
+    gFrames: 'フレーム',
+    gDetector: '異常検出器 (0.5 秒ごと)',
     v: { healthy: '正常', stale: 'STALE', jump: 'JUMP' },
   },
   goal: {
