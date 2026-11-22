@@ -13,3 +13,11 @@ export function inflationCost(d: number, k: number, inscribed: number, inflation
   if (d > inflationRadius) return 0
   return Math.trunc((INSCRIBED - 1) * Math.exp(-k * (d - inscribed)))
 }
+
+/** Distance (m) from point (px, py) to a rotated box (centre x, y; size w x h; yaw); 0 inside. */
+export function distToBox(px: number, py: number, b: { x: number; y: number; w: number; h: number; yaw: number }): number {
+  const c = Math.cos(-b.yaw), s = Math.sin(-b.yaw)
+  const lx = c * (px - b.x) - s * (py - b.y), ly = s * (px - b.x) + c * (py - b.y)
+  const dx = Math.max(Math.abs(lx) - b.w / 2, 0), dy = Math.max(Math.abs(ly) - b.h / 2, 0)
+  return Math.hypot(dx, dy)
+}

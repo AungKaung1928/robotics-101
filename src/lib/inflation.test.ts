@@ -21,3 +21,16 @@ describe('inflationCost (his k 3.0, r 0.22 m, radius 0.55 m)', () => {
     expect(cost(0.4, 10)).toBeLessThan(cost(0.4, 3))
   })
 })
+
+import { distToBox } from './inflation'
+describe('distToBox', () => {
+  const box1 = { x: 2, y: 2, w: 1, h: 1, yaw: 0 } // explorer_world.sdf:104-109
+  it('0 inside, face distance beside, corner distance diagonal', () => {
+    expect(distToBox(2.2, 1.9, box1)).toBe(0)
+    expect(distToBox(1.2, 2, box1)).toBeCloseTo(0.3, 12)
+    expect(distToBox(1.2, 1.2, box1)).toBeCloseTo(0.3 * Math.SQRT2, 12)
+  })
+  it('honours the yaw', () => {
+    expect(distToBox(2 + 1, 2, { ...box1, w: 2, yaw: Math.PI / 2 })).toBeCloseTo(0.5, 12)
+  })
+})
