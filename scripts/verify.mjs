@@ -63,6 +63,11 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
         if (r.h1 && h1 !== r.h1[lang]) fails.push(`${name}: h1 '${h1}'`)
         if (!dom.includes(`<html lang="${lang}"`)) fails.push(`${name}: <html lang> is not ${lang}`)
         if (lang === 'ja' && !JA_TEXT.test(h1 ?? '')) fails.push(`${name}: h1 not Japanese`)
+        // Every prose paragraph and label on a Japanese page must be Japanese (source lines are citations: skipped).
+        if (lang === 'ja') {
+          const prose = [...dom.matchAll(/<p(?: class="(?:lede|note)")?>([^<]+)<\/p>|<dt>([^<]+)<\/dt>/g)].map((m) => (m[1] ?? m[2]).trim())
+          for (const t of prose) if (!JA_TEXT.test(t)) fails.push(`${name}: English left on the Japanese page: '${t.slice(0, 50)}'`)
+        }
         if (!/<(svg|canvas)[^>]*role="img"/.test(dom)) fails.push(`${name}: no figure`)
         for (const l of r.links ?? []) if (!dom.includes(`href="${l}"`)) fails.push(`${name}: no waypoint link ${l}`)
         for (const k of r.readouts ?? []) {
