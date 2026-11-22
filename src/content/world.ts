@@ -42,6 +42,7 @@ export const NAV2 = {
 export const SOURCE_REPO = 'https://github.com/AungKaung1928/TF-Transform-Explorer'
 
 export const LAUNCH_NAV2_S = 10 // CONTEXT.md "Stage delays": Nav2 starts 10 s after launch
+export const PATROL_WAIT_S = 15 // README "Run": patrol waits 15 s after Nav2
 export const TF_MAX_JUMP = 0.5 // src/tf_anomaly_detector.cpp:11
 export const TF_MAX_AGE = 1.0 // src/tf_anomaly_detector.cpp:10
 export const TF_CHECK_PERIOD = 0.5 // src/tf_anomaly_detector.cpp:26, 500 ms timer

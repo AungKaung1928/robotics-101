@@ -1,10 +1,9 @@
 import { useState } from 'react'
-import { SOURCE_REPO } from '../content/world'
+import { PATROL_WAIT_S, SOURCE_REPO } from '../content/world'
 import type { Strings } from '../i18n'
 import { STAGES, earlyStarts, type StageId } from '../lib/bringup'
 import Slider from './Slider'
 
-const PATROL_WAIT = 15 // README "Run": patrol waits 15 s after Nav2
 const W = 640, ROW = 34, PAD = 110, T = 30
 const x = (t: number) => PAD + (Math.min(t, T) / T) * (W - PAD - 20)
 const DEFAULT = Object.fromEntries(STAGES.map((s) => [s.id, s.t])) as Record<StageId, number>
@@ -13,7 +12,7 @@ export default function BringupChapter({ t }: { t: Strings }) {
   const s = t.bringup
   const [slam, setSlam] = useState(DEFAULT.slam)
   const [nav2, setNav2] = useState(DEFAULT.nav2)
-  const times = { ...DEFAULT, slam, nav2, patrol: nav2 + PATROL_WAIT }
+  const times = { ...DEFAULT, slam, nav2, patrol: nav2 + PATROL_WAIT_S }
   const early = earlyStarts(times)
   const bad = new Set(early.map(([a]) => a))
   const H = STAGES.length * ROW + 40

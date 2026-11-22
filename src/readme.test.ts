@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { LIDAR, NAV2, WORLD } from './content/world'
+import { LAUNCH_NAV2_S, LIDAR, NAV2, PATROL_WAIT_S, WORLD } from './content/world'
 import { clusterCount, clusters } from './lib/cluster'
 import { cellCount } from './lib/grid'
 import { inflationCost } from './lib/inflation'
@@ -29,5 +29,8 @@ describe('README numbers match the code', () => {
       return d === Infinity ? null : [pose.x + d * Math.cos(pose.yaw + a), pose.y + d * Math.sin(pose.yaw + a)]
     })
     expect(README).toContain(`0.1 m gives ${clusterCount(clusters(pts, 0.1))} pieces, 0.5 m the ${clusterCount(clusters(pts, 0.5))} objects`)
+  })
+  it('patrol start with the launch delays', () => {
+    expect(README).toContain(`patrol start (${LAUNCH_NAV2_S + PATROL_WAIT_S} s with the launch file's delays)`)
   })
 })
