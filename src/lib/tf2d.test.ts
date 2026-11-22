@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { NAV2, TF_CHECK_PERIOD, TF_MAX_AGE, TF_MAX_JUMP } from '../content/world'
+import { FOOTPRINT_TO_BASE, NAV2, TF_CHECK_PERIOD, TF_MAX_AGE, TF_MAX_JUMP } from '../content/world'
 import { maxDrivePerCheck, verdict } from './anomaly'
 import { apply, compose, invert } from './tf2d'
 
@@ -41,5 +41,13 @@ describe('a jump cannot be driven', () => {
   it('0.26 m/s for 0.5 s is 0.13 m, under the 0.5 m jump threshold', () => {
     expect(maxDrivePerCheck(NAV2.maxVelX, TF_CHECK_PERIOD)).toBeCloseTo(0.13, 12)
     expect(maxDrivePerCheck(NAV2.maxVelX, TF_CHECK_PERIOD)).toBeLessThan(TF_MAX_JUMP)
+  })
+})
+
+describe('base_footprint → base_link', () => {
+  it('is the identity in the plane (only a 1 cm lift, xacro:12-16)', () => {
+    const p = { x: 1.2, y: -0.4, yaw: 0.7 }
+    const q = compose(p, FOOTPRINT_TO_BASE)
+    close([q.x, q.y, q.yaw], [p.x, p.y, p.yaw])
   })
 })

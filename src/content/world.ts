@@ -69,6 +69,10 @@ export const TF_MAX_JUMP = 0.5 // src/tf_anomaly_detector.cpp:11
 export const TF_MAX_AGE = 1.0 // src/tf_anomaly_detector.cpp:10
 export const TF_CHECK_PERIOD = 0.5 // src/tf_anomaly_detector.cpp:26, 500 ms timer
 export const BASE_TO_SCAN = { x: -0.032, y: 0, yaw: 0 } // description/turtlebot3_burger.urdf.xacro:118
+// Odometry publishes odom → base_footprint (xacro:153-154); base_footprint → base_link only lifts 1 cm (xacro:12-16),
+// so in the plane it is the identity.
+export const FOOTPRINT_TO_BASE = { x: 0, y: 0, yaw: 0 }
+export const ODOM_CONFIG_HZ = 30 // xacro:148 odom_publish_frequency
 
 /** Plan positions of the 7 waypoints (m) and the side their label sits on. Drawn for this page, not the robot's patrol code. */
 export const WAYPOINTS: { x: number; y: number; side: 'left' | 'right' }[] = [
