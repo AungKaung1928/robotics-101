@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { BASE_TO_SCAN, MEASURED, NAV2, SLAM, SOURCE_REPO, TF_CHECK_PERIOD, TF_MAX_AGE, TF_MAX_JUMP } from '../content/world'
+import { BASE_TO_SCAN, FOOTPRINT_TO_BASE, MEASURED, ODOM_CONFIG_HZ, NAV2, SLAM, SOURCE_REPO, TF_CHECK_PERIOD, TF_MAX_AGE, TF_MAX_JUMP } from '../content/world'
 import type { Strings } from '../i18n'
 import { maxDrivePerCheck, verdict } from '../lib/anomaly'
 import { apply, compose, invert, type TF } from '../lib/tf2d'
@@ -31,9 +31,10 @@ export default function TfChapter({ t }: { t: Strings }) {
   const [jump, setJump] = useState(() => routeParam(location.hash, 'jump', 0.1, 0, 1))
   const [age, setAge] = useState(0.2)
   const mapOdom = { x: dx, y: 0, yaw: rad(dyaw) }
-  const mapBase = compose(mapOdom, { x, y, yaw: rad(yaw) })
+  const mapFoot = compose(mapOdom, { x, y, yaw: rad(yaw) })
+  const mapBase = compose(mapFoot, FOOTPRINT_TO_BASE)
   const mapScan = compose(mapBase, BASE_TO_SCAN)
-  const rows: [string, TF][] = [['map', { x: 0, y: 0, yaw: 0 }], ['odom', mapOdom], ['base_link', mapBase], ['base_scan', mapScan]]
+  const rows: [string, TF][] = [['map', { x: 0, y: 0, yaw: 0 }], ['odom', mapOdom], ['base_footprint', mapFoot], ['base_link', mapBase], ['base_scan', mapScan]]
   const v = verdict(age, jump, TF_MAX_AGE, TF_MAX_JUMP)
   return (
     <>
@@ -78,11 +79,11 @@ export default function TfChapter({ t }: { t: Strings }) {
           <div><dt>{s.verdict}</dt><dd data-k="verdict" className={`v-${v}`}>{s.v[v]}</dd></div>
           <div><dt>{s.mapOdom}</dt><dd data-k="mapodom">{SLAM.tfPublishS} s ({(1 / SLAM.tfPublishS).toFixed(0)} Hz)</dd></div>
           <div><dt>{s.drive}</dt><dd data-k="drive">{maxDrivePerCheck(NAV2.maxVelX, TF_CHECK_PERIOD).toFixed(2)} m</dd></div>
-          <div><dt>{s.odom} <b className="kind">{t.kind.measured}</b></dt><dd data-k="odomhz">{MEASURED.odomHz.join('–')} Hz (≈ {Math.round(MEASURED.odomHz[0] * TF_CHECK_PERIOD)}–{Math.round(MEASURED.odomHz[1] * TF_CHECK_PERIOD)})</dd></div>
+          <div><dt>{s.odom} ({t.kind.config} {ODOM_CONFIG_HZ} Hz) <b className="kind">{t.kind.measured}</b></dt><dd data-k="odomhz">{MEASURED.odomHz.join('–')} Hz (≈ {Math.round(MEASURED.odomHz[0] * TF_CHECK_PERIOD)}–{Math.round(MEASURED.odomHz[1] * TF_CHECK_PERIOD)})</dd></div>
         </dl>
         <p className="note">{s.driveNote}</p>
         </fieldset>
-        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/src/tf_anomaly_detector.cpp#L10-L97`}>tf_anomaly_detector.cpp:10-97</a>, <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L115-L119`}>turtlebot3_burger.urdf.xacro:115-119</a>, <a href={`${SOURCE_REPO}/blob/main/config/slam_params.yaml#L47`}>slam_params.yaml:47</a>, <a href="https://www.ros.org/reps/rep-0105.html">REP 105</a></p>
+        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/src/tf_anomaly_detector.cpp#L10-L97`}>tf_anomaly_detector.cpp:10-97</a>, <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L12-L154`}>turtlebot3_burger.urdf.xacro:12-16, 115-119, 148-154</a>, <a href={`${SOURCE_REPO}/blob/main/config/slam_params.yaml#L47`}>slam_params.yaml:47</a>, <a href="https://www.ros.org/reps/rep-0105.html">REP 105</a></p>
       </div>
     </>
   )
