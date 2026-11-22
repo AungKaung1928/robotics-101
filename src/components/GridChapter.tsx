@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { LIDAR, SLAM_MAX_LASER_RANGE, SLAM_RESOLUTION, WAYPOINTS, WORLD } from '../content/world'
+import { LIDAR, MEASURED, NAV2, SLAM, SLAM_MAX_LASER_RANGE, SLAM_RESOLUTION, WAYPOINTS, WORLD } from '../content/world'
 import type { Strings } from '../i18n'
-import { addBeam, cellCount, makeGrid, prob } from '../lib/grid'
+import { addBeam, cellCount, makeGrid, prob, scansPerKept } from '../lib/grid'
 import { beamAngles, castRay } from '../lib/scan'
 import { routeParam, routeStep } from '../lib/route'
 import Slider from './Slider'
@@ -70,9 +70,15 @@ export default function GridChapter({ t }: { t: Strings }) {
           <div><dt>{s.scans}</dt><dd data-k="scans">{scans}</dd></div>
           <div><dt>{s.known}</dt><dd data-k="known">{((known / (g.n * g.n)) * 100).toFixed(1)} %</dd></div>
         </dl>
+        <p className="group-h">{s.gSlam}</p>
+        <dl className="readout">
+          <div><dt>{s.kept}</dt><dd data-k="kept">{(SLAM.minTravel / NAV2.maxVelX).toFixed(1)} s</dd></div>
+          <div><dt>{s.between} <b className="kind">{t.kind.measured}</b></dt><dd data-k="between">{MEASURED.scanHz.map((h) => scansPerKept(SLAM.minTravel, NAV2.maxVelX, h).toFixed(1)).join('–')}</dd></div>
+          <div><dt>{s.republish}</dt><dd data-k="republish">{SLAM.mapUpdateS.toFixed(0)} s</dd></div>
+        </dl>
         <p className="note">{s.limit(SLAM_MAX_LASER_RANGE, L_MAX)}</p>
         <p className="note">{s.same}</p>
-        <p className="src">{t.source}: <a href="https://github.com/AungKaung1928/TF-Transform-Explorer/blob/main/config/slam_params.yaml#L11-L12">slam_params.yaml:11-12</a>, <a href="https://github.com/AungKaung1928/TF-Transform-Explorer/blob/main/config/nav2_params.yaml#L81">nav2_params.yaml:81, 119</a>, Thrun, Burgard, Fox, <i>Probabilistic Robotics</i>, ch. 9</p>
+        <p className="src">{t.source}: <a href="https://github.com/AungKaung1928/TF-Transform-Explorer/blob/main/config/slam_params.yaml#L11-L49">slam_params.yaml:11-49</a>, <a href="https://github.com/AungKaung1928/TF-Transform-Explorer/blob/main/config/nav2_params.yaml#L81">nav2_params.yaml:81, 119</a>, Thrun, Burgard, Fox, <i>Probabilistic Robotics</i>, ch. 9</p>
       </div>
     </>
   )
