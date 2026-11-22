@@ -18,3 +18,8 @@ export const STAGES: Stage[] = [
 export function earlyStarts(times: Record<StageId, number>): [StageId, StageId][] {
   return STAGES.flatMap((s) => s.needs.filter((n) => times[s.id] <= times[n]).map((n): [StageId, StageId] => [s.id, n]))
 }
+
+/** Stages in start order (ties keep the launch-file order): the steps of the step-through. */
+export function startOrder(times: Record<StageId, number>): StageId[] {
+  return STAGES.map((s, i) => ({ id: s.id, t: times[s.id], i })).sort((a, b) => a.t - b.t || a.i - b.i).map((s) => s.id)
+}

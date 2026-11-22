@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { neighbour, parseRoute } from './route'
+import { neighbour, parseRoute, routeStep } from './route'
 
 describe('parseRoute', () => {
   it('opens built chapters, with or without a step suffix', () => {
@@ -8,6 +8,14 @@ describe('parseRoute', () => {
   })
   it('falls back to the overview', () => {
     for (const h of ['', '#/', '#/nope']) expect(parseRoute(h)).toEqual({ page: 'overview' })
+  })
+})
+describe('routeStep', () => {
+  it('reads a 1-based step, clamps it, defaults to the last', () => {
+    expect(routeStep('#/bringup/3', 7)).toBe(2)
+    expect(routeStep('#/bringup/99', 7)).toBe(6)
+    expect(routeStep('#/bringup', 7)).toBe(6)
+    expect(routeStep('#/bringup/0', 7)).toBe(6)
   })
 })
 describe('neighbour', () => {

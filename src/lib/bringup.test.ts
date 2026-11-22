@@ -16,3 +16,14 @@ describe('bring-up order', () => {
     expect(earlyStarts({ ...base(), slam: 1 })).toEqual([['slam', 'spawn']])
   })
 })
+
+import { startOrder } from './bringup'
+describe('startOrder', () => {
+  it('his delays: gazebo, spawn, slam, detector, nav2, rviz, patrol', () => {
+    expect(startOrder(base())).toEqual(['gazebo', 'spawn', 'slam', 'detector', 'nav2', 'rviz', 'patrol'])
+  })
+  it('Nav2 moved to 5 s comes before SLAM; a tie keeps file order', () => {
+    expect(startOrder({ ...base(), nav2: 5 }).slice(2, 4)).toEqual(['nav2', 'slam'])
+    expect(startOrder({ ...base(), nav2: 8 }).slice(2, 4)).toEqual(['slam', 'nav2'])
+  })
+})
