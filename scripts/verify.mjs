@@ -81,8 +81,8 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
         console.log(`${name}: checked`)
       }
     }
-    chrome(BASE + '#/scan', { size: '390,1400', shot: 'scan-390.png' })
-    chrome(BASE, { size: '390,1200', shot: 'plan-390.png' })
+    chrome(BASE + 'phone.html#/scan', { size: '390,844', shot: 'scan-390.png' })
+    chrome(BASE + 'phone.html', { size: '390,844', shot: 'plan-390.png' })
   } finally {
     vite.kill()
   }
