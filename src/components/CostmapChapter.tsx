@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { NAV2, OBSTACLES, SOURCE_REPO, type Box } from '../content/world'
 import type { Strings } from '../i18n'
-import { INSCRIBED, LETHAL, distToBox, inflationCost } from '../lib/inflation'
+import { INSCRIBED, LETHAL, distToBox, inflationCost, kForEdgeCost } from '../lib/inflation'
 import Slider from './Slider'
 
 const R = NAV2.robotRadius, RAD = NAV2.inflationRadius
@@ -57,6 +57,7 @@ export default function CostmapChapter({ t }: { t: Strings }) {
         <dl className="readout">
           <div><dt>{c.cost}</dt><dd data-k="cost">{cost(d)}{cost(d) === LETHAL ? ` (${c.lethal})` : cost(d) === INSCRIBED ? ` (${c.inscribed})` : ''}</dd></div>
           <div><dt>{c.zero}</dt><dd data-k="edge">{RAD} m ({edge} → 0)</dd></div>
+          <div><dt>{c.smooth}</dt><dd data-k="smooth">{kForEdgeCost(10, R, RAD).toFixed(1)}</dd></div>
         </dl>
         <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L81-L87`}>nav2_params.yaml:81-87</a>, <a href="https://docs.nav2.org/configuration/packages/costmap-plugins/inflation.html">Nav2 InflationLayer</a></p>
       </div>

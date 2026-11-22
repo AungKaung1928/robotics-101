@@ -18,7 +18,7 @@ const ROUTES = [
   { hash: '#/detect', readouts: ['found', 'truth'] },
   { hash: '#/grid', readouts: ['cells', 'scans', 'known'], equals: { scans: '1' } },
   { hash: '#/grid/7', readouts: ['known'], equals: { scans: '7' }, moreThan: { known: ['#/grid', 'known'] } },
-  { hash: '#/costmap', readouts: ['cost', 'edge'] },
+  { hash: '#/costmap', readouts: ['cost', 'edge', 'smooth'] },
   { hash: '#/goal', readouts: ['tick', 'drive', 'time', 'ticks', 'cmdhz'] },
 ]
 const JA_TEXT = /[぀-ヿ一-龯]/
