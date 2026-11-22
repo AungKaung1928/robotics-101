@@ -13,7 +13,7 @@ Five more waypoints (bring-up order, TF tree, a simple detector, occupancy grid,
 
 ## Run
 
-Needs Node 22 (CI) or 20.19+ and, for the page check, Chrome.
+Needs Node 22.12+ (vitest 5 requires it) and, for the page check, Chrome.
 
 ```bash
 git clone https://github.com/AungKaung1928/robotics-first-steps
@@ -23,6 +23,12 @@ npm run dev          # open the printed localhost URL
 npm test             # ray cast, inflation cost, routes, patrol path
 scripts/verify.sh    # builds, loads every page in headless Chrome (EN/JA, 390 px); ends with "PASS 6 pages"
 ```
+
+## Sources
+
+- Robot, sensor, Nav2 values and the arena: [TF-Transform-Explorer](https://github.com/AungKaung1928/TF-Transform-Explorer) (`description/turtlebot3_burger.urdf.xacro`, `config/nav2_params.yaml`, `worlds/explorer_world.sdf`).
+- Inflation cost: [Nav2 InflationLayer](https://docs.nav2.org/configuration/packages/costmap-plugins/inflation.html).
+- Units and axes: [REP 103](https://www.ros.org/reps/rep-0103.html).
 
 ## License
 
