@@ -26,12 +26,12 @@ cd robotics-first-steps
 npm ci
 npm run dev          # open the printed localhost URL
 npm test             # launch order, ray cast, clustering, occupancy update, transforms, detector rule, time to goal, inflation cost, routes, patrol path
-scripts/verify.sh    # builds, loads every page in headless Chrome (EN/JA, 390 px); ends with "PASS 34 pages"
+scripts/verify.sh    # builds, loads every page in headless Chrome (EN/JA, 390 px); ends with "PASS 36 pages"
 ```
 
 ## How it is checked
 
-`npm test` pins every number on the pages and in this README to the code. `scripts/verify.sh` opens 34 pages and states (`#/bringup/3`, `#/tf?jump=0.6`, ...) in English and Japanese, plus a 390 px phone frame (feature map: [docs/FEATURES.md](docs/FEATURES.md)). CI also runs `scripts/keys.mjs`, which uses real keys, clicks and hover.
+`npm test` pins every number on the pages and in this README to the code. `scripts/verify.sh` opens 36 pages and states (`#/bringup/3`, `#/tf?jump=0.6`, ...) in English and Japanese, plus a 390 px phone frame (feature map: [docs/FEATURES.md](docs/FEATURES.md)). CI also runs `scripts/keys.mjs`, which uses real keys, clicks and hover.
 
 ## Sources
 
