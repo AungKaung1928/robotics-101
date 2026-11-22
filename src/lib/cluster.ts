@@ -6,7 +6,7 @@
  */
 export function clusters(points: ([number, number] | null)[], threshold: number): number[] {
   const n = points.length
-  const label = new Array<number>(n).fill(-1)
+  const label = Array.from({ length: n }, () => -1)
   let k = -1
   for (let i = 0; i < n; i++) {
     const p = points[i], q = i > 0 ? points[i - 1] : null

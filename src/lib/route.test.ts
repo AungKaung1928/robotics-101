@@ -7,12 +7,13 @@ describe('parseRoute', () => {
     expect(parseRoute('#/costmap/2')).toEqual({ page: 'chapter', id: 'costmap' })
   })
   it('falls back to the overview', () => {
-    for (const h of ['', '#/', '#/nope', '#/detect']) expect(parseRoute(h)).toEqual({ page: 'overview' })
+    for (const h of ['', '#/', '#/nope']) expect(parseRoute(h)).toEqual({ page: 'overview' })
   })
 })
 describe('neighbour', () => {
   it('walks built chapters only and stops at the ends', () => {
-    expect(neighbour('scan', 1)).toBe('grid')
+    expect(neighbour('scan', 1)).toBe('detect')
+    expect(neighbour('detect', 1)).toBe('grid')
     expect(neighbour('grid', 1)).toBe('costmap')
     expect(neighbour('scan', -1)).toBe('tf')
     expect(neighbour('tf', -1)).toBe('bringup')

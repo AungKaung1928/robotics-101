@@ -2,11 +2,12 @@
 
 | Route | What the page must show (EN and JA) |
 |---|---|
-| `#/` | h1, the arena plan, links to the 6 built waypoints, 1 waypoint marked planned |
+| `#/` | h1, the arena plan, links to all 7 waypoints, none marked planned |
 | `#/bringup` | h1, launch timeline, readouts: patrol start (25 s), early starts "none" at his delays |
 | `#/tf` | h1, arena with map/odom/base_link axes, the box1 hit in map and base_scan, detector verdict "healthy" at the start values |
 | `#/scan` | h1, arena figure, readouts: beams with a return, gap between beams, distance per scan |
 | `#/goal` | h1, arena with tolerance circle and tick dots, readouts: per tick, distance to drive, minimum time, ticks |
+| `#/detect` | h1, arena with coloured clusters, readouts: objects found, objects in view |
 | `#/grid` | h1, occupancy canvas, readouts: cells (40,000 at 0.05 m), scans added, known share |
 | `#/costmap` | h1, cost chart, readouts: cost at the probe, cost at the inflation edge |
 

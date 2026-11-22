@@ -94,6 +94,18 @@ const en = {
     known: 'cells no longer unknown',
     model: 'Model: hit p = 0.7, pass p = 0.4 (page choice); beams with no return change nothing.',
   },
+  detect: {
+    lines: [
+      'The simplest LiDAR detector: walk the scan and start a new object wherever two neighbouring hits are farther apart than a threshold.',
+      'Too small: one object breaks into pieces, because beams spread with range and land far apart on a surface hit at a shallow angle. Too large: neighbours merge.',
+    ],
+    x: 'Robot x (m)',
+    y: 'Robot y (m)',
+    th: 'Break threshold (m)',
+    found: 'objects found',
+    truth: 'objects in view (ground truth)',
+    next: 'Borges & Aldon (2004) propose a threshold that grows with range and sensor noise; it is added once the formula is read from the paper itself.',
+  },
   costmap: {
     lines: [
       'Nav2 inflates every obstacle: cost falls off with distance, so the planner keeps clear of walls.',
@@ -199,6 +211,18 @@ const ja: typeof en = {
     scans: '追加したスキャン',
     known: '未知でなくなったセル',
     model: 'モデル: 当たり p = 0.7、通過 p = 0.4 (このページの選択)。反射のないビームは何も変えない。',
+  },
+  detect: {
+    lines: [
+      '一番簡単な LiDAR 検出器: スキャンを順にたどり、隣り合う点がしきい値より離れたら新しい物体とする。',
+      '小さすぎると 1 つの物体がばらばらになる。ビームは距離で広がり、浅い角度で当たる面では点が離れるため。大きすぎると隣の物体がつながる。',
+    ],
+    x: 'ロボット x (m)',
+    y: 'ロボット y (m)',
+    th: '区切りのしきい値 (m)',
+    found: '見つかった物体',
+    truth: '視野内の物体 (正解)',
+    next: 'Borges & Aldon (2004) は距離とセンサ雑音で大きくなるしきい値を提案している。式を論文本体で確認してから追加する。',
   },
   costmap: {
     lines: [

@@ -102,6 +102,8 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .buttons { display: flex; gap: var(--s2); margin-bottom: var(--s3); }
 .buttons button { font: var(--t-small) var(--mono); padding: var(--s2) var(--s3); border: 1px solid var(--ink); background: var(--surface); color: var(--ink); border-radius: var(--radius); cursor: pointer; }
 .buttons button:first-child { background: var(--robot); border-color: var(--robot); color: var(--surface); }
+.cl { fill: hsl(var(--h) 70% 38%); }
+@media (prefers-color-scheme: dark) { .cl { fill: hsl(var(--h) 75% 65%); } }
 .v-stale, .v-jump, .early { color: var(--ray); }
 .chart { width: 100%; height: auto; background: var(--surface); border: 1px solid var(--rule); }
 .chart .axis { fill: none; stroke: var(--ink-2); }

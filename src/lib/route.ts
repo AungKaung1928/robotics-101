@@ -3,7 +3,7 @@ export const CHAPTERS = [
   { id: 'bringup', built: true },
   { id: 'tf', built: true },
   { id: 'scan', built: true },
-  { id: 'detect', built: false },
+  { id: 'detect', built: true },
   { id: 'grid', built: true },
   { id: 'costmap', built: true },
   { id: 'goal', built: true },
