@@ -52,3 +52,17 @@ describe('objectsInView', () => {
     expect(clusterCount(clusters(pts, 0.5))).toBe(objectsInView(hits.map((h) => h.shape), WALLS.length))
   })
 })
+
+import { gaussian } from './noise'
+describe('his sensor noise splits surfaces', () => {
+  it('start pose, 0.1 m threshold: 5 pieces clean, 7 with σ = 1 cm (seed 1, as the page)', () => {
+    const pose = sensorPose({ x: 0.5, y: 0.5, yaw: Math.PI / 4 })
+    const A = beamAngles(LIDAR.samples, LIDAR.minAngle, LIDAR.maxAngle)
+    const n = gaussian(A.length, LIDAR.noiseStd, 1)
+    const pts = A.map((a, i): [number, number] | null => {
+      const d = castRayHit(pose, a, WORLD, LIDAR.minRange, LIDAR.maxRange).d
+      return d === Infinity ? null : [pose.x + (d + n[i]) * Math.cos(pose.yaw + a), pose.y + (d + n[i]) * Math.sin(pose.yaw + a)]
+    })
+    expect(clusterCount(clusters(pts, 0.1))).toBe(7)
+  })
+})

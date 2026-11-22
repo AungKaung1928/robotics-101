@@ -35,6 +35,8 @@ export const LIDAR = {
   maxAngle: 3.141592, // :177
   minRange: 0.12, // :181
   maxRange: 3.5, // :182
+  rangeResolution: 0.015, // :183
+  noiseStd: 0.01, // :185-188 gaussian, mean 0
 }
 
 export const NAV2 = {
