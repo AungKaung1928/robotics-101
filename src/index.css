@@ -176,7 +176,9 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
   .wp .wp-title { font-size: 0.4px; }
   .wp .wp-value { font-size: 0.3px; }
   .wp .wp-kind { display: none; }
-  .peek { display: none; } /* no hover on touch; the map labels carry the same values */
+  .peek { display: none; }
+  /* SVG text scales down with the figure (~0.56 at 390 px): larger units keep it near 11 px */
+  .timeline text, .chart .tick { font-size: 20px; } /* no hover on touch; the map labels carry the same values */
 }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
