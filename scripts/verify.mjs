@@ -68,7 +68,7 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
         if (lang === 'ja' && !JA_TEXT.test(h1 ?? '')) fails.push(`${name}: h1 not Japanese`)
         // Every prose paragraph and label on a Japanese page must be Japanese (source lines are citations: skipped).
         if (lang === 'ja') {
-          const prose = [...dom.matchAll(/<p(?: class="(?:lede|note)")?>([^<]+)<\/p>|<dt>([^<]+)<\/dt>/g)].map((m) => (m[1] ?? m[2]).trim())
+          const prose = [...dom.matchAll(/<p(?: class="(?:lede|note)")?>([^<]+)<\/p>|<dt>(.*?)<\/dt>/g)].map((m) => (m[1] ?? m[2]).replace(/<[^>]+>/g, '').trim())
           for (const t of prose) if (!JA_TEXT.test(t)) fails.push(`${name}: English left on the Japanese page: '${t.slice(0, 50)}'`)
         }
         if (!/<(svg|canvas)[^>]*role="img"/.test(dom)) fails.push(`${name}: no figure`)
