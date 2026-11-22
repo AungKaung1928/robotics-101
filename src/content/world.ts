@@ -47,6 +47,10 @@ export const NAV2 = {
   accLimX: 2.5, // :45 (decel_lim_x -2.5 at :48)
   progressRadius: 0.5, // :27 required_movement_radius
   progressTime: 10.0, // :28 movement_time_allowance (s)
+  planner: 'NavFn', // :153 nav2_navfn_planner/NavfnPlanner
+  useAstar: false, // :155 (false = Dijkstra)
+  allowUnknown: true, // :156
+  recoveries: ['spin', 'backup', 'wait'], // :165
   costmapResolution: 0.05, // :81 (local costmap)
   globalCostmapResolution: 0.05, // :119
   globalRobotRadius: 0.22, // :118

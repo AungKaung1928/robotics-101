@@ -43,10 +43,12 @@ export default function GoalChapter({ t }: { t: Strings }) {
         <p className="group-h">{s.gChecks}</p>
         <dl className="readout">
           <div><dt>{s.yaw}</dt><dd data-k="yaw">{NAV2.yawGoalTolerance} rad = {((NAV2.yawGoalTolerance * 180) / Math.PI).toFixed(1)}°</dd></div>
+          <div><dt>{s.planner}</dt><dd data-k="planner">{NAV2.planner} · {NAV2.useAstar ? 'A*' : 'Dijkstra'}</dd></div>
+          <div><dt>{s.recover}</dt><dd data-k="recover">{NAV2.recoveries.join(' · ')}</dd></div>
           <div><dt>{s.progress}</dt><dd data-k="progress">{(NAV2.progressRadius / V).toFixed(1)} s</dd></div>
         </dl>
         <p className="note">{s.every}</p>
-        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L18-L48`}>nav2_params.yaml:18-48</a>, <a href={`${SOURCE_REPO}/blob/main/README.md`}>README (patrol result)</a></p>
+        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L18-L165`}>nav2_params.yaml:18-48, 153-165</a>, <a href={`${SOURCE_REPO}/blob/main/README.md`}>README (patrol result)</a></p>
       </div>
     </>
   )
