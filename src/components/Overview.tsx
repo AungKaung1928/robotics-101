@@ -1,21 +1,9 @@
 import { useState } from 'react'
-import { LAUNCH_NAV2_S, LIDAR, NAV2, OBSTACLES, SOURCE_REPO, STACK, TF_MAX_JUMP, WAYPOINTS } from '../content/world'
+import { WAYPOINT_VALUE as VALUE } from '../content/waypoints'
+import { SOURCE_REPO, STACK, WAYPOINTS } from '../content/world'
 import type { Strings } from '../i18n'
-import { beamGap } from '../lib/scan'
 import { CHAPTERS, type ChapterId } from '../lib/route'
 import Arena from './Arena'
-
-const gapCm = (beamGap(LIDAR.maxRange, LIDAR.samples, LIDAR.minAngle, LIDAR.maxAngle) * 100).toFixed(1)
-// One value per waypoint, read from the tracked constants; kind = where the value comes from.
-const VALUE: Record<ChapterId, { v: string; kind: 'config' | 'formula' }> = {
-  bringup: { v: `Nav2 @ ${LAUNCH_NAV2_S} s`, kind: 'config' },
-  tf: { v: `jump > ${TF_MAX_JUMP} m`, kind: 'config' },
-  scan: { v: `${gapCm} cm @ ${LIDAR.maxRange} m`, kind: 'formula' },
-  detect: { v: `${OBSTACLES.length} obstacles`, kind: 'config' },
-  grid: { v: `${NAV2.costmapResolution} m cells`, kind: 'config' },
-  costmap: { v: `k = ${NAV2.costScaling.toFixed(1)}`, kind: 'config' },
-  goal: { v: `± ${NAV2.goalTolerance} m`, kind: 'config' },
-}
 
 export default function Overview({ t }: { t: Strings }) {
   const [peek, setPeek] = useState<ChapterId>(CHAPTERS[0])
