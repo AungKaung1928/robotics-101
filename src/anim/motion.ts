@@ -1,7 +1,7 @@
 import { easeInOut } from '../lib/timeline'
 
-/** Glide length for a Step: long enough to see the change happen, short enough not to wait for it (ms). */
-export const GLIDE_MS = 420
+/** Glide length for a Step: long enough to see the change happen, inside the 300 ms UI limit (ms). */
+export const GLIDE_MS = 300
 
 /** Playhead `elapsed` ms into a glide from `from` to `to` lasting `dur` ms; lands exactly on `to`. */
 export function glide(from: number, to: number, elapsed: number, dur = GLIDE_MS): number {

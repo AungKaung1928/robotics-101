@@ -67,3 +67,8 @@ export const PULSE_S = settleTime(PRESS, 0, PULSE_V, 0.002)
 
 /** For marks that carry data (a threshold line, a bar): no bounce, so the mark never shows a value that is not true. */
 export const CALM: Spring = springFrom(0.25, 0)
+
+/** UI controls (buttons, step dots): quick and nearly flat, bounce 0.2 (≈ 1.5 % overshoot), Emil Kowalski's 0.1-0.3. */
+export const UI: Spring = springFrom(0.15, 0.2)
+const UI_EASE = springEasing(UI)
+export const UI_STYLE = { '--spring': UI_EASE.easing, '--spring-ms': `${UI_EASE.ms}ms` } as CSSProperties

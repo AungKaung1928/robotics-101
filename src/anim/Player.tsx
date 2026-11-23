@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 
 import type { Strings } from '../i18n'
 import { advance, stepEvent } from '../lib/timeline'
 import { GLIDE_MS, HOLD_KEY, currentStep, fromKeyboard, glide, playerKey, shouldAutoplay } from './motion'
-import { PRESS_STYLE } from './spring'
+import { UI_STYLE } from './spring'
 import './player.css'
 
 const held = () => typeof sessionStorage !== 'undefined' && sessionStorage.getItem(HOLD_KEY) === '1'
@@ -81,7 +81,7 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
     else go(k === 'start' ? 0 : end, true)
   }
   return (
-    <div className="stepper" role="group" aria-label={s.player.label} onKeyDown={onKey} style={PRESS_STYLE}>
+    <div className="stepper" role="group" aria-label={s.player.label} onKeyDown={onKey} style={UI_STYLE}>
       <button type="button" onClick={(e) => step(-1, still || fromKeyboard(e))} disabled={from <= Math.min(...events) + 1e-9}>← {s.back}</button>
       <button type="button" disabled={still} aria-pressed={playing} onClick={toggle}>{playing ? s.player.pause : s.player.play}</button>
       <button type="button" onClick={(e) => step(1, still || fromKeyboard(e))} disabled={from >= Math.max(...events) - 1e-9}>

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { BOUNCY, PRESS, PULSE_S, WOBBLE, arrivalScale, settleTime, springAt, springEasing, springFrom } from './spring'
+import { BOUNCY, PRESS, PULSE_S, UI, WOBBLE, arrivalScale, settleTime, springAt, springEasing, springFrom } from './spring'
 
 describe('springAt', () => {
   it('starts at x0 and ends at rest', () => {
@@ -78,5 +78,14 @@ describe('arrivalScale', () => {
     expect(Math.min(...v)).toBeLessThan(1)
     expect(PULSE_S).toBeLessThan(0.3)
     expect(Math.abs(arrivalScale(PULSE_S) - 1)).toBeLessThan(0.002)
+  })
+})
+
+describe('UI spring (controls)', () => {
+  it('overshoots under 3 % and finishes under 300 ms', () => {
+    const { easing, ms } = springEasing(UI)
+    const v = easing.slice(7, -1).split(', ').map(Number)
+    expect(Math.max(...v)).toBeLessThan(1.03)
+    expect(ms).toBeLessThan(300)
   })
 })
