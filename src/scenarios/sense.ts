@@ -11,9 +11,8 @@ export function cast(o: Pt, a: number, walls: readonly Seg[], covered = false): 
   return castWall(o, a, walls, covered)?.d ?? null
 }
 
-/** Like cast(), plus which wall (index into `walls`) the beam hit: links a scan point back to the thing it came from. */
-export function castWall(o: Pt, a: number, walls: readonly Seg[], covered = false): { d: number; i: number } | null {
-  if (covered) return null
+/** Nearest wall along the ray at any distance (no sensor range): what is really there. */
+export function rayHit(o: Pt, a: number, walls: readonly Seg[]): { d: number; i: number } | null {
   const dx = Math.cos(a), dy = Math.sin(a)
   let best = Infinity, hit = -1
   for (const [i, [x1, y1, x2, y2]] of walls.entries()) {
@@ -22,7 +21,14 @@ export function castWall(o: Pt, a: number, walls: readonly Seg[], covered = fals
     const t = ((x1 - o.x) * ey - (y1 - o.y) * ex) / den, u = ((x1 - o.x) * dy - (y1 - o.y) * dx) / den
     if (t > 0 && u >= 0 && u <= 1 && t < best) { best = t; hit = i }
   }
-  return best >= MIN_R && best <= MAX_R ? { d: best, i: hit } : null
+  return hit < 0 ? null : { d: best, i: hit }
+}
+
+/** Like cast(), plus which wall (index into `walls`) the beam hit: links a scan point back to the thing it came from. */
+export function castWall(o: Pt, a: number, walls: readonly Seg[], covered = false): { d: number; i: number } | null {
+  if (covered) return null
+  const h = rayHit(o, a, walls)
+  return h && h.d >= MIN_R && h.d <= MAX_R ? h : null
 }
 
 /** A room with one wall the reader can move (its x in m): the single-beam step. */

@@ -75,3 +75,46 @@ describe('squish-range', () => {
     expect(css).toContain('prefers-reduced-motion: reduce')
   })
 })
+
+// Each rule here is read as a flat list: comments dropped, @keyframes skipped, `reduce` = inside a reduced-motion block.
+function cssRules(css: string) {
+  const out: { sel: string; body: string; reduce: boolean }[] = [], stack: string[] = []
+  let buf = ''
+  for (const ch of css.replace(/\/\*[\s\S]*?\*\//g, '')) {
+    if (ch === '{') { stack.push(buf.trim()); buf = '' }
+    else if (ch === '}') {
+      const sel = stack.pop()!, at = stack.join(' ')
+      if (!sel.startsWith('@') && !at.includes('@keyframes')) out.push({ sel, body: buf.trim(), reduce: at.includes('reduce') })
+      buf = ''
+    } else buf += ch
+  }
+  return out
+}
+const sels = (s: string) => s.split(',').map((x) => x.trim().replace(/\s+/g, ' '))
+// Moving under reduce is impossible for these without an off-rule of the same selector:
+const SAFE: Record<string, string> = {
+  ".mascot[data-mood='sleep'] .m-breath": 'sets only animation-duration; the reduce block sets .m-breath animation: none (name none)',
+  '::view-transition-group(chapter)': 'reduce block: ::view-transition-group(*) animation none !important',
+  "html[data-vt='next']::view-transition-old(chapter)": "transition.ts swap() sets data-vt='fade' under reduce",
+  "html[data-vt='next']::view-transition-new(chapter)": "transition.ts swap() sets data-vt='fade' under reduce",
+  "html[data-vt='back']::view-transition-old(chapter)": "transition.ts swap() sets data-vt='fade' under reduce",
+  "html[data-vt='back']::view-transition-new(chapter)": "transition.ts swap() sets data-vt='fade' under reduce",
+}
+
+describe('reduced motion switches off the same selector', () => {
+  // An off-rule with a shorter selector loses on specificity and the thing still moves
+  // (player.css 2026-11-23: '.stepper .rail li::before' vs '.stepper .rail li + li::before', 0.253 s in Chrome).
+  it('every selector that transitions or animates has an off-rule with the identical selector in a reduce block', () => {
+    const missing: string[] = [], seen = new Set<string>()
+    for (const f of files) {
+      const r = cssRules(read(f))
+      const off = new Set(r.filter((x) => x.reduce).flatMap((x) => sels(x.sel)))
+      for (const x of r) {
+        if (x.reduce || !/(^|;)\s*(transition|animation)(-name|-duration)?\s*:/.test(x.body) || /(transition|animation)\s*:\s*none/.test(x.body)) continue
+        for (const s of sels(x.sel)) { seen.add(s); if (!off.has(s) && !SAFE[s]) missing.push(`${f}: ${s}`) }
+      }
+    }
+    expect(missing).toEqual([])
+    expect(Object.keys(SAFE).filter((s) => !seen.has(s)), 'stale SAFE entries').toEqual([])
+  })
+})

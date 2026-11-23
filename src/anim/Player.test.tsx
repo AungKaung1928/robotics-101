@@ -13,11 +13,11 @@ describe('Player render', () => {
   it('reduced motion: Play disabled and not pressed, even with autoplay', () => {
     motion(true)
     const html = render(3)
-    expect(html).toMatch(/<button type="button" disabled="" aria-pressed="false">Play<\/button>/)
+    expect(html).toMatch(/<button type="button" disabled="" aria-pressed="false"><svg[^>]*><path d="M2 1L5.5[^"]*"><\/path><\/svg>Play<\/button>/)
   })
   it('motion allowed + autoplay: Play is pressed (playing) and offers Pause', () => {
     motion(false)
-    expect(render(0)).toMatch(/aria-pressed="true">Pause<\/button>/)
+    expect(render(0)).toMatch(/aria-pressed="true"><svg[^>]*><path d="M2 1L4 1[^"]*"><\/path><\/svg>Pause<\/button>/)
   })
   it('rail: current step marked, earlier steps done, Next names the next step; caption is a live region', () => {
     motion(false)
@@ -26,5 +26,24 @@ describe('Player render', () => {
     expect(html.match(/data-done="true"/g)).toHaveLength(1)
     expect(html).toContain('<span class="wide">: c</span>')
     expect(html).toContain('aria-live="polite"')
+  })
+  it('scrubber speaks the step, not the raw time: aria-valuetext = n/total + label; no labels = none', () => {
+    motion(false)
+    expect(render(1.5)).toContain('aria-valuetext="2/4 b"')
+    expect(render(3)).toContain('aria-valuetext="4/4 d"')
+    expect(renderToStaticMarkup(<Player t={1} setT={() => {}} end={3} events={[0, 1, 3]} speed={1} caption="c" s={STRINGS.en} />)).not.toContain('aria-valuetext')
+  })
+  it('speed button only with speedLabel and motion allowed; its name says word + rate', () => {
+    const sp = () => renderToStaticMarkup(<Player t={0} setT={() => {}} end={3} events={[0, 3]} speed={1} caption="c" speedLabel="Speed" s={STRINGS.en} />)
+    motion(false)
+    expect(sp()).toContain('aria-label="Speed 1×"><span>1×</span>')
+    expect(render(0)).not.toContain('class="rate"')
+    motion(true)
+    expect(sp()).not.toContain('class="rate"')
+  })
+  it('at the end and paused, Play shows the replay arrow (Play restarts from 0); while playing the pause bars', () => {
+    motion(false)
+    expect(render(3, false)).toMatch(/<svg class="pp is-replay"[^>]*><path d="M8.5 5A[^"]*"><\/path><\/svg>Play</)
+    expect(render(1, false)).not.toContain('is-replay')
   })
 })

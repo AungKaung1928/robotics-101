@@ -16,6 +16,7 @@
 .ss-beam.is-none { stroke: var(--ink-2); stroke-dasharray: 3 4; }
 .ss-hit { fill: var(--ray); }
 .ss-num { fill: var(--ink); font: 700 15px var(--mono); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; }
+.ss-num.is-none { fill: var(--ink-2); font-weight: 400; } /* no reading: the chapter's word, quieter than a number */
 .ss-paw ellipse, .ss-paw circle { fill: var(--surface); stroke: var(--ink); stroke-width: 2.5; stroke-linejoin: round; }
 .think-scene { width: 100%; height: auto; background: var(--surface); }
 .ts-mark { stroke: var(--robot); stroke-width: 2; stroke-dasharray: 4 4; }
@@ -69,3 +70,14 @@
 .ms-turn-c { fill: var(--ink); }
 .ms-turn-label { fill: var(--ink); font: 600 13px var(--mono); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; }
 .sp-step.is-none .sp-face { stroke-dasharray: 5 4; }
+/* ThinkScene: the measured d (line + value); lit while the rule's condition holds, dashed when the sensor sees nothing. */
+.tk-d line { stroke: var(--ink-2); stroke-width: 1.5; }
+.tk-d text { font: 14px var(--mono); fill: var(--ink-2); }
+.tk-d.is-on line { stroke: var(--free); stroke-width: 2.5; }
+.tk-d.is-on text { fill: var(--ink); font-weight: 600; }
+.tk-d.is-blind line { stroke-dasharray: 3 3; }
+/* MoveScene wheel arrows: ground speed per wheel (1 s of travel); dashed = what a slipping wheel spins. */
+.ms-v path { fill: none; stroke: var(--robot); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.ms-v.is-spin path { stroke: var(--ink-2); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.ss-range { stroke: var(--ink-2); stroke-width: 2; stroke-linecap: round; } /* where the sensor's range ends (3.5 m) */
+.sw-none { fill: var(--ink-2); font: 13px var(--mono); } /* SimWhatScene: sensor off, the view says why it is blank */

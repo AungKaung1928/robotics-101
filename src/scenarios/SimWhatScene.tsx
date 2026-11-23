@@ -10,8 +10,8 @@ const M = 12, PW = 1.5 * 130 + 2 * M, PH = 130 + 2 * M // panel size stays fixed
 export const layout = (wallX: number, box?: Box) => roomLayout(wallX, box, PW, PH, M, 130)
 export type { Box }
 
-export default function SimWhatScene({ wallX = 1, box, sensorOn = true, worldWord, viewWord, label, hot0 = null, hot: hotIn, onHot }: {
-  wallX?: number; box?: Box; sensorOn?: boolean; worldWord: string; viewWord: string; label: string; hot0?: number | null
+export default function SimWhatScene({ wallX = 1, box, sensorOn = true, worldWord, viewWord, emptyWord, label, hot0 = null, hot: hotIn, onHot }: {
+  wallX?: number; box?: Box; sensorOn?: boolean; worldWord: string; viewWord: string; emptyWord?: string; label: string; hot0?: number | null
   hot?: number | null; onHot?: (wall: number | null) => void
 }) {
   const { walls, O, movable, X, Y } = layout(wallX, box), hits = sweep(O, walls, 1, 1, Math.PI / 90, !sensorOn), [own, setOwn] = useState<number | null>(hot0)
@@ -44,6 +44,7 @@ export default function SimWhatScene({ wallX = 1, box, sensorOn = true, worldWor
         <rect className="sw-pane is-view" width={PW} height={PH} rx={8} />
         {hits.map((h, i) => <circle key={i} className={cls('ss-hit', h.w)} cx={X(h.x)} cy={Y(h.y)} r={1.8} {...link(h.w)} />)}
         <circle className="sw-self" cx={X(O.x)} cy={Y(O.y)} r={5} />
+        {!sensorOn && emptyWord && <text className="sw-none" x={PW / 2} y={PH - 14} textAnchor="middle">{emptyWord}</text>/* why the view is blank */}
         <text className="sw-cap" x={PW / 2} y={PH + 16} textAnchor="middle">{viewWord}</text>
       </g>
     </svg>

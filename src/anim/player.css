@@ -5,8 +5,10 @@
 /* Connector into a reached step fills left to right (stepper progress): how far the story got reads without counting dots. */
 .stepper .rail li:has(> [data-done], > [aria-current]) + li:has(> [data-done], > [aria-current])::before { background-size: 100% 100%; }
 .stepper .rail button { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; border: 0; background: none; padding: 0; color: var(--ink-2); }
-.stepper .rail .dot { display: grid; place-items: center; width: 1.5rem; height: 1.5rem; border: 1px solid var(--rule); border-radius: 50%; background: var(--surface); transition: background-color 200ms, color 200ms, border-color 200ms; }
+.stepper .rail .dot { display: grid; place-items: center; width: 1.5rem; height: 1.5rem; border: 1px solid var(--rule); border-radius: 50%; background: var(--surface); transition: background-color 200ms, color 200ms, border-color 200ms, transform var(--spring-ms, 200ms) var(--spring, ease-out); }
 .stepper .rail [data-done] .dot { border-color: var(--ink); }
+/* A step dot is a button: on hover / keyboard focus it lifts 2 px and its ring darkens (a jump target, not a picture). */
+.stepper .rail button:is(:hover, :focus-visible) .dot { transform: translateY(-2px); border-color: var(--ink); }
 .stepper .rail [aria-current] { color: var(--ink); }
 .stepper .rail [aria-current] .dot { background: var(--ink); color: var(--surface); border-color: var(--ink); }
 /* The step that becomes current pops (1.15 → 1) on the UI spring: the eye lands on where the story is now. */
@@ -21,7 +23,25 @@
 .stepper button:active:not(:disabled) { transform: scale(0.97); transition-duration: 60ms; }
 /* Scrubber at least 24 px tall: WCAG 2.2 2.5.8 pointer target (measured 16 px with the browser default). */
 .stepper .scrub { min-height: 24px; }
+/* Play icon: triangle morphs into pause bars (same command list, CSS d transition; browsers without it swap at once). */
+.stepper .pp { width: 0.8em; height: 0.8em; margin-right: 0.4em; vertical-align: -0.05em; fill: currentColor; }
+.stepper .pp.is-replay path { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
+.stepper .pp.is-replay { overflow: visible; }
+.stepper .pp path { transition: d var(--spring-ms, 200ms) var(--spring, ease-out); }
+/* Speed button: fixed width so the row does not jump; the new rate pops in on the UI spring. */
+.stepper .rate span { display: inline-block; min-width: 2.2em; }
+@supports (animation-timing-function: linear(0, 1)) { .stepper .rate span { animation: rail-pop var(--spring-ms) var(--spring); } }
+/* Scrubber + the step name under the pointer (video chapter title on hover); the tip pops on the UI spring per step.
+   Its anchor slides with the fraction (left edge at the start, right edge at the end) and it is never wider than the track
+   (ellipsis; the full name stays in aria-valuetext): long labels never leave the track. */
+.stepper .scrub-wrap { flex: 1 1 10rem; position: relative; display: flex; }
+.stepper .scrub-wrap .scrub { flex: 1 1 auto; min-width: 0; }
+.stepper .scrub-tip { position: absolute; bottom: calc(100% + 2px); transform: translateX(calc(var(--f, 0.5) * -100%)); padding: 0 0.4em; border-radius: var(--radius); background: var(--ink); color: var(--surface); white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis; box-sizing: border-box; pointer-events: none; }
+@supports (animation-timing-function: linear(0, 1)) { .stepper .scrub-tip { animation: tip-pop var(--spring-ms) var(--spring); } }
+@keyframes tip-pop { from { transform: translateX(calc(var(--f, 0.5) * -100%)) translateY(3px) scale(0.85); opacity: 0; } }
 /* Track drawn by scrubTrack() (inline background-image): a 6 px band centred in the 24 px target, step gaps included. */
+/* Unplayed track: 65 % ink-2 over the page = 3.14:1 light, 4.19:1 dark (contrast.test); --rule was 1.46 / 1.75, too faint for the step gaps. */
+.stepper .scrub { --scrub-rest: color-mix(in srgb, var(--ink-2) 65%, var(--paper)); }
 .stepper .scrub.squish-range { height: 24px; background-color: transparent; background-size: 100% 6px; background-repeat: no-repeat; background-position: center; }
 @media (max-width: 600px) { .stepper .wide { display: none; } }
-@media (prefers-reduced-motion: reduce) { .stepper .rail .dot, .stepper button, .stepper .rail li::before { transition: none; } .stepper .rail [aria-current] .dot { animation: none; } .stepper button:active:not(:disabled) { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .stepper .rail .dot, .stepper button, .stepper .rail li + li::before, .stepper .pp path { transition: none; } .stepper .rail [aria-current] .dot, .stepper .scrub-tip, .stepper .rate span { animation: none; } .stepper button:active:not(:disabled) { transform: none; } }
