@@ -1,0 +1,14 @@
+/* Level 2 graph styles; code card, glossary and verdict come from ../l1/l1.css. */
+.graph .edge { fill: none; stroke: var(--rule); stroke-width: 2; }
+.graph .edge.live { stroke: var(--ray); stroke-dasharray: 6 6; animation: flow 0.8s linear infinite; }
+@keyframes flow { to { stroke-dashoffset: -12; } }
+@media (prefers-reduced-motion: reduce) { .graph .edge.live { animation: none; } }
+.graph .nd rect { fill: var(--surface); stroke: var(--rule); stroke-width: 2; rx: 4; }
+.graph .nd { cursor: pointer; }
+.graph .nd text { font: 18px var(--mono); fill: var(--ink-2); }
+.graph .nd.ok rect { stroke: var(--free); }
+.graph .nd.ok text { fill: var(--ink); }
+.graph .nd.starved rect { stroke: var(--ray); stroke-dasharray: 4 3; }
+.graph .nd.off { opacity: 0.35; }
+.graph .nd:focus-visible rect { stroke: var(--robot); stroke-width: 3; }
+.graph .legend { font: 16px var(--mono); fill: var(--ink-2); }

@@ -2,8 +2,9 @@ import { createRoot } from 'react-dom/client'
 import '../../index.css'
 import { STRINGS } from '../../i18n'
 import { CallbackChapter, ClosestChapter, CppChapter, DecideChapter, ShellChapter } from './index'
+import { NodesChapter } from '../l2'
 
-const BODIES = { decide: DecideChapter, closest: ClosestChapter, callback: CallbackChapter, cpp: CppChapter, shell: ShellChapter }
+const BODIES = { decide: DecideChapter, closest: ClosestChapter, callback: CallbackChapter, cpp: CppChapter, shell: ShellChapter, nodes: NodesChapter }
 const q = new URLSearchParams(location.search)
 const Body = BODIES[(q.get('c') ?? 'decide') as keyof typeof BODIES]
 const t = STRINGS[q.get('lang') === 'ja' ? 'ja' : 'en']
