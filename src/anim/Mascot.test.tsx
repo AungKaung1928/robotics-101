@@ -70,3 +70,13 @@ describe('glance toward the last tap', () => {
     expect(glanceAt(5000, 100, 64)).toBe(1)
   })
 })
+
+describe('LiveNote', () => {
+  it('first render is an empty polite status region, even with text (it must exist before it is filled)', async () => {
+    const { default: LiveNote } = await import('./LiveNote')
+    const h = renderToStaticMarkup(<LiveNote text="bumped into the wall" />)
+    expect(h).toContain('role="status"')
+    expect(h).toContain('aria-live="polite"')
+    expect(h).not.toContain('bumped')
+  })
+})
