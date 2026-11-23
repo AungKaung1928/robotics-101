@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { BOOP_S, HAPPY_S, WHEEL_R, eyeShift, wheelAngle, OOPS_S, REST, SPARK_AT, boopPose, happyPose, oopsPose, sparks } from './mascot'
+import { BOOP_S, HAPPY_S, JOLT_S, WHEEL_R, brakePose, startPose, eyeShift, wheelAngle, OOPS_S, REST, SPARK_AT, boopPose, happyPose, oopsPose, sparks } from './mascot'
 
 const ts = (end: number) => Array.from({ length: 601 }, (_, i) => (i / 600) * end)
 
@@ -87,5 +87,15 @@ describe('wheelAngle', () => {
     expect(wheelAngle(2 * Math.PI * WHEEL_R)).toBeCloseTo(360, 9)
     expect(wheelAngle(-Math.PI * WHEEL_R)).toBeCloseTo(-180, 9)
     expect(wheelAngle(0)).toBe(0)
+  })
+})
+
+describe('brakePose / startPose', () => {
+  it('brake tips forward first (+), start back (−), mirror images, both settle within 0.6 s', () => {
+    expect(brakePose(0.05).rot).toBeGreaterThan(1)
+    expect(startPose(0.05).rot).toBeLessThan(-1)
+    for (const t of [0.03, 0.1, 0.2]) expect(brakePose(t).rot).toBeCloseTo(-startPose(t).rot, 12)
+    expect(JOLT_S).toBeLessThan(0.6)
+    expect(Math.abs(brakePose(JOLT_S).rot)).toBeLessThan(0.2)
   })
 })

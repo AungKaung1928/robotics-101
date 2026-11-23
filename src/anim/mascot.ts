@@ -74,3 +74,17 @@ export const WHEEL_R = 5 // wheel radius in the mascot's 64-unit box
 export function wheelAngle(dist: number, r = WHEEL_R): number {
   return ((dist / r) * 180) / Math.PI
 }
+
+const JOLT = 90 // deg / s of pitch rate at the jolt
+
+/**
+ * Inertia on starts and stops: braking pitches the body forward (positive tilt, towards the direction of travel)
+ * and it springs back; starting leans it back the same way. Tilt is about the feet, like oops, but smaller.
+ */
+export function brakePose(t: number): Pose {
+  return t <= 0 ? REST : { ...REST, rot: springAt(t, BOUNCY, 0, JOLT) }
+}
+export function startPose(t: number): Pose {
+  return t <= 0 ? REST : { ...REST, rot: springAt(t, BOUNCY, 0, -JOLT) }
+}
+export const JOLT_S = settleTime(BOUNCY, 0, JOLT, 0.2)

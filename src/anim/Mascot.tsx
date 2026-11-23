@@ -1,37 +1,40 @@
 import { useEffect, useState } from 'react'
-import { BOOP_S, HAPPY_S, OOPS_S, REST, WHEEL_R, boopPose, eyeShift, wheelAngle, happyPose, oopsPose, sparks, type Pose } from './mascot'
+import { BOOP_S, HAPPY_S, JOLT_S, OOPS_S, REST, WHEEL_R, boopPose, brakePose, startPose, eyeShift, wheelAngle, happyPose, oopsPose, sparks, type Pose } from './mascot'
 import { PRESS_STYLE } from './spring'
 import './mascot.css'
 
 const reduced = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 export type Mood = 'idle' | 'happy' | 'oops'
-type Reaction = 'happy' | 'oops' | 'boop'
+type Reaction = 'happy' | 'oops' | 'boop' | 'brake' | 'start'
 const REACTION: Record<Reaction, { pose: (t: number) => Pose; end: number }> = {
   happy: { pose: happyPose, end: HAPPY_S }, oops: { pose: oopsPose, end: OOPS_S }, boop: { pose: boopPose, end: BOOP_S },
+  brake: { pose: brakePose, end: JOLT_S }, start: { pose: startPose, end: JOLT_S },
 }
 
 /**
  * The guide robot (TurtleBot3 Burger shape: two wheels, stacked plates, LiDAR dome as the head). Idles with a slow
  * breath and a blink (CSS); bounces when `cheer` changes (a challenge solved) and wobbles when `oops` changes (the
- * reader broke something), both on springs; a pointer arriving (or a tap) gives it a small boop. Reduced motion: no
+ * reader broke something), both on springs; a pointer arriving (or a tap) gives it a small boop; `brake` / `start` changes pitch it forward / back (inertia). Reduced motion: no
  * movement, only the face changes for a moment. `look` (−1 left … 1 right) turns the eyes toward what is changing,
  * e.g. the playhead's place on the scrubber. `roll` = distance driven in the drawing's own units (64-unit box): the
  * wheels turn by roll / radius, so they never skid against the floor.
  */
-export default function Mascot({ cheer = 0, oops = 0, look = 0, roll = 0, size = 64, label, inSvg = false }: {
-  cheer?: number; oops?: number; look?: number; roll?: number; size?: number; label: string; inSvg?: boolean
+export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look = 0, roll = 0, size = 64, label, inSvg = false }: {
+  cheer?: number; oops?: number; brake?: number; start?: number; look?: number; roll?: number; size?: number; label: string; inSvg?: boolean
 }) {
   const [act, setAct] = useState<{ kind: Reaction; n: number } | null>(null)
   const [pose, setPose] = useState<Pose>(REST)
   const [t, setT] = useState(0)
   useEffect(() => { if (cheer) setAct({ kind: 'happy', n: cheer }) }, [cheer])
   useEffect(() => { if (oops) setAct({ kind: 'oops', n: oops }) }, [oops])
+  useEffect(() => { if (brake) setAct({ kind: 'brake', n: brake }) }, [brake])
+  useEffect(() => { if (start) setAct({ kind: 'start', n: start }) }, [start])
   useEffect(() => {
     if (!act) return
     const { pose: f, end } = REACTION[act.kind]
     const done = () => { setPose(REST); setT(0); setAct(null) }
     if (reduced()) {
-      const id = setTimeout(done, act.kind === 'boop' ? 0 : 900)
+      const id = setTimeout(done, act.kind === 'happy' || act.kind === 'oops' ? 900 : 0)
       return () => clearTimeout(id)
     }
     const t0 = performance.now()
@@ -48,7 +51,7 @@ export default function Mascot({ cheer = 0, oops = 0, look = 0, roll = 0, size =
   }, [act])
   // Boop on pointer arrival or tap, only when idle: it never cuts a cheer or an oops short, and runs to the end.
   const boop = () => { if (!act) setAct({ kind: 'boop', n: 0 }) }
-  const mood: Mood = act && act.kind !== 'boop' ? act.kind : 'idle'
+  const mood: Mood = act && (act.kind === 'happy' || act.kind === 'oops') ? act.kind : 'idle'
   const fig = <MascotFigure pose={pose} mood={mood} size={size} label={label} spark={mood === 'happy' ? t : 0} look={look} roll={roll} />
   // Inside a chapter's SVG figure (place it with a parent <g transform>) the hit area is a <g>, in HTML a <span>.
   return inSvg
