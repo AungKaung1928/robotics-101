@@ -58,7 +58,7 @@ export default function ThinkScene({ stopAt, t, v = 0.2, wallX = 1.2, stopWord =
   const wide = d1 - d0 > dw + 10
   const beyond = !wide && d1 + 8 + dw < VW - M // short line, room past the wall (built-in room): label there
   const [dx, anchor]: [number, 'middle' | 'start' | 'end'] = wide ? [(d0 + d1) / 2, 'middle'] : beyond ? [d1 + 8, 'start'] : [d1 - 6, 'end']
-  const ly = wide ? dy - 6 : beyond ? dy - 26 : dy + 54 // else under the robot and the ladder row (+34), clear of the bubble tail
+  const ly = wide ? dy - 6 : beyond ? dy - 26 : dy + 70 // else under the robot, the ladder row (+34) and the check marks (+42..52)
   return (
     <svg ref={ref} className="think-scene" viewBox={`0 0 ${VW} ${VH}`} role="img" aria-label={label} data-state={fired ? 'fired' : bumped ? 'bumped' : 'driving'}>
       {walls.map(([x1, y1, x2, y2], i) => <line key={i} className={i === movable ? 'ss-wall is-movable' : 'ss-wall'} x1={X(x1)} y1={Y(y1)} x2={X(x2)} y2={Y(y2)} />)}
@@ -70,9 +70,10 @@ export default function ThinkScene({ stopAt, t, v = 0.2, wallX = 1.2, stopWord =
       <g transform={`translate(${X(x) + 20} ${Y(Y0)}) scale(${sx} ${1 / sx}) translate(${-X(x) - 20} ${-Y(Y0)})`}>
         <RobotTop x={X(x)} y={Y(Y0)} deg={0} rolledL={X(x) - X(sim.x0)} rolledR={X(x) - X(sim.x0)} mood={bumped ? 'dizzy' : fired ? 'proud' : 'curious'} t={since} />
       </g>
-      {/* one mark per check made so far, where the robot's front was: the loop only looks at these spots (chapter model) */}
+      {/* one mark per check made so far, where the robot's front was: the loop only looks at these spots (chapter model).
+          Below the robot and the ladder row (+34), so the last check before a crash stays visible in front of the wall */}
       <g className="tk-ticks" data-ticks={seen.length}>{seen.map((k, i) => { const last = i === seen.length - 1 && fired, kx = X(sim.mark(k.distance))
-        return <line key={i} className={last ? 'tk-tick is-fired' : 'tk-tick'} x1={kx} x2={kx} y1={dy + 20} y2={dy + (last ? 30 : 25)} /> })}</g>
+        return <line key={i} className={last ? 'tk-tick is-fired' : 'tk-tick'} x1={kx} x2={kx} y1={dy + 42} y2={dy + (last ? 52 : 47)} /> })}</g>
       <g className={dOn ? 'tk-d is-on' : d === null ? 'tk-d is-blind' : 'tk-d'} data-d={d === null ? 'none' : d.toFixed(2)}>
         <line x1={d0} x2={d1} y1={dy} y2={dy} /><line x1={d1} x2={d1} y1={dy - 4} y2={dy + 4} />
         {/* room on the line: centred above it; near the wall: beyond the wall if the room goes on, else below the robot */}
