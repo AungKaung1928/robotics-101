@@ -80,3 +80,4 @@
 .ms-v path { fill: none; stroke: var(--robot); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
 .ms-v.is-spin path { stroke: var(--ink-2); stroke-width: 1.5; stroke-dasharray: 4 3; }
 .ss-range { stroke: var(--ink-2); stroke-width: 2; stroke-linecap: round; } /* where the sensor's range ends (3.5 m) */
+.sw-none { fill: var(--ink-2); font: 13px var(--mono); } /* SimWhatScene: sensor off, the view says why it is blank */

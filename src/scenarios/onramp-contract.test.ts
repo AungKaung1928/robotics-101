@@ -150,3 +150,17 @@ describe('SimPickScene takes the chapter ladder', () => {
     expect(h).toContain(`data-pick="${at}"`)
   })
 })
+
+describe('SimWhatScene sensor off says why the view is blank', () => {
+  it('emptyWord in the view only when the sensor is off; no dots then', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: SimWhatScene } = await import('./SimWhatScene')
+    const { SIMWHAT_STRINGS } = await import('../chapters/l0/simwhat.strings')
+    const word = SIMWHAT_STRINGS.en.empty
+    const at = (sensorOn: boolean) => renderToStaticMarkup(createElement(SimWhatScene, { sensorOn, worldWord: 'w', viewWord: 'v', emptyWord: word, label: '' }))
+    expect(at(false)).toContain(`class="sw-none" x=`)
+    expect(at(false)).toContain(`>${word}</text>`)
+    expect(at(true)).not.toContain('sw-none')
+  })
+})
