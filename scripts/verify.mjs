@@ -28,6 +28,7 @@ const ROUTES = [
   { hash: '#/detect', readouts: ['found', 'truth'] },
   { hash: '#/grid', readouts: ['cells', 'scans', 'known'], equals: { scans: '1', kept: '1.9 s', between: '8.7–9.2', republish: '5 s' }, has: ' %"' }, // canvas label carries the result
   { hash: '#/grid?res=0.1', readouts: ['cells'], equals: { cells: '10,000' } },
+  { hash: '#/grid?t=2.5', readouts: ['known'], equals: { scans: '3' }, moreThan: { known: ['#/grid', 'known'] } },
   { hash: '#/grid/7', readouts: ['known'], equals: { scans: '7' }, moreThan: { known: ['#/grid', 'known'] } },
   { hash: '#/costmap', readouts: ['cost', 'edge', 'smooth'], equals: { window: '3 × 3 m = 3,600', ladder: '3.5 → 3.0 → 2.5 → 1.5 m' } },
   { hash: '#/goal', readouts: ['tick', 'drive', 'time', 'ticks', 'cmdhz'], equals: { time: '14.4 s', timeaccel: '14.5 s', yaw: '0.25 rad = 14.3°', progress: '1.9 s', planner: 'NavFn · Dijkstra', recover: 'spin · backup · wait' } },

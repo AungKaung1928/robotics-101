@@ -155,8 +155,8 @@ try {
     ...(end.startsWith('t = 25 s · patrol') && end.endsWith('true') ? [] : [`end ${end}, expected t = 25 s · patrol and Next disabled`]),
   ])
 
-  // Grid: Add scan adds one scan and makes more cells known.
-  await open('#/grid')
+  // Grid: Add scan adds one scan and makes more cells known ('#/grid/1': paused, so the scenario does not add scans itself).
+  await open('#/grid/1')
   const k0 = await js(`[${readout('scans')}, parseFloat(${readout('known')})].join(' ')`)
   await js(`document.querySelector('.buttons button').click()`)
   await sleep(300)
