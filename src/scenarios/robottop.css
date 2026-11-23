@@ -1,0 +1,10 @@
+.rtop-body { fill: var(--surface); stroke: var(--ink); stroke-width: 2.5; }
+.rtop-lidar { fill: color-mix(in srgb, var(--robot) 14%, var(--surface)); stroke: var(--robot); stroke-width: 2; }
+.rtop-lidar.is-off { stroke: var(--ink-2); stroke-dasharray: 3 3; }
+.rtop-eye { fill: var(--ink); }
+.rtop-line { fill: none; stroke: var(--ink); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.rtop-blush { fill: var(--ray); opacity: 0.22; }
+.rtop-stars path, .rtop-spark { fill: var(--robot); }
+.move-scene { width: 100%; height: auto; background: var(--surface); }
+.ms-trail { fill: none; stroke: var(--robot); stroke-width: 2.5; stroke-dasharray: 1 6; stroke-linecap: round; }
+.ms-skid { fill: var(--ink-2); opacity: 0.6; }
