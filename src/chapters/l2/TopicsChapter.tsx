@@ -70,6 +70,7 @@ export default function TopicsChapter({ t }: { t: Strings }) {
       <div className="panel">
         <p className="learn">{s.learn}</p>
         {s.lines.map((l) => <p key={l}>{l}</p>)}
+        <p className="note" data-k="everyday">{s.everyday}</p>
         <label className="slider"><span>{s.mine}</span>
           <input className="code" style={{ width: '100%', minWidth: 0 }} value={mine} spellCheck={false} autoCapitalize="off"
             onChange={(e) => { setMine(e.target.value); setTS(DURATION_MS / 1000) }} />

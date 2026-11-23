@@ -53,6 +53,7 @@ export default function CallbackChapter({ t }: { t: Strings }) {
       <div className="panel">
         <p className="learn">{s.learn}</p>
         {s.lines.map((l) => <p key={l}>{l}</p>)}
+        <p className="note" data-k="everyday">{s.everyday}</p>
         <pre className="code" aria-label="Python">
           {[
             <>class Stopper:</>,

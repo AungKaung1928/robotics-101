@@ -3,6 +3,7 @@ export const PARAMS_STRINGS = {
   en: {
     title: 'ROS 2: parameters and launch files',
     learn: 'You will learn: a parameter is a setting a node reads by name, so you can change its behaviour without changing its code. A launch file starts nodes and passes them settings.',
+    everyday: 'Everyday: a thermostat. The heater\'s program stays the same; you only change the set temperature.',
     lines: [
       'tf_anomaly_detector checks the robot\'s position every 0.5 s and warns when it moved more than max_position_jump since the last check.',
       'The code says declare_parameter("max_position_jump", 0.5): 0.5 m unless someone overrides it from a launch file or the command line.',
@@ -30,6 +31,7 @@ export const PARAMS_STRINGS = {
   ja: {
     title: 'ROS 2：パラメータと launch ファイル',
     learn: '学ぶこと：パラメータはノードが名前で読む設定で、コードを変えずに動きを変えられる。launch ファイルはノードを起動し、設定を渡す。',
+    everyday: '身近な例：サーモスタット。ヒーターのプログラムはそのままで、設定温度だけを変える。',
     lines: [
       'tf_anomaly_detector は 0.5 秒ごとにロボットの位置を確かめ、前回から max_position_jump より大きく動いていたら警告する。',
       'コードには declare_parameter("max_position_jump", 0.5) とある：launch ファイルやコマンドラインで上書きしない限り 0.5 m。',

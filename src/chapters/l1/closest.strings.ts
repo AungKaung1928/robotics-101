@@ -3,6 +3,7 @@ export const CLOSEST_STRINGS = {
   en: {
     title: 'Python: loops and functions',
     learn: 'You will learn: a for loop looks at every reading once; a function gives that loop a name you can call again.',
+    everyday: 'Everyday: finding the lowest card in a shuffled deck. You turn over one card at a time and keep the lowest so far; when the deck is empty, you hold the lowest.',
     lines: [
       'One scan gives many distances, not one. Here: 10 readings across the front of the robot, left to right.',
       'The for loop takes them one at a time. closest starts at infinity, so the first reading always beats it. After that, only a smaller reading replaces it.',
@@ -29,6 +30,7 @@ export const CLOSEST_STRINGS = {
   ja: {
     title: 'Python：ループと関数',
     learn: '学ぶこと：for ループは読み取り値を1つずつ全部見る。関数はそのループに名前を付けて、何度でも呼べるようにする。',
+    everyday: '身近な例：シャッフルしたトランプから一番小さいカードを探す。1枚ずつめくり、それまでで一番小さいカードを持っておく。山がなくなったとき、手にあるのが一番小さいカード。',
     lines: [
       '1回のスキャンで得られる距離は1つではなく、たくさんある。ここではロボット前方の左から右へ10個の読み取り値。',
       'for ループはそれを1つずつ取り出す。closest は無限大から始めるので、最初の値は必ずそれより小さい。その後は、より小さい値だけが置き換わる。',
