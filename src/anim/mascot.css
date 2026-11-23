@@ -23,6 +23,10 @@
 .mascot .m-sway { transform-box: view-box; transform-origin: 32px 31px; animation: m-sway 5.3s ease-in-out infinite; }
 @keyframes m-sway { 25% { transform: rotate(1.5deg); } 75% { transform: rotate(-1.5deg); } }
 .mascot-hit { display: inline-block; line-height: 0; }
+/* Blush (decoration, no data): peach from the ray colour, a little deeper when happy. */
+.mascot .m-blush { fill: var(--ray); opacity: 0.22; }
+.mascot[data-mood='happy'] .m-blush { opacity: 0.4; }
+@media (prefers-color-scheme: dark) { .mascot .m-blush { opacity: 0.45; } .mascot[data-mood='happy'] .m-blush { opacity: 0.65; } }
 /* Curious: the head tilts while thinking, on the press spring (a little overshoot); reduced motion keeps the tilt, no swing. */
 .mascot .m-tilt { transform-box: view-box; transform-origin: 32px 31px; transition: transform var(--spring-ms, 300ms) var(--spring, ease-out); }
 .mascot[data-mood='think'] .m-tilt { transform: rotate(-8deg); }

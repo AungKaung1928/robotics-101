@@ -117,6 +117,7 @@ export function MascotFigure({ pose, mood, size = 64, label, spark = 0, dizzy = 
                 )}
                 </g>
               </g>
+              <g className="m-blush"><ellipse cx="22.5" cy="27.5" rx="2.6" ry="1.4" /><ellipse cx="41.5" cy="27.5" rx="2.6" ry="1.4" /></g>
             </g></g>
             {stars.filter((p) => p.front).map(starPath)}
           </g>
