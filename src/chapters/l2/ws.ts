@@ -8,7 +8,7 @@ import { HOME, resolve, short, type Line } from '../l1/shell'
  */
 export const WS = `${HOME}/tf_explorer_ws`
 const ROS_SETUP = '/opt/ros/humble/setup.bash'
-export const EXECUTABLES = ['tf_monitor_node', 'frame_broadcaster_node', 'tf_anomaly_detector', 'simple_wiggle_recovery', 'patrol_node'] // CMakeLists.txt:107-113
+export const EXECUTABLES = ['tf_monitor_node', 'frame_broadcaster_node', 'tf_anomaly_detector', 'simple_wiggle_recovery', 'patrol_node'] // CMakeLists.txt:108-112
 
 export interface Ws { cwd: string; dirs: string[]; ros: boolean; overlay: string | null; builtIn: string | null }
 export const fresh = (): Ws => ({ cwd: HOME, dirs: [HOME, '/opt/ros/humble'], ros: false, overlay: null, builtIn: null })

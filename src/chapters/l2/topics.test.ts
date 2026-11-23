@@ -13,7 +13,9 @@ describe('2.2 topics', () => {
     expect(resolve('1scan', 'my_node')).toBeNull()
     expect(resolve('', 'my_node')).toBeNull()
     expect(resolve('sc an', 'my_node')).toBeNull()
-    expect(resolve('_scan', 'my_node')).toBeNull()
+    expect(resolve('_scan', 'my_node')).toBeNull() // relative names start with a letter
+    expect(resolve('/_scan', 'my_node')).toBe('/_scan') // tokens after / may start with _ (hidden topic)
+    expect(resolve('/1scan', 'my_node')).toBeNull()
     expect(resolve('my__scan', 'my_node')).toBeNull()
   })
 
