@@ -1,5 +1,7 @@
 /* Guide robot (lane anim). Ink line, surface fill, robot blue only on the LiDAR; idle = breath + blink. */
 .mascot { overflow: visible; display: inline-block; vertical-align: middle; }
+.mascot .m-spark { fill: var(--robot); }
+.mascot .m-spark[data-i='1'] { fill: var(--free); }
 .mascot .m-shadow { fill: var(--ink); opacity: 0.12; }
 .mascot .m-wheel, .mascot .m-plate, .mascot .m-head { fill: var(--surface); stroke: var(--ink); stroke-width: 2.2; }
 .mascot .m-wheel { fill: var(--ink); }

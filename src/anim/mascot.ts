@@ -23,7 +23,6 @@ export function happyPose(t: number): Pose {
   }
   return { y: 0, rot: 0, ...squash(1 + springAt(t - LAND, BOUNCY, 0, LAND_V)) }
 }
-export const HAPPY_S = LAND + settleTime(BOUNCY, 0, LAND_V, 0.004)
 
 const KICK = 160 // deg / s: the shove when the reader breaks something
 
@@ -33,3 +32,24 @@ export function oopsPose(t: number): Pose {
   return { ...REST, rot: springAt(t, WOBBLE, 0, KICK) }
 }
 export const OOPS_S = settleTime(WOBBLE, 0, KICK, 0.3)
+
+const SPARKS = 6, G = 160, SPEED = 70, SPARK_S = 0.7 // count, px/s² down, px/s, s
+/** Sparks pop at the top of the jump, from the top of the lifted head. */
+export const SPARK_AT = CROUCH + AIR / 2
+
+/**
+ * Sparks for a solved challenge: thrown from the top of the head in a fan (−60° … +60° from straight up) at the
+ * top of the bounce (`t` = time since the bounce started), then falling under gravity and fading out.
+ * Positions in the mascot's 64-unit box.
+ */
+export function sparks(time: number): { x: number; y: number; o: number }[] {
+  const t = time - SPARK_AT
+  if (t <= 0 || t >= SPARK_S) return []
+  return Array.from({ length: SPARKS }, (_, i) => {
+    const a = ((i / (SPARKS - 1)) * 120 - 60) * (Math.PI / 180), v = SPEED * (Math.min(i, SPARKS - 1 - i) % 2 ? 0.8 : 1)
+    return { x: 32 + v * Math.sin(a) * t, y: 12 - HEIGHT - v * Math.cos(a) * t + 0.5 * G * t * t, o: 1 - t / SPARK_S }
+  })
+}
+
+/** Length of the happy reaction: until the landing spring has settled and the last spark has faded. */
+export const HAPPY_S = Math.max(LAND + settleTime(BOUNCY, 0, LAND_V, 0.004), SPARK_AT + SPARK_S)

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { HAPPY_S, OOPS_S, REST, happyPose, oopsPose, type Pose } from './mascot'
+import { HAPPY_S, OOPS_S, REST, happyPose, oopsPose, sparks, type Pose } from './mascot'
 import './mascot.css'
 
 const reduced = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -13,6 +13,7 @@ export type Mood = 'idle' | 'happy' | 'oops'
 export default function Mascot({ cheer = 0, oops = 0, size = 64, label }: { cheer?: number; oops?: number; size?: number; label: string }) {
   const [mood, setMood] = useState<Mood>('idle')
   const [pose, setPose] = useState<Pose>(REST)
+  const [t, setT] = useState(0)
   useEffect(() => { if (cheer) return play('happy') }, [cheer])
   useEffect(() => { if (oops) return play('oops') }, [oops])
   function play(m: Exclude<Mood, 'idle'>) {
@@ -26,18 +27,19 @@ export default function Mascot({ cheer = 0, oops = 0, size = 64, label }: { chee
     let id = 0
     const frame = (ms: number) => {
       const t = (ms - t0) / 1000
-      if (t >= end) { setPose(REST); setMood('idle'); return }
+      if (t >= end) { setPose(REST); setMood('idle'); setT(0); return }
       setPose(f(t))
+      setT(t)
       id = requestAnimationFrame(frame)
     }
     id = requestAnimationFrame(frame)
-    return () => { cancelAnimationFrame(id); setPose(REST) }
+    return () => { cancelAnimationFrame(id); setPose(REST); setT(0) }
   }
-  return <MascotFigure pose={pose} mood={mood} size={size} label={label} />
+  return <MascotFigure pose={pose} mood={mood} size={size} label={label} spark={mood === 'happy' ? t : 0} />
 }
 
 /** One frame of the robot: pose and face in, SVG out (the filmstrip test draws frames with it). */
-export function MascotFigure({ pose, mood, size = 64, label }: { pose: Pose; mood: Mood; size?: number; label: string }) {
+export function MascotFigure({ pose, mood, size = 64, label, spark = 0 }: { pose: Pose; mood: Mood; size?: number; label: string; spark?: number }) {
   const body = `translate(32 58) translate(0 ${-pose.y}) rotate(${pose.rot}) scale(${pose.sx} ${pose.sy}) translate(-32 -58)`
   const shadow = 1 - pose.y / 25
   return (
@@ -58,6 +60,7 @@ export function MascotFigure({ pose, mood, size = 64, label }: { pose: Pose; moo
           )}
         </g>
       </g>
+      {sparks(spark).map((p, i) => <circle key={i} className="m-spark" data-i={i % 2} cx={p.x} cy={p.y} r="1.8" opacity={p.o} />)}
     </svg>
   )
 }

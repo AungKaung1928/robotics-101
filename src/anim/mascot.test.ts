@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { HAPPY_S, OOPS_S, REST, happyPose, oopsPose } from './mascot'
+import { HAPPY_S, OOPS_S, REST, SPARK_AT, happyPose, oopsPose, sparks } from './mascot'
 
 const ts = (end: number) => Array.from({ length: 601 }, (_, i) => (i / 600) * end)
 
@@ -35,5 +35,26 @@ describe('oopsPose', () => {
     expect(Math.min(...r)).toBeLessThan(-2)
     expect(Math.abs(oopsPose(OOPS_S).rot)).toBeLessThan(0.3)
     expect(OOPS_S).toBeLessThan(1.5)
+  })
+})
+
+describe('sparks', () => {
+  it('pop at the top of the jump (head highest), over before the bounce settles', () => {
+    expect(happyPose(SPARK_AT).y).toBeCloseTo(10, 9)
+    expect(sparks(HAPPY_S)).toEqual([]) // the reaction runs until the last spark is gone
+  })
+  it('none before or after, six in between, fanning out symmetrically', () => {
+    expect(sparks(SPARK_AT)).toEqual([])
+    expect(sparks(SPARK_AT + 0.7)).toEqual([])
+    const s = sparks(SPARK_AT + 0.1)
+    expect(s).toHaveLength(6)
+    const xs = s.map((p) => p.x - 32)
+    expect(xs[0]).toBeCloseTo(-xs[5], 9)
+  })
+  it('rise first, then fall under gravity, fading', () => {
+    const mid = (t: number) => sparks(SPARK_AT + t)[2]
+    expect(mid(0.1).y).toBeLessThan(2) // above the head top at the apex (12 − 10)
+    expect(mid(0.65).y).toBeGreaterThan(mid(0.3).y)
+    expect(mid(0.6).o).toBeLessThan(mid(0.1).o)
   })
 })
