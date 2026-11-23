@@ -21,13 +21,14 @@ function Dial({ x, value, max, word }: { x: number; value: number; max: number; 
 /**
  * On-ramp "act": dials for forward and turn speed (the command), arrows on each wheel for what the wheel really does,
  * the robot driving the arc. At `tStop` the dials drop to 0 but the wheels slow down over the brake time: the robot
- * rolls on past its ghost (where an instant stop would have left it) by the distance printed between them. From act.ts.
+ * rolls on past its ghost (where an instant stop would have left it) by the distance printed between them (cm, as the chapter). From act.ts.
  */
 export default function ActScene({ v, w, tStop, decel, t, vWord = 'v', wWord = 'ω', showTurn = false, label }: {
   v: number; w: number; tStop: number; decel: number; t: number; vWord?: string; wWord?: string; showTurn?: boolean; label: string
 }) {
   const { s: S, x0, y0 } = actFrame(v, w, tStop, decel), scr = (p: { x: number; y: number }) => [x0 + p.x * S, y0 - p.y * S] as const
   const f = actAt(v, w, tStop, decel, t), on = t < tStop, [x, y] = scr(f.pose), [gx, gy] = scr(f.ghost), { vl, vr } = wheels(v, w)
+  const cm = (f.rollOn * 100).toFixed(1) // the chapter states roll-on in cm, one decimal; hidden while it rounds to 0.0
   const path = Array.from({ length: Math.floor(t / 0.05) + 2 }, (_, i) => scr(actAt(v, w, tStop, decel, Math.min(i * 0.05, t)).pose))
     .map(([px, py], i) => `${i ? 'L' : 'M'}${px.toFixed(1)} ${py.toFixed(1)}`).join('')
   const arrow = (side: 1 | -1, sp: number) => { const len = (sp / VMAX) * 22 * f.speed; return len ? <path className="as-arrow" d={`M0 ${-side * 26}h${len}`} markerEnd="url(#as-head)" /> : null }
@@ -36,9 +37,9 @@ export default function ActScene({ v, w, tStop, decel, t, vWord = 'v', wWord = '
       <defs><marker id="as-head" viewBox="0 0 6 6" refX="3" refY="3" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L6 3 0 6z" className="as-head" /></marker></defs>
       <path className="ms-trail" d={path} />
       {!on && <g opacity={0.35}><RobotTop x={gx} y={gy} deg={deg(f.ghost.th)} /></g>}
-      {f.rollOn > 0.002 && <>
+      {cm !== '0.0' && <>
         <line className="as-roll" x1={gx} y1={gy} x2={x} y2={y} />
-        <text className="as-num" x={(gx + x) / 2} y={Math.min(gy, y) - 30} textAnchor="middle">+{f.rollOn.toFixed(2)} m</text>
+        <text className="as-num" x={(gx + x) / 2} y={Math.min(gy, y) - 30} textAnchor="middle">+{cm} cm</text>
       </>}
       {showTurn && <TurnOverlay vl={vl} vr={vr} p={f.pose} scr={scr} s={S} x={x} y={y} />}{/* R = v / ω: the two dials set the circle */}
       <RobotTop x={x} y={y} deg={deg(f.pose.th)} rolledL={f.rolled.l * S} rolledR={f.rolled.r * S} mood={on ? 'idle' : f.speed > 0 ? 'worried' : 'curious'} stretch={brakeStretch(v, w, tStop, decel, t)} />

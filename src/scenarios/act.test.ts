@@ -58,3 +58,15 @@ describe('actFrame: the whole trajectory fits, framing fixed for every t', () =>
   })
   it('a short straight drive keeps the old scale (300 px per m)', () => expect(actFrame(0.1, 0, 1, 2.5).s).toBe(300))
 })
+
+describe('ActScene roll-on label in the chapter unit', () => {
+  it('cm with one decimal (chapter: (rollOnM(v) * 100).toFixed(1)); none while it rounds to 0.0', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: ActScene } = await import('./ActScene')
+    const at = (v: number) => renderToStaticMarkup(createElement(ActScene, { v, w: 0, tStop: 3, decel: 2.5, t: 4, label: '' }))
+    expect(at(0.15)).toContain('+0.5 cm</text>') // 0.15² / 5 = 0.0045 m
+    expect(at(0.22)).toContain('+1.0 cm</text>') // 0.22² / 5 = 0.00968 m
+    expect(at(0.02)).not.toContain('as-num') // 0.08 mm
+  })
+})

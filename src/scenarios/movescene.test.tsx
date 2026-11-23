@@ -70,7 +70,7 @@ describe('ActScene', () => {
     expect(r).toContain('opacity="0.35"')
     const s = p(5)
     expect(s).toContain('data-phase="stopped"')
-    expect(s).toContain('+0.04 m') // 0.2² / (2 · 0.5)
+    expect(s).toContain('+4.0 cm') // 0.2² / (2 · 0.5) m
   })
 })
 
