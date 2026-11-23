@@ -1,0 +1,53 @@
+/** Chapter 0.2 text, EN + JA. Same keys in both (pipe.test checks). */
+export const PIPE_STRINGS = {
+  en: {
+    title: 'Robotics software: many small programs',
+    learn: 'You will learn: a robot runs many small programs that pass data along, and the job is to build, connect and fix them.',
+    lines: [
+      'No single program drives the robot. Each small program does one job and passes its result to the next.',
+      'A robotics software engineer writes these programs, connects them, tests them, and finds out which one broke when the robot misbehaves.',
+      'Each box below is a later chapter of this app. Click one to jump there.',
+    ],
+    names: { lidar: 'LiDAR driver', slam: 'SLAM (map)', costmap: 'Costmap', planner: 'Planner', controller: 'Controller' },
+    does: { lidar: 'measures distances', slam: 'builds the map', costmap: 'marks where it is unsafe', planner: 'finds a path', controller: 'turns the path into wheel speeds' },
+    caption: (name: string) => `scan at: ${name}`,
+    wheels: 'wheels move',
+    stuck: 'robot does not move',
+    breakIt: 'Break it: stop one program',
+    fixIt: 'Fix it: all programs running',
+    brokenNote: 'One program receives the scan but passes nothing on. The robot just stands still: no error on screen. Which one is it?',
+    challenge: 'Challenge: break it, watch where the data stops, then click the broken program.',
+    solved: 'Solved: you found it.',
+    notYet: 'Not yet.',
+    words: 'Words',
+    glossary: [
+      ['program', 'a list of instructions a computer runs'],
+      ['data', 'the numbers passed between programs, like one LiDAR scan'],
+    ] as [string, string][],
+  },
+  ja: {
+    title: 'ロボットのソフトウェア：小さなプログラムの集まり',
+    learn: '学ぶこと：ロボットは多くの小さなプログラムがデータを渡し合って動く。仕事はそれを作り、つなぎ、直すこと。',
+    lines: [
+      'ロボットを 1 つのプログラムだけで動かしているわけではない。小さなプログラムがそれぞれ 1 つの仕事をして、結果を次へ渡す。',
+      'ロボットソフトウェアエンジニアはこれらを書き、つなぎ、テストし、ロボットがおかしいときにどれが壊れたかを見つける。',
+      '下の箱はそれぞれこのアプリの後の章。クリックするとその章へ移動する。',
+    ],
+    names: { lidar: 'LiDAR ドライバ', slam: 'SLAM（地図）', costmap: 'コストマップ', planner: 'プランナー', controller: 'コントローラ' },
+    does: { lidar: '距離を測る', slam: '地図を作る', costmap: '危ない場所に印を付ける', planner: '経路を探す', controller: '経路を車輪の速さに変える' },
+    caption: (name: string) => `スキャンの位置：${name}`,
+    wheels: '車輪が動く',
+    stuck: 'ロボットが動かない',
+    breakIt: '壊す：プログラムを 1 つ止める',
+    fixIt: '直す：全部のプログラムを動かす',
+    brokenNote: 'あるプログラムがスキャンを受け取っても何も渡さない。ロボットはただ止まっていて、画面にエラーも出ない。どれだろう？',
+    challenge: 'チャレンジ：壊して、データがどこで止まるかを見て、壊れたプログラムをクリックしよう。',
+    solved: '達成：見つけた。',
+    notYet: 'まだ。',
+    words: '用語',
+    glossary: [
+      ['program', 'コンピュータが実行する命令の並び'],
+      ['data', 'プログラムの間で渡される数値。たとえば 1 回分の LiDAR スキャン'],
+    ] as [string, string][],
+  },
+}

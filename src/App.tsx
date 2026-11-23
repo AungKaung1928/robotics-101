@@ -102,7 +102,7 @@ function LevelChapter({ p, t, ja }: { p: LevelPage; t: Strings; ja: boolean }) {
     <main className="chapter">
       <div className="chead">
         <div>
-          <p className="eyebrow">{t.levels.heading} {p.meta.level} · {t.levels.names[p.meta.level]}</p>
+          <p className="eyebrow">{t.levels.one} {p.meta.level} · {t.levels.names[p.meta.level]}</p>
           <h1><span className="num">{p.num}</span> <Icon name={p.meta.icon} /> {title(p.meta)}</h1>
         </div>
       </div>

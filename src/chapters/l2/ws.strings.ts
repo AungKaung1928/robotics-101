@@ -1,0 +1,53 @@
+/** Chapter 2.6 text, EN + JA. Same keys in both (ws.test checks). */
+export const WS_STRINGS = {
+  en: {
+    title: 'ROS 2: workspace, packages, colcon build',
+    learn: 'You will learn: your code lives in packages inside a workspace; colcon build turns them into programs; source install/setup.bash makes ROS find them.',
+    lines: [
+      'A package is one folder with a package.xml (name, dependencies) and a CMakeLists.txt (what to build). tf_explorer is one package with 5 programs.',
+      'A workspace is a folder with src/ inside. You clone packages into src/, then run colcon build from the workspace folder. It creates build/, install/ and log/ next to src/.',
+      'Two sources, in order: /opt/ros/humble first (ROS itself), then install/setup.bash (your packages). Every new terminal needs both.',
+    ],
+    tree: 'tf_explorer_ws/',
+    yours: 'Your terminal: build and run it yourself',
+    breakIt: 'Break it: skip the first source', fixIt: 'Fix it: source ROS first',
+    brokenNote: 'Without ROS sourced, CMake cannot find ament_cmake, the build tool every ROS C++ package needs. The build fails before compiling anything.',
+    newTerm: 'Open a new terminal',
+    insideSrc: 'Try it: run colcon build inside src/ and watch where install/ appears.',
+    challenge: 'Challenge: in a new terminal, get ros2 run tf_explorer tf_anomaly_detector to start.',
+    solved: 'Solved: the node started.', notYet: 'Not yet.',
+    runsHere: 'A pretend terminal (JavaScript): no real build. Real error and log lines are copied; lines in (parentheses) are shortened.',
+    words: 'Words',
+    glossary: [
+      ['package', 'a folder with package.xml: one unit of ROS code'],
+      ['workspace', 'a folder holding src/ with your packages'],
+      ['colcon build', 'builds every package under the current folder'],
+      ['overlay', 'your install/ on top of ROS: source it after /opt/ros/humble'],
+    ] as [string, string][],
+  },
+  ja: {
+    title: 'ROS 2：ワークスペース、パッケージ、colcon build',
+    learn: '学ぶこと：コードはワークスペースの中のパッケージに入る。colcon build がそれをプログラムにし、source install/setup.bash で ROS が見つけられるようになる。',
+    lines: [
+      'パッケージは package.xml（名前、依存）と CMakeLists.txt（何をビルドするか）を持つ1つのフォルダ。tf_explorer は5つのプログラムを持つ1パッケージ。',
+      'ワークスペースは中に src/ を持つフォルダ。src/ にパッケージを clone し、ワークスペースのフォルダで colcon build する。src/ の隣に build/、install/、log/ ができる。',
+      'source は2つ、この順番で：まず /opt/ros/humble（ROS 本体）、次に install/setup.bash（自分のパッケージ）。新しいターミナルでは毎回両方必要。',
+    ],
+    tree: 'tf_explorer_ws/',
+    yours: 'あなたのターミナル：自分でビルドして実行しよう',
+    breakIt: '壊す：最初の source を飛ばす', fixIt: '直す：先に ROS を source',
+    brokenNote: 'ROS を source しないと、CMake は ament_cmake（ROS の C++ パッケージに必須のビルドツール）を見つけられない。コンパイル前にビルドが失敗する。',
+    newTerm: '新しいターミナルを開く',
+    insideSrc: '試そう：src/ の中で colcon build して、install/ がどこにできるか見よう。',
+    challenge: 'チャレンジ：新しいターミナルで ros2 run tf_explorer tf_anomaly_detector を起動させよう。',
+    solved: '成功：ノードが起動した。', notYet: 'まだ。',
+    runsHere: '疑似ターミナル（JavaScript）で、本当のビルドはしない。実際のエラーとログ行はそのまま、（かっこ）内の行は短縮。',
+    words: '用語',
+    glossary: [
+      ['パッケージ', 'package.xml を持つフォルダ：ROS のコードの単位'],
+      ['ワークスペース', '自分のパッケージが入った src/ を持つフォルダ'],
+      ['colcon build', '今のフォルダ以下の全パッケージをビルドする'],
+      ['オーバーレイ', 'ROS の上に重ねる自分の install/：/opt/ros/humble の後に source'],
+    ] as [string, string][],
+  },
+}
