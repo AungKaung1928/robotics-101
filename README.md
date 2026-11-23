@@ -2,11 +2,20 @@
 
 **Live: https://robotics-101.vercel.app** (work in progress: new chapters land here as they are built)
 
-A mobile robot's first ideas, seen top-down on the floor plan of a simulated ROS 2 setup: one TurtleBot3 in a 10 × 10 m Gazebo arena. Each waypoint is one idea with one interactive figure, and every value comes from the source repo's files ([TF-Transform-Explorer](https://github.com/AungKaung1928/TF-Transform-Explorer)), cited by file and line.
+A free course for people with no robotics experience: from "what does a robot do" to the work of a robotics software engineer, in small steps. Every chapter is one idea with one figure you can drive; most add a "break it" button that causes the real failure and a hands-on challenge. One simulated TurtleBot3 runs through the whole course; its values come from a real ROS 2 setup ([TF-Transform-Explorer](https://github.com/AungKaung1928/TF-Transform-Explorer)). English and Japanese.
 
-![The plan, then the seven waypoints in order (10 s): launch timeline stepped to SLAM, TF frames, LiDAR scan, clusters, occupancy grid after 7 scans, costmap, goal](docs/media/demo.gif)
+| Level | Chapters |
+|---|---|
+| 0 Start here | sense-think-act, the software around a robot, the tools, which ROS version |
+| 1 Programming for robots | decisions, closest reading, callbacks, Python to C++, the terminal |
+| 2 ROS 2 basics | nodes, topics, message types, actions, parameters, workspaces, driving |
+| 3 A robot that moves by itself | LiDAR scan, TF tree, TF debugging lab, a simple detector |
+| 4 Mapping and navigation | occupancy grid, costmap, reaching a goal, bring-up order |
+| Engineering Practice (optional) | BFS on a grid, telemetry when messages arrive late |
 
-The GIF is rebuilt from the page check's screenshots: `scripts/verify.sh && python3 scripts/make_demo.py`.
+![The level map, then one chapter per level: 0.1 sense-think-act, 1.1 decisions, 2.1 nodes, 3.3 TF debugging lab, the occupancy grid, reaching a goal, and EP1 BFS](docs/media/demo.gif)
+
+The seven patrol chapters (Levels 3-4) and the numbers they show:
 
 | Waypoint | What you change | What you read |
 |---|---|---|
@@ -18,22 +27,9 @@ The GIF is rebuilt from the page check's screenshots: `scripts/verify.sh && pyth
 | 6. Costmap inflation | Nav2 `cost_scaling_factor`, distance to obstacle | cost of the cell (253 inside the 0.22 m radius, 93 at the 0.55 m edge, then 0) |
 | 7. Reaching a goal | goal distance | 1.3 cm per 20 Hz control tick at 0.26 m/s; distance left after the 0.25 m tolerance; minimum time and ticks |
 
-## Run
-
-Needs Node 22.12+ (vitest 5 requires it) and, for the page check, Chrome.
-
-```bash
-git clone https://github.com/AungKaung1928/robotics-101
-cd robotics-101
-npm ci
-npm run dev          # open the printed localhost URL
-npm test             # launch order, ray cast, clustering, occupancy update, transforms, detector rule, time to goal, inflation cost, routes, patrol path
-scripts/verify.sh    # builds, loads every page in headless Chrome (EN/JA, 390 px); ends with "PASS 36 pages"
-```
-
 ## How it is checked
 
-`npm test` pins every number on the pages and in this README to the code. `scripts/verify.sh` opens 36 pages and states (`#/bringup/3`, `#/tf?jump=0.6`, ...) in English and Japanese, plus a 390 px phone frame (feature map: [docs/FEATURES.md](docs/FEATURES.md)). CI also runs `scripts/keys.mjs`, which uses real keys, clicks and hover.
+`npm test` pins every number on the pages and in this README to the code. `scripts/verify.sh` opens every page and state (`#/bringup/3`, `#/tf?jump=0.6`, ...) in English and Japanese, plus a 390 px phone frame; commands in `package.json` (feature map: [docs/FEATURES.md](docs/FEATURES.md)). CI also runs `scripts/keys.mjs`, which uses real keys, clicks and hover.
 
 ## Sources
 

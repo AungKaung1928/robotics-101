@@ -48,7 +48,7 @@ describe('scenario figures render from their models', () => {
       wallX={2} err0={0.2} sinceFix={since} label="" residualText={(m) => `off ${(m * 100).toFixed(1)} cm`} />)
     const before = at(-1), mid = at(0.1), end = at(fixSettle(0.2))
     expect(before).toContain('data-mood="dizzy"')
-    expect(count(before, /class="hit"/g)).toBe(5)
+    expect(count(before, /a0\.03 0\.03 0 1 0 0\.06 0/g)).toBe(5) // five hit dots in the one hit path
     expect(mid).toContain('data-mood="curious"')
     expect(end).toContain('data-mood="happy"')
     expect(end).toContain('off 0.0 cm')
@@ -64,6 +64,14 @@ describe('scenario figures render from their models', () => {
     expect(at(2)).not.toContain('class="path"') // goal at layer 8, 0.25 s per layer: trace starts with the goal alone
     expect(at(2.1)).toContain('class="path"')
     expect(count(at(9), /class="wall"/g)).toBe(2)
+    expect(count(at(1), /class="came( on-front)?"/g)).toBe(count(at(1), /class="(front|seen)"/g) - 1) // every reached cell but the start
+    expect(count(at(1), /class="came on-front"/g)).toBe(count(at(1), /class="front"/g)) // light arrows on the solid front
+    expect(at(0.3)).toContain('rotate(180)') // cell 1 (x 1, y 0) points left to its parent, the start
+    expect(at(1)).not.toContain('cell-hit')
+    expect(count(renderToStaticMarkup(<BfsWave w={5} h={3} blocked={blocked} start={0} goal={4} t={1} label="" onCell={() => {}} />), /class="cell-hit"/g)).toBe(15)
+    const kb = renderToStaticMarkup(<BfsWave w={5} h={3} blocked={blocked} start={0} goal={4} t={1} label="grid" onCell={() => {}} />)
+    expect(kb).toContain('tabindex="0"') // one tab stop for the whole grid
+    expect(kb).toContain('aria-label="grid. 1, 1: free"') // focus starts on the start cell
     const shut = blocked.map((b, i) => b || i === 3 || i === 8 || i === 13)
     expect(at(9, 4, shut)).not.toContain('class="path"')
   })
@@ -74,5 +82,6 @@ describe('scenario figures render from their models', () => {
     expect(count(at(9), /class="env stale"/g)).toBe(2) // rect + flap of message 1, overtaken by 2
     expect(count(at(9), /class="env used"/g)).toBe(6)
     expect(at(9)).toContain('class="mascot"')
+    expect(at(0.05)).toMatch(/class="env-id"[^>]*>#(<!-- -->)?0<\/text>/) // row id matches the timeline's #n
   })
 })

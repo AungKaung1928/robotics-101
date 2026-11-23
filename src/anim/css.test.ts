@@ -41,6 +41,24 @@ describe('keyframe names', () => {
   })
 })
 
+// Class names are global too: the first class of each selector is the scope our styles hang on; the same root class in
+// another stylesheet styles both (found 2026-11-24: our ScrubNumber '.scrub' also got index.css's flex: 1 1 10rem).
+const roots = (f: string) => [...read(f).replace(/\/\*[\s\S]*?\*\//g, '').matchAll(/(?:^|[},])\s*([^{}@,]+?)\s*(?=[{,])/gm)]
+  .map((m) => /^\.([\w-]+)/.exec(m[1].trim())?.[1]).filter((c): c is string => !!c)
+
+// Shared on purpose: 'inset' = the app's figure box our figures sit in; 'stepper' = src/anim/Player replaces
+// src/components/Player and keeps its class, so index.css's layout still applies.
+const SHARED = new Set(['inset', 'stepper'])
+
+describe('root class names', () => {
+  it('ours are not root classes in any other stylesheet under src', () => {
+    const ours = new Set(files.flatMap(roots).filter((c) => !SHARED.has(c)))
+    const clash = walk('src').filter((f) => !files.includes(f)).flatMap((f) => [...new Set(roots(f))].filter((c) => ours.has(c)).map((c) => `${c} (${f})`))
+    expect(clash).toEqual([])
+    expect(ours.size).toBeGreaterThan(5)
+  })
+})
+
 describe('keyframe names across the app', () => {
   it('each @keyframes name is defined in one place only', () => {
     const all = walk('src').flatMap((f) => names(f).map((n) => `${n} (${f})`))

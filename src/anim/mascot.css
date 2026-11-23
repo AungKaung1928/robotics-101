@@ -2,6 +2,7 @@
 .mascot { overflow: visible; display: inline-block; vertical-align: middle; }
 .mascot .m-spark { fill: var(--robot); }
 .mascot .m-spark[data-i='1'] { fill: var(--free); }
+.mascot .m-star { fill: var(--cost); }
 .mascot .m-shadow { fill: var(--ink); opacity: 0.12; }
 .mascot .m-wheel, .mascot .m-plate, .mascot .m-head { fill: var(--surface); stroke: var(--ink); stroke-width: 2.2; }
 .mascot .m-wheel { fill: var(--ink); }
@@ -11,9 +12,10 @@
 .mascot .m-face .m-mouth { fill: none; stroke: var(--ink); stroke-width: 1.6; }
 .mascot .m-face path { fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; }
 .mascot .m-breath { transform-box: view-box; transform-origin: 32px 58px; animation: m-breath 3.2s ease-in-out infinite; }
-.mascot .m-eyes { transform-box: fill-box; transform-origin: center; animation: m-blink 4.1s infinite; }
+/* Blink: uneven gaps (4.5 s, then a double blink 0.3 s apart) so the loop is not a metronome; per-robot phase from Mascot. */
+.mascot .m-eyes { transform-box: fill-box; transform-origin: center; animation: m-blink 9.4s infinite; animation-delay: var(--blink-delay, 0s); }
 @keyframes m-breath { 50% { transform: scale(0.992, 1.015); } }
-@keyframes m-blink { 0%, 94%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.12); } }
+@keyframes m-blink { 0%, 27%, 31%, 76%, 78.5%, 81%, 100% { transform: scaleY(1); } 29%, 77%, 80% { transform: scaleY(0.12); } }
 .mascot .m-look { transition: transform 300ms ease-out; }
 @supports (transition-timing-function: linear(0, 1)) { .mascot .m-look { transition: transform var(--spring-ms, 300ms) var(--spring, ease-out); } }
 .mascot .m-think circle { fill: var(--ink-2); animation: m-dot 1.2s ease-in-out infinite; }
@@ -21,4 +23,11 @@
 .mascot .m-sway { transform-box: view-box; transform-origin: 32px 31px; animation: m-sway 5.3s ease-in-out infinite; }
 @keyframes m-sway { 25% { transform: rotate(1.5deg); } 75% { transform: rotate(-1.5deg); } }
 .mascot-hit { display: inline-block; line-height: 0; }
-@media (prefers-reduced-motion: reduce) { .mascot .m-breath, .mascot .m-eyes { animation: none; } .mascot .m-look { transition: none; } .mascot .m-think circle { animation: none; } .mascot .m-sway { animation: none; } }
+/* Blush (decoration, no data): peach from the ray colour, a little deeper when happy. */
+.mascot .m-blush { fill: var(--ray); opacity: 0.22; }
+.mascot[data-mood='happy'] .m-blush { opacity: 0.4; }
+@media (prefers-color-scheme: dark) { .mascot .m-blush { opacity: 0.45; } .mascot[data-mood='happy'] .m-blush { opacity: 0.65; } }
+/* Curious: the head tilts while thinking, on the press spring (a little overshoot); reduced motion keeps the tilt, no swing. */
+.mascot .m-tilt { transform-box: view-box; transform-origin: 32px 31px; transition: transform var(--spring-ms, 300ms) var(--spring, ease-out); }
+.mascot[data-mood='think'] .m-tilt { transform: rotate(-8deg); }
+@media (prefers-reduced-motion: reduce) { .mascot .m-breath, .mascot .m-eyes { animation: none; } .mascot .m-look { transition: none; } .mascot .m-think circle { animation: none; } .mascot .m-sway { animation: none; } .mascot .m-tilt { transition: none; } }

@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import Mascot from '../../anim/Mascot'
 import Player from '../../anim/Player'
 import { STRINGS, type Strings } from '../../i18n'
 import { SCRIPT, challengeOk, exec, fresh, prompt, scenario, session } from './shell'
@@ -39,7 +40,7 @@ export default function ShellChapter({ t }: { t: Strings }) {
       <div className="panel">
         <p className="learn">{s.learn}</p>
         {s.lines.map((l) => <p key={l}>{l}</p>)}
-        <p className="group-h">{s.yours}</p>
+        <p className="group-h"><Mascot oops={own.lines.filter((l) => l.out.includes('command not found')).length} cheer={ok ? 1 : 0} size={40} label="" /> {s.yours}</p>
         <Term lines={own.lines} start={prompts(mine)} cursor={input} />
         <form onSubmit={(e) => { e.preventDefault(); if (input.trim()) setMine([...mine, input]); setInput('') }}>
           <input className="code" style={{ width: '100%', minWidth: 0 }} value={input} onChange={(e) => setInput(e.target.value)}

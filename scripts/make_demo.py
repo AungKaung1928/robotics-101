@@ -7,7 +7,7 @@ from pathlib import Path
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parent.parent
-FRAMES = ["plan", "bringup-3", "tf", "scan", "detect", "grid-7", "costmap", "goal"]
+FRAMES = ["plan", "0-loop", "1-decide", "2-nodes", "3-tflab", "grid-7", "goal", "ep-bfs"]
 CROP = (0, 0, 1280, 900)  # header, title, figure and readouts
 WIDTH = 800
 HOLD_MS = {"plan": 2000}  # every chapter frame: 1100 ms
