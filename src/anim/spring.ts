@@ -47,3 +47,12 @@ export const PRESS: Spring = { k: 900, c: 30 } // ζ = 0.5
 /** The PRESS spring as CSS variables (--spring easing, --spring-ms) for any transition that should move like it. */
 const PRESS_EASE = springEasing(PRESS)
 export const PRESS_STYLE = { '--spring': PRESS_EASE.easing, '--spring-ms': `${PRESS_EASE.ms}ms` } as CSSProperties
+
+/**
+ * A spring from how long it looks and how bouncy it is (Motion's spring options; motion-dom 14.14.0
+ * animation/generators/spring.mjs:28-30, 173-179, bounce ≥ 0 only): ζ = 1 − bounce, ω₀ = 2π / (1.2 · visualDuration).
+ */
+export function springFrom(visualDuration: number, bounce: number): Spring {
+  const z = Math.max(1 - Math.min(Math.max(bounce, 0), 1), 0.05), w0 = (2 * Math.PI) / (visualDuration * 1.2)
+  return { k: w0 * w0, c: 2 * z * w0 }
+}

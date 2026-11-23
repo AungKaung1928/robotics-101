@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { BOUNCY, PRESS, WOBBLE, settleTime, springAt, springEasing } from './spring'
+import { BOUNCY, PRESS, WOBBLE, settleTime, springAt, springEasing, springFrom } from './spring'
 
 describe('springAt', () => {
   it('starts at x0 and ends at rest', () => {
@@ -49,5 +49,22 @@ describe('springEasing', () => {
     expect(Math.max(...v)).toBeLessThan(1.2)
     expect(ms).toBeGreaterThan(150)
     expect(ms).toBeLessThan(500)
+  })
+})
+
+describe('springFrom (Motion visualDuration + bounce)', () => {
+  it('bounce 0 is critically damped, and BOUNCY is visualDuration 2π/24 s with bounce 0.65', () => {
+    const crit = springFrom(0.3, 0)
+    expect(crit.c * crit.c).toBeCloseTo(4 * crit.k, 6)
+    const b = springFrom((2 * Math.PI) / 24, 0.65)
+    expect(b.k).toBeCloseTo(BOUNCY.k, 9)
+    expect(b.c).toBeCloseTo(BOUNCY.c, 9)
+  })
+  it('Motion\'s layout example (0.2 s, bounce 0.2) overshoots a little and settles in well under a second', () => {
+    const s = springFrom(0.2, 0.2)
+    const min = Math.min(...Array.from({ length: 400 }, (_, i) => springAt(i / 400, s, 1)))
+    expect(min).toBeLessThan(0)
+    expect(min).toBeGreaterThan(-0.05)
+    expect(settleTime(s, 1)).toBeLessThan(0.6)
   })
 })
