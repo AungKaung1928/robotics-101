@@ -1,28 +1,19 @@
 {
-  "keepEnglish": [
-    "Robotics 101",
-    "ROS 2",
-    "ROS",
-    "LiDAR",
-    "Nav2",
-    "TF",
-    "node",
-    "topic",
-    "message",
-    "launch",
-    "colcon",
-    "SLAM",
-    "costmap",
-    "Python",
-    "C++",
-    "Gazebo",
-    "TurtleBot3",
-    "odom",
-    "base_link",
-    "map"
-  ],
-  "rules": [
-    "Numbers, units, file names, code, frame names and anything in backticks stay unchanged.",
-    "Myanmar Unicode only, never Zawgyi."
-  ]
+ "version": 2,
+ "tierA_keepEnglish": [
+  "Robotics 101", "ROS 2", "ROS", "LiDAR", "Nav2", "TF", "SLAM", "BFS", "URDF", "DDS", "Python", "C++", "JavaScript", "Gazebo", "TurtleBot3", "Wi-Fi", "CMake", "rviz2", "colcon",
+  "node", "topic", "message", "launch", "launch file", "publish", "publisher", "subscribe", "subscriber", "callback", "queue", "frame", "transform", "package", "workspace", "parameter", "action", "service", "costmap", "waypoint", "scan", "beam", "terminal", "timer", "odom", "base_link", "base_footprint"
+ ],
+ "tierA_rule": "Any token with a capital letter after the first, a digit, _ / . + or :: (identifiers, topics, files, commands), and everything inside backticks, stays exactly as in English. Frame names like map, odom, base_link stay English when they name a frame.",
+ "tierB_loanwords": {
+  "robot": "စက်ရုပ်", "sensor": "ဆင်ဆာ", "camera": "ကင်မရာ", "computer": "ကွန်ပျူတာ", "software": "ဆော့ဖ်ဝဲ", "motor": "မော်တာ", "battery": "ဘက်ထရီ", "simulator": "ဆင်မျူလေတာ", "program": "ပရိုဂရမ်", "code": "ကုဒ်", "laptop": "လက်ပ်တော့"
+ },
+ "tierC_plain": {
+  "distance": "အကွာအဝေး", "speed": "အမြန်နှုန်း", "wall": "နံရံ", "wheel": "ဘီး", "turn": "လှည့်", "stop": "ရပ်", "obstacle": "အတားအဆီး", "map (plain word)": "မြေပုံ", "goal": "ပန်းတိုင်", "path": "လမ်းကြောင်း", "error": "အမှား", "test": "စမ်းသပ်မှု"
+ },
+ "uiVerbs": {
+  "Play": "ဖွင့်", "Pause": "ခဏရပ်", "Step": "တစ်ဆင့်ချင်း", "Back": "နောက်သို့", "Next": "ရှေ့သို့", "Reset": "ပြန်စ", "Break it": "ဖျက်ကြည့်", "Fix it": "ပြင်ကြည့်", "Check": "စစ်ကြည့်", "Predict": "ခန့်မှန်း", "Challenge": "စိန်ခေါ်မှု", "Try it": "စမ်းကြည့်"
+ },
+ "literaryBanned": ["သည်", "၏", "၌", "၍", "သော", "၎င်း"],
+ "literaryAllow": ["သည်းခံ", "ဆိုသော်လည်း"]
 }

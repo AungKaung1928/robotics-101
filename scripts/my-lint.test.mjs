@@ -1,0 +1,39 @@
+import { describe, expect, it } from 'vitest'
+import { encodingErrors, lint } from './my-lint.mjs'
+
+describe('Burmese encoding check', () => {
+  // Zawgyi spellings (visual order, Zawgyi-only code points); each must fail.
+  const zawgyi = {
+    'Maung (ေ first)': 'ေမာင္',
+    'Myanmar (ျ first, ္ as asat)': 'ျမန္မာ',
+    'I (ၽ U+107D)': 'ကၽြန္ေတာ္',
+    'school (ေ first)': 'ေက်ာင္း',
+    'stacked ka U+1060': 'မၠာ',
+  }
+  for (const [name, s] of Object.entries(zawgyi)) it(`rejects Zawgyi: ${name}`, () => expect(encodingErrors(s)).not.toEqual([]))
+
+  it('accepts Unicode Burmese', () => {
+    for (const s of ['မောင်', 'မြန်မာ', 'ကျွန်တော်', 'ကျောင်း', 'မန္တလေး', 'စက်ရုပ်ကို ရပ်ပါ။']) expect(encodingErrors(s), s).toEqual([])
+  })
+})
+
+describe('lint', () => {
+  it('passes a correct body sentence', () => {
+    const en = 'Each beam returns the nearest wall or obstacle, if it is closer than 3.5 m.'
+    const my = 'beam တစ်ခုစီက 3.5 m ထက် နီးတဲ့ အနီးဆုံး နံရံ ဒါမှမဟုတ် အတားအဆီးကို ပြန်ပြပါတယ်။'
+    expect(lint(en, my)).toEqual({ fail: [], warn: [] })
+  })
+  it('fails changed numbers, lost identifiers, literary endings, missing ။', () => {
+    const en = 'Publish to /cmd_vel at 10 Hz.'
+    expect(lint(en, '/cmd_vel ကို 5 Hz နဲ့ ပို့ပါ။').fail.join()).toMatch(/numbers/)
+    expect(lint(en, 'cmd_vel ကို 10 Hz နဲ့ ပို့ပါ။').fail.join()).toMatch(/identifier \/cmd_vel/)
+    expect(lint(en, '/cmd_vel ကို 10 Hz ဖြင့် ပို့သည်။').fail.join()).toMatch(/literary/)
+    expect(lint(en, '/cmd_vel ကို 10 Hz နဲ့ ပို့ပါ').fail.join()).toMatch(/။/)
+  })
+  it('pins UI verbs, loanwords and tier A terms', () => {
+    expect(lint('Pause', 'ရပ်', 'label').fail.join()).toMatch(/UI verb/)
+    expect(lint('Pause', 'ခဏရပ်', 'label').fail).toEqual([])
+    expect(lint('Stop the robot.', 'ရိုဘော့ကို ရပ်ပါ။').fail.join()).toMatch(/robot/)
+    expect(lint('Start one node.', 'နုတ် တစ်ခု စပါ။').fail.join()).toMatch(/tier A "node"/)
+  })
+})
