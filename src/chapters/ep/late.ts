@@ -56,3 +56,13 @@ export function scenario(): Scenario<LateScene> {
     frame: (tMs) => ({ tMs, arrived: arrivals.filter((a) => a <= tMs).length }),
   }
 }
+
+/**
+ * The other fix: a reorder buffer. Hold each message until stamp + windowMs, then hand them over in stamp order.
+ * Never goes back in time, but every message is used windowMs late; one that arrives after its window is dropped.
+ */
+export function reorder(windowMs: number): { used: number[]; dropped: number[]; addedDelayMs: number } {
+  const used: number[] = [], dropped: number[] = []
+  for (const m of [...messages()].sort((a, b) => a.stamp - b.stamp)) (m.age <= windowMs ? used : dropped).push(m.i)
+  return { used, dropped, addedDelayMs: windowMs }
+}
