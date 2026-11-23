@@ -34,6 +34,13 @@ const ROUTES = [
   { hash: '#/1/callback', has: 'class="num">1.3<' },
   { hash: '#/1/cpp', has: 'class="num">1.4<' },
   { hash: '#/1/shell', has: 'class="num">1.5<' },
+  { hash: '#/2/nodes', has: 'class="num">2.1<' },
+  { hash: '#/2/topics', has: 'class="num">2.2<' },
+  { hash: '#/2/msgtypes', has: 'class="num">2.3<' },
+  { hash: '#/2/actions', has: 'class="num">2.4<' },
+  { hash: '#/2/params', has: 'class="num">2.5<' },
+  { hash: '#/2/ws', has: 'class="num">2.6<' },
+  { hash: '#/2/drive', has: 'class="num">2.7<' },
   { hash: '#/4/grid', readouts: ['cells'], equals: { cells: '40,000' } }, // level route opens the same chapter
   { hash: '#/grid?res=0.1', readouts: ['cells'], equals: { cells: '10,000' } },
   { hash: '#/grid?t=2.5', readouts: ['known'], equals: { scans: '3' }, moreThan: { known: ['#/grid', 'known'] } },

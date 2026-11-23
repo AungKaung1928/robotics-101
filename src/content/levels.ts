@@ -2,7 +2,7 @@ import type { ComponentType } from 'react'
 import type { ChapterMeta } from '../anim/contract'
 import { LEVEL0_CHAPTERS, LoopChapter, PipeChapter } from '../chapters/l0'
 import { CallbackChapter, ClosestChapter, CppChapter, DecideChapter, LEVEL1_CHAPTERS, ShellChapter } from '../chapters/l1'
-import { LEVEL2_CHAPTERS } from '../chapters/l2'
+import { ActionsChapter, DriveChapter, LEVEL2_CHAPTERS, MsgTypesChapter, NodesChapter, ParamsChapter, TopicsChapter, WsChapter } from '../chapters/l2'
 import { STRINGS, type Strings } from '../i18n'
 import { CHAPTER_ICON } from '../icons'
 import type { ChapterId } from '../lib/route'
@@ -26,6 +26,7 @@ export const LEVELS: ChapterMeta[][] = [
 /** Bodies of the new-level chapters (the 7 patrol chapters keep their own routes in App). */
 export const LEVEL_BODY: Record<string, ComponentType<{ t: Strings }>> = {
   loop: LoopChapter, pipe: PipeChapter, decide: DecideChapter, closest: ClosestChapter, callback: CallbackChapter, cpp: CppChapter, shell: ShellChapter,
+  nodes: NodesChapter, topics: TopicsChapter, msgtypes: MsgTypesChapter, actions: ActionsChapter, params: ParamsChapter, ws: WsChapter, drive: DriveChapter,
 }
 
 export type LevelPage = { meta: ChapterMeta; num: string; prev: ChapterMeta | null; next: ChapterMeta | null }

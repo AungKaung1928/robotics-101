@@ -61,7 +61,7 @@ export default function DriveChapter({ t }: { t: Strings }) {
         <p><strong>{s.challenge}</strong></p>
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet} x {end.x.toFixed(2)}, y {end.y.toFixed(2)} m{end.v !== 0 ? ` (${s.moving})` : ''}</p>
         <p className="group-h">{s.words}</p>
-        <dl className="gloss">{s.glossary.map(([k, x]) => <div key={k} style={{ display: 'contents' }}><dt>{k}</dt><dd>{x}</dd></div>)}</dl>
+        <dl className="gloss">{s.glossary.map(([k, x]) => <div key={k} style={{ display: 'contents' }}><dt><code>{k}</code></dt><dd>{x}</dd></div>)}</dl>
         <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L143-L154`}>turtlebot3_burger.urdf.xacro:143-154</a> (DiffDrive, wheel separation 0.160 m, radius 0.033 m, max_linear_acceleration 1.0), <a href="https://github.com/gazebosim/gz-sim/blob/gz-sim8/src/systems/diff_drive/DiffDrive.cc#L641-L646">gz-sim DiffDrive.cc:641-646</a> (keeps the last command) · <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html">Humble: ros2 topic pub</a></p>
       </div>
     </>

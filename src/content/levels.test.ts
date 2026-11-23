@@ -11,7 +11,8 @@ describe('levelPage', () => {
   it('neighbours cross levels; first chapter has no prev; wrong level, unknown id, patrol chapters → null', () => {
     expect(levelPage('#/0/loop')?.prev).toBeNull()
     expect(levelPage('#/1/decide')?.prev?.id).toBe('pipe')
-    expect(levelPage('#/1/shell')?.next?.id).toBe('scan')
+    expect(levelPage('#/1/shell')?.next?.id).toBe('nodes')
+    expect(levelPage('#/2/drive')?.next?.id).toBe('scan')
     expect(levelPage('#/2/decide')).toBeNull()
     expect(levelPage('#/1/nope')).toBeNull()
     expect(levelPage('#/4/grid')).toBeNull()

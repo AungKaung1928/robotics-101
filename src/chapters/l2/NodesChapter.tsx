@@ -61,7 +61,7 @@ export default function NodesChapter({ t }: { t: Strings }) {
         <p className="learn">{s.learn}</p>
         {s.lines.map((l) => <p key={l}>{l}</p>)}
         <dl className="readout">
-          <div><dt>{byId[sel].name}</dt><dd data-k="sel">{s.state[allOk.has(sel) ? 'ok' : stopped.has(sel) ? 'off' : 'starved']}</dd></div>
+          <div><dt><code>{byId[sel].name}</code></dt><dd data-k="sel">{s.state[allOk.has(sel) ? 'ok' : stopped.has(sel) ? 'off' : 'starved']}</dd></div>
         </dl>
         <p className="note" data-k="job">{s.jobs[sel]} · <a href={`${LAUNCH}#L${byId[sel].lines.replace('-', '-L')}`}>tf_explorer.launch.py:{byId[sel].lines}</a></p>
         <p>
@@ -78,7 +78,7 @@ export default function NodesChapter({ t }: { t: Strings }) {
         </p>
         <p className="runs">{s.left}</p>
         <p className="group-h">{s.words}</p>
-        <dl className="gloss">{s.glossary.map(([k, v]) => <div key={k} style={{ display: 'contents' }}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+        <dl className="gloss">{s.glossary.map(([k, v]) => <div key={k} style={{ display: 'contents' }}><dt><code>{k}</code></dt><dd>{v}</dd></div>)}</dl>
         <p className="src">{t.source}: <a href={`${LAUNCH}#L131-L142`}>tf_explorer.launch.py:131-142</a> (TF-Transform-Explorer, start delays), <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Nodes/Understanding-ROS2-Nodes.html">ROS 2 Humble: Understanding nodes</a></p>
       </div>
     </>
