@@ -404,7 +404,10 @@ export function stringsFor<T>(table: { en: T; ja: T }, t: Strings, id: string): 
 /** Chapter title for the reader's language; Burmese titles from src/i18n/my/titles.json ({ "<chapter id>": "..." }). */
 export function titleOf(c: { id: string; titleEn: string; titleJa: string }, t: Strings): string {
   const l = langOf(t)
-  return l === 'ja' ? c.titleJa : l === 'my' ? overlay(c.titleEn, (myOverlay('titles') as Record<string, unknown> | undefined)?.[c.id]) : c.titleEn
+  if (l !== 'my') return l === 'ja' ? c.titleJa : c.titleEn
+  // The 7 older chapters have no meta array, so titles.json cannot list them; their Burmese title is core chapters.<id>.
+  const mine = (myOverlay('titles') as Record<string, unknown> | undefined)?.[c.id] ?? (t.chapters as Record<string, string>)[c.id]
+  return overlay(c.titleEn, mine)
 }
 
 export function initialLang(): Lang {

@@ -14,3 +14,12 @@ describe('stringsFor ids', () => {
     expect(tables[`./chapters/${c.dir}/${c.base}.strings.ts`]?.[c.exp], 'strings file + export').toBeDefined()
   })
 })
+
+describe('titleOf in Burmese', async () => {
+  const { STRINGS, titleOf } = await import('./i18n')
+  const { LEVELS } = await import('./content/levels')
+  const older = LEVELS.flat().filter((c) => c.id in STRINGS.en.chapters)
+  it('found the 7 older chapters', () => expect(older.length).toBe(7))
+  // They have no meta array (no titles.json key), so their Burmese title comes from core chapters.<id>.
+  it.each(older.map((c) => [c.id, c] as const))('%s', (id, c) => expect(titleOf(c, STRINGS.my)).toBe((STRINGS.my.chapters as Record<string, string>)[id]))
+})
