@@ -20,8 +20,8 @@ describe('EP figures vs page models', () => {
     expect(pathTo(wave, key(GOAL)).length).toBe(page.path!.length)
   })
 
-  it('BfsWave path cells vs page path cells (neighbour order: page up-right-down-left, figure right-down-left-up)', () => {
-    expect(pathTo(wave, key(GOAL))).not.toEqual(page.path) // different tie-break: a different, equally short path
+  it('BfsWave path cells = page path cells (same neighbour order, so the same tie-break)', () => {
+    expect(pathTo(wave, key(GOAL))).toEqual(page.path)
   })
 
   const msgs = DELAYS_MS.map((d, i) => ({ id: i, stamp: (i * PERIOD_MS) / 1000, latency: d / 1000 }))

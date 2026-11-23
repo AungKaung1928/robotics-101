@@ -5,7 +5,7 @@ import { arrivalScale } from '../anim/spring'
 import { useTextWidth } from './fit'
 import './robottop.css'
 
-export type Rung = { name: string; kind: '2D' | '3D' | 'none'; note?: string } // none = no world (only the robot in RViz): dashed shelf; note e.g. "needs a graphics card"
+export type Rung = { name: string; kind: '2D' | '2.5D' | '3D' | 'none'; note?: string } // none = no world (only the robot in RViz): dashed shelf; note e.g. "needs a graphics card"
 const VW = 360, RIGHT = 350, RH = 54, BH = 46, NOTCH = 36, TOP = 40, HOP = 0.45 // px; NOTCH = room for the 32 px robot
 const ROBOT = 32, LINE = 1.8 * 13 // line pitch 1.8x: Burmese stacks marks above and below the line
 
