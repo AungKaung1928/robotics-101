@@ -63,5 +63,20 @@ describe('on-ramp words', () => {
       }
     })
   })
+  // Japanese has no word spaces: a term is its text before any （reading）, matched as a substring; plain words exempt as in EN.
+  const EVERYDAY_JA = new Set(['ルール', '確認'])
+  it('no word is used in an earlier chapter than the one that teaches it (JA text)', () => {
+    const order = [...ONRAMP_A, ...ONRAMP_B]
+    const text = (id: (typeof order)[number]) => {
+      const { glossary: _g, ...rest } = BY_ID[id].ja as Record<string, unknown>
+      return JSON.stringify(rest)
+    }
+    order.forEach((id, i) => {
+      for (const later of order.slice(i + 1)) for (const [w0] of BY_ID[later].ja.glossary) {
+        const w = w0.replace(/（.*$/, '').trim()
+        if (w.includes('/') || EVERYDAY_JA.has(w)) continue
+        expect(text(id).includes(w), `"${w}" (taught in ${later}) already used in ${id}`).toBe(false)
+      }
+    })
+  })
 })
-
