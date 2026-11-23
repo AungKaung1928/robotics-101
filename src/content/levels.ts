@@ -1,6 +1,6 @@
 import type { ComponentType } from 'react'
 import type { ChapterMeta } from '../anim/contract'
-import { ActChapter, LEVEL0_CHAPTERS, LoopChapter, MeetChapter, MoveChapter, PipeChapter, RosChapter, SenseChapter, SimpickChapter, SimwhatChapter, ThinkChapter, ToolsChapter } from '../chapters/l0'
+import { ActChapter, LEVEL0_CHAPTERS, LoopChapter, MeetChapter, MoveChapter, PipeChapter, RosChapter, ScopeChapter, SenseChapter, SimpickChapter, SimwhatChapter, ThinkChapter, ToolsChapter } from '../chapters/l0'
 import { CallbackChapter, ClosestChapter, CppChapter, DecideChapter, LEVEL1_CHAPTERS, ShellChapter } from '../chapters/l1'
 import { TFLAB_META, TfLabChapter } from '../chapters/l3'
 import { BfsChapter, EP_CHAPTERS, LateChapter } from '../chapters/ep'
@@ -28,7 +28,7 @@ export const LEVELS: ChapterMeta[][] = [
 /** Bodies of the new-level chapters (the 7 patrol chapters keep their own routes in App). */
 export const LEVEL_BODY: Record<string, ComponentType<{ t: Strings }>> = {
   meet: MeetChapter, move: MoveChapter, sense: SenseChapter, think: ThinkChapter, act: ActChapter, simwhat: SimwhatChapter, simpick: SimpickChapter,
-  loop: LoopChapter, pipe: PipeChapter, tools: ToolsChapter, ros: RosChapter, decide: DecideChapter, closest: ClosestChapter, callback: CallbackChapter, cpp: CppChapter, shell: ShellChapter,
+  loop: LoopChapter, pipe: PipeChapter, tools: ToolsChapter, ros: RosChapter, scope: ScopeChapter, decide: DecideChapter, closest: ClosestChapter, callback: CallbackChapter, cpp: CppChapter, shell: ShellChapter,
   bfs: BfsChapter, late: LateChapter, tflab: TfLabChapter,
   nodes: NodesChapter, topics: TopicsChapter, msgtypes: MsgTypesChapter, actions: ActionsChapter, params: ParamsChapter, ws: WsChapter, drive: DriveChapter,
 }

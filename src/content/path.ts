@@ -3,10 +3,10 @@ import { LEVELS } from './levels'
 import type { ChapterMeta } from '../anim/contract'
 
 /** Difficulty dots 1-5 for every numbered chapter with its own page: app2's on-ramp data plus the lead's chapters. EP stays outside the scale. */
-export const DOTS: Record<string, number> = { ...ONRAMP_DOTS, loop: 1, pipe: 1, tools: 1, ros: 1, tflab: 4 }
+export const DOTS: Record<string, number> = { ...ONRAMP_DOTS, loop: 1, pipe: 1, tools: 1, ros: 1, scope: 1, tflab: 4 }
 
 /** "You already know: <id>": the earlier chapter each one grows from. */
-export const GROWS_FROM: Record<string, string> = { ...ONRAMP_GROWS, loop: 'act', pipe: 'loop', tools: 'pipe', ros: 'tools', tflab: 'tf' }
+export const GROWS_FROM: Record<string, string> = { ...ONRAMP_GROWS, loop: 'act', pipe: 'loop', tools: 'pipe', ros: 'tools', scope: 'ros', tflab: 'tf' }
 
 /** Chapter id → its meta, display number ('0.4') and route, across all levels. */
 export function findChapter(id: string): { meta: ChapterMeta; num: string; href: string } | null {

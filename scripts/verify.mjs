@@ -35,6 +35,7 @@ const ROUTES = [
   { hash: '#/0/meet', has: 'class="num">0.1<' },
   { hash: '#/0/think', has: ['class="pathline"', 'class="think-scene"'] },
   { hash: '#/0/pipe', has: 'class="num">0.9<' },
+  { hash: '#/0/scope', has: ['class="num">0.12<', 'class="scope"'], equals: { ros2: '20 / 22', cpp: '8 / 22' } },
   { hash: '#/3/tflab', has: ['class="num">3.3<', 'class="tfc"'] }, // tfc = the animated chain scene (the old static svg was class="tfchain")
   { hash: '#/ep/bfs', has: 'class="num">EP1<' },
   { hash: '#/ep/late', has: 'class="num">EP2<' },
@@ -61,7 +62,7 @@ const ROUTES = [
 ]
 const JA_TEXT = /[぀-ヿ一-龯]/
 // Product names stay in Latin letters on Japanese pages too.
-const PROPER_NAMES = new Set(['TurtleBot3 Burger'])
+const PROPER_NAMES = new Set(['TurtleBot3 Burger', 'Python', 'C++', 'ROS 2']) // product and language names stay in Latin script in Japanese text
 
 const CHROME = [process.env.CHROME, 'google-chrome', 'chromium', '/mnt/c/Program Files/Google/Chrome/Application/chrome.exe']
   .filter(Boolean).find((c) => (c.includes('/') ? existsSync(c) : spawnSync('which', [c]).status === 0))
