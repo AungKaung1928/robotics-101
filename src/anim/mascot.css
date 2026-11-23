@@ -16,5 +16,7 @@
 @keyframes m-blink { 0%, 94%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.12); } }
 .mascot .m-look { transition: transform 300ms ease-out; }
 @supports (transition-timing-function: linear(0, 1)) { .mascot .m-look { transition: transform var(--spring-ms, 300ms) var(--spring, ease-out); } }
+.mascot .m-think circle { fill: var(--ink-2); animation: m-dot 1.2s ease-in-out infinite; }
+@keyframes m-dot { 0%, 100% { opacity: 0.25; } 30% { opacity: 1; } }
 .mascot-hit { display: inline-block; line-height: 0; }
-@media (prefers-reduced-motion: reduce) { .mascot .m-breath, .mascot .m-eyes { animation: none; } .mascot .m-look { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .mascot .m-breath, .mascot .m-eyes { animation: none; } .mascot .m-look { transition: none; } .mascot .m-think circle { animation: none; } }

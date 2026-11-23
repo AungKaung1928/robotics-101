@@ -17,6 +17,13 @@ describe('Mascot render', () => {
     expect(html.match(/<circle[^>]*r="2.2"/g)).toHaveLength(2)
     expect(html).not.toContain('m-spark')
   })
+  it('thinking: eyes up, three-dot bubble; idle has none', () => {
+    const think = renderToStaticMarkup(<Mascot label="" thinking />)
+    expect(think).toContain('data-mood="think"')
+    expect(think.match(/<g class="m-think">/g)).toHaveLength(1)
+    expect(think).toContain('translate(1.5px, -2px)')
+    expect(renderToStaticMarkup(<Mascot label="" />)).not.toContain('m-think')
+  })
   it('faces: happy = arcs, oops = wide eyes + mouth; six sparks mid-celebration', () => {
     expect(renderToStaticMarkup(<MascotFigure pose={REST} mood="happy" label="" />)).toContain('q3-4 6 0')
     expect(renderToStaticMarkup(<MascotFigure pose={REST} mood="oops" label="" />)).toContain('m-mouth')

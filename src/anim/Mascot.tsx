@@ -4,7 +4,7 @@ import { PRESS_STYLE } from './spring'
 import './mascot.css'
 
 const reduced = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
-export type Mood = 'idle' | 'happy' | 'oops'
+export type Mood = 'idle' | 'happy' | 'oops' | 'think'
 type Reaction = 'happy' | 'oops' | 'boop' | 'brake' | 'start'
 const REACTION: Record<Reaction, { pose: (t: number) => Pose; end: number }> = {
   happy: { pose: happyPose, end: HAPPY_S }, oops: { pose: oopsPose, end: OOPS_S }, boop: { pose: boopPose, end: BOOP_S },
@@ -14,13 +14,15 @@ const REACTION: Record<Reaction, { pose: (t: number) => Pose; end: number }> = {
 /**
  * The guide robot (TurtleBot3 Burger shape: two wheels, stacked plates, LiDAR dome as the head). Idles with a slow
  * breath and a blink (CSS); bounces when `cheer` changes (a challenge solved) and wobbles when `oops` changes (the
- * reader broke something), both on springs; a pointer arriving (or a tap) gives it a small boop; `brake` / `start` changes pitch it forward / back (inertia). Reduced motion: no
+ * reader broke something), both on springs; a pointer arriving (or a tap) gives it a small boop; `thinking` (a state, e.g. the think step of a loop) looks up
+ * with a three-dot bubble; `brake` / `start` changes pitch it forward / back (inertia). Reduced motion: no
  * movement, only the face changes for a moment. `look` (−1 left … 1 right) turns the eyes toward what is changing,
  * e.g. the playhead's place on the scrubber. `roll` = distance driven in the drawing's own units (64-unit box): the
  * wheels turn by roll / radius, so they never skid against the floor.
  */
-export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look = 0, roll = 0, size = 64, label, inSvg = false }: {
-  cheer?: number; oops?: number; brake?: number; start?: number; look?: number; roll?: number; size?: number; label: string; inSvg?: boolean
+export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look = 0, roll = 0, thinking = false, size = 64, label, inSvg = false }: {
+  cheer?: number; oops?: number; brake?: number; start?: number; look?: number; roll?: number; thinking?: boolean
+  size?: number; label: string; inSvg?: boolean
 }) {
   const [act, setAct] = useState<{ kind: Reaction; n: number } | null>(null)
   const [pose, setPose] = useState<Pose>(REST)
@@ -51,7 +53,7 @@ export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look
   }, [act])
   // Boop on pointer arrival or tap, only when idle: it never cuts a cheer or an oops short, and runs to the end.
   const boop = () => { if (!act) setAct({ kind: 'boop', n: 0 }) }
-  const mood: Mood = act && (act.kind === 'happy' || act.kind === 'oops') ? act.kind : 'idle'
+  const mood: Mood = act && (act.kind === 'happy' || act.kind === 'oops') ? act.kind : thinking ? 'think' : 'idle'
   const fig = <MascotFigure pose={pose} mood={mood} size={size} label={label} spark={mood === 'happy' ? t : 0} look={look} roll={roll} />
   // Inside a chapter's SVG figure (place it with a parent <g transform>) the hit area is a <g>, in HTML a <span>.
   return inSvg
@@ -80,7 +82,7 @@ export function MascotFigure({ pose, mood, size = 64, label, spark = 0, look = 0
               <path className="m-spoke" d={`M${cx} ${53 - WHEEL_R + 1.5}V${53 + WHEEL_R - 1.5}`} />
             </g>
           ))}
-          <g className="m-look" style={{ transform: `translateX(${eyeShift(look)}px)` }}>
+          <g className="m-look" style={{ transform: `translate(${mood === 'think' ? 1.5 : eyeShift(look)}px, ${mood === 'think' ? -2 : 0}px)` }}>
             {mood === 'happy' ? (
               <g className="m-face"><path d="M24 25q3-4 6 0M34 25q3-4 6 0" /></g>
             ) : (
@@ -89,6 +91,9 @@ export function MascotFigure({ pose, mood, size = 64, label, spark = 0, look = 0
           </g>
         </g>
       </g>
+      {mood === 'think' && (
+        <g className="m-think">{[50, 55, 60].map((x, i) => <circle key={x} cx={x} cy={7 - i} r="1.8" style={{ animationDelay: `${i * 0.2}s` }} />)}</g>
+      )}
       {sparks(spark).map((p, i) => <circle key={i} className="m-spark" data-i={i % 2} cx={p.x} cy={p.y} r="1.8" opacity={p.o} />)}
     </svg>
   )
