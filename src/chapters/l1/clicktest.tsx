@@ -82,6 +82,7 @@ const cases = (l: Lang): Case[] => [
   { name: 'simpick check', Body: SimpickChapter, steps: [{ click: '.sp-check button.pick', text: 'mvsim' }, { expect: 'check', ok: true }, { a11y: true }] },
   { name: 'meet parts', Body: MeetChapter, steps: [{ click: 'g.meet-part.is-sensor' }, { expect: 'part', is: MEET_STRINGS[l].parts.sensor }, { click: 'g.meet-part.is-wheels' }, { expect: 'part', is: MEET_STRINGS[l].parts.wheels }] },
   { name: 'meet car', Body: MeetChapter, steps: [{ expect: 'robot', is: MEET_STRINGS[l].no }, { click: '.break' }, { expect: 'robot', is: MEET_STRINGS[l].yes }, { expect: 'decides', is: MEET_STRINGS[l].itself }] },
+  { name: 'meet keyboard', Body: MeetChapter, steps: [{ key: 'Enter', on: 'g.meet-part.is-battery' }, { expect: 'part', is: MEET_STRINGS[l].parts.battery }, { key: ' ', on: 'g.meet-part.is-computer' }, { expect: 'part', is: MEET_STRINGS[l].parts.computer }] },
   { name: 'meet check', Body: MeetChapter, steps: [{ click: '.meet-check button.pick', text: MEET_STRINGS[l].answers.notRobot }, { expect: 'check', ok: true }, { a11y: true }] },
 ]
 
