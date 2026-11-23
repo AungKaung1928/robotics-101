@@ -34,4 +34,4 @@
 /* Track drawn by scrubTrack() (inline background-image): a 6 px band centred in the 24 px target, step gaps included. */
 .stepper .scrub.squish-range { height: 24px; background-color: transparent; background-size: 100% 6px; background-repeat: no-repeat; background-position: center; }
 @media (max-width: 600px) { .stepper .wide { display: none; } }
-@media (prefers-reduced-motion: reduce) { .stepper .rail .dot, .stepper button, .stepper .rail li::before, .stepper .pp path { transition: none; } .stepper .rail [aria-current] .dot, .stepper .scrub-tip { animation: none; } .stepper button:active:not(:disabled) { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .stepper .rail .dot, .stepper button, .stepper .rail li + li::before, .stepper .pp path { transition: none; } .stepper .rail [aria-current] .dot, .stepper .scrub-tip { animation: none; } .stepper button:active:not(:disabled) { transform: none; } }
