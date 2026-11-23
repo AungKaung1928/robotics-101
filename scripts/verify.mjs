@@ -133,7 +133,9 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
           const v = dom.match(new RegExp(`data-k="${k}"[^>]*>([^<]*)`))?.[1]
           if (!want.test(v ?? '')) fails.push(`${name}: readout ${k} '${v}', want ${want}`)
         }
-        const phone = chrome(BASE + 'phone.html' + r.hash, { lang, size: '390,844' }).match(/PHONE (\d+) (\d+)/)
+        // One retry, as for the DOM dump: under load the dump can end before the frame has printed its widths.
+        const measure = () => chrome(BASE + 'phone.html' + r.hash, { lang, size: '390,844' }).match(/PHONE (\d+) (\d+)/)
+        const phone = measure() ?? measure()
         if (!phone) fails.push(`${name}: 390 px frame not measured`)
         else if (+phone[1] > +phone[2]) fails.push(`${name}: sideways scroll at 390 px (${phone[1]} > ${phone[2]})`)
         console.log(`${name}: checked`)
