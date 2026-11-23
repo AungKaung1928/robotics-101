@@ -282,10 +282,10 @@
   "back": "The DWB controller works at 20 Hz, and at a 0.26 m/s speed limit, each tick moves 1.3 cm."
  },
  "core:goal.lines.1": {
-  "status": "needs-human",
+  "status": "pass-alt",
   "en": "The goal counts as reached once the robot is within 0.25 m and its heading within 0.25 rad: patrol can stop up to 25 cm short.",
-  "my": "စက်ရုပ်က 0.25 m အတွင်း ရောက်ပြီး ဦးတည်ချက်က 0.25 rad အတွင်း ရှိရင် goal ကို ရောက်ပြီလို့ သတ်မှတ်ပါတယ်- ကင်းလှည့်တာက 25 cm အလိုမှာတင် ရပ်သွားနိုင်ပါတယ်။",
-  "note": "meaning drift (blind back-translation: \"If the robot arrives within 0.25 m and the orientation is within 0.25 rad, it is defined as having reached the goal: patrolling can stop just 25 cm ahead.\"): drift: back translation wrongly implies stopping ahead instead of short of the goal"
+  "my": "စက်ရုပ်က 0.25 m အတွင်း ရောက်ပြီး ဦးတည်ရာက 0.25 rad အတွင်း ရှိတာနဲ့ ပန်းတိုင် ရောက်ပြီလို့ သတ်မှတ်ပါတယ်- ဒါကြောင့် ကင်းလှည့်တာက ပန်းတိုင် မရောက်ခင် 25 cm အထိ စောပြီး ရပ်နိုင်ပါတယ်။",
+  "back": "The goal is considered reached once the robot is within 0.25 m and its heading is within 0.25 rad: so the patrol can stop up to 25 cm early before reaching the goal."
  },
  "core:goal.lines.2": {
   "status": "pass",
@@ -491,6 +491,18 @@
   "my": "စိတ်ကြိုက်၊ အဆင့်များရဲ့ အပြင်ဘက်",
   "back": "Optional, outside of the levels"
  },
+ "core:levels.groups.1": {
+  "status": "pass-alt",
+  "en": "A practice world",
+  "my": "လေ့ကျင့်ဖို့ ကမ္ဘာ",
+  "back": "World for training"
+ },
+ "core:levels.groups.2": {
+  "status": "pass-alt",
+  "en": "The software around it",
+  "my": "စက်ရုပ် ပတ်လည်က ဆော့ဖ်ဝဲ",
+  "back": "Software around the robot"
+ },
  "core:levels.heading": {
   "status": "pass",
   "en": "Levels",
@@ -579,7 +591,7 @@
   "status": "needs-human",
   "en": "Scenario",
   "my": "စင်္ကာရီယို",
-  "note": "blind back-translation \"Cingario\": the transliteration of scenario is not understood; kept English"
+  "note": "blind back-translation \"Cingario\": the transliteration of scenario is not understood; kept English | 2026-11-24 redraft ဖြစ်စဉ် back \"Process\": drift again"
  },
  "core:player.pause": {
   "status": "pass",
@@ -597,7 +609,7 @@
   "status": "needs-human",
   "en": "Scenario time",
   "my": "စင်္ကာရီယို အချိန်",
-  "note": "blind back-translation \"Cingario\": the transliteration of scenario is not understood; kept English"
+  "note": "blind back-translation \"Cingario\": the transliteration of scenario is not understood; kept English | 2026-11-24 redraft ဖြစ်စဉ် အချိန် back \"Process time\": drift again"
  },
  "core:scan.beam": {
   "status": "pass",
@@ -624,10 +636,10 @@
   "back": "returned beams"
  },
  "core:scan.lines.0": {
-  "status": "needs-human",
+  "status": "pass-alt",
   "en": "360 beams, one per degree, 5 times a second. Each beam returns the nearest wall or obstacle, if it is closer than 3.5 m.",
-  "my": "1 စက္ကန့်မှာ 5 ကြိမ်၊ 1 ဒီဂရီမှာ beam 1 ခုနှုန်းနဲ့ beam 360 ခု ထုတ်ပါတယ်။ beam တစ်ခုစီဟာ 3.5 m ထက် နီးရင် အနီးဆုံး နံရံ ဒါမှမဟုတ် အတားအဆီးကို ပြန်ပေးပါတယ်။",
-  "note": "mechanical check: numbers 1,3.5,360,5 vs 1,1,1,3.5,360,5"
+  "my": "beam 360 ခု၊ ဒီဂရီ တစ်ခုကို beam တစ်ခု၊ တစ်စက္ကန့်ကို 5 ကြိမ်။ beam တစ်ခုစီက 3.5 m ထက် နီးရင် အနီးဆုံး နံရံ ဒါမှမဟုတ် အတားအဆီးကို ပြန်ပြောပါတယ်။",
+  "back": "360 beams, one beam per degree, 5 times per second. Each beam reports the nearest wall or obstacle if it is closer than 3.5 m."
  },
  "core:scan.lines.1": {
   "status": "pass",
