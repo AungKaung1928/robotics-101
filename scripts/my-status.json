@@ -266,8 +266,9 @@
  "core:goal.d": {
   "status": "pass",
   "en": "Goal distance (m)",
-  "my": "Goal အကွာအဝေး (m)",
-  "back": "Goal distance (m)"
+  "my": "ပန်းတိုင် အကွာအဝေး (m)",
+  "back": "Goal distance (m)",
+  "note": "consistency: copied from l2/actions:distance"
  },
  "core:goal.drive": {
   "status": "pass",
@@ -1370,8 +1371,9 @@
  "ep/late:notYet": {
   "status": "pass-alt",
   "en": "Not yet:",
-  "my": "မရသေးဘူး:",
-  "back": "Not yet:"
+  "my": "မရသေးပါ:",
+  "back": "Not yet:",
+  "note": "consistency: copied from l1/callback:notYet"
  },
  "ep/late:older": {
   "status": "pass-alt",
@@ -1682,8 +1684,9 @@
  "l0/loop:crashed": {
   "status": "pass-alt",
   "en": "hit the wall",
-  "my": "နံရံကို တိုက်မိပြီ",
-  "back": "Hit the wall"
+  "my": "နံရံကို တိုက်မိ",
+  "back": "Hit the wall",
+  "note": "consistency: copied from l1/cpp:crashed"
  },
  "l0/loop:fixIt": {
   "status": "pass-alt",
@@ -1760,8 +1763,9 @@
  "l0/loop:notYet": {
   "status": "pass-alt",
   "en": "Not yet:",
-  "my": "မအောင်မြင်သေးပါ-",
-  "back": "Not successful yet:"
+  "my": "မရသေးပါ:",
+  "back": "Not yet:",
+  "note": "consistency: copied from l1/callback:notYet"
  },
  "l0/loop:rate": {
   "status": "pass-alt",
@@ -1784,8 +1788,9 @@
  "l0/loop:solved": {
   "status": "pass-alt",
   "en": "Solved:",
-  "my": "အောင်မြင်ပါပြီ-",
-  "back": "Succeeded:"
+  "my": "အောင်မြင်ပြီ:",
+  "back": "Success:",
+  "note": "consistency: copied from ep/late:solved"
  },
  "l0/loop:stage.act": {
   "status": "pass-alt",
@@ -1820,8 +1825,9 @@
  "l0/loop:words": {
   "status": "pass-alt",
   "en": "Words",
-  "my": "ဝေါဟာရများ",
-  "back": "Glossary"
+  "my": "ဝေါဟာရ",
+  "back": "Glossary",
+  "note": "consistency: copied from ep/bfs:words"
  },
  "l0/meet:answers.notRobot": {
   "status": "pass-alt",
@@ -2396,8 +2402,9 @@
  "l0/pipe:words": {
   "status": "pass-alt",
   "en": "Words",
-  "my": "ဝေါဟာရများ",
-  "back": "Glossary"
+  "my": "ဝေါဟာရ",
+  "back": "Glossary",
+  "note": "consistency: copied from ep/bfs:words"
  },
  "l0/ros:breakIt": {
   "status": "pass-alt",
@@ -2534,8 +2541,9 @@
  "l0/ros:words": {
   "status": "pass-alt",
   "en": "Words",
-  "my": "ဝေါဟာရများ",
-  "back": "Glossary"
+  "my": "ဝေါဟာရ",
+  "back": "Glossary",
+  "note": "consistency: copied from ep/bfs:words"
  },
  "l0/sense:answers.five": {
   "status": "pass-alt",
@@ -3542,14 +3550,16 @@
  "l0/tools:words": {
   "status": "pass-alt",
   "en": "Words",
-  "my": "ဝေါဟာရများ",
-  "back": "Glossary"
+  "my": "ဝေါဟာရ",
+  "back": "Glossary",
+  "note": "consistency: copied from ep/bfs:words"
  },
  "l1/callback:age": {
   "status": "pass-alt",
   "en": "oldest data acted on",
-  "my": "သုံးခဲ့တဲ့ data ထဲက အဟောင်းဆုံး",
-  "back": "oldest of the data used"
+  "my": "သုံးခဲ့တဲ့ အဟောင်းဆုံး data",
+  "back": "Oldest data used",
+  "note": "consistency: copied from ep/late:bOldest"
  },
  "l1/callback:arrive": {
   "status": "pass-alt",
@@ -4046,8 +4056,9 @@
  "l1/cpp:solved": {
   "status": "pass-alt",
   "en": "Solved:",
-  "my": "ဖြေရှင်းပြီး:",
-  "back": "Solved:"
+  "my": "အောင်မြင်ပြီ:",
+  "back": "Success:",
+  "note": "consistency: copied from ep/late:solved"
  },
  "l1/cpp:stopped": {
   "status": "pass-alt",
@@ -4214,8 +4225,9 @@
  "l1/decide:runsHere": {
   "status": "pass-alt",
   "en": "Python shown; the page runs the same logic in JavaScript.",
-  "my": "ဒီမှာ Python ကို ပြထားပါတယ်၊ ဒီစာမျက်နှာကတော့ အဲဒီ logic အတိုင်းကို JavaScript နဲ့ run ပါတယ်။",
-  "back": "Python is shown here, and this page runs exactly that logic in JavaScript."
+  "my": "ဒီမှာ Python နဲ့ ပြထားပါတယ်၊ စာမျက်နှာက တူညီတဲ့ logic ကို JavaScript နဲ့ run ပါတယ်။",
+  "back": "It is shown here in Python; the page runs the same logic in JavaScript.",
+  "note": "consistency: copied from ep/bfs:runsHere"
  },
  "l1/decide:solved": {
   "status": "pass-alt",
@@ -4670,8 +4682,9 @@
  "l2/actions:words": {
   "status": "pass-alt",
   "en": "Words",
-  "my": "ဝေါဟာရများ",
-  "back": "Glossary"
+  "my": "ဝေါဟာရ",
+  "back": "Glossary",
+  "note": "consistency: copied from ep/bfs:words"
  },
  "l2/drive:already": {
   "status": "pass-alt",
@@ -4718,8 +4731,9 @@
  "l2/drive:glossary.0.1": {
   "status": "pass-alt",
   "en": "the topic a mobile robot reads its speed commands from",
-  "my": "ရွေ့လျားနိုင်တဲ့ စက်ရုပ်က သူ့ အမြန်နှုန်း command တွေကို ဖတ်တဲ့ topic",
-  "back": "The topic from which a movable robot reads its speed commands"
+  "my": "ရွေ့လျားတဲ့ စက်ရုပ်က အမြန်နှုန်း command တွေကို ဖတ်ယူတဲ့ topic",
+  "back": "The topic from which a moving robot reads speed commands",
+  "note": "consistency: copied from l2/topics:glossary.0.1"
  },
  "l2/drive:glossary.1.0": {
   "status": "pass-alt",
@@ -4838,20 +4852,23 @@
  "l2/drive:wheelL": {
   "status": "pass-alt",
   "en": "left wheel",
-  "my": "ဘယ်ဘီး",
-  "back": "Left wheel"
+  "my": "ဘယ်ဘက် ဘီး",
+  "back": "Left wheel",
+  "note": "consistency: copied from l0/move:left"
  },
  "l2/drive:wheelR": {
   "status": "pass-alt",
   "en": "right wheel",
-  "my": "ညာဘီး",
-  "back": "Right wheel"
+  "my": "ညာဘက် ဘီး",
+  "back": "Right wheel",
+  "note": "consistency: copied from l0/act:right"
  },
  "l2/drive:words": {
   "status": "pass-alt",
   "en": "Words",
-  "my": "ဝေါဟာရများ",
-  "back": "Glossary"
+  "my": "ဝေါဟာရ",
+  "back": "Glossary",
+  "note": "consistency: copied from ep/bfs:words"
  },
  "l2/drive:zeros": {
   "status": "pass-alt",
@@ -5000,8 +5017,9 @@
  "l2/msgtypes:notYet": {
   "status": "pass-alt",
   "en": "Not yet:",
-  "my": "မပြီးသေးပါ:",
-  "back": "Not yet done:"
+  "my": "မရသေးပါ:",
+  "back": "Not yet:",
+  "note": "consistency: copied from l1/callback:notYet"
  },
  "l2/msgtypes:reset": {
   "status": "pass-alt",
@@ -5030,8 +5048,9 @@
  "l2/msgtypes:words": {
   "status": "pass-alt",
   "en": "Words",
-  "my": "ဝေါဟာရများ",
-  "back": "Glossary"
+  "my": "ဝေါဟာရ",
+  "back": "Glossary",
+  "note": "consistency: copied from ep/bfs:words"
  },
  "l2/nodes:breakIt": {
   "status": "pass-alt",
@@ -5162,8 +5181,9 @@
  "l2/nodes:notYet": {
   "status": "pass-alt",
   "en": "Not yet:",
-  "my": "မပြီးသေးပါ:",
-  "back": "Not yet done:"
+  "my": "မရသေးပါ:",
+  "back": "Not yet:",
+  "note": "consistency: copied from l1/callback:notYet"
  },
  "l2/nodes:patrol": {
   "status": "pass-alt",
@@ -5228,8 +5248,9 @@
  "l2/nodes:words": {
   "status": "pass-alt",
   "en": "Words",
-  "my": "ဝေါဟာရများ",
-  "back": "Glossary"
+  "my": "ဝေါဟာရ",
+  "back": "Glossary",
+  "note": "consistency: copied from ep/bfs:words"
  },
  "l2/nodes:yes": {
   "status": "pass-alt",
@@ -5354,8 +5375,9 @@
  "l2/params:notYet": {
   "status": "pass-alt",
   "en": "Not yet:",
-  "my": "မပြီးသေးပါ:",
-  "back": "Not yet done:"
+  "my": "မရသေးပါ:",
+  "back": "Not yet:",
+  "note": "consistency: copied from l1/callback:notYet"
  },
  "l2/params:runtimeNote": {
   "status": "pass-alt",
@@ -5366,8 +5388,9 @@
  "l2/params:solved": {
   "status": "pass-alt",
   "en": "Solved:",
-  "my": "ဖြေရှင်းပြီး:",
-  "back": "Solved:"
+  "my": "အောင်မြင်ပြီ:",
+  "back": "Success:",
+  "note": "consistency: copied from ep/late:solved"
  },
  "l2/params:source": {
   "status": "pass-alt",
@@ -5414,8 +5437,9 @@
  "l2/params:words": {
   "status": "pass-alt",
   "en": "Words",
-  "my": "ဝေါဟာရများ",
-  "back": "Glossary"
+  "my": "ဝေါဟာရ",
+  "back": "Glossary",
+  "note": "consistency: copied from ep/bfs:words"
  },
  "l2/params:yes": {
   "status": "pass-alt",
@@ -5648,8 +5672,9 @@
  "l2/topics:words": {
   "status": "pass-alt",
   "en": "Words",
-  "my": "ဝေါဟာရများ",
-  "back": "Glossary"
+  "my": "ဝေါဟာရ",
+  "back": "Glossary",
+  "note": "consistency: copied from ep/bfs:words"
  },
  "l2/ws:breakIt": {
   "status": "pass-alt",
@@ -5792,8 +5817,9 @@
  "l2/ws:words": {
   "status": "pass-alt",
   "en": "Words",
-  "my": "ဝေါဟာရများ",
-  "back": "Glossary"
+  "my": "ဝေါဟာရ",
+  "back": "Glossary",
+  "note": "consistency: copied from ep/bfs:words"
  },
  "l2/ws:yours": {
   "status": "pass-alt",
