@@ -105,7 +105,7 @@ export function MascotFigure({ pose, mood, size = 64, label, spark = 0, dizzy = 
           ))}
           <g className="m-headgroup" transform={`translate(0 ${head.dy}) rotate(${head.rot} 32 31)`}>
             {stars.filter((p) => !p.front).map(starPath)}
-            <g className="m-sway">
+            <g className="m-tilt"><g className="m-sway">
               <rect className="m-head" x="17" y="12" width="30" height="20" rx="10" />
               <path className="m-lidar" d="M20 18h24" />
               <g className="m-look" style={{ transform: `translate(${mood === 'think' ? 1.5 : eyeShift(look)}px, ${mood === 'think' ? -2 : 0}px)` }}>
@@ -117,7 +117,7 @@ export function MascotFigure({ pose, mood, size = 64, label, spark = 0, dizzy = 
                 )}
                 </g>
               </g>
-            </g>
+            </g></g>
             {stars.filter((p) => p.front).map(starPath)}
           </g>
         </g>
