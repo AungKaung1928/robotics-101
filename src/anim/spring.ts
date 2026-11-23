@@ -64,3 +64,6 @@ export function arrivalScale(t: number): number {
   return t <= 0 ? 1 : 1 + springAt(t, PRESS, 0, PULSE_V)
 }
 export const PULSE_S = settleTime(PRESS, 0, PULSE_V, 0.002)
+
+/** For marks that carry data (a threshold line, a bar): no bounce, so the mark never shows a value that is not true. */
+export const CALM: Spring = springFrom(0.25, 0)
