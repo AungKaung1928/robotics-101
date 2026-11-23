@@ -72,3 +72,15 @@ describe('ActScene', () => {
     expect(s).toContain('+0.04 m') // 0.2² / (2 · 0.5)
   })
 })
+
+describe('SimWhatScene', () => {
+  it('scan points follow the wall; sensor off empties the view, the world keeps its wall', async () => {
+    const { default: SimWhatScene } = await import('./SimWhatScene')
+    const p = (x: number, on = true) => renderToStaticMarkup(<SimWhatScene wallX={x} sensorOn={on} worldWord="world" viewWord="view" label="" />)
+    expect(p(1)).toContain('data-points="180"')
+    expect(p(1)).not.toBe(p(0.8))
+    const off = p(1, false)
+    expect(off).toContain('data-points="0"')
+    expect(off).toContain('ss-wall is-movable')
+  })
+})

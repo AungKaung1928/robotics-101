@@ -29,3 +29,8 @@
 .as-arrow { stroke: var(--robot); stroke-width: 2.5; }
 .as-head { fill: var(--robot); }
 .as-roll { stroke: var(--ray); stroke-width: 2; stroke-dasharray: 3 3; }
+.simwhat-scene { width: 100%; height: auto; }
+.sw-pane { fill: var(--surface); stroke: var(--rule); }
+.sw-pane.is-view { fill: color-mix(in srgb, var(--ink) 4%, var(--surface)); }
+.sw-self { fill: var(--robot); }
+.sw-cap { fill: var(--ink-2); font: 600 12px var(--mono); }
