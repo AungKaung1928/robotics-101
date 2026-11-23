@@ -1,9 +1,12 @@
-import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type ReactNode } from 'react'
 import type { Strings } from '../i18n'
 import { advance, stepEvent } from '../lib/timeline'
 import { GLIDE_MS, HOLD_KEY, currentStep, glide, playerKey, shouldAutoplay } from './motion'
+import { PRESS, springEasing } from './spring'
 import './player.css'
 
+const PRESS_EASE = springEasing(PRESS)
+const SPRING = { '--spring': PRESS_EASE.easing, '--spring-ms': `${PRESS_EASE.ms}ms` } as CSSProperties
 const held = () => typeof sessionStorage !== 'undefined' && sessionStorage.getItem(HOLD_KEY) === '1'
 const reducedMotion = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 
@@ -79,7 +82,7 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
     else go(k === 'start' ? 0 : end)
   }
   return (
-    <div className="stepper" role="group" aria-label={s.player.label} onKeyDown={onKey}>
+    <div className="stepper" role="group" aria-label={s.player.label} onKeyDown={onKey} style={SPRING}>
       <button type="button" onClick={() => step(-1)} disabled={from <= Math.min(...events) + 1e-9}>← {s.back}</button>
       <button type="button" disabled={still} aria-pressed={playing} onClick={toggle}>{playing ? s.player.pause : s.player.play}</button>
       <button type="button" onClick={() => step(1)} disabled={from >= Math.max(...events) - 1e-9}>

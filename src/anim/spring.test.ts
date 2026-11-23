@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { BOUNCY, WOBBLE, settleTime, springAt } from './spring'
+import { BOUNCY, PRESS, WOBBLE, settleTime, springAt, springEasing } from './spring'
 
 describe('springAt', () => {
   it('starts at x0 and ends at rest', () => {
@@ -35,5 +35,19 @@ describe('settleTime', () => {
       for (let t = T; t < T + 2; t += 0.005) expect(Math.abs(springAt(t, s, 1))).toBeLessThanOrEqual(0.01)
       expect(T).toBeLessThan(1.5) // a reaction is over in well under 1.5 s
     }
+  })
+})
+
+describe('springEasing', () => {
+  it('linear() from 0 to 1 with the overshoot of the spring, short enough for a button', () => {
+    const { easing, ms } = springEasing(PRESS)
+    const v = easing.slice(7, -1).split(', ').map(Number)
+    expect(v).toHaveLength(41)
+    expect(v[0]).toBe(0)
+    expect(v[40]).toBe(1)
+    expect(Math.max(...v)).toBeGreaterThan(1.1) // ζ = 0.5 overshoots by e^(-π/√3) ≈ 16 %
+    expect(Math.max(...v)).toBeLessThan(1.2)
+    expect(ms).toBeGreaterThan(150)
+    expect(ms).toBeLessThan(500)
   })
 })

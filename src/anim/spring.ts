@@ -28,3 +28,16 @@ export function settleTime(s: Spring, x0: number, v0 = 0, eps = 0.01): number {
 /** Springs the mascot uses (k, c per unit mass): bouncy landing, wobble, and a calm settle. */
 export const BOUNCY: Spring = { k: 400, c: 14 } // ζ = 0.35: two visible overshoots
 export const WOBBLE: Spring = { k: 260, c: 8 } // ζ ≈ 0.25: a few rocking swings
+
+/**
+ * The spring as a CSS easing: `linear(...)` sampled from 0 → 1 (progress = 1 − displacement from a unit start), plus
+ * the duration in ms it needs. CSS transitions then move with the same physics as the JS character motion.
+ */
+export function springEasing(s: Spring, samples = 40): { easing: string; ms: number } {
+  const T = settleTime(s, 1, 0, 0.002)
+  const pts = Array.from({ length: samples + 1 }, (_, i) => (i === samples ? 1 : 1 - springAt((i / samples) * T, s, 1)))
+  return { easing: `linear(${pts.map((p) => +p.toFixed(4)).join(', ')})`, ms: Math.round(T * 1000) }
+}
+
+/** Button release: snappy and a single visible overshoot. */
+export const PRESS: Spring = { k: 900, c: 30 } // ζ = 0.5

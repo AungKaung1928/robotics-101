@@ -10,5 +10,9 @@
 .stepper .rail .wide { max-width: 7rem; text-align: center; }
 .stepper .keys { flex: 1 0 100%; color: var(--ink-2); }
 .stepper kbd { font: inherit; padding: 0 0.3em; border: 1px solid var(--rule); border-radius: 3px; }
+/* Press: squash to 0.94 at once, spring back (the PRESS spring as a linear() easing, set inline by Player). */
+.stepper button { transition: transform 160ms ease-out; }
+@supports (transition-timing-function: linear(0, 1)) { .stepper button { transition: transform var(--spring-ms) var(--spring); } }
+.stepper button:active:not(:disabled) { transform: scale(0.94); transition-duration: 60ms; }
 @media (max-width: 600px) { .stepper .wide { display: none; } }
-@media (prefers-reduced-motion: reduce) { .stepper .rail .dot { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .stepper .rail .dot, .stepper button { transition: none; } .stepper button:active:not(:disabled) { transform: none; } }
