@@ -72,16 +72,16 @@
   "back": "SLAM start time (s)"
  },
  "core:bringup.waits": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "starts before",
-  "my": "မတိုင်ခင် စတင်သည်",
-  "back": "Starts before"
+  "my": "မတိုင်ခင် စတယ်",
+  "back": "Starts before it reaches"
  },
  "core:chapters.bringup": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "Bring-up order",
-  "my": "စက်နှိုးသည့် အစီအစဉ်",
-  "back": "Bringup sequence"
+  "my": "စက်နှိုးတဲ့ အစီအစဉ်",
+  "back": "The sequence for waking the machine"
  },
  "core:chapters.costmap": {
   "status": "pass",
@@ -667,10 +667,10 @@
   "back": "gap between beams"
  },
  "core:scan.hits": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "beams with a return",
-  "my": "ပြန်လာသော beam များ",
-  "back": "returned beams"
+  "my": "ပြန်လာတဲ့ beam တွေ",
+  "back": "Returning beams"
  },
  "core:scan.lines.0": {
   "status": "pass-alt",
@@ -679,10 +679,10 @@
   "back": "360 beams, one beam per degree, 5 times per second. Each beam reports the nearest wall or obstacle if it is closer than 3.5 m."
  },
  "core:scan.lines.1": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "Neighbouring beams spread apart with range: anything narrower than the gap can fall between them.",
-  "my": "အကွာအဝေး ဝေးသွားတာနဲ့အမျှ ဘေးချင်းကပ် beam တွေ ကွာဟသွားပါတယ်၊ အဲဒီကြားဟတ်ထက် ပိုကျဉ်းတဲ့ မည်သည့်အရာမဆို beam တွေကြား လွတ်သွားနိုင်ပါတယ်။",
-  "back": "As the distance gets further, the adjacent beams diverge; anything narrower than that gap can be missed between the beams."
+  "my": "အကွာအဝေး ဝေးသွားတာနဲ့အမျှ ဘေးချင်းကပ် beam တွေ ကွာဟသွားပါတယ်၊ အဲဒီကြားထက် ပိုကျဉ်းတဲ့ ဘယ်အရာမဆို beam တွေကြား လွတ်သွားနိုင်ပါတယ်။",
+  "back": "As the distance gets farther, adjacent beams spread apart; anything narrower than that gap can slip through between the beams."
  },
  "core:scan.lines.2": {
   "status": "pass",
@@ -847,10 +847,10 @@
   "back": "/odom rate (≈ number of updates per check)"
  },
  "core:tf.point": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "hit at box1 corner",
-  "my": "box1 ဒေါင့်မှာ ထိမှန်သည့် အမှတ်",
-  "back": "point hit at box1 corner"
+  "my": "box1 ဒေါင့်မှာ ထိတဲ့ အမှတ်",
+  "back": "Point that hits at the corner of box1"
  },
  "core:tf.scene": {
   "status": "pass",
@@ -877,10 +877,10 @@
   "back": "STALE"
  },
  "core:tf.verdict": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "detector says",
-  "my": "ထောက်လှမ်းကိရိယာ၏ ဆုံးဖြတ်ချက်",
-  "back": "detector's verdict"
+  "my": "ထောက်လှမ်းကိရိယာရဲ့ ဆုံးဖြတ်ချက်",
+  "back": "The detection device's decision"
  },
  "core:tf.x": {
   "status": "pass",

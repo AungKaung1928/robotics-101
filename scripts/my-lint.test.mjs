@@ -22,6 +22,11 @@ describe('Burmese encoding check', () => {
 })
 
 describe('lint', () => {
+  it('rejects literary forms in labels too, and the attributive သည့် (pinned UI verbs excepted)', () => {
+    expect(lint('Bring-up order', 'စက်နှိုးသည့် အစီအစဉ်', 'label').fail.join()).toMatch(/literary/)
+    expect(lint('beams with a return', 'ပြန်လာသော beam တွေ', 'label').fail.join()).toMatch(/literary/)
+    expect(lint('Back', 'နောက်သို့', 'label').fail).toEqual([])
+  })
   it('does not read a glossary word inside an identifier (sensor_msgs is not "sensor")', () => {
     expect(lint('the data shape, like sensor_msgs/msg/LaserScan', 'ဒေတာ ပုံစံ၊ ဥပမာ sensor_msgs/msg/LaserScan', 'label').fail).toEqual([])
     expect(lint('a sensor', 'sensor တစ်ခု', 'label').fail.join()).toMatch(/sensor/)

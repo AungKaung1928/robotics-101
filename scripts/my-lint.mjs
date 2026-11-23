@@ -54,7 +54,8 @@ export function lint(en, my, role = 'body') {
   for (const t of G.tierA_keepEnglish) if (word(t).test(en) && !word(t).test(my)) fail.push(`tier A "${t}" not kept`)
   if (G.uiVerbs[en] !== undefined && my !== G.uiVerbs[en]) fail.push(`UI verb "${en}" must be ${G.uiVerbs[en]}`)
   for (const [w, b] of Object.entries(G.tierB_loanwords)) if (word(w).test(en) && !my.includes(b)) fail.push(`"${w}" must be ${b}`)
-  if (role === 'body' || role === 'heading') {
+  // Every role: a label in literary register (ပြန်လာသော, စက်နှိုးသည့်) reads as stiffly as a sentence; pinned UI verbs are fixed.
+  if (G.uiVerbs[en] === undefined) {
     let t = my
     for (const a of G.literaryAllow) t = t.split(a).join('')
     for (const l of G.literaryBanned) if (t.includes(l)) fail.push(`literary form ${l}`)
