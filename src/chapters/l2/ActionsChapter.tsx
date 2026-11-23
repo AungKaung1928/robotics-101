@@ -60,7 +60,7 @@ export default function ActionsChapter({ t }: { t: Strings }) {
       <div className="panel">
         <p className="learn">{s.learn}</p>
         {s.lines.map((l) => <p key={l}>{l}</p>)}
-        <dl className="gloss">{s.compare.map(([k, v, ex]) => <div key={k} style={{ display: 'contents' }}><dt>{k}</dt><dd>{v} · <code>{ex}</code></dd></div>)}</dl>
+        <dl className="gloss">{s.compare.map(([k, v, ex]) => <div key={k} style={{ display: 'contents' }}><dt><code>{k}</code></dt><dd>{v} · <code>{ex}</code></dd></div>)}</dl>
         <Slider hint={t.drag} label={s.distance} value={distance} min={1} max={4} step={0.25} onChange={(v) => restart(() => setDistance(v))} fmt={(v) => v.toFixed(2)} />
         <p>
           <button type="button" className="break" onClick={() => restart(() => setReachable(!reachable))}>{reachable ? s.breakIt : s.fixIt}</button>{' '}

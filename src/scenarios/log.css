@@ -6,5 +6,6 @@
 .evlog tr[data-state='later'] { opacity: 0.35; }
 .evlog tr[data-state='done'] { opacity: 1; }
 .evlog tr[data-state='now'] { opacity: 1; font-weight: 600; box-shadow: inset 3px 0 0 var(--ink); }
+.evlog tr[data-hot] { background: var(--grid); }
 .evlog button { font: inherit; border: 0; background: none; color: inherit; padding: 0 var(--s1); cursor: pointer; }
 @media (prefers-reduced-motion: reduce) { .evlog tr { transition: none; } }

@@ -1,0 +1,106 @@
+import { useEffect, useState } from 'react'
+import { BOOP_S, HAPPY_S, JOLT_S, OOPS_S, REST, WHEEL_R, boopPose, headLag, brakePose, startPose, eyeShift, wheelAngle, happyPose, oopsPose, sparks, type Pose } from './mascot'
+import { PRESS_STYLE } from './spring'
+import './mascot.css'
+
+const reduced = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
+export type Mood = 'idle' | 'happy' | 'oops' | 'think'
+type Reaction = 'happy' | 'oops' | 'boop' | 'brake' | 'start'
+const REACTION: Record<Reaction, { pose: (t: number) => Pose; end: number }> = {
+  happy: { pose: happyPose, end: HAPPY_S }, oops: { pose: oopsPose, end: OOPS_S }, boop: { pose: boopPose, end: BOOP_S },
+  brake: { pose: brakePose, end: JOLT_S }, start: { pose: startPose, end: JOLT_S },
+}
+
+/**
+ * The guide robot (TurtleBot3 Burger shape: two wheels, stacked plates, LiDAR dome as the head). Idles with a slow
+ * breath and a blink (CSS); bounces when `cheer` changes (a challenge solved) and wobbles when `oops` changes (the
+ * reader broke something), both on springs; a pointer arriving (or a tap) gives it a small boop; `thinking` (a state, e.g. the think step of a loop) looks up
+ * with a three-dot bubble; `brake` / `start` changes pitch it forward / back (inertia). Reduced motion: no
+ * movement, only the face changes for a moment. `look` (−1 left … 1 right) turns the eyes toward what is changing,
+ * e.g. the playhead's place on the scrubber. `roll` = distance driven in the drawing's own units (64-unit box): the
+ * wheels turn by roll / radius, so they never skid against the floor.
+ */
+export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look = 0, roll = 0, thinking = false, size = 64, label, inSvg = false }: {
+  cheer?: number; oops?: number; brake?: number; start?: number; look?: number; roll?: number; thinking?: boolean
+  size?: number; label: string; inSvg?: boolean
+}) {
+  const [act, setAct] = useState<{ kind: Reaction; n: number } | null>(null)
+  const [pose, setPose] = useState<Pose>(REST)
+  const [t, setT] = useState(0)
+  useEffect(() => { if (cheer) setAct({ kind: 'happy', n: cheer }) }, [cheer])
+  useEffect(() => { if (oops) setAct({ kind: 'oops', n: oops }) }, [oops])
+  useEffect(() => { if (brake) setAct({ kind: 'brake', n: brake }) }, [brake])
+  useEffect(() => { if (start) setAct({ kind: 'start', n: start }) }, [start])
+  useEffect(() => {
+    if (!act) return
+    const { pose: f, end } = REACTION[act.kind]
+    const done = () => { setPose(REST); setT(0); setAct(null) }
+    if (reduced()) {
+      const id = setTimeout(done, act.kind === 'happy' || act.kind === 'oops' ? 900 : 0)
+      return () => clearTimeout(id)
+    }
+    const t0 = performance.now()
+    let id = 0
+    const frame = (ms: number) => {
+      const t = (ms - t0) / 1000
+      if (t >= end) return done()
+      setPose(f(t))
+      setT(t)
+      id = requestAnimationFrame(frame)
+    }
+    id = requestAnimationFrame(frame)
+    return () => cancelAnimationFrame(id)
+  }, [act])
+  // Boop on pointer arrival or tap, only when idle: it never cuts a cheer or an oops short, and runs to the end.
+  const boop = () => { if (!act) setAct({ kind: 'boop', n: 0 }) }
+  const mood: Mood = act && (act.kind === 'happy' || act.kind === 'oops') ? act.kind : thinking ? 'think' : 'idle'
+  const head = act && !reduced() ? headLag(REACTION[act.kind].pose, t) : undefined
+  const fig = <MascotFigure pose={pose} mood={mood} size={size} label={label} spark={mood === 'happy' ? t : 0} look={look} roll={roll} head={head} />
+  // Inside a chapter's SVG figure (place it with a parent <g transform>) the hit area is a <g>, in HTML a <span>.
+  return inSvg
+    ? <g className="mascot-hit" onPointerEnter={boop} onClick={boop}>{fig}</g>
+    : <span className="mascot-hit" onPointerEnter={boop} onClick={boop}>{fig}</span>
+}
+
+/** One frame of the robot: pose and face in, SVG out (the filmstrip test draws frames with it). label '' = decorative: hidden from screen readers. */
+export function MascotFigure({ pose, mood, size = 64, label, spark = 0, look = 0, roll = 0, head = { rot: 0, dy: 0 } }: {
+  pose: Pose; mood: Mood; size?: number; label: string; spark?: number; look?: number; roll?: number; head?: { rot: number; dy: number }
+}) {
+  const body = `translate(32 58) translate(0 ${-pose.y}) rotate(${pose.rot}) scale(${pose.sx} ${pose.sy}) translate(-32 -58)`
+  const shadow = 1 - pose.y / 25
+  return (
+    <svg className="mascot" data-mood={mood} width={size} height={size} viewBox="0 0 64 64" style={PRESS_STYLE}
+      {...(label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': true })}>
+      <ellipse className="m-shadow" cx="32" cy="60" rx={18 * shadow} ry={2.2 * shadow} />
+      <g transform={body}>
+        <g className="m-breath">
+          <rect className="m-plate" x="11" y="40" width="42" height="16" rx="7" />
+          <rect className="m-plate" x="14" y="31" width="36" height="11" rx="5" />
+          {[14, 50].map((cx) => (
+            <g key={cx} transform={`rotate(${wheelAngle(roll)} ${cx} 53)`}>
+              <circle className="m-wheel" cx={cx} cy="53" r={WHEEL_R} />
+              <path className="m-spoke" d={`M${cx} ${53 - WHEEL_R + 1.5}V${53 + WHEEL_R - 1.5}`} />
+            </g>
+          ))}
+          <g className="m-headgroup" transform={`translate(0 ${head.dy}) rotate(${head.rot} 32 31)`}>
+            <g className="m-sway">
+              <rect className="m-head" x="17" y="12" width="30" height="20" rx="10" />
+              <path className="m-lidar" d="M20 18h24" />
+              <g className="m-look" style={{ transform: `translate(${mood === 'think' ? 1.5 : eyeShift(look)}px, ${mood === 'think' ? -2 : 0}px)` }}>
+                {mood === 'happy' ? (
+                  <g className="m-face"><path d="M24 25q3-4 6 0M34 25q3-4 6 0" /></g>
+                ) : (
+                  <g className="m-face m-eyes"><circle cx="27" cy="24" r={mood === 'oops' ? 3 : 2.2} /><circle cx="37" cy="24" r={mood === 'oops' ? 3 : 2.2} />{mood === 'oops' && <circle className="m-mouth" cx="32" cy="29.5" r="1.4" />}</g>
+                )}
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+      {mood === 'think' && (
+        <g className="m-think">{[50, 55, 60].map((x, i) => <circle key={x} cx={x} cy={7 - i} r="1.8" style={{ animationDelay: `${i * 0.2}s` }} />)}</g>
+      )}
+      {sparks(spark).map((p, i) => <circle key={i} className="m-spark" data-i={i % 2} cx={p.x} cy={p.y} r="1.8" opacity={p.o} />)}
+    </svg>
+  )
+}

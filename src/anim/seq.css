@@ -1,0 +1,5 @@
+/* Sequence-diagram message arrow (lane anim): ink while in flight, robot blue once delivered for feedback rows. */
+.seq line, .seq path { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.seq text { fill: var(--ink); font: 12px var(--mono); }
+.seq[data-kind='feedback'] line, .seq[data-kind='feedback'] path { stroke: var(--robot); }
+.seq[data-kind='error'] line, .seq[data-kind='error'] path { stroke: var(--ray); }

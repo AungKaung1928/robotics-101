@@ -1,0 +1,3 @@
+/* Top-down wheel tread (lane anim): ink wheel, paper stripes that slide with the wheel's own distance. */
+.tread-body { fill: var(--ink); }
+.tread-stripe { stroke: var(--surface); stroke-width: 1.2; }

@@ -78,7 +78,7 @@ export default function TopicsChapter({ t }: { t: Strings }) {
         {slamTopic !== '/scan' && <p className="note">{s.brokenNote}</p>}
         <p className="group-h">{s.got}</p>
         <dl className="readout">
-          {ss.map((q) => <div key={q.node}><dt>{q.node} ← {resolve(q.topic, q.node) ?? q.topic}</dt><dd data-k={`got-${q.node}`}>{received(q, DURATION_MS / 1000)}</dd></div>)}
+          {ss.map((q) => <div key={q.node}><dt><code>{q.node} ← {resolve(q.topic, q.node) ?? q.topic}</code></dt><dd data-k={`got-${q.node}`}>{received(q, DURATION_MS / 1000)}</dd></div>)}
         </dl>
         <p><strong>{s.challenge}</strong></p>
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? `✓ ${s.solved} /scan` : `${s.notYet}: ${s.nothing}`}</p>

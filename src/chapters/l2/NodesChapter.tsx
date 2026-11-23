@@ -40,7 +40,7 @@ export default function NodesChapter({ t }: { t: Strings }) {
         <p className="learn">{s.learn}</p>
         {s.lines.map((l) => <p key={l}>{l}</p>)}
         <dl className="readout">
-          <div><dt>{byId[sel].name}</dt><dd data-k="sel">{s.state[allOk.has(sel) ? 'ok' : stopped.has(sel) ? 'off' : 'starved']}</dd></div>
+          <div><dt><code>{byId[sel].name}</code></dt><dd data-k="sel">{s.state[allOk.has(sel) ? 'ok' : stopped.has(sel) ? 'off' : 'starved']}</dd></div>
         </dl>
         <p className="note" data-k="job">{s.jobs[sel]} · <a href={`${LAUNCH}#L${byId[sel].lines.replace('-', '-L')}`}>tf_explorer.launch.py:{byId[sel].lines}</a></p>
         <p>

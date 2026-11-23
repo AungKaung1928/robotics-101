@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import type { Strings } from '../i18n'
 import { advance, stepEvent } from '../lib/timeline'
-import { GLIDE_MS, HOLD_KEY, currentStep, glide, playerKey, shouldAutoplay } from './motion'
+import { GLIDE_MS, HOLD_KEY, currentStep, fromKeyboard, glide, playerKey, shouldAutoplay } from './motion'
+import { UI_STYLE } from './spring'
 import './player.css'
 
 const held = () => typeof sessionStorage !== 'undefined' && sessionStorage.getItem(HOLD_KEY) === '1'
@@ -10,7 +11,7 @@ const reducedMotion = () => typeof matchMedia === 'function' && matchMedia('(pre
 /**
  * Scenario controls: step back, play/pause, step forward (by events), and a scrubber over [0, end].
  * The chapter owns the playhead `t` and draws its figure from it; this only moves it.
- * Step glides the playhead to the event (eased, GLIDE_MS) so the change is seen happening, not cut to.
+ * Step by click glides the playhead to the event (eased, GLIDE_MS) so the change is seen happening; Step by key jumps.
  * Keys inside the group: Space / k play-pause, r replay, ← / → step, Home / End jump.
  * `labels` (one per event, ascending order): a numbered step rail under the controls, current step filled, each a
  * button that glides there, and Next names the step it goes to.
@@ -52,9 +53,10 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
     id = requestAnimationFrame(frame)
     return () => cancelAnimationFrame(id)
   }, [target, setT])
-  const go = (to: number) => { setPlaying(false); if (still) { setTarget(null); setT(to) } else setTarget(to) }
+  // instant: reduced motion, or a key press (keys repeat; an animated step feels slow, Emil Kowalski's review standards)
+  const go = (to: number, instant = still) => { setPlaying(false); if (instant) { setTarget(null); setT(to) } else setTarget(to) }
   const from = target ?? t
-  const step = (dir: -1 | 1) => go(stepEvent(events, from, dir))
+  const step = (dir: -1 | 1, instant = still) => go(stepEvent(events, from, dir), instant)
   const atEnd = t >= end - 1e-9
   const toggle = () => {
     setTarget(null)
@@ -74,15 +76,15 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
     e.stopPropagation() // inside the Player, ← / → step the scenario; the page's chapter arrows must not also fire
     if (k === 'toggle') toggle()
     else if (k === 'replay') replay()
-    else if (k === 'back') step(-1)
-    else if (k === 'next') step(1)
-    else go(k === 'start' ? 0 : end)
+    else if (k === 'back') step(-1, true)
+    else if (k === 'next') step(1, true)
+    else go(k === 'start' ? 0 : end, true)
   }
   return (
-    <div className="stepper" role="group" aria-label={s.player.label} onKeyDown={onKey}>
-      <button type="button" onClick={() => step(-1)} disabled={from <= Math.min(...events) + 1e-9}>← {s.back}</button>
+    <div className="stepper" role="group" aria-label={s.player.label} onKeyDown={onKey} style={UI_STYLE}>
+      <button type="button" onClick={(e) => step(-1, still || fromKeyboard(e))} disabled={from <= Math.min(...events) + 1e-9}>← {s.back}</button>
       <button type="button" disabled={still} aria-pressed={playing} onClick={toggle}>{playing ? s.player.pause : s.player.play}</button>
-      <button type="button" onClick={() => step(1)} disabled={from >= Math.max(...events) - 1e-9}>
+      <button type="button" onClick={(e) => step(1, still || fromKeyboard(e))} disabled={from >= Math.max(...events) - 1e-9}>
         {s.next}{nextLabel && <span className="wide">: {nextLabel}</span>} →
       </button>
       <input className="scrub" type="range" min={0} max={end} step={end / 200} value={t} aria-label={s.player.scrub}
@@ -93,7 +95,7 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
           {labels.map((l, i) => (
             <li key={i}>
               <button type="button" aria-current={i === here ? 'step' : undefined} data-done={i < here || undefined}
-                onClick={() => go(sorted[i])} title={l}>
+                onClick={(e) => go(sorted[i], still || fromKeyboard(e))} title={l}>
                 <span className="dot">{i + 1}</span><span className="wide">{l}</span>
               </button>
             </li>
