@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { BOOP_S, HAPPY_S, HEAD_LAG, JOLT_S, WHEEL_R, headLag, brakePose, startPose, eyeShift, wheelAngle, OOPS_S, REST, SPARK_AT, boopPose, happyPose, oopsPose, sparks, dizzyStars, faceSwap, SWAP_S } from './mascot'
+import { BOOP_S, HAPPY_S, HEAD_LAG, JOLT_S, WHEEL_R, headLag, brakePose, startPose, eyeShift, wheelAngle, OOPS_S, REST, SPARK_AT, boopPose, happyPose, oopsPose, sparks, dizzyStars, faceSwap, SWAP_S, STILL_DIZZY, STILL_SPARK } from './mascot'
 
 const ts = (end: number) => Array.from({ length: 601 }, (_, i) => (i / 600) * end)
 
@@ -148,5 +148,16 @@ describe('face swap blink-through', () => {
       expect(sy).toBeGreaterThanOrEqual(0.1 - 1e-12)
       expect(sy).toBeLessThanOrEqual(1)
     }
+  })
+})
+
+describe('reduced-motion still frames', () => {
+  it('stars and sparks are visible at the still times (the cue survives without motion)', () => {
+    const st = dizzyStars(STILL_DIZZY)
+    expect(st).toHaveLength(3)
+    expect(Math.min(...st.map((p) => p.o))).toBeGreaterThan(0.4)
+    const sp = sparks(STILL_SPARK)
+    expect(sp.length).toBeGreaterThan(0)
+    expect(Math.min(...sp.map((p) => p.o))).toBeGreaterThan(0.5)
   })
 })

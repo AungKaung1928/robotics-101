@@ -131,3 +131,7 @@ export function faceSwap(t: number): { sy: number; showNew: boolean } {
   if (u >= 1) return { sy: 1, showNew: true }
   return u < 0.5 ? { sy: 1 - 1.8 * u, showNew: false } : { sy: 0.1 + 1.8 * (u - 0.5), showNew: true }
 }
+
+/** Reduced motion: the reaction's cue as one still frame (no movement): stars at full strength, sparks just out. */
+export const STILL_DIZZY = OOPS_S * 0.15
+export const STILL_SPARK = SPARK_AT + 0.15

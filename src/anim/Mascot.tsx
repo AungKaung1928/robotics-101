@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { BOOP_S, HAPPY_S, JOLT_S, OOPS_S, REST, WHEEL_R, boopPose, headLag, brakePose, startPose, eyeShift, wheelAngle, happyPose, oopsPose, sparks, dizzyStars, faceSwap, SWAP_S, type Pose } from './mascot'
+import { BOOP_S, HAPPY_S, JOLT_S, OOPS_S, REST, WHEEL_R, boopPose, headLag, brakePose, startPose, eyeShift, wheelAngle, happyPose, oopsPose, sparks, dizzyStars, faceSwap, SWAP_S, STILL_DIZZY, STILL_SPARK, type Pose } from './mascot'
 import { PRESS_STYLE } from './spring'
 import './mascot.css'
 
@@ -72,7 +72,8 @@ export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look
     return () => cancelAnimationFrame(id)
   }, [mood]) // face is read only at the moment the mood changes, on purpose
   const sw = faceSwap(face.t)
-  const fig = <MascotFigure pose={pose} mood={mood} size={size} label={label} spark={mood === 'happy' ? t : 0} dizzy={mood === 'oops' ? t : 0} eyes={{ mood: sw.showNew ? face.to : face.from, sy: sw.sy }} look={look} roll={roll} head={head} />
+  const still = !!act && reduced() // reduced motion: the cue shows as a still frame for the 900 ms the face holds
+  const fig = <MascotFigure pose={pose} mood={mood} size={size} label={label} spark={mood === 'happy' ? (still ? STILL_SPARK : t) : 0} dizzy={mood === 'oops' ? (still ? STILL_DIZZY : t) : 0} eyes={{ mood: sw.showNew ? face.to : face.from, sy: sw.sy }} look={look} roll={roll} head={head} />
   // Inside a chapter's SVG figure (place it with a parent <g transform>) the hit area is a <g>, in HTML a <span>.
   return inSvg
     ? <g className="mascot-hit" onPointerEnter={boop} onClick={boop}>{fig}</g>
