@@ -24,3 +24,9 @@
 .side .tag.go { fill: var(--free); }
 .side .tag.stop { fill: var(--ray); }
 .side .is-crash .body { fill: var(--ray); }
+.side .ray line { stroke: var(--ray); stroke-width: 2; transition: opacity var(--motion); }
+.side .ray circle { fill: var(--ray); }
+.side .ray.todo { opacity: 0.18; }
+.side .ray.seen { opacity: 0.45; }
+.side .ray.now line { stroke-width: 4; }
+.side .ray.best line, .side .ray.best circle { stroke: var(--robot); fill: var(--robot); stroke-width: 4; }

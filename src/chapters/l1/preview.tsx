@@ -1,9 +1,9 @@
 import { createRoot } from 'react-dom/client'
 import '../../index.css'
 import { STRINGS } from '../../i18n'
-import { DecideChapter } from './index'
+import { ClosestChapter, DecideChapter } from './index'
 
-const BODIES = { decide: DecideChapter }
+const BODIES = { decide: DecideChapter, closest: ClosestChapter }
 const q = new URLSearchParams(location.search)
 const Body = BODIES[(q.get('c') ?? 'decide') as keyof typeof BODIES]
 const t = STRINGS[q.get('lang') === 'ja' ? 'ja' : 'en']
