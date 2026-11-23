@@ -94,4 +94,13 @@ describe('LevelDone', () => {
     expect(f(4 * STAGGER)).not.toContain('class="celebrate"')
     expect(f(5 * STAGGER + 0.1)).toContain('class="celebrate"')
   })
+  it('a long level: the whole ripple stays within STAGGER_MAX, the burst comes right after the last dot', async () => {
+    const { LevelDoneFrame, STAGGER, STAGGER_MAX, staggerStep } = await import('./LevelDone')
+    expect(staggerStep(5)).toBe(STAGGER) // short rows keep 80 ms
+    for (const n of [12, 22]) {
+      expect(n * staggerStep(n)).toBeLessThanOrEqual(STAGGER_MAX + 1e-9)
+      const g = (t: number) => renderToStaticMarkup(<LevelDoneFrame done={n} total={n} t={t} label="" />)
+      expect(g(STAGGER_MAX + 0.05)).toContain('class="celebrate"') // was n * 80 ms: 0.96 s / 1.76 s
+    }
+  })
 })
