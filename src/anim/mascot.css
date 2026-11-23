@@ -18,5 +18,7 @@
 @supports (transition-timing-function: linear(0, 1)) { .mascot .m-look { transition: transform var(--spring-ms, 300ms) var(--spring, ease-out); } }
 .mascot .m-think circle { fill: var(--ink-2); animation: m-dot 1.2s ease-in-out infinite; }
 @keyframes m-dot { 0%, 100% { opacity: 0.25; } 30% { opacity: 1; } }
+.mascot .m-sway { transform-box: view-box; transform-origin: 32px 31px; animation: m-sway 5.3s ease-in-out infinite; }
+@keyframes m-sway { 25% { transform: rotate(1.5deg); } 75% { transform: rotate(-1.5deg); } }
 .mascot-hit { display: inline-block; line-height: 0; }
-@media (prefers-reduced-motion: reduce) { .mascot .m-breath, .mascot .m-eyes { animation: none; } .mascot .m-look { transition: none; } .mascot .m-think circle { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .mascot .m-breath, .mascot .m-eyes { animation: none; } .mascot .m-look { transition: none; } .mascot .m-think circle { animation: none; } .mascot .m-sway { animation: none; } }

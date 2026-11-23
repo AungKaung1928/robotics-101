@@ -82,14 +82,16 @@ export function MascotFigure({ pose, mood, size = 64, label, spark = 0, look = 0
             </g>
           ))}
           <g className="m-headgroup" transform={`translate(0 ${head.dy}) rotate(${head.rot} 32 31)`}>
-            <rect className="m-head" x="17" y="12" width="30" height="20" rx="10" />
-            <path className="m-lidar" d="M20 18h24" />
-            <g className="m-look" style={{ transform: `translate(${mood === 'think' ? 1.5 : eyeShift(look)}px, ${mood === 'think' ? -2 : 0}px)` }}>
-              {mood === 'happy' ? (
-                <g className="m-face"><path d="M24 25q3-4 6 0M34 25q3-4 6 0" /></g>
-              ) : (
-                <g className="m-face m-eyes"><circle cx="27" cy="24" r={mood === 'oops' ? 3 : 2.2} /><circle cx="37" cy="24" r={mood === 'oops' ? 3 : 2.2} />{mood === 'oops' && <circle className="m-mouth" cx="32" cy="29.5" r="1.4" />}</g>
-              )}
+            <g className="m-sway">
+              <rect className="m-head" x="17" y="12" width="30" height="20" rx="10" />
+              <path className="m-lidar" d="M20 18h24" />
+              <g className="m-look" style={{ transform: `translate(${mood === 'think' ? 1.5 : eyeShift(look)}px, ${mood === 'think' ? -2 : 0}px)` }}>
+                {mood === 'happy' ? (
+                  <g className="m-face"><path d="M24 25q3-4 6 0M34 25q3-4 6 0" /></g>
+                ) : (
+                  <g className="m-face m-eyes"><circle cx="27" cy="24" r={mood === 'oops' ? 3 : 2.2} /><circle cx="37" cy="24" r={mood === 'oops' ? 3 : 2.2} />{mood === 'oops' && <circle className="m-mouth" cx="32" cy="29.5" r="1.4" />}</g>
+                )}
+              </g>
             </g>
           </g>
         </g>
