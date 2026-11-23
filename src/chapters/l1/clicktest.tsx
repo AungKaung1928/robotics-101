@@ -12,6 +12,8 @@ import SenseChapter from '../l0/SenseChapter'
 import ThinkChapter from '../l0/ThinkChapter'
 import ActChapter from '../l0/ActChapter'
 import SimwhatChapter from '../l0/SimwhatChapter'
+import SimpickChapter from '../l0/SimpickChapter'
+import { SIMPICK_STRINGS } from '../l0/simpick.strings'
 import { SIMWHAT_STRINGS } from '../l0/simwhat.strings'
 import { ACT_STRINGS } from '../l0/act.strings'
 import { THINK_STRINGS } from '../l0/think.strings'
@@ -73,6 +75,9 @@ const cases = (l: Lang): Case[] => [
   { name: 'simwhat wall', Body: SimwhatChapter, steps: [{ slide: 3 }, { expect: 'world', is: '3.0 m' }, { expect: 'dots', is: '360' }] },
   { name: 'simwhat sensor off', Body: SimwhatChapter, steps: [{ click: '.break' }, { expect: 'dots', is: '0' }, { expect: 'world', is: '1.5 m' }, { expect: 'count:svg.simwhat circle.sw-dot', is: '0' }] },
   { name: 'simwhat check', Body: SimwhatChapter, steps: [{ click: 'button.pick', text: SIMWHAT_STRINGS[l].answers.empty }, { expect: 'check', ok: true }, { a11y: true }] },
+  { name: 'simpick no gpu + sensor', Body: SimpickChapter, steps: [{ expect: 'start', has: SIMPICK_STRINGS[l].rows.site.name }, { click: '[data-q="gpu"] button', text: SIMPICK_STRINGS[l].no }, { click: '[data-q="sensor"] button', text: SIMPICK_STRINGS[l].yes }, { click: '[data-q="physics"] button', text: SIMPICK_STRINGS[l].no }, { expect: 'start', has: 'mvsim' }] },
+  { name: 'simpick gpu + physics', Body: SimpickChapter, steps: [{ click: '[data-q="gpu"] button', text: SIMPICK_STRINGS[l].yes }, { click: '[data-q="sensor"] button', text: SIMPICK_STRINGS[l].no }, { click: '[data-q="physics"] button', text: SIMPICK_STRINGS[l].yes }, { expect: 'start', has: 'Gazebo' }, { expect: 'count:li.sp-row.is-lit', is: '1' }] },
+  { name: 'simpick check', Body: SimpickChapter, steps: [{ click: '.sp-check button.pick', text: 'mvsim' }, { expect: 'check', ok: true }, { a11y: true }] },
 ]
 
 const setValue = (el: HTMLInputElement, v: string) => {
