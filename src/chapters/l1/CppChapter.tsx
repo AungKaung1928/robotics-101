@@ -71,7 +71,7 @@ export default function CppChapter({ t }: { t: Strings }) {
         </svg>
         <p className="runs" data-k="bench">{s.benchNote(`${BENCH.pyNs} ns`, `C++ ${BENCH.cppNs} ns (${ratio.toFixed(0)}×)`)} {BENCH.compiler}, Python {BENCH.python}.</p>
         <p className="group-h">{s.words}</p>
-        <dl className="gloss">{s.glossary.map(([k, v]) => <div key={k} style={{ display: 'contents' }}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+        <dl className="gloss">{s.glossary.map(([k, v]) => <div key={k} style={{ display: 'contents' }}><dt><code>{k}</code></dt><dd>{v}</dd></div>)}</dl>
         <p className="src">{t.source}: <a href="https://en.cppreference.com/w/cpp/language/list_initialization">cppreference: list initialization (narrowing)</a>, <a href="https://en.cppreference.com/w/cpp/language/implicit_conversion">implicit conversions (floating → integral truncates)</a></p>
       </div>
     </>

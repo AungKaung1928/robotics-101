@@ -75,7 +75,7 @@ export default function CallbackChapter({ t }: { t: Strings }) {
         <p className="src">{s.repo} <a href={REPO}>13_classes/classes.py:111-112</a></p>
         <pre className="code">{"self.scan_sub_ = self.create_subscription(\n    LaserScan, 'scan', self.scan_callback, 10)"}</pre>
         <p className="group-h">{s.words}</p>
-        <dl className="gloss">{s.glossary.map(([k, v]) => <div key={k} style={{ display: 'contents' }}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+        <dl className="gloss">{s.glossary.map(([k, v]) => <div key={k} style={{ display: 'contents' }}><dt><code>{k}</code></dt><dd>{v}</dd></div>)}</dl>
         <p className="src">{t.source}: <a href="https://docs.ros.org/en/humble/Concepts/Intermediate/About-Executors.html">ROS 2 Humble: Executors</a>, <a href="https://docs.ros.org/en/humble/Concepts/Intermediate/About-Quality-of-Service-Settings.html">Quality of Service (history depth)</a>, <a href="https://docs.python.org/3/tutorial/classes.html">Python tutorial: classes</a></p>
       </div>
     </>

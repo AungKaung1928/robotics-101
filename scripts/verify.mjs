@@ -27,6 +27,11 @@ const ROUTES = [
   { hash: '#/scan', equals: { movemeasured: '5.4–5.8 cm', noise: '1 / 1.5 cm' }, readouts: ['hits', 'gap', 'move', 'scanhz', 'beam'], words: { beam: /^-?[01]° → 1\.4\d m$/ } },
   { hash: '#/detect', readouts: ['found', 'truth'] },
   { hash: '#/grid', readouts: ['cells', 'scans', 'known'], equals: { scans: '1', kept: '1.9 s', between: '8.7–9.2', republish: '5 s' }, has: ' %"' }, // canvas label carries the result
+  { hash: '#/1/decide', has: 'class="num">1.1<' },
+  { hash: '#/1/closest', has: 'class="num">1.2<' },
+  { hash: '#/1/callback', has: 'class="num">1.3<' },
+  { hash: '#/1/cpp', has: 'class="num">1.4<' },
+  { hash: '#/1/shell', has: 'class="num">1.5<' },
   { hash: '#/4/grid', readouts: ['cells'], equals: { cells: '40,000' } }, // level route opens the same chapter
   { hash: '#/grid?res=0.1', readouts: ['cells'], equals: { cells: '10,000' } },
   { hash: '#/grid?t=2.5', readouts: ['known'], equals: { scans: '3' }, moreThan: { known: ['#/grid', 'known'] } },
@@ -79,15 +84,15 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
         if (r.h1 && h1 !== r.h1[lang]) fails.push(`${name}: h1 '${h1}'`)
         if (!dom.includes(`<html lang="${lang}"`)) fails.push(`${name}: <html lang> is not ${lang}`)
         if (lang === 'ja' && !JA_TEXT.test(h1 ?? '')) fails.push(`${name}: h1 not Japanese`)
-        // Every prose paragraph and label on a Japanese page must be Japanese (source lines are citations: skipped).
+        // Every prose paragraph and label on a Japanese page must be Japanese (source lines are citations, a term that is only <code> is a command: skipped).
         if (lang === 'ja') {
-          const prose = [...dom.matchAll(/<p(?: class="(?:lede|note)")?>([^<]+)<\/p>|<dt>(.*?)<\/dt>/g)].map((m) => (m[1] ?? m[2]).replace(/<[^>]+>/g, '').trim())
+          const prose = [...dom.matchAll(/<p(?: class="(?:lede|note)")?>([^<]+)<\/p>|<dt>(?!<code>[^<]*<\/code><\/dt>)(.*?)<\/dt>/g)].map((m) => (m[1] ?? m[2]).replace(/<[^>]+>/g, '').trim())
           for (const t of prose) if (!JA_TEXT.test(t)) fails.push(`${name}: English left on the Japanese page: '${t.slice(0, 50)}'`)
           // Headline values (title spot, overview waypoints): numbers and units only, no English word of 3+ letters.
           const values = [...dom.matchAll(/data-k="spot"[^>]*>([^<]*)|class="wp-value"[^>]*>([^<]*)/g)].map((m) => (m[1] ?? m[2]).trim())
           for (const v of values) if (/\b[a-z]{3,}\b/.test(v)) fails.push(`${name}: English in a headline value: '${v}'`)
         }
-        if (!/<(svg|canvas)[^>]*role="(img|group)"/.test(dom)) fails.push(`${name}: no figure`)
+        if (!/<(svg|canvas)[^>]*role="(img|group)"|<pre[^>]*role="log"/.test(dom)) fails.push(`${name}: no figure`) // a terminal chapter's figure is its log
         // Links inside role="img" are hidden from screen readers.
         for (const m of dom.matchAll(/<svg[^>]*role="img"[^>]*>([\s\S]*?)<\/svg>/g)) if (m[1].includes('<a ')) fails.push(`${name}: link inside an svg with role="img"`)
         if (r.readouts && !/data-k="spot"[^>]*>[^<]*\d/.test(dom)) fails.push(`${name}: no headline value under the title`)
