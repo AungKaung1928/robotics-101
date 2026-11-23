@@ -119,6 +119,7 @@ const en = {
     waits: 'starts before',
     ok: 'none',
     breakIt: 'Break it: Nav2 before SLAM',
+    logHead: ['stage', 'starts', 'gives'],
   },
   grid: {
     lines: [
@@ -287,6 +288,7 @@ const ja: typeof en = {
     waits: 'より先に開始',
     ok: 'なし',
     breakIt: 'わざと壊す: SLAM より先に Nav2',
+    logHead: ['段', '開始', '出力'],
   },
   grid: {
     lines: [
