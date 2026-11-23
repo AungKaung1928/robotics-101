@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { bfs, bfsTimeline, layerAt, pathTo, robotAt, tracedCells } from './bfs'
+import { bfs, bfsTimeline, layerAt, pathTo, robotAt, toggleCell, tracedCells } from './bfs'
 
 const parse = (rows: string[]) => ({ w: rows[0].length, h: rows.length, blocked: rows.join('').split('').map((c) => c === '#') })
 
@@ -47,5 +47,14 @@ describe('EP1 BFS', () => {
     expect(robotAt(tl.traced - 0.01, tl.traced, 0.3, 9)).toBe(0) // waits for the trace
     expect(robotAt(tl.end, tl.traced, 0.3, 9)).toBeCloseTo(8, 12)
     expect(robotAt(99, tl.traced, 0.3, 9)).toBe(8)
+  })
+  it('toggleCell: flips a cell, never walls the start or goal, ignores out-of-range, leaves the input untouched', () => {
+    const b = [false, false, true, false]
+    expect(toggleCell(b, 1, 0, 3)).toEqual([false, true, true, false])
+    expect(toggleCell(b, 2, 0, 3)).toEqual([false, false, false, false])
+    expect(toggleCell(b, 0, 0, 3)).toBe(b)
+    expect(toggleCell(b, 3, 0, 3)).toBe(b)
+    expect(toggleCell(b, 9, 0, 3)).toBe(b)
+    expect(b).toEqual([false, false, true, false])
   })
 })

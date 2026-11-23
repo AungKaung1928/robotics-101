@@ -9,8 +9,9 @@ import './bfswave.css'
  * cell it was reached from (came_from, as redblobgames.com/pathfinding/a-star/implementation.html draws it). When the front reaches the goal the
  * parent chain is walked back from the goal (how BFS recovers the path: each cell only knows its parent), then the robot drives it at `cellS` s per cell, cheering on arrival.
  */
-export default function BfsWave({ w, h, blocked, start, goal, t, layerS = 0.25, cellS = 0.3, traceS = 0.06, label }: {
+export default function BfsWave({ w, h, blocked, start, goal, t, layerS = 0.25, cellS = 0.3, traceS = 0.06, label, onCell }: {
   w: number; h: number; blocked: boolean[]; start: number; goal: number; t: number; layerS?: number; cellS?: number; traceS?: number; label: string
+  onCell?: (c: number) => void // break-it: the chapter flips the cell (toggleCell) and the search reruns
 }) {
   const r = bfs(w, h, blocked, start), path = pathTo(r, goal), gd = r.dist[goal]
   const reach = gd >= 0 ? gd : Math.max(...r.dist)
@@ -39,6 +40,9 @@ export default function BfsWave({ w, h, blocked, start, goal, t, layerS = 0.25, 
           </g>
         )
       })}
+      {onCell && Array.from({ length: w * h }, (_, c) => (
+        <rect key={`hit${c}`} className="cell-hit" x={c % w} y={Math.floor(c / w)} width={1} height={1} onClick={() => onCell(c)} />
+      ))}
       <circle className="goal" cx={gx} cy={gy} r={0.3} />
       {found && shown.length > 1 && <polyline className="path" points={shown.map((c) => xy(c).join(',')).join(' ')} />}
       <g transform={`translate(${rx - 0.55} ${ry - 0.6}) scale(${1.1 / 64})`}>

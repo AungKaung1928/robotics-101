@@ -7,3 +7,4 @@
 .bfs .goal { fill: none; stroke: var(--robot); stroke-width: 0.1; }
 .bfs .came { fill: none; stroke: var(--ink-2); stroke-width: 0.05; stroke-linecap: round; stroke-linejoin: round; opacity: 0.75; }
 .bfs .came.on-front { stroke: var(--surface); opacity: 1; }
+.bfs .cell-hit { fill: transparent; cursor: pointer; }
