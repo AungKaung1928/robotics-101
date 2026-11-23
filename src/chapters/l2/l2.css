@@ -12,3 +12,6 @@
 .graph .nd.off { opacity: 0.35; }
 .graph .nd:focus-visible rect { stroke: var(--robot); stroke-width: 3; }
 .graph .legend { font: 16px var(--mono); fill: var(--ink-2); }
+.graph .edge.on { stroke: var(--ink-2); }
+.graph .dot { fill: var(--ray); }
+.graph .dot.cmd { fill: var(--robot); }
