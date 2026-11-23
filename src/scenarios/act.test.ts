@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { TRACK } from './diffdrive'
-import { actAt, brakeTime, progress, wheels } from './act'
+import { ACT_VIEW, actAt, actFrame, brakeTime, progress, wheels } from './act'
 
 describe('act model', () => {
   it('two numbers become two wheel speeds', () => {
@@ -41,4 +41,20 @@ describe('brake stretch', () => {
     expect(Math.min(...after)).toBeLessThan(0.99) // the squash
     expect(brakeStretch(v, 0, ts, a, end + 3)).toBeCloseTo(1, 3)
   })
+})
+
+describe('actFrame: the whole trajectory fits, framing fixed for every t', () => {
+  const _b = 2.5 // act chapter BRAKE (nav2 decel limit)
+  it.each([[0.2, 0.6], [0.22, 1.5], [0.1, -1.2], [-0.15, 0.8], [0.22, 0], [0, 1]])('v %f, w %f: every pose + robot room inside the drawing area', (v, w) => {
+    const tStop = 3, { s, x0, y0 } = actFrame(v, w, tStop, _b), V = ACT_VIEW
+    for (let t = 0; t <= tStop + 1; t += 0.05) {
+      const p = actAt(v, w, tStop, _b, t).pose, x = x0 + p.x * s, y = y0 - p.y * s
+      expect(x).toBeGreaterThanOrEqual(V.side - 1e-6)
+      expect(x).toBeLessThanOrEqual(V.w - V.side + 1e-6)
+      expect(y).toBeGreaterThanOrEqual(V.top - 1e-6)
+      expect(y).toBeLessThanOrEqual(V.bottom - V.under + 1e-6)
+    }
+    expect(s).toBeLessThanOrEqual(V.sMax)
+  })
+  it('a short straight drive keeps the old scale (300 px per m)', () => expect(actFrame(0.1, 0, 1, 2.5).s).toBe(300))
 })
