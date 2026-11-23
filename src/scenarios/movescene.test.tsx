@@ -113,3 +113,16 @@ describe('SimPickScene', () => {
     expect(renderToStaticMarkup(<SimPickScene rungs={rungs} pick={2} from={0} t={0.2} label="" />)).toContain('data-mood="idle"')
   })
 })
+
+describe('LoopActor', () => {
+  it('stands on the ground with its front at x; think shows the thought dots; sense looks at the wall', async () => {
+    const { default: LoopActor } = await import('./LoopActor')
+    const think = renderToStaticMarkup(<svg><LoopActor x={300} y={244} stage="think" driven={0} ended={false} crashed={false} /></svg>)
+    expect(think).toContain('translate(262.1') // 300 − 55·44/64 = 262.19
+    expect(think).toContain('data-mood="think"')
+    expect(think).toContain('m-think')
+    const sense = renderToStaticMarkup(<svg><LoopActor x={300} y={244} stage="sense" driven={0} ended={false} crashed={false} /></svg>)
+    expect(sense).toContain('data-mood="idle"')
+    expect(sense).toContain('translate(2.5px') // eyes shifted fully toward the wall
+  })
+})
