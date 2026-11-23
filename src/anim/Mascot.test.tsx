@@ -80,3 +80,18 @@ describe('LiveNote', () => {
     expect(h).not.toContain('bumped')
   })
 })
+
+describe('LevelDone', () => {
+  it('done dots filled; they pop in one after another; the burst waits for the last dot', async () => {
+    const { LevelDoneFrame, STAGGER } = await import('./LevelDone')
+    const f = (t: number) => renderToStaticMarkup(<LevelDoneFrame done={5} total={7} t={t} label="" />)
+    expect(f(-1).match(/ld-dot is-done/g)!.length).toBe(5)
+    expect(f(-1).match(/class="ld-dot"/g)!.length).toBe(2)
+    const scales = (h: string) => [...h.matchAll(/scale\(([\d.]+)\)/g)].map((m) => +m[1])
+    const mid = scales(f(2.5 * STAGGER)) // dots 0-2 popping, 3-4 not yet
+    expect(mid[0]).not.toBe(1)
+    expect(mid[4]).toBe(1)
+    expect(f(4 * STAGGER)).not.toContain('class="celebrate"')
+    expect(f(5 * STAGGER + 0.1)).toContain('class="celebrate"')
+  })
+})
