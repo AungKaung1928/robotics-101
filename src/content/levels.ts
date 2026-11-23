@@ -2,6 +2,7 @@ import type { ComponentType } from 'react'
 import type { ChapterMeta } from '../anim/contract'
 import { LEVEL0_CHAPTERS, LoopChapter, PipeChapter, RosChapter, ToolsChapter } from '../chapters/l0'
 import { CallbackChapter, ClosestChapter, CppChapter, DecideChapter, LEVEL1_CHAPTERS, ShellChapter } from '../chapters/l1'
+import { BfsChapter, EP_CHAPTERS, LateChapter } from '../chapters/ep'
 import { ActionsChapter, DriveChapter, LEVEL2_CHAPTERS, MsgTypesChapter, NodesChapter, ParamsChapter, TopicsChapter, WsChapter } from '../chapters/l2'
 import { STRINGS, type Strings } from '../i18n'
 import { CHAPTER_ICON } from '../icons'
@@ -26,14 +27,22 @@ export const LEVELS: ChapterMeta[][] = [
 /** Bodies of the new-level chapters (the 7 patrol chapters keep their own routes in App). */
 export const LEVEL_BODY: Record<string, ComponentType<{ t: Strings }>> = {
   loop: LoopChapter, pipe: PipeChapter, tools: ToolsChapter, ros: RosChapter, decide: DecideChapter, closest: ClosestChapter, callback: CallbackChapter, cpp: CppChapter, shell: ShellChapter,
+  bfs: BfsChapter, late: LateChapter,
   nodes: NodesChapter, topics: TopicsChapter, msgtypes: MsgTypesChapter, actions: ActionsChapter, params: ParamsChapter, ws: WsChapter, drive: DriveChapter,
 }
 
 export type LevelPage = { meta: ChapterMeta; num: string; prev: ChapterMeta | null; next: ChapterMeta | null }
 
-/** '#/1/decide' → that chapter with its number ('1.1') and its neighbours in reading order (across levels); anything else → null. */
+/**
+ * '#/1/decide' → that chapter with its number ('1.1') and its neighbours in reading order (across levels);
+ * '#/ep/bfs' → 'EP1', neighbours inside Engineering Practice only; anything else → null.
+ */
 export function levelPage(hash: string): LevelPage | null {
   const [lv, id] = hash.replace(/^#\/?/, '').split('?')[0].split('/')
+  if (lv === 'ep') {
+    const j = EP_CHAPTERS.findIndex((c) => c.id === id)
+    return j < 0 ? null : { meta: EP_CHAPTERS[j], num: `EP${j + 1}`, prev: EP_CHAPTERS[j - 1] ?? null, next: EP_CHAPTERS[j + 1] ?? null }
+  }
   const chs = LEVELS[Number(lv)]
   const i = chs?.findIndex((c) => c.id === id && LEVEL_BODY[c.id]) ?? -1
   if (!chs || i < 0) return null
