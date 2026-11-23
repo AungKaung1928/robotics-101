@@ -1,7 +1,7 @@
 import { BOUNCY, WOBBLE, settleTime, springAt } from './spring'
 
 /** Body pose relative to rest: lift (px, up positive), scale x / y about the feet, tilt (deg) about the feet. */
-export type Pose = { y: number; sx: number; sy: number; rot: number }
+export type Pose = { y: number; sx: number; sy: number; rot: number; x?: number } // x: sideways offset (px), entrance only
 export const REST: Pose = { y: 0, sx: 1, sy: 1, rot: 0 }
 
 /** Squash or stretch that keeps the area: sy given, sx = 1 / sy (a squashed body gets wider, not smaller). */
@@ -95,6 +95,18 @@ export function startPose(t: number): Pose {
   return t <= 0 ? REST : { ...REST, rot: springAt(t, BOUNCY, 0, -JOLT) }
 }
 export const JOLT_S = settleTime(BOUNCY, 0, JOLT, 0.2)
+
+export const ENTER_D = 40, ENTER_ROLL = 0.6 // px rolled in from the left, s of braking
+/**
+ * Entrance (landing page): the robot rolls in from ENTER_D px to the left, braking at a constant rate to a stop at
+ * ENTER_ROLL s (x = −D·(1 − t/T)², so speed falls linearly to 0), then the brake jolt pitches it forward and it settles.
+ */
+export function enterPose(t: number): Pose {
+  if (t <= 0) return { ...REST, x: -ENTER_D }
+  if (t < ENTER_ROLL) return { ...REST, x: -ENTER_D * (1 - t / ENTER_ROLL) ** 2 }
+  return { ...brakePose(t - ENTER_ROLL), x: 0 }
+}
+export const ENTER_S = ENTER_ROLL + JOLT_S
 
 export const HEAD_LAG = 0.04 // s the head trails the body (overlapping action; Cooper, 12 principles in games)
 

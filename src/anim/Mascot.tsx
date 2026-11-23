@@ -1,14 +1,14 @@
 import { useEffect, useId, useState, type CSSProperties } from 'react'
-import { BOOP_S, HAPPY_S, JOLT_S, OOPS_S, REST, WHEEL_R, boopPose, headLag, brakePose, startPose, eyeShift, wheelAngle, happyPose, oopsPose, sparks, dizzyStars, faceSwap, SWAP_S, STILL_DIZZY, STILL_SPARK, blinkDelay, type Pose } from './mascot'
+import { BOOP_S, HAPPY_S, JOLT_S, OOPS_S, REST, WHEEL_R, boopPose, headLag, brakePose, startPose, eyeShift, wheelAngle, happyPose, oopsPose, sparks, dizzyStars, faceSwap, SWAP_S, STILL_DIZZY, STILL_SPARK, blinkDelay, enterPose, ENTER_S, type Pose } from './mascot'
 import { PRESS_STYLE } from './spring'
 import './mascot.css'
 
 const reduced = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 export type Mood = 'idle' | 'happy' | 'oops' | 'think' | 'sleep'
-type Reaction = 'happy' | 'oops' | 'boop' | 'brake' | 'start'
+type Reaction = 'happy' | 'oops' | 'boop' | 'brake' | 'start' | 'enter'
 const REACTION: Record<Reaction, { pose: (t: number) => Pose; end: number }> = {
   happy: { pose: happyPose, end: HAPPY_S }, oops: { pose: oopsPose, end: OOPS_S }, boop: { pose: boopPose, end: BOOP_S },
-  brake: { pose: brakePose, end: JOLT_S }, start: { pose: startPose, end: JOLT_S },
+  brake: { pose: brakePose, end: JOLT_S }, start: { pose: startPose, end: JOLT_S }, enter: { pose: enterPose, end: ENTER_S },
 }
 
 /**
@@ -20,13 +20,14 @@ const REACTION: Record<Reaction, { pose: (t: number) => Pose; end: number }> = {
  * e.g. the playhead's place on the scrubber. `roll` = distance driven in the drawing's own units (64-unit box): the
  * wheels turn by roll / radius, so they never skid against the floor.
  */
-export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look = 0, roll = 0, thinking = false, sleepAfter = 0, size = 64, label, inSvg = false }: {
-  cheer?: number; oops?: number; brake?: number; start?: number; look?: number; roll?: number; thinking?: boolean; sleepAfter?: number
+export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look = 0, roll = 0, thinking = false, sleepAfter = 0, enter = false, size = 64, label, inSvg = false }: {
+  cheer?: number; oops?: number; brake?: number; start?: number; look?: number; roll?: number; thinking?: boolean; sleepAfter?: number; enter?: boolean
   size?: number; label: string; inSvg?: boolean
 }) {
   const [act, setAct] = useState<{ kind: Reaction; n: number } | null>(null)
-  const [pose, setPose] = useState<Pose>(REST)
+  const [pose, setPose] = useState<Pose>(() => (enter && !reduced() ? enterPose(0) : REST)) // entrance: first paint already off to the left, no jump
   const [t, setT] = useState(0)
+  useEffect(() => { if (enter && !reduced()) setAct({ kind: 'enter', n: 1 }) }, []) // once, on mount; reduced motion: already in place
   useEffect(() => { if (cheer) setAct({ kind: 'happy', n: cheer }) }, [cheer])
   useEffect(() => { if (oops) setAct({ kind: 'oops', n: oops }) }, [oops])
   useEffect(() => { if (brake) setAct({ kind: 'brake', n: brake }) }, [brake])
@@ -88,18 +89,18 @@ export function MascotFigure({ pose, mood, size = 64, label, spark = 0, dizzy = 
   const blink = { ...PRESS_STYLE, '--blink-delay': `${blinkDelay(useId())}ms` } as CSSProperties
   const stars = dizzyStars(dizzy)
   const starPath = (p: (typeof stars)[number], i: number) => <path key={i} className="m-star" d="M0-3L.8-.8 3 0 .8.8 0 3-.8.8-3 0-.8-.8Z" transform={`translate(${p.x} ${p.y}) scale(${p.s})`} opacity={p.o} />
-  const body = `translate(32 58) translate(0 ${-pose.y}) rotate(${pose.rot}) scale(${pose.sx} ${pose.sy}) translate(-32 -58)`
+  const body = `translate(${pose.x ?? 0} 0) translate(32 58) translate(0 ${-pose.y}) rotate(${pose.rot}) scale(${pose.sx} ${pose.sy}) translate(-32 -58)`
   const shadow = 1 - pose.y / 25
   return (
     <svg className="mascot" data-mood={mood} width={size} height={size} viewBox="0 0 64 64" style={blink}
       {...(label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': true })}>
-      <ellipse className="m-shadow" cx="32" cy="60" rx={18 * shadow} ry={2.2 * shadow} />
+      <ellipse className="m-shadow" cx={32 + (pose.x ?? 0)} cy="60" rx={18 * shadow} ry={2.2 * shadow} />
       <g transform={body}>
         <g className="m-breath">
           <rect className="m-plate" x="11" y="40" width="42" height="16" rx="7" />
           <rect className="m-plate" x="14" y="31" width="36" height="11" rx="5" />
           {[14, 50].map((cx) => (
-            <g key={cx} transform={`rotate(${wheelAngle(roll)} ${cx} 53)`}>
+            <g key={cx} transform={`rotate(${wheelAngle(roll + (pose.x ?? 0))} ${cx} 53)`}>
               <circle className="m-wheel" cx={cx} cy="53" r={WHEEL_R} />
               <path className="m-spoke" d={`M${cx} ${53 - WHEEL_R + 1.5}V${53 + WHEEL_R - 1.5}`} />
             </g>

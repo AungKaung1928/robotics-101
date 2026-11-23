@@ -53,3 +53,10 @@ describe('sleep face', () => {
     expect(h).not.toContain('m-eyes')
   })
 })
+
+describe('entrance first paint', () => {
+  it('with enter the first frame is already off to the left (no flash at rest); without, at rest', () => {
+    expect(renderToStaticMarkup(<Mascot enter label="" />)).toContain('<g transform="translate(-40 0)')
+    expect(renderToStaticMarkup(<Mascot label="" />)).toContain('<g transform="translate(0 0)')
+  })
+})
