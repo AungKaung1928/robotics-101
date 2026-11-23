@@ -1,6 +1,7 @@
 import RobotTop from './RobotTop'
 import { TRACK, poseAt, rolled, trail, wheelPoint, type Pose2 } from './diffdrive'
 import TurnOverlay from './TurnOverlay'
+import { startStretch } from '../anim/spring'
 import './robottop.css'
 
 const S = 300, X0 = 60, Y0 = 200 // px per m (the drawn wheels sit TRACK·S = 48 px apart, as in RobotTop), start point (screen)
@@ -41,7 +42,7 @@ export default function MoveScene({ vl, vr, t, slip = 0, showTurn = false, arrow
       {arrows && slip > 0 && <g className="ms-v is-spin" data-ms={vl.toFixed(3)}><path d={wheelArrow(p, 1, vl).d} /><path d={wheelArrow(p, 1, vl).head} /></g>}
       {arrows && ([[1, vl * (1 - slip)], [-1, vr]] as const).map(([side, g]) => { const a = wheelArrow(p, side, g); return (
         <g key={side} className="ms-v" data-wheel={side === 1 ? 'left' : 'right'} data-ms={g.toFixed(3)}><path d={a.d} /><path d={a.head} /></g>) })}
-      <RobotTop x={x} y={y} deg={(-p.th * 180) / Math.PI} rolledL={r.l * S} rolledR={r.r * S} mood={slip > 0 ? 'worried' : solved ? 'proud' : 'idle'} />
+      <RobotTop x={x} y={y} deg={(-p.th * 180) / Math.PI} rolledL={r.l * S} rolledR={r.r * S} mood={slip > 0 ? 'worried' : solved ? 'proud' : 'idle'} stretch={vl || vr ? startStretch(t) : 1} />
     </svg>
   )
 }

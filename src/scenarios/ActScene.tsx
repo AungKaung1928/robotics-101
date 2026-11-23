@@ -1,4 +1,5 @@
 import RobotTop from './RobotTop'
+import { startStretch } from '../anim/spring'
 import { actAt, actFrame, brakeStretch, wheels } from './act'
 import TurnOverlay from './TurnOverlay'
 import './robottop.css'
@@ -46,7 +47,7 @@ export default function ActScene({ v, w, tStop, decel, t, vWord = 'v', wWord = '
         <text className="as-num" x={(gx + x) / 2} y={Math.min(gy, y) - 30} textAnchor="middle">+{cm} cm</text>
       </>}
       {showTurn && <TurnOverlay vl={vl} vr={vr} p={f.pose} scr={scr} s={S} x={x} y={y} />}{/* R = v / ω: the two dials set the circle */}
-      <RobotTop x={x} y={y} deg={deg(f.pose.th)} rolledL={f.rolled.l * S} rolledR={f.rolled.r * S} mood={fast || (!on && f.speed > 0) ? 'worried' : solved ? 'proud' : on ? 'idle' : 'curious'} stretch={brakeStretch(v, w, tStop, decel, t)} />
+      <RobotTop x={x} y={y} deg={deg(f.pose.th)} rolledL={f.rolled.l * S} rolledR={f.rolled.r * S} mood={fast || (!on && f.speed > 0) ? 'worried' : solved ? 'proud' : on ? 'idle' : 'curious'} stretch={brakeStretch(v, w, tStop, decel, t) * (v || w ? startStretch(t) : 1)} />
       <g transform={`translate(${x} ${y}) rotate(${deg(f.pose.th)})`}>{arrow(1, vl)}{arrow(-1, vr)}</g>
       <Dial x={150} value={on ? v : 0} max={VMAX} word={vWord} />
       <Dial x={310} value={on ? w : 0} max={WMAX} word={wWord} />

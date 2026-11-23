@@ -91,3 +91,11 @@ export const CALM: Spring = springFrom(0.25, 0)
 export const UI: Spring = springFrom(0.15, 0.2)
 const UI_EASE = springEasing(UI)
 export const UI_STYLE = { '--spring': UI_EASE.easing, '--spring-ms': `${UI_EASE.ms}ms` } as CSSProperties
+
+/** Squash at a start: the body is 10 % short along its heading when it sets off, then springs (BOUNCY: a small stretch
+ * past 1) back to round. The start counterpart of the brake lean (squash and stretch on starts and stops). t in s since the
+ * start; 1 before it and once settled. Reduced motion: callers pass a settled t. */
+export const START_SQUASH = 0.1
+export function startStretch(t: number): number {
+  return t < 0 ? 1 : 1 + springAt(t, BOUNCY, -START_SQUASH)
+}

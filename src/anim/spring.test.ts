@@ -97,3 +97,15 @@ describe('UI spring (controls)', () => {
     expect(ms).toBeLessThan(300)
   })
 })
+
+describe('startStretch', () => {
+  it('squashed at the start, a small stretch past 1, round again within 0.5 s', async () => {
+    const { startStretch, START_SQUASH } = await import('./spring')
+    expect(startStretch(-1)).toBe(1)
+    expect(startStretch(0)).toBeCloseTo(1 - START_SQUASH, 9)
+    const peak = Math.max(...Array.from({ length: 50 }, (_, i) => startStretch(i / 100)))
+    expect(peak).toBeGreaterThan(1.005) // follow-through: overshoots
+    expect(peak).toBeLessThan(1 + START_SQUASH) // never more than the squash
+    expect(Math.abs(startStretch(0.5) - 1)).toBeLessThan(0.01)
+  })
+})

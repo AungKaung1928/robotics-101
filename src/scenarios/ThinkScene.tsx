@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import RobotTop from './RobotTop'
 import { useTextWidth } from './fit'
-import { BOUNCY, arrivalScale, springAt } from '../anim/spring'
+import { BOUNCY, arrivalScale, springAt, startStretch } from '../anim/spring'
 import { cast, room } from './sense'
 import { RADIUS, thinkRun, thinkX } from './think'
 import { roomLayout } from './room'
@@ -70,7 +70,7 @@ export default function ThinkScene({ stopAt, t, v = 0.2, wallX = 1.2, stopWord =
         : <circle key={a} className={a === stopAt ? 'tk-rung is-pick' : 'tk-rung'} cx={cx} cy={Y(Y0) + 34} r={a === stopAt ? 5 : 4}><title>{rungRule(a)}</title></circle> })}
       <line className="ts-mark" x1={X(sim.mark(stopAt))} x2={X(sim.mark(stopAt))} y1={by0 - 50} y2={by0 + 50} />
       <g transform={`translate(${X(x) + 20} ${Y(Y0)}) scale(${sx} ${1 / sx}) translate(${-X(x) - 20} ${-Y(Y0)})`}>
-        <RobotTop x={X(x)} y={Y(Y0)} deg={0} rolledL={X(x) - X(sim.x0)} rolledR={X(x) - X(sim.x0)} mood={bumped ? 'dizzy' : fired ? 'proud' : 'curious'} t={since} />
+        <RobotTop x={X(x)} y={Y(Y0)} deg={0} rolledL={X(x) - X(sim.x0)} rolledR={X(x) - X(sim.x0)} mood={bumped ? 'dizzy' : fired ? 'proud' : 'curious'} t={since} stretch={startStretch(t)} />
       </g>
       {/* one mark per check made so far, where the robot's front was: the loop only looks at these spots (chapter model).
           Below the robot and the ladder row (+34), so the last check before a crash stays visible in front of the wall */}
