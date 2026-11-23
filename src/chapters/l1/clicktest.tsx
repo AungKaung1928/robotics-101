@@ -13,6 +13,8 @@ import ThinkChapter from '../l0/ThinkChapter'
 import ActChapter from '../l0/ActChapter'
 import SimwhatChapter from '../l0/SimwhatChapter'
 import SimpickChapter from '../l0/SimpickChapter'
+import MeetChapter from '../l0/MeetChapter'
+import { MEET_STRINGS } from '../l0/meet.strings'
 import { SIMPICK_STRINGS } from '../l0/simpick.strings'
 import { SIMWHAT_STRINGS } from '../l0/simwhat.strings'
 import { ACT_STRINGS } from '../l0/act.strings'
@@ -78,6 +80,9 @@ const cases = (l: Lang): Case[] => [
   { name: 'simpick no gpu + sensor', Body: SimpickChapter, steps: [{ expect: 'start', has: SIMPICK_STRINGS[l].rows.site.name }, { click: '[data-q="gpu"] button', text: SIMPICK_STRINGS[l].no }, { click: '[data-q="sensor"] button', text: SIMPICK_STRINGS[l].yes }, { click: '[data-q="physics"] button', text: SIMPICK_STRINGS[l].no }, { expect: 'start', has: 'mvsim' }] },
   { name: 'simpick gpu + physics', Body: SimpickChapter, steps: [{ click: '[data-q="gpu"] button', text: SIMPICK_STRINGS[l].yes }, { click: '[data-q="sensor"] button', text: SIMPICK_STRINGS[l].no }, { click: '[data-q="physics"] button', text: SIMPICK_STRINGS[l].yes }, { expect: 'start', has: 'Gazebo' }, { expect: 'count:li.sp-row.is-lit', is: '1' }] },
   { name: 'simpick check', Body: SimpickChapter, steps: [{ click: '.sp-check button.pick', text: 'mvsim' }, { expect: 'check', ok: true }, { a11y: true }] },
+  { name: 'meet parts', Body: MeetChapter, steps: [{ click: 'g.meet-part.is-sensor' }, { expect: 'part', is: MEET_STRINGS[l].parts.sensor }, { click: 'g.meet-part.is-wheels' }, { expect: 'part', is: MEET_STRINGS[l].parts.wheels }] },
+  { name: 'meet car', Body: MeetChapter, steps: [{ expect: 'robot', is: MEET_STRINGS[l].no }, { click: '.break' }, { expect: 'robot', is: MEET_STRINGS[l].yes }, { expect: 'decides', is: MEET_STRINGS[l].itself }] },
+  { name: 'meet check', Body: MeetChapter, steps: [{ click: '.meet-check button.pick', text: MEET_STRINGS[l].answers.notRobot }, { expect: 'check', ok: true }, { a11y: true }] },
 ]
 
 const setValue = (el: HTMLInputElement, v: string) => {
