@@ -27,6 +27,8 @@ import { ACTIONS_STRINGS } from '../l2/actions.strings'
 import { DRIVE_STRINGS } from '../l2/drive.strings'
 import { NODES_STRINGS } from '../l2/nodes.strings'
 import { SCRIPT } from '../l2/ws'
+import { WS_STRINGS } from '../l2/ws.strings'
+import { SHELL_STRINGS } from './shell.strings'
 
 type Step =
   | { click: string; text?: string }
@@ -54,6 +56,9 @@ const cases = (l: Lang): Case[] => [
   { name: 'actions unreachable', Body: BODIES.actions, steps: [{ click: '.break', text: S(ACTIONS_STRINGS, l, 'l2.actions.ACTIONS_STRINGS').breakIt }, { expect: 'status', has: 'ABORTED (6)' }] },
   { name: 'params break', Body: BODIES.params, steps: [{ click: '.break' }, { expect: 'false', has: '19' }] },
   { name: 'ws challenge', Body: BODIES.ws, steps: [...typeAll(SCRIPT), { expect: 'challenge', ok: true }] },
+  { name: 'ws new terminal forgets', Body: BODIES.ws, steps: [...typeAll(SCRIPT), { expect: 'challenge', ok: true }, { click: '.break', text: S(WS_STRINGS, l, 'l2.ws.WS_STRINGS').newTerm }, { expect: 'challenge', is: S(WS_STRINGS, l, 'l2.ws.WS_STRINGS').notYet }] },
+  { name: 'shell new terminal forgets', Body: BODIES.shell, steps: [...typeAll(['source /opt/ros/humble/setup.bash', 'ros2 pkg list']), { expect: 'challenge', ok: true }, { click: '.break' }, ...typeAll(['ros2 pkg list']), { expect: 'challenge', is: S(SHELL_STRINGS, l, 'l1.shell.SHELL_STRINGS').notYet }] },
+  { name: 'topics break', Body: BODIES.topics, steps: [{ expect: 'got-slam_toolbox', re: /[1-9]/ }, { click: '.break' }, { expect: 'got-slam_toolbox', re: /^0\b/ }] },
   { name: 'drive break', Body: BODIES.drive, steps: [{ click: '.break' }, { expect: 'challenge', has: S(DRIVE_STRINGS, l, 'l2.drive.DRIVE_STRINGS').moving }] },
   { name: 'bfs stack', Body: BfsChapter, steps: [{ expect: 'len', has: '13' }, { click: '.break' }, { expect: 'len', has: '15' }] },
   { name: 'bfs wall click', Body: BfsChapter, steps: [{ click: cell(l, 3, 3) }, { expect: 'len', has: '13' }, { click: cell(l, 0, 2) }, { click: cell(l, 0, 4) }, { click: cell(l, 1, 3) }, { expect: 'len', is: S(BFS_STRINGS, l, 'ep.bfs.BFS_STRINGS').none }] },

@@ -9,7 +9,7 @@ setsid npx vite --port $PORT --strictPort >/tmp/clicktest-vite.log 2>&1 &
 VITE=$!
 trap 'kill -- -$VITE 2>/dev/null' EXIT  # whole group: npx leaves vite running otherwise
 for _ in $(seq 50); do curl -sf -o /dev/null "http://localhost:$PORT/" && break; sleep 0.2; done
-dump() { timeout 120 "$CHROME" --headless=new --disable-gpu --force-prefers-reduced-motion --virtual-time-budget=20000 \
+dump() { timeout 120 "$CHROME" --headless=new --disable-gpu --force-prefers-reduced-motion --virtual-time-budget=40000 \
   --dump-dom "http://localhost:$PORT/src/chapters/l1/clicktest.html" 2>/dev/null | sed -n '/<pre id="out">/,/<\/pre>/p' | sed 's/<[^>]*>//g'; }
 OUT=$(dump)
 # A blank dump happens under load on this laptop (Chrome returns before the page runs): retry once, say so.
