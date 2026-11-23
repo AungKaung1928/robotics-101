@@ -8,8 +8,10 @@ describe('levelPage', () => {
     expect(p?.prev?.id).toBe('decide')
     expect(p?.next?.id).toBe('callback')
   })
-  it('first chapter has no prev; wrong level, unknown id, patrol chapters → null', () => {
-    expect(levelPage('#/1/decide')?.prev).toBeNull()
+  it('neighbours cross levels; first chapter has no prev; wrong level, unknown id, patrol chapters → null', () => {
+    expect(levelPage('#/0/loop')?.prev).toBeNull()
+    expect(levelPage('#/1/decide')?.prev?.id).toBe('loop')
+    expect(levelPage('#/1/shell')?.next?.id).toBe('scan')
     expect(levelPage('#/2/decide')).toBeNull()
     expect(levelPage('#/1/nope')).toBeNull()
     expect(levelPage('#/4/grid')).toBeNull()
@@ -21,7 +23,7 @@ describe('levelPage', () => {
 
 describe('readingIndex', () => {
   it('orders pages across levels; plain and level routes agree; overview is -1', () => {
-    expect(readingIndex('#/1/closest')).toBe(1)
+    expect(readingIndex('#/1/closest')).toBe(2)
     expect(readingIndex('#/scan')).toBe(readingIndex('#/3/scan'))
     expect(readingIndex('#/4/grid/7')).toBeGreaterThan(readingIndex('#/3/scan?t=0.1'))
     expect(readingIndex('#/')).toBe(-1)

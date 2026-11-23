@@ -10,7 +10,7 @@ const BASE = `http://localhost:${PORT}/`
 const OUT = join(ROOT, 'verify-out')
 // Route, then the readouts (data-k) its page must show with a number in them.
 const ROUTES = [
-  { hash: '', h1: { en: 'Robotics 101', ja: 'ロボティクス 101' }, links: ['#/bringup', '#/tf', '#/scan', '#/detect', '#/grid', '#/costmap', '#/goal', '#/3/scan', '#/3/tf', '#/3/detect', '#/4/grid', '#/4/costmap', '#/4/goal', '#/4/bringup'], has: 'class="levelmap"', words: { peek: /^1 \/ 7 · Nav2 @ 10 s$/ } },
+  { hash: '', h1: { en: 'Robotics 101', ja: 'ロボティクス 101' }, links: ['#/bringup', '#/tf', '#/scan', '#/detect', '#/grid', '#/costmap', '#/goal', '#/0/loop', '#/3/scan', '#/3/tf', '#/3/detect', '#/4/grid', '#/4/costmap', '#/4/goal', '#/4/bringup'], has: 'class="levelmap"', words: { peek: /^1 \/ 7 · Nav2 @ 10 s$/ } },
   { hash: '#/bringup', readouts: ['patrol', 'step'], words: { early: /none|なし/ } },
   { hash: '#/bringup/3', readouts: ['step'], off: 4 },
   { hash: '#/tf', readouts: ['hit-map', 'hit-base_footprint', 'hit-base_scan', 'odomhz'], equals: { drive: '0.13 m', mapodom: '0.02 s (50 Hz)' }, words: { verdict: /healthy|正常/ } },
@@ -27,6 +27,7 @@ const ROUTES = [
   { hash: '#/scan', equals: { movemeasured: '5.4–5.8 cm', noise: '1 / 1.5 cm' }, readouts: ['hits', 'gap', 'move', 'scanhz', 'beam'], words: { beam: /^-?[01]° → 1\.4\d m$/ } },
   { hash: '#/detect', readouts: ['found', 'truth'] },
   { hash: '#/grid', readouts: ['cells', 'scans', 'known'], equals: { scans: '1', kept: '1.9 s', between: '8.7–9.2', republish: '5 s' }, has: ' %"' }, // canvas label carries the result
+  { hash: '#/0/loop', has: 'class="num">0.1<', equals: { blind: '5.2 cm' } },
   { hash: '#/1/decide', has: 'class="num">1.1<' },
   { hash: '#/1/closest', has: 'class="num">1.2<' },
   { hash: '#/1/callback', has: 'class="num">1.3<' },
