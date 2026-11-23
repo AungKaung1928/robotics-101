@@ -491,6 +491,12 @@
   "my": "စိတ်ကြိုက်၊ အဆင့်များရဲ့ အပြင်ဘက်",
   "back": "Optional, outside of the levels"
  },
+ "core:levels.groups.0": {
+  "status": "pass-alt",
+  "en": "Meet the robot",
+  "my": "စက်ရုပ်ကို တွေ့ကြမယ်",
+  "back": "Let's meet the robot"
+ },
  "core:levels.groups.1": {
   "status": "pass-alt",
   "en": "A practice world",
@@ -868,6 +874,582 @@
   "en": "Robotics 101",
   "my": "Robotics 101",
   "back": "Robotics 101"
+ },
+ "ep/bfs:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: queue.pop() instead of queue.popleft()",
+  "my": "ဖျက်ကြည့်: queue.popleft() အစား queue.pop()",
+  "back": "Break it: queue.pop() instead of queue.popleft()"
+ },
+ "ep/bfs:brokenNote": {
+  "status": "pass-alt",
+  "en": "pop() takes the newest cell: a stack. It dives down one direction and still reaches G, but the path is longer. Nothing crashes; the answer is just worse.",
+  "my": "pop() က အသစ်ဆုံး cell ကို ထုတ်ပါတယ်: stack တစ်ခုပါ။ ဦးတည်ရာ တစ်ခုတည်းကို နက်နက် ဆင်းသွားပြီး G ကို ရောက်သေးပေမဲ့ လမ်းကြောင်းက ပိုရှည်ပါတယ်။ ဘာမှ crash မဖြစ်ပါဘူး၊ အဖြေ ပိုဆိုးသွားရုံပါ။",
+  "back": "pop() takes out the newest cell: it is a stack. It goes deep in one direction and still reaches G, but the path is longer. Nothing crashes; the answer is just worse."
+ },
+ "ep/bfs:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: add walls so the shortest path needs at least 21 steps, and G can still be reached.",
+  "my": "စိန်ခေါ်မှု: အတိုဆုံး လမ်းကြောင်းက အနည်းဆုံး 21 ဆင့် လိုအောင် နံရံတွေ ထည့်ပါ၊ ဒါပေမဲ့ G ကို ရောက်နိုင်သေးရပါမယ်။",
+  "back": "Challenge: add walls so that the shortest path needs at least 21 steps, but G must still be reachable."
+ },
+ "ep/bfs:clickHint": {
+  "status": "pass-alt",
+  "en": "Click a cell to add or remove a wall (keyboard: Tab to the grid, arrows to move, Enter to toggle).",
+  "my": "နံရံ ထည့်ဖို့ ဒါမှမဟုတ် ဖယ်ဖို့ cell ကို နှိပ်ပါ (ကီးဘုတ်: Tab နဲ့ grid ကို သွား၊ မြှားခလုတ်တွေနဲ့ ရွှေ့၊ Enter နဲ့ ပြောင်းပါ)။",
+  "back": "Click a cell to add or remove a wall (keyboard: go to the grid with Tab, move with the arrow keys, toggle with Enter)."
+ },
+ "ep/bfs:cost.0": {
+  "status": "pass-alt",
+  "en": "Nav2 stores the map as a costmap: each cell holds a number from 0 (free) to 254 (lethal obstacle), 255 means unknown, and 253 means the robot body would touch an obstacle there.",
+  "my": "Nav2 က မြေပုံကို costmap အဖြစ် သိမ်းပါတယ်။ cell တစ်ခုစီမှာ 0 (လွတ်) ကနေ 254 (သေချာပေါက် တိုက်မိမယ့် အတားအဆီး) အထိ နံပါတ်တစ်ခု ရှိပါတယ်။ 255 က မသိဘူးလို့ အဓိပ္ပာယ်ရပြီး 253 က အဲဒီနေရာမှာ စက်ရုပ်ကိုယ်ထည်က အတားအဆီးကို ထိမယ်လို့ အဓိပ္ပာယ်ရပါတယ်။",
+  "back": "Nav2 stores the map as a costmap. Each cell has a number from 0 (free) to 254 (certain-collision obstacle). 255 means unknown, and 253 means the robot body would touch the obstacle at that spot."
+ },
+ "ep/bfs:cost.1": {
+  "status": "pass-alt",
+  "en": "Its NavFn planner runs Dijkstra (or A*), as in the costmap view above. Nav2's inflation layer makes the cost fall off smoothly with distance from an obstacle; the page uses one step (+4) to keep it visible. With every cost equal, Dijkstra takes cells out in the same rings as BFS.",
+  "my": "သူ့ရဲ့ NavFn planner က အပေါ်က costmap မြင်ကွင်းလိုပဲ Dijkstra (ဒါမှမဟုတ် A*) ကို run ပါတယ်။ Nav2 ရဲ့ inflation layer က အတားအဆီးနဲ့ အကွာအဝေး ဝေးလာတာနဲ့အမျှ cost ကို ချောချောမွေ့မွေ့ လျော့ကျစေပါတယ်။ မြင်သာအောင် ဒီစာမျက်နှာက တစ်ဆင့်တည်း (+4) ပဲ သုံးပါတယ်။ cost အားလုံး တူရင် Dijkstra က BFS လိုပဲ ကွင်းအစဉ်အတိုင်း cell တွေကို ထုတ်ပါတယ်။",
+  "back": "Its NavFn planner runs Dijkstra (or A*) just like the costmap view above. Nav2's inflation layer reduces the cost smoothly as the distance from the obstacle grows. To make it visible, this page uses only a single step (+4). When all costs are equal, Dijkstra takes out cells in ring order just like BFS."
+ },
+ "ep/bfs:costNote": {
+  "status": "pass-alt",
+  "en": "Each cell touching a wall now costs 5 instead of 1. Dijkstra takes out the cheapest cell first: 15 steps at cost 15, against the BFS path's 13 steps at cost 41. Longer, but never brushing a wall.",
+  "my": "အခု နံရံနဲ့ ထိနေတဲ့ cell တစ်ခုစီက cost 1 အစား 5 ကျပါတယ်။ Dijkstra က အသက်သာဆုံး cell ကို အရင် ထုတ်ပါတယ်: 15 ဆင့်၊ cost 15 ပါ။ BFS လမ်းကြောင်းကတော့ 13 ဆင့်၊ cost 41 ပါ။ ပိုရှည်ပေမဲ့ နံရံကို ဘယ်တော့မှ မပွတ်ပါဘူး။",
+  "back": "Now each cell touching a wall costs 5 instead of 1. Dijkstra takes out the cheapest cell first: 15 steps, cost 15. The BFS path is 13 steps, cost 41. It is longer but never brushes the wall."
+ },
+ "ep/bfs:costOff": {
+  "status": "pass-alt",
+  "en": "Back to plain BFS",
+  "my": "ရိုးရိုး BFS ကို ပြန်သွား",
+  "back": "Go back to plain BFS"
+ },
+ "ep/bfs:costOn": {
+  "status": "pass-alt",
+  "en": "Costmap view: Dijkstra, +4 next to a wall",
+  "my": "costmap မြင်ကွင်း: Dijkstra၊ နံရံဘေးမှာ +4",
+  "back": "costmap view: Dijkstra, +4 next to walls"
+ },
+ "ep/bfs:costTitle": {
+  "status": "pass-alt",
+  "en": "On a real robot",
+  "my": "တကယ့် စက်ရုပ်ပေါ်မှာ",
+  "back": "On a real robot"
+ },
+ "ep/bfs:figLabel": {
+  "status": "pass-alt",
+  "en": "Grid map: S start, G goal, walls dark",
+  "my": "grid မြေပုံ: S က အစ၊ G က ပန်းတိုင်၊ အရောင်ရင့်တာက နံရံ",
+  "back": "Grid map: S is the start, G is the goal, darker color is a wall"
+ },
+ "ep/bfs:fixIt": {
+  "status": "pass-alt",
+  "en": "Fix it: back to popleft()",
+  "my": "ပြင်ကြည့်: popleft() ကို ပြန်သုံး",
+  "back": "Fix it: use popleft() again"
+ },
+ "ep/bfs:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "BFS",
+  "my": "BFS",
+  "back": "BFS"
+ },
+ "ep/bfs:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "breadth-first search: look at everything 1 step away, then 2 steps, and so on",
+  "my": "breadth-first search: 1 ဆင့်အကွာ အရာအားလုံးကို ကြည့်၊ ပြီးရင် 2 ဆင့်၊ အဲဒီလို ဆက်သွား",
+  "back": "breadth-first search: look at everything 1 step away, then 2 steps, and so on"
+ },
+ "ep/bfs:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "queue",
+  "my": "queue",
+  "back": "queue"
+ },
+ "ep/bfs:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "first in, first out: the oldest item leaves first",
+  "my": "အရင်ဝင် အရင်ထွက်: အဟောင်းဆုံးက အရင် ထွက်",
+  "back": "first in, first out: the oldest comes out first"
+ },
+ "ep/bfs:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "stack",
+  "my": "stack",
+  "back": "stack"
+ },
+ "ep/bfs:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "last in, first out: the newest item leaves first",
+  "my": "နောက်ဝင် အရင်ထွက်: အသစ်ဆုံးက အရင် ထွက်",
+  "back": "last in, first out: the newest comes out first"
+ },
+ "ep/bfs:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "neighbour",
+  "my": "ဘေးချင်းကပ် cell (neighbour)",
+  "back": "Adjacent cell (neighbour)"
+ },
+ "ep/bfs:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "a cell one step up, down, left or right",
+  "my": "အပေါ်၊ အောက်၊ ဘယ်၊ ညာ တစ်ဆင့်အကွာက cell",
+  "back": "The cell one step away: up, down, left, or right"
+ },
+ "ep/bfs:glossary.4.0": {
+  "status": "pass-alt",
+  "en": "parent",
+  "my": "parent",
+  "back": "parent"
+ },
+ "ep/bfs:glossary.4.1": {
+  "status": "pass-alt",
+  "en": "the cell that put this one into the queue",
+  "my": "ဒီ cell ကို queue ထဲ ထည့်ခဲ့တဲ့ cell",
+  "back": "The cell that added this cell to the queue"
+ },
+ "ep/bfs:glossary.5.0": {
+  "status": "pass-alt",
+  "en": "costmap",
+  "my": "costmap",
+  "back": "costmap"
+ },
+ "ep/bfs:glossary.5.1": {
+  "status": "pass-alt",
+  "en": "a grid where each cell has a cost, not only free / occupied",
+  "my": "လွတ် / ပိတ် ပဲ မဟုတ်ဘဲ cell တစ်ခုစီမှာ cost ရှိတဲ့ grid",
+  "back": "A grid where each cell has a cost, not just free / blocked"
+ },
+ "ep/bfs:glossary.6.0": {
+  "status": "pass-alt",
+  "en": "Nav2",
+  "my": "Nav2",
+  "back": "Nav2"
+ },
+ "ep/bfs:glossary.6.1": {
+  "status": "pass-alt",
+  "en": "the ROS 2 navigation software: plans a path on the map and drives the robot along it",
+  "my": "ROS 2 ရဲ့ navigation ဆော့ဖ်ဝဲ: မြေပုံပေါ်မှာ လမ်းကြောင်း စီစဉ်ပြီး စက်ရုပ်ကို အဲဒီလမ်းကြောင်းအတိုင်း မောင်းပေး",
+  "back": "ROS 2's navigation software: plans a path on the map and drives the robot along that path"
+ },
+ "ep/bfs:glossary.7.0": {
+  "status": "pass-alt",
+  "en": "NavFn",
+  "my": "NavFn",
+  "back": "NavFn"
+ },
+ "ep/bfs:glossary.7.1": {
+  "status": "pass-alt",
+  "en": "one of Nav2's path planners",
+  "my": "Nav2 ရဲ့ လမ်းကြောင်း planner တွေထဲက တစ်ခု",
+  "back": "One of Nav2's path planners"
+ },
+ "ep/bfs:glossary.8.0": {
+  "status": "pass-alt",
+  "en": "Dijkstra",
+  "my": "Dijkstra",
+  "back": "Dijkstra"
+ },
+ "ep/bfs:glossary.8.1": {
+  "status": "pass-alt",
+  "en": "BFS for steps that cost different amounts: always takes out the cheapest total so far",
+  "my": "ဆင့်တစ်ခုစီ cost မတူတဲ့အခါ သုံးတဲ့ BFS: အခုထိ စုစုပေါင်း အသက်သာဆုံးကို အမြဲ အရင် ထုတ်",
+  "back": "BFS used when each step has a different cost: always take out the one with the cheapest total so far first"
+ },
+ "ep/bfs:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: breadth-first search finds the fewest-steps path on a grid, and the queue is the reason it is the fewest.",
+  "my": "သင်ယူမယ့်အရာ: breadth-first search က grid ပေါ်မှာ အဆင့်အနည်းဆုံး လမ်းကြောင်းကို ရှာပေးပါတယ်။ အနည်းဆုံး ဖြစ်ရတဲ့ အကြောင်းရင်းက queue ပါ။",
+  "back": "What you will learn: breadth-first search finds the path with the fewest steps on a grid. The reason it is the fewest is the queue."
+ },
+ "ep/bfs:legendDone": {
+  "status": "pass-alt",
+  "en": "taken out",
+  "my": "ထုတ်ပြီး",
+  "back": "Taken out"
+ },
+ "ep/bfs:legendNear": {
+  "status": "pass-alt",
+  "en": "cost 5 (touches a wall)",
+  "my": "cost 5 (နံရံနဲ့ ထိနေ)",
+  "back": "cost 5 (touching a wall)"
+ },
+ "ep/bfs:legendPath": {
+  "status": "pass-alt",
+  "en": "path",
+  "my": "လမ်းကြောင်း",
+  "back": "Path"
+ },
+ "ep/bfs:legendQueued": {
+  "status": "pass-alt",
+  "en": "in the queue",
+  "my": "queue ထဲမှာ",
+  "back": "In queue"
+ },
+ "ep/bfs:lines.0": {
+  "status": "pass-alt",
+  "en": "A map for a robot is often a grid: each cell is free or occupied. The robot starts at S and must reach G, one cell up, down, left or right per step.",
+  "my": "စက်ရုပ်အတွက် မြေပုံက grid ဖြစ်လေ့ရှိပါတယ်။ cell တစ်ခုစီက လွတ်နေတာ ဒါမှမဟုတ် ပိတ်နေတာ ဖြစ်ပါတယ်။ စက်ရုပ်က S ကနေ စပြီး G ကို ရောက်ရပါမယ်။ တစ်ဆင့်မှာ အပေါ်၊ အောက်၊ ဘယ်၊ ညာ cell တစ်ကွက်ပဲ ရွှေ့ရပါတယ်။",
+  "back": "For a robot, the map is usually a grid. Each cell is either free or blocked. The robot starts from S and must reach G. In one step it moves only one cell up, down, left, or right."
+ },
+ "ep/bfs:lines.1": {
+  "status": "pass-alt",
+  "en": "BFS keeps a queue: a line of cells waiting their turn. Take the oldest cell out, put each free neighbour you have not seen yet at the back. Cells come out in rings: all 1 step away, then all 2 steps, and so on.",
+  "my": "BFS က queue တစ်ခုကို သုံးပါတယ်။ queue ဆိုတာ အလှည့်စောင့်နေတဲ့ cell တွေရဲ့ တန်းစီပါ။ အဟောင်းဆုံး cell ကို ထုတ်ပြီး မမြင်ရသေးတဲ့ လွတ်နေတဲ့ ဘေးချင်းကပ် cell တစ်ခုစီကို တန်းရဲ့ နောက်ဆုံးမှာ ထည့်ပါ။ cell တွေက ကွင်းလိုက် ထွက်လာပါတယ်: 1 ဆင့်အကွာ အားလုံး၊ ပြီးရင် 2 ဆင့်အကွာ အားလုံး၊ အဲဒီလို ဆက်သွားပါတယ်။",
+  "back": "BFS uses a queue. A queue is a line of cells waiting their turn. Take out the oldest cell, and add each free, not-yet-seen neighbouring cell to the end of the line. The cells come out in rings: all those 1 step away, then all those 2 steps away, and so on."
+ },
+ "ep/bfs:lines.2": {
+  "status": "pass-alt",
+  "en": "So the first time G comes out, no shorter path can exist. Each cell remembers who put it in (its parent); walking parents back from G gives the path.",
+  "my": "ဒါကြောင့် G ပထမဆုံး ထွက်လာတဲ့အချိန်မှာ ဒီထက် တိုတဲ့ လမ်းကြောင်း မရှိနိုင်တော့ပါဘူး။ cell တစ်ခုစီက သူ့ကို ဘယ် cell က ထည့်ခဲ့လဲ (သူ့ parent) ဆိုတာ မှတ်ထားပါတယ်။ G ကနေ parent တွေကို နောက်ပြန် လိုက်သွားရင် လမ်းကြောင်း ရပါတယ်။",
+  "back": "So when G comes out first, there can no longer be a shorter path. Each cell remembers which cell added it (its parent). If you follow the parents backwards from G, you get the path."
+ },
+ "ep/bfs:maxQueue": {
+  "status": "pass-alt",
+  "en": "largest queue",
+  "my": "အကြီးဆုံး queue",
+  "back": "Largest queue"
+ },
+ "ep/bfs:none": {
+  "status": "pass-alt",
+  "en": "no path",
+  "my": "လမ်းကြောင်း မရှိ",
+  "back": "No path"
+ },
+ "ep/bfs:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet: shortest path =",
+  "my": "မရသေးဘူး: အတိုဆုံး လမ်းကြောင်း =",
+  "back": "Not yet: shortest path ="
+ },
+ "ep/bfs:pathCost": {
+  "status": "pass-alt",
+  "en": "path cost",
+  "my": "လမ်းကြောင်း cost",
+  "back": "Path cost"
+ },
+ "ep/bfs:pathLen": {
+  "status": "pass-alt",
+  "en": "path length (steps)",
+  "my": "လမ်းကြောင်း အရှည် (ဆင့်)",
+  "back": "Path length (steps)"
+ },
+ "ep/bfs:reset": {
+  "status": "pass-alt",
+  "en": "Reset the map",
+  "my": "မြေပုံကို ပြန်စ",
+  "back": "Reset map"
+ },
+ "ep/bfs:runsHere": {
+  "status": "pass-alt",
+  "en": "Python shown; the page runs the same logic in JavaScript.",
+  "my": "ဒီမှာ Python နဲ့ ပြထားပါတယ်၊ စာမျက်နှာက တူညီတဲ့ logic ကို JavaScript နဲ့ run ပါတယ်။",
+  "back": "It is shown here in Python; the page runs the same logic in JavaScript."
+ },
+ "ep/bfs:solved": {
+  "status": "pass-alt",
+  "en": "Solved: shortest path =",
+  "my": "အောင်မြင်ပြီ: အတိုဆုံး လမ်းကြောင်း =",
+  "back": "Success: shortest path ="
+ },
+ "ep/bfs:title": {
+  "status": "pass-alt",
+  "en": "BFS: the shortest way across a grid",
+  "my": "BFS: grid ကို ဖြတ်သွားတဲ့ အတိုဆုံး လမ်း",
+  "back": "BFS: shortest path across a grid"
+ },
+ "ep/bfs:visited": {
+  "status": "pass-alt",
+  "en": "cells taken out",
+  "my": "ထုတ်ပြီးသား cell",
+  "back": "Cells taken out"
+ },
+ "ep/bfs:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရ",
+  "back": "Glossary"
+ },
+ "ep/late:acted": {
+  "status": "pass-alt",
+  "en": "acted on",
+  "my": "သုံးခဲ့",
+  "back": "Used"
+ },
+ "ep/late:bDropped": {
+  "status": "pass-alt",
+  "en": "readings thrown away",
+  "my": "ပစ်လိုက်တဲ့ တန်ဖိုး",
+  "back": "Discarded values"
+ },
+ "ep/late:bOldest": {
+  "status": "pass-alt",
+  "en": "oldest data acted on",
+  "my": "သုံးခဲ့တဲ့ အဟောင်းဆုံး data",
+  "back": "Oldest data used"
+ },
+ "ep/late:backwards": {
+  "status": "pass-alt",
+  "en": "went back in time",
+  "my": "အတိတ်ကို ပြန်သွားခဲ့",
+  "back": "Went back into the past"
+ },
+ "ep/late:bpText": {
+  "status": "pass-alt",
+  "en": "Readings arrive every 100 ms. If handling one takes longer, they pile up in a queue that keeps only the newest few (KEEP_LAST depth). A short queue throws more away; a long one keeps more but the robot acts on older data.",
+  "my": "တန်ဖိုးတွေက 100 ms တိုင်း ရောက်လာပါတယ်။ တစ်ခုကို ကိုင်တွယ်တာ ဒီထက် ကြာရင် အသစ်ဆုံး အနည်းငယ်ကိုပဲ ထားတဲ့ queue (KEEP_LAST depth) ထဲမှာ ပုံနေပါတယ်။ queue တိုရင် ပိုများများ ပစ်ပါတယ်၊ ရှည်ရင် ပိုများများ ထားပေမဲ့ စက်ရုပ်က ပိုဟောင်းတဲ့ data နဲ့ လုပ်ဆောင်ပါတယ်။",
+  "back": "Values arrive every 100 ms. If handling one takes longer than that, they pile up in a queue that keeps only the few newest (KEEP_LAST depth). A short queue discards more; a long one keeps more but the robot works with older data."
+ },
+ "ep/late:bpTitle": {
+  "status": "pass-alt",
+  "en": "When the robot cannot keep up: backpressure",
+  "my": "စက်ရုပ် မမီတော့တဲ့အခါ: backpressure",
+  "back": "When the robot cannot keep up: backpressure"
+ },
+ "ep/late:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: with max age only, act on at least 15 of the 20 readings and never go back in time.",
+  "my": "စိန်ခေါ်မှု: max age တစ်ခုတည်းနဲ့ တန်ဖိုး 20 ခုထဲက အနည်းဆုံး 15 ခုကို သုံးပါ၊ အတိတ်ကို ဘယ်တော့မှ ပြန်မသွားပါစေနဲ့။",
+  "back": "Challenge: with max age alone, use at least 15 of the 20 values, and never go back into the past."
+ },
+ "ep/late:depth": {
+  "status": "pass-alt",
+  "en": "queue depth",
+  "my": "queue အနက်",
+  "back": "Queue depth"
+ },
+ "ep/late:envLabel": {
+  "status": "pass-alt",
+  "en": "Each message as an envelope: flies for its own delay, then is used or dropped",
+  "my": "message တစ်ခုစီကို စာအိတ်အဖြစ် ပြထား: သူ့နောက်ကျချိန်အတိုင်း ပျံသန်းပြီး သုံးခံရ ဒါမှမဟုတ် ပစ်ခံရ",
+  "back": "Each message is shown as an envelope: it flies according to its latency and is used or discarded"
+ },
+ "ep/late:exampleNote": {
+  "status": "pass-alt",
+  "en": "The delays on this page are an example, not a measurement.",
+  "my": "ဒီစာမျက်နှာက နောက်ကျချိန်တွေက ဥပမာပါ၊ တိုင်းတာထားတာ မဟုတ်ပါဘူး။",
+  "back": "The latencies on this page are examples, not measured."
+ },
+ "ep/late:fateShort.old": {
+  "status": "pass-alt",
+  "en": "too old",
+  "my": "အရမ်းဟောင်း",
+  "back": "Too old"
+ },
+ "ep/late:fateShort.stale": {
+  "status": "pass-alt",
+  "en": "older",
+  "my": "ပိုဟောင်း",
+  "back": "Older"
+ },
+ "ep/late:fateShort.used": {
+  "status": "pass-alt",
+  "en": "used",
+  "my": "သုံးခဲ့",
+  "back": "Used"
+ },
+ "ep/late:figLabel": {
+  "status": "pass-alt",
+  "en": "Timeline: each reading falls from the sensor line (when measured) to the robot line (when it arrived)",
+  "my": "Timeline: တန်ဖိုး တစ်ခုစီက ဆင်ဆာ မျဉ်း (တိုင်းချိန်) ကနေ စက်ရုပ် မျဉ်း (ရောက်ချိန်) ဆီ ကျလာ",
+  "back": "Timeline: each value drops from the sensor line (measured time) to the robot line (arrival time)"
+ },
+ "ep/late:fixIt": {
+  "status": "pass-alt",
+  "en": "Fix it properly: also drop older than newest",
+  "my": "သေချာ ပြင်ကြည့်: အသစ်ဆုံးထက် ဟောင်းတာကိုလည်း ပစ်",
+  "back": "Fix it properly: also discard anything older than the newest"
+ },
+ "ep/late:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "header.stamp",
+  "my": "header.stamp",
+  "back": "header.stamp"
+ },
+ "ep/late:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "the time the data was measured, set by the sender",
+  "my": "data တိုင်းခဲ့တဲ့ အချိန်၊ ပို့သူက သတ်မှတ်",
+  "back": "The time the data was measured, set by the sender"
+ },
+ "ep/late:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "latency",
+  "my": "latency",
+  "back": "latency"
+ },
+ "ep/late:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "time from measuring to arriving",
+  "my": "တိုင်းချိန်ကနေ ရောက်ချိန်အထိ ကြာချိန်",
+  "back": "Time from measurement to arrival"
+ },
+ "ep/late:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "stale",
+  "my": "stale",
+  "back": "stale"
+ },
+ "ep/late:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "too old to trust for the next decision",
+  "my": "နောက် ဆုံးဖြတ်ချက်အတွက် ယုံလို့ မရလောက်အောင် ဟောင်းနေတာ",
+  "back": "So old that it cannot be trusted for the next decision"
+ },
+ "ep/late:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "out of order",
+  "my": "out of order (အစဉ်မမှန်)",
+  "back": "out of order"
+ },
+ "ep/late:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "a newer message arrives before an older one",
+  "my": "message အသစ်က အဟောင်းထက် အရင် ရောက်လာတာ",
+  "back": "A newer message arriving before an older one"
+ },
+ "ep/late:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: every message carries the time it was measured, and the robot must use that stamp, not the time it arrived.",
+  "my": "သင်ယူမယ့်အရာ: message တိုင်းမှာ တိုင်းတာခဲ့တဲ့ အချိန် ပါပါတယ်။ စက်ရုပ်က ရောက်လာတဲ့ အချိန်ကို မဟုတ်ဘဲ အဲဒီ stamp ကို သုံးရပါမယ်။",
+  "back": "What you will learn: every message carries the time it was measured. The robot must use that stamp, not the time it arrives."
+ },
+ "ep/late:lines.0": {
+  "status": "pass-alt",
+  "en": "A sensor sends a reading 10 times a second over Wi-Fi. Each message carries header.stamp: when it was measured. Most take 25-40 ms to arrive.",
+  "my": "ဆင်ဆာတစ်ခုက Wi-Fi ကနေ တစ်စက္ကန့်ကို 10 ကြိမ် တန်ဖိုး ပို့ပါတယ်။ message တစ်ခုစီမှာ header.stamp ပါပါတယ်: တိုင်းခဲ့တဲ့ အချိန်ပါ။ အများစုက ရောက်ဖို့ 25-40 ms ကြာပါတယ်။",
+  "back": "A sensor sends a value 10 times per second over Wi-Fi. Each message carries header.stamp: the time it was measured. Most take 25-40 ms to arrive."
+ },
+ "ep/late:lines.1": {
+  "status": "pass-alt",
+  "en": "At 0.6 s the Wi-Fi hiccups. Readings #6-#9 are held up and arrive after #10. If the robot acts on each message as it arrives, it uses #10, then jumps back to the older #6: its picture of the world goes back in time.",
+  "my": "0.6 s မှာ Wi-Fi ခဏ ထစ်သွားပါတယ်။ #6-#9 တန်ဖိုးတွေ ပိတ်မိနေပြီး #10 ပြီးမှ ရောက်လာပါတယ်။ စက်ရုပ်က message တစ်ခုစီကို ရောက်တာနဲ့ သုံးရင် #10 ကို သုံးပြီးမှ ပိုဟောင်းတဲ့ #6 ကို ပြန်ခုန်သွားပါတယ်: စက်ရုပ်ရဲ့ ကမ္ဘာမြင်ကွင်းက အတိတ်ကို ပြန်ရောက်သွားပါတယ်။",
+  "back": "At 0.6 s the Wi-Fi stutters briefly. Values #6-#9 are stuck and arrive only after #10. If the robot uses each message as soon as it arrives, it uses #10 and then jumps back to the older #6: the robot's view of the world goes back into the past."
+ },
+ "ep/late:lines.2": {
+  "status": "needs-human",
+  "en": "Two fixes. A max age drops anything measured too long ago, but the number needs tuning. A stamp check drops anything older than the newest reading already used, and needs no tuning.",
+  "my": "ပြင်နည်း 2 ခု ရှိပါတယ်။ max age က အရမ်းကြာခဲ့ပြီ တိုင်းထားတာမှန်သမျှကို ပစ်ပါတယ်၊ ဒါပေမဲ့ နံပါတ်ကို ချိန်ညှိဖို့ လိုပါတယ်။ stamp စစ်ဆေးမှုက သုံးပြီးသား အသစ်ဆုံး တန်ဖိုးထက် ဟောင်းတာမှန်သမျှကို ပစ်ပါတယ်၊ ချိန်ညှိဖို့ မလိုပါဘူး။",
+  "note": "blind check: Garbled clause: 'အရမ်းကြာခဲ့ပြီ တိုင်းထားတာမှန်သမျှ' lacks a connecting particle/relative marker; hard to parse"
+ },
+ "ep/late:maxAge": {
+  "status": "pass-alt",
+  "en": "max_age (s)",
+  "my": "max_age (s)",
+  "back": "max_age (s)"
+ },
+ "ep/late:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet:",
+  "my": "မရသေးဘူး:",
+  "back": "Not yet:"
+ },
+ "ep/late:older": {
+  "status": "pass-alt",
+  "en": "dropped: older than newest",
+  "my": "ပစ်လိုက်: အသစ်ဆုံးထက် ဟောင်း",
+  "back": "Discarded: older than the newest"
+ },
+ "ep/late:rDelay": {
+  "status": "needs-human",
+  "en": "every reading used later by",
+  "my": "တန်ဖိုးတိုင်း နောက်ကျပြီး သုံးရတဲ့ ကြာချိန်",
+  "note": "blind check: Garbled word order: 'တန်ဖိုးတိုင်း နောက်ကျပြီး သုံးရတဲ့ ကြာချိန်' - meaning unclear"
+ },
+ "ep/late:rDropped": {
+  "status": "pass-alt",
+  "en": "dropped (too late for the wait)",
+  "my": "ပစ်လိုက် (စောင့်ချိန်အတွက် နောက်ကျလွန်း)",
+  "back": "Discarded (too late for the wait time)"
+ },
+ "ep/late:rUsed": {
+  "status": "pass-alt",
+  "en": "used, in order",
+  "my": "အစဉ်အတိုင်း သုံးခဲ့",
+  "back": "Used in order"
+ },
+ "ep/late:reorderText": {
+  "status": "pass-alt",
+  "en": "Hold each reading until its stamp + a wait, then use them in stamp order. Never back in time, but every reading is used that much later; one that arrives after its wait is dropped.",
+  "my": "တန်ဖိုး တစ်ခုစီကို သူ့ stamp + စောင့်ချိန် ရောက်တဲ့အထိ ထိန်းထားပြီး stamp အစဉ်အတိုင်း သုံးပါ။ အတိတ်ကို ဘယ်တော့မှ ပြန်မသွားပေမဲ့ တန်ဖိုးတိုင်းကို အဲဒီလောက် နောက်ကျပြီး သုံးရပါတယ်။ စောင့်ချိန် ကျော်ပြီးမှ ရောက်တဲ့ တန်ဖိုးကို ပစ်ပါတယ်။",
+  "back": "Hold each value until its stamp + wait time arrives, and use them in stamp order. It never goes back into the past, but every value is used that much later. A value that arrives after the wait time has passed is discarded."
+ },
+ "ep/late:reorderTitle": {
+  "status": "pass-alt",
+  "en": "Fix 3: a reorder buffer",
+  "my": "ပြင်နည်း 3: reorder buffer",
+  "back": "Fix 3: reorder buffer"
+ },
+ "ep/late:repoNote": {
+  "status": "pass-alt",
+  "en": "Same idea in TF-Transform-Explorer: tf_anomaly_detector declares max_transform_age = 1.0 s.",
+  "my": "TF-Transform-Explorer မှာလည်း ဒီအကြံအတိုင်းပါ: tf_anomaly_detector က max_transform_age = 1.0 s လို့ သတ်မှတ်ထားပါတယ်။",
+  "back": "TF-Transform-Explorer has the same advice: tf_anomaly_detector sets max_transform_age = 1.0 s."
+ },
+ "ep/late:robot": {
+  "status": "pass-alt",
+  "en": "robot (arrived)",
+  "my": "စက်ရုပ် (ရောက်ချိန်)",
+  "back": "Robot (arrival time)"
+ },
+ "ep/late:runsHere": {
+  "status": "pass-alt",
+  "en": "Python shown; the page runs the same logic in JavaScript.",
+  "my": "ဒီမှာ Python နဲ့ ပြထားပါတယ်၊ စာမျက်နှာက တူညီတဲ့ logic ကို JavaScript နဲ့ run ပါတယ်။",
+  "back": "It is shown here in Python; the page runs the same logic in JavaScript."
+ },
+ "ep/late:sensor": {
+  "status": "pass-alt",
+  "en": "sensor (measured)",
+  "my": "ဆင်ဆာ (တိုင်းချိန်)",
+  "back": "Sensor (measured time)"
+ },
+ "ep/late:solved": {
+  "status": "pass-alt",
+  "en": "Solved:",
+  "my": "အောင်မြင်ပြီ:",
+  "back": "Success:"
+ },
+ "ep/late:stale": {
+  "status": "pass-alt",
+  "en": "dropped: too old",
+  "my": "ပစ်လိုက်: အရမ်းဟောင်း",
+  "back": "Discarded: too old"
+ },
+ "ep/late:title": {
+  "status": "pass-alt",
+  "en": "Telemetry: when messages arrive late",
+  "my": "Telemetry: message တွေ နောက်ကျပြီး ရောက်လာတဲ့အခါ",
+  "back": "Telemetry: when messages arrive late"
+ },
+ "ep/late:unfix": {
+  "status": "pass-alt",
+  "en": "Back to max age only",
+  "my": "max age တစ်ခုတည်းကို ပြန်သွား",
+  "back": "Go back to max age only"
+ },
+ "ep/late:window": {
+  "status": "pass-alt",
+  "en": "wait (ms)",
+  "my": "စောင့်ချိန် (ms)",
+  "back": "Wait time (ms)"
+ },
+ "ep/late:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရ",
+  "back": "Glossary"
+ },
+ "ep/late:work": {
+  "status": "pass-alt",
+  "en": "handling time (ms)",
+  "my": "ကိုင်တွယ်ချိန် (ms)",
+  "back": "Handling time (ms)"
+ },
+ "ep/late:worstAge": {
+  "status": "pass-alt",
+  "en": "oldest data used",
+  "my": "သုံးခဲ့တဲ့ အဟောင်းဆုံး data",
+  "back": "Oldest data used"
  },
  "l0/act:answers.atOnce": {
   "status": "pass-alt",
