@@ -1,4 +1,4 @@
-/** EP1 text, EN + JA. Same keys in both (bfs.strings.test checks). */
+/** EP1 text, EN + JA. Same keys in both (strings.test checks). */
 export const BFS_STRINGS = {
   en: {
     title: 'BFS: the shortest way across a grid',
