@@ -29,6 +29,7 @@ const ROUTES = [
   { hash: '#/grid', readouts: ['cells', 'scans', 'known'], equals: { scans: '1', kept: '1.9 s', between: '8.7–9.2', republish: '5 s' }, has: ' %"' }, // canvas label carries the result
   { hash: '#/0/loop', has: 'class="num">0.1<', equals: { blind: '5.2 cm' } },
   { hash: '#/0/pipe', has: 'class="num">0.2<' },
+  { hash: '#/3/tflab', has: 'class="num">3.3<' },
   { hash: '#/ep/bfs', has: 'class="num">EP1<' },
   { hash: '#/ep/late', has: 'class="num">EP2<' },
   { hash: '#/0/tools', has: 'class="num">0.3<' },
