@@ -12,7 +12,7 @@
 @media (prefers-reduced-motion: reduce) { .ep-bfs .c { transition: none; } }
 .ep-late { width: 100%; height: auto; display: block; }
 .ep-late .lane { stroke: var(--rule); stroke-width: 2; }
-.ep-late text { font: 18px var(--mono); fill: var(--ink-2, var(--ink)); }
+.ep-late text { font: 22px var(--mono); fill: var(--ink-2, var(--ink)); }
 .ep-late .msg line { stroke: var(--rule); stroke-width: 1.5; }
 .ep-late .msg circle { fill: var(--ray); }
 .ep-late .msg.acted circle, .bfs-legend .lg.acted { background: var(--robot); fill: var(--robot); }

@@ -13,7 +13,7 @@ import './ep.css'
 /** The same 20 messages in the envelope figure's units (s). anim.test checks it gives the page's fates in keep-latest mode. */
 const ENVELOPES = DELAYS_MS.map((d, i) => ({ id: i, stamp: (i * PERIOD_MS) / 1000, latency: d / 1000 }))
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
-const X0 = 20, PX = 0.42, TOP = 50, BOT = 300 // timeline geometry (SVG units; PX per ms)
+const X0 = 20, PX = 0.3, TOP = 60, BOT = 280 // timeline geometry (SVG units; PX per ms)
 const x = (ms: number) => X0 + ms * PX
 
 /** EP2: late messages. The timeline is the model's own stamps and arrivals; the slider and fix toggle re-run it. */
@@ -32,7 +32,7 @@ export default function LateChapter({ t }: { t: Strings }) {
     <>
       <div className="figure">
         <svg className="ep-late" viewBox={`0 0 ${x(END_MS) + 20} ${BOT + 30}`} role="img" aria-label={s.figLabel}>
-          <line className="lane" x1={X0} x2={x(END_MS)} y1={TOP} y2={TOP} /><text x={X0} y={TOP - 12}>{s.sensor}</text>
+          <line className="lane" x1={X0} x2={x(END_MS)} y1={TOP} y2={TOP} /><text x={X0} y={TOP - 36}>{s.sensor}</text>
           <line className="lane" x1={X0} x2={x(END_MS)} y1={BOT} y2={BOT} /><text x={X0} y={BOT + 24}>{s.robot}</text>
           {o.map((m) => {
             const p = Math.max(0, Math.min(1, (f.tMs - m.stamp) / (m.arrive - m.stamp)))
@@ -42,7 +42,7 @@ export default function LateChapter({ t }: { t: Strings }) {
               <g key={m.i} className={`msg ${cls}`}>
                 <line x1={x(m.stamp)} y1={TOP} x2={x(m.stamp) + (x(m.arrive) - x(m.stamp)) * p} y2={TOP + (BOT - TOP) * p} />
                 <circle cx={x(m.stamp) + (x(m.arrive) - x(m.stamp)) * p} cy={TOP + (BOT - TOP) * p} r={9} />
-                {(m.i === 6 || m.i === 10 || m.i === 14) && <text className="id" x={x(m.stamp)} y={TOP - 30 + 18}>#{m.i}</text>}
+                {(m.i === 6 || m.i === 10 || m.i === 14) && <text className="id" x={x(m.stamp)} y={TOP - 8}>#{m.i}</text>}
               </g>
             )
           })}
