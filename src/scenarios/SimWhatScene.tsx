@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, type PointerEvent } from 'react'
 import RobotTop from './RobotTop'
 import { room, sweep } from './sense'
 import './robottop.css'
@@ -18,7 +18,14 @@ export default function SimWhatScene({ wallX, sensorOn = true, worldWord, viewWo
 }) {
   const walls = room(wallX), hits = sweep(O, walls, 1, 1, Math.PI / 90, !sensorOn), [hot, setHot] = useState<number | null>(hot0)
   const cls = (base: string, i: number) => `${base}${hot === null ? '' : hot === i ? ' is-hot' : ' is-dim'}`
-  const link = (i: number) => ({ onPointerEnter: () => setHot(i), onPointerLeave: () => setHot(null), onFocus: () => setHot(i), onBlur: () => setHot(null) })
+  // Mouse: hover lights, leave clears. Touch has no hover and fires pointerleave right after pointerup (W3C pointerevents
+  // issue #431), so a tap toggles instead and touch enter/leave are ignored. Keyboard: focus / blur.
+  const link = (i: number) => ({
+    onPointerEnter: (e: PointerEvent) => { if (e.pointerType !== 'touch') setHot(i) },
+    onPointerLeave: (e: PointerEvent) => { if (e.pointerType !== 'touch') setHot(null) },
+    onPointerDown: (e: PointerEvent) => { if (e.pointerType === 'touch') setHot((h) => (h === i ? null : i)) },
+    onFocus: () => setHot(i), onBlur: () => setHot(null),
+  })
   return (
     <svg className="simwhat-scene" viewBox={`0 0 ${2 * PW + 10} ${PH + 22}`} role="img" aria-label={label} data-points={hits.length}>
       <g>
