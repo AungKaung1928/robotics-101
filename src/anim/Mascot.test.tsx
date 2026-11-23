@@ -4,6 +4,12 @@ import Mascot, { MascotFigure } from './Mascot'
 import { REST, SPARK_AT } from './mascot'
 
 describe('Mascot render', () => {
+  it('labelled = an image with that name; empty label = decorative, hidden from screen readers', () => {
+    expect(renderToStaticMarkup(<MascotFigure pose={REST} mood="idle" label="guide robot" />)).toMatch(/role="img" aria-label="guide robot"/)
+    const deco = renderToStaticMarkup(<MascotFigure pose={REST} mood="idle" label="" />)
+    expect(deco).toContain('aria-hidden="true"')
+    expect(deco).not.toContain('role="img"')
+  })
   it('inSvg: a <g> hit area holding a nested <svg>, valid inside a chapter figure', () => {
     const html = renderToStaticMarkup(<svg><g transform="translate(10 20)"><Mascot label="robot" inSvg /></g></svg>)
     expect(html).toContain('<g class="mascot-hit"><svg class="mascot"')

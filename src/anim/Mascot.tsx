@@ -62,14 +62,15 @@ export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look
     : <span className="mascot-hit" onPointerEnter={boop} onClick={boop}>{fig}</span>
 }
 
-/** One frame of the robot: pose and face in, SVG out (the filmstrip test draws frames with it). */
+/** One frame of the robot: pose and face in, SVG out (the filmstrip test draws frames with it). label '' = decorative: hidden from screen readers. */
 export function MascotFigure({ pose, mood, size = 64, label, spark = 0, look = 0, roll = 0, head = { rot: 0, dy: 0 } }: {
   pose: Pose; mood: Mood; size?: number; label: string; spark?: number; look?: number; roll?: number; head?: { rot: number; dy: number }
 }) {
   const body = `translate(32 58) translate(0 ${-pose.y}) rotate(${pose.rot}) scale(${pose.sx} ${pose.sy}) translate(-32 -58)`
   const shadow = 1 - pose.y / 25
   return (
-    <svg className="mascot" data-mood={mood} width={size} height={size} viewBox="0 0 64 64" role="img" aria-label={label} style={PRESS_STYLE}>
+    <svg className="mascot" data-mood={mood} width={size} height={size} viewBox="0 0 64 64" style={PRESS_STYLE}
+      {...(label ? { role: 'img', 'aria-label': label } : { 'aria-hidden': true })}>
       <ellipse className="m-shadow" cx="32" cy="60" rx={18 * shadow} ry={2.2 * shadow} />
       <g transform={body}>
         <g className="m-breath">
