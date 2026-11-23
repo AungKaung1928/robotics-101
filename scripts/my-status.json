@@ -857,6 +857,1146 @@
   "my": "Robotics 101",
   "back": "Robotics 101"
  },
+ "l0/act:answers.atOnce": {
+  "status": "pass-alt",
+  "en": "at once",
+  "my": "ချက်ချင်း",
+  "back": "Instantly"
+ },
+ "l0/act:answers.later": {
+  "status": "pass-alt",
+  "en": "a moment later",
+  "my": "ခဏအကြာမှ",
+  "back": "After a moment"
+ },
+ "l0/act:answers.never": {
+  "status": "pass-alt",
+  "en": "never",
+  "my": "ဘယ်တော့မှ မရပ်ပါဘူး",
+  "back": "It never stops"
+ },
+ "l0/act:breakIt": {
+  "status": "pass-alt",
+  "en": "Press stop",
+  "my": "ရပ် ကို နှိပ်ပါ",
+  "back": "Press Stop"
+ },
+ "l0/act:check": {
+  "status": "pass-alt",
+  "en": "Check: the robot is told to stop while driving. When does it stand still?",
+  "my": "စစ်ကြည့်- စက်ရုပ် မောင်းနေတုန်း ရပ်ဖို့ ခိုင်းလိုက်ပါတယ်။ အဲဒါ ဘယ်အချိန်မှာ လုံးဝ ရပ်သွားမလဲ။",
+  "back": "Check: you tell the robot to stop while it is driving. When does it stop completely?"
+ },
+ "l0/act:fixIt": {
+  "status": "pass-alt",
+  "en": "Go again",
+  "my": "ထပ်သွားပါ",
+  "back": "Go over again"
+ },
+ "l0/act:forward": {
+  "status": "pass-alt",
+  "en": "Forward speed (m/s)",
+  "my": "အရှေ့သို့ အမြန်နှုန်း (m/s)",
+  "back": "Forward speed (m/s)"
+ },
+ "l0/act:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "forward speed",
+  "my": "အရှေ့သို့ အမြန်နှုန်း",
+  "back": "Forward speed"
+ },
+ "l0/act:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "how fast the robot drives ahead, in m/s",
+  "my": "စက်ရုပ် ရှေ့ကို ဘယ်လောက် မြန်မြန် သွားသလဲ၊ m/s နဲ့ တိုင်း",
+  "back": "How fast the robot goes forward, measured in m/s"
+ },
+ "l0/act:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "turn speed",
+  "my": "လှည့်နှုန်း",
+  "back": "Turn rate"
+ },
+ "l0/act:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "how fast it changes direction, in rad/s (1 rad/s is about 57 degrees a second)",
+  "my": "ဦးတည်ရာကို ဘယ်လောက် မြန်မြန် ပြောင်းသလဲ၊ rad/s နဲ့ တိုင်း (1 rad/s ဆိုတာ တစ်စက္ကန့်ကို 57 ဒီဂရီလောက်)",
+  "back": "How fast the heading changes, measured in rad/s (1 rad/s is about 57 degrees per second)"
+ },
+ "l0/act:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "brake",
+  "my": "ဘရိတ်",
+  "back": "Brake"
+ },
+ "l0/act:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "slow down to a stop; it takes a little time and distance",
+  "my": "အရှိန်လျှော့ပြီး ရပ်တာ၊ အချိန်နဲ့ အကွာအဝေး နည်းနည်း ယူရ",
+  "back": "Slowing down and stopping; takes a little time and distance"
+ },
+ "l0/act:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: every choice ends as two numbers, and the robot needs time to follow them.",
+  "my": "ဆုံးဖြတ်ချက်တိုင်းဟာ ကိန်းဂဏန်း 2 ခုအနေနဲ့ပဲ အဆုံးသတ်ပြီး အဲဒီအတိုင်း လုပ်ဆောင်ဖို့ စက်ရုပ်မှာ အချိန် လိုပါတယ်ဆိုတာကို လေ့လာရပါမယ်။",
+  "back": "You will learn that every decision ends up as two numbers, and that the robot needs time to carry them out."
+ },
+ "l0/act:left": {
+  "status": "pass-alt",
+  "en": "Left wheel",
+  "my": "ဘယ်ဘက် ဘီး",
+  "back": "Left wheel"
+ },
+ "l0/act:mascot": {
+  "status": "pass-alt",
+  "en": "the robot",
+  "my": "စက်ရုပ်",
+  "back": "Robot"
+ },
+ "l0/act:no": {
+  "status": "pass-alt",
+  "en": "Not quite: press stop and read how far it rolls.",
+  "my": "မဟုတ်သေးပါဘူး- ရပ် ကို နှိပ်ပြီး ဘယ်လောက်အထိ ဆက်လိမ့်သွားသလဲဆိုတာ ဖတ်ကြည့်ပါ။",
+  "back": "Not yet: press Stop and read how far it rolls on."
+ },
+ "l0/act:right": {
+  "status": "pass-alt",
+  "en": "Right wheel",
+  "my": "ညာဘက် ဘီး",
+  "back": "Right wheel"
+ },
+ "l0/act:rolled": {
+  "status": "pass-alt",
+  "en": "Rolls on after stop",
+  "my": "ရပ်ပြီးနောက် ဆက်လိမ့်တဲ့ အကွာအဝေး",
+  "back": "Distance rolled after stopping"
+ },
+ "l0/act:steps.0": {
+  "status": "pass-alt",
+  "en": "The rule chose \"go\" or \"stop\". To act, the robot turns that choice into two numbers: how fast to drive forward, and how fast to turn.",
+  "my": "စည်းမျဉ်းအရ \"သွားမယ်\" ဒါမှမဟုတ် \"ရပ်မယ်\" ဆိုတာကို ရွေးချယ်ပါတယ်။ အလုပ်လုပ်ဖို့အတွက် စက်ရုပ်ဟာ အဲဒီရွေးချယ်မှုကို ကိန်းဂဏန်း 2 ခုအဖြစ် ပြောင်းလဲလိုက်ပါတယ်- အရှေ့ကို ဘယ်လောက် အမြန်နှုန်းနဲ့ သွားမလဲဆိုတာနဲ့ ဘယ်လောက် အမြန်နှုန်းနဲ့ လှည့်မလဲဆိုတာ ဖြစ်ပါတယ်။",
+  "back": "By rule, it chooses \"go\" or \"stop\". To act, the robot converts that choice into two numbers: how fast to go forward and how fast to turn."
+ },
+ "l0/act:steps.1": {
+  "status": "pass-alt",
+  "en": "The two numbers become the two wheel speeds you met before: the forward speed on both wheels, plus a little extra on one side and a little less on the other to turn. Set both below and watch the wheels.",
+  "my": "အဲဒီ ကိန်းဂဏန်း 2 ခုဟာ အရင်က တွေ့ခဲ့တဲ့ ဘီး 2 ဖက်ရဲ့ အမြန်နှုန်းတွေ ဖြစ်လာပါတယ်။ ဘီးနှစ်ဖက်လုံးရဲ့ အရှေ့ကိုသွားတဲ့ အမြန်နှုန်းအပြင်၊ လှည့်ဖို့အတွက် တစ်ဖက်မှာ နည်းနည်းပိုပေါင်းပြီး နောက်တစ်ဖက်မှာ နည်းနည်း ပြန်လျှော့လိုက်တာပါ။ အောက်မှာ နှစ်ခုလုံးကို သတ်မှတ်ပြီး ဘီးတွေကို ကြည့်ကြည့်ပါ။",
+  "back": "Those two numbers become the speeds of the two wheels seen earlier. Besides the forward speed of both wheels, to turn, a little more is added on one side and a little is reduced back on the other. Set both below and watch the wheels."
+ },
+ "l0/act:steps.2": {
+  "status": "pass-alt",
+  "en": "Nothing stops at once. Press stop: the robot brakes and still rolls on a little. Add the 4.4 cm it drives between two checks at top speed, and you see why it must sense early.",
+  "my": "ဘယ်အရာမှ ချက်ချင်း ရပ်မသွားပါဘူး။ ရပ် ကို နှိပ်ကြည့်ပါ- စက်ရုပ်က ဘရိတ်အုပ်လိုက်ပေမဲ့ နည်းနည်း ဆက်လိမ့်နေပါဦးမယ်။ အမြန်ဆုံး အမြန်နှုန်းနဲ့ စစ်ဆေးမှု 2 ခုကြားမှာ သွားတဲ့ 4.4 cm ကို ပေါင်းလိုက်ရင် ဘာလို့ ဆင်ဆာနဲ့ စောစော ကြည့်ထားဖို့ လိုသလဲဆိုတာ သိနိုင်ပါတယ်။",
+  "back": "Nothing stops instantly. Try pressing Stop: the robot brakes, but it will still roll on a little. Adding up the 4.4 cm travelled between two checks at top speed, you can see why you need to look early with the sensor."
+ },
+ "l0/act:steps.3": {
+  "status": "pass-alt",
+  "en": "A bicycle is the same: you squeeze the brakes and it still rolls a short way before it stands still.",
+  "my": "စက်ဘီးလည်း ဒီလိုပါပဲ- ဘရိတ်ညှစ်လိုက်ပေမဲ့ လုံးဝ မရပ်ခင်မှာ ခဏတော့ ဆက်လိမ့်နေပါသေးတယ်။",
+  "back": "A bicycle is the same: you squeeze the brake, but it still rolls on for a moment before stopping completely."
+ },
+ "l0/act:title": {
+  "status": "pass-alt",
+  "en": "How a robot acts: two numbers for the wheels",
+  "my": "စက်ရုပ် ဘယ်လို အလုပ်လုပ်သလဲ- ဘီးတွေအတွက် ကိန်းဂဏန်း 2 ခု",
+  "back": "How a robot works: two numbers for the wheels"
+ },
+ "l0/act:tooFast": {
+  "status": "pass-alt",
+  "en": "too fast for this wheel (top speed 0.22 m/s)",
+  "my": "ဒီ ဘီး အတွက် အရမ်း မြန်နေပါတယ် (အမြန်ဆုံး အမြန်နှုန်း 0.22 m/s)",
+  "back": "Too fast for this wheel (top speed 0.22 m/s)"
+ },
+ "l0/act:turn": {
+  "status": "pass-alt",
+  "en": "Turn speed (rad/s, + = left)",
+  "my": "လှည့်နှုန်း (rad/s, + = ဘယ်)",
+  "back": "Turn rate (rad/s, + = left)"
+ },
+ "l0/act:words": {
+  "status": "pass-alt",
+  "en": "Words you met",
+  "my": "တွေ့ခဲ့ရတဲ့ စကားလုံးများ",
+  "back": "Words encountered"
+ },
+ "l0/act:yes": {
+  "status": "pass-alt",
+  "en": "Yes: braking takes a moment, so it rolls on a little first.",
+  "my": "ဟုတ်ပါတယ်- ဘရိတ်အုပ်ဖို့ အချိန် ခဏယူရတဲ့အတွက် အရင်ဆုံး နည်းနည်း ဆက်လိမ့်သွားတာပါ။",
+  "back": "Yes: braking takes a little time, so it first rolls on a little."
+ },
+ "l0/loop:actStop": {
+  "status": "pass-alt",
+  "en": "stop",
+  "my": "ရပ်",
+  "back": "Stop"
+ },
+ "l0/loop:blind": {
+  "status": "pass-alt",
+  "en": "Driven between two looks",
+  "my": "စစ်ဆေးမှု 2 ခုကြားမှာ သွားလိုက်တဲ့ အကွာအဝေး",
+  "back": "Distance travelled between two checks"
+ },
+ "l0/loop:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: cover the sensor after loop 2",
+  "my": "ဖျက်ကြည့်- loop 2 ပြီးရင် ဆင်ဆာကို လက်နဲ့ ဖုံးပါ",
+  "back": "Break it: after loop 2, cover the sensor with your hand"
+ },
+ "l0/loop:brokenNote": {
+  "status": "pass-alt",
+  "en": "Sense returns nothing, so Think keeps the last number it had. The robot believes the wall is still far away.",
+  "my": "ဆင်ဆာနဲ့ကြည့် တဲ့အဆင့်က ဘာမှ ပြန်မရတဲ့အတွက် စဉ်းစား တဲ့အဆင့်က နောက်ဆုံးရထားတဲ့ ကိန်းဂဏန်းကိုပဲ ဆက်သုံးနေပါတယ်။ စက်ရုပ်က နံရံဟာ ဝေးနေသေးတယ်လို့ ထင်နေတာပါ။",
+  "back": "Because the look-with-sensor step gets nothing back, the think step keeps using the last number it got. The robot thinks the wall is still far away."
+ },
+ "l0/loop:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: find the slowest loop rate where the robot drives at most 10 cm without looking.",
+  "my": "စိန်ခေါ်မှု- စက်ရုပ်က မကြည့်ဘဲ အများဆုံး 10 cm ပဲ သွားမယ့် အနှေးဆုံး loop နှုန်းကို ရှာပါ။",
+  "back": "Challenge: find the slowest loop rate at which the robot, without looking, goes at most 10 cm."
+ },
+ "l0/loop:crashed": {
+  "status": "pass-alt",
+  "en": "hit the wall",
+  "my": "နံရံကို တိုက်မိပြီ",
+  "back": "Hit the wall"
+ },
+ "l0/loop:fixIt": {
+  "status": "pass-alt",
+  "en": "Fix it: uncover the sensor",
+  "my": "ပြင်ကြည့်- ဆင်ဆာပေါ်က လက်ကို ဖယ်ပါ",
+  "back": "Fix it: take your hand off the sensor"
+ },
+ "l0/loop:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "sensor",
+  "my": "ဆင်ဆာ",
+  "back": "Sensor"
+ },
+ "l0/loop:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "a part that measures something: distance, light, speed",
+  "my": "အကွာအဝေး၊ အလင်း၊ အမြန်နှုန်း လို တစ်ခုခုကို တိုင်းတဲ့ အစိတ်အပိုင်း",
+  "back": "A component that measures something like distance, light, or speed"
+ },
+ "l0/loop:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "loop",
+  "my": "loop",
+  "back": "loop"
+ },
+ "l0/loop:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "the same steps, run again and again",
+  "my": "တူညီတဲ့ အဆင့်တွေကို ထပ်ခါထပ်ခါ လုပ်တာ",
+  "back": "Doing the same steps over and over"
+ },
+ "l0/loop:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "Hz",
+  "my": "Hz",
+  "back": "Hz"
+ },
+ "l0/loop:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "times per second: 5 Hz = 5 loops each second",
+  "my": "တစ်စက္ကန့်မှာ ဘယ်နှကြိမ်: 5 Hz = တစ်စက္ကန့်မှာ loop 5 ကြိမ်",
+  "back": "How many times per second: 5 Hz = loop 5 times per second"
+ },
+ "l0/loop:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: every robot runs one loop, again and again: look, decide, move.",
+  "my": "သင် လေ့လာရမှာကတော့- စက်ရုပ်တိုင်းဟာ ကြည့်မယ်၊ ဆုံးဖြတ်မယ်၊ လှုပ်ရှားမယ် ဆိုတဲ့ loop တစ်ခုကိုပဲ ထပ်ခါတလဲလဲ လုပ်ဆောင်နေတာ ဖြစ်ပါတယ်။",
+  "back": "What you will learn: every robot just repeats one loop over and over: look, decide, move."
+ },
+ "l0/loop:lines.0": {
+  "status": "pass-alt",
+  "en": "Sense: a sensor measures the world. Here a LiDAR measures how far the wall in front is.",
+  "my": "ဆင်ဆာနဲ့ကြည့်ခြင်း- ဆင်ဆာ က ပတ်ဝန်းကျင်ကို တိုင်းတာပါတယ်။ ဒီမှာတော့ LiDAR က အရှေ့က နံရံ ဘယ်လောက်ဝေးသလဲဆိုတာကို တိုင်းတာပါတယ်။",
+  "back": "Looking with the sensor: the sensor measures the surroundings. Here, the LiDAR measures how far the wall in front is."
+ },
+ "l0/loop:lines.1": {
+  "status": "pass-alt",
+  "en": "Think: a program turns that number into a choice. Closer than 0.5 m: stop. Otherwise: go.",
+  "my": "စဉ်းစားခြင်း- ပရိုဂရမ် က အဲဒီ ကိန်းဂဏန်းကို ရွေးချယ်မှုတစ်ခုအဖြစ် ပြောင်းလဲပေးပါတယ်။ 0.5 m ထက် နီးရင်- ရပ်မယ်၊ မဟုတ်ရင်- သွားမယ်။",
+  "back": "Thinking: the program converts that number into a choice. If closer than 0.5 m: stop, otherwise: go."
+ },
+ "l0/loop:lines.2": {
+  "status": "pass-alt",
+  "en": "Act: the motors carry out the choice. Then the loop starts again with a new measurement.",
+  "my": "အလုပ်လုပ်ခြင်း- မော်တာ တွေက ရွေးချယ်မှုကို လုပ်ဆောင်ပါတယ်။ ပြီးရင် တိုင်းတာမှု အသစ်တစ်ခုနဲ့ loop က ပြန်စပါတယ်။",
+  "back": "Acting: the motors carry out the choice. Then the loop starts again with a new measurement."
+ },
+ "l0/loop:noData": {
+  "status": "pass-alt",
+  "en": "no data",
+  "my": "အချက်အလက် မရှိပါ",
+  "back": "No data"
+ },
+ "l0/loop:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet:",
+  "my": "မအောင်မြင်သေးပါ-",
+  "back": "Not successful yet:"
+ },
+ "l0/loop:rate": {
+  "status": "pass-alt",
+  "en": "Loops per second (Hz)",
+  "my": "တစ်စက္ကန့်မှာ loop ပတ်တဲ့ အကြိမ်ရေ (Hz)",
+  "back": "Number of times the loop runs per second (Hz)"
+ },
+ "l0/loop:result": {
+  "status": "pass-alt",
+  "en": "Result",
+  "my": "ရလဒ်",
+  "back": "Result"
+ },
+ "l0/loop:slow": {
+  "status": "pass-alt",
+  "en": "Slowed down: each loop takes 1.2 s here, 0.2 s on the real robot.",
+  "my": "အနှေးပြကွက်- ဒီမှာတော့ loop တစ်ခုကို 1.2 s ကြာပြီး တကယ့် စက်ရုပ်မှာတော့ 0.2 s ကြာပါတယ်။",
+  "back": "Slow motion: here one loop takes 1.2 s, while on a real robot it takes 0.2 s."
+ },
+ "l0/loop:solved": {
+  "status": "pass-alt",
+  "en": "Solved:",
+  "my": "အောင်မြင်ပါပြီ-",
+  "back": "Succeeded:"
+ },
+ "l0/loop:stage.act": {
+  "status": "pass-alt",
+  "en": "Act",
+  "my": "အလုပ်လုပ်",
+  "back": "Act"
+ },
+ "l0/loop:stage.sense": {
+  "status": "pass-alt",
+  "en": "Sense",
+  "my": "ဆင်ဆာနဲ့ကြည့်",
+  "back": "Look with sensor"
+ },
+ "l0/loop:stage.think": {
+  "status": "pass-alt",
+  "en": "Think",
+  "my": "စဉ်းစား",
+  "back": "Think"
+ },
+ "l0/loop:stopped": {
+  "status": "pass-alt",
+  "en": "stopped",
+  "my": "ရပ်သွားပြီ",
+  "back": "Stopped"
+ },
+ "l0/loop:title": {
+  "status": "pass-alt",
+  "en": "What a robot does: sense, think, act",
+  "my": "စက်ရုပ် ဘာလုပ်သလဲ- ဆင်ဆာနဲ့ကြည့်၊ စဉ်းစား၊ အလုပ်လုပ်",
+  "back": "What a robot does: look with sensor, think, act"
+ },
+ "l0/loop:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရများ",
+  "back": "Glossary"
+ },
+ "l0/meet:answers.notRobot": {
+  "status": "pass-alt",
+  "en": "not a robot",
+  "my": "စက်ရုပ် မဟုတ်ပါ",
+  "back": "Not a robot"
+ },
+ "l0/meet:answers.robot": {
+  "status": "pass-alt",
+  "en": "a robot",
+  "my": "စက်ရုပ် တစ်ခု",
+  "back": "A robot"
+ },
+ "l0/meet:car": {
+  "status": "pass-alt",
+  "en": "Remote-control car",
+  "my": "ရီမုထိန်းကား",
+  "back": "Remote-controlled car"
+ },
+ "l0/meet:check": {
+  "status": "pass-alt",
+  "en": "Check: a toy car follows your remote control. Robot or not?",
+  "my": "စစ်ကြည့်- ကစားစရာကားက သင် ရီမုနဲ့ ထိန်းတဲ့အတိုင်း လုပ်ပါတယ်။ စက်ရုပ် လား၊ မဟုတ်ဘူးလား။",
+  "back": "Check: the toy car does as you control it with the remote. Is it a robot or not?"
+ },
+ "l0/meet:decides": {
+  "status": "pass-alt",
+  "en": "Decides",
+  "my": "ဆုံးဖြတ်နိုင်မှု",
+  "back": "Deciding ability"
+ },
+ "l0/meet:downgrade": {
+  "status": "pass-alt",
+  "en": "Take them away",
+  "my": "ပြန်ဖယ်လိုက်ပါ",
+  "back": "Take it back off"
+ },
+ "l0/meet:drawing": {
+  "status": "pass-alt",
+  "en": "A drawing, not to scale.",
+  "my": "ဒါက ပုံကြမ်းဖြစ်ပြီး အတိုင်းအတာ အစစ်မဟုတ်ပါဘူး။",
+  "back": "This is a sketch and not the real scale."
+ },
+ "l0/meet:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "robot",
+  "my": "စက်ရုပ်",
+  "back": "Robot"
+ },
+ "l0/meet:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "a machine that senses, decides and moves by itself",
+  "my": "အာရုံခံတာ၊ ဆုံးဖြတ်တာနဲ့ လှုပ်ရှားတာတွေကို သူ့အလိုအလျောက် လုပ်နိုင်တဲ့ စက်",
+  "back": "A machine that can sense, decide, and move automatically by itself"
+ },
+ "l0/meet:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "sensor",
+  "my": "ဆင်ဆာ",
+  "back": "Sensor"
+ },
+ "l0/meet:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "a part that measures something, such as a distance",
+  "my": "အကွာအဝေး စတာတွေကို တိုင်းတာပေးတဲ့ အစိတ်အပိုင်း",
+  "back": "A part that measures things such as distance"
+ },
+ "l0/meet:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "TurtleBot3 Burger",
+  "my": "TurtleBot3 Burger",
+  "back": "TurtleBot3 Burger"
+ },
+ "l0/meet:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "the small learning robot used in every chapter",
+  "my": "သင်ခန်းစာတိုင်းမှာ အသုံးပြုမယ့် လေ့လာရေး စက်ရုပ် အသေးစား",
+  "back": "A small learning robot that will be used in every lesson"
+ },
+ "l0/meet:itself": {
+  "status": "pass-alt",
+  "en": "by itself",
+  "my": "သူ့အလိုလို",
+  "back": "By itself"
+ },
+ "l0/meet:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: what makes a machine a robot, and the four parts of the robot in this course.",
+  "my": "သင် လေ့လာရမှာကတော့- စက် အစိတ်အပိုင်းတွေကို စက်ရုပ် ဖြစ်စေတဲ့ အချက်တွေနဲ့ ဒီသင်ခန်းစာမှာ သုံးမယ့် စက်ရုပ်ရဲ့ အစိတ်အပိုင်း 4 ခုအကြောင်း ဖြစ်ပါတယ်။",
+  "back": "What you will learn: the things that make machine parts a robot, and the four parts of the robot we will use in this lesson."
+ },
+ "l0/meet:mascot": {
+  "status": "pass-alt",
+  "en": "the robot",
+  "my": "စက်ရုပ်",
+  "back": "Robot"
+ },
+ "l0/meet:moves": {
+  "status": "pass-alt",
+  "en": "Moves",
+  "my": "လှုပ်ရှားနိုင်မှု",
+  "back": "Moving ability"
+ },
+ "l0/meet:no": {
+  "status": "pass-alt",
+  "en": "no",
+  "my": "မဟုတ်ပါ",
+  "back": "No"
+ },
+ "l0/meet:parts.battery": {
+  "status": "pass-alt",
+  "en": "A battery: no cable, so the robot can drive anywhere. It lasts about 2.5 hours.",
+  "my": "ဘက်ထရီ- ကြိုးမပါတဲ့အတွက် စက်ရုပ်က ဘယ်နေရာကိုမဆို သွားနိုင်ပါတယ်။ 2.5 နာရီလောက် အသုံးခံပါတယ်။",
+  "back": "Battery: because it has no cable, the robot can go anywhere. It lasts about 2.5 hours."
+ },
+ "l0/meet:parts.computer": {
+  "status": "pass-alt",
+  "en": "Small computers inside: they run the rule that decides. Chapter: how it thinks.",
+  "my": "အထဲက ကွန်ပျူတာ အသေးလေးတွေ- ဆုံးဖြတ်ချက်ပေးတဲ့ စည်းမျဉ်းတွေကို အဲဒါတွေက လုပ်ဆောင်ပေးပါတယ်။ သင်ခန်းစာ- ဘယ်လို စဉ်းစားသလဲ။",
+  "back": "Small computers inside: they carry out the rules that give decisions. Lesson: how does it think?"
+ },
+ "l0/meet:parts.sensor": {
+  "status": "pass-alt",
+  "en": "A spinning distance sensor on top, 18 cm above the floor: it measures all around. Chapter: how it senses.",
+  "my": "အပေါ်ကနေ လည်နေတဲ့ အကွာအဝေးတိုင်း ဆင်ဆာ ဖြစ်ပြီး ကြမ်းပြင်ကနေ 18 cm အမြင့်မှာ ရှိပါတယ်- ပတ်ပတ်လည် အကုန်လုံးကို တိုင်းတာပေးပါတယ်။ သင်ခန်းစာ- ဘယ်လို သိမြင်သလဲ။",
+  "back": "The distance sensor spinning on top is 18 cm high from the floor - it measures everything all around. Lesson: how does it sense?"
+ },
+ "l0/meet:parts.wheels": {
+  "status": "pass-alt",
+  "en": "Two wheels, each with its own motor. Different speeds steer the robot. Next chapter: how it moves.",
+  "my": "ကိုယ်ပိုင် မော်တာ တစ်လုံးစီ ပါတဲ့ ဘီး 2 ဘီးပါ။ အမြန်နှုန်း မတူတာက စက်ရုပ်ကို လှည့်စေပါတယ်။ နောက်သင်ခန်းစာ- ဘယ်လို လှုပ်ရှားသလဲ။",
+  "back": "Two wheels, each with its own motor. A difference in speed makes the robot turn. Next lesson: how does it move?"
+ },
+ "l0/meet:person": {
+  "status": "pass-alt",
+  "en": "a person",
+  "my": "လူတစ်ယောက်",
+  "back": "A person"
+ },
+ "l0/meet:right": {
+  "status": "pass-alt",
+  "en": "Yes: you do the sensing and deciding, so it is not a robot.",
+  "my": "ဟုတ်ပါတယ်။ သင်ကိုယ်တိုင် အာရုံခံပြီး ဆုံးဖြတ်တာ ဖြစ်တဲ့အတွက် ဒါဟာ စက်ရုပ် မဟုတ်ပါဘူး။",
+  "back": "Correct. Because you yourself sense and decide, this is not a robot."
+ },
+ "l0/meet:robot": {
+  "status": "pass-alt",
+  "en": "A robot?",
+  "my": "စက်ရုပ် လား",
+  "back": "Is it a robot"
+ },
+ "l0/meet:senses": {
+  "status": "pass-alt",
+  "en": "Senses",
+  "my": "သိမြင်နိုင်မှု",
+  "back": "Sensing ability"
+ },
+ "l0/meet:steps.0": {
+  "status": "pass-alt",
+  "en": "A robot is a machine that senses, decides and moves by itself. Three you may have met: a robot vacuum cleaner, a delivery robot on the pavement, a robot arm in a factory.",
+  "my": "စက်ရုပ် ဆိုတာ သူ့အလိုလို သိမြင်နိုင်တယ်၊ ဆုံးဖြတ်နိုင်တယ်၊ လှုပ်ရှားနိုင်တဲ့ စက်တစ်မျိုး ဖြစ်ပါတယ်။ သင် တွေ့ဖူးနိုင်တဲ့ စက်ရုပ် 3 မျိုးကတော့- ဖုန်စုပ်စက်ရုပ်၊ လမ်းပေါ်က ပစ္စည်းပို့စက်ရုပ်နဲ့ စက်ရုံသုံး စက်ရုပ် လက်မောင်းတွေပဲ ဖြစ်ပါတယ်။",
+  "back": "A robot is a kind of machine that can sense, decide, and move by itself. Three kinds of robots you may have seen are: vacuum robots, street delivery robots, and factory robot arms."
+ },
+ "l0/meet:steps.1": {
+  "status": "pass-alt",
+  "en": "Ours is the TurtleBot3 Burger, a small robot made for learning: 14 cm long, 18 cm wide, 19 cm tall, 1 kg. Tap its parts in the drawing.",
+  "my": "ကျွန်တော်တို့ သုံးမှာကတော့ လေ့လာရေးအတွက် ထုတ်ထားတဲ့ TurtleBot3 Burger ဆိုတဲ့ စက်ရုပ်အသေးလေး ဖြစ်ပါတယ်- အလျား 14 cm၊ အနံ 18 cm၊ အမြင့် 19 cm နဲ့ အလေးချိန် 1 kg ရှိပါတယ်။ ပုံထဲက အစိတ်အပိုင်းတွေကို နှိပ်ကြည့်ပါ။",
+  "back": "What we will use is a small robot made for learning called TurtleBot3 Burger: it is 14 cm in length, 18 cm in width, 19 cm in height, and weighs 1 kg. Click the parts in the picture."
+ },
+ "l0/meet:steps.2": {
+  "status": "pass-alt",
+  "en": "Is a remote-control car a robot? It moves, but a person watches and decides. Give it a sensor and a rule, and it decides by itself: now it is a robot. Try the button.",
+  "my": "ရီမုနဲ့ ထိန်းတဲ့ကားက စက်ရုပ် လား။ အဲဒါက လှုပ်ရှားနိုင်ပေမဲ့ လူက ကြည့်ပြီး ဆုံးဖြတ်ပေးရတာပါ။ ဆင်ဆာ နဲ့ စည်းမျဉ်းတစ်ခု ပေးလိုက်ရင်တော့ သူ့အလိုလို ဆုံးဖြတ်နိုင်သွားပါပြီ- အဲဒီအခါမှာတော့ စက်ရုပ် ဖြစ်သွားပါပြီ။ ခလုတ်ကို စမ်းကြည့်ပါ။",
+  "back": "Is a remote-controlled car a robot? It can move, but a person has to look and decide for it. If you give it a sensor and a rule, it can decide by itself - at that point it becomes a robot. Try the switch."
+ },
+ "l0/meet:tapHint": {
+  "status": "pass-alt",
+  "en": "Tap a part",
+  "my": "အစိတ်အပိုင်းတစ်ခုကို နှိပ်ပါ",
+  "back": "Click a part"
+ },
+ "l0/meet:title": {
+  "status": "pass-alt",
+  "en": "What is a robot?",
+  "my": "စက်ရုပ် ဆိုတာ ဘာလဲ",
+  "back": "What is a robot"
+ },
+ "l0/meet:upgrade": {
+  "status": "pass-alt",
+  "en": "Give it a sensor and a rule",
+  "my": "ဆင်ဆာ နဲ့ စည်းမျဉ်း ပေးပါ",
+  "back": "Give a sensor and a rule"
+ },
+ "l0/meet:words": {
+  "status": "pass-alt",
+  "en": "Words you met",
+  "my": "တွေ့ခဲ့ရတဲ့ စကားလုံးများ",
+  "back": "Words encountered"
+ },
+ "l0/meet:wrong": {
+  "status": "pass-alt",
+  "en": "Not quite: who decides where the car goes?",
+  "my": "မမှန်သေးပါဘူး။ ကား ဘယ်သွားမလဲဆိုတာ ဘယ်သူက ဆုံးဖြတ်တာလဲ။",
+  "back": "Not right yet. Who decides where the car goes?"
+ },
+ "l0/meet:yes": {
+  "status": "pass-alt",
+  "en": "yes",
+  "my": "ဟုတ်ကဲ့",
+  "back": "Yes"
+ },
+ "l0/move:answers.curveLeft": {
+  "status": "pass-alt",
+  "en": "curves left",
+  "my": "ဘယ်ဘက်ကို ကွေ့",
+  "back": "Turn left"
+ },
+ "l0/move:answers.curveRight": {
+  "status": "pass-alt",
+  "en": "curves right",
+  "my": "ညာဘက်ကို ကွေ့",
+  "back": "Turn right"
+ },
+ "l0/move:answers.straight": {
+  "status": "pass-alt",
+  "en": "straight",
+  "my": "အတည့်",
+  "back": "Straight"
+ },
+ "l0/move:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: the left wheel slips on a wet floor",
+  "my": "ဖျက်ကြည့် - ဘယ်ဘက် ဘီးက ရေစိုနေတဲ့ ကြမ်းပြင်ပေါ်မှာ ချော်နေတယ်",
+  "back": "Break it - the left wheel is slipping on a wet floor"
+ },
+ "l0/move:brokenNote": {
+  "status": "pass-alt",
+  "en": "Both wheels are told the same speed, yet the robot curves left. The slipping wheel delivers only half its speed, so the robot cannot trust that it went where it was told. Later it will need sensors to check.",
+  "my": "ဘီး နှစ်ဖက်လုံးကို အမြန်နှုန်း အတူတူ ပေးထားပေမဲ့ စက်ရုပ်က ဘယ်ဘက်ကို ကွေ့နေပါတယ်။ ချော်နေတဲ့ ဘီးက သတ်မှတ်ထားတဲ့ အမြန်နှုန်းရဲ့ တစ်ဝက်ပဲ ရောက်တဲ့အတွက် စက်ရုပ်ဟာ ခိုင်းထားတဲ့အတိုင်း သွားတယ်လို့ ယုံကြည်လို့ မရတော့ပါဘူး။ နောက်ပိုင်းမှာ ဒါကို စစ်ဖို့အတွက် ဆင်ဆာတွေ လိုအပ်လာပါလိမ့်မယ်။",
+  "back": "Both wheels are given the same speed, but the robot is turning left. Because the slipping wheel only reaches half of the set speed, you can no longer trust that the robot goes as commanded. Later you will need sensors to check this."
+ },
+ "l0/move:check": {
+  "status": "pass-alt",
+  "en": "Check: the left wheel turns faster than the right. Where does the robot go?",
+  "my": "စစ်ကြည့် - ဘယ်ဘက် ဘီးက ညာဘက်ထက် ပိုမြန်နေရင် စက်ရုပ် ဘယ်ဘက်ကို သွားမလဲ။",
+  "back": "Check - if the left wheel is faster than the right, which way will the robot go?"
+ },
+ "l0/move:fixIt": {
+  "status": "pass-alt",
+  "en": "Fix it: dry floor",
+  "my": "ပြင်ကြည့် - ခြောက်သွေ့တဲ့ ကြမ်းပြင်",
+  "back": "Fix it - dry floor"
+ },
+ "l0/move:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "wheel speed",
+  "my": "ဘီး အမြန်နှုန်း",
+  "back": "Wheel speed"
+ },
+ "l0/move:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "how fast a wheel moves the robot along the floor, in metres per second (m/s)",
+  "my": "စက်ရုပ် ကြမ်းပြင်ပေါ်မှာ ရွေ့ဖို့ ဘီး ဘယ်လောက် မြန်မြန် လည်ရမလဲဆိုတဲ့ တစ်စက္ကန့်အတွင်း မီတာနှုန်း (m/s)",
+  "back": "How fast a wheel must spin for the robot to move on the floor, in metres per second (m/s)"
+ },
+ "l0/move:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "spin on the spot",
+  "my": "တစ်နေရာတည်းမှာတင် လည်",
+  "back": "Spin on the spot"
+ },
+ "l0/move:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "turn around without moving the middle",
+  "my": "အလယ်ဗဟိုကို မရွေ့ဘဲ ပတ်ချာလည် လှည့်ခြင်း",
+  "back": "Turning around in circles without the center moving"
+ },
+ "l0/move:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "slip",
+  "my": "ချော်",
+  "back": "Slip"
+ },
+ "l0/move:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "a wheel turns but the robot does not move as far as it should",
+  "my": "ဘီး လည်နေပေမဲ့ စက်ရုပ်က ရောက်သင့်သလောက် မရောက်ခြင်း",
+  "back": "The wheel spinning but the robot not getting as far as it should"
+ },
+ "l0/move:kind.curveLeft": {
+  "status": "pass-alt",
+  "en": "curves left",
+  "my": "ဘယ်ဘက်ကို ကွေ့",
+  "back": "Turn left"
+ },
+ "l0/move:kind.curveRight": {
+  "status": "pass-alt",
+  "en": "curves right",
+  "my": "ညာဘက်ကို ကွေ့",
+  "back": "Turn right"
+ },
+ "l0/move:kind.spin": {
+  "status": "pass-alt",
+  "en": "spins on the spot",
+  "my": "တစ်နေရာတည်းမှာတင် လည်",
+  "back": "Spin on the spot"
+ },
+ "l0/move:kind.still": {
+  "status": "pass-alt",
+  "en": "stands still",
+  "my": "ရပ်နေ",
+  "back": "Stopped"
+ },
+ "l0/move:kind.straight": {
+  "status": "pass-alt",
+  "en": "straight",
+  "my": "အတည့်",
+  "back": "Straight"
+ },
+ "l0/move:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: a robot like ours steers with nothing but two wheel speeds.",
+  "my": "သင်ယူရမှာက- ကျွန်တော်တို့လို စက်ရုပ်က ဘီး 2 ဘီးရဲ့ အမြန်နှုန်းကိုပဲ သုံးပြီး လမ်းကြောင်း ပြောင်းပါတယ်။",
+  "back": "What you learn: a robot like ours changes direction using only the speeds of its two wheels."
+ },
+ "l0/move:left": {
+  "status": "pass-alt",
+  "en": "Left wheel",
+  "my": "ဘယ်ဘက် ဘီး",
+  "back": "Left wheel"
+ },
+ "l0/move:mascot": {
+  "status": "pass-alt",
+  "en": "the robot",
+  "my": "စက်ရုပ်",
+  "back": "Robot"
+ },
+ "l0/move:path": {
+  "status": "pass-alt",
+  "en": "Path",
+  "my": "လမ်းကြောင်း",
+  "back": "Path"
+ },
+ "l0/move:real": {
+  "status": "pass-alt",
+  "en": "The real TurtleBot3 Burger: wheels 16 cm apart, 6.6 cm across, top speed 0.22 m/s, which is about one wheel turn per second.",
+  "my": "တကယ့် TurtleBot3 Burger - ဘီး နှစ်ဘီးကြား အကွာအဝေး 16 cm၊ အချင်း 6.6 cm နဲ့ အမြင့်ဆုံး အမြန်နှုန်း 0.22 m/s ရှိပြီး ဒါဟာ တစ်စက္ကန့်မှာ ဘီး တစ်ပတ်နီးပါး လည်တဲ့နှုန်း ဖြစ်ပါတယ်။",
+  "back": "The real TurtleBot3 Burger - distance between the two wheels 16 cm, diameter 6.6 cm, and maximum speed 0.22 m/s, which is a rate of nearly one wheel rotation per second."
+ },
+ "l0/move:right": {
+  "status": "pass-alt",
+  "en": "Right wheel speed (m/s)",
+  "my": "ညာဘက် ဘီး အမြန်နှုန်း (m/s)",
+  "back": "Right wheel speed (m/s)"
+ },
+ "l0/move:right_": {
+  "status": "pass-alt",
+  "en": "Yes: the slower side is on the inside of the curve.",
+  "my": "ဟုတ်ပါတယ်။ ပိုနှေးတဲ့ဘက်က အကွေ့ရဲ့ အတွင်းဘက်မှာ ရှိနေမှာ ဖြစ်ပါတယ်။",
+  "back": "Correct. The slower side will be on the inside of the turn."
+ },
+ "l0/move:steps.0": {
+  "status": "pass-alt",
+  "en": "Our robot has two wheels, each with its own motor, and a small free-rolling ball at the back. There is no steering wheel. It can only change how fast each wheel turns.",
+  "my": "ကျွန်တော်တို့ စက်ရုပ်မှာ မော်တာ တစ်လုံးစီ ပါတဲ့ ဘီး 2 ဘီးနဲ့ နောက်ဘက်မှာ လွတ်လွတ်လပ်လပ် လိမ့်တဲ့ ဘောလုံးလေး တစ်လုံး ပါပါတယ်။ ကားလို စတီယာရင် မရှိပါဘူး။ ဘီး တစ်ဘီးချင်းစီ ဘယ်လောက် မြန်မြန် လည်မလဲ ဆိုတာကိုပဲ ပြောင်းနိုင်ပါတယ်။",
+  "back": "Our robot has two wheels, one motor each, and a small ball at the back that rolls freely. It has no car-like steering. The only thing it can change is how fast each individual wheel turns."
+ },
+ "l0/move:steps.1": {
+  "status": "pass-alt",
+  "en": "Same speed on both wheels: it drives straight. One wheel faster: it curves toward the slower side. You know this from a shopping cart: push harder on the left handle and it swings right.",
+  "my": "ဘီး နှစ်ဖက်လုံး အမြန်နှုန်း အတူတူဆိုရင် အတည့်သွားပါတယ်။ ဘီး တစ်ဖက်က ပိုမြန်ရင်တော့ ပိုနှေးတဲ့ဘက်ကို ကွေ့ပါတယ်။ ဒါဟာ shopping cart တွန်းတာနဲ့ တူပါတယ်။ ဘယ်ဘက် လက်ကိုင်ကို ပိုတွန်းရင် ညာဘက်ကို ကွေ့သွားမှာပါ။",
+  "back": "If both wheels have the same speed, it goes straight. If one wheel is faster, it turns toward the slower side. This is like pushing a shopping cart. If you push the left handle more, it will turn to the right."
+ },
+ "l0/move:steps.2": {
+  "status": "pass-alt",
+  "en": "Opposite speeds, one forward and one backward: the robot spins on the spot. Its middle does not move at all.",
+  "my": "ဘီး တစ်ဘီးက ရှေ့ကို၊ နောက်တစ်ဘီးက နောက်ကို လည်ရင် စက်ရုပ်က နေရာမှာတင် ဝိုင်းလည်ပါတယ်။ စက်ရုပ်ရဲ့ အလယ်က လုံးဝ မရွေ့ပါဘူး။",
+  "back": "If one wheel turns forward and the other wheel turns backward, the robot spins round in place. The center of the robot does not move at all."
+ },
+ "l0/move:steps.3": {
+  "status": "pass-alt",
+  "en": "Drag the right wheel below. The left wheel stays at 0.15 m/s. Watch the drawn path change.",
+  "my": "အောက်က ညာဘက် ဘီးကို ဆွဲကြည့်ပါ။ ဘယ်ဘက် ဘီးကိုတော့ 0.15 m/s မှာပဲ ထားထားပါတယ်။ လမ်းကြောင်း ဘယ်လို ပြောင်းလဲသွားလဲဆိုတာ ကြည့်ပါ။",
+  "back": "Drag the right wheel below. The left wheel is kept at 0.15 m/s. See how the path changes."
+ },
+ "l0/move:title": {
+  "status": "pass-alt",
+  "en": "How a robot moves: two wheels",
+  "my": "စက်ရုပ် လှုပ်ရှားပုံ - ဘီး 2 ဘီး",
+  "back": "How the robot moves - two wheels"
+ },
+ "l0/move:turns": {
+  "status": "pass-alt",
+  "en": "Right wheel turns per second",
+  "my": "ညာဘက် ဘီးရဲ့ တစ်စက္ကန့်အတွင်း လည်ပတ်နှုန်း",
+  "back": "Right wheel's rotation rate within one second"
+ },
+ "l0/move:words": {
+  "status": "pass-alt",
+  "en": "Words you met",
+  "my": "တွေ့ခဲ့ရတဲ့ စကားလုံးများ",
+  "back": "Words encountered"
+ },
+ "l0/move:wrong": {
+  "status": "pass-alt",
+  "en": "Not quite: set the right wheel to 0.05 and look.",
+  "my": "မမှန်သေးပါဘူး။ ညာဘက် ဘီးကို 0.05 ထားပြီး ကြည့်ကြည့်ပါ။",
+  "back": "Not right yet. Try setting the right wheel to 0.05 and look."
+ },
+ "l0/pipe:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "the numbers passed between programs, like one LiDAR scan",
+  "my": "ပရိုဂရမ်တွေကြား ပို့ပေးတဲ့ ဂဏန်းတွေ၊ ဥပမာ LiDAR scan တစ်ခု",
+  "back": "Numbers sent between programs, for example one LiDAR scan"
+ },
+ "l0/sense:answers.five": {
+  "status": "pass-alt",
+  "en": "5 m",
+  "my": "5 m",
+  "back": "5 m"
+ },
+ "l0/sense:answers.limit": {
+  "status": "pass-alt",
+  "en": "3.5 m",
+  "my": "3.5 m",
+  "back": "3.5 m"
+ },
+ "l0/sense:answers.nothing": {
+  "status": "pass-alt",
+  "en": "nothing there",
+  "my": "ဘာမှမရှိပါ",
+  "back": "Nothing"
+ },
+ "l0/sense:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: cover the sensor with a hand",
+  "my": "ဖျက်ကြည့်- ဆင်ဆာ ကို လက်နဲ့ ပိတ်ပါ",
+  "back": "Break it: cover the sensor with a hand"
+ },
+ "l0/sense:brokenNote": {
+  "status": "pass-alt",
+  "en": "The hand is 2 cm away, closer than the 12 cm this sensor can measure. Every reading is thrown away: the walls are still there, but the robot is blind.",
+  "my": "လက်က 2 cm ပဲ ဝေးတဲ့အတွက် ဒီ ဆင်ဆာ တိုင်းနိုင်တဲ့ 12 cm ထက် ပိုနီးနေပါတယ်။ တိုင်းတာချက် အားလုံးကို ပယ်ဖျက်လိုက်ပါတယ်- နံရံ တွေက ရှိနေသေးပေမဲ့ စက်ရုပ် က ဘာမှမမြင်ရတော့ပါဘူး။",
+  "back": "The hand is only 2 cm away, so it is closer than the 12 cm this sensor can measure. All measurements are discarded - the walls are still there but the robot can no longer see anything."
+ },
+ "l0/sense:check": {
+  "status": "pass-alt",
+  "en": "Check: the wall moves to 5 m in front. What is the front number?",
+  "my": "စစ်ကြည့်- နံရံ က ရှေ့ 5 m ကို ရောက်သွားရင် ရှေ့က ဂဏန်းက ဘယ်လောက် ဖြစ်မလဲ။",
+  "back": "Check: if the wall reaches 5 m in front, what will the front number be?"
+ },
+ "l0/sense:count": {
+  "status": "pass-alt",
+  "en": "Numbers that count, this turn",
+  "my": "ဒီတစ်ပတ်အတွက် ရေတွက်ထားတဲ့ ဂဏန်းများ",
+  "back": "Numbers counted for this turn"
+ },
+ "l0/sense:fixIt": {
+  "status": "pass-alt",
+  "en": "Fix it: take the hand away",
+  "my": "ပြင်ကြည့်- လက်ကို ဖယ်ပါ",
+  "back": "Fix it: take the hand away"
+ },
+ "l0/sense:front": {
+  "status": "pass-alt",
+  "en": "Front number",
+  "my": "ရှေ့က ဂဏန်း",
+  "back": "Front number"
+ },
+ "l0/sense:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "distance sensor",
+  "my": "အကွာအဝေး ဆင်ဆာ",
+  "back": "Distance sensor"
+ },
+ "l0/sense:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "a part that measures how far away something is",
+  "my": "အရာဝတ္ထုတစ်ခု ဘယ်လောက်ဝေးလဲ တိုင်းတာပေးတဲ့ အစိတ်အပိုင်း",
+  "back": "A part that measures how far an object is"
+ },
+ "l0/sense:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "beam",
+  "my": "beam",
+  "back": "beam"
+ },
+ "l0/sense:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "a thin line of light sent out to measure one distance",
+  "my": "အကွာအဝေး တစ်ခုကို တိုင်းတာဖို့ လွှတ်ထုတ်တဲ့ အလင်းတန်း",
+  "back": "A ray of light sent out to measure a distance"
+ },
+ "l0/sense:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "LiDAR",
+  "my": "LiDAR",
+  "back": "LiDAR"
+ },
+ "l0/sense:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "a distance sensor that spins and measures all around",
+  "my": "ပတ်ပတ်လည်ကို လည်ပတ်တိုင်းတာပေးတဲ့ အကွာအဝေး ဆင်ဆာ",
+  "back": "A distance sensor that spins around and measures all around"
+ },
+ "l0/sense:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: a distance sensor turns the world into numbers, and where those numbers stop.",
+  "my": "သင် သင်ယူရမှာက- အကွာအဝေး ဆင်ဆာ တစ်ခုက ကမ္ဘာကြီးကို ကိန်းဂဏန်းတွေအဖြစ် ဘယ်လိုပြောင်းလဲပေးလဲဆိုတာနဲ့ အဲဒီဂဏန်းတွေ ဘယ်နေရာမှာ ရပ်သွားလဲဆိုတာ ဖြစ်ပါတယ်။",
+  "back": "What you will learn: how a distance sensor turns the world into numbers, and where those numbers stop."
+ },
+ "l0/sense:mascot": {
+  "status": "pass-alt",
+  "en": "the robot",
+  "my": "စက်ရုပ်",
+  "back": "Robot"
+ },
+ "l0/sense:no": {
+  "status": "pass-alt",
+  "en": "Not quite: drag the wall past 3.5 m and look.",
+  "my": "မမှန်သေးပါဘူး- နံရံကို 3.5 m ကျော်အောင် ဆွဲပြီး ကြည့်ပါ။",
+  "back": "Not correct yet: drag the wall past 3.5 m and look."
+ },
+ "l0/sense:nothing": {
+  "status": "pass-alt",
+  "en": "nothing there",
+  "my": "ဘာမှမရှိပါ",
+  "back": "Nothing"
+ },
+ "l0/sense:perSecond": {
+  "status": "pass-alt",
+  "en": "Numbers per second",
+  "my": "တစ်စက္ကန့်အတွင်း ဂဏန်းများ",
+  "back": "Numbers within one second"
+ },
+ "l0/sense:real": {
+  "status": "pass-alt",
+  "en": "The real TurtleBot3 Burger: 360 numbers per turn, 5 turns a second, from 12 cm to 3.5 m.",
+  "my": "တကယ့် TurtleBot3 Burger- တစ်ပတ်ကို 360 ဂဏန်း၊ တစ်စက္ကန့်ကို 5 ပတ်၊ 12 cm ကနေ 3.5 m အထိ ဖြစ်ပါတယ်။",
+  "back": "The real TurtleBot3 Burger: 360 numbers per turn, 5 turns per second, from 12 cm to 3.5 m."
+ },
+ "l0/sense:steps.0": {
+  "status": "pass-alt",
+  "en": "A distance sensor sends out a beam of light and times how long it takes to come back from a wall. Out comes one number: the distance in metres. A laser tape measure works the same way.",
+  "my": "အကွာအဝေး ဆင်ဆာ က အလင်း beam တစ်ခုကို လွှတ်ထုတ်ပြီး နံရံ ကနေ ပြန်လာဖို့ ဘယ်လောက်ကြာလဲဆိုတာကို အချိန်တိုင်းပါတယ်။ အဲဒီကနေ ကိန်းဂဏန်းတစ်ခု ထွက်လာပါတယ်- အဲဒါကတော့ metres နဲ့ ပြထားတဲ့ အကွာအဝေး ဖြစ်ပါတယ်။ လေဆာ ပေကြိုးတွေလည်း ဒီအတိုင်းပဲ အလုပ်လုပ်ပါတယ်။",
+  "back": "A distance sensor sends out one beam of light and times how long it takes to come back from a wall. From that comes one number - that is the distance shown in metres. Laser tape measures work this same way too."
+ },
+ "l0/sense:steps.1": {
+  "status": "pass-alt",
+  "en": "Drag the wall below. The front number follows it. Past 3.5 m, the limit of our robot's sensor, it says \"nothing there\", even though the wall is still in the room.",
+  "my": "အောက်က နံရံ ကို ဆွဲရွှေ့ကြည့်ပါ။ ရှေ့က ဂဏန်းက သူ့နောက်ကို လိုက်ပါလိမ့်မယ်။ ဒီ စက်ရုပ် ရဲ့ ဆင်ဆာ အကန့်အသတ်ဖြစ်တဲ့ 3.5 m ကျော်သွားရင် နံရံ က အခန်းထဲမှာ ရှိနေသေးပေမဲ့ \"ဘာမှမရှိပါ\" လို့ ပြောပါလိမ့်မယ်။",
+  "back": "Drag the wall below. The front number will follow it. When it goes past 3.5 m, which is this robot's sensor limit, it will say \"nothing\" even though the wall is still in the room."
+ },
+ "l0/sense:steps.2": {
+  "status": "pass-alt",
+  "en": "Now the beam spins. The sensor on top of our robot turns 5 times a second and measures 360 times per turn. That is 1800 numbers every second, the ring of dots around the robot. A spinning distance sensor like this is called a LiDAR.",
+  "my": "အခု beam က လည်နေပါပြီ။ စက်ရုပ် အပေါ်က ဆင်ဆာ က တစ်စက္ကန့်ကို 5 ကြိမ် လည်ပြီး တစ်ပတ်မှာ 360 ကြိမ် တိုင်းတာပါတယ်။ အဲဒါက တစ်စက္ကန့်တိုင်းမှာ ဂဏန်းပေါင်း 1800 ဖြစ်ပြီး စက်ရုပ် ပတ်ပတ်လည်မှာ အစက်လေးတွေနဲ့ ဝိုင်းနေတာကို တွေ့ရမှာပါ။ ဒီလို လည်ပတ်နေတဲ့ အကွာအဝေး ဆင်ဆာ ကို LiDAR လို့ ခေါ်ပါတယ်။",
+  "back": "Now the beam is spinning. The sensor on top of the robot spins 5 times per second and measures 360 times per turn. That is 1800 numbers every second, and you will see it ringed with small dots around the robot. A distance sensor that spins like this is called a LiDAR."
+ },
+ "l0/sense:steps.3": {
+  "status": "pass-alt",
+  "en": "The robot has other senses too, for later: wheels that count their own turns, a sensor that feels the robot turning, and on some robots a camera.",
+  "my": "နောက်ပိုင်းမှာ လေ့လာဖို့ စက်ရုပ် မှာ အခြား အာရုံခံနိုင်စွမ်းတွေလည်း ရှိပါသေးတယ်- သူတို့ဘာသာ လည်ပတ်မှုကို ရေတွက်နိုင်တဲ့ ဘီး တွေ၊ စက်ရုပ် လှည့် တာကို သိနိုင်တဲ့ ဆင်ဆာ နဲ့ အချို့ စက်ရုပ် တွေမှာပါတဲ့ ကင်မရာ တို့ပဲ ဖြစ်ပါတယ်။",
+  "back": "Later, the robot also has other sensing abilities to learn - wheels that can count their own rotation, a sensor that can tell the robot is turning, and cameras that some robots have."
+ },
+ "l0/sense:title": {
+  "status": "pass-alt",
+  "en": "How a robot senses: one beam, then a ring",
+  "my": "စက်ရုပ်က အာရုံခံပုံ- beam တစ်ခုကနေ စက်ဝိုင်းတစ်ခုအထိ",
+  "back": "How the robot senses: from one beam to a circle"
+ },
+ "l0/sense:wall": {
+  "status": "pass-alt",
+  "en": "Wall in front (m)",
+  "my": "ရှေ့က နံရံ (m)",
+  "back": "Wall in front (m)"
+ },
+ "l0/sense:words": {
+  "status": "pass-alt",
+  "en": "Words you met",
+  "my": "တွေ့ခဲ့ရတဲ့ စကားလုံးများ",
+  "back": "Words encountered"
+ },
+ "l0/sense:yes": {
+  "status": "pass-alt",
+  "en": "Yes: 5 m is past the 3.5 m limit, so the sensor cannot see it.",
+  "my": "ဟုတ်ပါတယ်- 5 m က အကန့်အသတ်ဖြစ်တဲ့ 3.5 m ထက် ကျော်လွန်နေတဲ့အတွက် ဆင်ဆာ က မမြင်နိုင်တော့ပါဘူး။",
+  "back": "Correct: because 5 m is beyond the limit of 3.5 m, the sensor can no longer see it."
+ },
+ "l0/simpick:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "a chip that draws 3D pictures fast; laptops without one draw 3D slowly or not at all",
+  "my": "3D ပုံတွေကို မြန်မြန် ဆွဲပေးတဲ့ chip၊ မပါတဲ့ လက်ပ်တော့တွေက 3D ကို နှေးနှေး ဆွဲတယ် ဒါမှမဟုတ် လုံးဝ မဆွဲနိုင်ဘူး",
+  "back": "A chip that draws 3D images quickly; laptops without it draw 3D slowly or cannot draw it at all"
+ },
+ "l0/simpick:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "weight, friction and falling, worked out by the simulator",
+  "my": "အလေးချိန်၊ ပွတ်တိုက်မှုနဲ့ ပြုတ်ကျတာတွေကို ဆင်မျူလေတာက တွက်ပေးတာ",
+  "back": "What the simulator calculates for weight, friction, and falling"
+ },
+ "l0/simpick:wrong": {
+  "status": "pass-alt",
+  "en": "Not quite: answer the three questions and see which step lights up.",
+  "my": "မမှန်သေးပါဘူး- မေးခွန်း 3 ခုကို ဖြေပြီး ဘယ်အဆင့် မီးလင်းလာလဲ ကြည့်ပါ။",
+  "back": "Not correct yet: answer the 3 questions and see which level lights up."
+ },
+ "l0/simwhat:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "a pretend world on a computer, with a pretend robot and pretend sensors",
+  "my": "ကွန်ပျူတာပေါ်က အတုကမ္ဘာ၊ စက်ရုပ်အတုနဲ့ ဆင်ဆာအတုတွေ ပါတယ်",
+  "back": "A fake world on the computer, with a fake robot and fake sensors"
+ },
+ "l0/simwhat:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "a window that shows what the robot believes; it is not a simulator",
+  "my": "စက်ရုပ်က ဘာကို ယုံကြည်နေလဲ ပြတဲ့ window၊ ဆင်မျူလေတာ မဟုတ်ဘူး",
+  "back": "A window showing what the robot believes, not the simulator"
+ },
+ "l0/think:answers.earlier": {
+  "status": "pass-alt",
+  "en": "it stops farther from the wall",
+  "my": "နံရံ နဲ့ ဝေးတဲ့နေရာမှာ ရပ် တယ်",
+  "back": "Stops far from the wall"
+ },
+ "l0/think:answers.later": {
+  "status": "pass-alt",
+  "en": "it stops closer to the wall",
+  "my": "နံရံ နဲ့ နီးတဲ့နေရာမှာ ရပ် တယ်",
+  "back": "Stops close to the wall"
+ },
+ "l0/think:answers.never": {
+  "status": "pass-alt",
+  "en": "it never stops",
+  "my": "လုံးဝ မရပ် တော့ဘူး",
+  "back": "Never stops at all"
+ },
+ "l0/think:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: set the rule to 0 m",
+  "my": "ဖျက်ကြည့် - စည်းကမ်းချက်ကို 0 m လို့ ထားလိုက်ပါ",
+  "back": "Break it - set the rule to 0 m"
+ },
+ "l0/think:brokenNote": {
+  "status": "pass-alt",
+  "en": "Nothing is ever closer than 0 m, so the rule never says stop. The robot drives into the wall.",
+  "my": "0 m ထက် နီးတာ ဘာမှမရှိနိုင်တဲ့အတွက် စည်းကမ်းချက်က 'ရပ်' ဖို့ ဘယ်တော့မှ ပြောမှာ မဟုတ်ပါဘူး။ ဒါကြောင့် စက်ရုပ် က နံရံ ကို ဝင်တိုက်ပါလိမ့်မယ်။",
+  "back": "Since nothing can be closer than 0 m, the rule will never say 'stop'. So the robot will crash into the wall."
+ },
+ "l0/think:bumped": {
+  "status": "pass-alt",
+  "en": "touched the wall",
+  "my": "နံရံ ကို တိုက်မိတယ်",
+  "back": "Hit the wall"
+ },
+ "l0/think:check": {
+  "status": "pass-alt",
+  "en": "Check: you change the rule from 0.5 m to 0.9 m. What happens?",
+  "my": "စစ်ကြည့် - စည်းကမ်းချက်ကို 0.5 m ကနေ 0.9 m ကို ပြောင်းလိုက်ရင် ဘာဖြစ်မလဲ။",
+  "back": "Check - what happens if you change the rule from 0.5 m to 0.9 m?"
+ },
+ "l0/think:checks": {
+  "status": "pass-alt",
+  "en": "Checks made",
+  "my": "စစ်ဆေးခဲ့တဲ့ အကြိမ်အရေအတွက်",
+  "back": "Number of times checked"
+ },
+ "l0/think:fig.go": {
+  "status": "pass-alt",
+  "en": "go",
+  "my": "သွား",
+  "back": "Go"
+ },
+ "l0/think:fig.line": {
+  "status": "pass-alt",
+  "en": "rule",
+  "my": "စည်းကမ်းချက်",
+  "back": "Rule"
+ },
+ "l0/think:fig.stop": {
+  "status": "pass-alt",
+  "en": "stop",
+  "my": "ရပ်",
+  "back": "Stop"
+ },
+ "l0/think:final": {
+  "status": "pass-alt",
+  "en": "Stopped at",
+  "my": "ရပ် သွားတဲ့ နေရာ",
+  "back": "Place where it stopped"
+ },
+ "l0/think:fixIt": {
+  "status": "pass-alt",
+  "en": "Fix it: back to 0.5 m",
+  "my": "ပြင်ကြည့် - 0.5 m ကို ပြန်ပြောင်းလိုက်ပါ",
+  "back": "Fix it - change it back to 0.5 m"
+ },
+ "l0/think:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "rule",
+  "my": "စည်းကမ်းချက်",
+  "back": "Rule"
+ },
+ "l0/think:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "if this is true, do that; otherwise, do something else",
+  "my": "ဒါ မှန်ရင် ဟိုဟာ လုပ်၊ မမှန်ရင် တခြားတစ်ခု လုပ်",
+  "back": "If this is true, do that; if not true, do something else"
+ },
+ "l0/think:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "check",
+  "my": "စစ်ဆေးခြင်း",
+  "back": "Checking"
+ },
+ "l0/think:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "one look at the newest number, then one choice: stop or go",
+  "my": "နောက်ဆုံး ဂဏန်းကို တစ်ချက်ကြည့်ပြီး ရွေးချယ်မှု တစ်ခု- ရပ်မလား သွားမလား",
+  "back": "Look at the latest number once and make one choice: stop or go"
+ },
+ "l0/think:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: a simple robot \"thinks\" by following a rule, and one number in the rule decides where it stops.",
+  "my": "သင်ယူရမှာကတော့ - ရိုးရှင်းတဲ့ စက်ရုပ် တစ်ခုဟာ စည်းကမ်းချက် တစ်ခုကို လိုက်နာပြီး 'စဉ်းစား' တာ ဖြစ်ပါတယ်။ စည်းကမ်းချက် ထဲက ဂဏန်းတစ်ခုက စက်ရုပ် ဘယ်မှာ ရပ် မလဲဆိုတာကို ဆုံးဖြတ်ပေးပါတယ်။",
+  "back": "What you will learn: a simple robot 'thinks' by following a rule. One number in the rule decides where the robot stops."
+ },
+ "l0/think:mascot": {
+  "status": "pass-alt",
+  "en": "the robot",
+  "my": "စက်ရုပ်",
+  "back": "Robot"
+ },
+ "l0/think:no": {
+  "status": "pass-alt",
+  "en": "Not quite: drag the rule to 0.9 and look where it stops.",
+  "my": "မမှန်သေးပါဘူး- စည်းကမ်းချက်ကို 0.9 အထိ ဆွဲပြီး ဘယ်မှာ ရပ်လဲ ကြည့်ပါ။",
+  "back": "Not correct yet: drag the rule up to 0.9 and see where it stops."
+ },
+ "l0/think:rule": {
+  "status": "pass-alt",
+  "en": "Stop when the wall is closer than (m)",
+  "my": "နံရံ က ဒီထက် နီးလာရင် ရပ် ပါ (m)",
+  "back": "Stop if the wall is closer than this (m)"
+ },
+ "l0/think:steps.0": {
+  "status": "pass-alt",
+  "en": "For this robot, thinking is a rule, not a brain: \"wall closer than 0.5 m: stop. Otherwise: go.\" It checks the rule each time a new front number arrives, 5 times a second.",
+  "my": "ဒီ စက်ရုပ် အတွက် စဉ်းစားတယ်ဆိုတာ ဦးနှောက် မဟုတ်ဘဲ စည်းကမ်းချက် တစ်ခု ဖြစ်ပါတယ်- \"နံရံက 0.5 m ထက် နီးရင်- ရပ်။ မဟုတ်ရင်- သွား။\" ရှေ့က ဂဏန်းအသစ် ရောက်လာတိုင်း ဒီစည်းကမ်းချက်ကို စစ်ပါတယ်၊ တစ်စက္ကန့်ကို 5 ကြိမ်ပါ။",
+  "back": "For this robot, thinking is not a brain but a single rule: \"If the wall is closer than 0.5 m: stop. Otherwise: go.\" Every time a new number arrives from the front, it checks this rule, 5 times per second."
+ },
+ "l0/think:steps.1": {
+  "status": "pass-alt",
+  "en": "Drag the 0.5 below. A bigger number: the robot stops earlier, far from the wall. A smaller number: it stops later, closer to the wall.",
+  "my": "အောက်က 0.5 ကို ဆွဲကြည့်ပါ။ ဂဏန်း ပိုကြီးရင် စက်ရုပ် က နံရံ နဲ့ ဝေးဝေးမှာ စောစော ရပ် ပါလိမ့်မယ်။ ဂဏန်း ပိုငယ်ရင်တော့ နံရံ နဲ့ နီးနီးမှာ နောက်ကျမှ ရပ် ပါလိမ့်မယ်။",
+  "back": "Drag the 0.5 below. If the number is bigger, the robot stops early, far from the wall. If the number is smaller, it stops late, close to the wall."
+ },
+ "l0/think:steps.2": {
+  "status": "pass-alt",
+  "en": "Between two checks the robot drives 5.2 cm without looking. Set the rule to 2 cm or less and the moment passes between two checks: the robot touches the wall.",
+  "my": "စစ်ဆေးမှု 2 ခုကြားမှာ စက်ရုပ် က ဘာကိုမှ မကြည့်ဘဲ 5.2 cm အထိ မောင်းနှင်ပါတယ်။ စည်းကမ်းချက်ကို 2 cm ဒါမှမဟုတ် အဲဒီထက် နည်းအောင် ထားလိုက်ရင် စစ်ဆေးမှု 2 ခုကြားမှာ ရပ် ရမယ့် အချိန် ကျော်သွားပြီး စက်ရုပ် က နံရံ ကို တိုက်မိသွားပါလိမ့်မယ်။",
+  "back": "Between two checks the robot drives up to 5.2 cm without looking at anything. If you set the rule to 2 cm or less, the time to stop between two checks is passed and the robot will hit the wall."
+ },
+ "l0/think:steps.3": {
+  "status": "pass-alt",
+  "en": "An automatic door follows the same kind of rule: someone closer than a set distance, open. In Level 1 you will write this exact rule yourself.",
+  "my": "အလိုအလျောက် တံခါးတွေလည်း ဒီလို စည်းကမ်းချက်မျိုးနဲ့ပဲ အလုပ်လုပ်တာ ဖြစ်ပါတယ် - လူတစ်ယောက်က သတ်မှတ်ထားတဲ့ အကွာအဝေး ထက် နီးလာရင် - ဖွင့်။ Level 1 မှာ ဒီ စည်းကမ်းချက်ကို သင် ကိုယ်တိုင် ရေးရမှာ ဖြစ်ပါတယ်။",
+  "back": "Automatic doors also work with a rule like this - if a person comes closer than a set distance - open. In Level 1 you will write this rule yourself."
+ },
+ "l0/think:title": {
+  "status": "pass-alt",
+  "en": "How a robot thinks: a rule",
+  "my": "စက်ရုပ် တစ်ခု ဘယ်လို စဉ်းစားသလဲ - စည်းကမ်းချက်",
+  "back": "How a robot thinks - the rule"
+ },
+ "l0/think:words": {
+  "status": "pass-alt",
+  "en": "Words you met",
+  "my": "တွေ့ခဲ့ရတဲ့ စကားလုံးများ",
+  "back": "Words encountered"
+ },
+ "l0/think:yes": {
+  "status": "pass-alt",
+  "en": "Yes: the rule fires as soon as the wall is under 0.9 m, which happens sooner.",
+  "my": "ဟုတ်ပါတယ် - နံရံ က 0.9 m ထက် နည်းသွားတာနဲ့ စည်းကမ်းချက်က စတင် အလုပ်လုပ်တာကြောင့် ပိုစောစော ရပ် သွားတာ ဖြစ်ပါတယ်။",
+  "back": "Yes - as soon as the wall is less than 0.9 m, the rule starts working, so it stops earlier."
+ },
+ "l0/tools:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "turned into machine code before it runs (C++), instead of read line by line (Python)",
+  "my": "run မလုပ်ခင် စက်ကုဒ် အဖြစ် ပြောင်းထားတာ (C++)၊ တစ်ကြောင်းချင်း ဖတ်တာ (Python) မဟုတ်ဘူး",
+  "back": "Converted into machine code before run (C++), not read line by line (Python)"
+ },
+ "l0/tools:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: the four tools under a robot program, and which job each one is for.",
+  "my": "သင်ယူရမှာက- စက်ရုပ် ပရိုဂရမ် တစ်ခုရဲ့ အောက်က tool 4 ခုနဲ့ တစ်ခုချင်းစီ ဘာအလုပ်အတွက်လဲ ဆိုတာပါ။",
+  "back": "What you learn: the 4 tools under a robot program, and what job each one is for."
+ },
  "l3/tflab:check": {
   "status": "pass",
   "en": "Check my guess",

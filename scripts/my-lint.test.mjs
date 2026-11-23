@@ -22,6 +22,11 @@ describe('Burmese encoding check', () => {
 })
 
 describe('lint', () => {
+  it('counts English number words as digits, like the parity test (one is free)', () => {
+    expect(lint('two wheels', 'ဘီး နှစ်ဘီး', 'label').fail.join()).toMatch(/numbers/)
+    expect(lint('two wheels', 'ဘီး 2 ဘီး', 'label').fail).toEqual([])
+    expect(lint('one wheel', 'ဘီး တစ်ဘီး', 'label').fail).toEqual([])
+  })
   it('passes a correct body sentence', () => {
     const en = 'Each beam returns the nearest wall or obstacle, if it is closer than 3.5 m.'
     const my = 'beam တစ်ခုစီက 3.5 m ထက် နီးတဲ့ အနီးဆုံး နံရံ ဒါမှမဟုတ် အတားအဆီးကို ပြန်ပြပါတယ်။'

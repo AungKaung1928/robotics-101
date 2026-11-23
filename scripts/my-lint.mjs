@@ -30,16 +30,10 @@ export function encodingErrors(s) {
 }
 
 const nums = (s) => (s.match(/\d+(?:\.\d+)?/g) ?? []).sort()
-// English number words may become digits in Burmese ("one scan" -> "scan 1 ကြိမ်"): count them as digits on the English side.
-const WORDS = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, twice: 2, once: 1 }
-const numsEn = (en, my) => {
-  const extra = (en.match(/\b(one|two|three|four|five|six|seven|eight|nine|ten|twice|once)\b/gi) ?? []).map((w) => String(WORDS[w.toLowerCase()]))
-  const want = nums(en)
-  const got = nums(my)
-  // Each number word may or may not be written as a digit: keep the ones the Burmese actually uses.
-  for (const d of extra) if (got.filter((x) => x === d).length > want.filter((x) => x === d).length) want.push(d)
-  return want.sort()
-}
+// Same rule as the parity test (src/i18n.parity.test.ts tokens): English number words count as digits and must appear as
+// digits in Burmese; 1 is ignored on both sides ("one scan" may stay a word).
+const WORDS = { zero: 0, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, twelve: 12, twice: 2 }
+const numsEn = (en) => nums(en.replace(/\b(zero|two|three|four|five|six|seven|eight|nine|ten|twelve|twice)\b/gi, (w) => String(WORDS[w.toLowerCase()]))).filter((d) => d !== '1')
 const ticks = (s) => (s.match(/`[^`]+`/g) ?? []).sort()
 // Identifiers, topics, files, commands: a capital after the first letter, digit, _ / . + :: inside the token.
 const idents = (s) => (s.match(/[A-Za-z_/~][\w/.+:-]*/g) ?? []).map((t) => t.replace(/[.:-]+$/, ''))
@@ -52,7 +46,8 @@ export function lint(en, my, role = 'body') {
   const warn = []
   if (!my || !my.trim()) return { fail: ['empty'], warn }
   fail.push(...encodingErrors(my))
-  if (!eq(numsEn(en, my), nums(my))) fail.push(`numbers ${numsEn(en, my)} vs ${nums(my)}`)
+  const numsMy = nums(my).filter((d) => d !== '1')
+  if (!eq(numsEn(en), numsMy)) fail.push(`numbers ${numsEn(en)} vs ${numsMy}`)
   if (!eq(ticks(en), ticks(my))) fail.push('backtick spans differ')
   for (const t of idents(en)) if (!my.includes(t)) fail.push(`identifier ${t} missing`)
   for (const t of G.tierA_keepEnglish) if (word(t).test(en) && !word(t).test(my)) fail.push(`tier A "${t}" not kept`)
