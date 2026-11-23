@@ -21,6 +21,9 @@
 .stepper button:active:not(:disabled) { transform: scale(0.97); transition-duration: 60ms; }
 /* Scrubber at least 24 px tall: WCAG 2.2 2.5.8 pointer target (measured 16 px with the browser default). */
 .stepper .scrub { min-height: 24px; }
+/* Play icon: triangle morphs into pause bars (same command list, CSS d transition; browsers without it swap at once). */
+.stepper .pp { width: 0.8em; height: 0.8em; margin-right: 0.4em; vertical-align: -0.05em; fill: currentColor; }
+.stepper .pp path { transition: d var(--spring-ms, 200ms) var(--spring, ease-out); }
 /* Scrubber + the step name under the pointer (video chapter title on hover); the tip pops on the UI spring per step.
    Its anchor slides with the fraction (left edge at the start, right edge at the end): long labels never leave the track. */
 .stepper .scrub-wrap { flex: 1 1 10rem; position: relative; display: flex; }
@@ -31,4 +34,4 @@
 /* Track drawn by scrubTrack() (inline background-image): a 6 px band centred in the 24 px target, step gaps included. */
 .stepper .scrub.squish-range { height: 24px; background-color: transparent; background-size: 100% 6px; background-repeat: no-repeat; background-position: center; }
 @media (max-width: 600px) { .stepper .wide { display: none; } }
-@media (prefers-reduced-motion: reduce) { .stepper .rail .dot, .stepper button, .stepper .rail li::before { transition: none; } .stepper .rail [aria-current] .dot, .stepper .scrub-tip { animation: none; } .stepper button:active:not(:disabled) { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .stepper .rail .dot, .stepper button, .stepper .rail li::before, .stepper .pp path { transition: none; } .stepper .rail [aria-current] .dot, .stepper .scrub-tip { animation: none; } .stepper button:active:not(:disabled) { transform: none; } }

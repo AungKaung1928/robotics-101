@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { scrubFrac, scrubTrack } from './motion'
+import { PAUSE_D, PLAY_D, scrubFrac, scrubTrack } from './motion'
 
 const stops = (bg: string) => bg.slice('linear-gradient(to right, '.length, -1).split(/, (?=var|transparent)/)
 
@@ -30,5 +30,13 @@ describe('scrubFrac', () => {
     expect(scrubFrac(-5, 222)).toBe(0)
     expect(scrubFrac(500, 222)).toBe(1)
     expect(scrubFrac(5, 10)).toBe(0) // narrower than the thumb
+  })
+})
+
+describe('play/pause icon', () => {
+  it('both paths have the same command list, so the browser can morph d between them', () => {
+    const cmds = (d: string) => d.replace(/[^A-Za-z]/g, '')
+    expect(cmds(PLAY_D)).toBe(cmds(PAUSE_D))
+    expect(PLAY_D.match(/[\d.]+/g)).toHaveLength(PAUSE_D.match(/[\d.]+/g)!.length)
   })
 })

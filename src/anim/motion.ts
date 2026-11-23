@@ -80,3 +80,7 @@ export function scrubFrac(x: number, width: number): number {
   const span = width - SCRUB_THUMB_PX
   return span > 0 ? Math.min(1, Math.max(0, (x - SCRUB_THUMB_PX / 2) / span)) : 0
 }
+
+// Play triangle and pause bars as the same two 4-corner shapes (left half, right half), so CSS morphs one into the other.
+export const PLAY_D = 'M2 1L5.5 3L5.5 7L2 9ZM5.5 3L9 5L9 5L5.5 7Z'
+export const PAUSE_D = 'M2 1L4 1L4 9L2 9ZM6 1L8 1L8 9L6 9Z'
