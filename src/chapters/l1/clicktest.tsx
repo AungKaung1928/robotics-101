@@ -17,7 +17,7 @@ import { SCRIPT } from '../l2/ws'
 type Step =
   | { click: string; text?: string }
   | { type: string; value: string; submit?: boolean }
-  | { slide: number }
+  | { slide: number; in?: string }
   | { key: string; on: string }
   | { a11y: true }
   | { expect: string; has?: string; is?: string; ok?: true; re?: RegExp }
@@ -45,6 +45,7 @@ const cases = (l: Lang): Case[] => [
   { name: 'bfs keyboard', Body: BfsChapter, steps: [{ expect: 'tabstops', is: '1' }, { key: 'ArrowDown', on: '.ep-bfs [tabindex="0"]' }, { key: 'ArrowDown', on: ':focus' }, { key: 'ArrowDown', on: ':focus' }, { key: 'ArrowDown', on: ':focus' }, { key: 'Enter', on: ':focus' }, { expect: 'len', has: '13' }, { key: 'ArrowRight', on: ':focus' }, { key: 'Enter', on: ':focus' }, { key: 'ArrowUp', on: ':focus' }, { key: 'ArrowUp', on: ':focus' }, { key: 'ArrowRight', on: ':focus' }, { key: 'Enter', on: ':focus' }, { expect: 'walls', is: '9' }, { expect: 'wallAt', is: BFS_STRINGS[l].cellLabel(2, 4, true) }] },
   { name: 'bfs costmap', Body: BfsChapter, steps: [{ click: 'button.costmap' }, { expect: 'len', has: '15' }, { expect: 'cost', has: '15' }, { click: 'button.costmap' }, { expect: 'len', has: '13' }] },
   { name: 'late slider', Body: LateChapter, steps: [{ expect: 'backwards', has: '5' }, { slide: 0.17 }, { expect: 'challenge', ok: true }, { slide: 0.18 }, { expect: 'backwards', has: '1' }] },
+  { name: 'late reorder', Body: LateChapter, steps: [{ expect: 'r-dropped', is: '4' }, { slide: 450, in: '.reorder input[type=range]' }, { expect: 'r-used', is: '20' }, { expect: 'r-delay', has: '0.45' }] },
   { name: 'late keep-latest', Body: LateChapter, steps: [{ expect: 'count:svg.late rect.env', is: '0' }, { click: '.break' }, { expect: 'count:svg.late rect.env', is: '20' }, { expect: 'backwards', has: '0' }, { expect: 'acted', has: '15' }] },
 ]
 
@@ -87,7 +88,7 @@ async function runCase(c: Case, host: HTMLElement, t: Strings): Promise<string |
         if (st.on !== ':focus') el.focus()
         el.dispatchEvent(new KeyboardEvent('keydown', { key: st.key, bubbles: true }))
       } else if ('slide' in st) {
-        const el = host.querySelector<HTMLInputElement>('.slider input[type=range]')
+        const el = host.querySelector<HTMLInputElement>(st.in ?? '.slider input[type=range]')
         if (!el) return 'no slider'
         setValue(el, String(st.slide))
       } else {

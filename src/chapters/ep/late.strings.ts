@@ -19,6 +19,9 @@ export const LATE_STRINGS = {
     goalText: (acted: number, back: number) => `acted on ${acted}, back in time ${back}×`,
     repoNote: 'Same idea in TF-Transform-Explorer: tf_anomaly_detector declares max_transform_age = 1.0 s.',
     exampleNote: 'The delays on this page are an example, not a measurement.',
+    reorderTitle: 'Third fix: a reorder buffer',
+    reorderText: 'Hold each reading until its stamp + a wait, then use them in stamp order. Never back in time, but every reading is used that much later; one that arrives after its wait is dropped.',
+    window: 'wait (ms)', rUsed: 'used, in order', rDropped: 'dropped (too late for the wait)', rDelay: 'every reading used later by',
     words: 'Words',
     glossary: [
       ['header.stamp', 'the time the data was measured, set by the sender'],
@@ -50,6 +53,9 @@ export const LATE_STRINGS = {
     goalText: (acted: number, back: number) => `使った ${acted} 個、過去に戻った ${back} 回`,
     repoNote: 'TF-Transform-Explorer も同じ考え方：tf_anomaly_detector は max_transform_age = 1.0 秒を宣言している。',
     exampleNote: 'このページの遅延は例であり、測定値ではない。',
+    reorderTitle: '3つ目の直し方：並べ替えバッファ',
+    reorderText: '各読み取り値をスタンプ + 待ち時間まで保持し、スタンプ順に使う。過去には戻らないが、どの値もその分だけ遅れて使われる。待ち時間より後に届いたものは捨てる。',
+    window: '待ち時間（ms）', rUsed: '使った（順番通り）', rDropped: '捨てた（待ちに間に合わない）', rDelay: 'すべての値の遅れ',
     words: '用語',
     glossary: [
       ['header.stamp', 'データを測った時刻。送り手が設定する'],

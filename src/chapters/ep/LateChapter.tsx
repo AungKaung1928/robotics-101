@@ -6,7 +6,7 @@ import { STRINGS, type Strings } from '../../i18n'
 import Gloss from '../l1/Gloss'
 import '../l1/l1.css'
 import LateEnvelopes from '../../scenarios/LateEnvelopes'
-import { DELAYS_MS, END_MS, PERIOD_MS, inGoal, run, scenario, summary } from './late'
+import { DELAYS_MS, END_MS, PERIOD_MS, inGoal, reorder, run, scenario, summary } from './late'
 import { LATE_STRINGS } from './late.strings'
 import './ep.css'
 
@@ -21,6 +21,8 @@ export default function LateChapter({ t }: { t: Strings }) {
   const s = LATE_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
   const [maxAge, setMaxAge] = useState(1)
   const [keepLatest, setKeepLatest] = useState(false)
+  const [windowMs, setWindowMs] = useState(200)
+  const ro = reorder(windowMs)
   const o = useMemo(() => run(Math.round(maxAge * 1000), keepLatest), [maxAge, keepLatest])
   const sum = summary(o)
   const sc = useMemo(() => scenario(), [])
@@ -81,6 +83,16 @@ export default function LateChapter({ t }: { t: Strings }) {
         </dl>
         <p><strong>{s.challenge}</strong></p>
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet} {s.goalText(sum.acted, sum.backwards)}</p>
+        <p className="group-h">{s.reorderTitle}</p>
+        <p>{s.reorderText}</p>
+        <div className="reorder">
+          <Slider label={s.window} value={windowMs} min={0} max={500} step={10} fmt={(v) => String(v)} onChange={setWindowMs} />
+        </div>
+        <dl className="readout">
+          <div><dt>{s.rUsed}</dt><dd data-k="r-used">{ro.used.length}</dd></div>
+          <div><dt>{s.rDropped}</dt><dd data-k="r-dropped">{ro.dropped.length}</dd></div>
+          <div><dt>{s.rDelay}</dt><dd data-k="r-delay">{(ro.addedDelayMs / 1000).toFixed(2)} s</dd></div>
+        </dl>
         <p className="group-h">{s.words}</p>
         <Gloss items={s.glossary} />
         <p className="src">{t.source}: <a href="https://github.com/ros2/common_interfaces/blob/humble/std_msgs/msg/Header.msg">std_msgs/Header.msg (Humble)</a> · <a href={`${SOURCE_REPO}/blob/main/src/tf_anomaly_detector.cpp#L10-L14`}>tf_anomaly_detector.cpp:10-14</a>. {s.repoNote} {s.exampleNote}</p>
