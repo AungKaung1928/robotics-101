@@ -84,3 +84,4 @@
 /* ThinkScene check marks: where each loop check happened; the one that fired the rule is longer and green. */
 .tk-tick { stroke: var(--ink-2); stroke-width: 1.5; stroke-linecap: round; }
 .tk-tick.is-fired { stroke: var(--free); stroke-width: 2.5; }
+.tk-tick.is-now { stroke: var(--robot); stroke-width: 2.5; } /* the check happening now */

@@ -136,6 +136,10 @@ describe('ThinkScene check marks are the chapter loop ticks', () => {
       expect(Math.max(...gaps) - Math.min(...gaps)).toBeLessThan(1e-6) // equal spacing: one STEP_M per check
     }
     expect(at(th.RULE_M, 1)).toContain(`data-ticks="${Math.floor(1 * dc.SCAN_HZ) + 1}"`) // ticks at 0, 1/HZ, ... <= 1 s
+    const mid = at(th.RULE_M, 1)
+    expect((mid.match(/tk-tick is-now/g) ?? []).length).toBe(1) // driving: exactly the latest check is 'now'
+    expect(mid).not.toContain('is-fired')
+    expect(at(0.01, 60)).not.toContain('is-now') // crashed: no check is current
   })
 })
 

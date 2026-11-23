@@ -72,8 +72,10 @@ export default function ThinkScene({ stopAt, t, v = 0.2, wallX = 1.2, stopWord =
       </g>
       {/* one mark per check made so far, where the robot's front was: the loop only looks at these spots (chapter model).
           Below the robot and the ladder row (+34), so the last check before a crash stays visible in front of the wall */}
-      <g className="tk-ticks" data-ticks={seen.length}>{seen.map((k, i) => { const last = i === seen.length - 1 && fired, kx = X(sim.mark(k.distance))
-        return <line key={i} className={last ? 'tk-tick is-fired' : 'tk-tick'} x1={kx} x2={kx} y1={dy + 42} y2={dy + (last ? 52 : 47)} /> })}</g>
+      <g className="tk-ticks" data-ticks={seen.length}>{seen.map((k, i) => {
+        // the latest check: lit green if it fired the rule, robot blue while the robot is still going (the caption's 'check k')
+        const latest = i === seen.length - 1, cls = latest && fired ? 'tk-tick is-fired' : latest && !bumped ? 'tk-tick is-now' : 'tk-tick', kx = X(sim.mark(k.distance))
+        return <line key={i} className={cls} x1={kx} x2={kx} y1={dy + 42} y2={dy + (latest && !bumped ? 52 : 47)} /> })}</g>
       <g className={dOn ? 'tk-d is-on' : d === null ? 'tk-d is-blind' : 'tk-d'} data-d={d === null ? 'none' : d.toFixed(2)}>
         <line x1={d0} x2={d1} y1={dy} y2={dy} /><line x1={d1} x2={d1} y1={dy - 4} y2={dy + 4} />
         {/* room on the line: centred above it; near the wall: beyond the wall if the room goes on, else below the robot */}
