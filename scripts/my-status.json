@@ -18,10 +18,10 @@
   "back": "Early starting steps"
  },
  "core:bringup.lines.0": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "One launch file starts everything. Most stages wait on fixed timers chosen so their inputs should exist first. Only patrol checks: it waits up to 5 s for Nav2’s action server and retries.",
-  "my": "launch file တစ်ခုတည်းနဲ့ အားလုံးကို စတင်ပါတယ်။ အဆင့်အများစုက input တွေ အရင်ရှိနေအောင် သတ်မှတ်ထားတဲ့ timer တွေနဲ့ စောင့်ပါတယ်။ patrol တစ်ခုပဲ စစ်ဆေးတာပါ- Nav2 ရဲ့ action server ကို 5 s အထိ စောင့်ပြီး ပြန်ကြိုးစားပါတယ်။",
-  "back": "Starts everything with a single launch file. Most steps wait with set timers to ensure inputs are available first. Only the patrol is checked: waits up to 5 s for Nav2's action server and retries."
+  "my": "launch file တစ်ခုတည်းနဲ့ အားလုံးကို စတင်ပါတယ်။ အဆင့်အများစုက input တွေ အရင်ရှိနေအောင် သတ်မှတ်ထားတဲ့ timer တွေနဲ့ စောင့်ပါတယ်။ patrol node တစ်ခုတည်းကပဲ စစ်ပါတယ်- Nav2 ရဲ့ action server ကို 5 s အထိ စောင့်ပြီး ပြန်ကြိုးစားပါတယ်။",
+  "back": "Everything is started with a single launch file. Most stages wait with timers that are set so that the inputs exist first. Only a single patrol node checks: it waits up to 5 s for Nav2's action server and retries."
  },
  "core:bringup.lines.1": {
   "status": "needs-human",
@@ -39,14 +39,14 @@
  "core:bringup.logHead.1": {
   "status": "pass-alt",
   "en": "starts",
-  "my": "စတာ",
-  "back": "Starts"
+  "my": "စချိန်",
+  "back": "Start time"
  },
  "core:bringup.logHead.2": {
   "status": "pass-alt",
   "en": "gives",
-  "my": "ပေးတာ",
-  "back": "Gives"
+  "my": "ပေးတဲ့အရာ",
+  "back": "What it gives"
  },
  "core:bringup.nav2": {
   "status": "pass",
@@ -183,8 +183,9 @@
  "core:costmap.window": {
   "status": "pass",
   "en": "local costmap: a window that moves with the robot",
-  "my": "local costmap- စက်ရုပ်နဲ့အတူ ရွှေ့တဲ့ window",
-  "back": "local costmap- window that moves with the robot"
+  "my": "local costmap- စက်ရုပ်နဲ့အတူ ရွေ့တဲ့ window",
+  "back": "local costmap- window that moves with the robot",
+  "note": "spelling: ရွှေ့ (move something) -> ရွေ့ (moves), audit 2026-11-24"
  },
  "core:costmap.zero": {
   "status": "pass",
@@ -298,8 +299,9 @@
  "core:goal.lines.0": {
   "status": "pass",
   "en": "The DWB controller runs at 20 Hz; at the 0.26 m/s speed limit each tick moves 1.3 cm.",
-  "my": "DWB controller က 20 Hz နဲ့ အလုပ်လုပ်ပြီး 0.26 m/s အမြန်နှုန်း အကန့်အသတ်မှာ tick တစ်ခုစီဟာ 1.3 cm ရွှေ့လျားပါတယ်။",
-  "back": "The DWB controller works at 20 Hz, and at a 0.26 m/s speed limit, each tick moves 1.3 cm."
+  "my": "DWB controller က 20 Hz နဲ့ အလုပ်လုပ်ပြီး 0.26 m/s အမြန်နှုန်း အကန့်အသတ်မှာ tick တစ်ခုစီဟာ 1.3 cm ရွေ့လျားပါတယ်။",
+  "back": "The DWB controller works at 20 Hz, and at a 0.26 m/s speed limit, each tick moves 1.3 cm.",
+  "note": "spelling: ရွှေ့ (move something) -> ရွေ့ (moves), audit 2026-11-24"
  },
  "core:goal.lines.1": {
   "status": "pass-alt",
@@ -434,10 +436,10 @@
   "back": "Model: hit p = 0.7, pass p = 0.4 (selection for this page), beams that return nothing do not change anything."
  },
  "core:grid.republish": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "map republished every",
-  "my": "မြေပုံကို အချိန်အပိုင်းအခြားအလိုက် ပြန်ပို့ပေးတဲ့နှုန်း",
-  "back": "Rate of periodic map republication"
+  "my": "မြေပုံကို ပြန်ထုတ်တဲ့ ကြားချိန်",
+  "back": "The interval for re-publishing the map"
  },
  "core:grid.res": {
   "status": "pass",
@@ -496,8 +498,9 @@
  "core:lede": {
   "status": "pass",
   "en": "One simulated TurtleBot3 in a 10 × 10 m Gazebo arena. Each waypoint is one idea of a mobile robot, with its value from that setup’s ROS 2 Nav2 config.",
-  "my": "10 × 10 m Gazebo ကွင်းထဲမှာ simulation လုပ်ထားတဲ့ TurtleBot3 စက်ရုပ် 1 စီး ရှိပါတယ်။ waypoint တစ်ခုစီဟာ ရွှေ့လျားစက်ရုပ်ရဲ့ အယူအဆ တစ်ခုစီ ဖြစ်ပြီး တန်ဖိုးတွေကိုတော့ အဲဒီ setup ရဲ့ ROS 2 Nav2 config ကနေ ယူထားတာ ဖြစ်ပါတယ်။",
-  "back": "There is 1 TurtleBot3 robot simulated in a 10 × 10 m Gazebo area. Each waypoint is a concept for the mobile robot and the values are taken from the ROS 2 Nav2 config of that setup."
+  "my": "10 × 10 m Gazebo ကွင်းထဲမှာ simulation လုပ်ထားတဲ့ TurtleBot3 စက်ရုပ် 1 စီး ရှိပါတယ်။ waypoint တစ်ခုစီဟာ ရွေ့လျားစက်ရုပ်ရဲ့ အယူအဆ တစ်ခုစီ ဖြစ်ပြီး တန်ဖိုးတွေကိုတော့ အဲဒီ setup ရဲ့ ROS 2 Nav2 config ကနေ ယူထားတာ ဖြစ်ပါတယ်။",
+  "back": "There is 1 TurtleBot3 robot simulated in a 10 × 10 m Gazebo area. Each waypoint is a concept for the mobile robot and the values are taken from the ROS 2 Nav2 config of that setup.",
+  "note": "spelling: ရွှေ့ (move something) -> ရွေ့ (moves), audit 2026-11-24"
  },
  "core:levels.difficulty": {
   "status": "pass-alt",
@@ -534,6 +537,48 @@
   "en": "The software around it",
   "my": "စက်ရုပ် ပတ်လည်က ဆော့ဖ်ဝဲ",
   "back": "Software around the robot"
+ },
+ "core:levels.grows.bringup": {
+  "status": "pass-alt",
+  "en": "Level 0 showed robot software as many small programs passing data along. Bring-up starts all those programs, in the right order.",
+  "my": "Level 0 က စက်ရုပ် ဆော့ဖ်ဝဲကို ဒေတာ လက်ဆင့်ကမ်းတဲ့ ပရိုဂရမ် အသေးလေးတွေ အများကြီးအဖြစ် ပြခဲ့ပါတယ်။ bring-up က အဲဒီ ပရိုဂရမ်တွေ အားလုံးကို မှန်ကန်တဲ့ အစဉ်အတိုင်း စတင်ပေးပါတယ်။",
+  "back": "Level 0 showed the robot software as many tiny programs that hand data along. Bring-up starts all those programs in the correct order."
+ },
+ "core:levels.grows.costmap": {
+  "status": "pass-alt",
+  "en": "The thinking chapter stopped the robot at a safe distance from the wall. A costmap draws that distance around every wall on the map.",
+  "my": "စဉ်းစားတဲ့ အခန်းက စက်ရုပ်ကို နံရံနဲ့ ဘေးကင်းတဲ့ အကွာအဝေးမှာ ရပ်စေခဲ့ပါတယ်။ costmap က အဲဒီ အကွာအဝေးကို မြေပုံပေါ်က နံရံတိုင်းရဲ့ ပတ်လည်မှာ ဆွဲပေးပါတယ်။",
+  "back": "The thinking chapter made the robot stop at a safe distance from the wall. The costmap draws that distance around every wall on the map."
+ },
+ "core:levels.grows.detect": {
+  "status": "pass-alt",
+  "en": "The sensing chapter showed a beam hitting something. Here neighbouring hits are grouped, and each group is a guess at one object.",
+  "my": "အာရုံခံတဲ့ အခန်းက beam တစ်ခု တစ်ခုခုကို ထိတာ ပြခဲ့ပါတယ်။ ဒီမှာတော့ ဘေးချင်းကပ် ထိမှတ်တွေကို အုပ်စုဖွဲ့ပြီး အုပ်စုတစ်ခုစီက အရာဝတ္ထု တစ်ခုလို့ ခန့်မှန်းတာပါ။",
+  "back": "The sensing chapter showed a beam hitting something. Here, adjacent hit points are grouped, and each group is estimated to be one object."
+ },
+ "core:levels.grows.goal": {
+  "status": "pass-alt",
+  "en": "The acting chapter sent the wheels two numbers. Here you send a place instead, and the planner decides if and how it gets there.",
+  "my": "လုပ်ဆောင်တဲ့ အခန်းက ဘီးတွေကို ဂဏန်း 2 ခု ပို့ခဲ့ပါတယ်။ ဒီမှာတော့ နေရာ တစ်ခုကို ပို့ပြီး planner က ရောက်နိုင်လား၊ ဘယ်လို ရောက်မလဲ ဆုံးဖြတ်ပါတယ်။",
+  "back": "The acting chapter sent 2 numbers to the wheels. Here, a place is sent, and the planner decides whether it can be reached and how it will be reached."
+ },
+ "core:levels.grows.grid": {
+  "status": "pass-alt",
+  "en": "The thinking chapter decided from one reading and then forgot it. A grid remembers readings as cells: free, wall or not seen yet.",
+  "my": "စဉ်းစားတဲ့ အခန်းက ဂဏန်း တစ်ခုနဲ့ ဆုံးဖြတ်ပြီး မေ့သွားခဲ့ပါတယ်။ grid က ဂဏန်းတွေကို cell တွေအဖြစ် မှတ်ထားပါတယ်- လွတ်တာ၊ နံရံ ဒါမှမဟုတ် မမြင်ရသေးတာ။",
+  "back": "The thinking chapter decided with one number and forgot. The grid records the numbers as cells: empty, wall, or not yet seen."
+ },
+ "core:levels.grows.scan": {
+  "status": "pass-alt",
+  "en": "The sensing chapter ended on a ring of beams around the robot. A LiDAR scan is that ring sent as one message, again and again.",
+  "my": "အာရုံခံတဲ့ အခန်းက စက်ရုပ် ပတ်လည်က beam စက်ဝိုင်းနဲ့ ပြီးခဲ့ပါတယ်။ LiDAR scan ဆိုတာ အဲဒီ စက်ဝိုင်းကို message တစ်ခုအဖြစ် ထပ်ခါထပ်ခါ ပို့တာပါ။",
+  "back": "The sensing chapter finished with a circle of beams around the robot. A LiDAR scan is sending that circle again and again as one message."
+ },
+ "core:levels.grows.tf": {
+  "status": "pass-alt",
+  "en": "The simulator chapter showed the world and the robot's own view as two pictures. TF keeps track of where one sits inside the other.",
+  "my": "ဆင်မျူလေတာ အခန်းက ကမ္ဘာနဲ့ စက်ရုပ်ရဲ့ ကိုယ်ပိုင် မြင်ကွင်းကို ပုံ 2 ပုံအဖြစ် ပြခဲ့ပါတယ်။ TF က တစ်ခုထဲမှာ နောက်တစ်ခု ဘယ်နေရာမှာ ရှိလဲ ဆိုတာကို မှတ်ထားပါတယ်။",
+  "back": "The simulator chapter showed the world and the robot's own view as 2 images. TF records where one is located inside the other."
  },
  "core:levels.heading": {
   "status": "pass",
@@ -590,10 +635,10 @@
   "back": "Level"
  },
  "core:levels.opened": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "opened",
-  "my": "ဖွင့်ထားပြီး",
-  "back": "Opened"
+  "my": "ဖွင့်ထားပြီ",
+  "back": "Already opened"
  },
  "core:levels.soon": {
   "status": "pass",
@@ -650,10 +695,10 @@
   "back": "Scene time"
  },
  "core:scan.beam": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "beam (hover a dot)",
-  "my": "beam (အစက်ပေါ် တင်ပါ)",
-  "back": "beam (hover on point)"
+  "my": "beam (အစက်ပေါ် mouse တင်ကြည့်ပါ)",
+  "back": "beam (hover the mouse over the dot)"
  },
  "core:scan.fired": {
   "status": "pass",
@@ -700,14 +745,16 @@
  "core:scan.move": {
   "status": "pass",
   "en": "moved per scan at 0.26 m/s",
-  "my": "0.26 m/s အမြန်နှုန်းမှာ scan တစ်ခုအလိုက် ရွှေ့တဲ့ အကွာအဝေး",
-  "back": "distance moved per scan at 0.26 m/s speed"
+  "my": "0.26 m/s အမြန်နှုန်းမှာ scan တစ်ခုအလိုက် ရွေ့တဲ့ အကွာအဝေး",
+  "back": "distance moved per scan at 0.26 m/s speed",
+  "note": "spelling: ရွှေ့ (move something) -> ရွေ့ (moves), audit 2026-11-24"
  },
  "core:scan.moveMeasured": {
   "status": "pass",
   "en": "moved per scan at the measured rate",
-  "my": "တိုင်းတာတဲ့ နှုန်းမှာ scan တစ်ခုအလိုက် ရွှေ့တဲ့ အကွာအဝေး",
-  "back": "distance moved per scan at measured rate"
+  "my": "တိုင်းတာတဲ့ နှုန်းမှာ scan တစ်ခုအလိုက် ရွေ့တဲ့ အကွာအဝေး",
+  "back": "distance moved per scan at measured rate",
+  "note": "spelling: ရွှေ့ (move something) -> ရွေ့ (moves), audit 2026-11-24"
  },
  "core:scan.noiseRes": {
   "status": "pass",
@@ -790,8 +837,9 @@
  "core:tf.driveNote": {
   "status": "pass",
   "en": "Under the 0.26 m/s Nav2 limit the robot moves at most 0.13 m between checks, so a jump over 0.5 m points to a map → odom correction, a late check or a fault.",
-  "my": "Nav2 ရဲ့ 0.26 m/s အကန့်အသတ်အောက်မှာ စက်ရုပ်ဟာ စစ်ဆေးမှုတွေကြား အများဆုံး 0.13 m ပဲ ရွှေ့လျားနိုင်တာကြောင့် 0.5 m ထက် ကျော်လွန်တဲ့ jump ဖြစ်ရင် map → odom ပြင်ဆင်မှု၊ စစ်ဆေးမှု နောက်ကျမှု သို့မဟုတ် အမှားအယွင်းတစ်ခု ရှိနေတာကို ညွှန်းဆိုနေပါတယ်။",
-  "back": "Under Nav2's 0.26 m/s limit, the robot can only move a maximum of 0.13 m between checks; therefore, a jump exceeding 0.5 m indicates a map → odom correction, a check delay, or an error."
+  "my": "Nav2 ရဲ့ 0.26 m/s အကန့်အသတ်အောက်မှာ စက်ရုပ်ဟာ စစ်ဆေးမှုတွေကြား အများဆုံး 0.13 m ပဲ ရွေ့လျားနိုင်တာကြောင့် 0.5 m ထက် ကျော်လွန်တဲ့ jump ဖြစ်ရင် map → odom ပြင်ဆင်မှု၊ စစ်ဆေးမှု နောက်ကျမှု သို့မဟုတ် အမှားအယွင်းတစ်ခု ရှိနေတာကို ညွှန်းဆိုနေပါတယ်။",
+  "back": "Under Nav2's 0.26 m/s limit, the robot can only move a maximum of 0.13 m between checks; therefore, a jump exceeding 0.5 m indicates a map → odom correction, a check delay, or an error.",
+  "note": "spelling: ရွှေ့ (move something) -> ရွေ့ (moves), audit 2026-11-24"
  },
  "core:tf.frame": {
   "status": "pass",
@@ -814,8 +862,9 @@
  "core:tf.jump": {
   "status": "pass",
   "en": "odom move since last check (m)",
-  "my": "နောက်ဆုံး စစ်ပြီးကတည်းက odom ရွှေ့တဲ့ အကွာအဝေး (m)",
-  "back": "distance odom moved since last check (m)"
+  "my": "နောက်ဆုံး စစ်ပြီးကတည်းက odom ရွေ့တဲ့ အကွာအဝေး (m)",
+  "back": "distance odom moved since last check (m)",
+  "note": "spelling: ရွှေ့ (move something) -> ရွေ့ (moves), audit 2026-11-24"
  },
  "core:tf.lines.0": {
   "status": "pass",
@@ -916,8 +965,8 @@
  "ep/bfs:brokenNote": {
   "status": "pass-alt",
   "en": "pop() takes the newest cell: a stack. It dives down one direction and still reaches G, but the path is longer. Nothing crashes; the answer is just worse.",
-  "my": "pop() က အသစ်ဆုံး cell ကို ထုတ်ပါတယ်: stack တစ်ခုပါ။ ဦးတည်ရာ တစ်ခုတည်းကို နက်နက် ဆင်းသွားပြီး G ကို ရောက်သေးပေမဲ့ လမ်းကြောင်းက ပိုရှည်ပါတယ်။ ဘာမှ crash မဖြစ်ပါဘူး၊ အဖြေ ပိုဆိုးသွားရုံပါ။",
-  "back": "pop() takes out the newest cell: it is a stack. It goes deep in one direction and still reaches G, but the path is longer. Nothing crashes; the answer is just worse."
+  "my": "pop() က အသစ်ဆုံး cell ကို ထုတ်ပါတယ်: stack တစ်ခုပါ။ ဦးတည်ရာ တစ်ခုတည်းကို နက်နက် ဆင်းသွားပြီး G ကို ရောက်တော့ ရောက်ပေမဲ့ လမ်းကြောင်းက ပိုရှည်ပါတယ်။ ဘာမှ crash မဖြစ်ပါဘူး၊ အဖြေ ပိုဆိုးသွားရုံပါ။",
+  "back": "pop() takes out the newest cell: it is a stack. It goes deep down a single direction and does reach G, but the path is longer. Nothing crashes, the answer just gets worse."
  },
  "ep/bfs:challenge": {
   "status": "pass-alt",
@@ -946,8 +995,8 @@
  "ep/bfs:costNote": {
   "status": "pass-alt",
   "en": "Each cell touching a wall now costs 5 instead of 1. Dijkstra takes out the cheapest cell first: 15 steps at cost 15, against the BFS path's 13 steps at cost 41. Longer, but never brushing a wall.",
-  "my": "အခု နံရံနဲ့ ထိနေတဲ့ cell တစ်ခုစီက cost 1 အစား 5 ကျပါတယ်။ Dijkstra က အသက်သာဆုံး cell ကို အရင် ထုတ်ပါတယ်: 15 ဆင့်၊ cost 15 ပါ။ BFS လမ်းကြောင်းကတော့ 13 ဆင့်၊ cost 41 ပါ။ ပိုရှည်ပေမဲ့ နံရံကို ဘယ်တော့မှ မပွတ်ပါဘူး။",
-  "back": "Now each cell touching a wall costs 5 instead of 1. Dijkstra takes out the cheapest cell first: 15 steps, cost 15. The BFS path is 13 steps, cost 41. It is longer but never brushes the wall."
+  "my": "အခု နံရံနဲ့ ထိနေတဲ့ cell တစ်ခုစီက cost 1 အစား 5 ကျပါတယ်။ Dijkstra က အသက်သာဆုံး cell ကို အရင် ထုတ်ပါတယ်: 15 ဆင့်၊ cost 15 ပါ။ BFS လမ်းကြောင်းကတော့ 13 ဆင့်၊ cost 41 ပါ။ Dijkstra လမ်းကြောင်းက ပိုရှည်ပေမဲ့ နံရံကို ဘယ်တော့မှ မပွတ်ပါဘူး။",
+  "back": "Now each cell touching a wall drops to cost 5 instead of cost 1. Dijkstra takes out the cheapest cell first: 15 steps, cost 15. The BFS path, however, is 13 steps, cost 41. The Dijkstra path is longer, but it never brushes the wall."
  },
  "ep/bfs:costOff": {
   "status": "pass-alt",
@@ -1096,8 +1145,8 @@
  "ep/bfs:legendDone": {
   "status": "pass-alt",
   "en": "taken out",
-  "my": "ထုတ်ပြီး",
-  "back": "Taken out"
+  "my": "queue ထဲက ထုတ်ပြီးသား",
+  "back": "Already issued"
  },
  "ep/bfs:legendNear": {
   "status": "pass-alt",
@@ -1246,14 +1295,14 @@
  "ep/late:depth": {
   "status": "pass-alt",
   "en": "queue depth",
-  "my": "queue အနက်",
-  "back": "Queue depth"
+  "my": "queue အတိမ်အနက်",
+  "back": "queue depth"
  },
  "ep/late:envLabel": {
   "status": "pass-alt",
   "en": "Each message as an envelope: flies for its own delay, then is used or dropped",
-  "my": "message တစ်ခုစီကို စာအိတ်အဖြစ် ပြထား: သူ့နောက်ကျချိန်အတိုင်း ပျံသန်းပြီး သုံးခံရ ဒါမှမဟုတ် ပစ်ခံရ",
-  "back": "Each message is shown as an envelope: it flies according to its latency and is used or discarded"
+  "my": "message တစ်ခုစီကို စာအိတ်အဖြစ် ပြထား: သူ့နောက်ကျချိန်အတိုင်း ပျံသွားပြီး သုံးလိုက်တာ ဒါမှမဟုတ် ပစ်လိုက်တာ ဖြစ်",
+  "back": "Show each message as an envelope: it flies according to its delay, and it is either used or thrown away"
  },
  "ep/late:exampleNote": {
   "status": "pass-alt",
@@ -1559,8 +1608,8 @@
  "l0/act:glossary.2.1": {
   "status": "pass-alt",
   "en": "slow down to a stop; it takes a little time and distance",
-  "my": "အရှိန်လျှော့ပြီး ရပ်တာ၊ အချိန်နဲ့ အကွာအဝေး နည်းနည်း ယူရ",
-  "back": "Slowing down and stopping; takes a little time and distance"
+  "my": "အရှိန်လျှော့ပြီး ရပ်တာ၊ အချိန်နဲ့ အကွာအဝေး နည်းနည်း ယူရတယ်",
+  "back": "Slowing down and stopping; it takes a little time and distance"
  },
  "l0/act:learn": {
   "status": "pass-alt",
@@ -1597,6 +1646,18 @@
   "en": "Rolls on after stop",
   "my": "ရပ်ပြီးနောက် ဆက်လိမ့်တဲ့ အကွာအဝေး",
   "back": "Distance rolled after stopping"
+ },
+ "l0/act:srcGloss.brake": {
+  "status": "pass-alt",
+  "en": "brake 2.5 m/s²",
+  "my": "ဘရိတ် 2.5 m/s²",
+  "back": "Brake 2.5 m/s²"
+ },
+ "l0/act:srcGloss.gap": {
+  "status": "pass-alt",
+  "en": "wheels 0.16 m apart",
+  "my": "ဘီးကြား 0.16 m",
+  "back": "Wheel separation 0.16 m"
  },
  "l0/act:steps.0": {
   "status": "pass-alt",
@@ -1673,8 +1734,8 @@
  "l0/loop:brokenNote": {
   "status": "pass-alt",
   "en": "Sense returns nothing, so Think keeps the last number it had. The robot believes the wall is still far away.",
-  "my": "ဆင်ဆာနဲ့ကြည့် တဲ့အဆင့်က ဘာမှ ပြန်မရတဲ့အတွက် စဉ်းစား တဲ့အဆင့်က နောက်ဆုံးရထားတဲ့ ကိန်းဂဏန်းကိုပဲ ဆက်သုံးနေပါတယ်။ စက်ရုပ်က နံရံဟာ ဝေးနေသေးတယ်လို့ ထင်နေတာပါ။",
-  "back": "Because the look-with-sensor step gets nothing back, the think step keeps using the last number it got. The robot thinks the wall is still far away."
+  "my": "ဆင်ဆာနဲ့ကြည့်တဲ့အဆင့်က ဘာမှ ပြန်မရတဲ့အတွက် စဉ်းစားတဲ့အဆင့်က နောက်ဆုံးရထားတဲ့ ကိန်းဂဏန်းကိုပဲ ဆက်သုံးနေပါတယ်။ စက်ရုပ်က နံရံဟာ ဝေးနေသေးတယ်လို့ ထင်နေတာပါ။",
+  "back": "Because the sensor-viewing stage gets nothing back, the thinking stage keeps using the last number it received. The robot thinks the wall is still far away."
  },
  "l0/loop:challenge": {
   "status": "pass-alt",
@@ -1688,6 +1749,12 @@
   "my": "နံရံကို တိုက်မိ",
   "back": "Hit the wall",
   "note": "consistency: copied from l1/cpp:crashed"
+ },
+ "l0/loop:fastIt": {
+  "status": "pass-alt",
+  "en": "Fix it: back to 5 loops per second",
+  "my": "ပြင်ကြည့်: တစ်စက္ကန့်ကို loop 5 ကြိမ် ပြန်ထား",
+  "back": "Try fixing it: set it back to 5 loops per second"
  },
  "l0/loop:fixIt": {
   "status": "pass-alt",
@@ -1768,6 +1835,12 @@
   "back": "Not yet:",
   "note": "consistency: copied from l1/callback:notYet"
  },
+ "l0/loop:past": {
+  "status": "pass-alt",
+  "en": "Past the 0.5 m line",
+  "my": "0.5 m မျဉ်းကို ကျော်သွားတာ",
+  "back": "Overshooting the 0.5 m line"
+ },
  "l0/loop:rate": {
   "status": "pass-alt",
   "en": "Loops per second (Hz)",
@@ -1783,8 +1856,20 @@
  "l0/loop:slow": {
   "status": "pass-alt",
   "en": "Slowed down: each loop takes 1.2 s here, 0.2 s on the real robot.",
-  "my": "အနှေးပြကွက်- ဒီမှာတော့ loop တစ်ခုကို 1.2 s ကြာပြီး တကယ့် စက်ရုပ်မှာတော့ 0.2 s ကြာပါတယ်။",
-  "back": "Slow motion: here one loop takes 1.2 s, while on a real robot it takes 0.2 s."
+  "my": "အနှေးပြကွက်- ဒီမှာ loop တစ်ခု 1.2 s ကြာပြီး တကယ့် စက်ရုပ်မှာ 0.2 s ကြာပါတယ်။",
+  "back": "Slow-motion scene: here one loop takes 1.2 s, and on a real robot it takes 0.2 s."
+ },
+ "l0/loop:slowIt": {
+  "status": "pass-alt",
+  "en": "Break it: slow the loop to once per second",
+  "my": "ဖျက်ကြည့်: loop ကို တစ်စက္ကန့်ကို တစ်ကြိမ်အထိ နှေးအောင်လုပ်",
+  "back": "Try breaking it: make the loop slow down to once per second"
+ },
+ "l0/loop:slowNote": {
+  "status": "pass-alt",
+  "en": "Now it drives 26 cm between two looks. The last look still saw more than 0.5 m, so it drove on, deep past the line, before the next look said stop.",
+  "my": "အခု ကြည့်တဲ့ 2 ကြိမ်ကြားမှာ 26 cm သွားပါတယ်။ နောက်ဆုံး ကြည့်တုန်းက 0.5 m ထက် ပိုဝေးတာ မြင်ခဲ့လို့ ဆက်သွားခဲ့ပြီး နောက်တစ်ကြိမ် ကြည့်ပြီး ရပ်လို့ မပြောခင်မှာ မျဉ်းကို အများကြီး ကျော်သွားပါတယ်။",
+  "back": "Now, between 2 looks, it travels 26 cm. At the last look it saw that it was farther than 0.5 m, so it kept going, and before the next look and the call to stop, it goes far past the line."
  },
  "l0/loop:solved": {
   "status": "pass-alt",
@@ -1919,8 +2004,8 @@
  "l0/meet:learn": {
   "status": "pass-alt",
   "en": "You will learn: what makes a machine a robot, and the four parts of the robot in this course.",
-  "my": "သင် လေ့လာရမှာကတော့- စက် အစိတ်အပိုင်းတွေကို စက်ရုပ် ဖြစ်စေတဲ့ အချက်တွေနဲ့ ဒီသင်ခန်းစာမှာ သုံးမယ့် စက်ရုပ်ရဲ့ အစိတ်အပိုင်း 4 ခုအကြောင်း ဖြစ်ပါတယ်။",
-  "back": "What you will learn: the things that make machine parts a robot, and the four parts of the robot we will use in this lesson."
+  "my": "သင်ယူရမှာက- စက်တစ်ခုကို စက်ရုပ် ဖြစ်စေတာ ဘာလဲ၊ ဒီသင်တန်းက စက်ရုပ်ရဲ့ အစိတ်အပိုင်း 4 ခုပါ။",
+  "back": "What you will learn: what makes a machine a robot; this course has 4 parts of a robot."
  },
  "l0/meet:mascot": {
   "status": "pass-alt",
@@ -1987,6 +2072,18 @@
   "en": "Senses",
   "my": "သိမြင်နိုင်မှု",
   "back": "Sensing ability"
+ },
+ "l0/meet:srcGloss.height": {
+  "status": "pass-alt",
+  "en": "sensor 0.010 + 0.172 m above the floor",
+  "my": "ဆင်ဆာ ကြမ်းပြင်ကနေ 0.010 + 0.172 m အမြင့်",
+  "back": "Sensor height from the floor 0.010 + 0.172 m"
+ },
+ "l0/meet:srcGloss.size": {
+  "status": "pass-alt",
+  "en": "138 × 178 × 192 mm long × wide × tall, 1 kg, 2 h 30 min",
+  "my": "138 × 178 × 192 mm (အလျား × အနံ × အမြင့်)၊ 1 kg၊ 2 h 30 min",
+  "back": "138 × 178 × 192 mm (length × width × height), 1 kg, 2 h 30 min"
  },
  "l0/meet:steps.0": {
   "status": "pass-alt",
@@ -2094,8 +2191,8 @@
  "l0/move:glossary.0.1": {
   "status": "pass-alt",
   "en": "how fast a wheel moves the robot along the floor, in metres per second (m/s)",
-  "my": "စက်ရုပ် ကြမ်းပြင်ပေါ်မှာ ရွေ့ဖို့ ဘီး ဘယ်လောက် မြန်မြန် လည်ရမလဲဆိုတဲ့ တစ်စက္ကန့်အတွင်း မီတာနှုန်း (m/s)",
-  "back": "How fast a wheel must spin for the robot to move on the floor, in metres per second (m/s)"
+  "my": "ဘီးက စက်ရုပ်ကို ကြမ်းပြင်ပေါ်မှာ ဘယ်လောက် မြန်မြန် ရွေ့စေလဲ၊ တစ်စက္ကန့်ကို မီတာ (m/s) နဲ့",
+  "back": "How fast the wheels make the robot move on the floor, in metres per second (m/s)"
  },
  "l0/move:glossary.1.0": {
   "status": "pass-alt",
@@ -2193,6 +2290,12 @@
   "my": "ဟုတ်ပါတယ်။ ပိုနှေးတဲ့ဘက်က အကွေ့ရဲ့ အတွင်းဘက်မှာ ရှိနေမှာ ဖြစ်ပါတယ်။",
   "back": "Correct. The slower side will be on the inside of the turn."
  },
+ "l0/move:srcGloss.wheels": {
+  "status": "pass-alt",
+  "en": "wheels",
+  "my": "ဘီး",
+  "back": "Wheel"
+ },
  "l0/move:steps.0": {
   "status": "pass-alt",
   "en": "Our robot has two wheels, each with its own motor, and a small free-rolling ball at the back. There is no steering wheel. It can only change how fast each wheel turns.",
@@ -2250,8 +2353,8 @@
  "l0/pipe:brokenNote": {
   "status": "pass-alt",
   "en": "One program receives the scan but passes nothing on. The robot just stands still: no error on screen. Which one is it?",
-  "my": "ပရိုဂရမ် တစ်ခုက scan ဖတ်တာကို လက်ခံရရှိပေမဲ့ ဘာမှ ထပ်မပို့ပါဘူး။ စက်ရုပ်က ရပ်နေပြီး screen ပေါ်မှာလည်း အမှား မပြပါဘူး။ ဘယ်ပရိုဂရမ် ဖြစ်မလဲ။",
-  "back": "One program receives the scan reading but sends nothing further. The robot is stopped and the screen also shows no error. Which program could it be?"
+  "my": "ပရိုဂရမ် တစ်ခုက scan ကို လက်ခံရပေမဲ့ ဘာမှ ဆက်မပို့ပါဘူး။ စက်ရုပ်က ရပ်နေရုံပါပဲ- screen ပေါ်မှာ အမှား မပြပါဘူး။ ဘယ်ပရိုဂရမ်လဲ။",
+  "back": "A program receives the scan but forwards nothing on. The robot just stands still: no error is shown on the screen. Which program is it?"
  },
  "l0/pipe:challenge": {
   "status": "pass-alt",
@@ -2485,8 +2588,8 @@
  "l0/ros:lines.1": {
   "status": "pass-alt",
   "en": "ROS 1 needed one central program, roscore, so the others could find each other. ROS 2 programs find each other directly (DDS), so there is no single program whose crash stops everything.",
-  "my": "ROS 1 မှာ ပရိုဂရမ်တွေ အချင်းချင်း ရှာတွေ့ဖို့ roscore ဆိုတဲ့ ဗဟို ပရိုဂရမ် တစ်ခု လိုအပ်ပါတယ်။ ROS 2 ပရိုဂရမ်တွေကတော့ (DDS) သုံးပြီး တိုက်ရိုက် ရှာဖွေနိုင်တဲ့အတွက် ပရိုဂရမ် တစ်ခု ပျက်ရုံနဲ့ အားလုံး ရပ်သွားတာမျိုး မရှိပါဘူး။",
-  "back": "In ROS 1, a central program called roscore is needed for programs to find each other. ROS 2 programs can find each other directly using (DDS), so there is no case where everything stops just because one program fails."
+  "my": "ROS 1 မှာ ပရိုဂရမ်တွေ အချင်းချင်း ရှာတွေ့ဖို့ roscore ဆိုတဲ့ ဗဟို ပရိုဂရမ် တစ်ခု လိုပါတယ်။ ROS 2 ပရိုဂရမ်တွေကတော့ အချင်းချင်း တိုက်ရိုက် ရှာတွေ့ပါတယ် (DDS)၊ ဒါကြောင့် ပရိုဂရမ် တစ်ခု ပျက်ရုံနဲ့ အားလုံး ရပ်သွားတာ မရှိပါဘူး။",
+  "back": "In ROS 1, a central program called roscore is needed for programs to find each other. ROS 2 programs find each other directly (DDS), so there is no case where everything stops just because one program crashes."
  },
  "l0/ros:lines.2": {
   "status": "pass-alt",
@@ -2527,8 +2630,8 @@
  "l0/ros:supported": {
   "status": "pass-alt",
   "en": "getting fixes",
-  "my": "ပြင်ဆင်ချက်များ ရရှိနေဆဲ",
-  "back": "Still receiving fixes"
+  "my": "ပြင်ဆင်ချက် ရနေဆဲ",
+  "back": "Still receiving corrections"
  },
  "l0/ros:title": {
   "status": "pass-alt",
@@ -2695,9 +2798,9 @@
  },
  "l0/sense:brokenNote": {
   "status": "pass-alt",
-  "en": "The hand is 2 cm away, closer than the 12 cm this sensor can measure. Every reading is thrown away: the walls are still there, but the robot is blind.",
-  "my": "လက်က 2 cm ပဲ ဝေးတဲ့အတွက် ဒီ ဆင်ဆာ တိုင်းနိုင်တဲ့ 12 cm ထက် ပိုနီးနေပါတယ်။ တိုင်းတာချက် အားလုံးကို ပယ်ဖျက်လိုက်ပါတယ်- နံရံ တွေက ရှိနေသေးပေမဲ့ စက်ရုပ် က ဘာမှမမြင်ရတော့ပါဘူး။",
-  "back": "The hand is only 2 cm away, so it is closer than the 12 cm this sensor can measure. All measurements are discarded - the walls are still there but the robot can no longer see anything."
+  "en": "The hand is 2 cm away, closer than the 12 cm this sensor can measure, so every reading says \"too close\" and none can be used: the walls are still there, but the robot is blind.",
+  "my": "လက်က 2 cm ပဲ ဝေးလို့ ဒီဆင်ဆာ တိုင်းနိုင်တဲ့ 12 cm ထက် နီးနေပါတယ်၊ ဒါကြောင့် တိုင်းချက်တိုင်းက \"နီးလွန်းတယ်\" လို့ပဲ ပြပြီး တစ်ခုမှ သုံးလို့ မရပါဘူး- နံရံတွေ ရှိနေသေးပေမဲ့ စက်ရုပ်က ဘာမှ မမြင်ရတော့ပါဘူး။",
+  "back": "The hand is only 2 cm away, so it is closer than the 12 cm this sensor can measure, therefore every measurement shows only \"too close\" and none is usable: there are still walls, but the robot no longer sees anything."
  },
  "l0/sense:check": {
   "status": "pass-alt",
@@ -2795,6 +2898,30 @@
   "my": "ကျွန်တော်တို့ simulation ထဲက Burger မှာ LDS-01 တပ်ထားပါတယ်- တစ်ပတ်ကို ဂဏန်း 360 ခု၊ တစ်စက္ကန့်ကို 5 ပတ်၊ 12 cm ကနေ 3.5 m အထိပါ။ တကယ့် Burger တွေမှာတော့ မော်ဒယ် 3 မျိုး (LDS-01, LDS-02, LDS-03) ထဲက တစ်ခု ပါလာပါတယ်၊ LDS-02 က 16 cm ကနေ 8 m အထိ တိုင်းပါတယ်။",
   "back": "The Burger in our simulation has an LDS-01 fitted: 360 numbers per revolution, 5 revolutions per second, from 12 cm to 3.5 m. Real Burgers, however, come with one of 3 models (LDS-01, LDS-02, LDS-03); the LDS-02 measures from 16 cm to 8 m."
  },
+ "l0/sense:srcGloss.and": {
+  "status": "pass-alt",
+  "en": "and",
+  "my": "နဲ့",
+  "back": "and"
+ },
+ "l0/sense:srcGloss.models": {
+  "status": "pass-alt",
+  "en": "three LDS models",
+  "my": "LDS မော်ဒယ် 3 မျိုး",
+  "back": "3 LDS models"
+ },
+ "l0/sense:srcGloss.specs": {
+  "status": "pass-alt",
+  "en": "specifications",
+  "my": "အသေးစိတ် အချက်အလက်",
+  "back": "Detailed information"
+ },
+ "l0/sense:srcGloss.turns": {
+  "status": "pass-alt",
+  "en": "5 turns/s",
+  "my": "5 turns/s",
+  "back": "5 turns/s"
+ },
  "l0/sense:steps.0": {
   "status": "pass-alt",
   "en": "A distance sensor sends out a beam of light and measures the light that comes back from a wall. Out comes one number: the distance in metres. A laser tape measure works on the same idea.",
@@ -2804,8 +2931,8 @@
  "l0/sense:steps.1": {
   "status": "pass-alt",
   "en": "Drag the wall below. The front number follows it. Past 3.5 m, the limit of our robot's sensor, it says \"nothing there\", even though the wall is still in the room.",
-  "my": "အောက်က နံရံ ကို ဆွဲရွှေ့ကြည့်ပါ။ ရှေ့က ဂဏန်းက သူ့နောက်ကို လိုက်ပါလိမ့်မယ်။ ဒီ စက်ရုပ် ရဲ့ ဆင်ဆာ အကန့်အသတ်ဖြစ်တဲ့ 3.5 m ကျော်သွားရင် နံရံ က အခန်းထဲမှာ ရှိနေသေးပေမဲ့ \"ဘာမှမရှိပါ\" လို့ ပြောပါလိမ့်မယ်။",
-  "back": "Drag the wall below. The front number will follow it. When it goes past 3.5 m, which is this robot's sensor limit, it will say \"nothing\" even though the wall is still in the room."
+  "my": "အောက်က နံရံကို ဆွဲရွှေ့ကြည့်ပါ။ ရှေ့ဂဏန်းက နံရံ အကွာအဝေးအတိုင်း ပြောင်းပါတယ်။ ကျွန်တော်တို့ စက်ရုပ်ရဲ့ ဆင်ဆာ ကန့်သတ်ချက် 3.5 m ကျော်သွားရင် နံရံက အခန်းထဲမှာ ရှိနေသေးပေမဲ့ \"ဘာမှမရှိ\" လို့ ပြပါတယ်။",
+  "back": "Try dragging the wall below. The number in front changes according to the wall distance. If it goes beyond our robot's sensor limit of 3.5 m, the wall is still in the room but it shows \"nothing\"."
  },
  "l0/sense:steps.2": {
   "status": "pass-alt",
@@ -2824,6 +2951,12 @@
   "en": "How a robot senses: one beam, then a ring",
   "my": "စက်ရုပ်က အာရုံခံပုံ- beam တစ်ခုကနေ စက်ဝိုင်းတစ်ခုအထိ",
   "back": "How the robot senses: from one beam to a circle"
+ },
+ "l0/sense:tooClose": {
+  "status": "pass-alt",
+  "en": "too close",
+  "my": "နီးလွန်းတယ်",
+  "back": "Too close"
  },
  "l0/sense:wall": {
   "status": "pass-alt",
@@ -2870,8 +3003,8 @@
  "l0/simpick:checked": {
   "status": "pass-alt",
   "en": "Facts checked against each tool's own pages on 2026-11-23.",
-  "my": "2026-11-23 မှာ tool တစ်ခုချင်းစီရဲ့ page တွေက အချက်အလက်တွေနဲ့ တိုက်ဆိုင်စစ်ဆေးထားတာ ဖြစ်ပါတယ်။",
-  "back": "On 2026-11-23 it was cross-checked against the information on each tool's page."
+  "my": "အချက်အလက်တွေကို tool တစ်ခုချင်းစီရဲ့ ကိုယ်ပိုင် page တွေနဲ့ 2026-11-23 မှာ တိုက်စစ်ထားပါတယ်။",
+  "back": "The facts were cross-checked against each tool's own pages on 2026-11-23."
  },
  "l0/simpick:dim.2.5D": {
   "status": "pass-alt",
@@ -3032,8 +3165,8 @@
  "l0/simpick:rows.isaac.what": {
   "status": "pass-alt",
   "en": "Photoreal 3D for robot learning; needs an NVIDIA RTX graphics card (version 6.0.1 asks for at least an RTX 4080 with 16 GB).",
-  "my": "စက်ရုပ် လေ့လာမှုအတွက် လက်တွေ့ကျတဲ့ 3D ဖြစ်ပါတယ်၊ NVIDIA RTX graphics card (ဗားရှင်း 6.0.1 အတွက် အနည်းဆုံး 16 GB ရှိတဲ့ RTX 4080 လိုအပ်ပါတယ်) လိုအပ်ပါတယ်။",
-  "back": "It is a realistic 3D for robot learning and needs an NVIDIA RTX graphics card (for version 6.0.1, an RTX 4080 with at least 16 GB is required)."
+  "my": "စက်ရုပ် လေ့လာမှုအတွက် အစစ်နဲ့တူတဲ့ 3D ပါ၊ NVIDIA RTX graphics card လိုပါတယ် (ဗားရှင်း 6.0.1 က အနည်းဆုံး 16 GB ပါတဲ့ RTX 4080 ကို တောင်းပါတယ်)။",
+  "back": "Realistic 3D for robot study, it needs an NVIDIA RTX graphics card (version 6.0.1 asks for an RTX 4080 with at least 16 GB)."
  },
  "l0/simpick:rows.mvsim.learn": {
   "status": "pass-alt",
@@ -3089,6 +3222,12 @@
   "my": "ROS 2 တရားဝင် အခြေခံ သင်ခန်းစာတွေမှာ သုံးတဲ့ 2D လိပ်ကလေး ဖြစ်ပါတယ်၊ ROS 2 နဲ့အတူ install လုပ်ပြီးသား ဖြစ်နေတတ်ပါတယ်။",
   "back": "It is the little 2D turtle used in the official ROS 2 basic tutorials; it is often already installed together with ROS 2."
  },
+ "l0/simpick:srcGloss.rows": {
+  "status": "pass-alt",
+  "en": "row links above",
+  "my": "အပေါ်က အတန်းတွေရဲ့ link",
+  "back": "Links of the rows above"
+ },
  "l0/simpick:start": {
   "status": "pass-alt",
   "en": "Start here",
@@ -3098,8 +3237,8 @@
  "l0/simpick:steps.0": {
   "status": "pass-alt",
   "en": "Many simulators exist. Think of them as a ladder: each step adds one thing to learn and asks a little more of your computer.",
-  "my": "ဆင်မျူလေတာ တွေ အများကြီး ရှိပါတယ်။ သူတို့ကို လှေကားထစ်တွေလို စဉ်းစားကြည့်ပါ- အဆင့်တစ်ခုစီတိုင်းမှာ သင်ယူစရာ တစ်ခုစီ တိုးလာပြီး ကွန်ပျူတာ ရဲ့ လုပ်ဆောင်နိုင်စွမ်းကိုလည်း ပိုတောင်းဆိုလာပါလိမ့်မယ်။",
-  "back": "There are many simulators. Think of them like steps of a staircase: each step adds one more thing to learn and also demands more of the computer's capability."
+  "my": "ဆင်မျူလေတာတွေ အများကြီး ရှိပါတယ်။ လှေကားထစ်တွေလို စဉ်းစားကြည့်ပါ- အဆင့်တိုင်းမှာ သင်ယူစရာ တစ်ခု တိုးလာပြီး ကွန်ပျူတာကိုလည်း နည်းနည်း ပိုတောင်းပါတယ်။",
+  "back": "There are many simulators. Think of them like stair steps: at every level one more thing to learn is added, and it also asks a little more of the computer."
  },
  "l0/simpick:steps.1": {
   "status": "pass-alt",
@@ -3110,8 +3249,8 @@
  "l0/simpick:steps.2": {
   "status": "pass-alt",
   "en": "From the projects behind this course: on a Windows laptop running Linux inside it (WSL2) with no graphics card, the 3D window of Gazebo Classic stayed black, while the 2D tools worked. So: start in 2D.",
-  "my": "ဒီသင်ခန်းစာကို အခြေခံထားတဲ့ ပရောဂျက်တွေမှာ တွေ့ခဲ့တာက- graphics card မပါတဲ့ Windows လက်ပ်တော့ ထဲမှာ Linux (WSL2) ကို run တဲ့အခါ Gazebo Classic ရဲ့ 3D window က မည်းနေခဲ့ပြီး 2D ကိရိယာတွေကတော့ အလုပ်လုပ်ပါတယ်။ ဒါကြောင့် 2D နဲ့ စပါ။",
-  "back": "What was found in the projects this lesson is based on: when running Linux (WSL2) on a Windows laptop without a graphics card, Gazebo Classic's 3D window was black, while the 2D tools worked. So start with 2D."
+  "my": "ဒီသင်ခန်းစာရဲ့ နောက်ကွယ်က project တွေမှာ တွေ့ခဲ့တာက- graphics card မပါတဲ့ Windows လက်ပ်တော့ ထဲမှာ Linux (WSL2) ကို run တဲ့အခါ Gazebo Classic ရဲ့ 3D window က မည်းနေခဲ့ပြီး 2D ကိရိယာတွေကတော့ အလုပ်လုပ်ပါတယ်။ ဒါကြောင့် 2D နဲ့ စပါ။",
+  "back": "What was found in the projects behind this lesson: when running Linux (WSL2) inside a Windows laptop without a graphics card, the 3D window of Gazebo Classic stayed black, while the 2D tools worked. So start with 2D."
  },
  "l0/simpick:steps.3": {
   "status": "pass-alt",
@@ -3344,8 +3483,8 @@
  "l0/think:answers.never": {
   "status": "pass-alt",
   "en": "it never stops",
-  "my": "လုံးဝ မရပ် တော့ဘူး",
-  "back": "Never stops at all"
+  "my": "လုံးဝ မရပ်တော့ဘူး",
+  "back": "Never stops at all anymore"
  },
  "l0/think:breakIt": {
   "status": "pass-alt",
@@ -3398,7 +3537,7 @@
  "l0/think:final": {
   "status": "pass-alt",
   "en": "Stopped at",
-  "my": "ရပ် သွားတဲ့ နေရာ",
+  "my": "ရပ်သွားတဲ့ နေရာ",
   "back": "Place where it stopped"
  },
  "l0/think:fixIt": {
@@ -3428,8 +3567,8 @@
  "l0/think:glossary.1.1": {
   "status": "pass-alt",
   "en": "one look at the newest number, then one choice: stop or go",
-  "my": "နောက်ဆုံး ဂဏန်းကို တစ်ချက်ကြည့်ပြီး ရွေးချယ်မှု တစ်ခု- ရပ်မလား သွားမလား",
-  "back": "Look at the latest number once and make one choice: stop or go"
+  "my": "နောက်ဆုံး ဂဏန်းကို တစ်ချက်ကြည့်ပြီး ရပ်မလား သွားမလား တစ်ခု ရွေးတာ",
+  "back": "Looking at the final number once and choosing one of stop or go"
  },
  "l0/think:learn": {
   "status": "pass-alt",
@@ -3454,6 +3593,12 @@
   "en": "Stop when the wall is closer than (m)",
   "my": "နံရံ က ဒီထက် နီးလာရင် ရပ် ပါ (m)",
   "back": "Stop if the wall is closer than this (m)"
+ },
+ "l0/think:srcGloss.perSec": {
+  "status": "pass-alt",
+  "en": "checks/s",
+  "my": "checks/s",
+  "back": "checks/s"
  },
  "l0/think:steps.0": {
   "status": "pass-alt",
@@ -3494,8 +3639,8 @@
  "l0/think:yes": {
   "status": "pass-alt",
   "en": "Yes: the rule fires as soon as the wall is under 0.9 m, which happens sooner.",
-  "my": "ဟုတ်ပါတယ် - နံရံ က 0.9 m ထက် နည်းသွားတာနဲ့ စည်းကမ်းချက်က စတင် အလုပ်လုပ်တာကြောင့် ပိုစောစော ရပ် သွားတာ ဖြစ်ပါတယ်။",
-  "back": "Yes - as soon as the wall is less than 0.9 m, the rule starts working, so it stops earlier."
+  "my": "ဟုတ်ပါတယ်- နံရံက 0.9 m ထက် နီးလာတာနဲ့ စည်းကမ်းချက်က အလုပ်လုပ်တာမို့ ပိုစောစော ရပ်ပါတယ်။",
+  "back": "Yes: the rule acts as soon as the wall gets closer than 0.9 m, so it stops earlier."
  },
  "l0/tools:challenge": {
   "status": "pass-alt",
@@ -3506,8 +3651,8 @@
  "l0/tools:fixIt": {
   "status": "pass-alt",
   "en": "Fix it: put every layer back",
-  "my": "ပြင်ကြည့်: အလွှာအားလုံးကို ပြန်ထည့်ဖို့",
-  "back": "Fix it: to put all the layers back"
+  "my": "ပြင်ကြည့်: အလွှာအားလုံးကို ပြန်ထည့်",
+  "back": "Try fixing: put all the layers back"
  },
  "l0/tools:glossary.0.0": {
   "status": "pass-alt",
@@ -3736,8 +3881,9 @@
  "l1/callback:glossary.1.1": {
   "status": "pass-alt",
   "en": "this object: where a method keeps values between calls",
-  "my": "ဒီ object ကိုယ်တိုင်: method တစ်ခုက ခေါ်တဲ့ကြားမှာ တန်ဖိုးတွေကို သိမ်းထားတဲ့ နေရာ",
-  "back": "this object itself: the place where values are kept between a method's calls"
+  "my": "ဒီ object ကိုယ်တိုင်: method ကို ခေါ်တဲ့ကြားမှာ တန်ဖိုးတွေကို သိမ်းထားတဲ့ နေရာ",
+  "back": "this object itself: the place where values are kept between a method's calls",
+  "note": "audit 5: particle က -> ကို (the method is called), 2026-11-24"
  },
  "l1/callback:glossary.2.0": {
   "status": "pass-alt",
@@ -3984,6 +4130,12 @@
   "en": "Not yet: changed",
   "my": "မရသေးပါ: ပြောင်းခဲ့တာ",
   "back": "Not yet: changed"
+ },
+ "l1/closest:realScan": {
+  "status": "pass-alt",
+  "en": "On a real scan, a beam that hits nothing within 3.5 m reads inf, so it never beats closest: that is why closest starts at infinity. A wall closer than 12 cm to the sensor reads -inf and wins, and the rule from 1.1 reads it as stop. (ROS rule REP 117; the simulator follows it.)",
+  "my": "တကယ့် scan မှာ 3.5 m အတွင်း ဘာမှ မထိတဲ့ beam က inf လို့ ဖတ်ရတာမို့ closest ကို ဘယ်တော့မှ မနိုင်ပါဘူး- ဒါကြောင့် closest ကို infinity ကနေ စတာပါ။ ဆင်ဆာနဲ့ 12 cm ထက် ပိုနီးတဲ့ နံရံကတော့ -inf လို့ ဖတ်ရပြီး နိုင်သွားပါတယ်၊ 1.1 ရဲ့ စည်းကမ်းချက်က အဲဒါကို \"ရပ်\" လို့ ယူပါတယ်။ (ROS စည်းမျဉ်း REP 117၊ ဆင်မျူလေတာကလည်း လိုက်နာပါတယ်။)",
+  "back": "In a real scan, a beam that hits nothing within 3.5 m is read as inf, so it can never win over closest: that is why closest starts from infinity. A wall nearer than 12 cm to the sensor, however, is read as -inf and wins; the rule in 1.1 takes that as \"stop\". (ROS rule REP 117; the simulator also complies.)"
  },
  "l1/closest:result": {
   "status": "pass-alt",
@@ -4342,9 +4494,9 @@
  },
  "l1/decide:realSensor": {
   "status": "pass-alt",
-  "en": "On a real sensor, a wall closer than its 12 cm minimum is a special case: the ROS rule REP 117 says to report -inf, meaning \"too close\", and the simulator here does. In Python -inf < stop_at is True, so the simulated robot stops 2.4 cm from the wall even with stop_at = 0.",
-  "my": "တကယ့် ဆင်ဆာမှာ သူ့ရဲ့ အနည်းဆုံး 12 cm ထက် ပိုနီးတဲ့ နံရံက အထူးကိစ္စ ဖြစ်ပါတယ်: ROS စည်းမျဉ်း REP 117 က \"နီးလွန်းတယ်\" လို့ အဓိပ္ပာယ်ရတဲ့ -inf ကို ပြန်ပို့ဖို့ ပြောထားပြီး ဒီက ဆင်မျူလေတာကလည်း အဲဒီအတိုင်း လုပ်ပါတယ်။ Python မှာ -inf < stop_at က True ဖြစ်လို့ stop_at = 0 ဖြစ်နေရင်တောင် ဆင်မျူလေတာထဲက စက်ရုပ်က နံရံနဲ့ 2.4 cm အကွာမှာ ရပ်ပါတယ်။",
-  "back": "On a real sensor, a wall closer than its minimum of 12 cm is a special case: the ROS rule REP 117 says to return -inf, meaning \"too close\", and the simulator here does the same. In Python -inf < stop_at is True, so even if stop_at = 0, the robot in the simulator stops 2.4 cm from the wall."
+  "en": "On a real sensor, a wall closer to the sensor than its 12 cm minimum is a special case: the ROS rule REP 117 says to report -inf, meaning \"too close\", and the simulator here does. In Python -inf < stop_at is True, so the simulated robot stops 2.4 cm from the wall even with stop_at = 0.",
+  "my": "တကယ့် ဆင်ဆာမှာ နံရံက ဆင်ဆာ တိုင်းနိုင်တဲ့ အနည်းဆုံး 12 cm ထက် ပိုနီးနေရင် အထူးကိစ္စ ဖြစ်ပါတယ်: ROS စည်းမျဉ်း REP 117 က \"နီးလွန်းတယ်\" လို့ အဓိပ္ပာယ်ရတဲ့ -inf ကို ပြန်ပို့ဖို့ ပြောထားပြီး ဒီက ဆင်မျူလေတာကလည်း အဲဒီအတိုင်း လုပ်ပါတယ်။ Python မှာ -inf < stop_at က True ဖြစ်လို့ stop_at = 0 ဖြစ်နေရင်တောင် ဆင်မျူလေတာထဲက စက်ရုပ်က နံရံနဲ့ 2.4 cm အကွာမှာ ရပ်ပါတယ်။",
+  "back": "On a real sensor, if the wall is nearer than the minimum 12 cm that the sensor can measure, it is a special case: the ROS rule REP 117 says to return -inf, which means \"too close\", and the simulator here also does the same. In Python, -inf < stop_at is True, so even if stop_at = 0, the robot in the simulator stops at 2.4 cm distance from the wall."
  },
  "l1/decide:runsHere": {
   "status": "pass-alt",
@@ -4764,8 +4916,8 @@
  "l2/actions:lines.1": {
   "status": "pass-alt",
   "en": "An action is for jobs that take time, like \"drive to this point\". The server first accepts the goal, then sends feedback while it works, then one result. You can cancel it halfway.",
-  "my": "action ကို အချိန်ကြာတဲ့ အလုပ်တွေအတွက် သုံးပါတယ်၊ \"ဒီနေရာအထိ မောင်းသွားပါ\" လိုမျိုးပါ။ server က ပထမ ပန်းတိုင်ကို လက်ခံပါတယ်၊ အလုပ်လုပ်နေစဉ် feedback ပို့ပါတယ်၊ ပြီးတော့ ရလဒ် တစ်ခု ပို့ပါတယ်။ တစ်ဝက်တစ်ပျက်မှာ ပယ်ဖျက်လို့ ရပါတယ်။",
-  "back": "An action is used for long-running jobs, like \"Drive to this spot\". The server accepts the goal first, sends feedback while working, and then sends one result. It can be cancelled halfway."
+  "my": "action ကို အချိန်ကြာတဲ့ အလုပ်တွေအတွက် သုံးပါတယ်၊ \"ဒီနေရာအထိ မောင်းသွားပါ\" လိုမျိုးပါ။ server က ပန်းတိုင်ကို အရင် လက်ခံပါတယ်၊ အလုပ်လုပ်နေစဉ် feedback ပို့ပါတယ်၊ ပြီးတော့ ရလဒ် တစ်ခု ပို့ပါတယ်။ တစ်ဝက်တစ်ပျက်မှာ ပယ်ဖျက်လို့ ရပါတယ်။",
+  "back": "An action is used for long-running jobs, such as \"drive to this place\". The server first accepts the goal, sends feedback while working, and then sends one result. It can be cancelled halfway."
  },
  "l2/actions:lines.2": {
   "status": "pass-alt",
@@ -4790,6 +4942,18 @@
   "en": "Solved: canceled with",
   "my": "အောင်မြင်: ပယ်ဖျက်ချိန်မှာ",
   "back": "Success: at the time of cancelling"
+ },
+ "l2/actions:srcGloss.retry": {
+  "status": "pass-alt",
+  "en": "retry",
+  "my": "ပြန်ကြိုးစား",
+  "back": "Retry"
+ },
+ "l2/actions:srcGloss.saveMap": {
+  "status": "pass-alt",
+  "en": "slam_toolbox (save_map service)",
+  "my": "slam_toolbox (save_map service)",
+  "back": "slam_toolbox (save_map service)"
  },
  "l2/actions:status": {
   "status": "pass-alt",
@@ -4949,6 +5113,18 @@
   "my": "လက်ရှိ အမြန်နှုန်း",
   "back": "Current speed"
  },
+ "l2/drive:srcGloss.diff": {
+  "status": "pass-alt",
+  "en": "DiffDrive, wheel separation 0.160 m, radius 0.033 m, max_linear_acceleration 1.0",
+  "my": "DiffDrive၊ ဘီးကြား 0.160 m၊ အချင်းဝက် 0.033 m၊ max_linear_acceleration 1.0",
+  "back": "DiffDrive, wheel separation 0.160 m, radius 0.033 m, max_linear_acceleration 1.0"
+ },
+ "l2/drive:srcGloss.last": {
+  "status": "pass-alt",
+  "en": "keeps the last command",
+  "my": "နောက်ဆုံး command ကို ဆက်ထိန်းထား",
+  "back": "Keep holding the last command"
+ },
  "l2/drive:stopped": {
   "status": "pass-alt",
   "en": "standing still",
@@ -5087,8 +5263,8 @@
  "l2/msgtypes:glossary.2.1": {
   "status": "pass-alt",
   "en": "a list of decimal numbers",
-  "my": "ဒဿမ ဂဏန်းတွေရဲ့ စာရင်း",
-  "back": "A list of decimal numbers"
+  "my": "ဒသမ ဂဏန်းတွေရဲ့ စာရင်း",
+  "back": "List of decimal digits"
  },
  "l2/msgtypes:glossary.3.0": {
   "status": "pass-alt",
@@ -5156,6 +5332,18 @@
   "en": "Solved: spinning left at",
   "my": "ဖြေရှင်းပြီး: ဘယ်ဘက် လှည့်နှုန်း",
   "back": "Solved: left turning rate"
+ },
+ "l2/msgtypes:srcGloss.reads": {
+  "status": "pass-alt",
+  "en": "reads linear.x, angular.z",
+  "my": "linear.x, angular.z ကို ဖတ်",
+  "back": "Read linear.x, angular.z"
+ },
+ "l2/msgtypes:srcGloss.samples": {
+  "status": "pass-alt",
+  "en": "samples",
+  "my": "နမူနာ",
+  "back": "Sample"
  },
  "l2/msgtypes:title": {
   "status": "pass-alt",
@@ -5326,6 +5514,12 @@
   "en": "Solved: the patrol does not need",
   "my": "ဖြေရှင်းပြီး: ကင်းလှည့်ဖို့ မလိုအပ်တာ",
   "back": "Solved: not needed for patrolling"
+ },
+ "l2/nodes:srcGloss.delays": {
+  "status": "pass-alt",
+  "en": "start delays",
+  "my": "စတင်ချိန် နှောင့်နှေးမှု",
+  "back": "Start-up delay"
  },
  "l2/nodes:state.off": {
   "status": "pass-alt",
@@ -5540,6 +5734,12 @@
   "my": "launch file",
   "back": "launch file"
  },
+ "l2/params:srcGloss.simTime": {
+  "status": "pass-alt",
+  "en": "passes only use_sim_time",
+  "my": "use_sim_time ကိုပဲ ပေးပို့",
+  "back": "Send only use_sim_time"
+ },
  "l2/params:title": {
   "status": "pass-alt",
   "en": "ROS 2: parameters and launch files",
@@ -5598,13 +5798,13 @@
  "l2/realproject:nodes": {
   "status": "pass-alt",
   "en": "Four of the project's own nodes, each a separate program, are started by one launch file, 9 s after launch.",
-  "my": "project ကိုယ်ပိုင် node 4 ခု (တစ်ခုစီက သီးခြား ပရိုဂရမ်) ကို launch file တစ်ခုက launch လုပ်ပြီး 9 s အကြာမှာ စတင်ပါတယ်။",
-  "back": "The project's own 4 nodes (each a separate program) are launched by one launch file and start after 9 s."
+  "my": "project ကိုယ်ပိုင် node 4 ခု (တစ်ခုစီက သီးခြား ပရိုဂရမ်) ကို launch file တစ်ခုက စပေးပါတယ်၊ launch လုပ်ပြီး 9 s ကြာမှ စပါတယ်။",
+  "back": "A launch file starts 4 project-specific nodes (each a separate program), and they start only after 9 s have passed since launch."
  },
  "l2/realproject:params": {
   "status": "pass-alt",
   "en": "The anomaly detector reads its jump limit, 0.5 m, as a parameter, so it can change without rebuilding.",
-  "my": "ပုံမှန်မဟုတ်တာ ရှာတဲ့ node က သူ့ ခုန်ကျော်မှု ကန့်သတ်ချက် 0.5 m ကို parameter အဖြစ် ဖတ်ပါတယ်၊ ဒါကြောင့် ပြန် build မလုပ်ဘဲ ပြောင်းလို့ ရပါတယ်။",
+  "my": "ပုံမှန်မဟုတ်တာ ရှာတဲ့ node က သူ့ ခုန်မှု ကန့်သတ်ချက် 0.5 m ကို parameter အဖြစ် ဖတ်ပါတယ်၊ ဒါကြောင့် ပြန် build မလုပ်ဘဲ ပြောင်းလို့ ရပါတယ်။",
   "back": "The anomaly-detecting node reads its jump limit of 0.5 m as a parameter, so it can be changed without rebuilding."
  },
  "l2/realproject:topics": {
@@ -5787,6 +5987,12 @@
   "my": "အောင်မြင်ပြီ: my_node ကြားရတာ",
   "back": "Success: what my_node hears"
  },
+ "l2/topics:srcGloss.rates": {
+  "status": "pass-alt",
+  "en": "README (measured rates)",
+  "my": "README (တိုင်းထားတဲ့ နှုန်း)",
+  "back": "README (measured rate)"
+ },
  "l2/topics:title": {
   "status": "pass-alt",
   "en": "ROS 2: topics",
@@ -5917,8 +6123,8 @@
  "l2/ws:runsHere": {
   "status": "pass-alt",
   "en": "A pretend terminal (JavaScript): no real build. Real error and log lines are copied; lines in (parentheses) are shortened.",
-  "my": "terminal အတု (JavaScript) ပါ: build အစစ် မလုပ်ပါဘူး။ အမှား စာကြောင်းနဲ့ log စာကြောင်း အစစ်တွေကို ကူးထားပါတယ်၊ (ကွင်း) ထဲက စာကြောင်းတွေကို တိုထားပါတယ်။",
-  "back": "It is a fake terminal (JavaScript): it does not do a real build. The error lines and log lines are copied from real ones, and the lines inside (parentheses) are shortened."
+  "my": "terminal အတု (JavaScript) ပါ: build အစစ် မလုပ်ပါဘူး။ အမှား စာကြောင်းနဲ့ log စာကြောင်း အစစ်တွေကို ကူးထားပါတယ်၊ (ကွင်း) ထဲမှာ ပြထားတဲ့ စာကြောင်းတွေကတော့ အတိုချုံ့ထားတာပါ။",
+  "back": "It is a fake terminal (JavaScript): it does not do a real build. The real error lines and log lines have been copied, but the lines shown in (parentheses) are abbreviated."
  },
  "l2/ws:solved": {
   "status": "pass-alt",

@@ -54,7 +54,7 @@ export const MY_TEMPLATES: Record<string, Record<string, Tpl>> = {
   },
   'l1.callback.CALLBACK_STRINGS': {
     measured: (drop: number, age: number, env: string) =>
-      `တကယ့် ROS (${env}) ပေါ်မှာ အတူတူ စမ်းထားတာ၊ callback 600 ms: scan ${drop} ခု ပစ်ခဲ့ပြီး သုံးခဲ့တဲ့ အဟောင်းဆုံး data က ${age} s ပါ။`,
+      `တကယ့် ROS (${env}) ပေါ်မှာ တူညီတဲ့ စမ်းသပ်မှု၊ callback 600 ms: scan ${drop} ခု ပစ်ခဲ့ပြီး သုံးခဲ့တဲ့ အဟောင်းဆုံး data က ${age} s ပါ။`,
     caption: (t: string, n: number, w: number) => `t = ${t} s · on_scan ကို ${n}× ခေါ်ပြီး · ${w} ခု စောင့်နေ`,
   },
   'l1.closest.CLOSEST_STRINGS': {

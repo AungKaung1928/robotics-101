@@ -14,5 +14,6 @@
  "decide": "Python: တန်ဖိုး တစ်ခုနဲ့ ဆုံးဖြတ်ချက် တစ်ခု",
  "closest": "Python: loop နဲ့ function",
  "callback": "Python: class နဲ့ callback",
- "cpp": "C++: စက်ရုပ် အတူတူ၊ compile လုပ်ထားတဲ့ ပုံစံ"
+ "cpp": "C++: စက်ရုပ် အတူတူ၊ compile လုပ်ထားတဲ့ ပုံစံ",
+ "tflab": "TF အမှားရှာလက်တွေ့စမ်းသပ်ခန်း - ပျောက်နေတဲ့ link တစ်ခု"
 }

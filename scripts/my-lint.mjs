@@ -54,6 +54,7 @@ export function lint(en, my, role = 'body') {
   for (const t of G.tierA_keepEnglish) if (word(t).test(en) && !word(t).test(my)) fail.push(`tier A "${t}" not kept`)
   if (G.uiVerbs[en] !== undefined && my !== G.uiVerbs[en]) fail.push(`UI verb "${en}" must be ${G.uiVerbs[en]}`)
   for (const [w, b] of Object.entries(G.tierB_loanwords)) if (word(w).test(en) && !my.includes(b)) fail.push(`"${w}" must be ${b}`)
+  for (const [bad, good] of Object.entries(G.misspelled)) if (my.includes(bad)) fail.push(`misspelling ${bad}: write ${good}`)
   // Every role: a label in literary register (ပြန်လာသော, စက်နှိုးသည့်) reads as stiffly as a sentence; pinned UI verbs are fixed.
   if (G.uiVerbs[en] === undefined) {
     let t = my
