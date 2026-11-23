@@ -52,7 +52,7 @@ export default function SimpickChapter({ t }: { t: Strings }) {
             )
           })}
         </ol>
-        <p className="note">{s.others}</p>
+        <p className="note">{s.others} <a href={SOURCES.stage}>stage_ros2</a>, <a href={SOURCES.flatland}>Flatland (ROS index)</a></p>
       </div>
       <div className="panel">
         <p className="learn">{s.learn}</p>

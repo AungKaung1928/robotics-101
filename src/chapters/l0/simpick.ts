@@ -6,7 +6,7 @@ export interface Row { id: RowId; dim: '2D' | '3D' | 'none'; url: string; mentio
 
 export const LADDER: Row[] = [
   { id: 'site', dim: '2D', url: '' },
-  { id: 'turtlesim', dim: '2D', url: 'https://docs.ros.org/en/jazzy/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html' },
+  { id: 'turtlesim', dim: '2D', url: 'https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html' },
   { id: 'fake', dim: 'none', url: 'https://emanual.robotis.com/docs/en/platform/turtlebot3/fakenode_simulation/' },
   { id: 'mvsim', dim: '2D', url: 'https://index.ros.org/p/mvsim/' },
   { id: 'gazebo', dim: '3D', url: 'https://emanual.robotis.com/docs/en/platform/turtlebot3/simulation/' },
@@ -18,6 +18,8 @@ export const SOURCES = {
   gazeboJazzy: 'https://github.com/ROBOTIS-GIT/turtlebot3_simulations/blob/jazzy/turtlebot3_gazebo/package.xml',
   classicEol: 'https://classic.gazebosim.org/',
   webots: 'https://cyberbotics.com/doc/guide/turtlebot3-burger',
+  stage: 'https://github.com/tuw-robotics/stage_ros2',
+  flatland: 'https://index.ros.org/p/flatland_server/',
 }
 
 export interface Answers { gpu: boolean | null; sensor: boolean | null; physics: boolean | null }
