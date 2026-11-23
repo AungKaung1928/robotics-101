@@ -9,6 +9,8 @@ import BfsChapter from '../ep/BfsChapter'
 import LateChapter from '../ep/LateChapter'
 import MoveChapter from '../l0/MoveChapter'
 import SenseChapter from '../l0/SenseChapter'
+import ThinkChapter from '../l0/ThinkChapter'
+import { THINK_STRINGS } from '../l0/think.strings'
 import { SENSE_STRINGS } from '../l0/sense.strings'
 import { MOVE_STRINGS } from '../l0/move.strings'
 import { BODIES } from '../l2/bodies'
@@ -58,6 +60,9 @@ const cases = (l: Lang): Case[] => [
   { name: 'sense wall', Body: SenseChapter, steps: [{ slide: 0.5 }, { expect: 'front', is: '0.50 m' }, { slide: 3.8 }, { expect: 'front', is: SENSE_STRINGS[l].nothing }] },
   { name: 'sense cover', Body: SenseChapter, steps: [{ click: '.break' }, { expect: 'count', has: '0 /' }, { expect: 'front', is: SENSE_STRINGS[l].nothing }] },
   { name: 'sense check', Body: SenseChapter, steps: [{ click: 'button.pick', text: SENSE_STRINGS[l].answers.nothing }, { expect: 'check', ok: true }, { a11y: true }] },
+  { name: 'think rule', Body: ThinkChapter, steps: [{ slide: 0.9 }, { expect: 'final', re: /^0\.8\d m$/ }, { slide: 0.02 }, { expect: 'final', is: THINK_STRINGS[l].bumped }] },
+  { name: 'think break', Body: ThinkChapter, steps: [{ click: '.break' }, { expect: 'final', is: THINK_STRINGS[l].bumped }, { click: '.break' }, { expect: 'final', has: '0.4' }] },
+  { name: 'think check', Body: ThinkChapter, steps: [{ click: 'button.pick', text: THINK_STRINGS[l].answers.earlier }, { expect: 'check', ok: true }, { a11y: true }] },
 ]
 
 const setValue = (el: HTMLInputElement, v: string) => {
