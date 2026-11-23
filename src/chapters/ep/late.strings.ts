@@ -19,7 +19,7 @@ export const LATE_STRINGS = {
     goalText: (acted: number, back: number) => `acted on ${acted}, back in time ${back}×`,
     repoNote: 'Same idea in TF-Transform-Explorer: tf_anomaly_detector declares max_transform_age = 1.0 s.',
     exampleNote: 'The delays on this page are an example, not a measurement.',
-    reorderTitle: 'Third fix: a reorder buffer',
+    reorderTitle: 'Fix 3: a reorder buffer',
     reorderText: 'Hold each reading until its stamp + a wait, then use them in stamp order. Never back in time, but every reading is used that much later; one that arrives after its wait is dropped.',
     window: 'wait (ms)', rUsed: 'used, in order', rDropped: 'dropped (too late for the wait)', rDelay: 'every reading used later by',
     bpTitle: 'When the robot cannot keep up: backpressure',
