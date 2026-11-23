@@ -10,6 +10,7 @@ import { LOOP_STRINGS } from './loop.strings'
 import { PIPE_STRINGS } from './pipe.strings'
 import { ROS_STRINGS } from './ros.strings'
 import { TOOLS_STRINGS } from './tools.strings'
+import { ONRAMP_A, ONRAMP_B } from './onramp'
 
 /** Level 0 chapters, in reading order: on-ramp (meet → act, loop), simulator (simwhat, simpick), then the tools (pipe, tools, ros). */
 export const LEVEL0_CHAPTERS: ChapterMeta[] = [
@@ -25,6 +26,9 @@ export const LEVEL0_CHAPTERS: ChapterMeta[] = [
   { id: 'tools', level: 0, titleEn: TOOLS_STRINGS.en.title, titleJa: TOOLS_STRINGS.ja.title, icon: 'frame' },
   { id: 'ros', level: 0, titleEn: ROS_STRINGS.en.title, titleJa: ROS_STRINGS.ja.title, icon: 'clock' },
 ]
+
+/** Level 0 groups on the level map (spec APP_R101_ONRAMP.md): A meet the robot, B a practice world, C the software around it. */
+export const LEVEL0_GROUPS: readonly (readonly string[])[] = [[...ONRAMP_A, 'loop'], ONRAMP_B, ['pipe', 'tools', 'ros']]
 
 export { default as LoopChapter } from './LoopChapter'
 export { default as PipeChapter } from './PipeChapter'

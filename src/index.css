@@ -238,8 +238,11 @@ h1 .icon { width: 0.8em; height: 0.8em; }
 .lv-chs a:hover { border-color: var(--ink); }
 .lv-chs a.is-done { border-color: var(--free); }
 .tick { color: var(--free); font-weight: 700; }
+.lv-groups { display: grid; gap: var(--s2); min-width: 0; }
+.lv-group { display: grid; gap: var(--s1); }
+.lv-gname { font: 600 var(--t-small) var(--mono); color: var(--ink-2); }
 @media (max-width: 700px) {
   .levelmap { padding: 0 var(--s3) var(--s4); }
   .levelmap li { grid-template-columns: 2rem minmax(0, 1fr); }
-  .lv-chs { grid-column: 1 / -1; }
+  .lv-chs, .lv-groups { grid-column: 1 / -1; }
 }
