@@ -70,3 +70,11 @@ describe('EP1 BFS', () => {
     expect(moveFocus(7, 'a', w, h)).toBe(7)
   })
 })
+
+describe('bfs tie order matches the EP1 page grid (up, right, down, left)', () => {
+  it('on an open 3x3 grid from the bottom-left, the corner goal is reached going up first', async () => {
+    const { bfs, pathTo } = await import('./bfs')
+    const w = 3, r = bfs(w, 3, Array(9).fill(false), 2 * w) // start (0,2)
+    expect(pathTo(r, 2)).toEqual([6, 3, 0, 1, 2]) // up, up, right, right: 'up' wins every tie
+  })
+})
