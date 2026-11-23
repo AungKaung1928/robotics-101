@@ -317,7 +317,7 @@ export const STRINGS = { en, ja }
 export type Strings = typeof en
 
 export function initialLang(): Lang {
-  const saved = localStorage.getItem('rfs-lang')
+  const saved = localStorage.getItem('r101-lang')
   if (saved === 'en' || saved === 'ja') return saved
   return navigator.language.startsWith('ja') ? 'ja' : 'en'
 }

@@ -3,6 +3,7 @@ import { waypointValues } from '../content/waypoints'
 import { SOURCE_REPO, STACK, WAYPOINTS } from '../content/world'
 import type { Strings } from '../i18n'
 import { CHAPTERS, type ChapterId } from '../lib/route'
+import { CHAPTER_ICON, Icon } from '../icons'
 import Arena from './Arena'
 
 export default function Overview({ t }: { t: Strings }) {
@@ -39,7 +40,7 @@ export default function Overview({ t }: { t: Strings }) {
         <p className="cta"><a className="btn" href={`#/${CHAPTERS[0]}`}>{t.start} →</a> <span className="note">{t.keys}</span></p>
         <a className="peek" href={`#/${peek}`}>
           <span className="peek-n" data-k="peek">{CHAPTERS.indexOf(peek) + 1} / {CHAPTERS.length} · {VALUE[peek].v}</span>
-          <strong>{t.chapters[peek]}</strong>
+          <strong><Icon name={CHAPTER_ICON[peek]} /> {t.chapters[peek]}</strong>
           <span>{t[peek].lines[0]}</span>
         </a>
         <p className="note">{t.pathNote}</p>

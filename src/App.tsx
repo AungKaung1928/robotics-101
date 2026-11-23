@@ -10,6 +10,7 @@ import Overview from './components/Overview'
 import ScanChapter from './components/ScanChapter'
 import TfChapter from './components/TfChapter'
 import { STRINGS, initialLang, type Lang } from './i18n'
+import { CHAPTER_ICON, Icon } from './icons'
 import { CHAPTERS, keyTarget, neighbour, parseRoute, type ChapterId } from './lib/route'
 
 const BODY: Record<ChapterId, typeof ScanChapter> = { bringup: BringupChapter, tf: TfChapter, scan: ScanChapter, detect: DetectChapter, grid: GridChapter, costmap: CostmapChapter, goal: GoalChapter }
@@ -26,7 +27,7 @@ export default function App() {
   }, [])
   useEffect(() => {
     document.documentElement.lang = lang
-    localStorage.setItem('rfs-lang', lang)
+    localStorage.setItem('r101-lang', lang)
   }, [lang])
   useEffect(() => {
     const on = (e: KeyboardEvent) => {
@@ -47,7 +48,7 @@ export default function App() {
   return (
     <>
       <header className="console">
-        <a href="#/" className="home">rfs</a>
+        <a href="#/" className="home">r101</a>
         <span>/waypoint {idx < 0 ? '–' : idx + 1}/{CHAPTERS.length}</span>
         <span>/{route.page === 'chapter' ? route.id : 'plan'}</span>
         <span className="langs">
@@ -60,7 +61,7 @@ export default function App() {
         <main className="chapter">
           <div className="chead">
             <div>
-              <h1><span className="num">{idx + 1}</span> {t.chapters[route.id]}</h1>
+              <h1><span className="num">{idx + 1}</span> <Icon name={CHAPTER_ICON[route.id]} /> {t.chapters[route.id]}</h1>
               <p className="spot" data-k="spot">{spot?.v} <b className="kind">{spot && t.kind[spot.kind]}</b></p>
             </div>
             <MiniPlan current={route.id} t={t} />

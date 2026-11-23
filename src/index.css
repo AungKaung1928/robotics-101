@@ -194,3 +194,7 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
 }
+
+/* Line icons: sit on the text baseline, take the text colour. */
+.icon { vertical-align: -0.15em; flex: none; }
+h1 .icon { width: 0.8em; height: 0.8em; }
