@@ -97,3 +97,7 @@
 .rtop-eye { transform-box: fill-box; transform-origin: center; animation: rtop-blink 4.2s infinite; }
 @keyframes rtop-blink { 0%, 94%, 100% { transform: scaleX(1); } 97% { transform: scaleX(0.15); } }
 @media (prefers-reduced-motion: reduce) { .rtop-eye { animation: none; } }
+/* Gentle breathing (his style: idle blink + gentle breathing): the body swells 2 % and back over 3.2 s. Reduced motion: still. */
+.rtop-body { transform-box: fill-box; transform-origin: center; animation: rtop-breath 3.2s ease-in-out infinite; }
+@keyframes rtop-breath { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+@media (prefers-reduced-motion: reduce) { .rtop-body { animation: none; } }
