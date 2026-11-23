@@ -67,3 +67,12 @@ describe('scrubTrack with many events', () => {
     expect(scrubTrack(few, 0, few.length - 1).match(/transparent/g)).toHaveLength(SCRUB_MAX_GAPS)
   })
 })
+
+describe('scrubTrack with clustered events', () => {
+  it('a segment shorter than SCRUB_MIN_PART of the bar: no gaps at all; equal parts keep theirs', async () => {
+    const { SCRUB_MIN_PART } = await import('./motion')
+    expect(scrubTrack([0, 0.1, 0.2, 5, 10], 0, 10)).not.toContain('transparent') // 1 % parts at the start
+    expect(scrubTrack([0, 2, 4, 6, 8, 10], 0, 10).match(/transparent/g)).toHaveLength(4) // the scope chapter's 5 rows
+    expect(scrubTrack([0, 10 * SCRUB_MIN_PART, 10], 0, 10).match(/transparent/g)).toHaveLength(1) // exactly the limit keeps it
+  })
+})

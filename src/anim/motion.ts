@@ -56,6 +56,8 @@ export function playStop(events: number[], t: number, end: number, pauseAtSteps:
 
 /** Most step gaps the scrubber draws; with more events it shows the plain fill. */
 export const SCRUB_MAX_GAPS = 12
+/** Shortest segment (share of the bar) that still gets its gaps; any shorter one and the bar shows the plain fill. */
+export const SCRUB_MIN_PART = 0.075 // just under 1/13: 12 equal inner steps (13 parts) still get their gaps, like SCRUB_MAX_GAPS
 
 /** Thumb diameter of .squish-range (range.css); the thumb centre travels from THUMB/2 to width - THUMB/2. */
 export const SCRUB_THUMB_PX = 22
@@ -70,8 +72,10 @@ export function scrubTrack(events: number[], t: number, end: number): string {
   const at = (f: number) => `calc(${SCRUB_THUMB_PX / 2}px + (100% - ${SCRUB_THUMB_PX}px) * ${+f.toFixed(4)})`
   const f = end > 0 ? Math.min(1, Math.max(0, t / end)) : 0
   const inner = [...new Set(events)].filter((e) => e > 1e-9 && e < end - 1e-9).map((e) => e / end).sort((a, b) => a - b)
-  // segments help only when there are few (a story in parts); one event per sensor check (think: 30) would be a comb
-  const gaps = inner.length <= SCRUB_MAX_GAPS ? inner : []
+  // segments help only when there are few and none is tiny (a story in parts): one event per sensor check (think: 30) or
+  // a cluster of close steps (msgtypes, nodes) would read as a dashed line, not as parts
+  const edges = [0, ...inner, 1], minPart = Math.min(...edges.slice(1).map((e, i) => e - edges[i]))
+  const gaps = inner.length <= SCRUB_MAX_GAPS && minPart >= SCRUB_MIN_PART ? inner : []
   const stops: string[] = []
   const seg = (a: number, b: number, to: string) => {
     if (f > a && f < b) stops.push(`var(--robot) 0 ${at(f)}`)
