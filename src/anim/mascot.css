@@ -11,7 +11,7 @@
 .mascot .m-face circle { fill: var(--ink); }
 .mascot .m-face .m-mouth { fill: none; stroke: var(--ink); stroke-width: 1.6; }
 .mascot .m-face path { fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; }
-.mascot .m-breath { transform-box: view-box; transform-origin: 32px 58px; animation: m-breath 3.2s ease-in-out infinite; }
+.mascot .m-breath { transform-box: view-box; transform-origin: 32px 58px; animation: m-breath 3.2s ease-in-out infinite; animation-delay: var(--breath-delay, 0s); }
 /* Blink: uneven gaps (4.5 s, then a double blink 0.3 s apart) so the loop is not a metronome; per-robot phase from Mascot. */
 .mascot .m-eyes { transform-box: fill-box; transform-origin: center; animation: m-blink 9.4s infinite; animation-delay: var(--blink-delay, 0s); }
 @keyframes m-breath { 50% { transform: scale(0.992, 1.015); } }
@@ -20,13 +20,21 @@
 @supports (transition-timing-function: linear(0, 1)) { .mascot .m-look { transition: transform var(--spring-ms, 300ms) var(--spring, ease-out); } }
 .mascot .m-think circle { fill: var(--ink-2); animation: m-dot 1.2s ease-in-out infinite; }
 @keyframes m-dot { 0%, 100% { opacity: 0.25; } 30% { opacity: 1; } }
-.mascot .m-sway { transform-box: view-box; transform-origin: 32px 31px; animation: m-sway 5.3s ease-in-out infinite; }
+.mascot .m-sway { transform-box: view-box; transform-origin: 32px 31px; animation: m-sway 5.3s ease-in-out infinite; animation-delay: var(--sway-delay, 0s); }
 @keyframes m-sway { 25% { transform: rotate(1.5deg); } 75% { transform: rotate(-1.5deg); } }
 .mascot-hit { display: inline-block; line-height: 0; }
 /* Blush (decoration, no data): peach from the ray colour, a little deeper when happy. */
 .mascot .m-blush { fill: var(--ray); opacity: 0.22; }
 .mascot[data-mood='happy'] .m-blush { opacity: 0.4; }
 @media (prefers-color-scheme: dark) { .mascot .m-blush { opacity: 0.45; } .mascot[data-mood='happy'] .m-blush { opacity: 0.65; } }
+/* Sleep (no input for a while): closed eyes, slower breath, two small z that drift up and fade; reduced motion: still z. */
+.mascot[data-mood='sleep'] .m-breath { animation-duration: 5.6s; }
+.mascot .m-zz path { fill: none; stroke: var(--ink-2); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; animation: m-zz 2.8s ease-in-out infinite; }
+.mascot .m-zz path + path { animation-delay: 1.4s; }
+@keyframes m-zz { 0% { opacity: 0; transform: translateY(3px); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) { .mascot .m-zz path { animation: none; } }
+/* Worried (e.g. close to an obstacle): brows with the inner ends up, a little shrink of the breath. */
+.mascot .m-brow { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; }
 /* Curious: the head tilts while thinking, on the press spring (a little overshoot); reduced motion keeps the tilt, no swing. */
 .mascot .m-tilt { transform-box: view-box; transform-origin: 32px 31px; transition: transform var(--spring-ms, 300ms) var(--spring, ease-out); }
 .mascot[data-mood='think'] .m-tilt { transform: rotate(-8deg); }
