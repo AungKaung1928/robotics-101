@@ -139,6 +139,15 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .timeline .is-off { opacity: 0.25; }
 .timeline .is-now text:first-child { font-weight: 700; }
 .timeline .cursor { stroke: var(--robot); stroke-width: 2; }
+.timeline .node { fill: var(--surface); stroke: var(--free); stroke-width: 2; }
+.timeline .is-early .node { stroke: var(--ray); }
+/* Dependency links: the dash flows from the stage that gives to the stage that needs it. */
+.timeline .dep { fill: none; stroke: var(--free); stroke-width: 1.5; stroke-dasharray: 4 4; animation: flow 0.8s linear infinite; }
+.timeline .dep.is-early { stroke: var(--ray); }
+.timeline .dep-off { opacity: 0.25; animation: none; }
+@keyframes flow { to { stroke-dashoffset: -8; } }
+.scrub { flex: 1 1 10rem; accent-color: var(--ink); }
+.break { font: var(--t-small) var(--mono); padding: var(--s1) var(--s3); border: 1px dashed var(--ray); background: none; color: var(--ray); border-radius: var(--radius); cursor: pointer; }
 .stepper { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); margin-top: var(--s2); font: var(--t-small) var(--mono); }
 .stepper button { font: inherit; padding: var(--s1) var(--s3); border: 1px solid var(--rule); background: var(--surface); color: var(--ink); border-radius: var(--radius); cursor: pointer; }
 .stepper button:disabled { color: var(--ink-2); cursor: default; }

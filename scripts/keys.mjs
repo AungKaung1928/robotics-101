@@ -140,19 +140,19 @@ try {
     report(`${hash}: drag the robot 2 m right → x 0.50 → 2.50, y stays 0.50`, xy === '2.50 0.50' ? [] : [`sliders x y = ${xy}`])
   }
 
-  // Bring-up: Play from step 1 advances one launch stage per second and stops on the last.
+  // Bring-up: Play from stage 1 moves the playhead at 5 scenario s per s, lights stages on the way, stops at patrol (25 s).
   await open('#/bringup/1')
   const caption = `document.querySelector('[data-k="step"]').textContent`
   const start = await js(caption)
   await js(`document.querySelectorAll('.stepper button')[1].click()`)
   await sleep(1300)
-  const next = await js(caption)
+  const mid = parseFloat((await js(caption)).slice(4))
   await sleep(7000)
   const end = await js(`[${caption}, document.querySelectorAll('.stepper button')[2].disabled].join(' | ')`)
-  report('bring-up Play: gazebo → spawn after one beat, stops on patrol', [
+  report('bring-up Play: playhead moves past spawn (3 s) within 1.3 s, stops on patrol', [
     ...(start.startsWith('t = 0 s') ? [] : [`start ${start}`]),
-    ...(next.startsWith('t = 3 s') ? [] : [`after one beat ${next}, expected t = 3 s`]),
-    ...(end.startsWith('t = 25 s') && end.endsWith('true') ? [] : [`end ${end}, expected t = 25 s and Next disabled`]),
+    ...(mid >= 3 && mid < 25 ? [] : [`after 1.3 s t = ${mid}, expected 3 ≤ t < 25`]),
+    ...(end.startsWith('t = 25 s · patrol') && end.endsWith('true') ? [] : [`end ${end}, expected t = 25 s · patrol and Next disabled`]),
   ])
 
   // Grid: Add scan adds one scan and makes more cells known.

@@ -14,6 +14,7 @@ const en = {
   pathNote: 'Patrol path drawn for this page; obstacles and walls from the Gazebo world file.',
   kind: { config: 'config', formula: 'formula', measured: 'measured' },
   back: 'Back',
+  player: { label: 'Scenario', play: 'Play', pause: 'Pause', scrub: 'Scenario time' },
   next: 'Next',
   plan: 'Plan',
   source: 'Source',
@@ -102,8 +103,7 @@ const en = {
     early: 'stages started too early',
     waits: 'starts before',
     ok: 'none',
-    play: 'Play',
-    pause: 'Pause',
+    breakIt: 'Break it: Nav2 before SLAM',
   },
   grid: {
     lines: [
@@ -169,6 +169,7 @@ const ja: typeof en = {
   pathNote: '巡回経路はこのページ用の図。障害物と壁は Gazebo のワールドファイルから。',
   kind: { config: '設定値', formula: '式', measured: '実測' },
   back: '戻る',
+  player: { label: 'シナリオ', play: '再生', pause: '一時停止', scrub: 'シナリオの時刻' },
   next: '次へ',
   plan: '全体図',
   source: '出典',
@@ -257,8 +258,7 @@ const ja: typeof en = {
     early: '早すぎる段',
     waits: 'より先に開始',
     ok: 'なし',
-    play: '再生',
-    pause: '一時停止',
+    breakIt: 'わざと壊す: SLAM より先に Nav2',
   },
   grid: {
     lines: [
