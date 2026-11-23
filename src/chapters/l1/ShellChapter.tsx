@@ -1,26 +1,13 @@
 import { useMemo, useState } from 'react'
 import Player from '../../components/Player'
 import { STRINGS, type Strings } from '../../i18n'
-import { SCRIPT, challengeOk, exec, fresh, prompt, scenario, session, type Line } from './shell'
+import { SCRIPT, challengeOk, exec, fresh, prompt, scenario, session } from './shell'
 import { SHELL_STRINGS } from './shell.strings'
+import Term from './Term'
 import './l1.css'
 
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 const DOCS = 'https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html'
-
-function Term({ lines, start, cursor }: { lines: Line[]; start: string[]; cursor?: string }) {
-  return (
-    <pre className="code term" role="log" aria-live="polite">
-      {lines.map((l, i) => (
-        <span key={i}>
-          <span className="ln"><span className="cmt">{start[i]}</span> {l.cmd}</span>
-          {l.out && <span className={`ln${l.ok ? '' : ' bad'}`}>{l.out}</span>}
-        </span>
-      ))}
-      {cursor !== undefined && <span className="ln"><span className="cmt">{start[lines.length]}</span> {cursor}<span className="caret">▌</span></span>}
-    </pre>
-  )
-}
 
 /** Prompts before each line of a session, so the folder in the prompt follows cd. */
 const prompts = (cmds: string[]) => {

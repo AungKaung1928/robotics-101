@@ -17,7 +17,7 @@ export const fresh = (): Sh => ({
   env: {},
 })
 
-const resolve = (cwd: string, p: string) => {
+export const resolve = (cwd: string, p: string) => {
   const parts = (p.startsWith('/') ? p : p.startsWith('~') ? HOME + p.slice(1) : `${cwd}/${p}`).split('/')
   const out: string[] = []
   for (const x of parts) {
@@ -27,7 +27,7 @@ const resolve = (cwd: string, p: string) => {
   }
   return '/' + out.join('/')
 }
-const short = (p: string) => (p.startsWith(HOME) ? '~' + p.slice(HOME.length) : p)
+export const short = (p: string) => (p.startsWith(HOME) ? '~' + p.slice(HOME.length) : p)
 export const prompt = (sh: Sh) => `${short(sh.cwd)}$`
 
 /** Run one command line; returns the new state (never mutates) and what the terminal prints. */
