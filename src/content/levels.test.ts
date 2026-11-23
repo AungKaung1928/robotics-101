@@ -9,7 +9,7 @@ describe('levelPage', () => {
     expect(p?.next?.id).toBe('callback')
   })
   it('neighbours cross levels; first chapter has no prev; wrong level, unknown id, patrol chapters → null', () => {
-    expect(levelPage('#/0/loop')?.prev).toBeNull()
+    expect(levelPage('#/0/meet')?.prev).toBeNull()
     expect(levelPage('#/1/decide')?.prev).toBe(LEVELS[0].at(-1))
     expect(levelPage('#/1/shell')?.next?.id).toBe('nodes')
     expect(levelPage('#/2/drive')?.next?.id).toBe('scan')

@@ -11,7 +11,7 @@ const DIST = process.env.VERIFY_DIST ?? 'dist'
 const OUT = join(ROOT, 'verify-out')
 // Route, then the readouts (data-k) its page must show with a number in them.
 const ROUTES = [
-  { hash: '', h1: { en: 'Robotics 101', ja: 'ロボティクス 101' }, links: ['#/bringup', '#/tf', '#/scan', '#/detect', '#/grid', '#/costmap', '#/goal', '#/0/loop', '#/3/scan', '#/3/tf', '#/3/detect', '#/4/grid', '#/4/costmap', '#/4/goal', '#/4/bringup', '#/0/loop', '#/ep/bfs', '#/ep/late'], has: 'class="levelmap"', words: { peek: /^1 \/ 7 · Nav2 @ 10 s$/ } },
+  { hash: '', h1: { en: 'Robotics 101', ja: 'ロボティクス 101' }, links: ['#/bringup', '#/tf', '#/scan', '#/detect', '#/grid', '#/costmap', '#/goal', '#/0/loop', '#/3/scan', '#/3/tf', '#/3/detect', '#/4/grid', '#/4/costmap', '#/4/goal', '#/4/bringup', '#/0/meet', '#/ep/bfs', '#/ep/late'], has: 'class="levelmap"', words: { peek: /^1 \/ 7 · Nav2 @ 10 s$/ } },
   { hash: '#/bringup', readouts: ['patrol', 'step'], words: { early: /none|なし/ } },
   { hash: '#/bringup/3', readouts: ['step'], off: 4 },
   { hash: '#/tf', readouts: ['hit-map', 'hit-base_footprint', 'hit-base_scan', 'odomhz'], equals: { drive: '0.13 m', mapodom: '0.02 s (50 Hz)' }, words: { verdict: /healthy|正常/ } },
@@ -28,13 +28,14 @@ const ROUTES = [
   { hash: '#/scan', equals: { movemeasured: '5.4–5.8 cm', noise: '1 / 1.5 cm' }, readouts: ['hits', 'gap', 'move', 'scanhz', 'beam'], words: { beam: /^-?[01]° → 1\.4\d m$/ } },
   { hash: '#/detect', readouts: ['found', 'truth'] },
   { hash: '#/grid', readouts: ['cells', 'scans', 'known'], equals: { scans: '1', kept: '1.9 s', between: '8.7–9.2', republish: '5 s' }, has: ' %"' }, // canvas label carries the result
-  { hash: '#/0/loop', has: 'class="num">0.1<', equals: { blind: '5.2 cm' } },
-  { hash: '#/0/pipe', has: 'class="num">0.2<' },
+  { hash: '#/0/loop', has: 'class="num">0.6<', equals: { blind: '5.2 cm' } },
+  { hash: '#/0/meet', has: 'class="num">0.1<' },
+  { hash: '#/0/pipe', has: 'class="num">0.9<' },
   { hash: '#/3/tflab', has: 'class="num">3.3<' },
   { hash: '#/ep/bfs', has: 'class="num">EP1<' },
   { hash: '#/ep/late', has: 'class="num">EP2<' },
-  { hash: '#/0/tools', has: 'class="num">0.3<' },
-  { hash: '#/0/ros', has: 'class="num">0.4<' },
+  { hash: '#/0/tools', has: 'class="num">0.10<' },
+  { hash: '#/0/ros', has: 'class="num">0.11<' },
   { hash: '#/1/decide', has: 'class="num">1.1<' },
   { hash: '#/1/closest', has: 'class="num">1.2<' },
   { hash: '#/1/callback', has: 'class="num">1.3<' },
@@ -55,6 +56,8 @@ const ROUTES = [
   { hash: '#/goal', readouts: ['tick', 'drive', 'time', 'ticks', 'cmdhz'], equals: { time: '14.4 s', timeaccel: '14.5 s', yaw: '0.25 rad = 14.3°', progress: '1.9 s', planner: 'NavFn · Dijkstra', recover: 'spin · backup · wait' } },
 ]
 const JA_TEXT = /[぀-ヿ一-龯]/
+// Product names stay in Latin letters on Japanese pages too.
+const PROPER_NAMES = new Set(['TurtleBot3 Burger'])
 
 const CHROME = [process.env.CHROME, 'google-chrome', 'chromium', '/mnt/c/Program Files/Google/Chrome/Application/chrome.exe']
   .filter(Boolean).find((c) => (c.includes('/') ? existsSync(c) : spawnSync('which', [c]).status === 0))
@@ -102,7 +105,7 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
         // Every prose paragraph and label on a Japanese page must be Japanese (source lines are citations, a term that is only <code> is a command: skipped).
         if (lang === 'ja') {
           const prose = [...dom.matchAll(/<p(?: class="(?:lede|note)")?>([^<]+)<\/p>|<dt>(?!<code>[^<]*<\/code><\/dt>)(.*?)<\/dt>/g)].map((m) => (m[1] ?? m[2]).replace(/<[^>]+>/g, '').trim())
-          for (const t of prose) if (!JA_TEXT.test(t)) fails.push(`${name}: English left on the Japanese page: '${t.slice(0, 50)}'`)
+          for (const t of prose) if (!JA_TEXT.test(t) && !PROPER_NAMES.has(t)) fails.push(`${name}: English left on the Japanese page: '${t.slice(0, 50)}'`)
           // Headline values (title spot, overview waypoints): numbers and units only, no English word of 3+ letters.
           const values = [...dom.matchAll(/data-k="spot"[^>]*>([^<]*)|class="wp-value"[^>]*>([^<]*)/g)].map((m) => (m[1] ?? m[2]).trim())
           for (const v of values) if (/\b[a-z]{3,}\b/.test(v)) fails.push(`${name}: English in a headline value: '${v}'`)
