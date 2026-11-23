@@ -11,6 +11,8 @@ import MoveChapter from '../l0/MoveChapter'
 import SenseChapter from '../l0/SenseChapter'
 import ThinkChapter from '../l0/ThinkChapter'
 import ActChapter from '../l0/ActChapter'
+import SimwhatChapter from '../l0/SimwhatChapter'
+import { SIMWHAT_STRINGS } from '../l0/simwhat.strings'
 import { ACT_STRINGS } from '../l0/act.strings'
 import { THINK_STRINGS } from '../l0/think.strings'
 import { SENSE_STRINGS } from '../l0/sense.strings'
@@ -68,6 +70,9 @@ const cases = (l: Lang): Case[] => [
   { name: 'act wheels', Body: ActChapter, steps: [{ slide: 0, in: '.act-turn input[type=range]' }, { expect: 'left', is: '0.15 m/s' }, { expect: 'right', is: '0.15 m/s' }, { slide: 0.22 }, { slide: 1.5, in: '.act-turn input[type=range]' }, { expect: 'right', has: ACT_STRINGS[l].tooFast }] },
   { name: 'act stop', Body: ActChapter, steps: [{ slide: 0.22 }, { click: '.break' }, { expect: 'rolled', is: '1.0 cm' }, { expect: 'note', has: '0.09' }] },
   { name: 'act check', Body: ActChapter, steps: [{ click: 'button.pick', text: ACT_STRINGS[l].answers.later }, { expect: 'check', ok: true }, { a11y: true }] },
+  { name: 'simwhat wall', Body: SimwhatChapter, steps: [{ slide: 3 }, { expect: 'world', is: '3.0 m' }, { expect: 'dots', is: '360' }] },
+  { name: 'simwhat sensor off', Body: SimwhatChapter, steps: [{ click: '.break' }, { expect: 'dots', is: '0' }, { expect: 'world', is: '1.5 m' }, { expect: 'count:svg.simwhat circle.sw-dot', is: '0' }] },
+  { name: 'simwhat check', Body: SimwhatChapter, steps: [{ click: 'button.pick', text: SIMWHAT_STRINGS[l].answers.empty }, { expect: 'check', ok: true }, { a11y: true }] },
 ]
 
 const setValue = (el: HTMLInputElement, v: string) => {
