@@ -66,7 +66,7 @@ const cases = (l: Lang): Case[] => [
   { name: 'move slip', Body: MoveChapter, steps: [{ slide: 0.15 }, { click: '.break' }, { expect: 'kind', is: MOVE_STRINGS[l].kind.curveLeft }] },
   { name: 'move check', Body: MoveChapter, steps: [{ click: 'button.pick', text: MOVE_STRINGS[l].answers.curveRight }, { expect: 'check', ok: true }, { a11y: true }] },
   { name: 'sense wall', Body: SenseChapter, steps: [{ slide: 0.5 }, { expect: 'front', is: '0.50 m' }, { slide: 3.8 }, { expect: 'front', is: SENSE_STRINGS[l].nothing }] },
-  { name: 'sense cover', Body: SenseChapter, steps: [{ click: '.break' }, { expect: 'count', has: '0 /' }, { expect: 'front', is: SENSE_STRINGS[l].nothing }] },
+  { name: 'sense cover', Body: SenseChapter, steps: [{ click: '.break' }, { expect: 'count', has: '0 /' }, { expect: 'front', is: SENSE_STRINGS[l].tooClose }] },
   { name: 'sense check', Body: SenseChapter, steps: [{ click: 'button.pick', text: SENSE_STRINGS[l].answers.nothing }, { expect: 'check', ok: true }, { a11y: true }] },
   { name: 'think rule', Body: ThinkChapter, steps: [{ slide: 0.9 }, { expect: 'final', re: /^0\.8\d m$/ }, { slide: 0.02 }, { expect: 'final', is: THINK_STRINGS[l].bumped }] },
   { name: 'think break', Body: ThinkChapter, steps: [{ click: '.break' }, { expect: 'final', is: THINK_STRINGS[l].bumped }, { click: '.break' }, { expect: 'final', has: '0.4' }] },

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { BEAMS, COVER_M, FRONT_MAX, FRONT_START, MAX_M, MIN_M, ROOM, VIEW, front, hit, perSecond, turn, valid } from './sense'
+import { BEAMS, COVER_M, front, FRONT_MAX, FRONT_START, hit, MAX_M, MIN_M, perSecond, ROOM, turn, valid, VIEW, why } from './sense'
 
 describe('sense model', () => {
   it('one beam straight ahead = the wall distance', () => {
@@ -20,6 +20,8 @@ describe('sense model', () => {
     const r = turn(FRONT_START, true)
     expect(r.filter(valid).length).toBe(0)
     expect(front(r)).toBeNull()
+    expect(why(r)).toBe('near') // REP 117: too close (-inf), not "nothing in range" (+inf)
+    expect(why(turn(MAX_M + 0.3))).toBe('far')
   })
   it('360 beams x 5 turns per second = 1800 numbers per second', () => {
     expect(BEAMS).toBe(360)

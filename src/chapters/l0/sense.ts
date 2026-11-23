@@ -31,6 +31,9 @@ export const valid = (r: number) => r >= MIN_M && r <= MAX_M
 /** The front number the page shows: metres, or null = nothing there. */
 export const front = (ranges: number[]) => (valid(ranges[0]) ? ranges[0] : null)
 
+/** Why there is no front number: under the minimum = 'near' (REP 117: -inf, too close), past the maximum = 'far' (+inf). */
+export const why = (ranges: number[]): 'near' | 'far' => (ranges[0] < MIN_M ? 'near' : 'far')
+
 export const perSecond = () => BEAMS * TURNS_PER_S
 
 /** Figure frame (svg units); sense.test checks the room and the farthest front wall fit. */
