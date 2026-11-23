@@ -59,3 +59,18 @@ describe('SenseScene with the chapter box shows the chapter reading', () => {
     }
   })
 })
+
+describe('ThinkScene with the chapter model tells the chapter story', () => {
+  it('fired / bumped follow think.run() for the opening rule, a mid rule and one smaller than a driving step', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: ThinkScene } = await import('./ThinkScene')
+    const th = await import('../chapters/l0/think')
+    const model = { run: (a: number) => th.run(a), speed: th.SPEED, startM: th.START_M }
+    for (const a of [th.RULE_M, 0.25, 0.01]) {
+      const r = th.run(a), h = renderToStaticMarkup(createElement(ThinkScene, { stopAt: a, t: 60, model, label: '' }))
+      expect(h).toContain(`data-state="${r.crashed ? 'bumped' : 'fired'}"`)
+    }
+    expect(th.run(0.01).crashed).toBe(true) // a rule smaller than one step of driving misses the wall
+  })
+})
