@@ -113,6 +113,9 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .ghost-move { stroke: var(--ink-2); stroke-width: 0.03; }
 .ghost.is-bad, .ghost-move.is-bad { stroke: var(--ray); }
 .chain { fill: none; stroke: var(--ink-2); stroke-width: 0.025; stroke-dasharray: 0.08 0.06; }
+.trail { fill: none; stroke: var(--robot); stroke-width: 0.025; stroke-linejoin: round; opacity: 0.6; }
+.truth { fill: none; stroke: var(--robot); stroke-width: 0.02; stroke-dasharray: 0.04 0.04; }
+.robot.is-bad { fill: var(--ray); stroke: var(--ray); }
 .beam { stroke: var(--ray); stroke-width: 0.025; }
 .frames { width: 100%; border-collapse: collapse; margin: 0 0 var(--s3); font-size: var(--t-small); }
 .frames th { text-align: left; color: var(--ink-2); font-weight: 400; border-bottom: 1px solid var(--rule); padding: var(--s1) 0; }

@@ -3,12 +3,16 @@ import { BASE_TO_SCAN, FOOTPRINT_TO_BASE, MEASURED, ODOM_CONFIG_HZ, NAV2, SLAM, 
 import type { Strings } from '../i18n'
 import { maxDrivePerCheck, verdict } from '../lib/anomaly'
 import { apply, compose, invert, type TF } from '../lib/tf2d'
+import { checkJump, corrections, driftAt, footAt, mapFootAt, slamAt, type Drive } from '../lib/tfdrive'
+import Player from './Player'
 import Arena from './Arena'
 import { routeParam } from '../lib/route'
 import Slider from './Slider'
 
 const HIT: [number, number] = [1.5, 1.5] // box1's south-west corner in map (explorer_world.sdf:106-109)
 const rad = (d: number) => (d * Math.PI) / 180
+const DRIVE_S = 8 // scenario: a quarter turn at the Nav2 speed limit, 8 s = 2.08 m
+const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 
 function Axes({ t, name, size = 0.6, at = [0.1, -0.3] }: { t: TF; name: string; size?: number; at?: [number, number] }) {
   const [xx, xy] = apply(t, [size, 0]), [yx, yy] = apply(t, [0, size])
@@ -30,8 +34,17 @@ export default function TfChapter({ t }: { t: Strings }) {
   const [yaw, setYaw] = useState(30)
   const [jump, setJump] = useState(() => routeParam(location.hash, 'jump', 0.1, 0, 1))
   const [age, setAge] = useState(0.2)
-  const mapOdom = { x: dx, y: 0, yaw: rad(dyaw) }
-  const mapFoot = compose(mapOdom, { x, y, yaw: rad(yaw) })
+  const [missUntil, setMissUntil] = useState(0)
+  // '#/tf?t=6' opens paused at 6 s of the drive; plain '#/tf' plays it from 0 s (end frame under reduced motion).
+  const deep = /[?&]t=/.test(location.hash)
+  const [time, setTime] = useState(() => (deep ? routeParam(location.hash, 't', 0, 0, DRIVE_S) : still() ? DRIVE_S : 0))
+  const drive: Drive = { start: { x, y, yaw: rad(yaw) }, speed: NAV2.maxVelX, turn: Math.PI / 2, duration: DRIVE_S, drift: { x: dx, y: 0, yaw: rad(dyaw) }, minTravel: SLAM.minTravel, missUntil }
+  const mapOdom = slamAt(drive, time)
+  const mapFoot = mapFootAt(drive, time)
+  const truth = compose(driftAt(drive, time), footAt(drive, time))
+  const trail = Array.from({ length: Math.round(time * 10) + 1 }, (_, i) => mapFootAt(drive, i / 10)).map((p, i) => `${i ? 'L' : 'M'}${p.x} ${p.y}`).join('')
+  const sceneJump = checkJump(drive, time, TF_CHECK_PERIOD)
+  const sceneV = verdict(age, sceneJump, TF_MAX_AGE, TF_MAX_JUMP)
   const mapBase = compose(mapFoot, FOOTPRINT_TO_BASE)
   const mapScan = compose(mapBase, BASE_TO_SCAN)
   const rows: [string, TF][] = [['map', { x: 0, y: 0, yaw: 0 }], ['odom', mapOdom], ['base_footprint', mapFoot], ['base_link', mapBase], ['base_scan', mapScan]]
@@ -48,9 +61,13 @@ export default function TfChapter({ t }: { t: Strings }) {
           {/* where base_link was at the previous check: `jump` m back along the heading */}
           <circle className={`ghost${v === 'jump' ? ' is-bad' : ''}`} cx={mapBase.x - jump * Math.cos(mapBase.yaw)} cy={mapBase.y - jump * Math.sin(mapBase.yaw)} r="0.22" />
           <path className={`ghost-move${v === 'jump' ? ' is-bad' : ''}`} d={`M${mapBase.x - jump * Math.cos(mapBase.yaw)} ${mapBase.y - jump * Math.sin(mapBase.yaw)}L${mapBase.x} ${mapBase.y}`} />
-          <circle className="robot" cx={mapBase.x} cy={mapBase.y} r="0.22" />
+          <path className="trail" d={trail} />
+          <circle className="truth" cx={truth.x} cy={truth.y} r="0.22" />
+          <circle className={`robot${sceneV === 'jump' ? ' is-bad' : ''}`} cx={mapBase.x} cy={mapBase.y} r="0.22" />
           <Axes t={mapBase} name="base_link" />
         </Arena>
+        <Player t={time} setT={setTime} end={DRIVE_S} events={[0, ...corrections(drive), DRIVE_S]} speed={1} autoplay={!deep && !still()} s={t}
+          caption={<>t = {time.toFixed(1)} s · {s.scene} <b className={`v-${sceneV}`} data-k="scene">{sceneJump.toFixed(2)} m {s.v[sceneV]}</b></>} />
       </div>
       <div className="panel">
         {s.lines.map((l) => <p key={l}>{l}</p>)}
@@ -75,6 +92,7 @@ export default function TfChapter({ t }: { t: Strings }) {
         <legend>{s.gDetector}</legend>
         <Slider label={s.jump} value={jump} min={0} max={1} step={0.05} mark={TF_MAX_JUMP} onChange={setJump} fmt={(v) => v.toFixed(2)} />
         <Slider label={s.age} value={age} min={0} max={2} step={0.1} mark={TF_MAX_AGE} onChange={setAge} fmt={(v) => v.toFixed(1)} />
+        <p><button type="button" className="break" onClick={() => { setDx(1); setMissUntil(6); setTime(0) }}>{s.breakIt}</button></p>
         <dl className="readout">
           <div><dt>{s.verdict}</dt><dd data-k="verdict" className={`v-${v}`}>{s.v[v]}</dd></div>
           <div><dt>{s.mapOdom}</dt><dd data-k="mapodom">{SLAM.tfPublishS} s ({(1 / SLAM.tfPublishS).toFixed(0)} Hz)</dd></div>
