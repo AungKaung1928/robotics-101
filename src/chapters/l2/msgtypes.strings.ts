@@ -1,0 +1,53 @@
+/** Chapter 2.3 text, EN + JA. Same keys in both (msgtypes.test checks). */
+export const MSGTYPES_STRINGS = {
+  en: {
+    title: 'ROS 2: message types',
+    learn: 'You will learn: every topic carries one message type, a fixed list of named fields. You read and write those fields by name.',
+    lines: [
+      '/scan carries sensor_msgs/msg/LaserScan. Most fields describe the sensor; the distances themselves are in ranges, 360 numbers.',
+      'ranges[i] is not "the i-th degree". Its angle is angle_min + i × angle_increment. On this robot ranges[0] looks backwards.',
+      '/cmd_vel carries geometry_msgs/msg/Twist: 6 numbers. A two-wheel robot only uses linear.x (forward speed) and angular.z (turn rate).',
+    ],
+    unknown: 'set by the driver',
+    index: 'index i in ranges', angle: 'angle of ranges[i]', ahead: 'straight ahead is index',
+    linX: 'linear.x (m/s)', angZ: 'angular.z (rad/s)',
+    breakIt: 'Break it: put the turn in angular.x',
+    reset: 'Reset the Twist',
+    ignoredNote: (f: string) => `Ignored by the robot: ${f}. The message is valid, the robot just never reads that field.`,
+    after: 'after 2 s', challenge: 'Challenge: make the robot turn left on the spot.',
+    solved: 'Solved: spinning left at', notYet: 'Not yet:',
+    words: 'Words',
+    glossary: [
+      ['message type', 'the fixed shape of a message: field names and their types'],
+      ['field', 'one named value inside a message, like range_min'],
+      ['float32[]', 'a list of decimal numbers'],
+      ['REP 103', 'the ROS rule for directions: x forward, y left, z up, positive turn = left'],
+    ] as [string, string][],
+    caption: (n: number, b: number) => (b ? `ranges: ${b} of 360 beams drawn` : `field ${n} of 10`),
+  },
+  ja: {
+    title: 'ROS 2：メッセージ型',
+    learn: '学ぶこと：どのトピックも1つのメッセージ型を運ぶ。型は名前付きフィールドの決まった並び。フィールドは名前で読み書きする。',
+    lines: [
+      '/scan は sensor_msgs/msg/LaserScan を運ぶ。ほとんどのフィールドはセンサーの説明で、距離そのものは ranges（360個の数）にある。',
+      'ranges[i] は「i 度目」ではない。角度は angle_min + i × angle_increment。このロボットでは ranges[0] は後ろを向いている。',
+      '/cmd_vel は geometry_msgs/msg/Twist を運ぶ：6つの数。二輪ロボットが使うのは linear.x（前進速度）と angular.z（旋回速度）だけ。',
+    ],
+    unknown: 'ドライバが設定',
+    index: 'ranges の添字 i', angle: 'ranges[i] の角度', ahead: '真正面の添字',
+    linX: 'linear.x（m/s）', angZ: 'angular.z（rad/s）',
+    breakIt: '壊す：旋回を angular.x に入れる',
+    reset: 'Twist をリセット',
+    ignoredNote: (f: string) => `ロボットに無視される：${f}。メッセージは正しいが、ロボットはそのフィールドを読まない。`,
+    after: '2秒後', challenge: 'チャレンジ：ロボットをその場で左に回そう。',
+    solved: '成功：左回転', notYet: 'まだ：',
+    words: '用語',
+    glossary: [
+      ['メッセージ型', 'メッセージの決まった形：フィールド名とその型'],
+      ['フィールド', 'メッセージの中の名前付きの値。例：range_min'],
+      ['float32[]', '小数のリスト'],
+      ['REP 103', 'ROS の方向の決まり：x 前、y 左、z 上、正の回転 = 左'],
+    ] as [string, string][],
+    caption: (n: number, b: number) => (b ? `ranges：360本中 ${b} 本を描画` : `フィールド ${n} / 10`),
+  },
+}

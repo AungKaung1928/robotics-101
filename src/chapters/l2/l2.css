@@ -1,0 +1,29 @@
+/* Level 2 graph styles; code card, glossary and verdict come from ../l1/l1.css. */
+.graph .edge { fill: none; stroke: var(--rule); stroke-width: 2; }
+.graph .edge.live { stroke: var(--ray); stroke-dasharray: 6 6; animation: flow 0.8s linear infinite; }
+@keyframes flow { to { stroke-dashoffset: -12; } }
+@media (prefers-reduced-motion: reduce) { .graph .edge.live { animation: none; } }
+.graph .nd rect { fill: var(--surface); stroke: var(--rule); stroke-width: 2; rx: 4; }
+.graph .nd { cursor: pointer; }
+.graph .nd text { font: 18px var(--mono); fill: var(--ink-2); }
+.graph .nd.ok rect { stroke: var(--free); }
+.graph .nd.ok text { fill: var(--ink); }
+.graph .nd.starved rect { stroke: var(--ray); stroke-dasharray: 4 3; }
+.graph .nd.off { opacity: 0.35; }
+.graph .nd:focus-visible rect { stroke: var(--robot); stroke-width: 3; }
+.graph .legend { font: 16px var(--mono); fill: var(--ink-2); }
+.graph .edge.on { stroke: var(--ink-2); }
+.graph .dot { fill: var(--ray); }
+.graph .dot.cmd { fill: var(--robot); }
+.graph .ftype { fill: var(--ink-2); }
+.graph .fval { fill: var(--robot); }
+.graph .fan { stroke: var(--ray); stroke-width: 0.6; opacity: 0.35; }
+.graph .fan.pick { stroke: var(--robot); stroke-width: 3; opacity: 1; }
+.graph .msg line, .graph .msg path { stroke: var(--ink-2); stroke-width: 2; fill: none; }
+.graph .msg text { font: 15px var(--mono); fill: var(--ink); }
+.graph .msg.fb line, .graph .msg.fb path { stroke: var(--robot); }
+.graph .msg.ok line, .graph .msg.ok path { stroke: var(--free); stroke-width: 3; }
+.graph .msg.bad line, .graph .msg.bad path { stroke: var(--ray); stroke-width: 3; }
+.graph .lim { stroke: var(--ray); stroke-width: 2; }
+.tree { min-height: 0; margin-bottom: 0.5rem; }
+.graph .goalc { fill: color-mix(in srgb, var(--free) 18%, transparent); stroke: var(--free); stroke-width: 2; }

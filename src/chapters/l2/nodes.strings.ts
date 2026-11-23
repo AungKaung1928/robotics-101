@@ -1,0 +1,73 @@
+import type { NodeId } from './nodes'
+
+/** Chapter 2.1 text, EN + JA. Same keys in both (nodes.test checks). */
+export const NODES_STRINGS = {
+  en: {
+    title: 'ROS 2: nodes',
+    learn: 'You will learn: a ROS 2 robot is not one program but many small ones, called nodes, each with one job.',
+    lines: [
+      'One launch file starts the patrol robot from Level 1 as separate programs. Each box is one node.',
+      'Nodes use each other\'s data (the arrows). A node is only useful when the nodes it needs are running too.',
+      'Because they are separate programs, one node can stop without killing the others. Click a box to stop or start it.',
+    ],
+    jobs: {
+      bridge: 'connects to the simulated robot: LiDAR scans and wheel odometry in, speed commands out',
+      rsp: 'tells everyone where each robot part sits (the LiDAR on the base)',
+      slam: 'builds the map',
+      anomaly: 'watches the robot\'s position for sudden jumps',
+      nav2: 'plans a path and drives to a goal',
+      patrol: 'picks the next waypoint and asks Nav2 to go there',
+      rviz: 'draws all of it on your screen',
+    } satisfies Record<NodeId, string>,
+    breakIt: 'Break it: stop ros_gz_bridge',
+    reset: 'Start all nodes',
+    state: { ok: 'working', starved: 'running, but waiting for data', off: 'stopped' },
+    patrol: 'robot patrols', yes: 'yes', no: 'no',
+    stoppedN: 'nodes stopped',
+    challenge: 'Challenge: stop as many nodes as you can while the robot keeps patrolling.',
+    solved: 'Solved: the patrol does not need', notYet: 'Not yet:', stopped: 'stopped',
+    left: 'Left out to keep it simple: spawn_burger (puts the robot in the world once), tf_monitor_node, frame_broadcaster_node.',
+    words: 'Words',
+    glossary: [
+      ['node', 'one running program with one job, for example slam_toolbox'],
+      ['launch file', 'a script that starts many nodes at once, with settings and start delays'],
+      ['ROS 2 graph', 'all nodes running now and how their data connects'],
+    ] as [string, string][],
+    caption: (t: string, n: number) => `t = ${t} s · ${n} of 7 nodes working`,
+    tap: 'Click a node to stop or start it',
+  },
+  ja: {
+    title: 'ROS 2：ノード',
+    learn: '学ぶこと：ROS 2 のロボットは1つのプログラムではなく、ノードと呼ばれる小さなプログラムの集まりで、それぞれ1つの仕事を持つ。',
+    lines: [
+      '1つの launch ファイルが、Level 1 の巡回ロボットを別々のプログラムとして起動する。箱1つが1ノード。',
+      'ノードは互いのデータを使う（矢印）。ノードは、必要なノードも動いているときだけ役に立つ。',
+      '別々のプログラムなので、1つのノードが止まっても他は止まらない。箱をクリックして止めたり起動したりしよう。',
+    ],
+    jobs: {
+      bridge: 'シミュレーションのロボットとつなぐ：LiDAR とオドメトリが入り、速度指令が出る',
+      rsp: 'ロボットの各部品の位置を全員に知らせる（ベース上の LiDAR）',
+      slam: '地図を作る',
+      anomaly: 'ロボットの位置が急に跳ばないか見張る',
+      nav2: '経路を計画してゴールまで走る',
+      patrol: '次のウェイポイントを選び、Nav2 に向かうよう頼む',
+      rviz: 'すべてを画面に描く',
+    } satisfies Record<NodeId, string>,
+    breakIt: '壊す：ros_gz_bridge を止める',
+    reset: '全ノードを起動',
+    state: { ok: '動作中', starved: '起動しているがデータ待ち', off: '停止' },
+    patrol: 'ロボットの巡回', yes: 'する', no: 'しない',
+    stoppedN: '止めたノード数',
+    challenge: 'チャレンジ：ロボットが巡回を続けたまま、できるだけ多くのノードを止めよう。',
+    solved: '成功：巡回に不要なのは', notYet: 'まだ：', stopped: '個停止',
+    left: '簡単にするため省略：spawn_burger（ロボットを一度だけ置く）、tf_monitor_node、frame_broadcaster_node。',
+    words: '用語',
+    glossary: [
+      ['ノード', '1つの仕事を持つ実行中のプログラム。例：slam_toolbox'],
+      ['launch ファイル', '設定と起動の遅れ付きで、多くのノードを一度に起動するスクリプト'],
+      ['ROS 2 グラフ', '今動いている全ノードと、そのデータのつながり'],
+    ] as [string, string][],
+    caption: (t: string, n: number) => `t = ${t} s · 7 ノード中 ${n} 個が動作中`,
+    tap: 'ノードをクリックして停止・起動',
+  },
+}
