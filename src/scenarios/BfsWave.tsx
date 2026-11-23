@@ -5,7 +5,8 @@ import './bfswave.css'
 
 /**
  * EP1 figure: the BFS wavefront spreads one layer per `layerS` s from the robot; each cell pops in (PRESS spring)
- * at the moment BFS discovers it, so the ripple is the algorithm's own order. When the front reaches the goal the
+ * at the moment BFS discovers it, so the ripple is the algorithm's own order. Each reached cell carries an arrow to the
+ * cell it was reached from (came_from, as redblobgames.com/pathfinding/a-star/implementation.html draws it). When the front reaches the goal the
  * parent chain is walked back from the goal (how BFS recovers the path: each cell only knows its parent), then the robot drives it at `cellS` s per cell, cheering on arrival.
  */
 export default function BfsWave({ w, h, blocked, start, goal, t, layerS = 0.25, cellS = 0.3, traceS = 0.06, label }: {
@@ -29,8 +30,13 @@ export default function BfsWave({ w, h, blocked, start, goal, t, layerS = 0.25, 
         const d = r.dist[c]
         if (d < 0 || d > layer) return null
         const s = arrivalScale(t - d * layerS)
-        return <rect key={c} className={d === layer && !found ? 'front' : 'seen'} x={x - 0.45} y={y - 0.45} width={0.9} height={0.9} rx={0.15}
-          transform={`translate(${x} ${y}) scale(${s}) translate(${-x} ${-y})`} />
+        const p = r.parent[c], deg = p < 0 ? 0 : (Math.atan2(Math.floor(p / w) - Math.floor(c / w), (p % w) - (c % w)) * 180) / Math.PI
+        return (
+          <g key={c} transform={`translate(${x} ${y}) scale(${s})`}>
+            <rect className={d === layer && !found ? 'front' : 'seen'} x={-0.45} y={-0.45} width={0.9} height={0.9} rx={0.15} />
+            {p >= 0 && <path className="came" d="M-0.18 0 L0.2 0 M0.08 -0.11 L0.2 0 L0.08 0.11" transform={`rotate(${deg})`} />}
+          </g>
+        )
       })}
       <circle className="goal" cx={gx} cy={gy} r={0.3} />
       {found && shown.length > 1 && <polyline className="path" points={shown.map((c) => xy(c).join(',')).join(' ')} />}

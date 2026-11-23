@@ -64,6 +64,8 @@ describe('scenario figures render from their models', () => {
     expect(at(2)).not.toContain('class="path"') // goal at layer 8, 0.25 s per layer: trace starts with the goal alone
     expect(at(2.1)).toContain('class="path"')
     expect(count(at(9), /class="wall"/g)).toBe(2)
+    expect(count(at(1), /class="came"/g)).toBe(count(at(1), /class="(front|seen)"/g) - 1) // every reached cell but the start
+    expect(at(0.3)).toContain('rotate(180)') // cell 1 (x 1, y 0) points left to its parent, the start
     const shut = blocked.map((b, i) => b || i === 3 || i === 8 || i === 13)
     expect(at(9, 4, shut)).not.toContain('class="path"')
   })

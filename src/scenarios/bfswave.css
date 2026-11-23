@@ -4,3 +4,4 @@
 .bfs .front { fill: var(--free); opacity: 0.45; stroke: var(--free); stroke-width: 0.06; }
 .bfs .path { fill: none; stroke: var(--robot); stroke-width: 0.12; stroke-linecap: round; stroke-linejoin: round; }
 .bfs .goal { fill: none; stroke: var(--robot); stroke-width: 0.1; }
+.bfs .came { fill: none; stroke: var(--ink-2); stroke-width: 0.05; stroke-linecap: round; stroke-linejoin: round; opacity: 0.55; }
