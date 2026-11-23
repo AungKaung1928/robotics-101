@@ -15,6 +15,10 @@ describe('bring-up order', () => {
   it('SLAM before the robot exists breaks SLAM, and not its dependents while they still start after it', () => {
     expect(earlyStarts({ ...base(), slam: 1 })).toEqual([['slam', 'spawn']])
   })
+  it('patrol_node starts with his own nodes at 9 s and waits startup_delay 15 s: first goal at 24 s, not tied to Nav2', () => {
+    expect(base().patrol).toBe(24)
+    expect(earlyStarts({ ...base(), nav2: 24 })).toEqual([['patrol', 'nav2']])
+  })
 })
 
 import { startOrder } from './bringup'

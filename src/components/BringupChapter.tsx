@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { PATROL_WAIT_S, SOURCE_REPO } from '../content/world'
+import { SOURCE_REPO } from '../content/world'
 import type { Strings } from '../i18n'
 import { Icon } from '../icons'
 import { STAGES, earlyStarts, startOrder, type StageId } from '../lib/bringup'
@@ -7,7 +7,7 @@ import { routeStep } from '../lib/route'
 import Player from './Player'
 import Slider from './Slider'
 
-const W = 640, ROW = 34, PAD = 110, T = 30, SPEED = 5 // scenario seconds per real second: the 25 s launch plays in 5 s
+const W = 640, ROW = 34, PAD = 110, T = 30, SPEED = 5 // scenario seconds per real second: the 24 s launch plays in under 5 s
 const x = (t: number) => PAD + (Math.min(t, T) / T) * (W - PAD - 20)
 const y = (i: number) => 30 + i * ROW
 const DEFAULT = Object.fromEntries(STAGES.map((s) => [s.id, s.t])) as Record<StageId, number>
@@ -18,7 +18,7 @@ export default function BringupChapter({ t }: { t: Strings }) {
   const s = t.bringup
   const [slam, setSlam] = useState(DEFAULT.slam)
   const [nav2, setNav2] = useState(DEFAULT.nav2)
-  const times = { ...DEFAULT, slam, nav2, patrol: nav2 + PATROL_WAIT_S }
+  const times = { ...DEFAULT, slam, nav2 } // patrol keeps its own clock (9 s + 15 s): a late Nav2 makes it race
   const early = earlyStarts(times)
   const order = startOrder(times)
   const events = order.map((id) => times[id])
@@ -59,13 +59,13 @@ export default function BringupChapter({ t }: { t: Strings }) {
       <div className="panel">
         {s.lines.map((l) => <p key={l}>{l}</p>)}
         <Slider hint={t.drag} label={s.slam} value={slam} min={0} max={20} step={0.5} mark={DEFAULT.slam} onChange={setSlam} />
-        <Slider label={s.nav2} value={nav2} min={0} max={20} step={0.5} mark={DEFAULT.nav2} onChange={setNav2} />
+        <Slider label={s.nav2} value={nav2} min={0} max={25} step={0.5} mark={DEFAULT.nav2} onChange={setNav2} />
         <p><button type="button" className="break" onClick={() => { setNav2(slam - 2); setT(T) }}>{s.breakIt}</button></p>
         <dl className="readout">
           <div><dt>{s.patrol}</dt><dd data-k="patrol">{times.patrol} s</dd></div>
           <div><dt>{s.early}</dt><dd data-k="early" className={early.length ? 'early' : ''}>{early.length ? early.map(([a, b]) => `${a} ${s.waits} ${b}`).join(', ') : s.ok}{early.length > 0 && <> <Icon name="warning" /></>}</dd></div>
         </dl>
-        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/launch/tf_explorer.launch.py#L68-L137`}>tf_explorer.launch.py:68-137</a>, <a href={`${SOURCE_REPO}/blob/main/README.md`}>README "Run"</a></p>
+        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/launch/tf_explorer.launch.py#L68-L137`}>tf_explorer.launch.py:68-137</a>, <a href={`${SOURCE_REPO}/blob/main/README.md#quick-start`}>README "Quick start"</a></p>
       </div>
     </>
   )
