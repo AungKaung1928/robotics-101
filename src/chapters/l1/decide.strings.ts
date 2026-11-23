@@ -14,6 +14,7 @@ export const DECIDE_STRINGS = {
     fixIt: 'Fix it: back to <',
     words: 'Words',
     glossary: [
+      ['LiDAR', 'a sensor that sends out laser beams and measures how far away each one hits something'],
       ['variable', 'a name that holds a value, like distance'],
       ['value', 'the number itself, like 1.20'],
       ['if / else', 'run one block when the test is true, the other when it is false'],
@@ -41,6 +42,7 @@ export const DECIDE_STRINGS = {
     fixIt: '直す：< に戻す',
     words: '用語',
     glossary: [
+      ['LiDAR', 'レーザー光を出し、それぞれが何かに当たるまでの距離を測るセンサー'],
       ['変数', '値に付けた名前。例：distance'],
       ['値', '数値そのもの。例：1.20'],
       ['if / else', '条件が真ならこちら、偽ならあちらのブロックを実行'],
