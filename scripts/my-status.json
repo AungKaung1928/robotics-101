@@ -3857,8 +3857,9 @@
  "l1/callback:glossary.1.1": {
   "status": "pass-alt",
   "en": "this object: where a method keeps values between calls",
-  "my": "ဒီ object ကိုယ်တိုင်: method တစ်ခုက ခေါ်တဲ့ကြားမှာ တန်ဖိုးတွေကို သိမ်းထားတဲ့ နေရာ",
-  "back": "this object itself: the place where values are kept between a method's calls"
+  "my": "ဒီ object ကိုယ်တိုင်: method ကို ခေါ်တဲ့ကြားမှာ တန်ဖိုးတွေကို သိမ်းထားတဲ့ နေရာ",
+  "back": "this object itself: the place where values are kept between a method's calls",
+  "note": "audit 5: particle က -> ကို (the method is called), 2026-11-24"
  },
  "l1/callback:glossary.2.0": {
   "status": "pass-alt",
