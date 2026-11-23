@@ -8,6 +8,7 @@ import DetectChapter from './components/DetectChapter'
 import GoalChapter from './components/GoalChapter'
 import GridChapter from './components/GridChapter'
 import MiniPlan from './components/MiniPlan'
+import PathLine from './components/PathLine'
 import { waypointValues } from './content/waypoints'
 import Overview from './components/Overview'
 import ScanChapter from './components/ScanChapter'
@@ -16,7 +17,6 @@ import { LANG_LABEL, STRINGS, initialLang, titleOf, type Lang, type Strings } fr
 import { CHAPTER_ICON, Icon } from './icons'
 import type { ChapterMeta } from './anim/contract'
 import { LEVEL_BODY, levelPage, readingIndex, type LevelPage } from './content/levels'
-import { DOTS, GROWS_FROM, findChapter } from './content/path'
 import { markDone } from './lib/progress'
 import { CHAPTERS, keyTarget, neighbour, parseRoute, type ChapterId } from './lib/route'
 
@@ -92,18 +92,6 @@ export default function App() {
         </main>
       )}
     </>
-  )
-}
-
-/** Difficulty dots and the earlier chapter this one grows from (src/content/path.ts); nothing for chapters outside the scale. */
-function PathLine({ id, t }: { id: string; t: Strings }) {
-  const dots = DOTS[id], from = GROWS_FROM[id] ? findChapter(GROWS_FROM[id]) : null
-  if (!dots && !from) return null
-  return (
-    <p className="pathline">
-      {dots ? <span className="dots" role="img" aria-label={`${t.levels.difficulty} ${dots} / 5`} data-k="dots">{[1, 2, 3, 4, 5].map((i) => <i key={i} className={i <= dots ? 'on' : undefined} />)}</span> : null}
-      {from ? <span>{t.levels.knows}: <a href={from.href}>{from.num} {titleOf(from.meta, t)}</a></span> : null}
-    </p>
   )
 }
 
