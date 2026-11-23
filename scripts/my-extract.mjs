@@ -66,8 +66,12 @@ for (const lvl of readdirSync(join(root, 'src/chapters')).sort()) {
 // read as text, not imported.
 for (const lvl of readdirSync(join(root, 'src/chapters'))) {
   const src = readFileSync(join(root, 'src/chapters', lvl, 'index.ts'), 'utf8')
-  // Array entries only (`  { id: ...`), as the parity test's TITLE_IDS; a standalone `X_META = { id: ... }` is not counted there.
+  // Chapter titles the parity test's TITLE_IDS accepts: inline array entries (`  { id: ...`) and named metas an array lists.
   for (const m of src.matchAll(/^\s+\{ id: '([\w-]+)'[^}]*?titleEn: (\w+)\.en\.title/gm)) titles[m[1]] = `${exportOf[m[2]]}:title`
+  // A named meta (`X_META = { id: ... }`) counts only when an array in the same file lists it (`[X_META]`), as TITLE_IDS sees it.
+  for (const m of src.matchAll(/^export const (\w+) = \{ id: '([\w-]+)'[^}]*?titleEn: (\w+)\.en\.title/gm)) {
+    if (new RegExp(`\\[[^\\]]*\\b${m[1]}\\b[^\\]]*\\]`).test(src)) titles[m[2]] = `${exportOf[m[3]]}:title`
+  }
 }
 const outFile = process.argv[2]
 if (!outFile) { console.error('usage: my-extract.mjs <out.json>'); process.exit(2) }
