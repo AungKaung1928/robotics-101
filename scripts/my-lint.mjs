@@ -23,7 +23,7 @@ export function encodingErrors(s) {
     if (c === '\u1039' && !((CONS.test(p) || kinzi) && CONS.test(ch[i + 1] ?? ''))) e.push(`stack sign ္ at ${i} not between consonants`)
   })
   // Letters from any other script (Japanese, Thai, ...): models sometimes slip one in. Latin and Greek stay (terms, θ ω).
-  const foreign = s.match(/[^\P{L}\u0000-\u024F\u0370-\u03FF\u1000-\u109F]|[^\P{M}\u0300-\u036F\u1000-\u109F]/gu)
+  const foreign = s.match(/[^\P{L}\u0041-\u024F\u0370-\u03FF\u1000-\u109F]|[^\P{M}\u0300-\u036F\u1000-\u109F]/gu)
   if (foreign) e.push(`letters outside Myanmar/Latin/Greek: ${[...new Set(foreign)].join('')}`)
   if (/[၀-၉]/.test(s)) e.push('Burmese digits (use 0-9)')
   return e
