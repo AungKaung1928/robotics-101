@@ -1,4 +1,6 @@
 /* Challenge-solved burst (lane anim): the mascot's two spark colours. */
+/* The burst never catches a click (it can drift over the quiz buttons next to the mascot): an animation must not block. */
+.celebrate { pointer-events: none; }
 .celebrate circle { fill: var(--robot); }
 .celebrate circle[data-i='1'] { fill: var(--free); }
 .level-done-wrap { display: inline-flex; align-items: flex-end; gap: 4px; }
