@@ -38,7 +38,8 @@ const ticks = (s) => (s.match(/`[^`]+`/g) ?? []).sort()
 // Identifiers, topics, files, commands: a capital after the first letter, digit, _ / . + :: inside the token.
 const idents = (s) => (s.match(/[A-Za-z_/~][\w/.+:-]*/g) ?? []).map((t) => t.replace(/[.:-]+$/, ''))
   .filter((t) => /[_/+]|::|\.\w|\w[A-Z]|\d/.test(t.slice(1)) || /^\/\w/.test(t))
-const word = (w) => new RegExp(`(^|[^A-Za-z])${w.replace(/[.+*?()[\]\\]/g, '\\$&')}s?([^A-Za-z]|$)`, 'i')
+// A glossary word only counts as a word, never as part of an identifier (sensor_msgs, /scan_topic).
+const word = (w) => new RegExp(`(^|[^A-Za-z0-9_/])${w.replace(/[.+*?()[\]\\]/g, '\\$&')}s?([^A-Za-z0-9_/]|$)`, 'i')
 const eq = (a, b) => a.length === b.length && a.every((x, i) => x === b[i])
 
 export function lint(en, my, role = 'body') {

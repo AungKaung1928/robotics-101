@@ -22,6 +22,10 @@ describe('Burmese encoding check', () => {
 })
 
 describe('lint', () => {
+  it('does not read a glossary word inside an identifier (sensor_msgs is not "sensor")', () => {
+    expect(lint('the data shape, like sensor_msgs/msg/LaserScan', 'ဒေတာ ပုံစံ၊ ဥပမာ sensor_msgs/msg/LaserScan', 'label').fail).toEqual([])
+    expect(lint('a sensor', 'sensor တစ်ခု', 'label').fail.join()).toMatch(/sensor/)
+  })
   it('allows ordinary words that only contain a literary ending (guest, trader)', () => {
     expect(lint('Guests wait.', 'ဧည့်သည်တွေ စောင့်ပါတယ်။', 'body').fail).toEqual([])
     expect(lint('Traders wait.', 'ကုန်သည်တွေ စောင့်ပါတယ်။', 'body').fail).toEqual([])
