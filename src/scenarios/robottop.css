@@ -47,9 +47,9 @@
 .sp-name { fill: var(--ink); font: 700 13px var(--mono); }
 .sp-sub { fill: var(--ink-2); font: 600 11px var(--mono); }
 .sp-note { fill: var(--ray); }
-.tk-rung { fill: var(--robot); opacity: 0.35; }
-.tk-rung.is-bump { fill: none; stroke: var(--occ); stroke-width: 2; opacity: 0.6; }
-.tk-rung.is-pick { opacity: 1; }
+.tk-rung { fill: var(--ink-2); } /* solid: data marks keep their contrast in light and dark */
+.tk-rung.is-bump { fill: none; stroke: var(--occ); stroke-width: 2; }
+.tk-rung.is-pick { fill: var(--robot); }
 .nface-body { fill: var(--surface); stroke: var(--ink); stroke-width: 1.8; }
 .nface-eye { fill: var(--ink); }
 .nface-line { fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-linecap: round; }
