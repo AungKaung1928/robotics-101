@@ -5,10 +5,9 @@ import { SOURCE_REPO } from '../../content/world'
 import { STRINGS, type Strings } from '../../i18n'
 import { GOAL, SCAN_HZ, SPEED, inGoal, run, scenario, type Compare } from './decide'
 import { DECIDE_STRINGS } from './decide.strings'
+import RobotSide from './RobotSide'
 import './l1.css'
 
-const W = 640, H = 175, WALL = 600, PX = 260 // px per metre: 2 m start fits left of the wall
-const FLOOR = 130, LEN = 0.14 * PX // robot body ~14 cm long
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 const m = (v: number) => v.toFixed(2)
 
@@ -22,26 +21,12 @@ export default function DecideChapter({ t }: { t: Strings }) {
   const [tS, setTS] = useState(() => (still() ? sc.durationMs / 1000 : 0))
   const now = Math.min(tS, sc.durationMs / 1000)
   const f = sc.frame(now * 1000)
-  const front = WALL - f.distance * PX
   const restart = () => setTS(Infinity) // a new setting shows its end frame at once; Play replays it
   const ok = inGoal(r)
-  const tag = f.crashed ? s.crashed : f.decision
   return (
     <>
       <div className="figure">
-        <svg className="side" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={s.title}>
-          <line className="floor" x1={10} x2={WALL} y1={FLOOR} y2={FLOOR} />
-          <rect className="wall" x={WALL} y={20} width={14} height={FLOOR - 20} />
-          <line className="stopline" x1={WALL - stopAt * PX} x2={WALL - stopAt * PX} y1={30} y2={FLOOR} />
-          <text x={WALL - stopAt * PX} y={20} textAnchor="middle">stop_at</text>
-          {!f.crashed && f.distance > 0 && <line className="beam" x1={front} x2={WALL} y1={FLOOR - 26} y2={FLOOR - 26} opacity={1 - ((now * SCAN_HZ) % 1) * 0.7} />}
-          <g className={f.crashed ? 'is-crash' : ''}>
-            <rect className="body" x={front - LEN} y={FLOOR - 40} width={LEN} height={30} rx={3} />
-            <circle className="wheel" cx={front - LEN / 2} cy={FLOOR - 8} r={8} />
-          </g>
-          <text x={(front + WALL) / 2} y={FLOOR + 30} textAnchor="middle">distance = {m(f.distance)} m</text>
-          <text className={`tag ${f.crashed ? 'stop' : f.decision}`} x={front - LEN / 2} y={FLOOR - 50} textAnchor="middle">{tag}</text>
-        </svg>
+        <RobotSide f={f} stopAt={stopAt} tS={now} label={s.title} crashed={s.crashed} />
         <Player t={now} setT={setTS} end={sc.durationMs / 1000} events={sc.eventsMs!.map((e) => e / 1000)} speed={1} autoplay={!still()} s={t}
           caption={s.caption(f.tick + 1, m(r.ticks[f.tick].distance), r.ticks[f.tick].decision)} />
       </div>
