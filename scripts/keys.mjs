@@ -216,7 +216,7 @@ try {
     const bad = []
     const head = await js(`[document.documentElement.lang, [...document.querySelectorAll('.panel h2')].map((h) => h.textContent).join('|')].join(' ')`)
     // The 5 numbered steps in the page's script; the 6th heading is the STALE section (Burmese may still fall back to English).
-    const steps = head.split('|').filter((h) => /^\d\./.test(h))
+    const steps = head.slice(lang.length + 1).split('|').filter((h) => /^\d\./.test(h))
     if (!head.startsWith(lang + ' ') || head.split('|').length !== 6 || steps.length !== 5 || !steps.every((h) => SCRIPT[lang].test(h))) bad.push(`headings: ${head}`)
     await step(`[...document.querySelectorAll('.pick')].filter((l) => l.textContent.includes('base_link')).forEach((l) => l.querySelector('input').click())`)
     await step(`${q('[data-act="check"]')}.click()`)
