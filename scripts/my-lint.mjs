@@ -18,7 +18,9 @@ export function encodingErrors(s) {
     const p = ch[i - 1] ?? ''
     if (c === 'ေ' && !(CONS.test(p) || MEDIAL.test(p))) e.push(`ေ at ${i} not after a consonant or medial`)
     if (MEDIAL.test(c) && !(CONS.test(p) || MEDIAL.test(p))) e.push(`medial at ${i} not after a consonant`)
-    if (c === '္' && !(CONS.test(p) && CONS.test(ch[i + 1] ?? ''))) e.push(`stack sign ္ at ${i} not between consonants`)
+    // ္ joins two consonants; kinzi (င + ် + ္ before a consonant, as in စင်္ကာပူ) is the one valid form after ်.
+    const kinzi = p === '\u103A' && ch[i - 2] === '\u1004'
+    if (c === '\u1039' && !((CONS.test(p) || kinzi) && CONS.test(ch[i + 1] ?? ''))) e.push(`stack sign ္ at ${i} not between consonants`)
   })
   if (/[぀-ヿ一-鿿]/.test(s)) e.push('Japanese text')
   if (/[၀-၉]/.test(s)) e.push('Burmese digits (use 0-9)')
@@ -26,6 +28,16 @@ export function encodingErrors(s) {
 }
 
 const nums = (s) => (s.match(/\d+(?:\.\d+)?/g) ?? []).sort()
+// English number words may become digits in Burmese ("one scan" -> "scan 1 ကြိမ်"): count them as digits on the English side.
+const WORDS = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, twice: 2, once: 1 }
+const numsEn = (en, my) => {
+  const extra = (en.match(/\b(one|two|three|four|five|six|seven|eight|nine|ten|twice|once)\b/gi) ?? []).map((w) => String(WORDS[w.toLowerCase()]))
+  const want = nums(en)
+  const got = nums(my)
+  // Each number word may or may not be written as a digit: keep the ones the Burmese actually uses.
+  for (const d of extra) if (got.filter((x) => x === d).length > want.filter((x) => x === d).length) want.push(d)
+  return want.sort()
+}
 const ticks = (s) => (s.match(/`[^`]+`/g) ?? []).sort()
 // Identifiers, topics, files, commands: a capital after the first letter, digit, _ / . + :: inside the token.
 const idents = (s) => (s.match(/[A-Za-z_/~][\w/.+:-]*/g) ?? []).map((t) => t.replace(/[.:-]+$/, ''))
@@ -38,7 +50,7 @@ export function lint(en, my, role = 'body') {
   const warn = []
   if (!my || !my.trim()) return { fail: ['empty'], warn }
   fail.push(...encodingErrors(my))
-  if (!eq(nums(en), nums(my))) fail.push(`numbers ${nums(en)} vs ${nums(my)}`)
+  if (!eq(numsEn(en, my), nums(my))) fail.push(`numbers ${numsEn(en, my)} vs ${nums(my)}`)
   if (!eq(ticks(en), ticks(my))) fail.push('backtick spans differ')
   for (const t of idents(en)) if (!my.includes(t)) fail.push(`identifier ${t} missing`)
   for (const t of G.tierA_keepEnglish) if (word(t).test(en) && !word(t).test(my)) fail.push(`tier A "${t}" not kept`)
@@ -50,6 +62,7 @@ export function lint(en, my, role = 'body') {
     for (const l of G.literaryBanned) if (t.includes(l)) fail.push(`literary form ${l}`)
   }
   if (role === 'body' && /[.!]["')]?$/.test(en.trim()) && /[က-႟]/.test(my) && !/။["')]?$/.test(my.trim())) fail.push('body sentence must end with ။')
+  if (!/[.!?:]['")]?$/.test(en.trim()) && /(။|ဖြစ်ပါတယ်)['")]?$/.test(my.trim())) fail.push('label or fragment got a sentence ending')
   if (/[က-႟]\s*\.$/.test(my.trim())) fail.push('"." after Burmese text')
   const r = [...my].length / [...en].length
   if (en.length > 12 && (r < 0.5 || r > 3)) warn.push(`length ratio ${r.toFixed(2)}`)

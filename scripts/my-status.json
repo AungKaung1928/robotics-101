@@ -1,0 +1,860 @@
+{
+ "core:back": {
+  "status": "pass",
+  "en": "Back",
+  "my": "နောက်သို့",
+  "back": "Back"
+ },
+ "core:bringup.breakIt": {
+  "status": "pass",
+  "en": "Break it: Nav2 before SLAM",
+  "my": "ဖျက်ကြည့်- SLAM မတိုင်ခင် Nav2",
+  "back": "Try breaking: Nav2 before SLAM"
+ },
+ "core:bringup.early": {
+  "status": "pass",
+  "en": "stages started too early",
+  "my": "စောပြီး စတင်နေတဲ့ အဆင့်များ",
+  "back": "Early starting steps"
+ },
+ "core:bringup.lines.0": {
+  "status": "pass",
+  "en": "One launch file starts everything. Most stages wait on fixed timers chosen so their inputs should exist first. Only patrol checks: it waits up to 5 s for Nav2’s action server and retries.",
+  "my": "launch file တစ်ခုတည်းနဲ့ အားလုံးကို စတင်ပါတယ်။ အဆင့်အများစုက input တွေ အရင်ရှိနေအောင် သတ်မှတ်ထားတဲ့ timer တွေနဲ့ စောင့်ပါတယ်။ patrol တစ်ခုပဲ စစ်ဆေးတာပါ- Nav2 ရဲ့ action server ကို 5 s အထိ စောင့်ပြီး ပြန်ကြိုးစားပါတယ်။",
+  "back": "Starts everything with a single launch file. Most steps wait with set timers to ensure inputs are available first. Only the patrol is checked: waits up to 5 s for Nav2's action server and retries."
+ },
+ "core:bringup.lines.1": {
+  "status": "pass",
+  "en": "Drag SLAM or Nav2 earlier: a stage that starts no later than its input waits on a frame or topic that is not there yet.",
+  "my": "SLAM ဒါမှမဟုတ် Nav2 ကို စောပြီး ဆွဲထားရင်- input ထက် မနောက်ကျဘဲ စတင်တဲ့ အဆင့်က မရှိသေးတဲ့ frame ဒါမှမဟုတ် topic ကို စောင့်နေပါလိမ့်မယ်။",
+  "back": "If SLAM or Nav2 are dragged early: the step starting without lagging behind the input will wait for missing frames or topics."
+ },
+ "core:bringup.nav2": {
+  "status": "pass",
+  "en": "Nav2 starts at (s)",
+  "my": "Nav2 စတင်ချိန် (s)",
+  "back": "Nav2 start time (s)"
+ },
+ "core:bringup.ok": {
+  "status": "pass",
+  "en": "none",
+  "my": "မရှိပါ",
+  "back": "None"
+ },
+ "core:bringup.patrol": {
+  "status": "pass",
+  "en": "patrol starts (its node at 9 s + 15 s wait)",
+  "my": "ကင်းလှည့်မှု စတင် (9 s မှာ node နဲ့ 15 s စောင့်ဆိုင်းမှု)",
+  "back": "Patrol start (node at 9 s and 15 s wait)"
+ },
+ "core:bringup.slam": {
+  "status": "pass",
+  "en": "SLAM starts at (s)",
+  "my": "SLAM စတင်ချိန် (s)",
+  "back": "SLAM start time (s)"
+ },
+ "core:bringup.waits": {
+  "status": "pass",
+  "en": "starts before",
+  "my": "မတိုင်ခင် စတင်သည်",
+  "back": "Starts before"
+ },
+ "core:chapters.bringup": {
+  "status": "pass",
+  "en": "Bring-up order",
+  "my": "စက်နှိုးသည့် အစီအစဉ်",
+  "back": "Bringup sequence"
+ },
+ "core:chapters.costmap": {
+  "status": "pass",
+  "en": "Costmap inflation",
+  "my": "costmap inflation",
+  "back": "costmap inflation"
+ },
+ "core:chapters.detect": {
+  "status": "pass",
+  "en": "A simple detector",
+  "my": "ရိုးရှင်းတဲ့ ထောက်လှမ်းကိရိယာ",
+  "back": "Simple detector"
+ },
+ "core:chapters.goal": {
+  "status": "pass",
+  "en": "Reaching a goal",
+  "my": "goal ဆီ ရောက်ရှိခြင်း",
+  "back": "Reaching the goal"
+ },
+ "core:chapters.grid": {
+  "status": "pass",
+  "en": "Occupancy grid",
+  "my": "Occupancy grid",
+  "back": "Occupancy grid"
+ },
+ "core:chapters.scan": {
+  "status": "pass",
+  "en": "One LiDAR scan",
+  "my": "LiDAR scan 1 ကြိမ်",
+  "back": "1 LiDAR scan"
+ },
+ "core:chapters.tf": {
+  "status": "pass",
+  "en": "The TF tree",
+  "my": "TF tree",
+  "back": "TF tree"
+ },
+ "core:costmap.cost": {
+  "status": "pass",
+  "en": "cost of this cell",
+  "my": "ဒီ cell ရဲ့ cost",
+  "back": "Cost of this cell"
+ },
+ "core:costmap.d": {
+  "status": "pass",
+  "en": "Robot centre to obstacle (m)",
+  "my": "စက်ရုပ်ဗဟိုမှ အတားအဆီးသို့ အကွာအဝေး (m)",
+  "back": "Distance from robot center to obstacle (m)"
+ },
+ "core:costmap.inscribed": {
+  "status": "pass",
+  "en": "inscribed",
+  "my": "inscribed",
+  "back": "inscribed"
+ },
+ "core:costmap.k": {
+  "status": "pass",
+  "en": "cost_scaling_factor k",
+  "my": "cost_scaling_factor k",
+  "back": "cost_scaling_factor k"
+ },
+ "core:costmap.ladder": {
+  "status": "pass",
+  "en": "range: LiDAR → clears → marks → window edge",
+  "my": "အကွာအဝေး- LiDAR → clears → marks → window edge",
+  "back": "Distance- LiDAR → clears → marks → window edge"
+ },
+ "core:costmap.lethal": {
+  "status": "pass",
+  "en": "lethal",
+  "my": "lethal",
+  "back": "lethal"
+ },
+ "core:costmap.lines.0": {
+  "status": "pass",
+  "en": "Nav2 inflates every obstacle: cost falls off with distance, so the planner prefers paths clear of walls.",
+  "my": "Nav2 က အတားအဆီးတိုင်းကို ချဲ့ပေးပါတယ်- အကွာအဝေး ဝေးသွားရင် cost လျော့သွားတာမို့ planner က နံရံတွေနဲ့ ကင်းလွတ်တဲ့ လမ်းကြောင်းကို ပိုရွေးချယ်ပါတယ်။",
+  "back": "Nav2 expands every obstacle: since the cost decreases as the distance increases, the planner chooses paths that are farther from the walls."
+ },
+ "core:costmap.lines.1": {
+  "status": "pass",
+  "en": "Inside the configured robot radius (0.22 m) the cost is 253: in the costmap’s circle model the centre there collides.",
+  "my": "သတ်မှတ်ထားတဲ့ စက်ရုပ် radius (0.22 m) အတွင်းမှာ cost က 253 ဖြစ်ပါတယ်- costmap ရဲ့ circle model မှာ ဗဟိုချက် အဲဒီနားရောက်ရင် တိုက်မိပါလိမ့်မယ်။",
+  "back": "Within the set robot radius (0.22 m), the cost is 253: in the costmap's circle model, if the center point reaches that area, it will collide."
+ },
+ "core:costmap.smooth": {
+  "status": "pass",
+  "en": "k that ends at cost 10 instead (no cliff)",
+  "my": "cost 10 မှာ အဆုံးသတ်တဲ့ k (ချောက်ကမ်းပါး မရှိ)",
+  "back": "k that ends at cost 10 (no cliff)"
+ },
+ "core:costmap.twoMaps": {
+  "status": "pass",
+  "en": "Both of his costmaps inflate the same way (k 3.0, 0.55 m): the global one over the whole map for the planner, the local one in a 3 × 3 m window for the controller.",
+  "my": "စက်ရုပ်ရဲ့ costmap နှစ်ခုလုံးက (k 3.0၊ 0.55 m) အတိုင်း အတူတူ ချဲ့ပါတယ်- global က planner အတွက် မြေပုံတစ်ခုလုံးစာ ဖြစ်ပြီး local ကတော့ controller အတွက် 3 × 3 m window အတွင်းမှာ ဖြစ်ပါတယ်။",
+  "back": "Both of the robot's costmaps are expanded in the same way (k 3.0, 0.55 m): the global one is the entire map for the planner, and the local one is within a 3 × 3 m window for the controller."
+ },
+ "core:costmap.window": {
+  "status": "pass",
+  "en": "local costmap: a window that moves with the robot",
+  "my": "local costmap- စက်ရုပ်နဲ့အတူ ရွှေ့တဲ့ window",
+  "back": "local costmap- window that moves with the robot"
+ },
+ "core:costmap.zero": {
+  "status": "pass",
+  "en": "cost reaches 0 at",
+  "my": "cost 0 ဖြစ်သွားတဲ့ အကွာအဝေး",
+  "back": "Distance where cost becomes 0"
+ },
+ "core:detect.found": {
+  "status": "pass",
+  "en": "objects found",
+  "my": "တွေ့ရှိတဲ့ အရာဝတ္ထုများ",
+  "back": "Detected objects"
+ },
+ "core:detect.lines.0": {
+  "status": "pass",
+  "en": "The simplest LiDAR detector: walk the scan and start a new object wherever two neighbouring hits are farther apart than a threshold.",
+  "my": "အရိုးရှင်းဆုံး LiDAR detector ကတော့- scan ဖတ်တာကို စစ်ဆေးပြီး ဘေးချင်းကပ်လျက် အမှတ် 2 ခုဟာ သတ်မှတ်ထားတဲ့ threshold ထက် ဝေးနေရင် အရာဝတ္ထု အသစ်အဖြစ် စတင်ပါတယ်။",
+  "back": "The simplest LiDAR detector: checks scans and starts a new object if two adjacent points are farther apart than the set threshold."
+ },
+ "core:detect.lines.1": {
+  "status": "pass",
+  "en": "Too small: one object breaks into pieces, because beams spread with range and land far apart on a surface hit at a shallow angle. Too large: neighbours merge.",
+  "my": "သေးလွန်းရင်- beam တွေက အကွာအဝေးကြောင့် ကားသွားပြီး မျက်နှာပြင်ပေါ်ကို ထောင့်စောင်းနဲ့ ထိတဲ့အခါ တစ်ခုနဲ့တစ်ခု ဝေးသွားတာကြောင့် အရာဝတ္ထု တစ်ခုတည်းက အပိုင်းပိုင်း ပြတ်သွားပါလိမ့်မယ်။ ကြီးလွန်းရင်တော့- ဘေးက အရာတွေနဲ့ ရောသွားပါလိမ့်မယ်။",
+  "back": "If it is too small: the beams become sparse due to distance, and when hitting the surface at an angle, they become far apart from each other, causing a single object to be fragmented. If it is too large: it will be mixed with objects on the side."
+ },
+ "core:detect.lines.2": {
+  "status": "pass",
+  "en": "Drag the robot on the map: the same object splits from one spot and not from another.",
+  "my": "မြေပုံပေါ်က စက်ရုပ်ကို ဆွဲကြည့်ပါ- အရာဝတ္ထု တစ်ခုတည်းကပဲ နေရာတစ်ခုမှာ ကွဲသွားပြီး တခြားနေရာမှာ မကွဲတာကို တွေ့ရပါမယ်။",
+  "back": "Try dragging the robot on the map: you will see that the same object breaks at one location but does not break at another location."
+ },
+ "core:detect.next": {
+  "status": "pass",
+  "en": "Borges & Aldon (2004) propose a threshold that grows with range and sensor noise; it is added once the formula is read from the paper itself.",
+  "my": "Borges & Aldon (2004) က အကွာအဝေးနဲ့ ဆင်ဆာ noise အလိုက် တိုးလာတဲ့ threshold တစ်ခုကို အဆိုပြုထားပါတယ်၊ paper ထဲက formula ကို ဖတ်ပြီးတာနဲ့ ဒါကို ထည့်ပေးပါမယ်။",
+  "back": "Borges & Aldon (2004) proposed a threshold that increases according to distance and sensor noise; once the formula in the paper is read, this will be added."
+ },
+ "core:detect.noise": {
+  "status": "pass",
+  "en": "add his sensor noise (σ 1 cm, Gaussian, URDF)",
+  "my": "ဆင်ဆာ noise ထည့်ရန် (σ 1 cm, Gaussian, URDF)",
+  "back": "Add sensor noise (σ 1 cm, Gaussian, URDF)"
+ },
+ "core:detect.pass": {
+  "status": "pass",
+  "en": "points processed · clusters so far",
+  "my": "လုပ်ဆောင်ပြီးတဲ့ point များ · ယခုအထိ cluster များ",
+  "back": "Processed points · clusters so far"
+ },
+ "core:detect.th": {
+  "status": "pass",
+  "en": "Break threshold (m)",
+  "my": "Break threshold (m)",
+  "back": "Break threshold (m)"
+ },
+ "core:detect.truth": {
+  "status": "pass",
+  "en": "objects in view (ground truth)",
+  "my": "မြင်ကွင်းထဲက အရာဝတ္ထုများ (ground truth)",
+  "back": "Objects in the scene (ground truth)"
+ },
+ "core:detect.x": {
+  "status": "pass",
+  "en": "Robot x (m)",
+  "my": "စက်ရုပ် x (m)",
+  "back": "Robot x (m)"
+ },
+ "core:detect.y": {
+  "status": "pass",
+  "en": "Robot y (m)",
+  "my": "စက်ရုပ် y (m)",
+  "back": "Robot y (m)"
+ },
+ "core:drag": {
+  "status": "pass",
+  "en": "← drag me →",
+  "my": "← ဆွဲရွှေ့ပါ →",
+  "back": "← Drag to move →"
+ },
+ "core:goal.d": {
+  "status": "pass",
+  "en": "Goal distance (m)",
+  "my": "Goal အကွာအဝေး (m)",
+  "back": "Goal distance (m)"
+ },
+ "core:goal.drive": {
+  "status": "pass",
+  "en": "distance to drive",
+  "my": "မောင်းရမယ့် အကွာအဝေး",
+  "back": "Distance to drive"
+ },
+ "core:goal.every": {
+  "status": "pass",
+  "en": "dots: every 10th tick",
+  "my": "အစက်များ- 10 ခုမြောက် tick တိုင်း",
+  "back": "Dots: every 10th tick"
+ },
+ "core:goal.gChecks": {
+  "status": "pass",
+  "en": "Nav2 checks",
+  "my": "Nav2 စစ်ဆေးချက်များ",
+  "back": "Nav2 checks"
+ },
+ "core:goal.gDrive": {
+  "status": "pass",
+  "en": "Driving",
+  "my": "မောင်းနှင်ခြင်း",
+  "back": "Driving"
+ },
+ "core:goal.lines.0": {
+  "status": "pass",
+  "en": "The DWB controller runs at 20 Hz; at the 0.26 m/s speed limit each tick moves 1.3 cm.",
+  "my": "DWB controller က 20 Hz နဲ့ အလုပ်လုပ်ပြီး 0.26 m/s အမြန်နှုန်း အကန့်အသတ်မှာ tick တစ်ခုစီဟာ 1.3 cm ရွှေ့လျားပါတယ်။",
+  "back": "The DWB controller works at 20 Hz, and at a 0.26 m/s speed limit, each tick moves 1.3 cm."
+ },
+ "core:goal.lines.1": {
+  "status": "needs-human",
+  "en": "The goal counts as reached once the robot is within 0.25 m and its heading within 0.25 rad: patrol can stop up to 25 cm short.",
+  "my": "စက်ရုပ်က 0.25 m အတွင်း ရောက်ပြီး ဦးတည်ချက်က 0.25 rad အတွင်း ရှိရင် goal ကို ရောက်ပြီလို့ သတ်မှတ်ပါတယ်- ကင်းလှည့်တာက 25 cm အလိုမှာတင် ရပ်သွားနိုင်ပါတယ်။",
+  "note": "meaning drift (blind back-translation: \"If the robot arrives within 0.25 m and the orientation is within 0.25 rad, it is defined as having reached the goal: patrolling can stop just 25 cm ahead.\"): drift: back translation wrongly implies stopping ahead instead of short of the goal"
+ },
+ "core:goal.lines.2": {
+  "status": "pass",
+  "en": "Minimum time first ignores acceleration. Nav2’s 2.5 m/s² limit reaches full speed in 0.1 s, the simulated drive’s 1.0 m/s² in 0.26 s: either way it barely matters here.",
+  "my": "အနည်းဆုံး အချိန်ဟာ ပထမတော့ အရှိန်မြှင့်မှုကို လျစ်လျူရှုထားပါတယ်။ Nav2 ရဲ့ 2.5 m/s² အကန့်အသတ်ဟာ 0.1 s အတွင်း အပြည့်အဝ အမြန်နှုန်း ရောက်ရှိပြီး ဆင်မျူလေတာ မောင်းနှင်မှုရဲ့ 1.0 m/s² ကတော့ 0.26 s အတွင်း ရောက်ရှိပါတယ်: ဘာပဲဖြစ်ဖြစ် ဒီနေရာမှာ မသိသာပါဘူး။",
+  "back": "The minimum time ignores acceleration at first. Nav2's 2.5 m/s² limit reaches full speed within 0.1 s, and the simulator's 1.0 m/s² reaches it within 0.26 s: regardless, it is not noticeable here."
+ },
+ "core:goal.lines.3": {
+  "status": "pass",
+  "en": "Measured in the source repo: 12 patrol goals reached in two 50 s windows, 0 aborts.",
+  "my": "source repo မှာ တိုင်းတာချက်အရ- 50 s ကြာတဲ့ window 2 ခုအတွင်းမှာ patrol goal 12 ခုကို ရောက်ခဲ့ပြီး abort ဖြစ်တာ 0 ခု ရှိပါတယ်။",
+  "back": "According to measurements in the source repo: 12 patrol goals were reached within 2 windows lasting 50 s each, with 0 aborts."
+ },
+ "core:goal.measured": {
+  "status": "pass",
+  "en": "/cmd_vel rate",
+  "my": "/cmd_vel rate",
+  "back": "/cmd_vel rate"
+ },
+ "core:goal.planner": {
+  "status": "pass",
+  "en": "global planner",
+  "my": "global planner",
+  "back": "global planner"
+ },
+ "core:goal.progress": {
+  "status": "pass",
+  "en": "progress checker: must move 0.5 m within 10 s; at full speed",
+  "my": "တိုးတက်မှု စစ်ဆေးချက်- 10 s အတွင်း 0.5 m ရွှေ့ရပါမယ်၊ အမြန်ဆုံး အမြန်နှုန်းနဲ့",
+  "back": "Progress check: must move 0.5 m within 10 s, at maximum speed"
+ },
+ "core:goal.recover": {
+  "status": "pass",
+  "en": "recovery behaviours loaded (the behavior tree sets the order)",
+  "my": "recovery လုပ်ဆောင်ချက်များ load လုပ်ပြီး (behavior tree က အစီအစဉ် သတ်မှတ်)",
+  "back": "Load recovery actions (determined by behavior tree)"
+ },
+ "core:goal.tick": {
+  "status": "pass",
+  "en": "per control tick",
+  "my": "control tick တစ်ခုစီအတွက်",
+  "back": "for each control tick"
+ },
+ "core:goal.ticks": {
+  "status": "pass",
+  "en": "control ticks",
+  "my": "control tick များ",
+  "back": "control ticks"
+ },
+ "core:goal.time": {
+  "status": "pass",
+  "en": "minimum time (no acceleration)",
+  "my": "အနည်းဆုံး အချိန် (acceleration မပါ)",
+  "back": "Minimum time (excluding acceleration)"
+ },
+ "core:goal.timeAccel": {
+  "status": "pass",
+  "en": "with his 2.5 m/s² limit",
+  "my": "2.5 m/s² ကန့်သတ်ချက်နဲ့",
+  "back": "With 2.5 m/s² limit"
+ },
+ "core:goal.yaw": {
+  "status": "pass",
+  "en": "heading tolerance",
+  "my": "ဦးတည်ချက် အမှား ခံနိုင်ရည်",
+  "back": "Yaw error tolerance"
+ },
+ "core:grid.add": {
+  "status": "pass",
+  "en": "Add scan",
+  "my": "Add scan",
+  "back": "Add scan"
+ },
+ "core:grid.between": {
+  "status": "pass",
+  "en": "LiDAR scans in that time (measured rate)",
+  "my": "အဲဒီအချိန်အတွင်း LiDAR scan များ (တိုင်းတာတဲ့ နှုန်း)",
+  "back": "LiDAR scans during that time (measurement rate)"
+ },
+ "core:grid.cells": {
+  "status": "pass",
+  "en": "cells in the page grid (10 × 10 m)",
+  "my": "page grid ထဲက cell များ (10 × 10 m)",
+  "back": "Cells in page grid (10 × 10 m)"
+ },
+ "core:grid.gSlam": {
+  "status": "pass",
+  "en": "How his SLAM uses scans",
+  "my": "စက်ရုပ်ရဲ့ SLAM က scan တွေကို ဘယ်လို သုံးသလဲ",
+  "back": "How the robot's SLAM uses scans"
+ },
+ "core:grid.kept": {
+  "status": "pass",
+  "en": "one scan joins the map per 0.5 m (or 0.5 rad); at full speed every",
+  "my": "0.5 m (ဒါမှမဟုတ် 0.5 rad) တိုင်း scan တစ်ခုကို map ထဲ ပေါင်းပါတယ်၊ အမြန်ဆုံး အမြန်နှုန်းနဲ့",
+  "back": "Every 0.5 m (or 0.5 rad), one scan is added to the map, at maximum speed"
+ },
+ "core:grid.known": {
+  "status": "pass",
+  "en": "cells no longer unknown",
+  "my": "မသိသေးတာ မဟုတ်တော့တဲ့ cell များ",
+  "back": "Cells that are no longer unknown"
+ },
+ "core:grid.lines.0": {
+  "status": "pass",
+  "en": "This page keeps the textbook grid: each cell holds the log-odds that it is occupied; grey is unknown. slam_toolbox instead redraws its map from stored scan poses, so a loop closure can move walls.",
+  "my": "ဒီစာမျက်နှာမှာ textbook grid ကို သုံးထားပါတယ်- cell တစ်ခုစီမှာ နေရာယူထားတဲ့ log-odds တွေ ရှိပြီး မီးခိုးရောင်ကတော့ မသိသေးတဲ့နေရာ ဖြစ်ပါတယ်။ slam_toolbox ကတော့ သိမ်းထားတဲ့ scan pose တွေကနေ မြေပုံကို ပြန်ဆွဲတာမို့ loop closure ဖြစ်ရင် နံရံတွေ ရွေ့သွားနိုင်ပါတယ်။",
+  "back": "This page uses a textbook grid: each cell holds log-odds, and gray represents unknown areas. slam_toolbox reconstructs the map from stored scan poses, so walls may shift if loop closure occurs."
+ },
+ "core:grid.lines.1": {
+  "status": "pass",
+  "en": "Each scan makes the cells along a beam a little more free and the hit cell more occupied.",
+  "my": "scan တစ်ခုစီက beam တစ်လျှောက်က cell တွေကို နည်းနည်း ပိုလွတ်စေပြီး ထိသွားတဲ့ cell ကိုတော့ ပိုပြီး နေရာယူထားစေပါတယ်။",
+  "back": "Each scan clears cells along the beam a bit more and makes the hit cell take up more space."
+ },
+ "core:grid.lines.2": {
+  "status": "pass",
+  "en": "Press Add scan: the robot scans from each waypoint in turn and the map fills in.",
+  "my": "Add scan ကို နှိပ်ပါ- စက်ရုပ်က waypoint တစ်ခုစီကနေ အလှည့်ကျ scan ဖတ်ပြီး မြေပုံ ဆွဲသွားပါလိမ့်မယ်။",
+  "back": "Click Add scan: The robot will scan in turns from each waypoint and build the map."
+ },
+ "core:grid.model": {
+  "status": "pass",
+  "en": "Model: hit p = 0.7, pass p = 0.4 (page choice); beams with no return change nothing.",
+  "my": "Model: hit p = 0.7၊ pass p = 0.4 (ဒီစာမျက်နှာအတွက် ရွေးချယ်မှု)၊ ဘာမှပြန်မလာတဲ့ beam တွေက ဘာမှမပြောင်းလဲစေပါဘူး။",
+  "back": "Model: hit p = 0.7, pass p = 0.4 (selection for this page), beams that return nothing do not change anything."
+ },
+ "core:grid.republish": {
+  "status": "pass",
+  "en": "map republished every",
+  "my": "မြေပုံကို အချိန်အပိုင်းအခြားအလိုက် ပြန်ပို့ပေးတဲ့နှုန်း",
+  "back": "Rate of periodic map republication"
+ },
+ "core:grid.res": {
+  "status": "pass",
+  "en": "Resolution (m per cell)",
+  "my": "Resolution (cell တစ်ခုလျှင် m)",
+  "back": "Resolution (m per cell)"
+ },
+ "core:grid.reset": {
+  "status": "pass",
+  "en": "Reset",
+  "my": "ပြန်စ",
+  "back": "Reset"
+ },
+ "core:grid.same": {
+  "status": "pass",
+  "en": "The SLAM map, the local and the global costmap all use this 0.05 m cell, so one map cell is one cost cell.",
+  "my": "SLAM မြေပုံ၊ local နဲ့ global costmap အားလုံးက ဒီ 0.05 m cell ကိုပဲ သုံးတာမို့ မြေပုံ cell တစ်ခုဟာ cost cell တစ်ခု ဖြစ်ပါတယ်။",
+  "back": "The SLAM map, local, and global costmaps all use this 0.05 m cell, so one map cell is one cost cell."
+ },
+ "core:grid.scans": {
+  "status": "pass",
+  "en": "scans added",
+  "my": "ထည့်သွင်းထားတဲ့ scan များ",
+  "back": "Added scans"
+ },
+ "core:grid.unknown": {
+  "status": "pass",
+  "en": "His NavFn planner may route through grey unknown cells (allow_unknown: true), so it can plan before the map is complete; the local costmap handles what the sensor sees on the way.",
+  "my": "စက်ရုပ်ရဲ့ NavFn planner က မီးခိုးရောင် cell တွေ (allow_unknown: true) ကနေ လမ်းကြောင်း ဆွဲပေးနိုင်တာမို့ မြေပုံ မပြီးခင်မှာ လမ်းကြောင်း သတ်မှတ်နိုင်ပါတယ်၊ လမ်းမှာ ဆင်ဆာ မြင်တာတွေကိုတော့ local costmap က ကိုင်တွယ်ပါတယ်။",
+  "back": "The robot's NavFn planner can path through gray cells (allow_unknown: true), so routes can be set before the map is complete; sensor observations on the way are handled by the local costmap."
+ },
+ "core:keys": {
+  "status": "pass",
+  "en": "Keys: 1–7 jump to a waypoint, ← → step.",
+  "my": "ခလုတ်များ: 1–7 နဲ့ waypoint ဆီ သွားနိုင်ပြီး ← → နဲ့ တစ်ဆင့်ချင်း ရွှေ့နိုင်ပါတယ်။",
+  "back": "Keys: 1–7 can go to a waypoint, and ← → can move step by step."
+ },
+ "core:kind.config": {
+  "status": "pass",
+  "en": "config",
+  "my": "config",
+  "back": "config"
+ },
+ "core:kind.formula": {
+  "status": "pass",
+  "en": "formula",
+  "my": "ပုံသေနည်း",
+  "back": "formula"
+ },
+ "core:kind.measured": {
+  "status": "pass",
+  "en": "measured",
+  "my": "တိုင်းတာရရှိချက်",
+  "back": "measured result"
+ },
+ "core:lede": {
+  "status": "pass",
+  "en": "One simulated TurtleBot3 in a 10 × 10 m Gazebo arena. Each waypoint is one idea of a mobile robot, with its value from that setup’s ROS 2 Nav2 config.",
+  "my": "10 × 10 m Gazebo ကွင်းထဲမှာ simulation လုပ်ထားတဲ့ TurtleBot3 စက်ရုပ် 1 စီး ရှိပါတယ်။ waypoint တစ်ခုစီဟာ ရွှေ့လျားစက်ရုပ်ရဲ့ အယူအဆ တစ်ခုစီ ဖြစ်ပြီး တန်ဖိုးတွေကိုတော့ အဲဒီ setup ရဲ့ ROS 2 Nav2 config ကနေ ယူထားတာ ဖြစ်ပါတယ်။",
+  "back": "There is 1 TurtleBot3 robot simulated in a 10 × 10 m Gazebo area. Each waypoint is a concept for the mobile robot and the values are taken from the ROS 2 Nav2 config of that setup."
+ },
+ "core:levels.ep": {
+  "status": "pass",
+  "en": "Engineering Practice",
+  "my": "အင်ဂျင်နီယာ လက်တွေ့လေ့ကျင့်မှု",
+  "back": "Engineering practical exercise"
+ },
+ "core:levels.epNote": {
+  "status": "pass",
+  "en": "optional, outside the levels",
+  "my": "စိတ်ကြိုက်၊ အဆင့်များရဲ့ အပြင်ဘက်",
+  "back": "Optional, outside of the levels"
+ },
+ "core:levels.heading": {
+  "status": "pass",
+  "en": "Levels",
+  "my": "အဆင့်များ",
+  "back": "Levels"
+ },
+ "core:levels.names.0": {
+  "status": "pass",
+  "en": "Start here",
+  "my": "ဒီက စပါ",
+  "back": "Start here"
+ },
+ "core:levels.names.1": {
+  "status": "pass",
+  "en": "Programming for robots",
+  "my": "စက်ရုပ်များအတွက် ပရိုဂရမ်းမင်း",
+  "back": "Programming for robots"
+ },
+ "core:levels.names.2": {
+  "status": "pass",
+  "en": "ROS 2 basics",
+  "my": "ROS 2 အခြေခံများ",
+  "back": "ROS 2 basics"
+ },
+ "core:levels.names.3": {
+  "status": "pass",
+  "en": "A robot that moves by itself",
+  "my": "အလိုအလျောက် လှုပ်ရှားတဲ့ စက်ရုပ်",
+  "back": "Autonomous moving robot"
+ },
+ "core:levels.names.4": {
+  "status": "pass",
+  "en": "Mapping and navigation",
+  "my": "မြေပုံဆွဲခြင်းနဲ့ လမ်းကြောင်းရှာခြင်း",
+  "back": "Mapping and navigation"
+ },
+ "core:levels.names.5": {
+  "status": "pass",
+  "en": "Robotics software engineer",
+  "my": "Robotics ဆော့ဖ်ဝဲ အင်ဂျင်နီယာ",
+  "back": "Robotics software engineering"
+ },
+ "core:levels.one": {
+  "status": "pass",
+  "en": "Level",
+  "my": "အဆင့်",
+  "back": "Level"
+ },
+ "core:levels.opened": {
+  "status": "pass",
+  "en": "opened",
+  "my": "ဖွင့်ထားပြီး",
+  "back": "Opened"
+ },
+ "core:levels.soon": {
+  "status": "pass",
+  "en": "Coming next",
+  "my": "မကြာမီ လာပါမည်",
+  "back": "Coming soon"
+ },
+ "core:next": {
+  "status": "pass",
+  "en": "Next",
+  "my": "ရှေ့သို့",
+  "back": "Forward"
+ },
+ "core:open": {
+  "status": "pass",
+  "en": "Open a waypoint",
+  "my": "waypoint ဖွင့်ပါ",
+  "back": "Open waypoint"
+ },
+ "core:pathNote": {
+  "status": "pass",
+  "en": "Patrol path drawn for this page; obstacles and walls from the Gazebo world file.",
+  "my": "ဒီစာမျက်နှာအတွက် ကင်းလှည့်လမ်းကြောင်း ဆွဲထားတာ ဖြစ်ပြီး အတားအဆီးနဲ့ နံရံတွေကိုတော့ Gazebo world file ကနေ ယူထားတာ ဖြစ်ပါတယ်။",
+  "back": "The patrol path for this page has been drawn, and the obstacles and walls are taken from the Gazebo world file."
+ },
+ "core:plan": {
+  "status": "pass",
+  "en": "Plan",
+  "my": "အစီအစဉ်",
+  "back": "Plan"
+ },
+ "core:player.label": {
+  "status": "needs-human",
+  "en": "Scenario",
+  "my": "စင်္ကာရီယို",
+  "note": "blind back-translation \"Cingario\": the transliteration of scenario is not understood; kept English"
+ },
+ "core:player.pause": {
+  "status": "pass",
+  "en": "Pause",
+  "my": "ခဏရပ်",
+  "back": "Pause"
+ },
+ "core:player.play": {
+  "status": "pass",
+  "en": "Play",
+  "my": "ဖွင့်",
+  "back": "Play"
+ },
+ "core:player.scrub": {
+  "status": "needs-human",
+  "en": "Scenario time",
+  "my": "စင်္ကာရီယို အချိန်",
+  "note": "blind back-translation \"Cingario\": the transliteration of scenario is not understood; kept English"
+ },
+ "core:scan.beam": {
+  "status": "pass",
+  "en": "beam (hover a dot)",
+  "my": "beam (အစက်ပေါ် တင်ပါ)",
+  "back": "beam (hover on point)"
+ },
+ "core:scan.fired": {
+  "status": "pass",
+  "en": "beams fired (one scan, 15× slower)",
+  "my": "beam များ ထုတ်လွှတ်မှု (scan တစ်ခု၊ 15× ပိုနှေး)",
+  "back": "Beams fired (one scan, 15× slower)"
+ },
+ "core:scan.gap": {
+  "status": "pass",
+  "en": "gap between beams",
+  "my": "beam များကြား ကွာဟချက်",
+  "back": "gap between beams"
+ },
+ "core:scan.hits": {
+  "status": "pass",
+  "en": "beams with a return",
+  "my": "ပြန်လာသော beam များ",
+  "back": "returned beams"
+ },
+ "core:scan.lines.0": {
+  "status": "needs-human",
+  "en": "360 beams, one per degree, 5 times a second. Each beam returns the nearest wall or obstacle, if it is closer than 3.5 m.",
+  "my": "1 စက္ကန့်မှာ 5 ကြိမ်၊ 1 ဒီဂရီမှာ beam 1 ခုနှုန်းနဲ့ beam 360 ခု ထုတ်ပါတယ်။ beam တစ်ခုစီဟာ 3.5 m ထက် နီးရင် အနီးဆုံး နံရံ ဒါမှမဟုတ် အတားအဆီးကို ပြန်ပေးပါတယ်။",
+  "note": "mechanical check: numbers 1,3.5,360,5 vs 1,1,1,3.5,360,5"
+ },
+ "core:scan.lines.1": {
+  "status": "pass",
+  "en": "Neighbouring beams spread apart with range: anything narrower than the gap can fall between them.",
+  "my": "အကွာအဝေး ဝေးသွားတာနဲ့အမျှ ဘေးချင်းကပ် beam တွေ ကွာဟသွားပါတယ်၊ အဲဒီကြားဟတ်ထက် ပိုကျဉ်းတဲ့ မည်သည့်အရာမဆို beam တွေကြား လွတ်သွားနိုင်ပါတယ်။",
+  "back": "As the distance gets further, the adjacent beams diverge; anything narrower than that gap can be missed between the beams."
+ },
+ "core:scan.lines.2": {
+  "status": "pass",
+  "en": "Drag the robot on the map to move the scan.",
+  "my": "scan ကို ရွှေ့ဖို့ map ပေါ်က စက်ရုပ်ကို ဆွဲပါ။",
+  "back": "Drag the robot on the map to move the scan."
+ },
+ "core:scan.measured": {
+  "status": "pass",
+  "en": "/scan rate (config 5 Hz)",
+  "my": "/scan နှုန်း (config 5 Hz)",
+  "back": "/scan rate (config 5 Hz)"
+ },
+ "core:scan.move": {
+  "status": "pass",
+  "en": "moved per scan at 0.26 m/s",
+  "my": "0.26 m/s အမြန်နှုန်းမှာ scan တစ်ခုအလိုက် ရွှေ့တဲ့ အကွာအဝေး",
+  "back": "distance moved per scan at 0.26 m/s speed"
+ },
+ "core:scan.moveMeasured": {
+  "status": "pass",
+  "en": "moved per scan at the measured rate",
+  "my": "တိုင်းတာတဲ့ နှုန်းမှာ scan တစ်ခုအလိုက် ရွှေ့တဲ့ အကွာအဝေး",
+  "back": "distance moved per scan at measured rate"
+ },
+ "core:scan.noiseRes": {
+  "status": "pass",
+  "en": "range noise σ / resolution (URDF)",
+  "my": "အကွာအဝေး noise σ / resolution (URDF)",
+  "back": "range noise σ / resolution (URDF)"
+ },
+ "core:scan.range": {
+  "status": "pass",
+  "en": "Range to inspect (m)",
+  "my": "စစ်ဆေးမယ့် အကွာအဝေး (m)",
+  "back": "Range to be checked (m)"
+ },
+ "core:scan.rate": {
+  "status": "pass",
+  "en": "Scan rate",
+  "my": "Scan နှုန်း",
+  "back": "Scan rate"
+ },
+ "core:scan.x": {
+  "status": "pass",
+  "en": "Robot x (m)",
+  "my": "စက်ရုပ် x (m)",
+  "back": "robot x (m)"
+ },
+ "core:scan.y": {
+  "status": "pass",
+  "en": "Robot y (m)",
+  "my": "စက်ရုပ် y (m)",
+  "back": "robot y (m)"
+ },
+ "core:scan.yaw": {
+  "status": "pass",
+  "en": "Heading (deg)",
+  "my": "ဦးတည်ရာ (deg)",
+  "back": "orientation (deg)"
+ },
+ "core:source": {
+  "status": "pass",
+  "en": "Source",
+  "my": "မူရင်း ရင်းမြစ်",
+  "back": "Original source"
+ },
+ "core:startR101": {
+  "status": "pass",
+  "en": "Start Robotics 101",
+  "my": "Robotics 101 စတင်ပါ",
+  "back": "Start Robotics 101"
+ },
+ "core:tf.age": {
+  "status": "pass",
+  "en": "transform age (s)",
+  "my": "transform သက်တမ်း (s)",
+  "back": "transform age (s)"
+ },
+ "core:tf.breakIt": {
+  "status": "pass",
+  "en": "Break it: 1 m drift, SLAM misses scans until 6 s",
+  "my": "ဖျက်ကြည့်- 1 m drift၊ 6 s အထိ SLAM က scan တွေ လွဲချော်မှု",
+  "back": "break it- 1 m drift, SLAM misses scans up to 6 s"
+ },
+ "core:tf.drift": {
+  "status": "pass",
+  "en": "odom drift in map, x (m)",
+  "my": "map ထဲက odom drift၊ x (m)",
+  "back": "odom drift in map, x (m)"
+ },
+ "core:tf.driftYaw": {
+  "status": "pass",
+  "en": "odom drift in map, yaw (deg)",
+  "my": "map ထဲက odom drift၊ yaw (deg)",
+  "back": "odom drift in map, yaw (deg)"
+ },
+ "core:tf.drive": {
+  "status": "pass",
+  "en": "most it can drive between checks (0.26 m/s)",
+  "my": "စစ်ဆေးမှုကြား အများဆုံး မောင်းနိုင်တဲ့ အကွာအဝေး (0.26 m/s)",
+  "back": "maximum drivable distance between checks (0.26 m/s)"
+ },
+ "core:tf.driveNote": {
+  "status": "pass",
+  "en": "Under the 0.26 m/s Nav2 limit the robot moves at most 0.13 m between checks, so a jump over 0.5 m points to a map → odom correction, a late check or a fault.",
+  "my": "Nav2 ရဲ့ 0.26 m/s အကန့်အသတ်အောက်မှာ စက်ရုပ်ဟာ စစ်ဆေးမှုတွေကြား အများဆုံး 0.13 m ပဲ ရွှေ့လျားနိုင်တာကြောင့် 0.5 m ထက် ကျော်လွန်တဲ့ jump ဖြစ်ရင် map → odom ပြင်ဆင်မှု၊ စစ်ဆေးမှု နောက်ကျမှု သို့မဟုတ် အမှားအယွင်းတစ်ခု ရှိနေတာကို ညွှန်းဆိုနေပါတယ်။",
+  "back": "Under Nav2's 0.26 m/s limit, the robot can only move a maximum of 0.13 m between checks; therefore, a jump exceeding 0.5 m indicates a map → odom correction, a check delay, or an error."
+ },
+ "core:tf.frame": {
+  "status": "pass",
+  "en": "frame",
+  "my": "frame",
+  "back": "frame"
+ },
+ "core:tf.gDetector": {
+  "status": "pass",
+  "en": "Anomaly detector (every 0.5 s)",
+  "my": "အမှားအယွင်း ထောက်လှမ်းကိရိယာ (0.5 s တိုင်း)",
+  "back": "error detector (every 0.5 s)"
+ },
+ "core:tf.gFrames": {
+  "status": "pass",
+  "en": "Frames",
+  "my": "Frames",
+  "back": "Frames"
+ },
+ "core:tf.jump": {
+  "status": "pass",
+  "en": "odom move since last check (m)",
+  "my": "နောက်ဆုံး စစ်ပြီးကတည်းက odom ရွှေ့တဲ့ အကွာအဝေး (m)",
+  "back": "distance odom moved since last check (m)"
+ },
+ "core:tf.lines.0": {
+  "status": "pass",
+  "en": "Every position is relative to a frame: map → odom → base_footprint → base_link → base_scan. Composing the chain gives the robot in the map.",
+  "my": "တည်နေရာ တိုင်းဟာ frame တစ်ခုပေါ် မူတည်ပါတယ်: map → odom → base_footprint → base_link → base_scan။ ဒီကွင်းဆက်ကို ပေါင်းစပ်လိုက်ရင် map ပေါ်က စက်ရုပ် တည်နေရာကို ရရှိမှာ ဖြစ်ပါတယ်။",
+  "back": "Every location depends on a frame: map → odom → base_footprint → base_link → base_scan. Combining this chain yields the robot's location on the map."
+ },
+ "core:tf.lines.1": {
+  "status": "pass",
+  "en": "One LiDAR hit on box1, written in each frame: same point, five sets of numbers (base_footprint and base_link differ only in height).",
+  "my": "box1 ပေါ် ထိတဲ့ LiDAR အမှတ် 1 ခုကို frame တစ်ခုစီမှာ ရေးထားတာ ဖြစ်ပါတယ်- အမှတ်က အတူတူပဲ ဖြစ်ပေမဲ့ ကိန်းဂဏန်း 5 စုံ ထွက်လာပါတယ် (base_footprint နဲ့ base_link က အမြင့်ပဲ ကွာပါတယ်။)",
+  "back": "1 LiDAR point hitting box1 is written in each frame: even though the point is the same, 5 sets of numbers appear (base_footprint and base_link only differ in height)."
+ },
+ "core:tf.lines.2": {
+  "status": "pass",
+  "en": "The anomaly detector checks every 0.5 s: older than 1.0 s is stale, a move over 0.5 m is a jump.",
+  "my": "အမှားအယွင်း ထောက်လှမ်းကိရိယာက 0.5 s တိုင်း စစ်ဆေးပါတယ်: 1.0 s ထက် ဟောင်းရင် stale ဖြစ်ပြီး 0.5 m ထက် ပိုရွှေ့ရင် jump ဖြစ်ပါတယ်။",
+  "back": "The error detector checks every 0.5 s: if it is older than 1.0 s, it is stale; if it moves more than 0.5 m, it is a jump."
+ },
+ "core:tf.mapOdom": {
+  "status": "pass",
+  "en": "SLAM publishes map → odom every",
+  "my": "SLAM က map → odom ကို publish လုပ်တဲ့ အချိန်တိုင်း",
+  "back": "each time SLAM publishes map → odom"
+ },
+ "core:tf.odom": {
+  "status": "pass",
+  "en": "/odom rate (≈ updates per check)",
+  "my": "/odom rate (≈ စစ်ဆေးမှု တစ်ခါမှာ update ဖြစ်တဲ့ အရေအတွက်)",
+  "back": "/odom rate (≈ number of updates per check)"
+ },
+ "core:tf.point": {
+  "status": "pass",
+  "en": "hit at box1 corner",
+  "my": "box1 ဒေါင့်မှာ ထိမှန်သည့် အမှတ်",
+  "back": "point hit at box1 corner"
+ },
+ "core:tf.scene": {
+  "status": "pass",
+  "en": "drive: SLAM corrects map → odom every 0.5 m; detector saw",
+  "my": "မောင်းနှင်မှု- 0.5 m တိုင်းမှာ SLAM က map → odom ကို ပြင်ပါတယ်၊ detector မြင်တာ",
+  "back": "Driving: SLAM corrects map → odom every 0.5 m, detector sees"
+ },
+ "core:tf.v.healthy": {
+  "status": "pass",
+  "en": "healthy",
+  "my": "ပုံမှန်",
+  "back": "healthy"
+ },
+ "core:tf.v.jump": {
+  "status": "pass",
+  "en": "JUMP",
+  "my": "JUMP",
+  "back": "JUMP"
+ },
+ "core:tf.v.stale": {
+  "status": "pass",
+  "en": "STALE",
+  "my": "STALE",
+  "back": "STALE"
+ },
+ "core:tf.verdict": {
+  "status": "pass",
+  "en": "detector says",
+  "my": "ထောက်လှမ်းကိရိယာ၏ ဆုံးဖြတ်ချက်",
+  "back": "detector's verdict"
+ },
+ "core:tf.x": {
+  "status": "pass",
+  "en": "base_footprint in odom at 0 s, x (m)",
+  "my": "0 s မှာ odom ထဲက base_footprint၊ x (m)",
+  "back": "base_footprint in odom at 0 s, x (m)"
+ },
+ "core:tf.y": {
+  "status": "pass",
+  "en": "base_footprint in odom at 0 s, y (m)",
+  "my": "0 s မှာ odom ထဲက base_footprint၊ y (m)",
+  "back": "base_footprint in odom at 0 s, y (m)"
+ },
+ "core:tf.yaw": {
+  "status": "pass",
+  "en": "base_footprint in odom at 0 s, yaw (deg)",
+  "my": "0 s မှာ odom ထဲက base_footprint၊ yaw (deg)",
+  "back": "base_footprint in odom at 0 s, yaw (deg)"
+ },
+ "core:title": {
+  "status": "pass",
+  "en": "Robotics 101",
+  "my": "Robotics 101",
+  "back": "Robotics 101"
+ }
+}

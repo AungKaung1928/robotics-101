@@ -28,7 +28,7 @@ const role = (key, en) => {
   if (/alt$/i.test(last)) return 'alt'
   if (/aria|label$/i.test(last) && en.split(' ').length <= 6) return 'aria'
   if (/^(title|heading|s\d+)$/i.test(last) || /^\d+\. /.test(en)) return 'heading'
-  if (en.split(/\s+/).length <= 5 && !/[.:?!]$/.test(en)) return 'label'
+  if (!/[.:?!]['")]?$/.test(en.trim())) return 'label'
   return 'body'
 }
 

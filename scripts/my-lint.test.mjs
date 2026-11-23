@@ -13,7 +13,7 @@ describe('Burmese encoding check', () => {
   for (const [name, s] of Object.entries(zawgyi)) it(`rejects Zawgyi: ${name}`, () => expect(encodingErrors(s)).not.toEqual([]))
 
   it('accepts Unicode Burmese', () => {
-    for (const s of ['မောင်', 'မြန်မာ', 'ကျွန်တော်', 'ကျောင်း', 'မန္တလေး', 'စက်ရုပ်ကို ရပ်ပါ။']) expect(encodingErrors(s), s).toEqual([])
+    for (const s of ['မောင်', 'မြန်မာ', 'ကျွန်တော်', 'ကျောင်း', 'မန္တလေး', 'စင်္ကာပူ', 'စက်ရုပ်ကို ရပ်ပါ။']) expect(encodingErrors(s), s).toEqual([])
   })
 })
 
@@ -29,6 +29,11 @@ describe('lint', () => {
     expect(lint(en, 'cmd_vel ကို 10 Hz နဲ့ ပို့ပါ။').fail.join()).toMatch(/identifier \/cmd_vel/)
     expect(lint(en, '/cmd_vel ကို 10 Hz ဖြင့် ပို့သည်။').fail.join()).toMatch(/literary/)
     expect(lint(en, '/cmd_vel ကို 10 Hz နဲ့ ပို့ပါ').fail.join()).toMatch(/။/)
+  })
+  it('accepts number words written as digits, rejects sentence endings on labels', () => {
+    expect(lint('One LiDAR scan', 'LiDAR scan 1 ကြိမ်', 'label').fail).toEqual([])
+    expect(lint('One LiDAR scan', 'LiDAR scan 2 ကြိမ်', 'label').fail.join()).toMatch(/numbers/)
+    expect(lint('moved per scan at 0.26 m/s', '0.26 m/s နဲ့ scan တစ်ကြိမ်မှာ ရွှေ့တဲ့ အကွာအဝေး ဖြစ်ပါတယ်။', 'label').fail.join()).toMatch(/sentence ending/)
   })
   it('pins UI verbs, loanwords and tier A terms', () => {
     expect(lint('Pause', 'ရပ်', 'label').fail.join()).toMatch(/UI verb/)
