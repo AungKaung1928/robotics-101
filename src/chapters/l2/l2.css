@@ -15,3 +15,7 @@
 .graph .edge.on { stroke: var(--ink-2); }
 .graph .dot { fill: var(--ray); }
 .graph .dot.cmd { fill: var(--robot); }
+.graph .ftype { fill: var(--ink-2); }
+.graph .fval { fill: var(--robot); }
+.graph .fan { stroke: var(--ray); stroke-width: 0.6; opacity: 0.35; }
+.graph .fan.pick { stroke: var(--robot); stroke-width: 3; opacity: 1; }
