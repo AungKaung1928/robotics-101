@@ -10,4 +10,5 @@ html[data-vt='back']::view-transition-new(chapter) { animation-name: vt-in-l; }
 @keyframes vt-out-r { to { opacity: 0; transform: translateX(16px); } }
 @keyframes vt-in-r { from { opacity: 0; transform: translateX(16px); } }
 @keyframes vt-in-l { from { opacity: 0; transform: translateX(-16px); } }
-@media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }
+/* Reduced motion: swap() asks for 'fade' (no slide); the group must not move either, and the cross-fade is short. */
+@media (prefers-reduced-motion: reduce) { ::view-transition-group(*) { animation: none !important; } ::view-transition-old(chapter), ::view-transition-new(chapter) { animation-duration: 150ms; } }
