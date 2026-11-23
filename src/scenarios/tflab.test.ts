@@ -37,7 +37,8 @@ describe('tf lab', () => {
     }
     expect(Math.abs(fixedYaw(e0, T))).toBeLessThanOrEqual(1e-3)
     expect(fixedYaw(e0, -1)).toBe(e0)
-    expect(T).toBeLessThan(1) // CALM settles in well under a second
+    expect(T).toBeGreaterThan(0.8) // slow enough to follow
+    expect(T).toBeLessThan(1.5)
   })
   it('mood: dizzy before, curious while improving, happy on the wall', () => {
     const before = residualAt(0.2)

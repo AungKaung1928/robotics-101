@@ -6,3 +6,4 @@
 .tflab .ax-x { stroke: var(--axis-x); stroke-width: 0.02; }
 .tflab .ax-y { stroke: var(--axis-y); stroke-width: 0.02; }
 .tflab .tf-readout { font-family: var(--mono); fill: var(--ink-2); }
+.tflab .ray { stroke: var(--ray); stroke-width: 0.008; opacity: 0.35; }

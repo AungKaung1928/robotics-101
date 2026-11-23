@@ -1,11 +1,17 @@
-import { CALM, settleTime, springAt } from '../anim/spring'
+import { settleTime, springAt, springFrom } from '../anim/spring'
 import { apply, compose, type TF } from '../lib/tf2d'
 
 /**
  * TF debugging lab: the laser sees a straight wall, but the points are drawn through base_link -> laser with an error
  * (wrong mounting yaw, or a stale robot pose while turning). Points land off the wall; the fix springs the error to 0
- * with CALM (critically damped: the points never pass the true wall, so no frame shows a false fix).
+ * with FIX (critically damped: the points never pass the true wall, so no frame shows a false fix).
  */
+
+/**
+ * No bounce, 0.8 s look: slow enough to watch the laser frame turn. CALM (0.25 s) did the visible part in 5 frames at
+ * 30 fps (2.9 -> 0.2 cm in 0.17 s, logs/app-refs/anim/tflab-gif-sheet.png), too fast to see why the points move.
+ */
+export const FIX = springFrom(0.8, 0)
 
 /** Map-frame points of laser hits `pts` (laser frame) through map->base `base` and base->laser `mount`. */
 export function toMap(base: TF, mount: TF, pts: [number, number][]): [number, number][] {
@@ -22,10 +28,10 @@ export function wallResidual(pts: [number, number][], wallX: number): number {
 }
 
 /** Yaw error at time `t` s after the fix is applied (before: err0). */
-export const fixedYaw = (err0: number, t: number) => (t <= 0 ? err0 : springAt(t, CALM, err0))
+export const fixedYaw = (err0: number, t: number) => (t <= 0 ? err0 : springAt(t, FIX, err0))
 
 /** Seconds until the yaw error is within `eps` rad of 0 after the fix. */
-export const fixSettle = (err0: number, eps = 1e-3) => settleTime(CALM, err0, 0, eps)
+export const fixSettle = (err0: number, eps = 1e-3) => settleTime(FIX, err0, 0, eps)
 
 export type Mood = 'dizzy' | 'curious' | 'happy'
 

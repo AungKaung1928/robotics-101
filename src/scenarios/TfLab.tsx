@@ -6,7 +6,7 @@ import './tflab.css'
 
 /**
  * Top-down TF lab: the laser's hits on a wall at x = `wallX`, drawn through map->base `base` and base->laser `mount`
- * whose yaw is off by `err0` until the fix (`sinceFix` ≥ 0 s), then springs to 0 (CALM). The laser frame's axes turn
+ * whose yaw is off by `err0` until the fix (`sinceFix` ≥ 0 s), then springs to 0 (FIX, no bounce). The laser frame's axes turn
  * with the error, so the reader sees WHY the points are off: the frame is rotated, not the wall. The robot is dizzy
  * while the points are off, curious while they move, and cheers once when they land.
  */
@@ -24,7 +24,7 @@ export default function TfLab({ hits, base, mount, wallX, err0, sinceFix, label,
     if (mood === 'dizzy' && prev.current === 'happy') setOops((n) => n + 1)
     prev.current = mood
   }, [mood, err0])
-  const L = toMap(base, m, [[0, 0], [0.25, 0], [0, 0.25]])
+  const L = toMap(base, m, [[0, 0], [0.4, 0], [0, 0.4]])
   // Fixed view over the broken and the true points: the camera never moves while the fix plays.
   const ys = [...ghost, ...toMap(base, { ...mount, yaw: mount.yaw + err0 }, hits)].map(([, y]) => y)
   const lo = Math.min(...ys) - 0.2, hi = Math.max(...ys) + 0.2
@@ -35,6 +35,7 @@ export default function TfLab({ hits, base, mount, wallX, err0, sinceFix, label,
       </g>
       <g transform="scale(1 -1)">
         <line className="wall" x1={wallX} y1={lo + 0.1} x2={wallX} y2={hi - 0.1} />
+        {drawn.map(([x, y], i) => <line key={`r${i}`} className="ray" x1={L[0][0]} y1={L[0][1]} x2={x} y2={y} />)}
         {ghost.map(([x, y], i) => <circle key={`g${i}`} className="ghost" cx={x} cy={y} r={0.035} />)}
         {drawn.map(([x, y], i) => <line key={`d${i}`} className="gap" x1={x} y1={y} x2={wallX} y2={y} />)}
         {drawn.map(([x, y], i) => <circle key={`h${i}`} className="hit" cx={x} cy={y} r={0.03} />)}
