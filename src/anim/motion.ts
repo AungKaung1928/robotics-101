@@ -40,3 +40,6 @@ export const HOLD_KEY = 'r101-hold'
 export function shouldAutoplay(asked: boolean, still: boolean, held: boolean): boolean {
   return asked && !still && !held
 }
+
+/** A click that came from the keyboard (Enter / Space on a focused button): browsers report it with detail 0. */
+export const fromKeyboard = (e: { detail: number }) => e.detail === 0
