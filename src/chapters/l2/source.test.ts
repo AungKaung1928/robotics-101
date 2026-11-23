@@ -5,6 +5,7 @@ import { CHECK_MS, DEFAULT } from './params'
 import { MAX_ACC, WHEEL_R, WHEEL_SEP } from './drive'
 import { NODES } from './nodes'
 import { NODES_STRINGS } from './nodes.strings'
+import { ACTIONS_STRINGS } from './actions.strings'
 
 /**
  * Level 1-2 numbers cite TF-Transform-Explorer by file:line. With TFE_REPO=<a clone of it>, read each cited line at
@@ -45,3 +46,17 @@ describe.skipIf(!REPO)('Level 1-2 numbers == TF-Transform-Explorer cited lines (
   })
 })
 
+
+/** 2.4 cites ros2-patrol-project; with PATROL_REPO=<a clone>, check the retry facts its break-it note states. */
+const PATROL = process.env.PATROL_REPO
+const showP = (file: string) => spawnSync('git', ['-C', PATROL!, 'show', `origin/main:${file}`], { encoding: 'utf8' }).stdout.split('\n')
+describe.skipIf(!PATROL)('2.4 retry note == ros2-patrol-project (origin/main)', () => {
+  it('max_retries 3 (patrol_points.yaml:49), 2 s wait before a retry (patrol_controller.py:232), skip after the last', () => {
+    expect(showP('config/patrol_points.yaml')[48]).toMatch(/^\s*max_retries: 3\s*$/)
+    const py = showP('patrol_navigation_project/patrol_controller.py')
+    expect(py[231]).toMatch(/time\.sleep\(2\.0\)/)
+    expect(py.slice(219, 240).join('\n')).toContain('Skipping waypoint')
+    for (const l of ['en', 'ja'] as const) expect(ACTIONS_STRINGS[l].brokenNote).toMatch(/max_retries = 3/)
+    expect(ACTIONS_STRINGS.en.brokenNote).toContain('waits 2 s')
+  })
+})
