@@ -39,7 +39,8 @@ describe('SenseScene', () => {
     expect(b).toContain('data-mood="worried"')
     expect(b).toContain('ss-paw')
     const c = renderToStaticMarkup(<SenseScene wallX={1} mode="spin" t={2} label="" />)
-    expect(count(c, /class="ss-hit"/g)).toBe(180)
+    expect(c).toContain('data-hits="180"')
+    expect(count(c, /class="ss-hit"/g)).toBeLessThanOrEqual(8) // grouped by fade, not one node per dot
   })
 })
 
