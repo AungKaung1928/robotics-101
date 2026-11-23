@@ -30,6 +30,7 @@ const ROUTES = [
   { hash: '#/0/loop', has: 'class="num">0.1<', equals: { blind: '5.2 cm' } },
   { hash: '#/0/pipe', has: 'class="num">0.2<' },
   { hash: '#/0/tools', has: 'class="num">0.3<' },
+  { hash: '#/0/ros', has: 'class="num">0.4<' },
   { hash: '#/1/decide', has: 'class="num">1.1<' },
   { hash: '#/1/closest', has: 'class="num">1.2<' },
   { hash: '#/1/callback', has: 'class="num">1.3<' },
