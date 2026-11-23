@@ -204,23 +204,34 @@ try {
     ...(kept === 'ja true' ? [] : [`after reload: ${kept}, expected ja true`]),
   ])
 
-  // 3.3 TF lab: the right guess is the two pairs through base_link; restarting the detector leaves MISSING, the odom broadcaster heals it.
-  await open('#/3/tflab')
-  const q = (sel) => `document.querySelector('${sel}')`
-  await js(`document.querySelectorAll('.pick input')[1].click(); document.querySelectorAll('.pick input')[2].click(); [...document.querySelectorAll('button')].find((b) => b.textContent === 'Check my guess').click()`)
-  await sleep(100)
-  const guess = await js(`${q('[data-k="predict"]')}?.textContent.startsWith('✓')`)
-  await js(`document.querySelectorAll('.choices button')[0].click()`)
-  await sleep(100)
-  const restart = await js(`${q('[data-k="diag"]')}?.textContent.includes('map->base_link: MISSING') && !${q('[data-k="challenge"]')}.textContent.startsWith('✓')`)
-  await js(`document.querySelectorAll('.choices button')[2].click()`)
-  await sleep(100)
-  const fixed = await js(`!${q('[data-k="diag"]')}.textContent.includes('MISSING') && ${q('[data-k="challenge"]')}.textContent.startsWith('✓')`)
-  report('TF lab: right guess, restart does not fix, odom broadcaster does', [
-    ...(guess === true ? [] : [`guess verdict ${guess}`]),
-    ...(restart === true ? [] : ['restart: still expected MISSING and no ✓']),
-    ...(fixed === true ? [] : ['odom broadcaster: expected all OK and ✓']),
-  ])
+  // 3.3 TF lab, all 5 steps in each language (predict, see, inspect, fix, verify); the right guess = the two pairs through base_link,
+  // restarting the detector leaves MISSING, the odom broadcaster heals it. Headings must be in the page's own script.
+  const SCRIPT = { en: /[A-Za-z]/, ja: /[\u3040-\u30ff\u4e00-\u9fff]/, my: /[\u1000-\u109f]/ }
+  for (const [i, lang] of ['en', 'ja', 'my'].entries()) {
+    await open('#/3/tflab')
+    await js(`document.querySelectorAll('.langs button')[${i}].click()`)
+    await open('#/3/tflab')
+    const q = (sel) => `document.querySelector('${sel}')`
+    const step = async (code) => { const v = await js(code); await sleep(100); return v }
+    const bad = []
+    const head = await js(`[document.documentElement.lang, [...document.querySelectorAll('.panel h2')].map((h) => h.textContent).join('|')].join(' ')`)
+    if (!head.startsWith(lang + ' ') || head.split('|').length !== 5 || !head.split('|').every((h) => SCRIPT[lang].test(h))) bad.push(`headings: ${head}`)
+    await step(`[...document.querySelectorAll('.pick')].filter((l) => l.textContent.includes('base_link')).forEach((l) => l.querySelector('input').click())`)
+    await step(`${q('[data-act="check"]')}.click()`)
+    if ((await js(`${q('[data-k="predict"]')}?.textContent.startsWith('✓')`)) !== true) bad.push('1 predict: no ✓ for the base_link pairs')
+    await step(`${q('[data-act="run"]')}.click()`)
+    if ((await js(`${q('[data-k="diag"]')}?.textContent.includes('map->base_link: MISSING')`)) !== true) bad.push('2 see: diag lacks map->base_link: MISSING')
+    const links = await js(`[...document.querySelectorAll('.tflab-code a')].filter((a) => /tf_anomaly_detector|test_tf_lab_missing_link/.test(a.href) && a.parentElement.textContent.length > a.textContent.length + 3).length`)
+    if (links !== 3) bad.push(`3 inspect: ${links} of 3 code links with a line of text`)
+    await step(`document.querySelectorAll('.choices button')[0].click()`)
+    if ((await js(`${q('[data-k="diag"]')}.textContent.includes('MISSING') && !${q('[data-k="challenge"]')}.textContent.startsWith('✓')`)) !== true) bad.push('4 fix: restart should leave MISSING')
+    await step(`document.querySelectorAll('.choices button')[2].click()`)
+    if ((await js(`!${q('[data-k="diag"]')}.textContent.includes('MISSING') && ${q('[data-k="challenge"]')}.textContent.startsWith('✓') && ${q('.tflab-cmd')}.textContent.includes('test_tf_lab_missing_link')`)) !== true) bad.push('5 verify: odom broadcaster should give all OK, ✓ and the colcon test line')
+    await step(`${q('[data-act="reset"]')}.click()`)
+    if ((await js(`!${q('[data-k="challenge"]')}.textContent.startsWith('✓') && !${q('[data-k="diag"]')}`)) !== true) bad.push('reset: back to the broken chain')
+    report(`TF lab ${lang}: 5 steps (predict, see, inspect, fix, verify) + reset`, bad)
+  }
+  await js(`document.querySelectorAll('.langs button')[0].click()`)
 } finally {
   chrome.kill()
   vite.kill()
