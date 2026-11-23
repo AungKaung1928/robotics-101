@@ -12,7 +12,7 @@ import { waypointValues } from './content/waypoints'
 import Overview from './components/Overview'
 import ScanChapter from './components/ScanChapter'
 import TfChapter from './components/TfChapter'
-import { STRINGS, initialLang, type Lang, type Strings } from './i18n'
+import { LANG_LABEL, STRINGS, initialLang, type Lang, type Strings } from './i18n'
 import { CHAPTER_ICON, Icon } from './icons'
 import type { ChapterMeta } from './anim/contract'
 import { LEVEL_BODY, levelPage, readingIndex, type LevelPage } from './content/levels'
@@ -70,7 +70,7 @@ export default function App() {
         <span>/{lvl ? `${lvl.meta.level}/${lvl.meta.id}` : route.page === 'chapter' ? route.id : 'plan'}</span>
         <span className="langs">
           {(['en', 'ja'] as const).map((l) => (
-            <button key={l} type="button" aria-pressed={lang === l} onClick={() => setLang(l)}>{l.toUpperCase()}</button>
+            <button key={l} type="button" aria-pressed={lang === l} onClick={() => setLang(l)}>{LANG_LABEL[l]}</button>
           ))}
         </span>
       </header>

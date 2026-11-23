@@ -2,6 +2,9 @@ import type { ChapterId } from './lib/route'
 
 export type Lang = 'en' | 'ja'
 
+// Switch labels: English words in one style for every language (his choice 2026-11-23), not codes.
+export const LANG_LABEL: Record<Lang, string> = { en: 'English', ja: 'Japanese' }
+
 const en = {
   title: 'Robotics 101',
   lede: 'One simulated TurtleBot3 in a 10 × 10 m Gazebo arena. Each waypoint is one idea of a mobile robot, with its value from that setup’s ROS 2 Nav2 config.',
