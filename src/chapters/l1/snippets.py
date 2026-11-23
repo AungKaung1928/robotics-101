@@ -1,5 +1,6 @@
-"""The Python shown on pages 1.1 (decide) and 1.2 (closest), run for real.
-Inputs come from the TypeScript models as one JSON argument; snippets.test.ts compares the output."""
+"""Page 1.1's `if distance < stop_at` inside the drive loop the page animates, run for real.
+Inputs come from the TypeScript model as one JSON argument; snippets.test.ts compares the output.
+(1.2's def closest is run from the rendered page text in pysyntax.test.tsx.)"""
 import json
 import sys
 
@@ -18,18 +19,7 @@ def drive(stop_at, op):  # 1.1: one reading per scan, one if per reading
         k += 1
 
 
-def closest(readings, start=float('inf')):  # 1.2, as shown; start=0 is the break-it
-    closest = start
-    updates = 0
-    for d in readings:
-        if d < closest:
-            closest = d
-            updates += 1
-    return closest, updates
-
-
 out = {
     'drive': [drive(s, op) for s in cfg['stop_ats'] for op in ('<', '>')],
-    'closest': [closest(rs) for rs in cfg['readings']] + [closest(rs, 0) for rs in cfg['readings']],
 }
 print(json.dumps(out))
