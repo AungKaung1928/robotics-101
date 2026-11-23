@@ -1,6 +1,7 @@
 /** Chapter 2.4 text, EN + JA. Same keys in both (actions.test checks). */
 export const ACTIONS_STRINGS = {
   en: {
+    srcGloss: { saveMap: 'slam_toolbox (save_map service)', retry: 'retry' },
     title: 'ROS 2: services and actions',
     learn: 'You will learn: besides topics, nodes can ask a question (service) or give a long job with progress reports (action).',
     everyday: 'Everyday: ordering a food delivery is an action. The shop accepts the order, the app shows where the courier is (feedback), then the food arrives (result); you can cancel on the way. Asking "are you open?" is a service.',
@@ -29,6 +30,7 @@ export const ACTIONS_STRINGS = {
     caption: (t: string, last: string) => `t = ${t} s · ${last}`,
   },
   ja: {
+    srcGloss: { saveMap: 'slam_toolbox（save_map サービス）', retry: '再試行' },
     title: 'ROS 2：サービスとアクション',
     learn: '学ぶこと：トピックのほかに、ノードは質問（サービス）や、途中報告付きの長い仕事（アクション）を頼める。',
     everyday: '身近な例：フードデリバリーの注文はアクション。店が注文を受け、アプリが配達員の位置を見せ（フィードバック）、料理が届く（結果）。途中でキャンセルもできる。「営業していますか？」と聞くのはサービス。',

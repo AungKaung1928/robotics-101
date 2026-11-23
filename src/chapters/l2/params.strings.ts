@@ -1,6 +1,7 @@
 /** Chapter 2.5 text, EN + JA. Same keys in both (params.test checks). */
 export const PARAMS_STRINGS = {
   en: {
+    srcGloss: { simTime: 'passes only use_sim_time' },
     title: 'ROS 2: parameters and launch files',
     learn: 'You will learn: a parameter is a setting a node reads by name, so you can change its behaviour without changing its code. A launch file starts nodes and passes them settings.',
     everyday: 'Everyday: a thermostat. The heater\'s program stays the same; you only change the set temperature.',
@@ -29,6 +30,7 @@ export const PARAMS_STRINGS = {
     caption: (n: number, w: number) => `check ${n}/20 · ${w} warning${w === 1 ? '' : 's'}`,
   },
   ja: {
+    srcGloss: { simTime: 'use_sim_time だけを渡す' },
     title: 'ROS 2：パラメータと launch ファイル',
     learn: '学ぶこと：パラメータはノードが名前で読む設定で、コードを変えずに動きを変えられる。launch ファイルはノードを起動し、設定を渡す。',
     everyday: '身近な例：サーモスタット。ヒーターのプログラムはそのままで、設定温度だけを変える。',

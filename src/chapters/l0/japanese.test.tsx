@@ -30,3 +30,18 @@ describe('Japanese pages have no English prose left (page-check rule)', () => {
     expect(prose.filter((t) => !JA_TEXT.test(t) && !PROPER_NAMES.has(t))).toEqual([])
   })
 })
+
+// The small-print source line: its own words (outside links, code and verbatim "quotes") are Japanese too; what stays
+// is names (projects, products, files) and code tokens the reader types.
+const SRC_NAMES = new Set(['ROBOTIS', 'Manual', 'Transform', 'Explorer', 'Gazebo', 'Harmonic', 'Humble', 'DiffDrive', 'package', 'xml',
+  'python', 'reference', 'rad', 'max', 'min', 'jump', 'linear', 'angular', 'scan', 'LDS', 'samples'])
+describe('Japanese source lines have no English glosses left', () => {
+  it.each(Object.keys(PAGES))('%s', (id) => {
+    const Page = PAGES[id]
+    const dom = renderToStaticMarkup(<Page t={STRINGS.ja} />)
+    const own = [...dom.matchAll(/<p class="src">([\s\S]*?)<\/p>/g)].map((m) => m[1]
+      .replace(/<a [^>]*>[\s\S]*?<\/a>/g, ' ').replace(/<code>[\s\S]*?<\/code>/g, ' ').replace(/&quot;[^&]*&quot;/g, ' ')
+      .replace(/<[^>]+>/g, ' ').replace(/&[a-z#0-9]+;/g, ' ')).join(' ')
+    expect((own.match(/\b[A-Za-z]{3,}\b/g) ?? []).filter((w) => !SRC_NAMES.has(w))).toEqual([])
+  })
+})

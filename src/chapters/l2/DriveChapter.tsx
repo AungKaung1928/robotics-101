@@ -66,7 +66,7 @@ export default function DriveChapter({ t }: { t: Strings }) {
         <p className="group-h">{s.words}</p>
         <Gloss items={s.glossary} />
         <RealProject id="drive" t={t} />
-        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L143-L154`}>turtlebot3_burger.urdf.xacro:143-154</a> (DiffDrive, wheel separation 0.160 m, radius 0.033 m, max_linear_acceleration 1.0), <a href="https://github.com/gazebosim/gz-sim/blob/gz-sim8/src/systems/diff_drive/DiffDrive.cc#L641-L646">gz-sim DiffDrive.cc:641-646</a> (keeps the last command) · <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html">Humble: ros2 topic pub</a></p>
+        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L143-L154`}>turtlebot3_burger.urdf.xacro:143-154</a> ({s.srcGloss.diff}), <a href="https://github.com/gazebosim/gz-sim/blob/gz-sim8/src/systems/diff_drive/DiffDrive.cc#L641-L646">gz-sim DiffDrive.cc:641-646</a> ({s.srcGloss.last}) · <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html">Humble: ros2 topic pub</a></p>
       </div>
     </>
   )

@@ -1,6 +1,7 @@
 /** Level 0 "think" text, EN + JA, same keys (think.page.test checks). Group A: no software words, no code. */
 export const THINK_STRINGS = {
   en: {
+    srcGloss: { perSec: 'checks/s' },
     title: 'How a robot thinks: a rule',
     learn: 'You will learn: a simple robot "thinks" by following a rule, and one number in the rule decides where it stops.',
     steps: [
@@ -30,6 +31,7 @@ export const THINK_STRINGS = {
     mascot: 'the robot',
   },
   ja: {
+    srcGloss: { perSec: '回/秒' },
     title: 'ロボットの考え方：ルール',
     learn: '学ぶこと：シンプルなロボットはルールにしたがって「考える」。ルールの中の1つの数字で、止まる場所が決まる。',
     steps: [

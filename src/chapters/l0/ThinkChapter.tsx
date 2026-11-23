@@ -60,7 +60,7 @@ export default function ThinkChapter({ t }: { t: Strings }) {
         </div>
         <p className="group-h">{s.words}</p>
         <dl className="gloss">{s.glossary.map(([w, d]) => <div key={w} style={{ display: 'contents' }}><dt>{w}</dt><dd>{d}</dd></div>)}</dl>
-        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L39`}>nav2_params.yaml:39</a> ({SPEED} m/s), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L168`}>turtlebot3_burger.urdf.xacro:168</a> ({SCAN_HZ} checks/s).</p>
+        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L39`}>nav2_params.yaml:39</a> ({SPEED} m/s), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L168`}>turtlebot3_burger.urdf.xacro:168</a> ({SCAN_HZ} {s.srcGloss.perSec}).</p>
       </div>
     </>
   )

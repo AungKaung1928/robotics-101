@@ -34,4 +34,13 @@ describe.skipIf(!hasPython)('Python shown on Level 1-2 + EP pages', () => {
     expect(r.stderr, code).toBe('')
     expect(JSON.parse(r.stdout)).toEqual(rs.map((x) => closestOf(x)))
   })
+  it('1.2 real-scan note, run on the shown Python: inf (nothing in range) never wins, -inf (too close) does', () => {
+    const [code] = pythonOf(renderToStaticMarkup(<BODIES.closest t={STRINGS.en} />))
+    const scans = [[1.2, Infinity, 0.8, Infinity], [Infinity, Infinity], [1.2, -Infinity, 0.8]]
+    const lit = (x: number) => (x === Infinity ? 'float("inf")' : x === -Infinity ? 'float("-inf")' : String(x))
+    const r = py(`exec(${JSON.stringify(code)})\nfor s in [${scans.map((sc) => `[${sc.map(lit).join(', ')}]`).join(', ')}]: print(repr(closest(s)))`)
+    expect(r.stderr, code).toBe('')
+    expect(r.stdout.trim().split('\n')).toEqual(['0.8', 'inf', '-inf'])
+    expect(scans.map((sc) => closestOf(sc))).toEqual([0.8, Infinity, -Infinity])
+  })
 })

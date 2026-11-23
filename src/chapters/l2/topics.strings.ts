@@ -1,6 +1,7 @@
 /** Chapter 2.2 text, EN + JA. Same keys in both (topics.test checks). */
 export const TOPICS_STRINGS = {
   en: {
+    srcGloss: { rates: 'README (measured rates)' },
     title: 'ROS 2: topics',
     learn: 'You will learn: nodes talk through topics, named channels where one node publishes and any number of nodes subscribe.',
     everyday: 'Everyday: a radio station. It broadcasts on one frequency without knowing who listens, and every radio tuned to it hears the same song. Tune one step off and you hear nothing.',
@@ -32,6 +33,7 @@ export const TOPICS_STRINGS = {
     caption: (t: string, n: number) => `t = ${t} s · ${n} messages on the wires`,
   },
   ja: {
+    srcGloss: { rates: 'README（測定したレート）' },
     title: 'ROS 2：トピック',
     learn: '学ぶこと：ノードはトピックで話す。トピックは名前の付いたチャンネルで、1つのノードが publish し、何個のノードでも subscribe できる。',
     everyday: '身近な例：ラジオ局。だれが聞いているか知らずに1つの周波数で放送し、合わせたラジオはどれも同じ曲を聞く。周波数が少しずれると何も聞こえない。',

@@ -1,6 +1,7 @@
 /** Chapter 2.3 text, EN + JA. Same keys in both (msgtypes.test checks). */
 export const MSGTYPES_STRINGS = {
   en: {
+    srcGloss: { reads: 'reads linear.x, angular.z', samples: 'samples', to: 'to' },
     title: 'ROS 2: message types',
     learn: 'You will learn: every topic carries one message type, a fixed list of named fields. You read and write those fields by name.',
     lines: [
@@ -26,6 +27,7 @@ export const MSGTYPES_STRINGS = {
     caption: (n: number, b: number) => (b ? `ranges: ${b} of 360 beams drawn` : `field ${n} of 10`),
   },
   ja: {
+    srcGloss: { reads: 'linear.x と angular.z を読む', samples: 'サンプル', to: 'から' },
     title: 'ROS 2：メッセージ型',
     learn: '学ぶこと：どのトピックも1つのメッセージ型を運ぶ。型は名前付きフィールドの決まった並び。フィールドは名前で読み書きする。',
     lines: [

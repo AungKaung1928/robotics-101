@@ -73,7 +73,7 @@ export default function ActChapter({ t }: { t: Strings }) {
         </div>
         <p className="group-h">{s.words}</p>
         <dl className="gloss">{s.glossary.map(([a, b]) => <div key={a} style={{ display: 'contents' }}><dt>{a}</dt><dd>{b}</dd></div>)}</dl>
-        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L45-L48`}>nav2_params.yaml:45-48</a> (brake 2.5 m/s²), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L146`}>turtlebot3_burger.urdf.xacro:146</a> (wheels 0.16 m apart), <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/features/">ROBOTIS e-Manual</a> (0.22 m/s).</p>
+        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L45-L48`}>nav2_params.yaml:45-48</a> ({s.srcGloss.brake}), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L146`}>turtlebot3_burger.urdf.xacro:146</a> ({s.srcGloss.gap}), <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/features/">ROBOTIS e-Manual</a> (0.22 m/s).</p>
       </div>
     </>
   )
