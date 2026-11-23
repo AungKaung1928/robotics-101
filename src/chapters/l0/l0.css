@@ -27,3 +27,15 @@
 .pipe .packet { fill: var(--free); }
 .pipe .say { fill: var(--ink-2); font: 14px var(--mono); }
 .pipe .say.go { fill: var(--free); font-weight: 600; }
+.stack { width: 100%; height: auto; }
+.stack .layer rect { fill: var(--surface); stroke: var(--free); stroke-width: 2; transition: fill var(--motion), stroke var(--motion); }
+.stack .layer text { fill: var(--ink); font: 600 15px var(--font); }
+.stack .layer .why { fill: var(--ink-2); font: 12px var(--font); }
+.stack .layer.is-off rect { stroke: var(--rule); fill: transparent; }
+.stack .layer.is-off text { fill: var(--rule); }
+.stack .layer.is-gone rect { stroke: var(--ray); stroke-dasharray: 5 4; fill: transparent; }
+.stack .layer.is-gone text { fill: var(--ray); text-decoration: line-through; }
+.stack .say { fill: var(--ink-2); font: 13px var(--mono); }
+.job { border: 0; padding: 0; margin: 0 0 .6rem; display: flex; flex-wrap: wrap; gap: .25rem .9rem; }
+.job legend { font-weight: 600; margin-bottom: .2rem; }
+.job label { white-space: nowrap; }
