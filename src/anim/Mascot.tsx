@@ -20,8 +20,8 @@ const REACTION: Record<Reaction, { pose: (t: number) => Pose; end: number }> = {
  * e.g. the playhead's place on the scrubber. `roll` = distance driven in the drawing's own units (64-unit box): the
  * wheels turn by roll / radius, so they never skid against the floor.
  */
-export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look = 0, roll = 0, thinking = false, sleepAfter = 0, enter = false, watch = false, size = 64, label, inSvg = false }: {
-  cheer?: number; oops?: number; brake?: number; start?: number; look?: number; roll?: number; thinking?: boolean; sleepAfter?: number; enter?: boolean; watch?: boolean
+export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look = 0, roll = 0, thinking = false, sleepAfter = 0, enter = false, watch = false, boop: boopN = 0, size = 64, label, inSvg = false }: {
+  cheer?: number; oops?: number; brake?: number; start?: number; look?: number; roll?: number; thinking?: boolean; sleepAfter?: number; enter?: boolean; watch?: boolean; boop?: number
   size?: number; label: string; inSvg?: boolean
 }) {
   const [act, setAct] = useState<{ kind: Reaction; n: number } | null>(null)
@@ -29,6 +29,8 @@ export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look
   const [t, setT] = useState(0)
   useEffect(() => { if (enter && !reduced()) setAct({ kind: 'enter', n: 1 }) }, []) // once, on mount; reduced motion: already in place
   useEffect(() => { if (cheer) setAct({ kind: 'happy', n: cheer }) }, [cheer])
+  // boop from elsewhere (Comeau: the trigger can be a nearby control): never cuts a running reaction short
+  useEffect(() => { if (boopN) setAct((a) => a ?? { kind: 'boop', n: boopN }) }, [boopN])
   useEffect(() => { if (oops) setAct({ kind: 'oops', n: oops }) }, [oops])
   useEffect(() => { if (brake) setAct({ kind: 'brake', n: brake }) }, [brake])
   useEffect(() => { if (start) setAct({ kind: 'start', n: start }) }, [start])
@@ -79,8 +81,8 @@ export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look
   const fig = <MascotFigure pose={pose} mood={mood} size={size} label={label} spark={mood === 'happy' ? (still ? STILL_SPARK : t) : 0} dizzy={mood === 'oops' ? (still ? STILL_DIZZY : t) : 0} eyes={{ mood: sw.showNew ? face.to : face.from, sy: sw.sy }} look={look || glance} roll={roll} head={head} />
   // Inside a chapter's SVG figure (place it with a parent <g transform>) the hit area is a <g>, in HTML a <span>.
   return inSvg
-    ? <g ref={hit} className="mascot-hit" onPointerEnter={boop} onClick={boop}>{fig}</g>
-    : <span ref={hit} className="mascot-hit" onPointerEnter={boop} onClick={boop}>{fig}</span>
+    ? <g ref={hit} className="mascot-hit" data-react={act?.kind} onPointerEnter={boop} onClick={boop}>{fig}</g>
+    : <span ref={hit} className="mascot-hit" data-react={act?.kind} onPointerEnter={boop} onClick={boop}>{fig}</span>
 }
 
 /** One frame of the robot: pose and face in, SVG out (the filmstrip test draws frames with it). label '' = decorative: hidden from screen readers. */
