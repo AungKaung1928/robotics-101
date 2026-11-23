@@ -39,14 +39,14 @@
  "core:bringup.logHead.1": {
   "status": "pass-alt",
   "en": "starts",
-  "my": "စတာ",
-  "back": "Starts"
+  "my": "စချိန်",
+  "back": "Start time"
  },
  "core:bringup.logHead.2": {
   "status": "pass-alt",
   "en": "gives",
-  "my": "ပေးတာ",
-  "back": "Gives"
+  "my": "ပေးတဲ့အရာ",
+  "back": "What it gives"
  },
  "core:bringup.nav2": {
   "status": "pass",
@@ -635,10 +635,10 @@
   "back": "Level"
  },
  "core:levels.opened": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "opened",
-  "my": "ဖွင့်ထားပြီး",
-  "back": "Opened"
+  "my": "ဖွင့်ထားပြီ",
+  "back": "Already opened"
  },
  "core:levels.soon": {
   "status": "pass",
@@ -1145,8 +1145,8 @@
  "ep/bfs:legendDone": {
   "status": "pass-alt",
   "en": "taken out",
-  "my": "ထုတ်ပြီး",
-  "back": "Taken out"
+  "my": "queue ထဲက ထုတ်ပြီးသား",
+  "back": "Already issued"
  },
  "ep/bfs:legendNear": {
   "status": "pass-alt",
@@ -1295,8 +1295,8 @@
  "ep/late:depth": {
   "status": "pass-alt",
   "en": "queue depth",
-  "my": "queue အနက်",
-  "back": "Queue depth"
+  "my": "queue အတိမ်အနက်",
+  "back": "queue depth"
  },
  "ep/late:envLabel": {
   "status": "pass-alt",
@@ -2606,8 +2606,8 @@
  "l0/ros:supported": {
   "status": "pass-alt",
   "en": "getting fixes",
-  "my": "ပြင်ဆင်ချက်များ ရရှိနေဆဲ",
-  "back": "Still receiving fixes"
+  "my": "ပြင်ဆင်ချက် ရနေဆဲ",
+  "back": "Still receiving corrections"
  },
  "l0/ros:title": {
   "status": "pass-alt",
@@ -3459,8 +3459,8 @@
  "l0/think:answers.never": {
   "status": "pass-alt",
   "en": "it never stops",
-  "my": "လုံးဝ မရပ် တော့ဘူး",
-  "back": "Never stops at all"
+  "my": "လုံးဝ မရပ်တော့ဘူး",
+  "back": "Never stops at all anymore"
  },
  "l0/think:breakIt": {
   "status": "pass-alt",
@@ -3513,7 +3513,7 @@
  "l0/think:final": {
   "status": "pass-alt",
   "en": "Stopped at",
-  "my": "ရပ် သွားတဲ့ နေရာ",
+  "my": "ရပ်သွားတဲ့ နေရာ",
   "back": "Place where it stopped"
  },
  "l0/think:fixIt": {
