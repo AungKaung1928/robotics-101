@@ -30,11 +30,12 @@ export default function BfsWave({ w, h, blocked, start, goal, t, layerS = 0.25, 
         const d = r.dist[c]
         if (d < 0 || d > layer) return null
         const s = arrivalScale(t - d * layerS)
+        const front = d === layer && !found
         const p = r.parent[c], deg = p < 0 ? 0 : (Math.atan2(Math.floor(p / w) - Math.floor(c / w), (p % w) - (c % w)) * 180) / Math.PI
         return (
           <g key={c} transform={`translate(${x} ${y}) scale(${s})`}>
-            <rect className={d === layer && !found ? 'front' : 'seen'} x={-0.45} y={-0.45} width={0.9} height={0.9} rx={0.15} />
-            {p >= 0 && <path className="came" d="M-0.18 0 L0.2 0 M0.08 -0.11 L0.2 0 L0.08 0.11" transform={`rotate(${deg})`} />}
+            <rect className={front ? 'front' : 'seen'} x={-0.45} y={-0.45} width={0.9} height={0.9} rx={0.15} />
+            {p >= 0 && <path className={front ? 'came on-front' : 'came'} d="M-0.18 0 L0.2 0 M0.08 -0.11 L0.2 0 L0.08 0.11" transform={`rotate(${deg})`} />}
           </g>
         )
       })}
