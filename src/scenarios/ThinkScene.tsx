@@ -52,7 +52,9 @@ export default function ThinkScene({ stopAt, t, v = 0.2, wallX = 1.2, stopWord =
   const d = sim.reading(x), dOn = d !== null && d < stopAt, dy = Y(Y0), d0 = X(sim.from(x)), d1 = X(d === null ? sim.wallAt : sim.from(x) + d)
   const dText = d === null ? 'd = ?' : `d = ${d.toFixed(2)} m`, dw = dText.length * 8.4 // 14 px monospace: 0.6 em per letter
   const wide = d1 - d0 > dw + 10
-  const [dx, anchor] = wide ? [(d0 + d1) / 2, 'middle'] : d1 + 8 + dw < VW - M ? [d1 + 8, 'start'] : [d1 - 6, 'end']
+  const beyond = !wide && d1 + 8 + dw < VW - M // short line, room past the wall (built-in room): label there
+  const [dx, anchor] = wide ? [(d0 + d1) / 2, 'middle'] : beyond ? [d1 + 8, 'start'] : [d1 - 6, 'end']
+  const ly = wide ? dy - 6 : beyond ? dy - 26 : dy + 54 // else under the robot and the ladder row (+34), clear of the bubble tail
   return (
     <svg ref={ref} className="think-scene" viewBox={`0 0 ${VW} ${VH}`} role="img" aria-label={label} data-state={fired ? 'fired' : bumped ? 'bumped' : 'driving'}>
       {walls.map(([x1, y1, x2, y2], i) => <line key={i} className={i === movable ? 'ss-wall is-movable' : 'ss-wall'} x1={X(x1)} y1={Y(y1)} x2={X(x2)} y2={Y(y2)} />)}
@@ -66,8 +68,8 @@ export default function ThinkScene({ stopAt, t, v = 0.2, wallX = 1.2, stopWord =
       </g>
       <g className={dOn ? 'tk-d is-on' : d === null ? 'tk-d is-blind' : 'tk-d'} data-d={d === null ? 'none' : d.toFixed(2)}>
         <line x1={d0} x2={d1} y1={dy} y2={dy} /><line x1={d1} x2={d1} y1={dy - 4} y2={dy + 4} />
-        {/* room on the line: centred above it; near the wall: beyond the wall if the room goes on, else lifted and ending before it */}
-        <text x={dx} y={wide ? dy - 6 : dy - 26} textAnchor={anchor}>{dText}</text>
+        {/* room on the line: centred above it; near the wall: beyond the wall if the room goes on, else below the robot */}
+        <text x={dx} y={ly} textAnchor={anchor}>{dText}</text>
       </g>
       <g className={fired ? 'tk-bubble is-fired' : 'tk-bubble'}>{/* tail on the robot's head, bubble clamped */}
         <circle cx={X(x) - 6} cy={Y(Y0) - 32} r={3} /><circle cx={X(x) - 11} cy={Y(Y0) - 45} r={4.5} /><circle cx={X(x) - 14} cy={Y(Y0) - 62} r={6} />
