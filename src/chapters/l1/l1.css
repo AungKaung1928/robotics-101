@@ -30,3 +30,6 @@
 .side .ray.seen { opacity: 0.45; }
 .side .ray.now line { stroke-width: 4; }
 .side .ray.best line, .side .ray.best circle { stroke: var(--robot); fill: var(--robot); stroke-width: 4; }
+.side .qslot { fill: none; stroke: var(--rule); }
+.side .qfull { fill: var(--ray); }
+.side text.lbl { font-size: 14px; }
