@@ -17,8 +17,8 @@ const REACTION: Record<Reaction, { pose: (t: number) => Pose; end: number }> = {
  * movement, only the face changes for a moment. `look` (−1 left … 1 right) turns the eyes toward what is changing,
  * e.g. the playhead's place on the scrubber.
  */
-export default function Mascot({ cheer = 0, oops = 0, look = 0, size = 64, label }: {
-  cheer?: number; oops?: number; look?: number; size?: number; label: string
+export default function Mascot({ cheer = 0, oops = 0, look = 0, size = 64, label, inSvg = false }: {
+  cheer?: number; oops?: number; look?: number; size?: number; label: string; inSvg?: boolean
 }) {
   const [act, setAct] = useState<{ kind: Reaction; n: number } | null>(null)
   const [pose, setPose] = useState<Pose>(REST)
@@ -48,11 +48,11 @@ export default function Mascot({ cheer = 0, oops = 0, look = 0, size = 64, label
   // Boop on pointer arrival or tap, only when idle: it never cuts a cheer or an oops short, and runs to the end.
   const boop = () => { if (!act) setAct({ kind: 'boop', n: 0 }) }
   const mood: Mood = act && act.kind !== 'boop' ? act.kind : 'idle'
-  return (
-    <span className="mascot-hit" onPointerEnter={boop} onClick={boop}>
-      <MascotFigure pose={pose} mood={mood} size={size} label={label} spark={mood === 'happy' ? t : 0} look={look} />
-    </span>
-  )
+  const fig = <MascotFigure pose={pose} mood={mood} size={size} label={label} spark={mood === 'happy' ? t : 0} look={look} />
+  // Inside a chapter's SVG figure (place it with a parent <g transform>) the hit area is a <g>, in HTML a <span>.
+  return inSvg
+    ? <g className="mascot-hit" onPointerEnter={boop} onClick={boop}>{fig}</g>
+    : <span className="mascot-hit" onPointerEnter={boop} onClick={boop}>{fig}</span>
 }
 
 /** One frame of the robot: pose and face in, SVG out (the filmstrip test draws frames with it). */
