@@ -9,15 +9,18 @@ export function glide(from: number, to: number, elapsed: number, dur = GLIDE_MS)
   return from + (to - from) * easeInOut(elapsed / dur)
 }
 
-export type PlayerKey = 'toggle' | 'replay' | 'back' | 'next' | 'start' | 'end' | null
+export type PlayerKey = 'toggle' | 'replay' | 'back' | 'next' | 'start' | 'end' | 'slower' | 'faster' | null
 
 /**
- * Keyboard map of the Player group: Space / k play-pause, r replay from 0, ← / → step by event, Home / End jump.
+ * Keyboard map of the Player group: Space / k play-pause, r replay from 0, ← / → step by event, Home / End jump,
+ * < / > slower / faster (video players' Shift+, / Shift+.).
  * On the scrubber the arrows and Home/End stay the range input's own (fine scrubbing), so they map to null there.
  */
 export function playerKey(key: string, onScrubber: boolean): PlayerKey {
   if (key === ' ' || key === 'k') return 'toggle'
   if (key === 'r' || key === 'R') return 'replay'
+  if (key === '<') return 'slower'
+  if (key === '>') return 'faster'
   if (onScrubber) return null
   if (key === 'ArrowLeft') return 'back'
   if (key === 'ArrowRight') return 'next'
@@ -97,4 +100,9 @@ export function nextRate(rate: number): number {
 export function storedRate(raw: string | null): number {
   const r = Number(raw)
   return (RATES as readonly number[]).includes(r) ? r : 1
+}
+/** One rate step slower (dir -1) or faster (dir 1) in 0.5 < 1 < 2 order, held at the ends. */
+export function shiftRate(rate: number, dir: -1 | 1): number {
+  const up = [...RATES].sort((a, b) => a - b), i = up.indexOf(rate as (typeof RATES)[number])
+  return i < 0 ? 1 : up[Math.min(up.length - 1, Math.max(0, i + dir))]
 }

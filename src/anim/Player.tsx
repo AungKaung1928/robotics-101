@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type ReactNode } from 'react'
 import type { Strings } from '../i18n'
 import { advance, stepEvent } from '../lib/timeline'
-import { GLIDE_MS, HOLD_KEY, PAUSE_D, PLAY_D, RATE_KEY, nextRate, storedRate, currentStep, fromKeyboard, glide, playStop, playerKey, SCRUB_THUMB_PX, scrubFrac, scrubTrack, shouldAutoplay } from './motion'
+import { GLIDE_MS, HOLD_KEY, PAUSE_D, PLAY_D, RATE_KEY, nextRate, shiftRate, storedRate, currentStep, fromKeyboard, glide, playStop, playerKey, SCRUB_THUMB_PX, scrubFrac, scrubTrack, shouldAutoplay } from './motion'
 import { UI_STYLE } from './spring'
 import './player.css'
 import './range.css'
@@ -13,7 +13,7 @@ const reducedMotion = () => typeof matchMedia === 'function' && matchMedia('(pre
  * Scenario controls: step back, play/pause, step forward (by events), and a scrubber over [0, end].
  * The chapter owns the playhead `t` and draws its figure from it; this only moves it.
  * Step by click glides the playhead to the event (eased, GLIDE_MS) so the change is seen happening; Step by key jumps.
- * Keys inside the group: Space / k play-pause, r replay, ← / → step, Home / End jump.
+ * Keys inside the group: Space / k play-pause, r replay, ← / → step, Home / End jump, < / > speed (with speedLabel).
  * `labels` (one per event, ascending order): a numbered step rail under the controls, current step filled, each a
  * button that glides there, and Next names the step it goes to.
  * `speedLabel`: a rate button (1× → 2× → 0.5×) after Play; the rate is kept for the session.
@@ -87,6 +87,7 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
     else if (k === 'replay') replay()
     else if (k === 'back') step(-1, true)
     else if (k === 'next') step(1, true)
+    else if (k === 'slower' || k === 'faster') { if (speedLabel) setRate((r) => shiftRate(r, k === 'faster' ? 1 : -1)) }
     else go(k === 'start' ? 0 : end, true)
   }
   return (
@@ -130,7 +131,7 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
         </ol>
       )}
       <span className="keys wide" aria-hidden="true">
-        <kbd>Space</kbd> {s.player.play} · <kbd>←</kbd><kbd>→</kbd> {s.back} / {s.next} · <kbd>R</kbd> ↺
+        <kbd>Space</kbd> {s.player.play} · <kbd>←</kbd><kbd>→</kbd> {s.back} / {s.next} · <kbd>R</kbd> ↺{speedLabel && !still && <> · <kbd>&lt;</kbd><kbd>&gt;</kbd> {speedLabel}</>}
       </span>
     </div>
   )

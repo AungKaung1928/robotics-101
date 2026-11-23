@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { PAUSE_D, PLAY_D, nextRate, scrubFrac, scrubTrack, storedRate } from './motion'
+import { PAUSE_D, PLAY_D, nextRate, playerKey, shiftRate, scrubFrac, scrubTrack, storedRate } from './motion'
 
 const stops = (bg: string) => bg.slice('linear-gradient(to right, '.length, -1).split(/, (?=var|transparent)/)
 
@@ -47,5 +47,14 @@ describe('playback rate', () => {
   })
   it('stored rate only if it is one of the offered rates', () => {
     expect([storedRate('2'), storedRate('0.5'), storedRate(null), storedRate('9'), storedRate('abc')]).toEqual([2, 0.5, 1, 1, 1])
+  })
+})
+
+describe('speed keys', () => {
+  it('< / > map to slower / faster, also on the scrubber', () => {
+    expect([playerKey('<', false), playerKey('>', true)]).toEqual(['slower', 'faster'])
+  })
+  it('shiftRate walks 0.5 < 1 < 2 and holds at the ends; unknown -> 1', () => {
+    expect([shiftRate(1, 1), shiftRate(2, 1), shiftRate(1, -1), shiftRate(0.5, -1), shiftRate(3, 1)]).toEqual([2, 2, 0.5, 0.5, 1])
   })
 })
