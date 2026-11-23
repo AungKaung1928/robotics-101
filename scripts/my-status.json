@@ -18,10 +18,10 @@
   "back": "Early starting steps"
  },
  "core:bringup.lines.0": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "One launch file starts everything. Most stages wait on fixed timers chosen so their inputs should exist first. Only patrol checks: it waits up to 5 s for Nav2’s action server and retries.",
-  "my": "launch file တစ်ခုတည်းနဲ့ အားလုံးကို စတင်ပါတယ်။ အဆင့်အများစုက input တွေ အရင်ရှိနေအောင် သတ်မှတ်ထားတဲ့ timer တွေနဲ့ စောင့်ပါတယ်။ patrol တစ်ခုပဲ စစ်ဆေးတာပါ- Nav2 ရဲ့ action server ကို 5 s အထိ စောင့်ပြီး ပြန်ကြိုးစားပါတယ်။",
-  "back": "Starts everything with a single launch file. Most steps wait with set timers to ensure inputs are available first. Only the patrol is checked: waits up to 5 s for Nav2's action server and retries."
+  "my": "launch file တစ်ခုတည်းနဲ့ အားလုံးကို စတင်ပါတယ်။ အဆင့်အများစုက input တွေ အရင်ရှိနေအောင် သတ်မှတ်ထားတဲ့ timer တွေနဲ့ စောင့်ပါတယ်။ patrol node တစ်ခုတည်းကပဲ စစ်ပါတယ်- Nav2 ရဲ့ action server ကို 5 s အထိ စောင့်ပြီး ပြန်ကြိုးစားပါတယ်။",
+  "back": "Everything is started with a single launch file. Most stages wait with timers that are set so that the inputs exist first. Only a single patrol node checks: it waits up to 5 s for Nav2's action server and retries."
  },
  "core:bringup.lines.1": {
   "status": "needs-human",
@@ -183,8 +183,9 @@
  "core:costmap.window": {
   "status": "pass",
   "en": "local costmap: a window that moves with the robot",
-  "my": "local costmap- စက်ရုပ်နဲ့အတူ ရွှေ့တဲ့ window",
-  "back": "local costmap- window that moves with the robot"
+  "my": "local costmap- စက်ရုပ်နဲ့အတူ ရွေ့တဲ့ window",
+  "back": "local costmap- window that moves with the robot",
+  "note": "spelling: ရွှေ့ (move something) -> ရွေ့ (moves), audit 2026-11-24"
  },
  "core:costmap.zero": {
   "status": "pass",
@@ -298,8 +299,9 @@
  "core:goal.lines.0": {
   "status": "pass",
   "en": "The DWB controller runs at 20 Hz; at the 0.26 m/s speed limit each tick moves 1.3 cm.",
-  "my": "DWB controller က 20 Hz နဲ့ အလုပ်လုပ်ပြီး 0.26 m/s အမြန်နှုန်း အကန့်အသတ်မှာ tick တစ်ခုစီဟာ 1.3 cm ရွှေ့လျားပါတယ်။",
-  "back": "The DWB controller works at 20 Hz, and at a 0.26 m/s speed limit, each tick moves 1.3 cm."
+  "my": "DWB controller က 20 Hz နဲ့ အလုပ်လုပ်ပြီး 0.26 m/s အမြန်နှုန်း အကန့်အသတ်မှာ tick တစ်ခုစီဟာ 1.3 cm ရွေ့လျားပါတယ်။",
+  "back": "The DWB controller works at 20 Hz, and at a 0.26 m/s speed limit, each tick moves 1.3 cm.",
+  "note": "spelling: ရွှေ့ (move something) -> ရွေ့ (moves), audit 2026-11-24"
  },
  "core:goal.lines.1": {
   "status": "pass-alt",
@@ -434,10 +436,10 @@
   "back": "Model: hit p = 0.7, pass p = 0.4 (selection for this page), beams that return nothing do not change anything."
  },
  "core:grid.republish": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "map republished every",
-  "my": "မြေပုံကို အချိန်အပိုင်းအခြားအလိုက် ပြန်ပို့ပေးတဲ့နှုန်း",
-  "back": "Rate of periodic map republication"
+  "my": "မြေပုံကို ပြန်ထုတ်တဲ့ ကြားချိန်",
+  "back": "The interval for re-publishing the map"
  },
  "core:grid.res": {
   "status": "pass",
@@ -496,8 +498,9 @@
  "core:lede": {
   "status": "pass",
   "en": "One simulated TurtleBot3 in a 10 × 10 m Gazebo arena. Each waypoint is one idea of a mobile robot, with its value from that setup’s ROS 2 Nav2 config.",
-  "my": "10 × 10 m Gazebo ကွင်းထဲမှာ simulation လုပ်ထားတဲ့ TurtleBot3 စက်ရုပ် 1 စီး ရှိပါတယ်။ waypoint တစ်ခုစီဟာ ရွှေ့လျားစက်ရုပ်ရဲ့ အယူအဆ တစ်ခုစီ ဖြစ်ပြီး တန်ဖိုးတွေကိုတော့ အဲဒီ setup ရဲ့ ROS 2 Nav2 config ကနေ ယူထားတာ ဖြစ်ပါတယ်။",
-  "back": "There is 1 TurtleBot3 robot simulated in a 10 × 10 m Gazebo area. Each waypoint is a concept for the mobile robot and the values are taken from the ROS 2 Nav2 config of that setup."
+  "my": "10 × 10 m Gazebo ကွင်းထဲမှာ simulation လုပ်ထားတဲ့ TurtleBot3 စက်ရုပ် 1 စီး ရှိပါတယ်။ waypoint တစ်ခုစီဟာ ရွေ့လျားစက်ရုပ်ရဲ့ အယူအဆ တစ်ခုစီ ဖြစ်ပြီး တန်ဖိုးတွေကိုတော့ အဲဒီ setup ရဲ့ ROS 2 Nav2 config ကနေ ယူထားတာ ဖြစ်ပါတယ်။",
+  "back": "There is 1 TurtleBot3 robot simulated in a 10 × 10 m Gazebo area. Each waypoint is a concept for the mobile robot and the values are taken from the ROS 2 Nav2 config of that setup.",
+  "note": "spelling: ရွှေ့ (move something) -> ရွေ့ (moves), audit 2026-11-24"
  },
  "core:levels.difficulty": {
   "status": "pass-alt",
@@ -650,10 +653,10 @@
   "back": "Scene time"
  },
  "core:scan.beam": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "beam (hover a dot)",
-  "my": "beam (အစက်ပေါ် တင်ပါ)",
-  "back": "beam (hover on point)"
+  "my": "beam (အစက်ပေါ် mouse တင်ကြည့်ပါ)",
+  "back": "beam (hover the mouse over the dot)"
  },
  "core:scan.fired": {
   "status": "pass",
@@ -700,14 +703,16 @@
  "core:scan.move": {
   "status": "pass",
   "en": "moved per scan at 0.26 m/s",
-  "my": "0.26 m/s အမြန်နှုန်းမှာ scan တစ်ခုအလိုက် ရွှေ့တဲ့ အကွာအဝေး",
-  "back": "distance moved per scan at 0.26 m/s speed"
+  "my": "0.26 m/s အမြန်နှုန်းမှာ scan တစ်ခုအလိုက် ရွေ့တဲ့ အကွာအဝေး",
+  "back": "distance moved per scan at 0.26 m/s speed",
+  "note": "spelling: ရွှေ့ (move something) -> ရွေ့ (moves), audit 2026-11-24"
  },
  "core:scan.moveMeasured": {
   "status": "pass",
   "en": "moved per scan at the measured rate",
-  "my": "တိုင်းတာတဲ့ နှုန်းမှာ scan တစ်ခုအလိုက် ရွှေ့တဲ့ အကွာအဝေး",
-  "back": "distance moved per scan at measured rate"
+  "my": "တိုင်းတာတဲ့ နှုန်းမှာ scan တစ်ခုအလိုက် ရွေ့တဲ့ အကွာအဝေး",
+  "back": "distance moved per scan at measured rate",
+  "note": "spelling: ရွှေ့ (move something) -> ရွေ့ (moves), audit 2026-11-24"
  },
  "core:scan.noiseRes": {
   "status": "pass",
@@ -790,8 +795,9 @@
  "core:tf.driveNote": {
   "status": "pass",
   "en": "Under the 0.26 m/s Nav2 limit the robot moves at most 0.13 m between checks, so a jump over 0.5 m points to a map → odom correction, a late check or a fault.",
-  "my": "Nav2 ရဲ့ 0.26 m/s အကန့်အသတ်အောက်မှာ စက်ရုပ်ဟာ စစ်ဆေးမှုတွေကြား အများဆုံး 0.13 m ပဲ ရွှေ့လျားနိုင်တာကြောင့် 0.5 m ထက် ကျော်လွန်တဲ့ jump ဖြစ်ရင် map → odom ပြင်ဆင်မှု၊ စစ်ဆေးမှု နောက်ကျမှု သို့မဟုတ် အမှားအယွင်းတစ်ခု ရှိနေတာကို ညွှန်းဆိုနေပါတယ်။",
-  "back": "Under Nav2's 0.26 m/s limit, the robot can only move a maximum of 0.13 m between checks; therefore, a jump exceeding 0.5 m indicates a map → odom correction, a check delay, or an error."
+  "my": "Nav2 ရဲ့ 0.26 m/s အကန့်အသတ်အောက်မှာ စက်ရုပ်ဟာ စစ်ဆေးမှုတွေကြား အများဆုံး 0.13 m ပဲ ရွေ့လျားနိုင်တာကြောင့် 0.5 m ထက် ကျော်လွန်တဲ့ jump ဖြစ်ရင် map → odom ပြင်ဆင်မှု၊ စစ်ဆေးမှု နောက်ကျမှု သို့မဟုတ် အမှားအယွင်းတစ်ခု ရှိနေတာကို ညွှန်းဆိုနေပါတယ်။",
+  "back": "Under Nav2's 0.26 m/s limit, the robot can only move a maximum of 0.13 m between checks; therefore, a jump exceeding 0.5 m indicates a map → odom correction, a check delay, or an error.",
+  "note": "spelling: ရွှေ့ (move something) -> ရွေ့ (moves), audit 2026-11-24"
  },
  "core:tf.frame": {
   "status": "pass",
@@ -814,8 +820,9 @@
  "core:tf.jump": {
   "status": "pass",
   "en": "odom move since last check (m)",
-  "my": "နောက်ဆုံး စစ်ပြီးကတည်းက odom ရွှေ့တဲ့ အကွာအဝေး (m)",
-  "back": "distance odom moved since last check (m)"
+  "my": "နောက်ဆုံး စစ်ပြီးကတည်းက odom ရွေ့တဲ့ အကွာအဝေး (m)",
+  "back": "distance odom moved since last check (m)",
+  "note": "spelling: ရွှေ့ (move something) -> ရွေ့ (moves), audit 2026-11-24"
  },
  "core:tf.lines.0": {
   "status": "pass",
@@ -1559,8 +1566,8 @@
  "l0/act:glossary.2.1": {
   "status": "pass-alt",
   "en": "slow down to a stop; it takes a little time and distance",
-  "my": "အရှိန်လျှော့ပြီး ရပ်တာ၊ အချိန်နဲ့ အကွာအဝေး နည်းနည်း ယူရ",
-  "back": "Slowing down and stopping; takes a little time and distance"
+  "my": "အရှိန်လျှော့ပြီး ရပ်တာ၊ အချိန်နဲ့ အကွာအဝေး နည်းနည်း ယူရတယ်",
+  "back": "Slowing down and stopping; it takes a little time and distance"
  },
  "l0/act:learn": {
   "status": "pass-alt",
@@ -1673,8 +1680,8 @@
  "l0/loop:brokenNote": {
   "status": "pass-alt",
   "en": "Sense returns nothing, so Think keeps the last number it had. The robot believes the wall is still far away.",
-  "my": "ဆင်ဆာနဲ့ကြည့် တဲ့အဆင့်က ဘာမှ ပြန်မရတဲ့အတွက် စဉ်းစား တဲ့အဆင့်က နောက်ဆုံးရထားတဲ့ ကိန်းဂဏန်းကိုပဲ ဆက်သုံးနေပါတယ်။ စက်ရုပ်က နံရံဟာ ဝေးနေသေးတယ်လို့ ထင်နေတာပါ။",
-  "back": "Because the look-with-sensor step gets nothing back, the think step keeps using the last number it got. The robot thinks the wall is still far away."
+  "my": "ဆင်ဆာနဲ့ကြည့်တဲ့အဆင့်က ဘာမှ ပြန်မရတဲ့အတွက် စဉ်းစားတဲ့အဆင့်က နောက်ဆုံးရထားတဲ့ ကိန်းဂဏန်းကိုပဲ ဆက်သုံးနေပါတယ်။ စက်ရုပ်က နံရံဟာ ဝေးနေသေးတယ်လို့ ထင်နေတာပါ။",
+  "back": "Because the sensor-viewing stage gets nothing back, the thinking stage keeps using the last number it received. The robot thinks the wall is still far away."
  },
  "l0/loop:challenge": {
   "status": "pass-alt",
