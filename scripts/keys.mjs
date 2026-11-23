@@ -127,16 +127,18 @@ try {
     ...(h0 === '1' && h1 === '0' ? [] : [`hints ${h0} → ${h1}, expected 1 → 0`]),
   ])
 
-  // Scan: dragging the robot 2 m right in the map moves the x slider from 0.50 to 2.50 and leaves y alone.
-  await open('#/scan')
-  const g = await js(`(() => { const c = document.querySelector('.grab').getBoundingClientRect(), v = document.querySelector('.arena').getBoundingClientRect()
-    return [c.x + c.width / 2, c.y + c.height / 2, Math.min(v.width, v.height) / 10.8] })()`)
-  await send('Input.dispatchMouseEvent', { type: 'mousePressed', x: g[0], y: g[1], button: 'left', clickCount: 1 })
-  await send('Input.dispatchMouseEvent', { type: 'mouseMoved', x: g[0] + 2 * g[2], y: g[1], button: 'left', buttons: 1 })
-  await send('Input.dispatchMouseEvent', { type: 'mouseReleased', x: g[0] + 2 * g[2], y: g[1], button: 'left', clickCount: 1 })
-  await sleep(200)
-  const xy = await js(`[...document.querySelectorAll('.panel input[type=range]')].slice(0, 2).map((i) => (+i.value).toFixed(2)).join(' ')`)
-  report('scan: drag the robot 2 m right → x 0.50 → 2.50, y stays 0.50', xy === '2.50 0.50' ? [] : [`sliders x y = ${xy}`])
+  // Scan and detector: dragging the robot 2 m right in the map moves the x slider from 0.50 to 2.50 and leaves y alone.
+  for (const hash of ['#/scan', '#/detect']) {
+    await open(hash)
+    const g = await js(`(() => { const c = document.querySelector('.grab').getBoundingClientRect(), v = document.querySelector('.arena').getBoundingClientRect()
+      return [c.x + c.width / 2, c.y + c.height / 2, Math.min(v.width, v.height) / 10.8] })()`)
+    await send('Input.dispatchMouseEvent', { type: 'mousePressed', x: g[0], y: g[1], button: 'left', clickCount: 1 })
+    await send('Input.dispatchMouseEvent', { type: 'mouseMoved', x: g[0] + 2 * g[2], y: g[1], button: 'left', buttons: 1 })
+    await send('Input.dispatchMouseEvent', { type: 'mouseReleased', x: g[0] + 2 * g[2], y: g[1], button: 'left', clickCount: 1 })
+    await sleep(200)
+    const xy = await js(`[...document.querySelectorAll('.panel input[type=range]')].slice(0, 2).map((i) => (+i.value).toFixed(2)).join(' ')`)
+    report(`${hash}: drag the robot 2 m right → x 0.50 → 2.50, y stays 0.50`, xy === '2.50 0.50' ? [] : [`sliders x y = ${xy}`])
+  }
 
   // Bring-up: Play from step 1 advances one launch stage per second and stops on the last.
   await open('#/bringup/1')

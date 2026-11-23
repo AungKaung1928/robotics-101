@@ -128,6 +128,7 @@ const en = {
     lines: [
       'The simplest LiDAR detector: walk the scan and start a new object wherever two neighbouring hits are farther apart than a threshold.',
       'Too small: one object breaks into pieces, because beams spread with range and land far apart on a surface hit at a shallow angle. Too large: neighbours merge.',
+      'Drag the robot on the map: the same object splits from one spot and not from another.',
     ],
     x: 'Robot x (m)',
     y: 'Robot y (m)',
@@ -281,6 +282,7 @@ const ja: typeof en = {
     lines: [
       '一番簡単な LiDAR 検出器: スキャンを順にたどり、隣り合う点がしきい値より離れたら新しい物体とする。',
       '小さすぎると 1 つの物体がばらばらになる。ビームは距離とともに広がり、浅い角度で当たる面では点が離れるため。大きすぎると隣の物体がつながる。',
+      '地図上のロボットをドラッグすると、同じ物体でも場所によって分かれたり分かれなかったりする。',
     ],
     x: 'ロボット x (m)',
     y: 'ロボット y (m)',

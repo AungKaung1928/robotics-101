@@ -5,6 +5,7 @@ import { clusterCount, clusters, objectsInView } from '../lib/cluster'
 import { gaussian } from '../lib/noise'
 import { beamAngles, castRayHit, sensorPose } from '../lib/scan'
 import Arena from './Arena'
+import Grab from './Grab'
 import { routeParam } from '../lib/route'
 import Slider from './Slider'
 
@@ -38,6 +39,7 @@ export default function DetectChapter({ t }: { t: Strings }) {
           <circle className="range" cx={sp.x} cy={sp.y} r={L.maxRange} />
           {pts.map((p, i) => p && <circle key={i} className="cl" style={{ '--h': hue(label[i]) } as React.CSSProperties} cx={p[0]} cy={p[1]} r="0.07" />)}
           <circle className="robot" cx={x} cy={y} r="0.22" />
+          <Grab x={x} y={y} onMove={(p) => { setX(p.x); setY(p.y) }} />
         </Arena>
       </div>
       <div className="panel">
