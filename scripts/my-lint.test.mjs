@@ -22,6 +22,11 @@ describe('Burmese encoding check', () => {
 })
 
 describe('lint', () => {
+  it('allows ordinary words that only contain a literary ending (guest, trader)', () => {
+    expect(lint('Guests wait.', 'ဧည့်သည်တွေ စောင့်ပါတယ်။', 'body').fail).toEqual([])
+    expect(lint('Traders wait.', 'ကုန်သည်တွေ စောင့်ပါတယ်။', 'body').fail).toEqual([])
+    expect(lint('It stops.', 'ရပ်သည်။', 'body').fail.join()).toMatch(/literary/)
+  })
   it('counts English number words as digits, like the parity test (one is free)', () => {
     expect(lint('two wheels', 'ဘီး နှစ်ဘီး', 'label').fail.join()).toMatch(/numbers/)
     expect(lint('two wheels', 'ဘီး 2 ဘီး', 'label').fail).toEqual([])
