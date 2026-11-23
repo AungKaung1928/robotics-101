@@ -58,7 +58,7 @@ export function playStop(events: number[], t: number, end: number, pauseAtSteps:
 export const SCRUB_THUMB_PX = 22
 
 /**
- * Scrubber track as one CSS gradient: played part filled, the rest plain, a 3 px transparent gap at every step event
+ * Scrubber track as one CSS gradient: played part filled, the rest in --scrub-rest (player.css), a 3 px transparent gap at every step event
  * inside (0, end), like chapter markers on a video progress bar, so the segments are seen before Play. Gaps show the
  * page behind (any theme). Positions follow the thumb centre (THUMB/2 + (100% - THUMB) * f), so the thumb sits exactly
  * on a gap when t is at that event.
@@ -70,7 +70,7 @@ export function scrubTrack(events: number[], t: number, end: number): string {
   const stops: string[] = []
   const seg = (a: number, b: number, to: string) => {
     if (f > a && f < b) stops.push(`var(--robot) 0 ${at(f)}`)
-    stops.push(`${b <= f ? 'var(--robot)' : 'var(--rule)'} 0 ${to}`)
+    stops.push(`${b <= f ? 'var(--robot)' : 'var(--scrub-rest)'} 0 ${to}`)
   }
   let prev = 0
   for (const g of gaps) { seg(prev, g, `calc(${at(g)} - 1.5px)`); stops.push(`transparent 0 calc(${at(g)} + 1.5px)`); prev = g }

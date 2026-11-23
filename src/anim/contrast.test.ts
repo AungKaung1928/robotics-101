@@ -63,3 +63,11 @@ describe('think ladder marks (data) keep 3:1 on the surface', () => {
     expect(ratio(mix(dark.robot, dark.surface, 0.35), dark.surface)).toBeLessThan(3)
   })
 })
+
+// Player scrubber: unplayed track = color-mix(ink-2 65 %, paper) (player.css); the step gaps show the page through it.
+describe.each([['light', light], ['dark', dark]] as const)('%s scrubber track', (_, t) => {
+  it('unplayed track vs page >= 3:1', () => {
+    expect(readFileSync('src/anim/player.css', 'utf8')).toContain('--scrub-rest: color-mix(in srgb, var(--ink-2) 65%, var(--paper))')
+    expect(ratio(over(t['ink-2'], 0.65, t.paper), t.paper)).toBeGreaterThanOrEqual(3)
+  })
+})
