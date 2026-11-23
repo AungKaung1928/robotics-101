@@ -137,3 +137,23 @@ describe('ThinkScene ladder', () => {
     expect(renderToStaticMarkup(<ThinkScene stopAt={0.5} t={0} label="" />)).not.toContain('tk-rung')
   })
 })
+
+describe('NodeFace and sinceLanding (Topics model)', () => {
+  it('landings every 1/hz after the travel time; a typo topic never lands', async () => {
+    const { sinceLanding } = await import('./NodeFace')
+    const { TOPICS, TRAVEL_MS } = await import('../chapters/l2/topics')
+    const hz = TOPICS.find((x) => x.name === '/scan')!.hz, tr = TRAVEL_MS / 1000
+    expect(sinceLanding({ node: 'nav2', topic: '/scan' }, tr - 0.01)).toBeNull()
+    expect(sinceLanding({ node: 'nav2', topic: '/scan' }, tr + 0.05)).toBeCloseTo(0.05)
+    expect(sinceLanding({ node: 'nav2', topic: '/scan' }, tr + 1 / hz + 0.02)).toBeCloseTo(0.02)
+    expect(sinceLanding({ node: 'my_node', topic: '/scna' }, 2)).toBeNull()
+    expect(sinceLanding({ node: 'my_node', topic: 'scan' }, tr + 0.05)).toBeCloseTo(0.05) // 'scan' resolves to /scan
+  })
+  it('munch right after a landing, idle later, starved with no landing', async () => {
+    const { default: NodeFace } = await import('./NodeFace')
+    const m = (since: number | null, starved = false) => renderToStaticMarkup(<svg><NodeFace x={0} y={0} starved={starved} since={since} /></svg>)
+    expect(m(0.05)).toContain('data-mood="munch"')
+    expect(m(0.15 + 0.2)).toContain('data-mood="idle"')
+    expect(m(null, true)).toContain('data-mood="starved"')
+  })
+})

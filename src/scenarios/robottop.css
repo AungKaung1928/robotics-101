@@ -50,3 +50,7 @@
 .tk-rung { fill: var(--robot); opacity: 0.35; }
 .tk-rung.is-bump { fill: none; stroke: var(--occ); stroke-width: 2; opacity: 0.6; }
 .tk-rung.is-pick { opacity: 1; }
+.nface-body { fill: var(--surface); stroke: var(--ink); stroke-width: 1.8; }
+.nface-eye { fill: var(--ink); }
+.nface-line { fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-linecap: round; }
+.nface[data-mood='starved'] .nface-body { stroke: var(--ink-2); stroke-dasharray: 2 2; }
