@@ -1,0 +1,17 @@
+/* Level 0 figures: the loop diagram. Colours from the tokens in index.css. */
+.loop { width: 100%; height: auto; }
+.loop .stage rect { fill: var(--surface); stroke: var(--rule); stroke-width: 2; transition: fill var(--motion), stroke var(--motion); }
+.loop .stage text { fill: var(--ink); font: 600 15px var(--font); }
+.loop .stage .icon { color: var(--ink-2); }
+.loop .stage.is-on rect { stroke: var(--free); stroke-width: 3; }
+.loop .stage.is-on .icon { color: var(--free); }
+.loop .say { fill: var(--ink-2); font: 13px var(--mono); }
+.loop-link, .loop-back { fill: none; stroke: var(--rule); stroke-width: 2; stroke-dasharray: 6 6; }
+.loop .track { stroke: var(--ink-2); stroke-width: 2; }
+.loop .stopline { stroke: var(--ray); stroke-dasharray: 4 4; }
+.loop .wall { fill: var(--occ); }
+.loop .bot { fill: var(--robot); }
+.loop .bot.is-crashed { fill: var(--ray); }
+.loop .beam { stroke: var(--ray); stroke-width: 2; stroke-dasharray: 3 5; }
+@media (prefers-reduced-motion: no-preference) { .loop-link, .loop-back { animation: loop-flow 1.2s linear infinite; } }
+@keyframes loop-flow { to { stroke-dashoffset: -24; } }
