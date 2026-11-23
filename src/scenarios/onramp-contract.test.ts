@@ -58,6 +58,36 @@ describe('SenseScene with the chapter box shows the chapter reading', () => {
       expect(h).toContain(`data-reading="${want === null ? 'none' : want.toFixed(2)}"`)
     }
   })
+  it('no reading (covered, or past the sensor range) shows the chapter word for nothing there', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: SenseScene } = await import('./SenseScene')
+    const sn = await import('../chapters/l0/sense')
+    const { SENSE_STRINGS } = await import('../chapters/l0/sense.strings')
+    const word = SENSE_STRINGS.en.nothing
+    for (const [front, covered] of [[4, false], [1.5, true]] as const) {
+      expect(sn.front(sn.turn(front, covered))).toBeNull()
+      const h = renderToStaticMarkup(createElement(SenseScene, { box: { ...sn.ROOM, front, maxFront: 5 }, mode: 'beam', covered, noneWord: word, label: '' }))
+      expect(h).toContain('data-reading="none"')
+      expect(h).toContain(`class="ss-num is-none"`)
+      expect(h).toContain(`>${word}</text>`)
+    }
+  })
+  it('wall past the range: the dashed beam ends at 3.5 m with a tick, short of the wall; covered or too close: no tick', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: SenseScene } = await import('./SenseScene')
+    const sn = await import('../chapters/l0/sense')
+    const at = (front: number, covered = false) => renderToStaticMarkup(createElement(SenseScene, { box: { ...sn.ROOM, front, maxFront: 5 }, mode: 'beam', covered, label: '' }))
+    const far = at(4)
+    expect(far).toContain('data-range="3.5"')
+    const beamX = +/class="ss-beam is-none" x1="[\d.]+" y1="[\d.]+" x2="([\d.]+)"/.exec(far)![1], tickX = +/class="ss-range" x1="([\d.]+)"/.exec(far)![1]
+    expect(beamX).toBeCloseTo(tickX, 3)
+    const wallXs = [...far.matchAll(/class="ss-wall[^"]*" x1="([\d.]+)" y1="[\d.]+" x2="([\d.]+)"/g)].filter((m) => m[1] === m[2]).map((m) => +m[1])
+    expect(Math.max(...wallXs)).toBeGreaterThan(beamX + 5) // the front wall is visibly further than the beam's end
+    expect(at(1.5, true)).not.toContain('ss-range')
+    expect(at(0.1)).not.toContain('ss-range')
+  })
 })
 
 describe('ThinkScene with the chapter model tells the chapter story', () => {
