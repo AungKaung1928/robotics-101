@@ -9,15 +9,18 @@ export function glide(from: number, to: number, elapsed: number, dur = GLIDE_MS)
   return from + (to - from) * easeInOut(elapsed / dur)
 }
 
-export type PlayerKey = 'toggle' | 'replay' | 'back' | 'next' | 'start' | 'end' | null
+export type PlayerKey = 'toggle' | 'replay' | 'back' | 'next' | 'start' | 'end' | 'slower' | 'faster' | null
 
 /**
- * Keyboard map of the Player group: Space / k play-pause, r replay from 0, ← / → step by event, Home / End jump.
+ * Keyboard map of the Player group: Space / k play-pause, r replay from 0, ← / → step by event, Home / End jump,
+ * < / > slower / faster (video players' Shift+, / Shift+.).
  * On the scrubber the arrows and Home/End stay the range input's own (fine scrubbing), so they map to null there.
  */
 export function playerKey(key: string, onScrubber: boolean): PlayerKey {
   if (key === ' ' || key === 'k') return 'toggle'
   if (key === 'r' || key === 'R') return 'replay'
+  if (key === '<') return 'slower'
+  if (key === '>') return 'faster'
   if (onScrubber) return null
   if (key === 'ArrowLeft') return 'back'
   if (key === 'ArrowRight') return 'next'
@@ -55,7 +58,7 @@ export function playStop(events: number[], t: number, end: number, pauseAtSteps:
 export const SCRUB_THUMB_PX = 22
 
 /**
- * Scrubber track as one CSS gradient: played part filled, the rest plain, a 3 px transparent gap at every step event
+ * Scrubber track as one CSS gradient: played part filled, the rest in --scrub-rest (player.css), a 3 px transparent gap at every step event
  * inside (0, end), like chapter markers on a video progress bar, so the segments are seen before Play. Gaps show the
  * page behind (any theme). Positions follow the thumb centre (THUMB/2 + (100% - THUMB) * f), so the thumb sits exactly
  * on a gap when t is at that event.
@@ -67,10 +70,41 @@ export function scrubTrack(events: number[], t: number, end: number): string {
   const stops: string[] = []
   const seg = (a: number, b: number, to: string) => {
     if (f > a && f < b) stops.push(`var(--robot) 0 ${at(f)}`)
-    stops.push(`${b <= f ? 'var(--robot)' : 'var(--rule)'} 0 ${to}`)
+    stops.push(`${b <= f ? 'var(--robot)' : 'var(--scrub-rest)'} 0 ${to}`)
   }
   let prev = 0
   for (const g of gaps) { seg(prev, g, `calc(${at(g)} - 1.5px)`); stops.push(`transparent 0 calc(${at(g)} + 1.5px)`); prev = g }
   seg(prev, 1, '100%')
   return `linear-gradient(to right, ${stops.join(', ')})`
+}
+
+/** Track fraction under a pointer x (px from the input's left edge) on the thumb-centre scale of scrubTrack, clamped. */
+export function scrubFrac(x: number, width: number): number {
+  const span = width - SCRUB_THUMB_PX
+  return span > 0 ? Math.min(1, Math.max(0, (x - SCRUB_THUMB_PX / 2) / span)) : 0
+}
+
+// Play triangle and pause bars as the same two 4-corner shapes (left half, right half), so CSS morphs one into the other.
+export const PLAY_D = 'M2 1L5.5 3L5.5 7L2 9ZM5.5 3L9 5L9 5L5.5 7Z'
+// At the end Play restarts from 0, so the icon becomes a replay arrow (video players' end state): three-quarter circle + chevron.
+export const REPLAY_D = 'M8.5 5A3.5 3.5 0 1 1 5 1.5M3.6 0.2L5 1.5L3.6 2.8'
+export const PAUSE_D = 'M2 1L4 1L4 9L2 9ZM6 1L8 1L8 9L6 9Z'
+
+/** Playback rates the speed button cycles through (protocol-explorer reference: a speed select next to Play). */
+export const RATES = [1, 2, 0.5] as const
+export const RATE_KEY = 'r101-rate'
+/** Next rate in the cycle; an unknown rate starts the cycle again at 1×. */
+export function nextRate(rate: number): number {
+  const i = RATES.indexOf(rate as (typeof RATES)[number])
+  return RATES[(i + 1) % RATES.length]
+}
+/** Stored rate if it is one of RATES, else 1 (the reader's choice carries to later chapters, like the pause hold). */
+export function storedRate(raw: string | null): number {
+  const r = Number(raw)
+  return (RATES as readonly number[]).includes(r) ? r : 1
+}
+/** One rate step slower (dir -1) or faster (dir 1) in 0.5 < 1 < 2 order, held at the ends. */
+export function shiftRate(rate: number, dir: -1 | 1): number {
+  const up = [...RATES].sort((a, b) => a - b), i = up.indexOf(rate as (typeof RATES)[number])
+  return i < 0 ? 1 : up[Math.min(up.length - 1, Math.max(0, i + dir))]
 }

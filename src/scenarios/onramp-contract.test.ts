@@ -58,6 +58,36 @@ describe('SenseScene with the chapter box shows the chapter reading', () => {
       expect(h).toContain(`data-reading="${want === null ? 'none' : want.toFixed(2)}"`)
     }
   })
+  it('no reading (covered, or past the sensor range) shows the chapter word for nothing there', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: SenseScene } = await import('./SenseScene')
+    const sn = await import('../chapters/l0/sense')
+    const { SENSE_STRINGS } = await import('../chapters/l0/sense.strings')
+    const word = SENSE_STRINGS.en.nothing
+    for (const [front, covered] of [[4, false], [1.5, true]] as const) {
+      expect(sn.front(sn.turn(front, covered))).toBeNull()
+      const h = renderToStaticMarkup(createElement(SenseScene, { box: { ...sn.ROOM, front, maxFront: 5 }, mode: 'beam', covered, noneWord: word, label: '' }))
+      expect(h).toContain('data-reading="none"')
+      expect(h).toContain(`class="ss-num is-none"`)
+      expect(h).toContain(`>${word}</text>`)
+    }
+  })
+  it('wall past the range: the dashed beam ends at 3.5 m with a tick, short of the wall; covered or too close: no tick', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: SenseScene } = await import('./SenseScene')
+    const sn = await import('../chapters/l0/sense')
+    const at = (front: number, covered = false) => renderToStaticMarkup(createElement(SenseScene, { box: { ...sn.ROOM, front, maxFront: 5 }, mode: 'beam', covered, label: '' }))
+    const far = at(4)
+    expect(far).toContain('data-range="3.5"')
+    const beamX = +/class="ss-beam is-none" x1="[\d.]+" y1="[\d.]+" x2="([\d.]+)"/.exec(far)![1], tickX = +/class="ss-range" x1="([\d.]+)"/.exec(far)![1]
+    expect(beamX).toBeCloseTo(tickX, 3)
+    const wallXs = [...far.matchAll(/class="ss-wall[^"]*" x1="([\d.]+)" y1="[\d.]+" x2="([\d.]+)"/g)].filter((m) => m[1] === m[2]).map((m) => +m[1])
+    expect(Math.max(...wallXs)).toBeGreaterThan(beamX + 5) // the front wall is visibly further than the beam's end
+    expect(at(1.5, true)).not.toContain('ss-range')
+    expect(at(0.1)).not.toContain('ss-range')
+  })
 })
 
 describe('ThinkScene with the chapter model tells the chapter story', () => {
@@ -73,10 +103,38 @@ describe('ThinkScene with the chapter model tells the chapter story', () => {
     }
     expect(th.run(0.01).crashed).toBe(true) // a rule smaller than one step of driving misses the wall
   })
+  it('the drawn d is the chapter distance: START_M at the start, run().final at the end, lit only when d < rule', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: ThinkScene } = await import('./ThinkScene')
+    const th = await import('../chapters/l0/think')
+    const model = { run: (a: number) => th.run(a), speed: th.SPEED, startM: th.START_M }
+    const at = (a: number, t: number) => renderToStaticMarkup(createElement(ThinkScene, { stopAt: a, t, model, label: '' }))
+    expect(at(th.RULE_M, 0)).toContain(`class="tk-d" data-d="${th.START_M.toFixed(2)}"`)
+    for (const a of [th.RULE_M, 0.25, 0.01]) {
+      const r = th.run(a)
+      expect(at(a, 60)).toContain(`data-d="${Math.max(0, r.final).toFixed(2)}"`)
+      expect(at(a, 60).includes('tk-d is-on')).toBe(r.final < a)
+    }
+  })
+})
+
+describe('ThinkScene built-in model: d is the sensor reading', () => {
+  it('a rule under the 0.12 m floor: at the end the sensor sees nothing, d is drawn as ?', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: ThinkScene } = await import('./ThinkScene')
+    const h = renderToStaticMarkup(createElement(ThinkScene, { stopAt: 0.1, t: 60, label: '' }))
+    expect(h).toContain('data-state="bumped"')
+    expect(h).toContain('class="tk-d is-blind" data-d="none"')
+    expect(h).toContain('d = ?')
+    const ok = renderToStaticMarkup(createElement(ThinkScene, { stopAt: 0.5, t: 60, label: '' }))
+    expect(ok).toMatch(/class="tk-d is-on" data-d="0\.[0-4]\d"/)
+  })
 })
 
 describe('SimPickScene takes the chapter ladder', () => {
-  it('one shelf per LADDER row, 3D rows get a side, none rows dashed, the picked row lit', async () => {
+  it('one shelf per LADDER row, 3D rows a full side, 2.5D rows a half side, none rows dashed, the picked row lit', async () => {
     const { renderToStaticMarkup } = await import('react-dom/server')
     const { createElement } = await import('react')
     const { default: SimPickScene } = await import('./SimPickScene')
@@ -85,8 +143,24 @@ describe('SimPickScene takes the chapter ladder', () => {
     const at = sp.LADDER.findIndex((r) => r.id === sp.pick({ gpu: false, sensor: true, physics: false }))
     const h = renderToStaticMarkup(createElement(SimPickScene, { rungs, pick: at, t: 9, label: '' }))
     expect(h.match(/class="sp-step/g)!.length).toBe(sp.LADDER.length)
-    expect(h.match(/sp-side/g)?.length ?? 0).toBe(sp.LADDER.filter((r) => r.dim === '3D').length)
+    expect(h.match(/l6 -5v/g)?.length ?? 0).toBe(sp.LADDER.filter((r) => r.dim === '3D').length)
+    expect(h.match(/l3 -2.5v/g)?.length ?? 0).toBe(sp.LADDER.filter((r) => r.dim === '2.5D').length)
+    expect(h.match(/is-25d/g)?.length ?? 0).toBe(sp.LADDER.filter((r) => r.dim === '2.5D').length)
     expect(h.match(/is-none/g)?.length ?? 0).toBe(sp.LADDER.filter((r) => r.dim === 'none').length)
     expect(h).toContain(`data-pick="${at}"`)
+  })
+})
+
+describe('SimWhatScene sensor off says why the view is blank', () => {
+  it('emptyWord in the view only when the sensor is off; no dots then', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: SimWhatScene } = await import('./SimWhatScene')
+    const { SIMWHAT_STRINGS } = await import('../chapters/l0/simwhat.strings')
+    const word = SIMWHAT_STRINGS.en.empty
+    const at = (sensorOn: boolean) => renderToStaticMarkup(createElement(SimWhatScene, { sensorOn, worldWord: 'w', viewWord: 'v', emptyWord: word, label: '' }))
+    expect(at(false)).toContain(`class="sw-none" x=`)
+    expect(at(false)).toContain(`>${word}</text>`)
+    expect(at(true)).not.toContain('sw-none')
   })
 })

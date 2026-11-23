@@ -38,3 +38,20 @@ export function brakeStretch(v: number, w: number, tStop: number, decel: number,
   if (t < end) return 1 + LEAN * Math.min(1, (t - tStop) / LEAN_IN)
   return 1 + springAt(t - end, BOUNCY, LEAN * Math.min(1, tb / LEAN_IN))
 }
+
+/** Drawing area of ActScene (viewBox 460 x 320, dials below y 250) and the room each pose needs around it, px. */
+export const ACT_VIEW = { w: 460, bottom: 248, side: 44, top: 52, under: 34, sMax: 300 }
+
+/**
+ * Screen frame for the whole trajectory (start to standstill), fixed for every t so nothing jumps during playback:
+ * the most px per m (up to sMax) that keeps every pose inside the drawing area with room for the robot, its wheel
+ * arrows and the roll-on label above it; the path is centred.
+ */
+export function actFrame(v: number, w: number, tStop: number, decel: number): { s: number; x0: number; y0: number } {
+  const T = tStop + brakeTime(v, w, decel), n = Math.max(2, Math.ceil(T / 0.05))
+  const ps = Array.from({ length: n + 1 }, (_, i) => actAt(v, w, tStop, decel, (i / n) * T).pose)
+  const xs = ps.map((p) => p.x), ys = ps.map((p) => p.y)
+  const [x1, x2, y1, y2] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)], V = ACT_VIEW
+  const s = Math.min(V.sMax, (V.w - 2 * V.side) / Math.max(1e-9, x2 - x1), (V.bottom - V.top - V.under) / Math.max(1e-9, y2 - y1))
+  return { s, x0: V.w / 2 - ((x1 + x2) / 2) * s, y0: (V.top + V.bottom - V.under) / 2 + ((y1 + y2) / 2) * s }
+}

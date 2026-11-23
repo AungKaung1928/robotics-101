@@ -9,7 +9,7 @@ const count = (h: string, re: RegExp) => h.match(re)?.length ?? 0
 describe('MoveScene and RobotTop', () => {
   it('straight: robot ends right of start, no skid, calm face', () => {
     const h = renderToStaticMarkup(<MoveScene vl={0.2} vr={0.2} t={1} label="" />)
-    expect(h).toContain('translate(110 200)') // 50 + 0.2 m · 300 px/m
+    expect(h).toContain('translate(120 200)') // 60 + 0.2 m · 300 px/m
     expect(count(h, /ms-skid/g)).toBe(0)
     expect(h).toContain('data-mood="idle"')
   })

@@ -1,10 +1,9 @@
 import RobotTop from './RobotTop'
-import { actAt, brakeStretch, wheels } from './act'
+import { actAt, actFrame, brakeStretch, wheels } from './act'
 import TurnOverlay from './TurnOverlay'
 import './robottop.css'
 
-const S = 300, X0 = 50, Y0 = 150, VMAX = 0.22, WMAX = 2.84 // px/m, start; Burger top speeds (ROBOTIS e-Manual)
-const scr = (p: { x: number; y: number }) => [X0 + p.x * S, Y0 - p.y * S] as const
+const VMAX = 0.22, WMAX = 2.84 // Burger top speeds (ROBOTIS e-Manual)
 const deg = (th: number) => (-th * 180) / Math.PI
 
 /** A half-circle gauge: the needle shows the COMMAND (it drops to 0 the moment stop is pressed). */
@@ -27,6 +26,7 @@ function Dial({ x, value, max, word }: { x: number; value: number; max: number; 
 export default function ActScene({ v, w, tStop, decel, t, vWord = 'v', wWord = 'ω', showTurn = false, label }: {
   v: number; w: number; tStop: number; decel: number; t: number; vWord?: string; wWord?: string; showTurn?: boolean; label: string
 }) {
+  const { s: S, x0, y0 } = actFrame(v, w, tStop, decel), scr = (p: { x: number; y: number }) => [x0 + p.x * S, y0 - p.y * S] as const
   const f = actAt(v, w, tStop, decel, t), on = t < tStop, [x, y] = scr(f.pose), [gx, gy] = scr(f.ghost), { vl, vr } = wheels(v, w)
   const path = Array.from({ length: Math.floor(t / 0.05) + 2 }, (_, i) => scr(actAt(v, w, tStop, decel, Math.min(i * 0.05, t)).pose))
     .map(([px, py], i) => `${i ? 'L' : 'M'}${px.toFixed(1)} ${py.toFixed(1)}`).join('')
