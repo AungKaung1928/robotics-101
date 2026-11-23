@@ -4,6 +4,7 @@ import { SOURCE_REPO, STACK, WAYPOINTS } from '../content/world'
 import { STRINGS, type Strings } from '../i18n'
 import { CHAPTERS, type ChapterId } from '../lib/route'
 import { CHAPTER_ICON, Icon } from '../icons'
+import { EP_CHAPTERS } from '../chapters/ep'
 import { LEVELS } from '../content/levels'
 import { readDone } from '../lib/progress'
 import Arena from './Arena'
@@ -55,6 +56,18 @@ export default function Overview({ t }: { t: Strings }) {
             ) : <span className="lv-chs note">{t.levels.soon}</span>}
           </li>
         ))}
+        <li className="is-ep">
+          <span className="lv-n">EP</span>
+          <span className="lv-name">{t.levels.ep} <span className="note">{t.levels.epNote}</span></span>
+          <span className="lv-chs">
+            {EP_CHAPTERS.map((c, i) => (
+              <a key={c.id} href={`#/ep/${c.id}`} className={done.has(c.id) ? 'is-done' : undefined}>
+                <Icon name={c.icon} /> <span>EP{i + 1} {ja ? c.titleJa : c.titleEn}</span>
+                {done.has(c.id) && <span className="tick" aria-label={t.levels.opened}>✓</span>}
+              </a>
+            ))}
+          </span>
+        </li>
       </ol>
     </section>
   )
@@ -65,7 +78,8 @@ export default function Overview({ t }: { t: Strings }) {
         <p className="eyebrow"><a href={SOURCE_REPO}>{STACK.join(' · ')}</a></p>
         <h1>{t.title}</h1>
         <p className="lede">{t.lede}</p>
-        <p className="cta"><a className="btn" href={`#/${CHAPTERS[0]}`}>{t.start} →</a> <span className="note">{t.keys}</span></p>
+        <p className="cta"><a className="btn" href={`#/0/${LEVELS[0][0].id}`}>{t.startR101} →</a> <a className="btn btn-2" href={`#/ep/${EP_CHAPTERS[0].id}`}>{t.levels.ep} →</a></p>
+        <p className="note">{t.keys}</p>
         <a className="peek" href={`#/${peek}`}>
           <span className="peek-n" data-k="peek">{CHAPTERS.indexOf(peek) + 1} / {CHAPTERS.length} · {VALUE[peek].v}</span>
           <strong><Icon name={CHAPTER_ICON[peek]} /> {t.chapters[peek]}</strong>
