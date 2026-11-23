@@ -22,6 +22,9 @@ export const LATE_STRINGS = {
     reorderTitle: 'Third fix: a reorder buffer',
     reorderText: 'Hold each reading until its stamp + a wait, then use them in stamp order. Never back in time, but every reading is used that much later; one that arrives after its wait is dropped.',
     window: 'wait (ms)', rUsed: 'used, in order', rDropped: 'dropped (too late for the wait)', rDelay: 'every reading used later by',
+    bpTitle: 'When the robot cannot keep up: backpressure',
+    bpText: 'Readings arrive every 100 ms. If handling one takes longer, they pile up in a queue that keeps only the newest few (KEEP_LAST depth). A short queue throws more away; a long one keeps more but the robot acts on older data.',
+    work: 'handling time (ms)', depth: 'queue depth', bDropped: 'readings thrown away', bOldest: 'oldest data acted on',
     words: 'Words',
     glossary: [
       ['header.stamp', 'the time the data was measured, set by the sender'],
@@ -56,6 +59,9 @@ export const LATE_STRINGS = {
     reorderTitle: '3つ目の直し方：並べ替えバッファ',
     reorderText: '各読み取り値をスタンプ + 待ち時間まで保持し、スタンプ順に使う。過去には戻らないが、どの値もその分だけ遅れて使われる。待ち時間より後に届いたものは捨てる。',
     window: '待ち時間（ms）', rUsed: '使った（順番通り）', rDropped: '捨てた（待ちに間に合わない）', rDelay: 'すべての値の遅れ',
+    bpTitle: 'ロボットが追いつけないとき：バックプレッシャー',
+    bpText: '読み取り値は 100 ms ごとに届く。1つの処理がそれより長いと、最新の数個だけを残すキュー（KEEP_LAST の深さ）に溜まる。短いキューは多く捨て、長いキューは多く残すが、ロボットはより古いデータで動く。',
+    work: '処理時間（ms）', depth: 'キューの深さ', bDropped: '捨てた読み取り値', bOldest: '使った中で最も古いデータ',
     words: '用語',
     glossary: [
       ['header.stamp', 'データを測った時刻。送り手が設定する'],

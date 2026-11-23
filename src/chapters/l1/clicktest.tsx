@@ -46,6 +46,7 @@ const cases = (l: Lang): Case[] => [
   { name: 'bfs costmap', Body: BfsChapter, steps: [{ click: 'button.costmap' }, { expect: 'len', has: '15' }, { expect: 'cost', has: '15' }, { click: 'button.costmap' }, { expect: 'len', has: '13' }] },
   { name: 'late slider', Body: LateChapter, steps: [{ expect: 'backwards', has: '5' }, { slide: 0.17 }, { expect: 'challenge', ok: true }, { slide: 0.18 }, { expect: 'backwards', has: '1' }] },
   { name: 'late reorder', Body: LateChapter, steps: [{ expect: 'r-dropped', is: '4' }, { slide: 450, in: '.reorder input[type=range]' }, { expect: 'r-used', is: '20' }, { expect: 'r-delay', has: '0.45' }] },
+  { name: 'late backpressure', Body: LateChapter, steps: [{ slide: 100, in: '.bp-work input[type=range]' }, { expect: 'b-dropped', is: '0' }, { slide: 150, in: '.bp-work input[type=range]' }, { slide: 1, in: '.bp-depth input[type=range]' }, { expect: 'b-dropped', re: /^[1-9]/ }] },
   { name: 'late keep-latest', Body: LateChapter, steps: [{ expect: 'count:svg.late rect.env', is: '0' }, { click: '.break' }, { expect: 'count:svg.late rect.env', is: '20' }, { expect: 'backwards', has: '0' }, { expect: 'acted', has: '15' }] },
 ]
 

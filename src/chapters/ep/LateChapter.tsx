@@ -6,7 +6,7 @@ import { STRINGS, type Strings } from '../../i18n'
 import Gloss from '../l1/Gloss'
 import '../l1/l1.css'
 import LateEnvelopes from '../../scenarios/LateEnvelopes'
-import { DELAYS_MS, END_MS, PERIOD_MS, inGoal, reorder, run, scenario, summary } from './late'
+import { DELAYS_MS, END_MS, PERIOD_MS, backpressure, inGoal, reorder, run, scenario, summary } from './late'
 import { LATE_STRINGS } from './late.strings'
 import './ep.css'
 
@@ -23,6 +23,9 @@ export default function LateChapter({ t }: { t: Strings }) {
   const [keepLatest, setKeepLatest] = useState(false)
   const [windowMs, setWindowMs] = useState(200)
   const ro = reorder(windowMs)
+  const [workMs, setWorkMs] = useState(150)
+  const [depth, setDepth] = useState(10)
+  const bp = backpressure(workMs, depth)
   const o = useMemo(() => run(Math.round(maxAge * 1000), keepLatest), [maxAge, keepLatest])
   const sum = summary(o)
   const sc = useMemo(() => scenario(), [])
@@ -92,6 +95,14 @@ export default function LateChapter({ t }: { t: Strings }) {
           <div><dt>{s.rUsed}</dt><dd data-k="r-used">{ro.used.length}</dd></div>
           <div><dt>{s.rDropped}</dt><dd data-k="r-dropped">{ro.dropped.length}</dd></div>
           <div><dt>{s.rDelay}</dt><dd data-k="r-delay">{(ro.addedDelayMs / 1000).toFixed(2)} s</dd></div>
+        </dl>
+        <p className="group-h">{s.bpTitle}</p>
+        <p>{s.bpText}</p>
+        <div className="bp-work"><Slider label={s.work} value={workMs} min={50} max={300} step={10} fmt={(v) => String(v)} onChange={setWorkMs} /></div>
+        <div className="bp-depth"><Slider label={s.depth} value={depth} min={1} max={10} step={1} fmt={(v) => String(v)} onChange={setDepth} /></div>
+        <dl className="readout">
+          <div><dt>{s.bDropped}</dt><dd data-k="b-dropped">{bp.dropped}</dd></div>
+          <div><dt>{s.bOldest}</dt><dd data-k="b-oldest">{(bp.oldestMs / 1000).toFixed(2)} s</dd></div>
         </dl>
         <p className="group-h">{s.words}</p>
         <Gloss items={s.glossary} />
