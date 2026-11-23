@@ -8,7 +8,8 @@ import { LIDAR } from '../../content/world'
  */
 export interface Field { name: string; type: string; line: number; value: string | null }
 export const SAMPLES = LIDAR.samples
-/** gz gpu_lidar spacing: the samples span [min, max] with both ends included (formula, not read from a running robot). */
+/** Gazebo's lidar spacing, both ends included: Lidar::AngleResolution() = (max - min) / (RangeCount - 1)
+ * (ign-sensors6 src/Lidar.cc:346-350, gz-sensors8 :357-361). Not read from a running robot. */
 export const INC = (LIDAR.maxAngle - LIDAR.minAngle) / (SAMPLES - 1)
 
 export const LASERSCAN: Field[] = [
