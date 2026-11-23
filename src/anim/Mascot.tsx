@@ -4,7 +4,7 @@ import { PRESS_STYLE } from './spring'
 import './mascot.css'
 
 const reduced = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
-export type Mood = 'idle' | 'happy' | 'oops' | 'think'
+export type Mood = 'idle' | 'happy' | 'oops' | 'think' | 'sleep'
 type Reaction = 'happy' | 'oops' | 'boop' | 'brake' | 'start'
 const REACTION: Record<Reaction, { pose: (t: number) => Pose; end: number }> = {
   happy: { pose: happyPose, end: HAPPY_S }, oops: { pose: oopsPose, end: OOPS_S }, boop: { pose: boopPose, end: BOOP_S },
@@ -20,8 +20,8 @@ const REACTION: Record<Reaction, { pose: (t: number) => Pose; end: number }> = {
  * e.g. the playhead's place on the scrubber. `roll` = distance driven in the drawing's own units (64-unit box): the
  * wheels turn by roll / radius, so they never skid against the floor.
  */
-export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look = 0, roll = 0, thinking = false, size = 64, label, inSvg = false }: {
-  cheer?: number; oops?: number; brake?: number; start?: number; look?: number; roll?: number; thinking?: boolean
+export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look = 0, roll = 0, thinking = false, sleepAfter = 0, size = 64, label, inSvg = false }: {
+  cheer?: number; oops?: number; brake?: number; start?: number; look?: number; roll?: number; thinking?: boolean; sleepAfter?: number
   size?: number; label: string; inSvg?: boolean
 }) {
   const [act, setAct] = useState<{ kind: Reaction; n: number } | null>(null)
@@ -53,7 +53,8 @@ export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look
   }, [act])
   // Boop on pointer arrival or tap, only when idle: it never cuts a cheer or an oops short, and runs to the end.
   const boop = () => { if (!act) setAct({ kind: 'boop', n: 0 }) }
-  const mood: Mood = act && (act.kind === 'happy' || act.kind === 'oops') ? act.kind : thinking ? 'think' : 'idle'
+  const asleep = useIdle(sleepAfter)
+  const mood: Mood = act && (act.kind === 'happy' || act.kind === 'oops') ? act.kind : thinking ? 'think' : asleep ? 'sleep' : 'idle'
   const head = act && !reduced() ? headLag(REACTION[act.kind].pose, t) : undefined
   // Face swaps blink through (closed at the swap); reduced motion: instant.
   const [face, setFace] = useState<{ from: Mood; to: Mood; t: number }>({ from: mood, to: mood, t: SWAP_S })
@@ -112,6 +113,8 @@ export function MascotFigure({ pose, mood, size = 64, label, spark = 0, dizzy = 
                 <g transform={`translate(32 24) scale(1 ${eyes?.sy ?? 1}) translate(-32 -24)`}>
                 {(eyes?.mood ?? mood) === 'happy' ? (
                   <g className="m-face"><path d="M24 25q3-4 6 0M34 25q3-4 6 0" /></g>
+                ) : (eyes?.mood ?? mood) === 'sleep' ? (
+                  <g className="m-face"><path d="M24 24q3 3 6 0M34 24q3 3 6 0" /></g>
                 ) : (
                   <g className="m-face m-eyes"><circle cx="27" cy="24" r={(eyes?.mood ?? mood) === 'oops' ? 3 : 2.2} /><circle cx="37" cy="24" r={(eyes?.mood ?? mood) === 'oops' ? 3 : 2.2} />{(eyes?.mood ?? mood) === 'oops' && <circle className="m-mouth" cx="32" cy="29.5" r="1.4" />}</g>
                 )}
@@ -123,10 +126,28 @@ export function MascotFigure({ pose, mood, size = 64, label, spark = 0, dizzy = 
           </g>
         </g>
       </g>
+      {mood === 'sleep' && <g className="m-zz"><path d="M48 9h4l-4 4h4" /><path d="M54 2h3l-3 3h3" /></g>}
       {mood === 'think' && (
         <g className="m-think">{[50, 55, 60].map((x, i) => <circle key={x} cx={x} cy={7 - i} r="1.8" style={{ animationDelay: `${i * 0.2}s` }} />)}</g>
       )}
       {sparks(spark).map((p, i) => <circle key={i} className="m-spark" data-i={i % 2} cx={p.x} cy={p.y} r="1.8" opacity={p.o} />)}
     </svg>
   )
+}
+
+/**
+ * True once `after` s pass with no pointer, key or scroll input on the page (0 = never). Any input wakes it at once.
+ * The face then swaps to sleep through the usual blink, so falling asleep and waking both read as a blink.
+ */
+export function useIdle(after: number): boolean {
+  const [idle, setIdle] = useState(false)
+  useEffect(() => {
+    if (!after || typeof window === 'undefined') return
+    let id = setTimeout(() => setIdle(true), after * 1000)
+    const wake = () => { clearTimeout(id); setIdle(false); id = setTimeout(() => setIdle(true), after * 1000) }
+    const evs = ['pointermove', 'pointerdown', 'keydown', 'scroll'] as const
+    evs.forEach((e) => window.addEventListener(e, wake, { passive: true }))
+    return () => { clearTimeout(id); evs.forEach((e) => window.removeEventListener(e, wake)) }
+  }, [after])
+  return idle
 }

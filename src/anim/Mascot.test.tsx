@@ -43,3 +43,13 @@ describe('Mascot render', () => {
   })
 })
 
+
+describe('sleep face', () => {
+  it('closed eyes and two z, no open eyes', () => {
+    const h = renderToStaticMarkup(<MascotFigure pose={REST} mood="sleep" label="" />)
+    expect(h).toContain('data-mood="sleep"')
+    expect(h).toContain('m-zz')
+    expect(h).toContain('M24 24q3 3 6 0')
+    expect(h).not.toContain('m-eyes')
+  })
+})

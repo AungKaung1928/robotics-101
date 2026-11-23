@@ -27,6 +27,12 @@
 .mascot .m-blush { fill: var(--ray); opacity: 0.22; }
 .mascot[data-mood='happy'] .m-blush { opacity: 0.4; }
 @media (prefers-color-scheme: dark) { .mascot .m-blush { opacity: 0.45; } .mascot[data-mood='happy'] .m-blush { opacity: 0.65; } }
+/* Sleep (no input for a while): closed eyes, slower breath, two small z that drift up and fade; reduced motion: still z. */
+.mascot[data-mood='sleep'] .m-breath { animation-duration: 5.6s; }
+.mascot .m-zz path { fill: none; stroke: var(--ink-2); stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; animation: m-zz 2.8s ease-in-out infinite; }
+.mascot .m-zz path + path { animation-delay: 1.4s; }
+@keyframes m-zz { 0% { opacity: 0; transform: translateY(3px); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(-3px); } }
+@media (prefers-reduced-motion: reduce) { .mascot .m-zz path { animation: none; } }
 /* Curious: the head tilts while thinking, on the press spring (a little overshoot); reduced motion keeps the tilt, no swing. */
 .mascot .m-tilt { transform-box: view-box; transform-origin: 32px 31px; transition: transform var(--spring-ms, 300ms) var(--spring, ease-out); }
 .mascot[data-mood='think'] .m-tilt { transform: rotate(-8deg); }
