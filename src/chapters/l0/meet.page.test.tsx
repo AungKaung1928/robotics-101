@@ -7,7 +7,7 @@ import { MEET_STRINGS } from './meet.strings'
 
 const words = (x: string) => x.split(/\s+/).filter(Boolean).length
 const BANNED = /\b(ROS|node|topic|python|code|program|LiDAR|Gazebo|RViz)\b/i
-// e-Manual Features: 138 x 178 x 192 mm (L x W x H), 1 kg, 2 h 30 min; xacro:16 + :117: sensor 0.010 + 0.172 m up.
+// e-Manual Features: 138 x 178 x 192 mm (L x W x H), 1 kg, 2 h 30 min; xacro:16 + :118: sensor 0.010 + 0.172 m up.
 const SPEC = { l: 13.8, w: 17.8, h: 19.2, sensorCm: (0.01 + 0.172) * 100, hours: 2.5 }
 
 describe('meet page', () => {
