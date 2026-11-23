@@ -13,7 +13,7 @@ A free course for people with no robotics experience: from "what does a robot do
 | 4 Mapping and navigation | occupancy grid, costmap, reaching a goal, bring-up order |
 | Engineering Practice (optional) | BFS on a grid, telemetry when messages arrive late |
 
-![The plan, then the seven waypoints in order (10 s): launch timeline stepped to SLAM, TF frames, LiDAR scan, clusters, occupancy grid after 7 scans, costmap, goal](docs/media/demo.gif)
+![The level map, then one chapter per level: 0.1 sense-think-act, 1.1 decisions, 2.1 nodes, 3.3 TF debugging lab, the occupancy grid, reaching a goal, and EP1 BFS](docs/media/demo.gif)
 
 The seven patrol chapters (Levels 3-4) and the numbers they show:
 
