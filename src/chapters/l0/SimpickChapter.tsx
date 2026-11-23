@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Mascot from '../../anim/Mascot'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { LADDER, SOURCES, pick, type Answers } from './simpick'
 import { SIMPICK_STRINGS } from './simpick.strings'
 import './l0.css'
@@ -14,7 +14,7 @@ const ANSWERS: Answer[] = ['mvsim', 'gazebo', 'isaac']
 
 /** Level 0 "simpick": the ladder of simulators; three yes/no questions light the one row to start with. */
 export default function SimpickChapter({ t }: { t: Strings }) {
-  const s = SIMPICK_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(SIMPICK_STRINGS, t, 'l0.simpick.SIMPICK_STRINGS')
   const [a, setA] = useState<Answers>({ gpu: null, sensor: null, physics: null })
   const [picked, setPicked] = useState<Answer | null>(null)
   const [cheer, setCheer] = useState(0)

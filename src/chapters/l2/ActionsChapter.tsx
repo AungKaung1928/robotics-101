@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import Player from '../../anim/Player'
 import Slider from '../../components/Slider'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { STATUS, challengeOk, run, scenario, type Ev } from './actions'
 import { ACTIONS_STRINGS } from './actions.strings'
 import '../l1/l1.css'
@@ -15,7 +15,7 @@ const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-red
 
 /** 2.4: one NavigateToPose goal as a sequence diagram; the reader cancels it or makes it unreachable. */
 export default function ActionsChapter({ t }: { t: Strings }) {
-  const s = ACTIONS_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(ACTIONS_STRINGS, t, 'l2.actions.ACTIONS_STRINGS')
   const [distance, setDistance] = useState(2)
   const [reachable, setReachable] = useState(true)
   const [cancelAt, setCancelAt] = useState<number | null>(null)

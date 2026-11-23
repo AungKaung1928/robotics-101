@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import Player from '../../anim/Player'
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { DURATION_MS, TOPICS, challengeOk, received, resolve, scenario, subs } from './topics'
 import { TOPICS_STRINGS } from './topics.strings'
 import '../l1/l1.css'
@@ -23,7 +23,7 @@ const wire = (node: string, topic: string) =>
 
 /** 2.2: one publisher, many subscribers, dots per message; the reader names my_node's topic. */
 export default function TopicsChapter({ t }: { t: Strings }) {
-  const s = TOPICS_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(TOPICS_STRINGS, t, 'l2.topics.TOPICS_STRINGS')
   const [slamTopic, setSlamTopic] = useState('/scan')
   const [mine, setMine] = useState('/scna')
   const sc = useMemo(() => scenario(slamTopic, mine), [slamTopic, mine])

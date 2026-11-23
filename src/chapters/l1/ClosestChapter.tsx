@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import Player from '../../anim/Player'
 import Slider from '../../components/Slider'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { BASE, BOX_M, beamDeg, challengeOk, closestOf, readings, scenario, trace, updates, type Start } from './closest'
 import { CLOSEST_STRINGS } from './closest.strings'
 import './l1.css'
@@ -18,7 +18,7 @@ const end = (i: number, d: number) => {
 
 /** 1.2: a for loop over 10 readings inside a function. The scenario steps the loop pass by pass. */
 export default function ClosestChapter({ t }: { t: Strings }) {
-  const s = CLOSEST_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(CLOSEST_STRINGS, t, 'l1.closest.CLOSEST_STRINGS')
   const [boxAt, setBoxAt] = useState(6)
   const [start, setStart] = useState<Start>('inf')
   const sc = useMemo(() => scenario(boxAt, start), [boxAt, start])

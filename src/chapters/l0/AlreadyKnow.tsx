@@ -1,4 +1,4 @@
-import { STRINGS, type Strings } from '../../i18n'
+import { langOf, stringsFor, type Strings } from '../../i18n'
 import { ACT_STRINGS } from './act.strings'
 import { MEET_STRINGS } from './meet.strings'
 import { MOVE_STRINGS } from './move.strings'
@@ -17,6 +17,7 @@ const LEAD = { en: 'You already know:', ja: 'もう知っていること：' }
 export default function AlreadyKnow({ id, t }: { id: string; t: Strings }) {
   const from = GROWS_FROM[id]
   if (!from || !L0_TITLES[from]) return null
-  const l = t === STRINGS.ja ? 'ja' : 'en'
-  return <p className="note already" data-k="already-know">{LEAD[l]} <a href={`#/0/${from}`}>{L0_TITLES[from][l].title}</a></p>
+  const l = langOf(t) === 'ja' ? 'ja' : 'en' // LEAD has no Burmese yet: English
+  const title = stringsFor(L0_TITLES[from], t, `l0.${from}.${from.toUpperCase()}_STRINGS`).title
+  return <p className="note already" data-k="already-know">{LEAD[l]} <a href={`#/0/${from}`}>{title}</a></p>
 }

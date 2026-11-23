@@ -1,5 +1,5 @@
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { langOf, type Strings } from '../../i18n'
 import { REAL } from './realproject'
 
 const HEAD = { en: 'From a real project', ja: '実際のプロジェクトから' }
@@ -8,7 +8,7 @@ const HEAD = { en: 'From a real project', ja: '実際のプロジェクトから
 export default function RealProject({ id, t }: { id: string; t: Strings }) {
   const box = REAL[id]
   if (!box) return null
-  const l = t === STRINGS.ja ? 'ja' : 'en'
+  const l = langOf(t) === 'ja' ? 'ja' : 'en' // box text lives in realproject.ts, not a .strings.ts: no Burmese yet, English
   return (
     <aside className="real-project" data-k="real">
       <p className="group-h">{HEAD[l]}</p>

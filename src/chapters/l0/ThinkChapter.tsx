@@ -3,7 +3,7 @@ import Mascot from '../../anim/Mascot'
 import Player from '../../anim/Player'
 import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import RobotSide from '../l1/RobotSide'
 import '../l1/l1.css'
 import { RULE_M, SCAN_HZ, SPEED, run, scenario } from './think'
@@ -19,7 +19,7 @@ const ANSWERS: Answer[] = ['earlier', 'later', 'never']
 
 /** Level 0 "think": the 1.1 rule and figure (RobotSide, decide.run) with the number as the only control; no code. */
 export default function ThinkChapter({ t }: { t: Strings }) {
-  const s = THINK_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(THINK_STRINGS, t, 'l0.think.THINK_STRINGS')
   const [rule, setRule] = useState(RULE_M)
   const [picked, setPicked] = useState<Answer | null>(null)
   const [cheer, setCheer] = useState(0)

@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import Player from '../../anim/Player'
 import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { CHECK_MS, DEFAULT, JUMP_M, N, caught, challengeOk, effective, falseAlarms, flagged, scenario, steps, type Source } from './params'
 import { PARAMS_STRINGS } from './params.strings'
 import '../l1/l1.css'
@@ -16,7 +16,7 @@ const SRC = `${SOURCE_REPO}/blob/main/src/tf_anomaly_detector.cpp`
 
 /** 2.5: one parameter, three places to set it; the bar chart shows each 0.5 s check against the limit. */
 export default function ParamsChapter({ t }: { t: Strings }) {
-  const s = PARAMS_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(PARAMS_STRINGS, t, 'l2.params.PARAMS_STRINGS')
   const [value, setValue] = useState(0.3)
   const [src, setSrc] = useState<Source>('default')
   const max = effective(src, value)

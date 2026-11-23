@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import Player from '../../anim/Player'
 import type { ChapterMeta } from '../../anim/contract'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, titleOf, type Strings } from '../../i18n'
 import { Icon } from '../../icons'
 import { LEVEL1_CHAPTERS } from '.'
 import { introScenario } from './intro'
@@ -12,12 +12,12 @@ import './l1.css'
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 
 /** Chapter chips of one level: lit up to `lit`, each a link to its chapter (#/<level>/<id>). */
-export function Chips({ list, lit, ja }: { list: ChapterMeta[]; lit: number; ja: boolean }) {
+export function Chips({ list, lit, t }: { list: ChapterMeta[]; lit: number; t: Strings }) {
   return (
     <ol className="chips">
       {list.map((c, i) => (
         <li key={c.id} className={i < lit ? 'on' : ''}>
-          <a href={`#/${c.level}/${c.id}`}><Icon name={c.icon} /> <span>{c.level}.{i + 1}</span> {ja ? c.titleJa : c.titleEn}</a>
+          <a href={`#/${c.level}/${c.id}`}><Icon name={c.icon} /> <span>{c.level}.{i + 1}</span> {titleOf(c, t)}</a>
         </li>
       ))}
     </ol>
@@ -32,8 +32,7 @@ export function useIntro(durationMs: number) {
 
 /** Level 1 intro: the 1.1 drive plays while the five chapter chips light up. */
 export default function Intro1({ t }: { t: Strings }) {
-  const ja = t === STRINGS.ja
-  const s = INTRO1_STRINGS[ja ? 'ja' : 'en']
+  const s = stringsFor(INTRO1_STRINGS, t, 'l1.intro.INTRO1_STRINGS')
   const sc = useMemo(() => introScenario(), [])
   const { now, setTS } = useIntro(sc.durationMs)
   const f = sc.frame(now * 1000)
@@ -47,7 +46,7 @@ export default function Intro1({ t }: { t: Strings }) {
       <div className="panel">
         <p className="learn">{s.title}</p>
         <p>{s.lead}</p>
-        <Chips list={LEVEL1_CHAPTERS} lit={f.lit} ja={ja} />
+        <Chips list={LEVEL1_CHAPTERS} lit={f.lit} t={t} />
         <p><a href={`#/1/${LEVEL1_CHAPTERS[0].id}`}>{s.start}</a></p>
       </div>
     </>
