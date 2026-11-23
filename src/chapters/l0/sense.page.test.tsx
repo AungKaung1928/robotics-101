@@ -31,6 +31,9 @@ describe('sense page', () => {
       for (const n of [BEAMS, TURNS_PER_S, perSecond(), `${MIN_M * 100} cm`, `${MAX_M} m`, `${COVER_M * 100} cm`]) expect(all).toContain(String(n))
     }
   })
+  it('real sensors: our simulated one is the LDS-01 (e-Manual 120-3,500 mm); the LDS-02 is 160-8,000 mm', () => {
+    for (const l of ['en', 'ja'] as const) for (const x of ['LDS-01', 'LDS-02', 'LDS-03', '16 cm', '8 m']) expect(SENSE_STRINGS[l].real).toContain(x)
+  })
   it.each(['en', 'ja'] as const)('%s renders: 360 dots at the start, front 1.50 m, sources', (l) => {
     const html = renderToStaticMarkup(<SenseChapter t={STRINGS[l]} />)
     expect(html.match(/class="sense-dot"/g)?.length).toBe(BEAMS)

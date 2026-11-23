@@ -76,7 +76,7 @@ export default function SenseChapter({ t }: { t: Strings }) {
         </div>
         <p className="group-h">{s.words}</p>
         <dl className="gloss">{s.glossary.map(([w, m]) => <div key={w} style={{ display: 'contents' }}><dt>{w}</dt><dd>{m}</dd></div>)}</dl>
-        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L168`}>turtlebot3_burger.urdf.xacro:168</a> (5 turns/s), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L174`}>:174</a> (360), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L181-L182`}>:181-182</a> (0.12-3.5 m).</p>
+        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L168`}>turtlebot3_burger.urdf.xacro:168</a> (5 turns/s), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L174`}>:174</a> (360), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L181-L182`}>:181-182</a> (0.12-3.5 m), <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/appendix_lds_01/">LDS-01</a> and <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/appendix_lds_02/">LDS-02</a> specifications, <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/sbc_setup/">SBC setup</a> (three LDS models) (ROBOTIS e-Manual).</p>
       </div>
     </>
   )
