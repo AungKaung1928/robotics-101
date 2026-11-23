@@ -10,6 +10,8 @@ import LateChapter from '../ep/LateChapter'
 import MoveChapter from '../l0/MoveChapter'
 import SenseChapter from '../l0/SenseChapter'
 import ThinkChapter from '../l0/ThinkChapter'
+import ActChapter from '../l0/ActChapter'
+import { ACT_STRINGS } from '../l0/act.strings'
 import { THINK_STRINGS } from '../l0/think.strings'
 import { SENSE_STRINGS } from '../l0/sense.strings'
 import { MOVE_STRINGS } from '../l0/move.strings'
@@ -63,6 +65,9 @@ const cases = (l: Lang): Case[] => [
   { name: 'think rule', Body: ThinkChapter, steps: [{ slide: 0.9 }, { expect: 'final', re: /^0\.8\d m$/ }, { slide: 0.02 }, { expect: 'final', is: THINK_STRINGS[l].bumped }] },
   { name: 'think break', Body: ThinkChapter, steps: [{ click: '.break' }, { expect: 'final', is: THINK_STRINGS[l].bumped }, { click: '.break' }, { expect: 'final', has: '0.4' }] },
   { name: 'think check', Body: ThinkChapter, steps: [{ click: 'button.pick', text: THINK_STRINGS[l].answers.earlier }, { expect: 'check', ok: true }, { a11y: true }] },
+  { name: 'act wheels', Body: ActChapter, steps: [{ slide: 0, in: '.act-turn input[type=range]' }, { expect: 'left', is: '0.15 m/s' }, { expect: 'right', is: '0.15 m/s' }, { slide: 0.22 }, { slide: 1.5, in: '.act-turn input[type=range]' }, { expect: 'right', has: ACT_STRINGS[l].tooFast }] },
+  { name: 'act stop', Body: ActChapter, steps: [{ slide: 0.22 }, { click: '.break' }, { expect: 'rolled', is: '1.0 cm' }, { expect: 'note', has: '0.09' }] },
+  { name: 'act check', Body: ActChapter, steps: [{ click: 'button.pick', text: ACT_STRINGS[l].answers.later }, { expect: 'check', ok: true }, { a11y: true }] },
 ]
 
 const setValue = (el: HTMLInputElement, v: string) => {
