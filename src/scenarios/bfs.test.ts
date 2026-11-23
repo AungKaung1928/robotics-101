@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { bfs, bfsTimeline, layerAt, pathTo, robotAt } from './bfs'
+import { bfs, bfsTimeline, layerAt, pathTo, robotAt, tracedCells } from './bfs'
 
 const parse = (rows: string[]) => ({ w: rows[0].length, h: rows.length, blocked: rows.join('').split('').map((c) => c === '#') })
 
@@ -33,15 +33,19 @@ describe('EP1 BFS', () => {
     expect(pathTo(bfs(w, h, blocked, 0), 8)).toEqual([])
     expect(bfs(w, h, blocked, 1).order).toEqual([])
   })
-  it('timeline: front reaches the goal layer at `found`, robot starts then and ends on the goal', () => {
-    const tl = bfsTimeline(8, 0.25, 0.3)
+  it('timeline: front reaches the goal at `found`, parents traced back by `traced`, robot ends on the goal', () => {
+    const tl = bfsTimeline(8, 0.25, 0.3, 0.05)
     expect(tl.found).toBeCloseTo(2, 12)
-    expect(tl.end).toBeCloseTo(2 + 8 * 0.3, 12)
-    expect(layerAt(0, 0.25, 8)).toBe(0)
+    expect(tl.traced).toBeCloseTo(2.4, 12)
+    expect(tl.end).toBeCloseTo(2.4 + 8 * 0.3, 12)
+    expect(tl.events).toEqual([0, tl.found, tl.traced, tl.end])
     expect(layerAt(tl.found, 0.25, 8)).toBe(8)
     expect(layerAt(99, 0.25, 8)).toBe(8)
-    expect(robotAt(1, tl.found, 0.3, 9)).toBe(0)
-    expect(robotAt(tl.end, tl.found, 0.3, 9)).toBeCloseTo(8, 12)
-    expect(robotAt(99, tl.found, 0.3, 9)).toBe(8)
+    expect(tracedCells(tl.found - 0.01, tl.found, 0.05, 9)).toBe(0)
+    expect(tracedCells(tl.found, tl.found, 0.05, 9)).toBe(1) // the goal itself
+    expect(tracedCells(tl.traced, tl.found, 0.05, 9)).toBe(9) // back to the start
+    expect(robotAt(tl.traced - 0.01, tl.traced, 0.3, 9)).toBe(0) // waits for the trace
+    expect(robotAt(tl.end, tl.traced, 0.3, 9)).toBeCloseTo(8, 12)
+    expect(robotAt(99, tl.traced, 0.3, 9)).toBe(8)
   })
 })

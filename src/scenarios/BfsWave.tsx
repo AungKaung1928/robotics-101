@@ -1,22 +1,23 @@
 import Mascot from '../anim/Mascot'
 import { arrivalScale } from '../anim/spring'
-import { bfs, bfsTimeline, layerAt, pathTo, robotAt } from './bfs'
+import { bfs, bfsTimeline, layerAt, pathTo, robotAt, tracedCells } from './bfs'
 import './bfswave.css'
 
 /**
  * EP1 figure: the BFS wavefront spreads one layer per `layerS` s from the robot; each cell pops in (PRESS spring)
  * at the moment BFS discovers it, so the ripple is the algorithm's own order. When the front reaches the goal the
- * parent chain is drawn and the robot drives it at `cellS` s per cell, cheering on arrival.
+ * parent chain is walked back from the goal (how BFS recovers the path: each cell only knows its parent), then the robot drives it at `cellS` s per cell, cheering on arrival.
  */
-export default function BfsWave({ w, h, blocked, start, goal, t, layerS = 0.25, cellS = 0.3, label }: {
-  w: number; h: number; blocked: boolean[]; start: number; goal: number; t: number; layerS?: number; cellS?: number; label: string
+export default function BfsWave({ w, h, blocked, start, goal, t, layerS = 0.25, cellS = 0.3, traceS = 0.06, label }: {
+  w: number; h: number; blocked: boolean[]; start: number; goal: number; t: number; layerS?: number; cellS?: number; traceS?: number; label: string
 }) {
   const r = bfs(w, h, blocked, start), path = pathTo(r, goal), gd = r.dist[goal]
   const reach = gd >= 0 ? gd : Math.max(...r.dist)
-  const tl = bfsTimeline(reach, layerS, cellS), layer = layerAt(t, layerS, reach)
+  const tl = bfsTimeline(reach, layerS, cellS, traceS), layer = layerAt(t, layerS, reach)
   const xy = (c: number) => [c % w + 0.5, Math.floor(c / w) + 0.5]
   const found = gd >= 0 && t >= tl.found
-  const k = robotAt(t, tl.found, cellS, path.length), i0 = Math.floor(k), f = k - i0
+  const shown = path.slice(path.length - tracedCells(t, tl.found, traceS, path.length))
+  const k = robotAt(t, tl.traced, cellS, path.length), i0 = Math.floor(k), f = k - i0
   const [ax, ay] = xy(path[i0] ?? start), [bx, by] = xy(path[Math.min(i0 + 1, path.length - 1)] ?? start)
   const rx = ax + (bx - ax) * f, ry = ay + (by - ay) * f
   const [gx, gy] = xy(goal)
@@ -32,7 +33,7 @@ export default function BfsWave({ w, h, blocked, start, goal, t, layerS = 0.25, 
           transform={`translate(${x} ${y}) scale(${s}) translate(${-x} ${-y})`} />
       })}
       <circle className="goal" cx={gx} cy={gy} r={0.3} />
-      {found && <polyline className="path" points={path.map((c) => xy(c).join(',')).join(' ')} />}
+      {found && shown.length > 1 && <polyline className="path" points={shown.map((c) => xy(c).join(',')).join(' ')} />}
       <g transform={`translate(${rx - 0.55} ${ry - 0.6}) scale(${1.1 / 64})`}>
         <Mascot inSvg label="" cheer={gd >= 0 && t >= tl.end ? 1 : 0} thinking={!found} />
       </g>

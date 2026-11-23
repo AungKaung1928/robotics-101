@@ -60,7 +60,8 @@ describe('scenario figures render from their models', () => {
     expect(count(at(0), /class="front"/g)).toBe(1)
     expect(at(1)).toContain('data-layer="4"')
     expect(at(1)).not.toContain('class="path"')
-    expect(at(2)).toContain('class="path"') // goal at layer 8, 0.25 s per layer
+    expect(at(2)).not.toContain('class="path"') // goal at layer 8, 0.25 s per layer: trace starts with the goal alone
+    expect(at(2.1)).toContain('class="path"')
     expect(count(at(9), /class="wall"/g)).toBe(2)
     const shut = blocked.map((b, i) => b || i === 3 || i === 8 || i === 13)
     expect(at(9, 4, shut)).not.toContain('class="path"')
