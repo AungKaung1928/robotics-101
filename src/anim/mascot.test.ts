@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { BOOP_S, HAPPY_S, eyeShift, OOPS_S, REST, SPARK_AT, boopPose, happyPose, oopsPose, sparks } from './mascot'
+import { BOOP_S, HAPPY_S, WHEEL_R, eyeShift, wheelAngle, OOPS_S, REST, SPARK_AT, boopPose, happyPose, oopsPose, sparks } from './mascot'
 
 const ts = (end: number) => Array.from({ length: 601 }, (_, i) => (i / 600) * end)
 
@@ -79,5 +79,13 @@ describe('eyeShift', () => {
     expect(eyeShift(-0.4)).toBeCloseTo(-1, 12)
     expect(eyeShift(7)).toBe(2.5)
     expect(eyeShift(NaN)).toBe(0)
+  })
+})
+
+describe('wheelAngle', () => {
+  it('one wheel circumference rolled = one full turn; backwards turns back', () => {
+    expect(wheelAngle(2 * Math.PI * WHEEL_R)).toBeCloseTo(360, 9)
+    expect(wheelAngle(-Math.PI * WHEEL_R)).toBeCloseTo(-180, 9)
+    expect(wheelAngle(0)).toBe(0)
   })
 })

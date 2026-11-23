@@ -67,3 +67,10 @@ export const BOOP_S = settleTime(BOUNCY, 0, BOOP_KICK, 0.2)
 export function eyeShift(look: number): number {
   return 2.5 * Math.min(1, Math.max(-1, Number.isFinite(look) ? look : 0))
 }
+
+export const WHEEL_R = 5 // wheel radius in the mascot's 64-unit box
+
+/** Wheel turn (deg) after rolling `dist` (same units as the radius) without slipping: θ = s / r, as wheel odometry assumes. */
+export function wheelAngle(dist: number, r = WHEEL_R): number {
+  return ((dist / r) * 180) / Math.PI
+}

@@ -5,6 +5,7 @@
 .mascot .m-shadow { fill: var(--ink); opacity: 0.12; }
 .mascot .m-wheel, .mascot .m-plate, .mascot .m-head { fill: var(--surface); stroke: var(--ink); stroke-width: 2.2; }
 .mascot .m-wheel { fill: var(--ink); }
+.mascot .m-spoke { stroke: var(--surface); stroke-width: 1.4; stroke-linecap: round; }
 .mascot .m-lidar { stroke: var(--robot); stroke-width: 3; stroke-linecap: round; }
 .mascot .m-face circle { fill: var(--ink); }
 .mascot .m-face .m-mouth { fill: none; stroke: var(--ink); stroke-width: 1.6; }
