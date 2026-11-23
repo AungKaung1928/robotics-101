@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import Player from '../../anim/Player'
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import Term from '../l1/Term'
 import { SCRIPT, WS, challengeOk, prompts, scenario, session } from './ws'
 import { WS_STRINGS } from './ws.strings'
@@ -25,7 +25,7 @@ function Tree({ dirs, root }: { dirs: string[]; root: string }) {
 
 /** 2.6: the README build steps typed out, the workspace tree growing beside them; then the reader's own terminal. */
 export default function WsChapter({ t }: { t: Strings }) {
-  const s = WS_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(WS_STRINGS, t, 'l2.ws.WS_STRINGS')
   const [broken, setBroken] = useState(false)
   const script = broken ? SCRIPT.slice(1) : SCRIPT
   const sc = useMemo(() => scenario(script), [script])

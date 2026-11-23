@@ -1,7 +1,3 @@
-.tfchain circle { fill: var(--surface); stroke: var(--free); stroke-width: 2.5; }
-.tfchain text { fill: var(--ink); font: 600 13px var(--mono); }
-.tfchain .link { stroke: var(--free); stroke-width: 3; }
-.tfchain .link.is-missing { stroke: var(--occ); stroke-dasharray: 6 6; }
 .pick { display: block; margin: var(--s1) 0; }
 .choices { display: flex; flex-wrap: wrap; gap: var(--s2); }
 .tflab-code code, .tflab-cmd { overflow-wrap: anywhere; white-space: pre-wrap; }

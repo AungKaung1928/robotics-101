@@ -2,14 +2,13 @@ import { useMemo, useState } from 'react'
 import Mascot from '../../anim/Mascot'
 import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { TURN_MAX, VIEW, rollOnM, rollOnS, tooFast, wheels } from './act'
 import { ACT_STRINGS } from './act.strings'
 import { SECONDS, TOP_SPEED, path } from './move'
 import './l0.css'
 import './move.css'
 import './act.css'
-import AlreadyKnow from './AlreadyKnow'
 import Face from './Face'
 import { mood } from './robotmood'
 import './face.css'
@@ -22,7 +21,7 @@ const ANSWERS: Answer[] = ['atOnce', 'later', 'never']
 
 /** Level 0 "act": forward + turn speed -> wheel speeds -> the move path; "stop" shows the roll-on from the brake limit. */
 export default function ActChapter({ t }: { t: Strings }) {
-  const s = ACT_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(ACT_STRINGS, t, 'l0.act.ACT_STRINGS')
   const [v, setV] = useState(0.15)
   const [w, setW] = useState(0.5)
   const [stopped, setStopped] = useState(false)
@@ -53,7 +52,6 @@ export default function ActChapter({ t }: { t: Strings }) {
       </div>
       <div className="panel">
         <p className="learn">{s.learn}</p>
-        <AlreadyKnow id="act" t={t} />
         {s.steps.map((l) => <p key={l}>{l}</p>)}
         <Slider hint={t.drag} label={s.forward} value={v} min={0} max={TOP_SPEED} step={0.01} mark={0.15} fmt={(x) => x.toFixed(2)} onChange={(x) => setV(Math.round(x * 100) / 100)} />
         <div className="act-turn"><Slider label={s.turn} value={w} min={-TURN_MAX} max={TURN_MAX} step={0.1} mark={0} fmt={(x) => x.toFixed(1)} onChange={(x) => setW(Math.round(x * 10) / 10)} /></div>

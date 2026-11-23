@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { SOURCE_REPO } from '../content/world'
 import type { Strings } from '../i18n'
 import { Icon } from '../icons'
+import EventLog from '../scenarios/EventLog'
 import { STAGES, earlyStarts, startOrder, type StageId } from '../lib/bringup'
 import { routeStep } from '../lib/route'
 import Player from './Player'
@@ -20,6 +21,7 @@ export default function BringupChapter({ t }: { t: Strings }) {
   const [nav2, setNav2] = useState(DEFAULT.nav2)
   const times = { ...DEFAULT, slam, nav2 } // patrol keeps its own clock (9 s + 15 s): a late Nav2 makes it race
   const early = earlyStarts(times)
+  const [hot, setHot] = useState<number | null>(null) // one index shared by the log row and the stage bar
   const order = startOrder(times)
   const events = order.map((id) => times[id])
   const end = Math.max(...events)
@@ -44,7 +46,8 @@ export default function BringupChapter({ t }: { t: Strings }) {
               d={`M${x(times[n])} ${y(row[n])} C${x(times[st.id]) - 14} ${y(row[n])} ${x(times[st.id]) - 14} ${y(row[st.id])} ${x(times[st.id])} ${y(row[st.id])}`} />
           )))}
           {STAGES.map((st, i) => (
-            <g key={st.id} className={`${bad.has(st.id) ? 'is-early' : ''}${started.has(st.id) ? '' : ' is-off'}${st.id === now ? ' is-now' : ''}`} transform={`translate(0 ${y(i)})`}>
+            <g key={st.id} className={`${bad.has(st.id) ? 'is-early' : ''}${started.has(st.id) ? '' : ' is-off'}${st.id === now ? ' is-now' : ''}${hot !== null && order[hot] === st.id ? ' is-hot' : ''}`} transform={`translate(0 ${y(i)})`}
+              onMouseEnter={() => setHot(order.indexOf(st.id))} onMouseLeave={() => setHot(null)}>
               <text x={8} y={5}>{st.id}</text>
               <line className="run" x1={x(times[st.id])} x2={x(Math.max(times[st.id], now_t))} y1={0} y2={0} />
               <circle className="node" cx={x(times[st.id])} cy={0} r={4} />
@@ -55,6 +58,8 @@ export default function BringupChapter({ t }: { t: Strings }) {
         </svg>
         <Player t={now_t} setT={setT} end={end} events={events} speed={SPEED} autoplay={!deep} s={t}
           caption={<>t = {fmt(now_t)} s · {now} → {STAGES.find((st) => st.id === now)!.gives}</>} />
+        <EventLog rows={order.map((id) => ({ t: times[id], cells: [id, `${fmt(times[id])} s`, STAGES.find((st) => st.id === id)!.gives] }))}
+          t={now_t} seek={setT} head={s.logHead} label={t.chapters.bringup} hot={hot} onHot={setHot} />
       </div>
       <div className="panel">
         {s.lines.map((l) => <p key={l}>{l}</p>)}

@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import Player from '../../anim/Player'
 import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { END_S, GOAL, challengeOk, plan, scenario, simulate, wheels } from './drive'
 import { DRIVE_STRINGS } from './drive.strings'
 import '../l1/l1.css'
@@ -16,7 +16,7 @@ const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-red
 
 /** 2.7: a plan of one Twist for some seconds, then zeros (or not); the robot drives it from the same model. */
 export default function DriveChapter({ t }: { t: Strings }) {
-  const s = DRIVE_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(DRIVE_STRINGS, t, 'l2.drive.DRIVE_STRINGS')
   const [v, setV] = useState(0.2)
   const [w, setW] = useState(0.5)
   const [dur, setDur] = useState(4)

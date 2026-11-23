@@ -250,3 +250,4 @@ h1 .icon { width: 0.8em; height: 0.8em; }
   .levelmap li { grid-template-columns: 2rem minmax(0, 1fr); }
   .lv-chs, .lv-groups { grid-column: 1 / -1; }
 }
+.timeline .is-hot .node { r: 6; } .timeline .is-hot text { font-weight: 700; }

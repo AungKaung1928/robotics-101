@@ -2,12 +2,11 @@ import { useMemo, useState } from 'react'
 import Mascot from '../../anim/Mascot'
 import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { BEAMS, FRONT_MAX, FRONT_START, MAX_M, ROOM, VIEW, front, perSecond, turn, valid } from './sense'
 import { SENSE_STRINGS } from './sense.strings'
 import './l0.css'
 import './sense.css'
-import AlreadyKnow from './AlreadyKnow'
 import Face from './Face'
 import { mood } from './robotmood'
 import './face.css'
@@ -20,7 +19,7 @@ const ANSWERS: Answer[] = ['five', 'limit', 'nothing']
 
 /** Level 0 "sense": drag the front wall; one beam gives the front number, the ring shows all BEAMS readings; break it = cover. */
 export default function SenseChapter({ t }: { t: Strings }) {
-  const s = SENSE_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(SENSE_STRINGS, t, 'l0.sense.SENSE_STRINGS')
   const [wall, setWall] = useState(FRONT_START)
   const [covered, setCovered] = useState(false)
   const [picked, setPicked] = useState<Answer | null>(null)
@@ -54,7 +53,6 @@ export default function SenseChapter({ t }: { t: Strings }) {
       </div>
       <div className="panel">
         <p className="learn">{s.learn}</p>
-        <AlreadyKnow id="sense" t={t} />
         {s.steps.map((l) => <p key={l}>{l}</p>)}
         <Slider hint={t.drag} label={s.wall} value={wall} min={0.3} max={FRONT_MAX} step={0.1} mark={MAX_M} fmt={(v) => v.toFixed(1)}
           onChange={(v) => setWall(Math.round(v * 10) / 10)} />

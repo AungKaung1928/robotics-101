@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Mascot from '../../anim/Mascot'
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { FIG, PARTS, isRobot, rcCar, type PartId } from './meet'
 import { MEET_STRINGS } from './meet.strings'
 import './l0.css'
@@ -12,7 +12,7 @@ const ANSWERS: Answer[] = ['robot', 'notRobot']
 
 /** Level 0 "meet": tap the Burger's parts (side-view drawing); the remote-control car test of what a robot is. */
 export default function MeetChapter({ t }: { t: Strings }) {
-  const s = MEET_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(MEET_STRINGS, t, 'l0.meet.MEET_STRINGS')
   const [part, setPart] = useState<PartId | null>(null)
   const [up, setUp] = useState(false)
   const [picked, setPicked] = useState<Answer | null>(null)

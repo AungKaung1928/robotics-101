@@ -57,7 +57,7 @@ export default function ThinkScene({ stopAt, t, v = 0.2, wallX = 1.2, stopWord =
   const dText = d === null ? 'd = ?' : `d = ${d.toFixed(2)} m`, dw = dText.length * 8.4 // 14 px monospace: 0.6 em per letter
   const wide = d1 - d0 > dw + 10
   const beyond = !wide && d1 + 8 + dw < VW - M // short line, room past the wall (built-in room): label there
-  const [dx, anchor] = wide ? [(d0 + d1) / 2, 'middle' as const] : beyond ? [d1 + 8, 'start' as const] : [d1 - 6, 'end' as const]
+  const [dx, anchor]: [number, 'middle' | 'start' | 'end'] = wide ? [(d0 + d1) / 2, 'middle'] : beyond ? [d1 + 8, 'start'] : [d1 - 6, 'end']
   const ly = wide ? dy - 6 : beyond ? dy - 26 : dy + 54 // else under the robot and the ladder row (+34), clear of the bubble tail
   return (
     <svg ref={ref} className="think-scene" viewBox={`0 0 ${VW} ${VH}`} role="img" aria-label={label} data-state={fired ? 'fired' : bumped ? 'bumped' : 'driving'}>

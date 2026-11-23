@@ -1,12 +1,11 @@
 import { useMemo, useState } from 'react'
 import Mascot from '../../anim/Mascot'
 import Slider from '../../components/Slider'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { FRONT_MAX, FRONT_MIN, FRONT_START, VIEW, view, world } from './simwhat'
 import { SIMWHAT_STRINGS } from './simwhat.strings'
 import './l0.css'
 import './simwhat.css'
-import AlreadyKnow from './AlreadyKnow'
 import Face from './Face'
 import { mood, type Mood } from './robotmood'
 import './face.css'
@@ -27,7 +26,7 @@ function Bot({ dx, m }: { dx: number; m: Mood }) {
 
 /** Level 0 "simwhat": left = the simulated world, right = the view window (RViz) drawing only the sensor dots. */
 export default function SimwhatChapter({ t }: { t: Strings }) {
-  const s = SIMWHAT_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(SIMWHAT_STRINGS, t, 'l0.simwhat.SIMWHAT_STRINGS')
   const [front, setFront] = useState(FRONT_START)
   const [on, setOn] = useState(true)
   const [picked, setPicked] = useState<Answer | null>(null)
@@ -56,7 +55,6 @@ export default function SimwhatChapter({ t }: { t: Strings }) {
       </div>
       <div className="panel">
         <p className="learn">{s.learn}</p>
-        <AlreadyKnow id="simwhat" t={t} />
         {s.steps.map((l) => <p key={l}>{l}</p>)}
         <p className="note" data-k="everyday">{s.everyday}</p>
         <Slider hint={t.drag} label={s.wall} value={front} min={FRONT_MIN} max={FRONT_MAX} step={0.1} fmt={(v) => v.toFixed(1)} onChange={(v) => setFront(Math.round(v * 10) / 10)} />
