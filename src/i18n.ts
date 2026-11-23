@@ -18,6 +18,7 @@ const en = {
   next: 'Next',
   levels: {
     heading: 'Levels',
+    one: 'Level',
     names: ['Start here', 'Programming for robots', 'ROS 2 basics', 'A robot that moves by itself', 'Mapping and navigation', 'Robotics software engineer'],
     soon: 'Coming next',
     opened: 'opened',
@@ -183,6 +184,7 @@ const ja: typeof en = {
   next: '次へ',
   levels: {
     heading: 'レベル',
+    one: 'レベル',
     names: ['はじめに', 'ロボットのためのプログラミング', 'ROS 2 の基本', '自分で動くロボット', '地図とナビゲーション', 'ロボットソフトウェアエンジニア'],
     soon: '準備中',
     opened: '開いた',
