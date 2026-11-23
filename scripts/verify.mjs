@@ -35,7 +35,7 @@ const ROUTES = [
   { hash: '#/0/meet', has: 'class="num">0.1<' },
   { hash: '#/0/think', has: 'class="pathline"' },
   { hash: '#/0/pipe', has: 'class="num">0.9<' },
-  { hash: '#/3/tflab', has: 'class="num">3.3<' },
+  { hash: '#/3/tflab', has: ['class="num">3.3<', 'class="tfc"'] }, // tfc = the animated chain scene (the old static svg was class="tfchain")
   { hash: '#/ep/bfs', has: 'class="num">EP1<' },
   { hash: '#/ep/late', has: 'class="num">EP2<' },
   { hash: '#/0/tools', has: 'class="num">0.10<' },
@@ -120,7 +120,7 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
         if (r.readouts && !/data-k="spot"[^>]*>[^<]*\d/.test(dom)) fails.push(`${name}: no headline value under the title`)
         if (r.readouts && (dom.match(/class="hint"/g) ?? []).length !== 1) fails.push(`${name}: want exactly one drag hint`)
         if (r.readouts && (dom.match(/aria-current="step"/g) ?? []).length !== 1) fails.push(`${name}: mini plan does not light exactly one waypoint`)
-        if (r.has && !dom.includes(r.has)) fails.push(`${name}: no '${r.has}' in the page`)
+        for (const h of [r.has ?? []].flat()) if (!dom.includes(h)) fails.push(`${name}: no '${h}' in the page`)
         const read = (k, d = dom) => d.match(new RegExp(`data-k="${k}"[^>]*>([^<]*)`))?.[1]
         for (const [k, want] of Object.entries(r.equals ?? {})) if (read(k) !== want) fails.push(`${name}: readout ${k} '${read(k)}', want '${want}'`)
         for (const [k, [hash, k2]] of Object.entries(r.moreThan ?? {})) {

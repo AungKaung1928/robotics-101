@@ -3,11 +3,11 @@ import { stringsFor, type Strings } from '../../i18n'
 import { SOURCE_REPO } from '../../content/world'
 import { BROKEN, CHOICES, PAIRS, apply, diagnose, healthy, pairKey, type Edge } from './tflab'
 import { TFLAB_STRINGS } from './tflab.strings'
+import { TfChainLive } from '../../scenarios/TfChain'
 import './l3.css'
 
 const CODE = ['src/tf_anomaly_detector.cpp#L37-L39', 'src/tf_anomaly_detector.cpp#L103-L110', 'test/test_tf_lab_missing_link.cpp#L56-L58']
 const TEST = 'TFLabMissingLink.FixedChainReportsMapToBaseLinkHealthy'
-const FRAMES = ['map', 'odom', 'base_link'] as const
 
 /** 3.3: predict → see → inspect → fix → verify, on the same broken chain as the repo's lab test. */
 export default function TfLabChapter({ t }: { t: Strings }) {
@@ -18,21 +18,11 @@ export default function TfLabChapter({ t }: { t: Strings }) {
   const [edges, setEdges] = useState<readonly Edge[]>(BROKEN)
   const diag = diagnose(edges), truth = diagnose(BROKEN)
   const right = PAIRS.every((p) => guess.has(pairKey(p)) === (truth[pairKey(p)] === 'MISSING'))
-  const has = (p: string, c: string) => edges.some(([a, b]) => a === p && b === c)
   const toggle = (k: string) => { const g = new Set(guess); if (g.has(k)) g.delete(k); else g.add(k); setGuess(g); setChecked(false) }
   return (
     <>
       <div className="figure">
-        <svg className="tfchain" viewBox="0 0 600 120" role="img" aria-label={s.setup}>
-          {FRAMES.map((f, i) => (
-            <g key={f} transform={`translate(${90 + i * 210} 60)`}>
-              <circle r="46" /><text y="5" textAnchor="middle">{f}</text>
-            </g>
-          ))}
-          {FRAMES.slice(1).map((c, i) => (
-            <line key={c} className={has(FRAMES[i], c) ? 'link' : 'link is-missing'} x1={136 + i * 210} x2={254 + i * 210} y1="60" y2="60" />
-          ))}
-        </svg>
+        <TfChainLive edges={edges} label={s.setup} />
         <p className="note">{s.setup}</p>
       </div>
       <div className="panel">
