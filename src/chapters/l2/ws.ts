@@ -13,7 +13,7 @@ export const EXECUTABLES = ['tf_monitor_node', 'frame_broadcaster_node', 'tf_ano
 export interface Ws { cwd: string; dirs: string[]; ros: boolean; overlay: string | null; builtIn: string | null }
 export const fresh = (): Ws => ({ cwd: HOME, dirs: [HOME, '/opt/ros/humble'], ros: false, overlay: null, builtIn: null })
 
-const NO_AMENT = 'CMake Error: ... asked CMake to find a package configuration file provided by "ament_cmake", but CMake did not find one.'
+export const NO_AMENT = 'CMake Error: ... asked CMake to find a package configuration file provided by "ament_cmake", but CMake did not find one.'
 export const STARTED = '[INFO] [...] [tf_anomaly_detector]: TF Anomaly Detector started (max_age=1.00s, max_jump=0.50m)' // tf_anomaly_detector.cpp:30-31
 
 export function exec(w: Ws, cmd: string): { w: Ws; line: Line } {
