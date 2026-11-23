@@ -28,6 +28,7 @@ export default function SenseScene({ wallX = 1, box, mode, t = 0, covered = fals
   return (
     <svg className="sense-scene" viewBox={`0 0 ${VW} ${VH}`} role="img" aria-label={label} data-hits={hits.length} data-reading={d === null ? 'none' : d.toFixed(2)}>
       {walls.map(([x1, y1, x2, y2], i) => <line key={i} className={i === movable ? 'ss-wall is-movable' : 'ss-wall'} x1={X(x1)} y1={Y(y1)} x2={X(x2)} y2={Y(y2)} />)}
+      {ring > 0 && <circle className="ss-limit" cx={X(O.x)} cy={Y(O.y)} r={X(O.x + MAX_R) - X(O.x)} data-r={MAX_R} />/* how far it can see, every way */}
       {ring > 0 && <path className="ss-hit is-ring" data-ring={ringHits.length} d={ringHits.map((h) => `M${(X(h.x) - 2).toFixed(1)} ${Y(h.y).toFixed(1)}a2 2 0 1 0 4 0a2 2 0 1 0 -4 0`).join('')} />}
       {fadeBuckets(hits, X, Y).map(([o, d]) => <path key={o} className="ss-hit" opacity={o} d={d} />)}
       {!covered && <line className={d === null ? 'ss-beam is-none' : 'ss-beam'} x1={X(O.x)} y1={Y(O.y)} x2={X(ex)} y2={Y(ey)} />}

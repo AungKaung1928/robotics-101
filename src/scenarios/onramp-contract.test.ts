@@ -190,6 +190,8 @@ describe('SenseScene ring = the chapter ring', () => {
       const got = Number(/data-ring="(\d+)"/.exec(h)?.[1] ?? -1)
       if (got !== want) off.push(`${front}${covered ? ' covered' : ''}: ${got} vs ${want}`)
     }
+    const one = renderToStaticMarkup(createElement(SenseScene, { box: { ...sn.ROOM, front: 1.5, maxFront: sn.FRONT_MAX }, mode: 'beam', ring: sn.BEAMS, label: '' }))
+    expect(one).toContain(`data-r="${sn.MAX_M}"`) // the range circle is the chapter's MAX_M
     if (off.length) console.log('RING-OFF', off.join(' | '))
     expect(off).toEqual([])
   })
