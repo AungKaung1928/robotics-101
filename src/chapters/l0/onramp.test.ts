@@ -2,6 +2,13 @@ import { describe, expect, it } from 'vitest'
 import { LEVEL1_CHAPTERS } from '../l1'
 import { LEVEL2_CHAPTERS } from '../l2'
 import { DOTS, GROWS_FROM, ONRAMP_A, ONRAMP_B } from './onramp'
+import { ACT_STRINGS } from './act.strings'
+import { MEET_STRINGS } from './meet.strings'
+import { MOVE_STRINGS } from './move.strings'
+import { SENSE_STRINGS } from './sense.strings'
+import { SIMPICK_STRINGS } from './simpick.strings'
+import { SIMWHAT_STRINGS } from './simwhat.strings'
+import { THINK_STRINGS } from './think.strings'
 
 // Reading path through the chapters this lane owns: new Level 0 chapters, then Level 1 and Level 2 in their index order.
 const PATH = [...ONRAMP_A, ...ONRAMP_B, ...LEVEL1_CHAPTERS.map((c) => c.id), ...LEVEL2_CHAPTERS.map((c) => c.id)]
@@ -24,5 +31,20 @@ describe('on-ramp path', () => {
   it('the bridges the spec names exist: 1.1 <- think, 2.7 <- act', () => {
     expect(GROWS_FROM.decide).toBe('think')
     expect(GROWS_FROM.drive).toBe('act')
+  })
+})
+
+describe('on-ramp words', () => {
+  const BY_ID = { meet: MEET_STRINGS, move: MOVE_STRINGS, sense: SENSE_STRINGS, think: THINK_STRINGS, act: ACT_STRINGS, simwhat: SIMWHAT_STRINGS, simpick: SIMPICK_STRINGS }
+  it('each word is taught once along the path, at most 3 per chapter', () => {
+    const seen = new Map<string, string>()
+    for (const id of [...ONRAMP_A, ...ONRAMP_B]) {
+      const g = BY_ID[id].en.glossary
+      expect(g.length, id).toBeLessThanOrEqual(3)
+      for (const [w] of g) {
+        expect(seen.get(w.toLowerCase()), `"${w}" in ${id}`).toBeUndefined()
+        seen.set(w.toLowerCase(), id)
+      }
+    }
   })
 })
