@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo, useState, type KeyboardEvent } from 'react'
 import Player from '../../anim/Player'
 import { STRINGS, type Strings } from '../../i18n'
 import Gloss from '../l1/Gloss'
@@ -21,6 +21,18 @@ export default function BfsChapter({ t }: { t: Strings }) {
   const now = Math.min(tS, sc.durationMs / 1000)
   const f = sc.frame(now * 1000)
   const restart = () => setTS(Infinity) // a changed map shows its end frame at once; Play replays it
+  const [focus, setFocus] = useState(key(START)) // one tab stop for the grid; arrow keys move it (roving tabindex)
+  const ARROWS: Record<string, [number, number]> = { ArrowUp: [0, -1], ArrowDown: [0, 1], ArrowLeft: [-1, 0], ArrowRight: [1, 0] }
+  const onKey = (e: KeyboardEvent<SVGRectElement>, k: number) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(k); return }
+    const d = ARROWS[e.key]
+    if (!d) return
+    e.preventDefault()
+    const [x, y] = cellOf(k), nx = Math.max(0, Math.min(W - 1, x + d[0])), ny = Math.max(0, Math.min(H - 1, y + d[1]))
+    const nk = key([nx, ny])
+    setFocus(nk)
+    e.currentTarget.parentElement?.querySelector<SVGRectElement>(`[data-cell="${nk}"]`)?.focus()
+  }
   const toggle = (k: number) => {
     if (k === key(START) || k === key(GOAL)) return
     const w = new Set(walls)
@@ -42,8 +54,8 @@ export default function BfsChapter({ t }: { t: Strings }) {
             const st = (wall ? 'wall' : f.states.get(k) ?? '') + (cost && !wall && nearWall(k, walls) ? ' near' : '')
             return (
               <rect key={k} className={`c ${st}${f.current === k && !f.showPath ? ' cur' : ''}`} x={x * CS} y={y * CS} width={CS} height={CS}
-                role="button" tabIndex={0} aria-label={s.cellLabel(x, y, wall)} aria-pressed={wall}
-                onClick={() => toggle(k)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(k) } }} />
+                role="button" tabIndex={k === focus ? 0 : -1} data-cell={k} aria-label={s.cellLabel(x, y, wall)} aria-pressed={wall}
+                onClick={() => { setFocus(k); toggle(k) }} onKeyDown={(e) => onKey(e, k)} />
             )
           })}
           <text x={START[0] * CS + CS / 2} y={START[1] * CS + CS / 2}>S</text>

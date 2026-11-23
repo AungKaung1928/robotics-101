@@ -18,6 +18,7 @@ type Step =
   | { click: string; text?: string }
   | { type: string; value: string; submit?: boolean }
   | { slide: number }
+  | { key: string; on: string }
   | { expect: string; has?: string; is?: string; ok?: true; re?: RegExp }
 interface Case { name: string; Body: ComponentType<{ t: Strings }>; steps: Step[] }
 
@@ -40,6 +41,7 @@ const cases = (l: Lang): Case[] => [
   { name: 'drive break', Body: BODIES.drive, steps: [{ click: '.break' }, { expect: 'challenge', has: DRIVE_STRINGS[l].moving }] },
   { name: 'bfs stack', Body: BfsChapter, steps: [{ expect: 'len', has: '13' }, { click: '.break' }, { expect: 'len', has: '15' }] },
   { name: 'bfs wall click', Body: BfsChapter, steps: [{ click: cell(l, 3, 3) }, { expect: 'len', has: '13' }, { click: cell(l, 0, 2) }, { click: cell(l, 0, 4) }, { click: cell(l, 1, 3) }, { expect: 'len', is: BFS_STRINGS[l].none }] },
+  { name: 'bfs keyboard', Body: BfsChapter, steps: [{ expect: 'tabstops', is: '1' }, { key: 'ArrowDown', on: '.bfs [tabindex="0"]' }, { key: 'ArrowDown', on: ':focus' }, { key: 'ArrowDown', on: ':focus' }, { key: 'ArrowDown', on: ':focus' }, { key: 'Enter', on: ':focus' }, { expect: 'len', has: '13' }, { key: 'ArrowRight', on: ':focus' }, { key: 'Enter', on: ':focus' }, { key: 'ArrowUp', on: ':focus' }, { key: 'ArrowUp', on: ':focus' }, { key: 'ArrowRight', on: ':focus' }, { key: 'Enter', on: ':focus' }, { expect: 'walls', is: '9' }, { expect: 'wallAt', is: BFS_STRINGS[l].cellLabel(2, 4, true) }] },
   { name: 'bfs costmap', Body: BfsChapter, steps: [{ click: 'button.costmap' }, { expect: 'len', has: '15' }, { expect: 'cost', has: '15' }, { click: 'button.costmap' }, { expect: 'len', has: '13' }] },
   { name: 'late slider', Body: LateChapter, steps: [{ expect: 'backwards', has: '5' }, { slide: 0.17 }, { expect: 'challenge', ok: true }, { slide: 0.18 }, { expect: 'backwards', has: '1' }] },
   { name: 'late keep-latest', Body: LateChapter, steps: [{ click: '.break' }, { expect: 'backwards', has: '0' }, { expect: 'acted', has: '15' }] },
@@ -68,13 +70,22 @@ async function runCase(c: Case, host: HTMLElement, t: Strings): Promise<string |
         setValue(el, st.value)
         await tick()
         if (st.submit) el.form!.requestSubmit()
+      } else if ('key' in st) {
+        const el = st.on === ':focus' ? (document.activeElement as HTMLElement | null) : host.querySelector<HTMLElement>(st.on)
+        if (!el) return `no element ${st.on}`
+        if (st.on !== ':focus') el.focus()
+        el.dispatchEvent(new KeyboardEvent('keydown', { key: st.key, bubbles: true }))
       } else if ('slide' in st) {
         const el = host.querySelector<HTMLInputElement>('.slider input[type=range]')
         if (!el) return 'no slider'
         setValue(el, String(st.slide))
       } else {
         const el = host.querySelector(`[data-k="${st.expect}"]`)
-        const txt = el?.textContent ?? '(missing)'
+        // pseudo readouts of the grid itself: tab stops, wall count, label of the focused cell
+        const txt = st.expect === 'tabstops' ? String(host.querySelectorAll('.bfs [tabindex="0"]').length)
+          : st.expect === 'walls' ? String(host.querySelectorAll('.bfs [aria-pressed="true"]').length)
+          : st.expect === 'wallAt' ? document.activeElement?.getAttribute('aria-label') ?? '(no focus)'
+          : el?.textContent ?? '(missing)'
         if (st.has && !txt.includes(st.has)) return `[data-k=${st.expect}] "${txt}" lacks "${st.has}"`
         if (st.is !== undefined && txt !== st.is) return `[data-k=${st.expect}] "${txt}" is not "${st.is}"`
         if (st.re && !st.re.test(txt)) return `[data-k=${st.expect}] "${txt}" !~ ${st.re}`
