@@ -13,7 +13,7 @@ export default function ScrubNumber({ value, onChange, range, format, label }: {
   const start = useRef<{ x: number; v: number } | null>(null)
   const [drag, setDrag] = useState(false)
   return (
-    <span className="scrub" role="slider" tabIndex={0} aria-label={label} aria-valuemin={range.min} aria-valuemax={range.max}
+    <span className="scrub-num" role="slider" tabIndex={0} aria-label={label} aria-valuemin={range.min} aria-valuemax={range.max}
       aria-valuenow={value} aria-valuetext={format(value)} style={UI_STYLE} data-drag={drag || undefined}
       onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); start.current = { x: e.clientX, v: value }; setDrag(true) }}
       onPointerMove={(e) => { if (start.current) onChange(scrubValue(start.current.v, e.clientX - start.current.x, range)) }}

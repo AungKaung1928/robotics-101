@@ -1,6 +1,6 @@
 /* Scrub number (lane anim): reads as a number you can grab: dotted underline in the robot colour, sideways cursor. */
-.scrub { font-family: var(--mono); color: var(--robot); border-bottom: 1px dashed currentColor; cursor: ew-resize; touch-action: none; user-select: none; display: inline-block; padding: 0 2px; border-radius: var(--radius); }
-.scrub:focus-visible { outline: 2px solid var(--robot); outline-offset: 2px; }
-.scrub[data-drag] { transform: scale(1.06); background: color-mix(in srgb, var(--robot) 10%, transparent); }
-@supports (transition-timing-function: linear(0, 1)) { .scrub { transition: transform var(--spring-ms) var(--spring); } }
-@media (prefers-reduced-motion: reduce) { .scrub { transition: none; } .scrub[data-drag] { transform: none; } }
+.scrub-num { font-family: var(--mono); color: var(--robot); border-bottom: 1px dashed currentColor; cursor: ew-resize; touch-action: none; user-select: none; display: inline-block; padding: 0 2px; border-radius: var(--radius); }
+.scrub-num:focus-visible { outline: 2px solid var(--robot); outline-offset: 2px; }
+.scrub-num[data-drag] { transform: scale(1.06); background: color-mix(in srgb, var(--robot) 10%, transparent); }
+@supports (transition-timing-function: linear(0, 1)) { .scrub-num { transition: transform var(--spring-ms) var(--spring); } }
+@media (prefers-reduced-motion: reduce) { .scrub-num { transition: none; } .scrub-num[data-drag] { transform: none; } }
