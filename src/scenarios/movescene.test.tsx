@@ -155,5 +155,6 @@ describe('NodeFace and sinceLanding (Topics model)', () => {
     expect(m(0.05)).toContain('data-mood="munch"')
     expect(m(0.15 + 0.2)).toContain('data-mood="idle"')
     expect(m(null, true)).toContain('data-mood="starved"')
+    expect(renderToStaticMarkup(<svg><NodeFace x={0} y={0} starved since={0.05} off /></svg>)).toContain('data-mood="off"') // off wins: asleep, not worried
   })
 })
