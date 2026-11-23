@@ -4,10 +4,12 @@ import DistroTimeline from './DistroTimeline'
 import EventLog from './EventLog'
 import InflationRipple from './InflationRipple'
 import SpeedProfile from './SpeedProfile'
+import TfLab from './TfLab'
 import ToolStack from './ToolStack'
 import { year } from './distros'
 import { driveProfile } from './drive'
 import { STACK_END, stackEvents } from './stack'
+import { fixSettle } from './tflab'
 
 // Each figure rendered at its start, middle and end: no crash, and the frame shows what the model says.
 const count = (html: string, re: RegExp) => html.match(re)?.length ?? 0
@@ -37,5 +39,17 @@ describe('scenario figures render from their models', () => {
     const cells = [{ x: 0, y: 0, d: 0 }, { x: 0.05, y: 0, d: 0.1 }, { x: 0.1, y: 0, d: 0.4 }]
     expect(count(renderToStaticMarkup(<InflationRipple cells={cells} res={0.05} x0={0} span={1} front={0.2} cost={(d) => (d === 0 ? 254 : 100)} label="" />), /<rect/g)).toBe(2)
     expect(renderToStaticMarkup(<SpeedProfile p={driveProfile(4, 0.25, 0.26, 2.5)} t={6} label="" />)).toContain('1.55 / 3.75 m')
+  })
+  it('TfLab: dizzy with points off the wall before the fix, curious while they move, happy and on the wall after', () => {
+    const hits: [number, number][] = [-0.6, -0.3, 0, 0.3, 0.6].map((y) => [1.9, y])
+    const at = (since: number) => renderToStaticMarkup(<TfLab hits={hits} base={{ x: 0, y: 0, yaw: 0 }} mount={{ x: 0.1, y: 0, yaw: 0 }}
+      wallX={2} err0={0.2} sinceFix={since} label="" residualText={(m) => `off ${(m * 100).toFixed(1)} cm`} />)
+    const before = at(-1), mid = at(0.1), end = at(fixSettle(0.2))
+    expect(before).toContain('data-mood="dizzy"')
+    expect(count(before, /class="hit"/g)).toBe(5)
+    expect(mid).toContain('data-mood="curious"')
+    expect(end).toContain('data-mood="happy"')
+    expect(end).toContain('off 0.0 cm')
+    expect(end).toContain('class="mascot"')
   })
 })
