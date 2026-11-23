@@ -33,3 +33,7 @@
 .side .qslot { fill: none; stroke: var(--rule); }
 .side .qfull { fill: var(--ray); }
 .side text.lbl { font-size: 14px; }
+.term { min-height: 6rem; }
+.caret { animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .caret { animation: none; } }
