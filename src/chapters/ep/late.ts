@@ -1,4 +1,5 @@
 import type { Scenario } from '../../anim/contract'
+import { dropped, maxAgeMs, simulate } from '../l1/callback'
 
 /** EP2: a 10 Hz sensor stream over Wi-Fi where some messages arrive late. Pure model, no DOM. */
 export const PERIOD_MS = 100
@@ -65,4 +66,10 @@ export function reorder(windowMs: number): { used: number[]; dropped: number[]; 
   const used: number[] = [], dropped: number[] = []
   for (const m of [...messages()].sort((a, b) => a.stamp - b.stamp)) (m.age <= windowMs ? used : dropped).push(m.i)
   return { used, dropped, addedDelayMs: windowMs }
+}
+
+/** Backpressure: a consumer slower than 10 Hz with a KEEP_LAST queue of `depth`. Same queue model as page 1.3. */
+export const backpressure = (workMs: number, depth: number) => {
+  const m = simulate(workMs, depth, DELAYS_MS.length, PERIOD_MS)
+  return { dropped: dropped(m), oldestMs: maxAgeMs(m) }
 }
