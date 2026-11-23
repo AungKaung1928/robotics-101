@@ -19,6 +19,7 @@ type Step =
   | { type: string; value: string; submit?: boolean }
   | { slide: number }
   | { key: string; on: string }
+  | { a11y: true }
   | { expect: string; has?: string; is?: string; ok?: true; re?: RegExp }
 interface Case { name: string; Body: ComponentType<{ t: Strings }>; steps: Step[] }
 
@@ -52,6 +53,13 @@ const setValue = (el: HTMLInputElement, v: string) => {
   el.dispatchEvent(new Event('input', { bubbles: true }))
   el.dispatchEvent(new Event('change', { bubbles: true }))
 }
+/** Controls and pictures a screen reader would announce with no name (aria-label, own text, or a wrapping <label>). */
+function unnamed(host: HTMLElement): string[] {
+  const name = (el: Element) => (el.getAttribute('aria-label') ?? '').trim() || (el.tagName !== 'INPUT' && (el.textContent ?? '').trim())
+    || (el.closest('label')?.textContent ?? '').trim() || (el.getAttribute('aria-labelledby') ? 'ref' : '')
+  return [...host.querySelectorAll('button, input, select, textarea, [role=button], svg[role=img], svg[role=group]')]
+    .filter((el) => !name(el)).map((el) => `${el.tagName.toLowerCase()}${el.className && typeof el.className === 'string' ? '.' + el.className.split(' ')[0] : ''}`)
+}
 const tick = () => new Promise((r) => setTimeout(r, 30))
 
 async function runCase(c: Case, host: HTMLElement, t: Strings): Promise<string | null> {
@@ -70,6 +78,9 @@ async function runCase(c: Case, host: HTMLElement, t: Strings): Promise<string |
         setValue(el, st.value)
         await tick()
         if (st.submit) el.form!.requestSubmit()
+      } else if ('a11y' in st) {
+        const bad = unnamed(host)
+        if (bad.length) return `no accessible name: ${bad.join(', ')}`
       } else if ('key' in st) {
         const el = st.on === ':focus' ? (document.activeElement as HTMLElement | null) : host.querySelector<HTMLElement>(st.on)
         if (!el) return `no element ${st.on}`
@@ -102,7 +113,9 @@ async function runCase(c: Case, host: HTMLElement, t: Strings): Promise<string |
 async function main() {
   const out: string[] = []
   let pass = 0, total = 0
-  for (const l of ['en', 'ja'] as const) for (const c of cases(l)) {
+  const ALL = { ...BODIES, bfs: BfsChapter, late: LateChapter }
+  const named: Case[] = Object.entries(ALL).map(([id, Body]) => ({ name: `a11y names ${id}`, Body, steps: [{ a11y: true }] }))
+  for (const l of ['en', 'ja'] as const) for (const c of [...cases(l), ...named]) {
     total++
     const host = document.createElement('div')
     document.body.append(host)
