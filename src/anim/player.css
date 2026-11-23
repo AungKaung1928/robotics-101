@@ -1,0 +1,14 @@
+/* Player step rail + key hint (lane anim). Uses the app's tokens only; motion = the 420 ms glide, no decoration. */
+.stepper .rail { flex: 1 0 100%; display: flex; list-style: none; margin: 0; padding: 0; gap: 0; counter-reset: none; }
+.stepper .rail li { flex: 1 1 0; position: relative; display: flex; justify-content: center; }
+.stepper .rail li + li::before { content: ''; position: absolute; top: 0.75rem; right: 50%; width: 100%; height: 1px; background: var(--rule); }
+.stepper .rail button { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; border: 0; background: none; padding: 0; color: var(--ink-2); }
+.stepper .rail .dot { display: grid; place-items: center; width: 1.5rem; height: 1.5rem; border: 1px solid var(--rule); border-radius: 50%; background: var(--surface); transition: background-color 200ms, color 200ms, border-color 200ms; }
+.stepper .rail [data-done] .dot { border-color: var(--ink); }
+.stepper .rail [aria-current] { color: var(--ink); }
+.stepper .rail [aria-current] .dot { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.stepper .rail .wide { max-width: 7rem; text-align: center; }
+.stepper .keys { flex: 1 0 100%; color: var(--ink-2); }
+.stepper kbd { font: inherit; padding: 0 0.3em; border: 1px solid var(--rule); border-radius: 3px; }
+@media (max-width: 600px) { .stepper .wide { display: none; } }
+@media (prefers-reduced-motion: reduce) { .stepper .rail .dot { transition: none; } }

@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react'
+import { flushSync } from 'react-dom'
+import { chapterDir, swap } from './anim/transition'
+import './anim/transition.css'
 import BringupChapter from './components/BringupChapter'
 import CostmapChapter from './components/CostmapChapter'
 import DetectChapter from './components/DetectChapter'
@@ -9,8 +12,10 @@ import { waypointValues } from './content/waypoints'
 import Overview from './components/Overview'
 import ScanChapter from './components/ScanChapter'
 import TfChapter from './components/TfChapter'
-import { STRINGS, initialLang, type Lang } from './i18n'
+import { STRINGS, initialLang, type Lang, type Strings } from './i18n'
 import { CHAPTER_ICON, Icon } from './icons'
+import type { ChapterMeta } from './anim/contract'
+import { LEVEL_BODY, levelPage, readingIndex, type LevelPage } from './content/levels'
 import { markDone } from './lib/progress'
 import { CHAPTERS, keyTarget, neighbour, parseRoute, type ChapterId } from './lib/route'
 
@@ -18,17 +23,25 @@ const BODY: Record<ChapterId, typeof ScanChapter> = { bringup: BringupChapter, t
 
 export default function App() {
   const [route, setRoute] = useState(() => parseRoute(location.hash))
+  const [lvl, setLvl] = useState(() => levelPage(location.hash))
   const [lang, setLang] = useState<Lang>(initialLang)
   const t = STRINGS[lang]
 
   useEffect(() => {
-    const on = () => { setRoute(parseRoute(location.hash)); window.scrollTo(0, 0) }
+    let shown = location.hash
+    const on = () => {
+      const to = location.hash, dir = chapterDir(readingIndex(shown), readingIndex(to))
+      shown = to
+      swap(() => flushSync(() => { setRoute(parseRoute(to)); setLvl(levelPage(to)) }), dir)
+      window.scrollTo(0, 0)
+    }
     addEventListener('hashchange', on)
     return () => removeEventListener('hashchange', on)
   }, [])
   useEffect(() => {
     if (route.page === 'chapter') markDone(localStorage, route.id)
-  }, [route])
+    else if (lvl) markDone(localStorage, lvl.meta.id)
+  }, [route, lvl])
   useEffect(() => {
     document.documentElement.lang = lang
     localStorage.setItem('r101-lang', lang)
@@ -53,15 +66,15 @@ export default function App() {
     <>
       <header className="console">
         <a href="#/" className="home">r101</a>
-        <span>/waypoint {idx < 0 ? '–' : idx + 1}/{CHAPTERS.length}</span>
-        <span>/{route.page === 'chapter' ? route.id : 'plan'}</span>
+        {!lvl && <span>/waypoint {idx < 0 ? '–' : idx + 1}/{CHAPTERS.length}</span>}
+        <span>/{lvl ? `${lvl.meta.level}/${lvl.meta.id}` : route.page === 'chapter' ? route.id : 'plan'}</span>
         <span className="langs">
           {(['en', 'ja'] as const).map((l) => (
             <button key={l} type="button" aria-pressed={lang === l} onClick={() => setLang(l)}>{l.toUpperCase()}</button>
           ))}
         </span>
       </header>
-      {route.page === 'overview' || !Body ? <Overview t={t} /> : (
+      {lvl ? <LevelChapter p={lvl} t={t} ja={lang === 'ja'} /> : route.page === 'overview' || !Body ? <Overview t={t} /> : (
         <main className="chapter">
           <div className="chead">
             <div>
@@ -78,5 +91,26 @@ export default function App() {
         </main>
       )}
     </>
+  )
+}
+
+function LevelChapter({ p, t, ja }: { p: LevelPage; t: Strings; ja: boolean }) {
+  const Body = LEVEL_BODY[p.meta.id]
+  const title = (c: ChapterMeta) => (ja ? c.titleJa : c.titleEn)
+  const link = (c: ChapterMeta) => `#/${c.level}/${c.id}`
+  return (
+    <main className="chapter">
+      <div className="chead">
+        <div>
+          <p className="eyebrow">{t.levels.heading} {p.meta.level} · {t.levels.names[p.meta.level]}</p>
+          <h1><span className="num">{p.num}</span> <Icon name={p.meta.icon} /> {title(p.meta)}</h1>
+        </div>
+      </div>
+      <Body t={t} />
+      <nav className="steps" aria-label={t.plan}>
+        {p.prev ? <a href={link(p.prev)}>← {t.back}: {title(p.prev)}</a> : <a href="#/">← {t.plan}</a>}
+        {p.next ? <a href={link(p.next)}>{t.next}: {title(p.next)} →</a> : <a href="#/">{t.plan} →</a>}
+      </nav>
+    </main>
   )
 }

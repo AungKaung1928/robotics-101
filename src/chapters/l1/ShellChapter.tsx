@@ -10,7 +10,7 @@ const DOCS = 'https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Config
 
 function Term({ lines, start, cursor }: { lines: Line[]; start: string[]; cursor?: string }) {
   return (
-    <pre className="code term" aria-live="polite">
+    <pre className="code term" role="log" aria-live="polite">
       {lines.map((l, i) => (
         <span key={i}>
           <span className="ln"><span className="cmt">{start[i]}</span> {l.cmd}</span>
@@ -62,7 +62,7 @@ export default function ShellChapter({ t }: { t: Strings }) {
         <p><strong>{s.challenge}</strong></p>
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet}</p>
         <p className="group-h">{s.words}</p>
-        <dl className="gloss">{s.glossary.map(([k, v]) => <div key={k} style={{ display: 'contents' }}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+        <dl className="gloss">{s.glossary.map(([k, v]) => <div key={k} style={{ display: 'contents' }}><dt><code>{k}</code></dt><dd>{v}</dd></div>)}</dl>
         <p className="src">{t.source}: <a href={DOCS}>ROS 2 Humble: Configuring environment</a> ("run this command on every new shell you open"), <a href="https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins">Bash manual: cd, source, pwd, echo</a></p>
       </div>
     </>

@@ -1,0 +1,13 @@
+/* Chapter change (lane anim): only the chapter body moves, 16 px the way the reader went; header and plan stay put. */
+main.chapter { view-transition-name: chapter; }
+::view-transition-group(chapter) { animation-duration: 260ms; }
+::view-transition-old(chapter), ::view-transition-new(chapter) { animation-duration: 260ms; animation-timing-function: cubic-bezier(0.2, 0, 0, 1); }
+html[data-vt='next']::view-transition-old(chapter) { animation-name: vt-out-l; }
+html[data-vt='next']::view-transition-new(chapter) { animation-name: vt-in-r; }
+html[data-vt='back']::view-transition-old(chapter) { animation-name: vt-out-r; }
+html[data-vt='back']::view-transition-new(chapter) { animation-name: vt-in-l; }
+@keyframes vt-out-l { to { opacity: 0; transform: translateX(-16px); } }
+@keyframes vt-out-r { to { opacity: 0; transform: translateX(16px); } }
+@keyframes vt-in-r { from { opacity: 0; transform: translateX(16px); } }
+@keyframes vt-in-l { from { opacity: 0; transform: translateX(-16px); } }
+@media (prefers-reduced-motion: reduce) { ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; } }

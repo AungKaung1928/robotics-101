@@ -54,7 +54,7 @@ export default function DecideChapter({ t }: { t: Strings }) {
         <p><strong>{s.challenge}</strong></p>
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet} {r.crashed ? s.crashed : `${m(r.final)} m`} ({GOAL[0]}–{GOAL[1]} m)</p>
         <p className="group-h">{s.words}</p>
-        <dl className="gloss">{s.glossary.map(([k, v]) => <div key={k} style={{ display: 'contents' }}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+        <dl className="gloss">{s.glossary.map(([k, v]) => <div key={k} style={{ display: 'contents' }}><dt><code>{k}</code></dt><dd>{v}</dd></div>)}</dl>
         <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L39`}>nav2_params.yaml:39</a> (max_vel_x {SPEED}), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L168`}>turtlebot3_burger.urdf.xacro:168</a> (update_rate {SCAN_HZ}) · <a href="https://docs.python.org/3/tutorial/controlflow.html#if-statements">Python tutorial: if</a>. {s.srcNote}</p>
       </div>
     </>

@@ -1,7 +1,8 @@
+import type { ComponentType } from 'react'
 import type { ChapterMeta } from '../anim/contract'
-import { LEVEL1_CHAPTERS } from '../chapters/l1'
+import { CallbackChapter, ClosestChapter, CppChapter, DecideChapter, LEVEL1_CHAPTERS, ShellChapter } from '../chapters/l1'
 import { LEVEL2_CHAPTERS } from '../chapters/l2'
-import { STRINGS } from '../i18n'
+import { STRINGS, type Strings } from '../i18n'
 import { CHAPTER_ICON } from '../icons'
 import type { ChapterId } from '../lib/route'
 
@@ -20,3 +21,25 @@ export const LEVELS: ChapterMeta[][] = [
   existing(4, ['grid', 'costmap', 'goal', 'bringup']),
   [],
 ]
+
+/** Bodies of the new-level chapters (the 7 patrol chapters keep their own routes in App). */
+export const LEVEL_BODY: Record<string, ComponentType<{ t: Strings }>> = {
+  decide: DecideChapter, closest: ClosestChapter, callback: CallbackChapter, cpp: CppChapter, shell: ShellChapter,
+}
+
+export type LevelPage = { meta: ChapterMeta; num: string; prev: ChapterMeta | null; next: ChapterMeta | null }
+
+/** '#/1/decide' → that chapter with its number ('1.1') and its neighbours inside the level; anything else → null. */
+export function levelPage(hash: string): LevelPage | null {
+  const [lv, id] = hash.replace(/^#\/?/, '').split('?')[0].split('/')
+  const chs = LEVELS[Number(lv)]
+  const i = chs?.findIndex((c) => c.id === id && LEVEL_BODY[c.id]) ?? -1
+  if (!chs || i < 0) return null
+  return { meta: chs[i], num: `${lv}.${i + 1}`, prev: chs[i - 1] ?? null, next: chs[i + 1] ?? null }
+}
+
+/** Reading position of the page at `hash` across all levels (0, 1, ...); overview or unknown → -1. */
+export function readingIndex(hash: string): number {
+  const id = hash.replace(/^#\/?/, '').split('?')[0].split('/').find((seg) => !/^\d*$/.test(seg))
+  return LEVELS.flat().findIndex((c) => c.id === id)
+}

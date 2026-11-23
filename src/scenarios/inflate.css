@@ -1,0 +1,2 @@
+/* Inflation front (lane anim): the cells written this instant, outlined in ink; no other decoration. */
+.inset rect.wave { stroke: var(--ink); stroke-width: 0.008; }
