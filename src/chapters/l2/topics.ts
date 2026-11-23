@@ -24,11 +24,11 @@ export const subs = (slamTopic: string, mine: string): Sub[] => [
 
 /**
  * Topic name resolution for a node with no namespace (ROS 2 topic name rules): 'scan' -> '/scan',
- * '~/scan' -> '/<node>/scan'. Invalid (empty, spaces, first character not a letter, ~ or /, '__') -> null.
+ * '~/scan' -> '/<node>/scan'. Invalid (empty, spaces, first character not a letter, ~ or /, a token starting with a digit, '__') -> null.
  */
 export function resolve(name: string, node: string): string | null {
   const n = name.trim()
-  if (!/^(~\/|\/)?[A-Za-z][A-Za-z0-9_]*(\/[A-Za-z_][A-Za-z0-9_]*)*$/.test(n) || n.includes('__')) return null
+  if (!/^(?:(?:~\/|\/)[A-Za-z_]|[A-Za-z])[A-Za-z0-9_]*(\/[A-Za-z_][A-Za-z0-9_]*)*$/.test(n) || n.includes('__')) return null
   if (n.startsWith('~/')) return `/${node}/${n.slice(2)}`
   return n.startsWith('/') ? n : `/${n}`
 }

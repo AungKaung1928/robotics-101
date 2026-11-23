@@ -7,7 +7,7 @@ import type { Scenario } from '../../anim/contract'
 export interface Sh { cwd: string; dirs: string[]; files: Record<string, string>; env: Record<string, string> }
 export interface Line { cmd: string; out: string; ok: boolean }
 
-export const HOME = '/root' // home folder of root, the user in the ros:humble Docker image
+export const HOME = '/root' // home folder of root, the user in the ros:humble Docker image (a docker exec shell: no ROS sourced yet)
 const SETUP = '/opt/ros/humble/setup.bash'
 
 export const fresh = (): Sh => ({
@@ -64,10 +64,10 @@ export function exec(sh: Sh, cmd: string): { sh: Sh; line: Line } {
       return say('')
     case 'echo': return say(arg.startsWith('$') ? s.env[arg.slice(1)] ?? '' : arg)
     case 'ros2':
-      if (!s.env.ROS_DISTRO) return say('ros2: command not found', false)
+      if (!s.env.ROS_DISTRO) return say('bash: ros2: command not found', false)
       return say(arg === 'pkg list' ? 'geometry_msgs  rclcpp  rclpy  sensor_msgs  ... (shortened)' : 'usage: ros2 ... (help text, shortened)')
     case '': return say('')
-    default: return say(`${name}: command not found`, false)
+    default: return say(`bash: ${name}: command not found`, false) // interactive bash, no command-not-found helper
   }
 }
 

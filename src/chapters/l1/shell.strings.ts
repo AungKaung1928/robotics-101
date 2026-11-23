@@ -6,7 +6,7 @@ export const SHELL_STRINGS = {
     lines: [
       'The terminal is a text window where you type a command, press Enter, and read the answer. Robots are run this way.',
       'You are always inside one folder. pwd shows it, ls lists it, cd moves you.',
-      'ros2 only exists after source /opt/ros/humble/setup.bash. Every new terminal starts without it.',
+      'ros2 only exists after source /opt/ros/humble/setup.bash. A new terminal starts without it, unless ~/.bashrc sources it.',
     ],
     runsHere: 'A pretend terminal in the page (JavaScript), not your computer: one folder tree, 8 commands.',
     yours: 'Your terminal: type a command, press Enter',
@@ -31,7 +31,7 @@ export const SHELL_STRINGS = {
     lines: [
       'ターミナルはコマンドを打って Enter を押し、答えを読む文字の画面。ロボットはこうして動かす。',
       'いつもどこか1つのフォルダの中にいる。pwd で表示、ls で一覧、cd で移動。',
-      'ros2 は source /opt/ros/humble/setup.bash の後にだけ使える。新しいターミナルはいつもそれなしで始まる。',
+      'ros2 は source /opt/ros/humble/setup.bash の後にだけ使える。~/.bashrc で source していなければ、新しいターミナルはそれなしで始まる。',
     ],
     runsHere: 'ページ内の疑似ターミナル（JavaScript）で、あなたのコンピュータではない：フォルダ1つ分、コマンド8つ。',
     yours: 'あなたのターミナル：コマンドを打って Enter',

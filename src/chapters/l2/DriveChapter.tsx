@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import Player from '../../components/Player'
+import Player from '../../anim/Player'
 import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
 import { STRINGS, type Strings } from '../../i18n'
@@ -7,6 +7,7 @@ import { END_S, GOAL, challengeOk, plan, scenario, simulate, wheels } from './dr
 import { DRIVE_STRINGS } from './drive.strings'
 import '../l1/l1.css'
 import './l2.css'
+import Gloss from '../l1/Gloss'
 
 const W = 640, H = 330, PX = 180, OX = 60, OY = 280 // px per metre; start at (OX, OY), x right, y up
 const X = (x: number) => OX + x * PX, Y = (y: number) => OY - y * PX
@@ -61,7 +62,7 @@ export default function DriveChapter({ t }: { t: Strings }) {
         <p><strong>{s.challenge}</strong></p>
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet} x {end.x.toFixed(2)}, y {end.y.toFixed(2)} m{end.v !== 0 ? ` (${s.moving})` : ''}</p>
         <p className="group-h">{s.words}</p>
-        <dl className="gloss">{s.glossary.map(([k, x]) => <div key={k} style={{ display: 'contents' }}><dt><code>{k}</code></dt><dd>{x}</dd></div>)}</dl>
+        <Gloss items={s.glossary} />
         <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L143-L154`}>turtlebot3_burger.urdf.xacro:143-154</a> (DiffDrive, wheel separation 0.160 m, radius 0.033 m, max_linear_acceleration 1.0), <a href="https://github.com/gazebosim/gz-sim/blob/gz-sim8/src/systems/diff_drive/DiffDrive.cc#L641-L646">gz-sim DiffDrive.cc:641-646</a> (keeps the last command) · <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html">Humble: ros2 topic pub</a></p>
       </div>
     </>

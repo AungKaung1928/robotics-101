@@ -1,12 +1,11 @@
 import { createRoot } from 'react-dom/client'
 import '../../index.css'
 import { STRINGS } from '../../i18n'
-import { CallbackChapter, ClosestChapter, CppChapter, DecideChapter, ShellChapter } from './index'
-import { ActionsChapter, DriveChapter, ParamsChapter, WsChapter, MsgTypesChapter, NodesChapter, TopicsChapter } from '../l2'
+import { BODIES, INTROS } from '../l2/bodies'
 
-const BODIES = { decide: DecideChapter, closest: ClosestChapter, callback: CallbackChapter, cpp: CppChapter, shell: ShellChapter, nodes: NodesChapter, topics: TopicsChapter, msgtypes: MsgTypesChapter, actions: ActionsChapter, params: ParamsChapter, ws: WsChapter, drive: DriveChapter }
 const q = new URLSearchParams(location.search)
-const Body = BODIES[(q.get('c') ?? 'decide') as keyof typeof BODIES]
+const c = q.get('c') ?? 'decide'
+const Body = c === 'intro1' ? INTROS[1] : c === 'intro2' ? INTROS[2] : BODIES[c as keyof typeof BODIES]
 const t = STRINGS[q.get('lang') === 'ja' ? 'ja' : 'en']
 // ?w=390: headless Chrome on Windows will not open a window under ~500 px, so the page frames itself at that width.
 const w = q.get('w')

@@ -25,7 +25,7 @@ export const PARAMS_STRINGS = {
       ['launch file', 'a Python script that starts nodes with their parameters'],
       ['--ros-args -p', 'set a parameter from the command line'],
     ] as [string, string][],
-    caption: (n: number, w: number) => `check ${n}/20 · ${w} warnings`,
+    caption: (n: number, w: number) => `check ${n}/20 · ${w} warning${w === 1 ? '' : 's'}`,
   },
   ja: {
     title: 'ROS 2：パラメータと launch ファイル',

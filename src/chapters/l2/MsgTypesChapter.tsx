@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import Player from '../../components/Player'
+import Player from '../../anim/Player'
 import Slider from '../../components/Slider'
 import { LIDAR, SOURCE_REPO } from '../../content/world'
 import { STRINGS, type Strings } from '../../i18n'
@@ -7,6 +7,7 @@ import { LASERSCAN, LIMITS, SAMPLES, beamAngle, challengeOk, ignored, indexAt, p
 import { MSGTYPES_STRINGS } from './msgtypes.strings'
 import '../l1/l1.css'
 import './l2.css'
+import Gloss from '../l1/Gloss'
 
 const MSG = 'https://github.com/ros2/common_interfaces/blob/humble'
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -78,7 +79,7 @@ export default function MsgTypesChapter({ t }: { t: Strings }) {
         <p><strong>{s.challenge}</strong></p>
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? `✓ ${s.solved} ${tw.angular[2].toFixed(2)} rad/s` : `${s.notYet} linear.x ${tw.linear[0].toFixed(2)}, angular.z ${tw.angular[2].toFixed(2)}`}</p>
         <p className="group-h">{s.words}</p>
-        <dl className="gloss">{s.glossary.map(([k, v]) => <div key={k} style={{ display: 'contents' }}><dt><code>{k}</code></dt><dd>{v}</dd></div>)}</dl>
+        <Gloss items={s.glossary} />
         <p className="src">{t.source}: <a href={`${MSG}/sensor_msgs/msg/LaserScan.msg`}>LaserScan.msg</a>, <a href={`${MSG}/geometry_msgs/msg/Twist.msg`}>Twist.msg</a> (Humble), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L174-L182`}>turtlebot3_burger.urdf.xacro:174-182</a> ({SAMPLES} samples, {LIDAR.minAngle} to {LIDAR.maxAngle} rad), <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L206`}>nav2_params.yaml:206</a>, <a href="https://github.com/gazebosim/gz-sim/blob/gz-sim8/src/systems/diff_drive/DiffDrive.cc#L618-L619">gz-sim DiffDrive.cc:618-619</a> (reads linear.x, angular.z), <a href="https://www.ros.org/reps/rep-0103.html">REP 103</a></p>
       </div>
     </>
