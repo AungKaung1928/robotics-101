@@ -177,6 +177,24 @@ describe('SimPickScene takes the chapter ladder', () => {
   })
 })
 
+describe('SenseScene ring = the chapter ring', () => {
+  it('ring BEAMS: drawn readings == the chapter count of valid beams at every wall-slider stop, covered too', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: SenseScene } = await import('./SenseScene')
+    const sn = await import('../chapters/l0/sense')
+    const off: string[] = []
+    for (let k = 3; k <= 40; k++) for (const covered of [false, true]) {
+      const front = k / 10, want = sn.turn(front, covered).filter(sn.valid).length
+      const h = renderToStaticMarkup(createElement(SenseScene, { box: { ...sn.ROOM, front, maxFront: sn.FRONT_MAX }, mode: 'beam', covered, ring: sn.BEAMS, label: '' }))
+      const got = Number(/data-ring="(\d+)"/.exec(h)?.[1] ?? -1)
+      if (got !== want) off.push(`${front}${covered ? ' covered' : ''}: ${got} vs ${want}`)
+    }
+    if (off.length) console.log('RING-OFF', off.join(' | '))
+    expect(off).toEqual([])
+  })
+})
+
 describe('SimWhatScene sensor off says why the view is blank', () => {
   it('emptyWord in the view only when the sensor is off; no dots then', async () => {
     const { renderToStaticMarkup } = await import('react-dom/server')

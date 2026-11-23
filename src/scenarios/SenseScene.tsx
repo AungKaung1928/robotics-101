@@ -1,5 +1,5 @@
 import RobotTop from './RobotTop'
-import { MAX_R, cast, rayHit, sweep } from './sense'
+import { MAX_R, cast, castWall, rayHit, sweep } from './sense'
 import { roomLayout, type Box } from './room'
 import './robottop.css'
 
@@ -10,13 +10,17 @@ const S = 280, M = 20, VW = 2 * M + 1.5 * S, VH = 2 * M + S
  * mode 'spin': the beam turns at `rate` rev/s and leaves hit dots that fade over one turn (the LiDAR picture).
  * `covered`: a paw over the sensor; no beam reaches anything, the robot looks worried. From sense.ts.
  * No reading (covered, or the wall past the sensor's range): `noneWord` (the chapter's 'nothing there') above the head.
+ * `ring` = n (beam mode): also one whole turn of n beams at once (beam i at i·360/n degrees), every reading a dot: the
+ * chapter's ring next to its front number.
  * `box` = the chapter's own room (src/chapters/l0/sense.ts ROOM) instead of the built-in one (wallX then unused).
  */
-export default function SenseScene({ wallX = 1, box, mode, t = 0, covered = false, rate = 0.5, noneWord = '?', label }: {
-  wallX?: number; box?: Box; mode: 'beam' | 'spin'; t?: number; covered?: boolean; rate?: number; noneWord?: string; label: string
+export default function SenseScene({ wallX = 1, box, mode, t = 0, covered = false, rate = 0.5, noneWord = '?', ring = 0, label }: {
+  wallX?: number; box?: Box; mode: 'beam' | 'spin'; t?: number; covered?: boolean; rate?: number; noneWord?: string; ring?: number; label: string
 }) {
   const { walls, O, movable, X, Y } = roomLayout(wallX, box, VW, VH, M, S), a = mode === 'spin' ? 2 * Math.PI * rate * t : 0, d = cast(O, a, walls, covered)
   const hits = mode === 'spin' ? sweep(O, walls, t, rate, Math.PI / 90, covered) : []
+  const ringHits = mode === 'beam' && ring > 0 ? Array.from({ length: ring }, (_, i) => (2 * Math.PI * i) / ring)
+    .flatMap((b) => { const h = castWall(O, b, walls, covered); return h ? [{ x: O.x + h.d * Math.cos(b), y: O.y + h.d * Math.sin(b) }] : [] }) : []
   // wall beyond the sensor's range: the beam goes out to MAX_R and stops short of it (the wall is there, the sensor says nothing)
   const far = mode === 'beam' && !covered && d === null && (rayHit(O, a, walls)?.d ?? 0) > MAX_R
   const end = d ?? (far ? MAX_R : 0.18), ex = O.x + end * Math.cos(a), ey = O.y + end * Math.sin(a)
@@ -24,6 +28,7 @@ export default function SenseScene({ wallX = 1, box, mode, t = 0, covered = fals
   return (
     <svg className="sense-scene" viewBox={`0 0 ${VW} ${VH}`} role="img" aria-label={label} data-hits={hits.length} data-reading={d === null ? 'none' : d.toFixed(2)}>
       {walls.map(([x1, y1, x2, y2], i) => <line key={i} className={i === movable ? 'ss-wall is-movable' : 'ss-wall'} x1={X(x1)} y1={Y(y1)} x2={X(x2)} y2={Y(y2)} />)}
+      {ring > 0 && <path className="ss-hit is-ring" data-ring={ringHits.length} d={ringHits.map((h) => `M${(X(h.x) - 2).toFixed(1)} ${Y(h.y).toFixed(1)}a2 2 0 1 0 4 0a2 2 0 1 0 -4 0`).join('')} />}
       {fadeBuckets(hits, X, Y).map(([o, d]) => <path key={o} className="ss-hit" opacity={o} d={d} />)}
       {!covered && <line className={d === null ? 'ss-beam is-none' : 'ss-beam'} x1={X(O.x)} y1={Y(O.y)} x2={X(ex)} y2={Y(ey)} />}
       {far && <line className="ss-range" x1={X(ex)} y1={Y(ey) - 8} x2={X(ex)} y2={Y(ey) + 8} data-range={MAX_R} />}
