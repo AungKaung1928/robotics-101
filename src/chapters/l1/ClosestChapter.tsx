@@ -81,7 +81,8 @@ export default function ClosestChapter({ t }: { t: Strings }) {
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet} {n} {s.times}</p>
         <p className="group-h">{s.words}</p>
         <Gloss items={s.glossary} />
-        <p className="src">{t.source}: <a href="https://docs.python.org/3/tutorial/controlflow.html#for-statements">Python tutorial: for</a>, <a href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions">defining functions</a>, <a href="https://docs.python.org/3/library/functions.html#float">float("inf")</a>.</p>
+        <p className="note" data-k="real-scan">{s.realScan}</p>
+        <p className="src">{t.source}: <a href="https://docs.python.org/3/tutorial/controlflow.html#for-statements">Python tutorial: for</a>, <a href="https://docs.python.org/3/tutorial/controlflow.html#defining-functions">defining functions</a>, <a href="https://docs.python.org/3/library/functions.html#float">float("inf")</a> · <a href="https://github.com/ros-infrastructure/rep/blob/master/rep-0117.rst">REP 117</a>.</p>
       </div>
     </>
   )
