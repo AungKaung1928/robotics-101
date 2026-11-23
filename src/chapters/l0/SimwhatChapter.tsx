@@ -6,6 +6,7 @@ import { FRONT_MAX, FRONT_MIN, FRONT_START, VIEW, view, world } from './simwhat'
 import { SIMWHAT_STRINGS } from './simwhat.strings'
 import './l0.css'
 import './simwhat.css'
+import AlreadyKnow from './AlreadyKnow'
 
 const { px: PX, ox: OX, oy: OY } = VIEW
 const RIGHT = VIEW.panelW + VIEW.gap // x offset of the view panel
@@ -53,6 +54,7 @@ export default function SimwhatChapter({ t }: { t: Strings }) {
       </div>
       <div className="panel">
         <p className="learn">{s.learn}</p>
+        <AlreadyKnow id="simwhat" t={t} />
         {s.steps.map((l) => <p key={l}>{l}</p>)}
         <Slider hint={t.drag} label={s.wall} value={front} min={FRONT_MIN} max={FRONT_MAX} step={0.1} fmt={(v) => v.toFixed(1)} onChange={(v) => setFront(Math.round(v * 10) / 10)} />
         <p><button type="button" className="break" onClick={() => { if (on) setOops(oops + 1); setOn(!on) }}>{on ? s.breakIt : s.fixIt}</button></p>

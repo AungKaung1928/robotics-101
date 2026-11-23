@@ -6,6 +6,7 @@ import { BASE, BOX_M, beamDeg, challengeOk, closestOf, readings, scenario, trace
 import { CLOSEST_STRINGS } from './closest.strings'
 import './l1.css'
 import Gloss from './Gloss'
+import AlreadyKnow from '../l0/AlreadyKnow'
 
 const W = 640, H = 330, CX = 320, CY = 305, PX = 110 // px per metre, top view, robot at the bottom
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -55,6 +56,7 @@ export default function ClosestChapter({ t }: { t: Strings }) {
       </div>
       <div className="panel">
         <p className="learn">{s.learn}</p>
+        <AlreadyKnow id="closest" t={t} />
         {s.lines.map((l) => <p key={l}>{l}</p>)}
         <p className="note" data-k="everyday">{s.everyday}</p>
         <pre className="code" aria-label="Python">

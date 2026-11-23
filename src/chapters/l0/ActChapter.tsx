@@ -9,6 +9,7 @@ import { SECONDS, TOP_SPEED, path } from './move'
 import './l0.css'
 import './move.css'
 import './act.css'
+import AlreadyKnow from './AlreadyKnow'
 
 const { px: PX, ox: OX, oy: OY } = VIEW
 const sx = (x: number) => OX + x * PX
@@ -50,6 +51,7 @@ export default function ActChapter({ t }: { t: Strings }) {
       </div>
       <div className="panel">
         <p className="learn">{s.learn}</p>
+        <AlreadyKnow id="act" t={t} />
         {s.steps.map((l) => <p key={l}>{l}</p>)}
         <Slider hint={t.drag} label={s.forward} value={v} min={0} max={TOP_SPEED} step={0.01} mark={0.15} fmt={(x) => x.toFixed(2)} onChange={(x) => setV(Math.round(x * 100) / 100)} />
         <div className="act-turn"><Slider label={s.turn} value={w} min={-TURN_MAX} max={TURN_MAX} step={0.1} mark={0} fmt={(x) => x.toFixed(1)} onChange={(x) => setW(Math.round(x * 10) / 10)} /></div>

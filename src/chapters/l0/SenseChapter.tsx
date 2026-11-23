@@ -7,6 +7,7 @@ import { BEAMS, FRONT_MAX, FRONT_START, MAX_M, ROOM, VIEW, front, perSecond, tur
 import { SENSE_STRINGS } from './sense.strings'
 import './l0.css'
 import './sense.css'
+import AlreadyKnow from './AlreadyKnow'
 
 const { px: PX, ox: OX, oy: OY } = VIEW
 const sx = (x: number) => OX + x * PX
@@ -51,6 +52,7 @@ export default function SenseChapter({ t }: { t: Strings }) {
       </div>
       <div className="panel">
         <p className="learn">{s.learn}</p>
+        <AlreadyKnow id="sense" t={t} />
         {s.steps.map((l) => <p key={l}>{l}</p>)}
         <Slider hint={t.drag} label={s.wall} value={wall} min={0.3} max={FRONT_MAX} step={0.1} mark={MAX_M} fmt={(v) => v.toFixed(1)}
           onChange={(v) => setWall(Math.round(v * 10) / 10)} />

@@ -8,6 +8,7 @@ import { LEFT, SECONDS, SLIP, TOP_SPEED, WHEEL_GAP_M, kind, path, turnsPerS, VIE
 import { MOVE_STRINGS } from './move.strings'
 import './l0.css'
 import './move.css'
+import AlreadyKnow from './AlreadyKnow'
 
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 const { px: PX, ox: OX, oy: OY } = VIEW
@@ -55,6 +56,7 @@ export default function MoveChapter({ t }: { t: Strings }) {
       </div>
       <div className="panel">
         <p className="learn">{s.learn}</p>
+        <AlreadyKnow id="move" t={t} />
         {s.steps.map((l) => <p key={l}>{l}</p>)}
         <Slider hint={t.drag} label={s.right} value={right} min={-TOP_SPEED} max={TOP_SPEED} step={0.01} mark={LEFT} fmt={(v) => v.toFixed(2)}
           onChange={(v) => { setRight(Math.round(v * 100) / 100); restart() }} />

@@ -10,6 +10,7 @@ import { RULE_M, SCAN_HZ, SPEED, run, scenario } from './think'
 import { THINK_STRINGS } from './think.strings'
 import './l0.css'
 import './think.css'
+import AlreadyKnow from './AlreadyKnow'
 
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 const m = (v: number) => v.toFixed(2)
@@ -40,6 +41,7 @@ export default function ThinkChapter({ t }: { t: Strings }) {
       </div>
       <div className="panel">
         <p className="learn">{s.learn}</p>
+        <AlreadyKnow id="think" t={t} />
         {s.steps.map((l) => <p key={l}>{l}</p>)}
         <Slider hint={t.drag} label={s.rule} value={rule} min={0} max={1} step={0.01} mark={RULE_M} fmt={m} onChange={set} />
         <p><button type="button" className="break" onClick={() => set(rule === 0 ? RULE_M : 0)}>{rule === 0 ? s.fixIt : s.breakIt}</button></p>
