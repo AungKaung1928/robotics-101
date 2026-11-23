@@ -7,7 +7,6 @@
 .sense-beam.is-none { stroke: var(--ink-2); stroke-dasharray: 4 5; }
 .sense-limit { fill: none; stroke: var(--rule); stroke-dasharray: 3 6; }
 .sense-body { fill: var(--robot); }
-.sense-eye { fill: var(--surface); }
 .sense-top { fill: var(--surface); stroke: var(--ink); stroke-width: 1.5; }
 .sense-hand { fill: var(--ink-2); }
 .sense-say { fill: var(--ink); font: 600 18px var(--mono); }

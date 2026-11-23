@@ -82,6 +82,10 @@ const cases = (l: Lang): Case[] => [
   { name: 'simpick check', Body: SimpickChapter, steps: [{ click: '.sp-check button.pick', text: 'mvsim' }, { expect: 'check', ok: true }, { a11y: true }] },
   { name: 'meet parts', Body: MeetChapter, steps: [{ click: 'g.meet-part.is-sensor' }, { expect: 'part', is: MEET_STRINGS[l].parts.sensor }, { click: 'g.meet-part.is-wheels' }, { expect: 'part', is: MEET_STRINGS[l].parts.wheels }] },
   { name: 'meet car', Body: MeetChapter, steps: [{ expect: 'robot', is: MEET_STRINGS[l].no }, { click: '.break' }, { expect: 'robot', is: MEET_STRINGS[l].yes }, { expect: 'decides', is: MEET_STRINGS[l].itself }] },
+  { name: 'face move slip dizzy', Body: MoveChapter, steps: [{ click: '.break' }, { expect: 'count:svg.move [data-mood=dizzy]', is: '1' }] },
+  { name: 'face sense proud', Body: SenseChapter, steps: [{ click: '.sense-check button.pick', text: SENSE_STRINGS[l].answers.nothing }, { expect: 'count:svg.sense [data-mood=proud]', is: '1' }, { click: '.break' }, { expect: 'count:svg.sense [data-mood=dizzy]', is: '1' }] },
+  { name: 'face simwhat off dizzy', Body: SimwhatChapter, steps: [{ click: '.break' }, { expect: 'count:svg.simwhat [data-mood=dizzy]', is: '1' }, { expect: 'count:svg.simwhat [data-mood=idle]', is: '1' }] },
+  { name: 'face act too fast dizzy', Body: ActChapter, steps: [{ slide: 0.22 }, { slide: 1.5, in: '.act-turn input[type=range]' }, { expect: 'count:svg.move [data-mood=dizzy]', is: '1' }] },
   { name: 'meet keyboard', Body: MeetChapter, steps: [{ key: 'Enter', on: 'g.meet-part.is-battery' }, { expect: 'part', is: MEET_STRINGS[l].parts.battery }, { key: ' ', on: 'g.meet-part.is-computer' }, { expect: 'part', is: MEET_STRINGS[l].parts.computer }] },
   { name: 'meet check', Body: MeetChapter, steps: [{ click: '.meet-check button.pick', text: MEET_STRINGS[l].answers.notRobot }, { expect: 'check', ok: true }, { a11y: true }] },
 ]

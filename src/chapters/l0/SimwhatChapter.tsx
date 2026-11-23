@@ -7,18 +7,20 @@ import { SIMWHAT_STRINGS } from './simwhat.strings'
 import './l0.css'
 import './simwhat.css'
 import AlreadyKnow from './AlreadyKnow'
+import Face from './Face'
+import { mood, type Mood } from './face'
+import './face.css'
 
 const { px: PX, ox: OX, oy: OY } = VIEW
 const RIGHT = VIEW.panelW + VIEW.gap // x offset of the view panel
 type Answer = 'wall' | 'empty' | 'gone'
 const ANSWERS: Answer[] = ['wall', 'empty', 'gone']
 
-function Bot({ dx }: { dx: number }) {
+function Bot({ dx, m }: { dx: number; m: Mood }) {
   return (
     <g transform={`translate(${dx + OX} ${OY})`}>
       <circle className="sw-body" r="13" />
-      <circle className="sw-eye" cx="6" cy="-4" r="2" />
-      <circle className="sw-eye" cx="6" cy="4" r="2" />
+      <Face k={0.65} mood={m} />
     </g>
   )
 }
@@ -46,10 +48,10 @@ export default function SimwhatChapter({ t }: { t: Strings }) {
           <text className="sw-title is-view" x={RIGHT + 12} y="30">{s.viewTitle}</text>
           <path className="sw-room" d={`M ${x(w.front)} ${y(w.side)} H ${x(w.back)} V ${y(-w.side)} H ${x(w.front)}`} />
           <rect className="sw-wall" x={x(w.front)} y={y(w.side) - 3} width="7" height={2 * w.side * PX + 6} />
-          <Bot dx={0} />
+          <Bot dx={0} m="idle" />
           {dots.map((d, i) => <circle key={i} className="sw-dot" r="1.8" cx={RIGHT + x(d.x)} cy={y(d.y)} />)}
           {!on && <text className="sw-empty" x={RIGHT + VIEW.panelW / 2} y={VIEW.h - 16} textAnchor="middle">{s.empty}</text>}
-          <Bot dx={RIGHT} />
+          <Bot dx={RIGHT} m={mood({ broken: !on, solved: picked === 'empty', sensing: true })} />
         </svg>
       </div>
       <div className="panel">

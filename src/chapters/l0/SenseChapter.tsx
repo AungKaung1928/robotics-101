@@ -8,6 +8,9 @@ import { SENSE_STRINGS } from './sense.strings'
 import './l0.css'
 import './sense.css'
 import AlreadyKnow from './AlreadyKnow'
+import Face from './Face'
+import { mood } from './face'
+import './face.css'
 
 const { px: PX, ox: OX, oy: OY } = VIEW
 const sx = (x: number) => OX + x * PX
@@ -43,8 +46,7 @@ export default function SenseChapter({ t }: { t: Strings }) {
           <rect x={OX - 12} y={OY - 18} width="24" height="6" rx="2" fill="currentColor" />
           <rect x={OX - 12} y={OY + 12} width="24" height="6" rx="2" fill="currentColor" />
           <circle className="sense-body" cx={OX} cy={OY} r="18" />
-          <circle className="sense-eye" cx={OX + 9} cy={OY - 6} r="2.5" />
-          <circle className="sense-eye" cx={OX + 9} cy={OY + 6} r="2.5" />
+          <g transform={`translate(${OX} ${OY})`}><Face k={0.9} mood={mood({ broken: covered, solved: picked === 'nothing', sensing: true })} /></g>
           <circle className="sense-top" cx={OX - 3} cy={OY} r="5" />
           {covered && <circle className="sense-hand" cx={OX - 3} cy={OY} r="12" />}
           <text className="sense-say" x={sx(Math.min(wall, MAX_M) / 2)} y={OY - 10} textAnchor="middle">{f === null ? s.nothing : `${f.toFixed(2)} m`}</text>
