@@ -8,6 +8,7 @@ import '../l1/l1.css'
 import './l2.css'
 import Gloss from '../l1/Gloss'
 import NodeGraph from './NodeGraph'
+import RealProject from './RealProject'
 
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 const LAUNCH = `${SOURCE_REPO}/blob/main/launch/tf_explorer.launch.py`
@@ -58,6 +59,7 @@ export default function NodesChapter({ t }: { t: Strings }) {
         <p className="runs">{s.left}</p>
         <p className="group-h">{s.words}</p>
         <Gloss items={s.glossary} />
+        <RealProject id="nodes" t={t} />
         <p className="src">{t.source}: <a href={`${LAUNCH}#L131-L142`}>tf_explorer.launch.py:131-142</a> (TF-Transform-Explorer, start delays), <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Nodes/Understanding-ROS2-Nodes.html">ROS 2 Humble: Understanding nodes</a></p>
       </div>
     </>

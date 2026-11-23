@@ -7,6 +7,7 @@ import { ACTIONS_STRINGS } from './actions.strings'
 import '../l1/l1.css'
 import './l2.css'
 import Gloss from '../l1/Gloss'
+import RealProject from './RealProject'
 
 const REPO = 'https://github.com/AungKaung1928/ros2-patrol-project/blob/main'
 const L = 150, R = 490, ROWS = 8
@@ -75,6 +76,7 @@ export default function ActionsChapter({ t }: { t: Strings }) {
           {ok && lastFb?.kind === 'feedback' ? `✓ ${s.solved} ${lastFb.remaining.toFixed(2)} ${s.left}` : `${s.notYet} ${res && res.kind === 'result' ? res.status : ''}`}
         </p>
         <pre className="code" aria-label="Python">{"self.navigate_to_pose_client = ActionClient(\n  self, NavigateToPose, 'navigate_to_pose')\n...\nsend_goal_async(goal_msg,\n  feedback_callback=self.feedback_callback)"}</pre>
+        <RealProject id="actions" t={t} />
         <p className="src"><a href={`${REPO}/patrol_navigation_project/patrol_controller.py#L32-L36`}>patrol_controller.py:32-36</a>, <a href={`${REPO}/patrol_navigation_project/patrol_controller.py#L198-L200`}>:198-200</a>, <a href={`${REPO}/patrol_navigation_project/patrol_controller.py#L220-L237`}>:220-237</a> (retry), <a href={`${REPO}/config/patrol_points.yaml#L49`}>patrol_points.yaml:49</a> (max_retries 3)</p>
         <p className="group-h">{s.words}</p>
         <Gloss items={s.glossary} />
