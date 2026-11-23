@@ -23,8 +23,8 @@ function Dial({ x, value, max, word }: { x: number; value: number; max: number; 
  * the robot driving the arc. At `tStop` the dials drop to 0 but the wheels slow down over the brake time: the robot
  * rolls on past its ghost (where an instant stop would have left it) by the distance printed between them (cm, as the chapter). From act.ts.
  */
-export default function ActScene({ v, w, tStop, decel, t, vWord = 'v', wWord = 'ω', showTurn = false, label }: {
-  v: number; w: number; tStop: number; decel: number; t: number; vWord?: string; wWord?: string; showTurn?: boolean; label: string
+export default function ActScene({ v, w, tStop, decel, t, vWord = 'v', wWord = 'ω', showTurn = false, solved = false, label }: {
+  v: number; w: number; tStop: number; decel: number; t: number; vWord?: string; wWord?: string; showTurn?: boolean; solved?: boolean; label: string
 }) {
   const { s: S, x0, y0 } = actFrame(v, w, tStop, decel), scr = (p: { x: number; y: number }) => [x0 + p.x * S, y0 - p.y * S] as const
   const f = actAt(v, w, tStop, decel, t), on = t < tStop, [x, y] = scr(f.pose), [gx, gy] = scr(f.ghost), { vl, vr } = wheels(v, w)
@@ -44,7 +44,7 @@ export default function ActScene({ v, w, tStop, decel, t, vWord = 'v', wWord = '
         <text className="as-num" x={(gx + x) / 2} y={Math.min(gy, y) - 30} textAnchor="middle">+{cm} cm</text>
       </>}
       {showTurn && <TurnOverlay vl={vl} vr={vr} p={f.pose} scr={scr} s={S} x={x} y={y} />}{/* R = v / ω: the two dials set the circle */}
-      <RobotTop x={x} y={y} deg={deg(f.pose.th)} rolledL={f.rolled.l * S} rolledR={f.rolled.r * S} mood={on ? (fast ? 'worried' : 'idle') : f.speed > 0 ? 'worried' : 'curious'} stretch={brakeStretch(v, w, tStop, decel, t)} />
+      <RobotTop x={x} y={y} deg={deg(f.pose.th)} rolledL={f.rolled.l * S} rolledR={f.rolled.r * S} mood={fast || (!on && f.speed > 0) ? 'worried' : solved ? 'proud' : on ? 'idle' : 'curious'} stretch={brakeStretch(v, w, tStop, decel, t)} />
       <g transform={`translate(${x} ${y}) rotate(${deg(f.pose.th)})`}>{arrow(1, vl)}{arrow(-1, vr)}</g>
       <Dial x={150} value={on ? v : 0} max={VMAX} word={vWord} />
       <Dial x={310} value={on ? w : 0} max={WMAX} word={wWord} />

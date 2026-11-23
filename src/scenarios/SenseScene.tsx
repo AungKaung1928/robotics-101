@@ -14,8 +14,8 @@ const S = 280, M = 20, VW = 2 * M + 1.5 * S, VH = 2 * M + S
  * chapter's ring next to its front number.
  * `box` = the chapter's own room (src/chapters/l0/sense.ts ROOM) instead of the built-in one (wallX then unused).
  */
-export default function SenseScene({ wallX = 1, box, mode, t = 0, covered = false, rate = 0.5, noneWord = '?', ring = 0, label }: {
-  wallX?: number; box?: Box; mode: 'beam' | 'spin'; t?: number; covered?: boolean; rate?: number; noneWord?: string; ring?: number; label: string
+export default function SenseScene({ wallX = 1, box, mode, t = 0, covered = false, rate = 0.5, noneWord = '?', ring = 0, solved = false, label }: {
+  wallX?: number; box?: Box; mode: 'beam' | 'spin'; t?: number; covered?: boolean; rate?: number; noneWord?: string; ring?: number; solved?: boolean; label: string
 }) {
   const { walls, O, movable, X, Y } = roomLayout(wallX, box, VW, VH, M, S), a = mode === 'spin' ? 2 * Math.PI * rate * t : 0, d = cast(O, a, walls, covered)
   const hits = mode === 'spin' ? sweep(O, walls, t, rate, Math.PI / 90, covered) : []
@@ -35,7 +35,7 @@ export default function SenseScene({ wallX = 1, box, mode, t = 0, covered = fals
       {far && <line className="ss-range" x1={X(ex)} y1={Y(ey) - 8} x2={X(ex)} y2={Y(ey) + 8} data-range={MAX_R} />}
       {d !== null && <circle className="ss-hit is-now" cx={X(ex)} cy={Y(ey)} r={4} />}
       {mode === 'beam' && <text className={d === null ? 'ss-num is-none' : 'ss-num'} x={d === null || near ? X(O.x) : X(O.x + end / 2)} y={Y(O.y) - (d === null || near ? 34 : 10)} textAnchor="middle">{d === null ? noneWord : `${d.toFixed(2)} m`}</text>}
-      <RobotTop x={X(O.x)} y={Y(O.y)} deg={0} mood={covered ? 'worried' : 'curious'} sensor={!covered} />
+      <RobotTop x={X(O.x)} y={Y(O.y)} deg={0} mood={covered ? 'worried' : solved ? 'proud' : 'curious'} sensor={!covered} />
       {covered && <g className="ss-paw" transform={`translate(${X(O.x)} ${Y(O.y)})`}>{/* a soft paw from behind over the dome: palm + three toe beans; the worried eyes stay visible in front */}
         <ellipse cx={-7} cy={0} rx={9} ry={11} />{[-8, 0, 8].map((ty) => <circle key={ty} cx={ty ? -17 : -19} cy={ty} r={3.6} />)}
       </g>}

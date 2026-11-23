@@ -10,8 +10,8 @@ const M = 12, PW = 1.5 * 130 + 2 * M, PH = 130 + 2 * M // panel size stays fixed
 export const layout = (wallX: number, box?: Box) => roomLayout(wallX, box, PW, PH, M, 130)
 export type { Box }
 
-export default function SimWhatScene({ wallX = 1, box, sensorOn = true, worldWord, viewWord, emptyWord, label, hot0 = null, hot: hotIn, onHot }: {
-  wallX?: number; box?: Box; sensorOn?: boolean; worldWord: string; viewWord: string; emptyWord?: string; label: string; hot0?: number | null
+export default function SimWhatScene({ wallX = 1, box, sensorOn = true, worldWord, viewWord, emptyWord, solved = false, label, hot0 = null, hot: hotIn, onHot }: {
+  wallX?: number; box?: Box; sensorOn?: boolean; worldWord: string; viewWord: string; emptyWord?: string; solved?: boolean; label: string; hot0?: number | null
   hot?: number | null; onHot?: (wall: number | null) => void
 }) {
   const { walls, O, movable, X, Y } = layout(wallX, box), hits = sweep(O, walls, 1, 1, Math.PI / 90, !sensorOn), [own, setOwn] = useState<number | null>(hot0)
@@ -37,7 +37,7 @@ export default function SimWhatScene({ wallX = 1, box, sensorOn = true, worldWor
             <line className={cls(i === movable ? 'ss-wall is-movable' : 'ss-wall', i)} x1={X(x1)} y1={Y(y1)} x2={X(x2)} y2={Y(y2)} />
           </g>
         ))}
-        <g transform={`translate(${X(O.x)} ${Y(O.y)}) scale(0.7) translate(${-X(O.x)} ${-Y(O.y)})`}><RobotTop x={X(O.x)} y={Y(O.y)} deg={0} mood={sensorOn ? 'idle' : 'worried'} sensor={sensorOn} /></g>
+        <g transform={`translate(${X(O.x)} ${Y(O.y)}) scale(0.7) translate(${-X(O.x)} ${-Y(O.y)})`}><RobotTop x={X(O.x)} y={Y(O.y)} deg={0} mood={!sensorOn ? 'worried' : solved ? 'proud' : 'idle'} sensor={sensorOn} /></g>
         <text className="sw-cap" x={PW / 2} y={PH + 16} textAnchor="middle">{worldWord}</text>
       </g>
       <g transform={`translate(${PW + 10} 0)`}>

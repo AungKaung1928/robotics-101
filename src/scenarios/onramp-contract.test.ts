@@ -213,6 +213,22 @@ describe('ActScene too fast = the chapter tooFast', () => {
   })
 })
 
+describe('solved face as the chapters (robotmood: broken wins over proud)', () => {
+  it('sense, simulator, act: proud when solved, worried when broken even if solved', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement: h } = await import('react')
+    const { default: SenseScene } = await import('./SenseScene'), { default: SimWhatScene } = await import('./SimWhatScene'), { default: ActScene } = await import('./ActScene')
+    const mood = (el: ReturnType<typeof h>) => /class="rtop" data-mood="(\w+)"/.exec(renderToStaticMarkup(el))![1]
+    expect(mood(h(SenseScene, { mode: 'beam', solved: true, label: '' }))).toBe('proud')
+    expect(mood(h(SenseScene, { mode: 'beam', solved: true, covered: true, label: '' }))).toBe('worried')
+    expect(mood(h(SimWhatScene, { worldWord: 'w', viewWord: 'v', solved: true, label: '' }))).toBe('proud')
+    expect(mood(h(SimWhatScene, { worldWord: 'w', viewWord: 'v', solved: true, sensorOn: false, label: '' }))).toBe('worried')
+    expect(mood(h(ActScene, { v: 0.1, w: 0, tStop: 3, decel: 2.5, t: 1, solved: true, label: '' }))).toBe('proud')
+    expect(mood(h(ActScene, { v: 0.22, w: 1.5, tStop: 3, decel: 2.5, t: 1, solved: true, label: '' }))).toBe('worried') // too fast wins
+    expect(mood(h(ActScene, { v: 0.1, w: 0, tStop: 3, decel: 2.5, t: 1, label: '' }))).toBe('idle')
+  })
+})
+
 describe('SimWhatScene sensor off says why the view is blank', () => {
   it('emptyWord in the view only when the sensor is off; no dots then', async () => {
     const { renderToStaticMarkup } = await import('react-dom/server')
