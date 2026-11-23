@@ -6,6 +6,7 @@ import InflationRipple from './InflationRipple'
 import SpeedProfile from './SpeedProfile'
 import TfLab from './TfLab'
 import BfsWave from './BfsWave'
+import LateEnvelopes from './LateEnvelopes'
 import ToolStack from './ToolStack'
 import { year } from './distros'
 import { driveProfile } from './drive'
@@ -65,5 +66,13 @@ describe('scenario figures render from their models', () => {
     expect(count(at(9), /class="wall"/g)).toBe(2)
     const shut = blocked.map((b, i) => b || i === 3 || i === 8 || i === 13)
     expect(at(9, 4, shut)).not.toContain('class="path"')
+  })
+  it('LateEnvelopes: envelopes appear at their stamp, take their fate on arrival', () => {
+    const msgs = [0, 1, 2, 3].map((id) => ({ id, stamp: id * 0.1, latency: id === 1 ? 0.3 : 0.02 }))
+    const at = (t: number) => renderToStaticMarkup(<LateEnvelopes msgs={msgs} maxAge={0.5} t={t} label="" fateText={(f) => f} />)
+    expect(count(at(0.05), /<rect class="env/g)).toBe(1)
+    expect(count(at(9), /class="env stale"/g)).toBe(2) // rect + flap of message 1, overtaken by 2
+    expect(count(at(9), /class="env used"/g)).toBe(6)
+    expect(at(9)).toContain('class="mascot"')
   })
 })
