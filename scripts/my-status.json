@@ -856,5 +856,132 @@
   "en": "Robotics 101",
   "my": "Robotics 101",
   "back": "Robotics 101"
+ },
+ "l3/tflab:check": {
+  "status": "pass",
+  "en": "Check my guess",
+  "my": "ခန့်မှန်းချက်ကို စစ်ကြည့်",
+  "back": "Check the guess"
+ },
+ "l3/tflab:choice.odom": {
+  "status": "pass",
+  "en": "Start the odom → base_link broadcaster",
+  "my": "odom → base_link broadcaster ကို ဖွင့်",
+  "back": "Turn on odom → base_link broadcaster"
+ },
+ "l3/tflab:choice.resend": {
+  "status": "pass",
+  "en": "Send map → odom again",
+  "my": "map → odom ကို ထပ်ပို့",
+  "back": "Resend map → odom"
+ },
+ "l3/tflab:choice.restart": {
+  "status": "pass",
+  "en": "Restart the detector",
+  "my": "detector ကို ပြန်ဖွင့်",
+  "back": "Restart the detector"
+ },
+ "l3/tflab:code.0": {
+  "status": "pass",
+  "en": "the three pairs it checks",
+  "my": "စစ်ဆေးတဲ့ အတွဲ 3 တွဲ",
+  "back": "3 pairs to check"
+ },
+ "l3/tflab:code.1": {
+  "status": "pass",
+  "en": "where it writes MISSING",
+  "my": "MISSING လို့ ရေးတဲ့နေရာ",
+  "back": "The place where it writes MISSING"
+ },
+ "l3/tflab:code.2": {
+  "status": "pass",
+  "en": "the lab test: never sends odom → base_link",
+  "my": "လက်တွေ့စမ်းသပ်မှု - odom → base_link ကို ဘယ်တော့မှ မပို့ပါဘူး",
+  "back": "Practical test - never sends odom → base_link"
+ },
+ "l3/tflab:learn": {
+  "status": "pass",
+  "en": "You will: predict a TF failure, see it, find the code that reports it, fix it, and check the fix.",
+  "my": "သင်ဟာ TF အမှားတစ်ခုကို ခန့်မှန်းမယ်၊ ကြည့်မယ်၊ အဲဒါကို ဖော်ပြပေးတဲ့ ကုဒ်ကို ရှာမယ်၊ ပြင်မယ်၊ ပြီးရင် ပြင်လိုက်တာကို ပြန်စစ်ဆေးပါမယ်။",
+  "back": "You will guess a TF error, observe it, find the code that shows it, fix it, and then verify the fix."
+ },
+ "l3/tflab:notYet": {
+  "status": "pass-alt",
+  "en": "Still MISSING: that change does not add the missing transform.",
+  "my": "အခုထိ MISSING ဖြစ်နေတုန်းပါပဲ - အဲဒီအပြောင်းအလဲက ပျောက်နေတဲ့ transform ကို ထည့်မပေးပါဘူး။",
+  "back": "Still MISSING - that change does not add the missing transform.",
+  "note": "Thai ยัง (still) slipped into the draft; replaced by အခုထိ by hand, lint check added"
+ },
+ "l3/tflab:ok": {
+  "status": "pass",
+  "en": "All three pairs OK. The repo checks the same with this test:",
+  "my": "အတွဲ 3 တွဲလုံး OK ပါပြီ။ repo က ဒီ စမ်းသပ်မှုနဲ့ အတူတူပဲ စစ်ဆေးပါတယ်။",
+  "back": "All 3 pairs are OK. The repo checks the same way as this experiment."
+ },
+ "l3/tflab:reset": {
+  "status": "needs-human",
+  "en": "Break it again",
+  "my": "နောက်တစ်ခါ ဖျက်ကြည့်",
+  "note": "meaning drift (blind back-translation: \"Try clearing again\"): drift: 'Break it again' is an imperative to cause failure, 'clearing' is neutral. | second blind check: \"Next time, try deleting\" (drift twice). Candidate: ထပ်ဖျက်ကြည့်"
+ },
+ "l3/tflab:right": {
+  "status": "pass",
+  "en": "Right: every pair that has to pass through the missing link fails.",
+  "my": "မှန်ပါတယ် - ပျောက်နေတဲ့ link ကို ဖြတ်သွားရမယ့် အတွဲတိုင်း အလုပ်မလုပ်ပါဘူး။",
+  "back": "Correct - Every pair that has to go through the missing link does not work."
+ },
+ "l3/tflab:run": {
+  "status": "pass",
+  "en": "Run the detector",
+  "my": "detector ကို run",
+  "back": "Run the detector"
+ },
+ "l3/tflab:s1": {
+  "status": "pass",
+  "en": "1. Predict: which pairs will the detector report MISSING?",
+  "my": "1. ခန့်မှန်း - ဘယ်အတွဲတွေကို detector က MISSING လို့ ပြမလဲ။",
+  "back": "1. Predict - Which pairs will the detector show as MISSING?"
+ },
+ "l3/tflab:s2": {
+  "status": "pass",
+  "en": "2. See it: /tf_diagnostics",
+  "my": "2. ကြည့်မယ် - /tf_diagnostics",
+  "back": "2. Observe - /tf_diagnostics"
+ },
+ "l3/tflab:s3": {
+  "status": "pass",
+  "en": "3. Inspect the code",
+  "my": "3. ကုဒ်ကို စစ်ဆေးကြည့်မယ်",
+  "back": "3. Inspect the code"
+ },
+ "l3/tflab:s4": {
+  "status": "pass",
+  "en": "4. Fix it: what do you change?",
+  "my": "4. ပြင်ကြည့်မယ် - ဘာကို ပြောင်းလဲမလဲ။",
+  "back": "4. Try to fix - what will you change?"
+ },
+ "l3/tflab:s5": {
+  "status": "pass",
+  "en": "5. Verify",
+  "my": "5. အတည်ပြုစစ်ဆေးမယ်",
+  "back": "5. Verify"
+ },
+ "l3/tflab:setup": {
+  "status": "pass",
+  "en": "SLAM sends map → odom. Nobody sends odom → base_link. The detector checks three pairs every 0.5 s.",
+  "my": "SLAM က map → odom ကို ပို့ပါတယ်။ ဘယ်သူမှ odom → base_link ကို မပို့ပါဘူး။ detector က အတွဲ 3 တွဲကို 0.5 s တိုင်း စစ်ဆေးပါတယ်။",
+  "back": "SLAM sends map → odom. No one sends odom → base_link. The detector checks 3 pairs every 0.5 s."
+ },
+ "l3/tflab:title": {
+  "status": "pass",
+  "en": "TF debugging lab: a missing link",
+  "my": "TF အမှားရှာလက်တွေ့စမ်းသပ်ခန်း - ပျောက်နေတဲ့ link တစ်ခု",
+  "back": "TF error troubleshooting laboratory - A missing link"
+ },
+ "l3/tflab:wrong": {
+  "status": "pass",
+  "en": "Not quite. Run it and look which pairs need odom → base_link.",
+  "my": "မမှန်သေးပါဘူး။ အဲဒါကို run ကြည့်ပြီး ဘယ်အတွဲတွေက odom → base_link လိုအပ်လဲဆိုတာ ကြည့်ပါ။",
+  "back": "Not correct yet. Try running that and see which pairs need odom → base_link."
  }
 }

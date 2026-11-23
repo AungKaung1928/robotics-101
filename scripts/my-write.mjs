@@ -1,5 +1,5 @@
 // Writes src/i18n/my/*.json (shape: src/i18n/my/README.md) from scripts/my-status.json: node scripts/my-write.mjs
-// Only strings with status pass whose stored English equals today's English go out; everything else is left out, so the
+// Only strings with status pass or pass-alt (second-model blind check while Gemini is out) whose stored English equals today's English go out; everything else is left out, so the
 // app shows English there. Prints per file: live / English fallback.
 import { execFileSync } from 'node:child_process'
 import { mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs'
@@ -16,7 +16,7 @@ const status = JSON.parse(readFileSync(join(here, 'my-status.json'), 'utf8'))
 
 const live = (i) => {
   const s = status[i.id]
-  return s?.status === 'pass' && s.en === i.en && lint(i.en, s.my, i.role).fail.length === 0 ? s.my : undefined
+  return (s?.status === 'pass' || s?.status === 'pass-alt') && s.en === i.en && lint(i.en, s.my, i.role).fail.length === 0 ? s.my : undefined
 }
 const files = {}
 const count = {}
