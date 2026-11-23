@@ -105,3 +105,14 @@ describe('TfChain renders from chainAt()', () => {
     expect(b).toContain('m-spark') // still frame keeps the proud sparks
   })
 })
+
+describe('EventLog next to the mini plan', () => {
+  it('the log marks its current row with data-state only, so the page has exactly one aria-current step (the mini plan waypoint)', async () => {
+    const { default: MiniPlan } = await import('../components/MiniPlan')
+    const { STRINGS } = await import('../i18n')
+    const rows = [{ t: 0, cells: ['a'] }, { t: 1, cells: ['b'] }, { t: 2, cells: ['c'] }]
+    const html = renderToStaticMarkup(<><MiniPlan current="bringup" t={STRINGS.en} /><EventLog rows={rows} t={1.5} seek={() => {}} head={['x']} label="" /></>)
+    expect(count(html, /aria-current="step"/g)).toBe(1)
+    expect(count(html, /data-state="now"/g)).toBe(1)
+  })
+})
