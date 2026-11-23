@@ -56,3 +56,5 @@
 .nface[data-mood='starved'] .nface-body { stroke: var(--ink-2); stroke-dasharray: 2 2; }
 .nface-z { fill: none; stroke: var(--ink-2); stroke-width: 1.2; stroke-linecap: round; stroke-linejoin: round; }
 .nface[data-mood='off'] .nface-body { fill: color-mix(in srgb, var(--ink) 6%, var(--surface)); }
+.cb-env { fill: none; stroke: var(--rule); stroke-width: 1; }
+.cb-env.is-full { fill: var(--ray); stroke: var(--ray); }

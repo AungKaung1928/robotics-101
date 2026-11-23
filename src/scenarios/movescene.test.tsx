@@ -171,3 +171,16 @@ describe('actionCues from the Actions model', () => {
     expect(actionCues(run(2, true, 1500))).toMatchObject({ brake: 1, cheer: 0 })
   })
 })
+
+describe('queueAt from the callback model', () => {
+  it('fast callback: queue stays empty, no drops; slow callback: queue fills to DEPTH, then drops', async () => {
+    const { queueAt } = await import('./CallbackActor')
+    const { simulate, DEPTH, PERIOD_MS, N } = await import('../chapters/l1/callback')
+    const fast = simulate(50)
+    for (let t = 0; t < N * PERIOD_MS; t += 37) { const q = queueAt(fast, t); expect(q.waiting).toBe(0); expect(q.drops).toBe(0) }
+    const slow = simulate(500), end = N * PERIOD_MS - 1
+    expect(queueAt(slow, end).waiting).toBe(DEPTH)
+    expect(queueAt(slow, end).drops).toBeGreaterThan(0)
+    expect(queueAt(slow, end).busy).toBe(true)
+  })
+})
