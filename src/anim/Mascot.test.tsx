@@ -60,3 +60,13 @@ describe('entrance first paint', () => {
     expect(renderToStaticMarkup(<Mascot label="" />)).toContain('<g transform="translate(0 0)')
   })
 })
+
+describe('glance toward the last tap', () => {
+  it('maps a tap left / right of the robot to −1 … 1, 0 straight above, clamped', async () => {
+    const { glanceAt } = await import('./Mascot')
+    expect(glanceAt(132, 100, 64)).toBe(0)
+    expect(glanceAt(132 + 120, 100, 64)).toBeCloseTo(0.5)
+    expect(glanceAt(-5000, 100, 64)).toBe(-1)
+    expect(glanceAt(5000, 100, 64)).toBe(1)
+  })
+})

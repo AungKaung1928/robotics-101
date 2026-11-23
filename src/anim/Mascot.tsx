@@ -1,4 +1,4 @@
-import { useEffect, useId, useState, type CSSProperties } from 'react'
+import { useEffect, useId, useRef, useState, type CSSProperties } from 'react'
 import { BOOP_S, HAPPY_S, JOLT_S, OOPS_S, REST, WHEEL_R, boopPose, headLag, brakePose, startPose, eyeShift, wheelAngle, happyPose, oopsPose, sparks, dizzyStars, faceSwap, SWAP_S, STILL_DIZZY, STILL_SPARK, blinkDelay, enterPose, ENTER_S, type Pose } from './mascot'
 import { PRESS_STYLE } from './spring'
 import './mascot.css'
@@ -20,8 +20,8 @@ const REACTION: Record<Reaction, { pose: (t: number) => Pose; end: number }> = {
  * e.g. the playhead's place on the scrubber. `roll` = distance driven in the drawing's own units (64-unit box): the
  * wheels turn by roll / radius, so they never skid against the floor.
  */
-export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look = 0, roll = 0, thinking = false, sleepAfter = 0, enter = false, size = 64, label, inSvg = false }: {
-  cheer?: number; oops?: number; brake?: number; start?: number; look?: number; roll?: number; thinking?: boolean; sleepAfter?: number; enter?: boolean
+export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look = 0, roll = 0, thinking = false, sleepAfter = 0, enter = false, watch = false, size = 64, label, inSvg = false }: {
+  cheer?: number; oops?: number; brake?: number; start?: number; look?: number; roll?: number; thinking?: boolean; sleepAfter?: number; enter?: boolean; watch?: boolean
   size?: number; label: string; inSvg?: boolean
 }) {
   const [act, setAct] = useState<{ kind: Reaction; n: number } | null>(null)
@@ -55,6 +55,7 @@ export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look
   // Boop on pointer arrival or tap, only when idle: it never cuts a cheer or an oops short, and runs to the end.
   const boop = () => { if (!act) setAct({ kind: 'boop', n: 0 }) }
   const asleep = useIdle(sleepAfter)
+  const hit = useRef<HTMLSpanElement & SVGGElement>(null), glance = useGlance(hit, watch)
   const mood: Mood = act && (act.kind === 'happy' || act.kind === 'oops') ? act.kind : thinking ? 'think' : asleep ? 'sleep' : 'idle'
   const head = act && !reduced() ? headLag(REACTION[act.kind].pose, t) : undefined
   // Face swaps blink through (closed at the swap); reduced motion: instant.
@@ -75,11 +76,11 @@ export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look
   }, [mood]) // face is read only at the moment the mood changes, on purpose
   const sw = faceSwap(face.t)
   const still = !!act && reduced() // reduced motion: the cue shows as a still frame for the 900 ms the face holds
-  const fig = <MascotFigure pose={pose} mood={mood} size={size} label={label} spark={mood === 'happy' ? (still ? STILL_SPARK : t) : 0} dizzy={mood === 'oops' ? (still ? STILL_DIZZY : t) : 0} eyes={{ mood: sw.showNew ? face.to : face.from, sy: sw.sy }} look={look} roll={roll} head={head} />
+  const fig = <MascotFigure pose={pose} mood={mood} size={size} label={label} spark={mood === 'happy' ? (still ? STILL_SPARK : t) : 0} dizzy={mood === 'oops' ? (still ? STILL_DIZZY : t) : 0} eyes={{ mood: sw.showNew ? face.to : face.from, sy: sw.sy }} look={look || glance} roll={roll} head={head} />
   // Inside a chapter's SVG figure (place it with a parent <g transform>) the hit area is a <g>, in HTML a <span>.
   return inSvg
-    ? <g className="mascot-hit" onPointerEnter={boop} onClick={boop}>{fig}</g>
-    : <span className="mascot-hit" onPointerEnter={boop} onClick={boop}>{fig}</span>
+    ? <g ref={hit} className="mascot-hit" onPointerEnter={boop} onClick={boop}>{fig}</g>
+    : <span ref={hit} className="mascot-hit" onPointerEnter={boop} onClick={boop}>{fig}</span>
 }
 
 /** One frame of the robot: pose and face in, SVG out (the filmstrip test draws frames with it). label '' = decorative: hidden from screen readers. */
@@ -151,4 +152,21 @@ export function useIdle(after: number): boolean {
     return () => { clearTimeout(id); evs.forEach((e) => window.removeEventListener(e, wake)) }
   }, [after])
   return idle
+}
+
+/** Gaze toward the last tap or click on the page, −1 (far left) … 1 (far right) of the robot; 0 until the first tap. */
+export function glanceAt(tapX: number, left: number, width: number, reach = 240): number {
+  return Math.max(-1, Math.min(1, (tapX - (left + width / 2)) / reach))
+}
+
+/** `on`: listen for taps anywhere and return the gaze toward the last one (the eyes ease there on the look spring). */
+export function useGlance(ref: { current: Element | null }, on: boolean): number {
+  const [g, setG] = useState(0)
+  useEffect(() => {
+    if (!on) return
+    const tap = (e: PointerEvent) => { const r = ref.current?.getBoundingClientRect(); if (r) setG(glanceAt(e.clientX, r.left, r.width)) }
+    window.addEventListener('pointerdown', tap, { passive: true })
+    return () => window.removeEventListener('pointerdown', tap)
+  }, [ref, on])
+  return g
 }
