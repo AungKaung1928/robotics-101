@@ -212,3 +212,22 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 /* Line icons: sit on the text baseline, take the text colour. */
 .icon { vertical-align: -0.15em; flex: none; }
 h1 .icon { width: 0.8em; height: 0.8em; }
+
+/* Level map: one row per level, chapter chips with their icon; ticks from localStorage. */
+.levelmap { max-width: 1280px; margin: 0 auto; padding: 0 var(--s5) var(--s5); }
+.levelmap h2 { font: 600 var(--t-small) var(--mono); text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 var(--s2); }
+.levelmap ol { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--ink); }
+.levelmap li { display: grid; grid-template-columns: 2rem minmax(0, 14rem) minmax(0, 1fr); gap: var(--s3); align-items: center; padding: var(--s2) 0; border-bottom: 1px solid var(--rule); }
+.lv-n { font: 600 1.25rem var(--mono); color: var(--free); }
+.is-soon .lv-n, .is-soon .lv-name { color: var(--ink-2); }
+.lv-name { font-weight: 600; }
+.lv-chs { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.lv-chs a { display: inline-flex; align-items: center; gap: var(--s1); padding: var(--s1) var(--s2); border: 1px solid var(--rule); border-radius: var(--radius); background: var(--surface); color: var(--ink); text-decoration: none; font-size: var(--t-small); }
+.lv-chs a:hover { border-color: var(--ink); }
+.lv-chs a.is-done { border-color: var(--free); }
+.tick { color: var(--free); font-weight: 700; }
+@media (max-width: 700px) {
+  .levelmap { padding: 0 var(--s3) var(--s4); }
+  .levelmap li { grid-template-columns: 2rem minmax(0, 1fr); }
+  .lv-chs { grid-column: 1 / -1; }
+}

@@ -11,6 +11,7 @@ import ScanChapter from './components/ScanChapter'
 import TfChapter from './components/TfChapter'
 import { STRINGS, initialLang, type Lang } from './i18n'
 import { CHAPTER_ICON, Icon } from './icons'
+import { markDone } from './lib/progress'
 import { CHAPTERS, keyTarget, neighbour, parseRoute, type ChapterId } from './lib/route'
 
 const BODY: Record<ChapterId, typeof ScanChapter> = { bringup: BringupChapter, tf: TfChapter, scan: ScanChapter, detect: DetectChapter, grid: GridChapter, costmap: CostmapChapter, goal: GoalChapter }
@@ -25,6 +26,9 @@ export default function App() {
     addEventListener('hashchange', on)
     return () => removeEventListener('hashchange', on)
   }, [])
+  useEffect(() => {
+    if (route.page === 'chapter') markDone(localStorage, route.id)
+  }, [route])
   useEffect(() => {
     document.documentElement.lang = lang
     localStorage.setItem('r101-lang', lang)
