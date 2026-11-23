@@ -1,3 +1,5 @@
+import type { CSSProperties } from 'react'
+
 /**
  * Damped spring x'' = -k x - c x' (mass 1), closed form, for character motion: overshoot comes from the physics, not
  * from hand-made keyframes. Under-damped (c² < 4k) rings and settles; critical / over-damped never crosses 0.
@@ -41,3 +43,7 @@ export function springEasing(s: Spring, samples = 40): { easing: string; ms: num
 
 /** Button release: snappy and a single visible overshoot. */
 export const PRESS: Spring = { k: 900, c: 30 } // ζ = 0.5
+
+/** The PRESS spring as CSS variables (--spring easing, --spring-ms) for any transition that should move like it. */
+const PRESS_EASE = springEasing(PRESS)
+export const PRESS_STYLE = { '--spring': PRESS_EASE.easing, '--spring-ms': `${PRESS_EASE.ms}ms` } as CSSProperties

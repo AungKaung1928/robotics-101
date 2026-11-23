@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { BOOP_S, HAPPY_S, OOPS_S, REST, SPARK_AT, boopPose, happyPose, oopsPose, sparks } from './mascot'
+import { BOOP_S, HAPPY_S, eyeShift, OOPS_S, REST, SPARK_AT, boopPose, happyPose, oopsPose, sparks } from './mascot'
 
 const ts = (end: number) => Array.from({ length: 601 }, (_, i) => (i / 600) * end)
 
@@ -69,5 +69,15 @@ describe('boopPose', () => {
     expect(BOOP_S).toBeLessThan(0.6)
     expect(Math.abs(boopPose(BOOP_S).rot)).toBeLessThan(0.2)
     expect(boopPose(BOOP_S).y).toBe(0)
+  })
+})
+
+describe('eyeShift', () => {
+  it('maps −1 … 1 to −2.5 … 2.5 px, clamps, ignores NaN', () => {
+    expect(eyeShift(0)).toBe(0)
+    expect(eyeShift(1)).toBe(2.5)
+    expect(eyeShift(-0.4)).toBeCloseTo(-1, 12)
+    expect(eyeShift(7)).toBe(2.5)
+    expect(eyeShift(NaN)).toBe(0)
   })
 })

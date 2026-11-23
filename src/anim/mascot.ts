@@ -62,3 +62,8 @@ export function boopPose(t: number): Pose {
   return { ...REST, rot: springAt(t, BOUNCY, 0, BOOP_KICK), y: t < 0.18 ? 2 * Math.sin((Math.PI * t) / 0.18) : 0 }
 }
 export const BOOP_S = settleTime(BOUNCY, 0, BOOP_KICK, 0.2)
+
+/** Eye offset (px in the 64 box) for a gaze `look` in [−1, 1]: up to 2.5 px, so the pupils stay inside the head. */
+export function eyeShift(look: number): number {
+  return 2.5 * Math.min(1, Math.max(-1, Number.isFinite(look) ? look : 0))
+}

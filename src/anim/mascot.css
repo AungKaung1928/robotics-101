@@ -13,5 +13,7 @@
 .mascot .m-eyes { transform-box: fill-box; transform-origin: center; animation: m-blink 4.1s infinite; }
 @keyframes m-breath { 50% { transform: scale(0.992, 1.015); } }
 @keyframes m-blink { 0%, 94%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.12); } }
-@media (prefers-reduced-motion: reduce) { .mascot .m-breath, .mascot .m-eyes { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .mascot .m-breath, .mascot .m-eyes { animation: none; } .mascot .m-look { transition: none; } }
+.mascot .m-look { transition: transform 300ms ease-out; }
+@supports (transition-timing-function: linear(0, 1)) { .mascot .m-look { transition: transform var(--spring-ms, 300ms) var(--spring, ease-out); } }
 .mascot-hit { display: inline-block; line-height: 0; }
