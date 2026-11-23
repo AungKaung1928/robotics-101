@@ -28,3 +28,20 @@ describe('on-ramp scenes agree with the chapter models', () => {
     expect(p.x).toBeLessThan(straight.x)
   })
 })
+
+describe('SimWhatScene with the chapter box draws the chapter view', () => {
+  it('every scan point equals simwhat.view() at the same angle (180 of its 360 beams); sensor off empties both', async () => {
+    const { layout } = await import('./SimWhatScene')
+    const { sweep } = await import('./sense')
+    const sw = await import('../chapters/l0/simwhat')
+    for (const front of [sw.FRONT_MIN, sw.FRONT_START, sw.FRONT_MAX]) {
+      const g = layout(1, { ...sw.ROOM, front, maxFront: sw.FRONT_MAX }), mine = sweep(g.O, g.walls, 1, 1), theirs = sw.view(front, true)
+      expect(theirs.length).toBe(360)
+      expect(mine.length).toBe(180)
+      // sweep(t = 1) is the last full turn: point k is at angle 2(k + 1)°, i.e. their beam 2(k + 1) mod 360
+      mine.forEach((p, k) => { const q = theirs[(2 * (k + 1)) % 360]; expect(p.x).toBeCloseTo(q.x, 9); expect(p.y).toBeCloseTo(q.y, 9) })
+      expect(sweep(g.O, g.walls, 1, 1, Math.PI / 90, true)).toEqual([])
+      expect(sw.view(front, false)).toEqual([])
+    }
+  })
+})

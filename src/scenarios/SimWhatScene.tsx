@@ -1,10 +1,21 @@
 import { useState, type PointerEvent } from 'react'
 import RobotTop from './RobotTop'
-import { room, sweep } from './sense'
+import { room, sweep, type Seg } from './sense'
 import './robottop.css'
 
-const S = 130, M = 12, O = { x: 0.3, y: 0.5 }, PW = 1.5 * S + 2 * M, PH = S + 2 * M
-const X = (x: number) => M + x * S, Y = (y: number) => M + (1 - y) * S
+const M = 12, PW = 1.5 * 130 + 2 * M, PH = 130 + 2 * M // panel size stays fixed; the world is scaled into it
+
+/** A chapter's own room (src/chapters/l0/sense.ts ROOM): robot at the origin facing +x, walls at x = back and x = front,
+ * y = ±side; front is the wall the reader moves, scaled for maxFront so dragging it never rescales the picture. */
+export type Box = { back: number; front: number; side: number; maxFront: number }
+
+/** Walls, robot position, the movable wall's index and metres -> panel mapping, for the built-in room or a chapter's box. */
+export function layout(wallX: number, box?: Box): { walls: Seg[]; O: { x: number; y: number }; movable: number; X: (x: number) => number; Y: (y: number) => number } {
+  if (!box) return { walls: room(wallX), O: { x: 0.3, y: 0.5 }, movable: 4, X: (x) => M + x * 130, Y: (y) => M + (1 - y) * 130 }
+  const { back, front, side, maxFront } = box, k = Math.min((PW - 2 * M) / (maxFront - back), (PH - 2 * M) / (2 * side))
+  const walls: Seg[] = [[back, -side, back, side], [back, side, front, side], [front, side, front, -side], [front, -side, back, -side]]
+  return { walls, O: { x: 0, y: 0 }, movable: 2, X: (x) => M + (x - back) * k, Y: (y) => PH / 2 - y * k }
+}
 
 /**
  * On-ramp "simulator": left, the world (the simulator: walls, the robot); right, what the robot believes (the
@@ -12,11 +23,12 @@ const X = (x: number) => M + x * S, Y = (y: number) => M + (1 - y) * S
  * moving the wall moves the points; `sensorOn` false empties the view while the world keeps its wall. Linked
  * highlighting (Red Blob Games): hover or focus a wall, or one of its points, and the wall and its points light up together
  * while the rest dims, so each point is seen to come from a wall. `hot0` = the wall lit at first (tests, still frames).
+ * `box` = draw the chapter's own room instead of the built-in one (wallX is then unused).
  */
-export default function SimWhatScene({ wallX, sensorOn = true, worldWord, viewWord, label, hot0 = null }: {
-  wallX: number; sensorOn?: boolean; worldWord: string; viewWord: string; label: string; hot0?: number | null
+export default function SimWhatScene({ wallX = 1, box, sensorOn = true, worldWord, viewWord, label, hot0 = null }: {
+  wallX?: number; box?: Box; sensorOn?: boolean; worldWord: string; viewWord: string; label: string; hot0?: number | null
 }) {
-  const walls = room(wallX), hits = sweep(O, walls, 1, 1, Math.PI / 90, !sensorOn), [hot, setHot] = useState<number | null>(hot0)
+  const { walls, O, movable, X, Y } = layout(wallX, box), hits = sweep(O, walls, 1, 1, Math.PI / 90, !sensorOn), [hot, setHot] = useState<number | null>(hot0)
   const cls = (base: string, i: number) => `${base}${hot === null ? '' : hot === i ? ' is-hot' : ' is-dim'}`
   // Mouse: hover lights, leave clears. Touch has no hover and fires pointerleave right after pointerup (W3C pointerevents
   // issue #431), so a tap toggles instead and touch enter/leave are ignored. Keyboard: focus / blur.
@@ -33,7 +45,7 @@ export default function SimWhatScene({ wallX, sensorOn = true, worldWord, viewWo
         {walls.map(([x1, y1, x2, y2], i) => (
           <g key={i} className="sw-link" tabIndex={0} role="button" aria-label={`${worldWord} ${i + 1}`} {...link(i)}>
             <line className="sw-hitarea" x1={X(x1)} y1={Y(y1)} x2={X(x2)} y2={Y(y2)} />
-            <line className={cls(i === 4 ? 'ss-wall is-movable' : 'ss-wall', i)} x1={X(x1)} y1={Y(y1)} x2={X(x2)} y2={Y(y2)} />
+            <line className={cls(i === movable ? 'ss-wall is-movable' : 'ss-wall', i)} x1={X(x1)} y1={Y(y1)} x2={X(x2)} y2={Y(y2)} />
           </g>
         ))}
         <g transform={`translate(${X(O.x)} ${Y(O.y)}) scale(0.7) translate(${-X(O.x)} ${-Y(O.y)})`}><RobotTop x={X(O.x)} y={Y(O.y)} deg={0} mood={sensorOn ? 'idle' : 'worried'} sensor={sensorOn} /></g>
