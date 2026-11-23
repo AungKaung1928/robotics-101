@@ -6,6 +6,7 @@ import { COMPILE_MS, DECLS, GCC_ERROR, compile, line, outcome, scenario, type De
 import { CPP_STRINGS } from './cpp.strings'
 import RobotSide from './RobotSide'
 import './l1.css'
+import Gloss from './Gloss'
 
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 
@@ -71,7 +72,7 @@ export default function CppChapter({ t }: { t: Strings }) {
         </svg>
         <p className="runs" data-k="bench">{s.benchNote(`${BENCH.pyNs} ns`, `C++ ${BENCH.cppNs} ns (${ratio.toFixed(0)}×)`)} {BENCH.compiler}, Python {BENCH.python}.</p>
         <p className="group-h">{s.words}</p>
-        <dl className="gloss">{s.glossary.map(([k, v]) => <div key={k} style={{ display: 'contents' }}><dt><code>{k}</code></dt><dd>{v}</dd></div>)}</dl>
+        <Gloss items={s.glossary} />
         <p className="src">{t.source}: <a href="https://en.cppreference.com/w/cpp/language/list_initialization">cppreference: list initialization (narrowing)</a>, <a href="https://en.cppreference.com/w/cpp/language/implicit_conversion">implicit conversions (floating → integral truncates)</a></p>
       </div>
     </>

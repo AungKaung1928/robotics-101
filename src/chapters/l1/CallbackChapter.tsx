@@ -5,6 +5,7 @@ import { STRINGS, type Strings } from '../../i18n'
 import { DEPTH, PERIOD_MS, challengeOk, dropped, keepsUp, maxAgeMs, scenario, simulate } from './callback'
 import { CALLBACK_STRINGS } from './callback.strings'
 import './l1.css'
+import Gloss from './Gloss'
 
 const W = 640, L = 150, R = 625, Y_IN = 40, Y_RUN = 100, Y_Q = 160, H = 200
 const REPO = 'https://github.com/AungKaung1928/python-ros2-reference/blob/main/13_classes/classes.py#L111-L112'
@@ -75,7 +76,7 @@ export default function CallbackChapter({ t }: { t: Strings }) {
         <p className="src">{s.repo} <a href={REPO}>13_classes/classes.py:111-112</a></p>
         <pre className="code">{"self.scan_sub_ = self.create_subscription(\n    LaserScan, 'scan', self.scan_callback, 10)"}</pre>
         <p className="group-h">{s.words}</p>
-        <dl className="gloss">{s.glossary.map(([k, v]) => <div key={k} style={{ display: 'contents' }}><dt><code>{k}</code></dt><dd>{v}</dd></div>)}</dl>
+        <Gloss items={s.glossary} />
         <p className="src">{t.source}: <a href="https://docs.ros.org/en/humble/Concepts/Intermediate/About-Executors.html">ROS 2 Humble: Executors</a>, <a href="https://docs.ros.org/en/humble/Concepts/Intermediate/About-Quality-of-Service-Settings.html">Quality of Service (history depth)</a>, <a href="https://docs.python.org/3/tutorial/classes.html">Python tutorial: classes</a></p>
       </div>
     </>

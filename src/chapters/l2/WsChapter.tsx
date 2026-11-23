@@ -7,6 +7,7 @@ import { SCRIPT, WS, challengeOk, prompts, scenario, session } from './ws'
 import { WS_STRINGS } from './ws.strings'
 import '../l1/l1.css'
 import './l2.css'
+import Gloss from '../l1/Gloss'
 
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 
@@ -62,7 +63,7 @@ export default function WsChapter({ t }: { t: Strings }) {
         <p><strong>{s.challenge}</strong></p>
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet}</p>
         <p className="group-h">{s.words}</p>
-        <dl className="gloss">{s.glossary.map(([k, v]) => <div key={k} style={{ display: 'contents' }}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+        <Gloss items={s.glossary} />
         <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/README.md`}>TF-Transform-Explorer README:27-33</a>, <a href={`${SOURCE_REPO}/blob/main/package.xml#L4-L24`}>package.xml:4-24</a>, <a href={`${SOURCE_REPO}/blob/main/CMakeLists.txt#L107-L113`}>CMakeLists.txt:107-113</a>, <a href={`${SOURCE_REPO}/blob/main/src/tf_anomaly_detector.cpp#L30-L31`}>tf_anomaly_detector.cpp:30-31</a> · <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Colcon-Tutorial.html">Humble: Using colcon</a>, <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html">Creating a workspace</a></p>
       </div>
     </>

@@ -6,6 +6,7 @@ import { STATUS, challengeOk, run, scenario, type Ev } from './actions'
 import { ACTIONS_STRINGS } from './actions.strings'
 import '../l1/l1.css'
 import './l2.css'
+import Gloss from '../l1/Gloss'
 
 const REPO = 'https://github.com/AungKaung1928/ros2-patrol-project/blob/main'
 const L = 150, R = 490, ROWS = 8
@@ -76,7 +77,7 @@ export default function ActionsChapter({ t }: { t: Strings }) {
         <pre className="code" aria-label="Python">{"self.navigate_to_pose_client = ActionClient(\n  self, NavigateToPose, 'navigate_to_pose')\n...\nsend_goal_async(goal_msg,\n  feedback_callback=self.feedback_callback)"}</pre>
         <p className="src"><a href={`${REPO}/patrol_navigation_project/patrol_controller.py#L32-L36`}>patrol_controller.py:32-36</a>, <a href={`${REPO}/patrol_navigation_project/patrol_controller.py#L198-L200`}>:198-200</a>, <a href={`${REPO}/patrol_navigation_project/patrol_controller.py#L220-L237`}>:220-237</a> (retry), <a href={`${REPO}/config/patrol_points.yaml#L49`}>patrol_points.yaml:49</a> (max_retries 3)</p>
         <p className="group-h">{s.words}</p>
-        <dl className="gloss">{s.glossary.map(([k, v]) => <div key={k} style={{ display: 'contents' }}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+        <Gloss items={s.glossary} />
         <p className="src">{t.source}: <a href="https://github.com/ros-navigation/navigation2/blob/humble/nav2_msgs/action/NavigateToPose.action">NavigateToPose.action (Humble)</a>, <a href="https://github.com/ros2/rcl_interfaces/blob/humble/action_msgs/msg/GoalStatus.msg">GoalStatus.msg</a>, <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Actions/Understanding-ROS2-Actions.html">Humble: Understanding actions</a>, <a href="https://github.com/SteveMacenski/slam_toolbox/tree/humble">slam_toolbox (save_map service)</a></p>
       </div>
     </>

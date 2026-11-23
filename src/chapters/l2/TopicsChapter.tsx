@@ -6,6 +6,7 @@ import { DURATION_MS, TOPICS, challengeOk, received, resolve, scenario, subs } f
 import { TOPICS_STRINGS } from './topics.strings'
 import '../l1/l1.css'
 import './l2.css'
+import Gloss from '../l1/Gloss'
 
 const W = 640, H = 330, BW = 170, BH = 40
 const PUB = { x: 100, y: 150 }
@@ -85,7 +86,7 @@ export default function TopicsChapter({ t }: { t: Strings }) {
         <pre className="code">{'ros2 topic list\nros2 topic info /scan     # 1 publisher, 3 subscribers\nros2 topic hz /scan'}</pre>
         <p className="runs">{s.cliNote(TOPICS[0].measuredHz)}</p>
         <p className="group-h">{s.words}</p>
-        <dl className="gloss">{s.glossary.map(([k, v]) => <div key={k} style={{ display: 'contents' }}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
+        <Gloss items={s.glossary} />
         <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/config/gz_bridge.yaml#L8-L31`}>gz_bridge.yaml:8-31</a>, <a href={`${SOURCE_REPO}/blob/main/config/slam_params.yaml#L7`}>slam_params.yaml:7</a>, <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L99`}>nav2_params.yaml:99, 129, 203</a>, <a href={`${SOURCE_REPO}/blob/main/README.md`}>README (measured rates)</a> · <a href="https://design.ros2.org/articles/topic_and_service_names.html">ROS 2 design: topic names</a>, <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html">Humble: Understanding topics</a></p>
       </div>
     </>
