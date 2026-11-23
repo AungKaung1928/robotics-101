@@ -1,4 +1,28 @@
 {
-  "keepEnglish": ["ROS 2", "ROS", "LiDAR", "Nav2", "TF", "node", "topic", "message", "launch", "colcon", "SLAM", "costmap", "Python", "C++", "Gazebo", "TurtleBot3", "odom", "base_link", "map"],
-  "rules": ["Numbers, units, file names, code, frame names and anything in backticks stay unchanged.", "Myanmar Unicode only, never Zawgyi."]
+  "keepEnglish": [
+    "Robotics 101",
+    "ROS 2",
+    "ROS",
+    "LiDAR",
+    "Nav2",
+    "TF",
+    "node",
+    "topic",
+    "message",
+    "launch",
+    "colcon",
+    "SLAM",
+    "costmap",
+    "Python",
+    "C++",
+    "Gazebo",
+    "TurtleBot3",
+    "odom",
+    "base_link",
+    "map"
+  ],
+  "rules": [
+    "Numbers, units, file names, code, frame names and anything in backticks stay unchanged.",
+    "Myanmar Unicode only, never Zawgyi."
+  ]
 }
