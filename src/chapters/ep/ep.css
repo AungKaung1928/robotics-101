@@ -1,0 +1,12 @@
+.bfs { width: 100%; max-width: 520px; height: auto; display: block; margin: 0 auto; }
+.bfs .c { fill: var(--surface); stroke: var(--rule); stroke-width: 1; cursor: pointer; transition: fill var(--motion, 160ms) ease; }
+.bfs .c.wall { fill: var(--occ); }
+.bfs .c.queued { fill: var(--ray); fill-opacity: 0.35; }
+.bfs .c.done { fill: var(--cost); fill-opacity: 0.35; }
+.bfs .c.path { fill: var(--robot); fill-opacity: 0.8; }
+.bfs .c.cur { stroke: var(--ink); stroke-width: 3; }
+.bfs .c:focus-visible { outline: none; stroke: var(--ink); stroke-width: 3; }
+.bfs text { font: 600 18px var(--mono); fill: var(--ink); pointer-events: none; text-anchor: middle; dominant-baseline: central; }
+.bfs-legend { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; justify-content: center; font-size: var(--t-small); margin: 0.25rem 0 0; }
+.bfs-legend i { display: inline-block; width: 0.9em; height: 0.9em; margin-right: 0.3em; vertical-align: -0.1em; border: 1px solid var(--rule); }
+@media (prefers-reduced-motion: reduce) { .bfs .c { transition: none; } }

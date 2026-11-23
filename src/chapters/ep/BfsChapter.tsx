@@ -1,0 +1,93 @@
+import { useMemo, useState } from 'react'
+import Player from '../../anim/Player'
+import { STRINGS, type Strings } from '../../i18n'
+import Gloss from '../l1/Gloss'
+import '../l1/l1.css'
+import { GOAL, H, START, W, cellOf, initialWalls, inGoal, key, scenario, steps, type Order } from './bfs'
+import { BFS_STRINGS } from './bfs.strings'
+import './ep.css'
+
+const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
+const CS = 40 // px per cell in the SVG
+
+/** EP1: BFS on an occupancy grid. The animation is the model's own pop order; clicks and break-it rebuild it. */
+export default function BfsChapter({ t }: { t: Strings }) {
+  const s = BFS_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const [walls, setWalls] = useState(initialWalls)
+  const [order, setOrder] = useState<Order>('queue')
+  const sc = useMemo(() => scenario(walls, order), [walls, order])
+  const r = sc.result
+  const [tS, setTS] = useState(() => (still() ? Infinity : 0))
+  const now = Math.min(tS, sc.durationMs / 1000)
+  const f = sc.frame(now * 1000)
+  const restart = () => setTS(Infinity) // a changed map shows its end frame at once; Play replays it
+  const toggle = (k: number) => {
+    if (k === key(START) || k === key(GOAL)) return
+    const w = new Set(walls)
+    if (!w.delete(k)) w.add(k)
+    setWalls(w); restart()
+  }
+  const queued = [...f.states.values()].filter((v) => v === 'queued').length
+  const len = steps(r)
+  const lenTxt = len === null ? s.none : String(len)
+  const ok = inGoal(r)
+  return (
+    <>
+      <div className="figure">
+        <svg className="bfs" viewBox={`0 0 ${W * CS} ${H * CS}`} role="group" aria-label={s.figLabel}>
+          {Array.from({ length: W * H }, (_, k) => {
+            const [x, y] = cellOf(k)
+            const wall = walls.has(k)
+            const st = wall ? 'wall' : f.states.get(k) ?? ''
+            return (
+              <rect key={k} className={`c ${st}${f.current === k && !f.showPath ? ' cur' : ''}`} x={x * CS} y={y * CS} width={CS} height={CS}
+                role="button" tabIndex={0} aria-label={s.cellLabel(x, y, wall)} aria-pressed={wall}
+                onClick={() => toggle(k)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(k) } }} />
+            )
+          })}
+          <text x={START[0] * CS + CS / 2} y={START[1] * CS + CS / 2}>S</text>
+          <text x={GOAL[0] * CS + CS / 2} y={GOAL[1] * CS + CS / 2}>G</text>
+        </svg>
+        <p className="bfs-legend">
+          <span><i style={{ background: 'var(--ray)', opacity: 0.5 }} />{s.legendQueued}</span>
+          <span><i style={{ background: 'var(--cost)', opacity: 0.5 }} />{s.legendDone}</span>
+          <span><i style={{ background: 'var(--robot)' }} />{s.legendPath}</span>
+        </p>
+        <Player t={now} setT={setTS} end={sc.durationMs / 1000} events={sc.eventsMs!.map((e) => e / 1000)} speed={1} autoplay={!still()} s={t}
+          caption={s.caption(f.k, r.popped.length, queued)} />
+      </div>
+      <div className="panel">
+        <p className="learn">{s.learn}</p>
+        {s.lines.map((l) => <p key={l}>{l}</p>)}
+        <pre className="code" aria-label="Python">
+          <span className="ln">from collections import deque</span>
+          <span className="ln">queue = deque([start]); parent = {'{start: None}'}</span>
+          <span className="ln">while queue:</span>
+          <span className="ln on">    cell = queue.<span className={order === 'stack' ? 'bad' : ''}>{order === 'queue' ? 'popleft()' : 'pop()'}</span>   <span className="cmt"># {order === 'queue' ? 'oldest first' : 'newest first'}</span></span>
+          <span className="ln">    if cell == goal: break</span>
+          <span className="ln">    for n in neighbours(cell):   <span className="cmt"># free cells, 4 ways</span></span>
+          <span className="ln">        if n not in parent:</span>
+          <span className="ln">            parent[n] = cell; queue.append(n)</span>
+        </pre>
+        <p className="runs">{s.runsHere} {s.clickHint}</p>
+        <p>
+          <button type="button" className="break" onClick={() => { setOrder(order === 'queue' ? 'stack' : 'queue'); restart() }}>{order === 'queue' ? s.breakIt : s.fixIt}</button>{' '}
+          <button type="button" onClick={() => { setWalls(initialWalls()); restart() }}>{s.reset}</button>
+        </p>
+        {order === 'stack' && <p className="note">{s.brokenNote}</p>}
+        <dl className="readout">
+          <div><dt>{s.pathLen}</dt><dd data-k="len">{lenTxt}</dd></div>
+          <div><dt>{s.visited}</dt><dd data-k="visited">{r.popped.length}</dd></div>
+          <div><dt>{s.maxQueue}</dt><dd data-k="maxq">{r.maxQueue}</dd></div>
+        </dl>
+        <p><strong>{s.challenge}</strong></p>
+        <p className={`verdict ${ok && order === 'queue' ? 'ok' : 'no'}`} data-k="challenge">{ok && order === 'queue' ? '✓ ' + s.solved : s.notYet} {lenTxt}</p>
+        <p className="group-h">{s.costTitle}</p>
+        {s.cost.map((l) => <p key={l}>{l}</p>)}
+        <p className="group-h">{s.words}</p>
+        <Gloss items={s.glossary} />
+        <p className="src">{t.source}: <a href="https://docs.python.org/3/library/collections.html#collections.deque">Python docs: collections.deque</a> · <a href="https://github.com/ros-navigation/navigation2/blob/humble/nav2_costmap_2d/include/nav2_costmap_2d/cost_values.hpp#L42-L46">nav2_costmap_2d cost_values.hpp:42-46 (Humble)</a> · <a href="https://docs.nav2.org/configuration/packages/configuring-navfn.html">Nav2: NavFn planner (use_astar)</a></p>
+      </div>
+    </>
+  )
+}
