@@ -22,20 +22,26 @@ function wheelArrow(p: Pose2, side: 1 | -1, ms: number) {
  * without gripping, while the robot curves although both wheels turn alike. All from diffdrive.poseAt().
  * `arrows`: per wheel, where its ground point gets in 1 s (unequal = a curve, opposite = a spin on the spot); with slip a
  * dashed arrow shows what the left wheel spins, the solid one what reaches the floor.
+ * `tEnd`: the rest of the path up to tEnd, faint (where it is going), plus the start dot. `solved`: proud face.
  */
-export default function MoveScene({ vl, vr, t, slip = 0, showTurn = false, arrows = false, label }: { vl: number; vr: number; t: number; slip?: number; showTurn?: boolean; arrows?: boolean; label: string }) {
+export default function MoveScene({ vl, vr, t, slip = 0, showTurn = false, arrows = false, tEnd, solved = false, label }: {
+  vl: number; vr: number; t: number; slip?: number; showTurn?: boolean; arrows?: boolean; tEnd?: number; solved?: boolean; label: string
+}) {
   const p = poseAt(vl, vr, t, slip), [x, y] = scr(p), r = rolled(vl, vr, t), tr = trail(vl, vr, t, slip)
   const path = tr.map((q, i) => `${i ? 'L' : 'M'}${scr(q).map((v) => v.toFixed(1)).join(' ')}`).join('')
   const skid = slip > 0 ? tr.filter((_, i) => i % 3 === 0).map((q) => scr(wheelPoint(q, 1))) : []
   return (
     <svg className="move-scene" viewBox="0 0 460 340" role="img" aria-label={label}>
+      {tEnd !== undefined && tEnd > t && <path className="ms-ahead" d={[p, ...trail(vl, vr, tEnd, slip).filter((_, i) => i * 0.05 > t + 1e-9)]
+        .map((q, i) => `${i ? 'L' : 'M'}${scr(q).map((v) => v.toFixed(1)).join(' ')}`).join('')} />}
+      {tEnd !== undefined && <circle className="ms-start" cx={scr({ x: 0, y: 0 })[0]} cy={scr({ x: 0, y: 0 })[1]} r={4} />}
       <path className="ms-trail" d={path} />
       {skid.map(([sx, sy], i) => <circle key={i} className="ms-skid" cx={sx} cy={sy} r={2.2} />)}
       {showTurn && <TurnOverlay vl={vl} vr={vr} p={p} slip={slip} scr={scr} s={S} x={x} y={y} />}
       {arrows && slip > 0 && <g className="ms-v is-spin" data-ms={vl.toFixed(3)}><path d={wheelArrow(p, 1, vl).d} /><path d={wheelArrow(p, 1, vl).head} /></g>}
       {arrows && ([[1, vl * (1 - slip)], [-1, vr]] as const).map(([side, g]) => { const a = wheelArrow(p, side, g); return (
         <g key={side} className="ms-v" data-wheel={side === 1 ? 'left' : 'right'} data-ms={g.toFixed(3)}><path d={a.d} /><path d={a.head} /></g>) })}
-      <RobotTop x={x} y={y} deg={(-p.th * 180) / Math.PI} rolledL={r.l * S} rolledR={r.r * S} mood={slip > 0 ? 'worried' : 'idle'} />
+      <RobotTop x={x} y={y} deg={(-p.th * 180) / Math.PI} rolledL={r.l * S} rolledR={r.r * S} mood={slip > 0 ? 'worried' : solved ? 'proud' : 'idle'} />
     </svg>
   )
 }

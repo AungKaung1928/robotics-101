@@ -86,3 +86,6 @@
 .tk-tick.is-fired { stroke: var(--free); stroke-width: 2.5; }
 .tk-tick.is-now { stroke: var(--robot); stroke-width: 2.5; } /* the check happening now */
 .ss-limit { fill: none; stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 2 4; opacity: 0.6; } /* SenseScene ring: the 3.5 m range */
+/* MoveScene tEnd: the rest of the path, faint (where it is going); the start point. */
+.ms-ahead { fill: none; stroke: var(--ink-2); stroke-width: 1.5; stroke-dasharray: 2 5; stroke-linecap: round; opacity: 0.7; }
+.ms-start { fill: var(--surface); stroke: var(--ink-2); stroke-width: 2; }

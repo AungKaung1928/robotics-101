@@ -43,3 +43,17 @@ describe('MoveScene framing over the chapter slider range', () => {
     expect(out).toEqual([])
   })
 })
+
+describe('MoveScene tEnd and solved (the chapter figure shows the whole path and the solved face)', () => {
+  it('ahead path from the robot to the pose at tEnd; start dot; proud when solved', async () => {
+    const { poseAt } = await import('./diffdrive')
+    const h = renderToStaticMarkup(<MoveScene vl={0.15} vr={0.1} t={1} tEnd={4} solved label="" />)
+    const d = /class="ms-ahead" d="([^"]+)"/.exec(h)![1], pts = [...d.matchAll(/[ML]([-\d.]+) ([-\d.]+)/g)].map((m) => [+m[1], +m[2]])
+    const now = poseAt(0.15, 0.1, 1), end = poseAt(0.15, 0.1, 4)
+    expect(pts[0][0]).toBeCloseTo(60 + now.x * 300, 0); expect(pts[0][1]).toBeCloseTo(200 - now.y * 300, 0)
+    expect(pts.at(-1)![0]).toBeCloseTo(60 + end.x * 300, 0); expect(pts.at(-1)![1]).toBeCloseTo(200 - end.y * 300, 0)
+    expect(h).toContain('class="ms-start"')
+    expect(h).toContain('data-mood="proud"')
+    expect(renderToStaticMarkup(<MoveScene vl={0.15} vr={0.1} t={4} tEnd={4} label="" />)).not.toContain('ms-ahead') // at the end nothing is ahead
+  })
+})
