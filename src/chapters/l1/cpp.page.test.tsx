@@ -5,10 +5,11 @@ import { join } from 'node:path'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { afterAll, describe, expect, it } from 'vitest'
 import { STRINGS } from '../../i18n'
-import { DECLS, compile, line } from './cpp'
+import { DECLS, GCC_ERROR, compile, line } from './cpp'
 import CppChapter from './CppChapter'
 
-const hasGpp = spawnSync('g++', ['--version']).status === 0
+const gpp = spawnSync('g++', ['--version'], { encoding: 'utf8' })
+const hasGpp = gpp.status === 0
 const dir = hasGpp ? mkdtempSync(join(tmpdir(), 'r101-cpppage-')) : ''
 afterAll(() => { if (dir) rmSync(dir, { recursive: true, force: true }) })
 
@@ -31,7 +32,12 @@ describe.skipIf(!hasGpp)('1.4 C++ as shown on the page compiles and decides like
     const cc = spawnSync('g++', ['-std=c++17', '-Wall', '-o', src + '.bin', src], { encoding: 'utf8' })
     const want = compile(d)
     expect(cc.status === 0, cc.stderr).toBe(want.ok)
-    if (!want.ok) return
+    if (!want.ok) {
+      // exact text is g++ 11's (the version the page quotes); other versions word it differently
+      expect(cc.stderr).toContain(/\s11\.\d/.test(gpp.stdout.split('\n')[0]) ? GCC_ERROR : 'narrowing conversion')
+      return
+    }
+    expect(cc.stderr).toBe('') // int = 0.5 compiles with no warning even under -Wall
     const out = Number(spawnSync(src + '.bin', { encoding: 'utf8' }).stdout.trim())
     expect(out).toBe(0.4 < want.value! ? 0 : 0.26)
   })
