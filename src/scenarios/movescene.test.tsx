@@ -197,3 +197,22 @@ describe('closestCue from the Closest model', () => {
     expect(closestCue(scenario(3, 'zero').frame(1e9)).oops).toBe(1)
   })
 })
+
+describe('chapter cues (cpp, params)', () => {
+  it('cpp: compile thinks, braces cheer at the error, int crashes, double drives calm', async () => {
+    const { cppCue } = await import('./cues')
+    const { scenario, COMPILE_MS } = await import('../chapters/l1/cpp')
+    expect(cppCue(scenario('double').frame(COMPILE_MS / 2)).thinking).toBe(true)
+    expect(cppCue(scenario('int{}').frame(1e9))).toMatchObject({ cheer: 1, oops: 0 })
+    expect(cppCue(scenario('int').frame(1e9))).toMatchObject({ oops: 1, cheer: 0 })
+    expect(cppCue(scenario('double').frame(1e9))).toMatchObject({ oops: 0, cheer: 0 })
+  })
+  it('params: threshold under one step = a wobble per check; right threshold = one cheer at the jump; too high = silence', async () => {
+    const { paramsCue } = await import('./cues')
+    const { STEP_M, JUMP_M, JUMP_AT, N } = await import('../chapters/l2/params')
+    expect(paramsCue(STEP_M / 2, N - 1).oops).toBe(N - 1)
+    expect(paramsCue((STEP_M + JUMP_M) / 2, JUMP_AT - 1).cheer).toBe(0)
+    expect(paramsCue((STEP_M + JUMP_M) / 2, N - 1)).toEqual({ oops: 0, cheer: 1 })
+    expect(paramsCue(JUMP_M + 0.1, N - 1)).toEqual({ oops: 0, cheer: 0 })
+  })
+})
