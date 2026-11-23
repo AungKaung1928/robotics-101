@@ -8,7 +8,7 @@ import './l1.css'
 import Gloss from './Gloss'
 
 const W = 640, L = 150, R = 625, Y_IN = 40, Y_RUN = 100, Y_Q = 160, H = 200
-const REPO = 'https://github.com/AungKaung1928/python-ros2-reference/blob/main/13_classes/classes.py#L111-L112'
+const REPO = 'https://github.com/AungKaung1928/python-ros2-reference/blob/main/13_classes/classes.py#L120-L121'
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 
 /** 1.3: ROS calls the method you registered, one call at a time; a slow callback fills the queue. */
@@ -57,10 +57,10 @@ export default function CallbackChapter({ t }: { t: Strings }) {
             <>        self.stop_at = stop_at</>,
             <>        self.count = 0</>,
             <>{' '}</>,
-            <>    def on_scan(self, distance):   <span className="cmt"># ROS calls this</span></>,
+            <>    def on_scan(self, msg):   <span className="cmt"># ROS calls this with a LaserScan</span></>,
             <>        self.count += 1             <span className="cmt"># now <span className="val">{f.done + (f.running === null ? 0 : 1)}</span></span></>,
-            <>        work(<span className={keepsUp(work) ? 'val' : 'bad'}>{work / 1000}</span>)                 <span className="cmt"># seconds</span></>,
-            <>        return distance {'<'} self.stop_at</>,
+            <>        work(<span className={keepsUp(work) ? 'val' : 'bad'}>{work / 1000}</span>)                 <span className="cmt"># stands for your processing time (s)</span></>,
+            <>        self.stop = min(msg.ranges) {'<'} self.stop_at</>,
           ].map((c, i) => <span key={i} className={`ln${f.running !== null && i >= 6 ? ' on' : ''}`}>{c}</span>)}
         </pre>
         <p className="runs">{s.runsHere}</p>
@@ -73,7 +73,7 @@ export default function CallbackChapter({ t }: { t: Strings }) {
         </dl>
         <p><strong>{s.challenge}</strong></p>
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet} {work} ms · {keepsUp(work) ? s.keeps : s.lags}</p>
-        <p className="src">{s.repo} <a href={REPO}>13_classes/classes.py:111-112</a></p>
+        <p className="src">{s.repo} <a href={REPO}>13_classes/classes.py:120-121</a></p>
         <pre className="code">{"self.scan_sub_ = self.create_subscription(\n    LaserScan, 'scan', self.scan_callback, 10)"}</pre>
         <p className="group-h">{s.words}</p>
         <Gloss items={s.glossary} />

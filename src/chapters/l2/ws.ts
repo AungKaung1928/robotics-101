@@ -54,13 +54,13 @@ export function exec(w: Ws, cmd: string): { w: Ws; line: Line } {
       return say('Starting >>> tf_explorer\nFinished <<< tf_explorer\nSummary: 1 package finished')
     }
     case 'ros2':
-      if (!s.ros) return say('ros2: command not found', false)
+      if (!s.ros) return say('bash: ros2: command not found', false)
       if (rest[0] !== 'run' || rest[1] !== 'tf_explorer') return say('(usage: ros2 run tf_explorer <executable>)', false)
       if (!s.overlay) return say("Package 'tf_explorer' not found", false)
       if (!EXECUTABLES.includes(rest[2])) return say(`No executable found`, false)
       return say(rest[2] === 'tf_anomaly_detector' ? STARTED : `(${rest[2]} starts)`)
     case '': return say('')
-    default: return say(`${name}: command not found`, false)
+    default: return say(`bash: ${name}: command not found`, false) // interactive bash, no command-not-found helper
   }
 }
 
