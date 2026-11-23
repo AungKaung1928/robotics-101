@@ -1,0 +1,26 @@
+import { easeInOut } from '../lib/timeline'
+
+/** Glide length for a Step: long enough to see the change happen, short enough not to wait for it (ms). */
+export const GLIDE_MS = 420
+
+/** Playhead `elapsed` ms into a glide from `from` to `to` lasting `dur` ms; lands exactly on `to`. */
+export function glide(from: number, to: number, elapsed: number, dur = GLIDE_MS): number {
+  if (dur <= 0 || elapsed >= dur) return to
+  return from + (to - from) * easeInOut(elapsed / dur)
+}
+
+export type PlayerKey = 'toggle' | 'back' | 'next' | 'start' | 'end' | null
+
+/**
+ * Keyboard map of the Player group: Space / k play-pause, ← / → step by event, Home / End jump.
+ * On the scrubber the arrows and Home/End stay the range input's own (fine scrubbing), so they map to null there.
+ */
+export function playerKey(key: string, onScrubber: boolean): PlayerKey {
+  if (key === ' ' || key === 'k') return 'toggle'
+  if (onScrubber) return null
+  if (key === 'ArrowLeft') return 'back'
+  if (key === 'ArrowRight') return 'next'
+  if (key === 'Home') return 'start'
+  if (key === 'End') return 'end'
+  return null
+}
