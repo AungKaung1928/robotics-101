@@ -27,3 +27,18 @@ describe('MoveScene and RobotTop', () => {
     expect(minPitch(0.22 * 300)).toBeLessThan(6)
   })
 })
+
+describe('SenseScene', () => {
+  it('beam: the number on the beam is the model reading; covered: no number, worried', async () => {
+    const { default: SenseScene } = await import('./SenseScene')
+    const a = renderToStaticMarkup(<SenseScene wallX={1} mode="beam" label="" />)
+    expect(a).toContain('data-reading="0.70"')
+    expect(a).toContain('0.70 m')
+    const b = renderToStaticMarkup(<SenseScene wallX={1} mode="beam" covered label="" />)
+    expect(b).toContain('data-reading="none"')
+    expect(b).toContain('data-mood="worried"')
+    expect(b).toContain('ss-paw')
+    const c = renderToStaticMarkup(<SenseScene wallX={1} mode="spin" t={2} label="" />)
+    expect(count(c, /class="ss-hit"/g)).toBe(180)
+  })
+})

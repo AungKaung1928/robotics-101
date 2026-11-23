@@ -8,3 +8,12 @@
 .move-scene { width: 100%; height: auto; background: var(--surface); }
 .ms-trail { fill: none; stroke: var(--robot); stroke-width: 2.5; stroke-dasharray: 1 6; stroke-linecap: round; }
 .ms-skid { fill: var(--ink-2); opacity: 0.6; }
+.sense-scene { width: 100%; height: auto; background: var(--surface); }
+.ss-wall { stroke: var(--ink-2); stroke-width: 2; stroke-linecap: round; }
+.ss-wall.is-movable { stroke: var(--occ); }
+.ss-wall.is-movable { stroke-width: 7; }
+.ss-beam { stroke: var(--ray); stroke-width: 2.5; }
+.ss-beam.is-none { stroke: var(--ink-2); stroke-dasharray: 3 4; }
+.ss-hit { fill: var(--ray); }
+.ss-num { fill: var(--ink); font: 700 15px var(--mono); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; }
+.ss-paw ellipse, .ss-paw circle { fill: var(--surface); stroke: var(--ink); stroke-width: 2.5; stroke-linejoin: round; }
