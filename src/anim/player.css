@@ -19,5 +19,7 @@
 .stepper button:active:not(:disabled) { transform: scale(0.97); transition-duration: 60ms; }
 /* Scrubber at least 24 px tall: WCAG 2.2 2.5.8 pointer target (measured 16 px with the browser default). */
 .stepper .scrub { min-height: 24px; }
+/* Track drawn by scrubTrack() (inline background-image): a 6 px band centred in the 24 px target, step gaps included. */
+.stepper .scrub.squish-range { height: 24px; background-color: transparent; background-size: 100% 6px; background-repeat: no-repeat; background-position: center; }
 @media (max-width: 600px) { .stepper .wide { display: none; } }
 @media (prefers-reduced-motion: reduce) { .stepper .rail .dot, .stepper button { transition: none; } .stepper .rail [aria-current] .dot { animation: none; } .stepper button:active:not(:disabled) { transform: none; } }
