@@ -1750,6 +1750,12 @@
   "back": "Hit the wall",
   "note": "consistency: copied from l1/cpp:crashed"
  },
+ "l0/loop:fastIt": {
+  "status": "pass-alt",
+  "en": "Fix it: back to 5 loops per second",
+  "my": "ပြင်ကြည့်: တစ်စက္ကန့်ကို loop 5 ကြိမ် ပြန်ထား",
+  "back": "Try fixing it: set it back to 5 loops per second"
+ },
  "l0/loop:fixIt": {
   "status": "pass-alt",
   "en": "Fix it: uncover the sensor",
@@ -1829,6 +1835,12 @@
   "back": "Not yet:",
   "note": "consistency: copied from l1/callback:notYet"
  },
+ "l0/loop:past": {
+  "status": "pass-alt",
+  "en": "Past the 0.5 m line",
+  "my": "0.5 m မျဉ်းကို ကျော်သွားတာ",
+  "back": "Overshooting the 0.5 m line"
+ },
  "l0/loop:rate": {
   "status": "pass-alt",
   "en": "Loops per second (Hz)",
@@ -1846,6 +1858,18 @@
   "en": "Slowed down: each loop takes 1.2 s here, 0.2 s on the real robot.",
   "my": "အနှေးပြကွက်- ဒီမှာ loop တစ်ခု 1.2 s ကြာပြီး တကယ့် စက်ရုပ်မှာ 0.2 s ကြာပါတယ်။",
   "back": "Slow-motion scene: here one loop takes 1.2 s, and on a real robot it takes 0.2 s."
+ },
+ "l0/loop:slowIt": {
+  "status": "pass-alt",
+  "en": "Break it: slow the loop to once per second",
+  "my": "ဖျက်ကြည့်: loop ကို တစ်စက္ကန့်ကို တစ်ကြိမ်အထိ နှေးအောင်လုပ်",
+  "back": "Try breaking it: make the loop slow down to once per second"
+ },
+ "l0/loop:slowNote": {
+  "status": "pass-alt",
+  "en": "Now it drives 26 cm between two looks. The last look still saw more than 0.5 m, so it drove on, deep past the line, before the next look said stop.",
+  "my": "အခု ကြည့်တဲ့ 2 ကြိမ်ကြားမှာ 26 cm သွားပါတယ်။ နောက်ဆုံး ကြည့်တုန်းက 0.5 m ထက် ပိုဝေးတာ မြင်ခဲ့လို့ ဆက်သွားခဲ့ပြီး နောက်တစ်ကြိမ် ကြည့်ပြီး ရပ်လို့ မပြောခင်မှာ မျဉ်းကို အများကြီး ကျော်သွားပါတယ်။",
+  "back": "Now, between 2 looks, it travels 26 cm. At the last look it saw that it was farther than 0.5 m, so it kept going, and before the next look and the call to stop, it goes far past the line."
  },
  "l0/loop:solved": {
   "status": "pass-alt",
