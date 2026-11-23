@@ -216,3 +216,17 @@ describe('chapter cues (cpp, params)', () => {
     expect(paramsCue(JUMP_M + 0.1, N - 1)).toEqual({ oops: 0, cheer: 0 })
   })
 })
+
+describe('chapter cues (twist, workspace)', () => {
+  it('twist: ignored fields wobble, left spin cheers, eyes follow the turn', async () => {
+    const { twistCue } = await import('./cues')
+    expect(twistCue({ linear: [0, 0, 0], angular: [0, 0, 0.5] })).toEqual({ oops: 0, look: -1, cheer: 1 })
+    expect(twistCue({ linear: [0.2, 0.3, 0], angular: [0.1, 0, -0.5] })).toEqual({ oops: 2, look: 1, cheer: 0 })
+  })
+  it('workspace: the scripted session ends with the start line and a cheer; a bad command wobbles', async () => {
+    const { wsCue } = await import('./cues')
+    const { session, SCRIPT } = await import('../chapters/l2/ws')
+    expect(wsCue(session([...SCRIPT]).lines).cheer).toBe(1)
+    expect(wsCue(session(['colcon build']).lines).oops).toBeGreaterThan(0)
+  })
+})
