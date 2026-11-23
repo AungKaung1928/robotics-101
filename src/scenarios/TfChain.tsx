@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { MascotFigure } from '../anim/Mascot'
-import { REST, STILL_DIZZY, STILL_SPARK, happyPose, oopsPose } from '../anim/mascot'
+import { REST, STILL_DIZZY, STILL_SPARK, happyPose, headLag, oopsPose } from '../anim/mascot'
 import type { Edge } from '../chapters/l3/tflab'
 import { CHAIN, chainAt, chainEnd } from './tfchain'
 import './tfchain.css'
@@ -16,6 +16,10 @@ const STEP = 170, X = (s: number) => 56 + s * STEP, Y = 114, R = 46
 export default function TfChain({ edges, before, t, label, still = false }: { edges: readonly Edge[]; before: readonly Edge[]; t: number; label: string; still?: boolean }) {
   const f = chainAt(edges, before, t), x = X(f.s)
   const pose = still ? REST : f.outcome === 'stuck' ? oopsPose(f.since) : f.outcome === 'arrived' ? happyPose(f.since) : REST
+  // wheels turn by the distance rolled (no skid: drawing units of the 52 px robot), head trails the body on the reactions
+  const k = 52 / 64, roll = (x - X(0)) / k
+  const react = f.outcome === 'stuck' ? oopsPose : f.outcome === 'arrived' ? happyPose : null
+  const head = still || !react ? undefined : headLag(react, f.since)
   const mood = f.outcome === 'stuck' ? 'oops' : f.outcome === 'arrived' ? 'happy' : 'idle'
   return (
     <svg className="tfc" viewBox="0 0 458 170" role="img" aria-label={label} data-outcome={f.outcome}>
@@ -32,7 +36,7 @@ export default function TfChain({ edges, before, t, label, still = false }: { ed
       ))}
       <circle className="tfc-pulse" cx={x} cy={Y - R - 4} r="4" />
       <g transform={`translate(${x - 26} ${Y - R - 56})`}>
-        <MascotFigure pose={pose} mood={mood} size={52} label="" spark={mood === 'happy' ? (still ? STILL_SPARK : f.since) : 0} dizzy={mood === 'oops' ? (still ? STILL_DIZZY : f.since) : 0} />
+        <MascotFigure pose={pose} mood={mood} size={52} label="" spark={mood === 'happy' ? (still ? STILL_SPARK : f.since) : 0} dizzy={mood === 'oops' ? (still ? STILL_DIZZY : f.since) : 0} roll={roll} head={head} />
       </g>
     </svg>
   )

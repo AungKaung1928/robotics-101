@@ -44,3 +44,20 @@ describe('TF chain scene follows diagnose()', () => {
     for (let t = 0; t < GROW + 2 * HOP; t += 0.01) { const s = chainAt(FIXED, BROKEN, t).s; expect(s).toBeGreaterThanOrEqual(last); last = s }
   })
 })
+
+describe('TF chain robot rolls, never skids', () => {
+  it('mid-walk the wheels have turned by distance / radius; on the bump the head trails the body', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: TfChain } = await import('./TfChain')
+    const { wheelAngle } = await import('../anim/mascot')
+    const h = renderToStaticMarkup(createElement(TfChain, { edges: BROKEN, before: BROKEN, t: HOP / 2, label: '' }))
+    const dx = chainAt(BROKEN, BROKEN, HOP / 2).s * 170 // svg units from map (STEP = 170)
+    const want = wheelAngle(dx / (52 / 64))
+    const got = Number(h.match(/rotate\(([-\d.e]+) 14 53\)/)![1])
+    expect(got).toBeCloseTo(want, 3)
+    expect(Math.abs(got)).toBeGreaterThan(30)
+    const bump = renderToStaticMarkup(createElement(TfChain, { edges: BROKEN, before: BROKEN, t: HOP + 0.06, label: '' }))
+    expect(bump).not.toContain('m-headgroup" transform="translate(0 0) rotate(0 32 31)')
+  })
+})
