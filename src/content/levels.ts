@@ -37,3 +37,9 @@ export function levelPage(hash: string): LevelPage | null {
   if (!chs || i < 0) return null
   return { meta: chs[i], num: `${lv}.${i + 1}`, prev: chs[i - 1] ?? null, next: chs[i + 1] ?? null }
 }
+
+/** Reading position of the page at `hash` across all levels (0, 1, ...); overview or unknown → -1. */
+export function readingIndex(hash: string): number {
+  const id = hash.replace(/^#\/?/, '').split('?')[0].split('/').find((seg) => !/^\d*$/.test(seg))
+  return LEVELS.flat().findIndex((c) => c.id === id)
+}

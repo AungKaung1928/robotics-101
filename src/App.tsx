@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react'
+import { flushSync } from 'react-dom'
+import { chapterDir, swap } from './anim/transition'
+import './anim/transition.css'
 import BringupChapter from './components/BringupChapter'
 import CostmapChapter from './components/CostmapChapter'
 import DetectChapter from './components/DetectChapter'
@@ -12,7 +15,7 @@ import TfChapter from './components/TfChapter'
 import { STRINGS, initialLang, type Lang, type Strings } from './i18n'
 import { CHAPTER_ICON, Icon } from './icons'
 import type { ChapterMeta } from './anim/contract'
-import { LEVEL_BODY, levelPage, type LevelPage } from './content/levels'
+import { LEVEL_BODY, levelPage, readingIndex, type LevelPage } from './content/levels'
 import { markDone } from './lib/progress'
 import { CHAPTERS, keyTarget, neighbour, parseRoute, type ChapterId } from './lib/route'
 
@@ -25,7 +28,13 @@ export default function App() {
   const t = STRINGS[lang]
 
   useEffect(() => {
-    const on = () => { setRoute(parseRoute(location.hash)); setLvl(levelPage(location.hash)); window.scrollTo(0, 0) }
+    let shown = location.hash
+    const on = () => {
+      const to = location.hash, dir = chapterDir(readingIndex(shown), readingIndex(to))
+      shown = to
+      swap(() => flushSync(() => { setRoute(parseRoute(to)); setLvl(levelPage(to)) }), dir)
+      window.scrollTo(0, 0)
+    }
     addEventListener('hashchange', on)
     return () => removeEventListener('hashchange', on)
   }, [])
