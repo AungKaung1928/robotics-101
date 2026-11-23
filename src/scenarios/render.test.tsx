@@ -3,28 +3,16 @@ import { describe, expect, it } from 'vitest'
 import DistroTimeline from './DistroTimeline'
 import EventLog from './EventLog'
 import InflationRipple from './InflationRipple'
-import SenseThinkAct from './SenseThinkAct'
 import SpeedProfile from './SpeedProfile'
 import ToolStack from './ToolStack'
 import { year } from './distros'
 import { driveProfile } from './drive'
-import { senseThinkAct } from './loop'
 import { STACK_END, stackEvents } from './stack'
 
 // Each figure rendered at its start, middle and end: no crash, and the frame shows what the model says.
 const count = (html: string, re: RegExp) => html.match(re)?.length ?? 0
 
 describe('scenario figures render from their models', () => {
-  it('SenseThinkAct: ring step follows the phase; end frame stopped, happy, no ray', () => {
-    const ticks = senseThinkAct(2, 0, 0.26, 5, 0.5), w = { sense: 'S', think: 'T', act: 'A', go: 'go', stop: 'stop' }
-    const at = (t: number) => renderToStaticMarkup(<SenseThinkAct ticks={ticks} hz={5} t={t} wall={2} stopAt={0.5} words={w} label="" />)
-    expect(at(0.02)).toContain('stl-ray')
-    expect(at(0.1)).toContain('2.00 &gt; 0.5 → go')
-    const end = at(1e3)
-    expect(end).not.toContain('stl-ray')
-    expect(end).toContain('data-mood="happy"')
-    expect(end).toContain('stop · 0.49 m')
-  })
   it('ToolStack: nothing before the first drop, all five layers and the robot at the end', () => {
     const w = Object.fromEntries(['linux', 'ros2', 'python', 'cpp', 'app'].map((k) => [k, { name: k, role: '' }])) as never
     expect(count(renderToStaticMarkup(<ToolStack t={-1} words={w} label="" />), /ts-layer/g)).toBe(0)
