@@ -230,3 +230,22 @@ describe('chapter cues (twist, workspace)', () => {
     expect(wsCue(session(['colcon build']).lines).oops).toBeGreaterThan(0)
   })
 })
+
+describe('costCue + worried face', () => {
+  it('calm beyond the inflation radius, worried inside it, oops at the inscribed radius and on the obstacle', async () => {
+    const { costCue } = await import('./cues')
+    const { inflationCost } = await import('../lib/inflation')
+    const c = (d: number) => costCue(inflationCost(d, 3, 0.105, 0.55))
+    expect(c(0.8)).toEqual({ worried: false, oops: 0 })
+    expect(c(0.3)).toEqual({ worried: true, oops: 0 })
+    expect(c(0.1)).toEqual({ worried: false, oops: 1 })
+    expect(c(0)).toEqual({ worried: false, oops: 1 })
+  })
+  it('worried face draws brows with the inner ends up', async () => {
+    const { MascotFigure } = await import('../anim/Mascot')
+    const { REST } = await import('../anim/mascot')
+    const h = renderToStaticMarkup(<MascotFigure pose={REST} mood="worried" label="" />)
+    expect(h).toContain('m-brow')
+    expect(renderToStaticMarkup(<MascotFigure pose={REST} mood="idle" label="" />)).not.toContain('m-brow')
+  })
+})

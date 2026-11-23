@@ -3,6 +3,7 @@ import { JUMP_AT, flagged } from '../chapters/l2/params'
 import { challengeOk as twistOk, ignored, used, type Twist } from '../chapters/l2/msgtypes'
 import { STARTED } from '../chapters/l2/ws'
 import type { Line } from '../chapters/l1/shell'
+import { INSCRIBED } from '../lib/inflation'
 
 /**
  * Mascot trigger props from chapter models, for chapters that only need the robot's reaction (spread into <Mascot>).
@@ -32,4 +33,11 @@ export function twistCue(tw: Twist) {
 /** Workspace (2.x) terminal: one wobble per failed command, a cheer once the detector node prints its start line. */
 export function wsCue(lines: Line[]) {
   return { oops: lines.filter((l) => !l.ok).length, cheer: lines.some((l) => l.out === STARTED) ? 1 : 0 }
+}
+
+/** Costmap (4.x): robot `d` m from the obstacle, Nav2 cost from the chapter's own inflationCost(). Worried anywhere the
+ * cost is above 0 (the planner pays to be here), the oops wobble once the cost reaches INSCRIBED (253): the footprint
+ * would touch the obstacle. Calm beyond the inflation radius. */
+export function costCue(cost: number) {
+  return { worried: cost > 0 && cost < INSCRIBED, oops: cost >= INSCRIBED ? 1 : 0 }
 }

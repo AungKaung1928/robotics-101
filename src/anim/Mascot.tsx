@@ -4,7 +4,7 @@ import { PRESS_STYLE } from './spring'
 import './mascot.css'
 
 const reduced = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
-export type Mood = 'idle' | 'happy' | 'oops' | 'think' | 'sleep'
+export type Mood = 'idle' | 'happy' | 'oops' | 'think' | 'sleep' | 'worried'
 type Reaction = 'happy' | 'oops' | 'boop' | 'brake' | 'start' | 'enter'
 const REACTION: Record<Reaction, { pose: (t: number) => Pose; end: number }> = {
   happy: { pose: happyPose, end: HAPPY_S }, oops: { pose: oopsPose, end: OOPS_S }, boop: { pose: boopPose, end: BOOP_S },
@@ -20,8 +20,8 @@ const REACTION: Record<Reaction, { pose: (t: number) => Pose; end: number }> = {
  * e.g. the playhead's place on the scrubber. `roll` = distance driven in the drawing's own units (64-unit box): the
  * wheels turn by roll / radius, so they never skid against the floor.
  */
-export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look = 0, roll = 0, thinking = false, sleepAfter = 0, enter = false, watch = false, boop: boopN = 0, size = 64, label, inSvg = false }: {
-  cheer?: number; oops?: number; brake?: number; start?: number; look?: number; roll?: number; thinking?: boolean; sleepAfter?: number; enter?: boolean; watch?: boolean; boop?: number
+export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look = 0, roll = 0, thinking = false, worried = false, sleepAfter = 0, enter = false, watch = false, boop: boopN = 0, size = 64, label, inSvg = false }: {
+  cheer?: number; oops?: number; brake?: number; start?: number; look?: number; roll?: number; thinking?: boolean; worried?: boolean; sleepAfter?: number; enter?: boolean; watch?: boolean; boop?: number
   size?: number; label: string; inSvg?: boolean
 }) {
   const [act, setAct] = useState<{ kind: Reaction; n: number } | null>(null)
@@ -59,7 +59,7 @@ export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look
   const boop = () => { if (!act) setAct({ kind: 'boop', n: 0 }) }
   const asleep = useIdle(sleepAfter)
   const hit = useRef<HTMLSpanElement & SVGGElement>(null), glance = useGlance(hit, watch)
-  const mood: Mood = act && (act.kind === 'happy' || act.kind === 'oops') ? act.kind : thinking ? 'think' : asleep ? 'sleep' : 'idle'
+  const mood: Mood = act && (act.kind === 'happy' || act.kind === 'oops') ? act.kind : thinking ? 'think' : worried ? 'worried' : asleep ? 'sleep' : 'idle'
   const head = act && !reduced() ? headLag(REACTION[act.kind].pose, t) : undefined
   // Face swaps blink through (closed at the swap); reduced motion: instant.
   const [face, setFace] = useState<{ from: Mood; to: Mood; t: number }>({ from: mood, to: mood, t: SWAP_S })
@@ -115,6 +115,7 @@ export function MascotFigure({ pose, mood, size = 64, label, spark = 0, dizzy = 
               <rect className="m-head" x="17" y="12" width="30" height="20" rx="10" />
               <path className="m-lidar" d="M20 18h24" />
               <g className="m-look" style={{ transform: `translate(${mood === 'think' ? 1.5 : eyeShift(look)}px, ${mood === 'think' ? -2 : 0}px)` }}>
+                {(eyes?.mood ?? mood) === 'worried' && <path className="m-brow" d="M24 21.6l4 -1.2M40 21.6l-4 -1.2" />}{/* under the LiDAR stripe, outside the blink */}
                 <g transform={`translate(32 24) scale(1 ${eyes?.sy ?? 1}) translate(-32 -24)`}>
                 {(eyes?.mood ?? mood) === 'happy' ? (
                   <g className="m-face"><path d="M24 25q3-4 6 0M34 25q3-4 6 0" /></g>

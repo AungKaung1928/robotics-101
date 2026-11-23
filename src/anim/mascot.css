@@ -33,6 +33,8 @@
 .mascot .m-zz path + path { animation-delay: 1.4s; }
 @keyframes m-zz { 0% { opacity: 0; transform: translateY(3px); } 40% { opacity: 1; } 100% { opacity: 0; transform: translateY(-3px); } }
 @media (prefers-reduced-motion: reduce) { .mascot .m-zz path { animation: none; } }
+/* Worried (e.g. close to an obstacle): brows with the inner ends up, a little shrink of the breath. */
+.mascot .m-brow { fill: none; stroke: var(--ink); stroke-width: 1.6; stroke-linecap: round; }
 /* Curious: the head tilts while thinking, on the press spring (a little overshoot); reduced motion keeps the tilt, no swing. */
 .mascot .m-tilt { transform-box: view-box; transform-origin: 32px 31px; transition: transform var(--spring-ms, 300ms) var(--spring, ease-out); }
 .mascot[data-mood='think'] .m-tilt { transform: rotate(-8deg); }
