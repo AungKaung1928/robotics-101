@@ -185,6 +185,9 @@ const en = {
     twoMaps: 'Both of his costmaps inflate the same way (k 3.0, 0.55 m): the global one over the whole map for the planner, the local one in a 3 × 3 m window for the controller.',
     lethal: 'lethal',
     inscribed: 'inscribed',
+    obstacle: 'obstacle',
+    radius: 'inflation radius',
+    inflated: 'inflated',
   },
 }
 
@@ -366,6 +369,9 @@ const ja: typeof en = {
     twoMaps: '2 つのコストマップは同じ膨張 (k 3.0、0.55 m)。グローバルは地図全体でプランナ用、ローカルは 3 × 3 m のウィンドウでコントローラ用。',
     lethal: '致命',
     inscribed: '内接',
+    obstacle: '障害物',
+    radius: '膨張半径',
+    inflated: '膨張',
   },
 }
 

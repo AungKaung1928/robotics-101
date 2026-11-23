@@ -5,6 +5,9 @@ import { INSCRIBED, LETHAL, distToBox, inflationCost, kForEdgeCost } from '../li
 import { routeParam } from '../lib/route'
 import { cellCount } from '../lib/grid'
 import Slider from './Slider'
+import Player from '../anim/Player'
+import InflationRipple from '../scenarios/InflationRipple'
+import { inflateCounts, inflateEvents, inflateFront } from '../scenarios/inflate'
 
 const R = NAV2.robotRadius, RAD = NAV2.inflationRadius
 const DMAX = 0.8, W = 640, H = 300, PAD = 48
@@ -17,6 +20,10 @@ const CELLS = Array.from({ length: N * N }, (_, k) => {
   const x = X0 + (k % N) * RES, y = X0 + Math.floor(k / N) * RES
   return { x, y, d: distToBox(x + RES / 2, y + RES / 2, BOX1) }
 })
+const DS = CELLS.map((c) => c.d)
+const END_S = 3 // the inflation front reaches the radius in 3 s
+const EVENTS = inflateEvents(END_S, R, RAD)
+const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 
 export default function CostmapChapter({ t }: { t: Strings }) {
   const c = t.costmap
@@ -26,19 +33,19 @@ export default function CostmapChapter({ t }: { t: Strings }) {
   const xs = Array.from({ length: 321 }, (_, i) => (i / 320) * DMAX)
   const curve = xs.map((x, i) => `${i ? 'L' : 'M'}${sx(x).toFixed(1)} ${sy(cost(x)).toFixed(1)}`).join('')
   const edge = cost(RAD)
+  // Inflation as Nav2 fills it: nearest cells first (InflationRipple); reduced motion opens on the finished map.
+  const [tS, setTS] = useState(() => (still() ? END_S : 0))
+  const front = inflateFront(tS, END_S, RAD)
+  const n = inflateCounts(DS, front, cost)
   return (
     <>
       <div className="figure">
-        <svg className="inset" viewBox={`${X0} ${-X0 - SPAN} ${SPAN} ${SPAN}`} role="img" aria-label={`${t.chapters.costmap}: box1`}>
-          <g transform="scale(1 -1)">
-            {CELLS.map((c) => {
-              const v = cost(c.d)
-              return v > 0 && <rect key={`${c.x} ${c.y}`} className={v === LETHAL ? 'c-lethal' : 'c-cost'} x={c.x} y={c.y} width={RES} height={RES} opacity={v === LETHAL ? 1 : v / LETHAL} />
-            })}
-            <circle className="robot" cx={BOX1.x - BOX1.w / 2 - d} cy={BOX1.y} r={R} />
-            <circle className="probe-dot" cx={BOX1.x - BOX1.w / 2 - d} cy={BOX1.y} r="0.03" />
-          </g>
-        </svg>
+        <InflationRipple cells={CELLS} res={RES} x0={X0} span={SPAN} front={front} cost={cost} lethal={LETHAL} label={`${t.chapters.costmap}: box1`}>
+          <circle className="robot" cx={BOX1.x - BOX1.w / 2 - d} cy={BOX1.y} r={R} />
+          <circle className="probe-dot" cx={BOX1.x - BOX1.w / 2 - d} cy={BOX1.y} r="0.03" />
+        </InflationRipple>
+        <Player t={tS} setT={setTS} end={END_S} events={EVENTS} speed={1} autoplay={!still()} pauseAtSteps s={t}
+          labels={[c.obstacle, c.inscribed, c.radius]} caption={<span data-k="ripple">{n.lethal} {c.lethal} · {n.inscribed} {c.inscribed} · {n.inflated} {c.inflated}</span>} />
         <svg className="chart" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={t.chapters.costmap}>
           <rect className="band-insc" x={sx(0)} y={PAD} width={sx(R) - sx(0)} height={H - 2 * PAD} />
           <rect className="band-infl" x={sx(R)} y={PAD} width={sx(RAD) - sx(R)} height={H - 2 * PAD} />

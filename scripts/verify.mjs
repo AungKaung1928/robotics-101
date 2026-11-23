@@ -57,7 +57,7 @@ const ROUTES = [
   { hash: '#/grid?res=0.1', readouts: ['cells'], equals: { cells: '10,000' } },
   { hash: '#/grid?t=2.5', readouts: ['known'], equals: { scans: '3' }, moreThan: { known: ['#/grid', 'known'] } },
   { hash: '#/grid/7', readouts: ['known'], equals: { scans: '7' }, moreThan: { known: ['#/grid', 'known'] } },
-  { hash: '#/costmap', readouts: ['cost', 'edge', 'smooth'], equals: { window: '3 × 3 m = 3,600', ladder: '3.5 → 3.0 → 2.5 → 1.5 m' }, has: ['class="pathline"', 'data-k="grow"'] }, // older chapters: dots + Level 0 link + intro line
+  { hash: '#/costmap', readouts: ['cost', 'edge', 'smooth'], equals: { window: '3 × 3 m = 3,600', ladder: '3.5 → 3.0 → 2.5 → 1.5 m' }, has: ['class="pathline"', 'data-k="grow"', 'data-k="ripple"'] }, // older chapters: dots + Level 0 link + intro line; ripple = the inflation scene's caption
   { hash: '#/goal', readouts: ['tick', 'drive', 'time', 'ticks', 'cmdhz'], equals: { time: '14.4 s', timeaccel: '14.5 s', yaw: '0.25 rad = 14.3°', progress: '1.9 s', planner: 'NavFn · Dijkstra', recover: 'spin · backup · wait' } },
 ]
 const JA_TEXT = /[぀-ヿ一-龯]/
@@ -120,7 +120,8 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
         for (const m of dom.matchAll(/<svg[^>]*role="img"[^>]*>([\s\S]*?)<\/svg>/g)) if (m[1].includes('<a ')) fails.push(`${name}: link inside an svg with role="img"`)
         if (r.readouts && !/data-k="spot"[^>]*>[^<]*\d/.test(dom)) fails.push(`${name}: no headline value under the title`)
         if (r.readouts && (dom.match(/class="hint"/g) ?? []).length !== 1) fails.push(`${name}: want exactly one drag hint`)
-        if (r.readouts && (dom.match(/aria-current="step"/g) ?? []).length !== 1) fails.push(`${name}: mini plan does not light exactly one waypoint`)
+        // Mini plan waypoints are links (<a ... aria-current="step">); a Player step rail marks its own step on a <button>.
+        if (r.readouts && (dom.match(/<a [^>]*aria-current="step"/g) ?? []).length !== 1) fails.push(`${name}: mini plan does not light exactly one waypoint`)
         for (const h of [r.has ?? []].flat()) if (!dom.includes(h)) fails.push(`${name}: no '${h}' in the page`)
         const read = (k, d = dom) => d.match(new RegExp(`data-k="${k}"[^>]*>([^<]*)`))?.[1]
         for (const [k, want] of Object.entries(r.equals ?? {})) if (read(k) !== want) fails.push(`${name}: readout ${k} '${read(k)}', want '${want}'`)
