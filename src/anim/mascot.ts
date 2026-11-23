@@ -135,3 +135,11 @@ export function faceSwap(t: number): { sy: number; showNew: boolean } {
 /** Reduced motion: the reaction's cue as one still frame (no movement): stars at full strength, sparks just out. */
 export const STILL_DIZZY = OOPS_S * 0.15
 export const STILL_SPARK = SPARK_AT + 0.15
+
+/** Per-robot blink phase (ms, ≤ 0) from a stable id, so two robots on one page do not blink in sync. */
+export const BLINK_MS = 9400
+export function blinkDelay(id: string): number {
+  let h = 2166136261 // FNV-1a
+  for (let i = 0; i < id.length; i++) h = Math.imul(h ^ id.charCodeAt(i), 16777619) >>> 0
+  return -(h % BLINK_MS)
+}

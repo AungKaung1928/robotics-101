@@ -12,9 +12,10 @@
 .mascot .m-face .m-mouth { fill: none; stroke: var(--ink); stroke-width: 1.6; }
 .mascot .m-face path { fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; }
 .mascot .m-breath { transform-box: view-box; transform-origin: 32px 58px; animation: m-breath 3.2s ease-in-out infinite; }
-.mascot .m-eyes { transform-box: fill-box; transform-origin: center; animation: m-blink 4.1s infinite; }
+/* Blink: uneven gaps (4.5 s, then a double blink 0.3 s apart) so the loop is not a metronome; per-robot phase from Mascot. */
+.mascot .m-eyes { transform-box: fill-box; transform-origin: center; animation: m-blink 9.4s infinite; animation-delay: var(--blink-delay, 0s); }
 @keyframes m-breath { 50% { transform: scale(0.992, 1.015); } }
-@keyframes m-blink { 0%, 94%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.12); } }
+@keyframes m-blink { 0%, 27%, 31%, 76%, 78.5%, 81%, 100% { transform: scaleY(1); } 29%, 77%, 80% { transform: scaleY(0.12); } }
 .mascot .m-look { transition: transform 300ms ease-out; }
 @supports (transition-timing-function: linear(0, 1)) { .mascot .m-look { transition: transform var(--spring-ms, 300ms) var(--spring, ease-out); } }
 .mascot .m-think circle { fill: var(--ink-2); animation: m-dot 1.2s ease-in-out infinite; }

@@ -1,5 +1,6 @@
+import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
-import { BOOP_S, HAPPY_S, HEAD_LAG, JOLT_S, WHEEL_R, headLag, brakePose, startPose, eyeShift, wheelAngle, OOPS_S, REST, SPARK_AT, boopPose, happyPose, oopsPose, sparks, dizzyStars, faceSwap, SWAP_S, STILL_DIZZY, STILL_SPARK } from './mascot'
+import { BOOP_S, HAPPY_S, HEAD_LAG, JOLT_S, WHEEL_R, headLag, brakePose, startPose, eyeShift, wheelAngle, OOPS_S, REST, SPARK_AT, boopPose, happyPose, oopsPose, sparks, dizzyStars, faceSwap, SWAP_S, STILL_DIZZY, STILL_SPARK, blinkDelay, BLINK_MS } from './mascot'
 
 const ts = (end: number) => Array.from({ length: 601 }, (_, i) => (i / 600) * end)
 
@@ -159,5 +160,23 @@ describe('reduced-motion still frames', () => {
     const sp = sparks(STILL_SPARK)
     expect(sp.length).toBeGreaterThan(0)
     expect(Math.min(...sp.map((p) => p.o))).toBeGreaterThan(0.5)
+  })
+})
+
+describe('blink phase', () => {
+  it('stable per id, inside one cycle, different for different ids', () => {
+    expect(blinkDelay(':r1:')).toBe(blinkDelay(':r1:'))
+    const ds = [':r0:', ':r1:', ':r2:', ':r3:', ':r4:'].map(blinkDelay)
+    for (const d of ds) { expect(d).toBeLessThanOrEqual(0); expect(d).toBeGreaterThan(-BLINK_MS) }
+    expect(new Set(ds).size).toBe(ds.length)
+  })
+  it('the CSS cycle is the same length and has a double blink with uneven gaps', () => {
+    const css = readFileSync('src/anim/mascot.css', 'utf8')
+    expect(css).toContain(`m-blink ${BLINK_MS / 1000}s`)
+    const closed = /@keyframes m-blink[^}]*}[^}]*?([\d.%, ]+)\s*{\s*transform: scaleY\(0\.12\)/.exec(css)![1].split(',').map((x) => parseFloat(x))
+    expect(closed.length).toBe(3)
+    const gaps = closed.map((c, i) => ((closed[(i + 1) % 3] - c + 100) % 100) * BLINK_MS / 100)
+    expect(Math.min(...gaps)).toBeLessThan(500) // the double blink
+    expect(Math.max(...gaps)).toBeGreaterThan(4000)
   })
 })
