@@ -7,6 +7,7 @@ import { fileURLToPath } from 'node:url'
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const PORT = Number(process.env.VERIFY_PORT ?? 4191)
 const BASE = `http://localhost:${PORT}/`
+const DIST = process.env.VERIFY_DIST ?? 'dist'
 const OUT = join(ROOT, 'verify-out')
 // Route, then the readouts (data-k) its page must show with a number in them.
 const ROUTES = [
@@ -75,11 +76,11 @@ async function main() {
   rmSync(OUT, { recursive: true, force: true })
   mkdirSync(OUT)
   // 390 px: a same-origin page frames the site and prints the frame's scroll width vs its width.
-  writeFileSync(join(ROOT, 'dist/phone.html'), `<!doctype html><body style="margin:0"><iframe id="f" style="width:390px;height:844px;border:0"></iframe><script>
+  writeFileSync(join(ROOT, DIST, 'phone.html'), `<!doctype html><body style="margin:0"><iframe id="f" style="width:390px;height:844px;border:0"></iframe><script>
 const f = document.getElementById('f'); f.src = '/' + location.hash
 f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
   document.body.append('PHONE ' + d.scrollWidth + ' ' + d.clientWidth) }, 800)</script>`)
-  const vite = spawn(join(ROOT, 'node_modules/.bin/vite'), ['preview', '--port', String(PORT), '--strictPort'], { cwd: ROOT, stdio: 'ignore' })
+  const vite = spawn(join(ROOT, 'node_modules/.bin/vite'), ['preview', '--outDir', DIST, '--port', String(PORT), '--strictPort'], { cwd: ROOT, stdio: 'ignore' })
   const fails = []
   const seen = {} // dom per route and language, for checks that compare two pages
   try {
