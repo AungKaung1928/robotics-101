@@ -6,7 +6,7 @@ A free course for people with no robotics experience: from "what does a robot do
 
 | Level | Chapters |
 |---|---|
-| 0 Start here | sense-think-act, the software around a robot, the tools, which ROS version |
+| 0 Start here | sense-think-act, the software around a robot, the tools, which ROS version, how much Python / C++ / ROS 2 / terminal the course needs |
 | 1 Programming for robots | decisions, closest reading, callbacks, Python to C++, the terminal |
 | 2 ROS 2 basics | nodes, topics, message types, actions, parameters, workspaces, driving |
 | 3 A robot that moves by itself | LiDAR scan, TF tree, TF debugging lab, a simple detector |

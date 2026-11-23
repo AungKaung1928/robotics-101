@@ -1,0 +1,13 @@
+/* 0.12 skill map: a row of dots pops in per level (spring scale), locked dots fade to the rule colour. */
+.scope { width: 100%; height: auto; font: var(--t-small) var(--font); }
+.scope .sk { fill: var(--ink); font-weight: 600; }
+.scope .lv { fill: var(--ink-2); }
+.scope .dot { fill: var(--robot); transform-box: fill-box; transform-origin: center; transform: scale(0); opacity: 0;
+  transition: transform 420ms cubic-bezier(0.34, 1.56, 0.64, 1), opacity 200ms ease-out, fill 300ms ease-out; }
+.scope .row.is-on .dot { transform: scale(1); opacity: 1; }
+.scope .row.is-on .dot.is-locked { fill: var(--rule); transform: scale(0.7); }
+.scope-check { display: flex; gap: 12px; align-items: flex-start; }
+.scope-check .pick { margin: 0 6px 6px 0; }
+@media (prefers-reduced-motion: reduce) {
+  .scope .dot { transition: none; }
+}
