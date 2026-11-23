@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, type PointerEvent } from 'react'
 import { LIDAR, MEASURED, NAV2, SOURCE_REPO, WORLD } from '../content/world'
 import type { Strings } from '../i18n'
+import { arenaPoint } from '../lib/drag'
 import { beamAngles, beamGap, castRay, movePerScan, sensorPose } from '../lib/scan'
 import Arena from './Arena'
 import { routeParam } from '../lib/route'
@@ -24,6 +25,14 @@ export default function ScanChapter({ t }: { t: Strings }) {
   const ahead = hits.reduce((b, h, i) => (b < 0 || Math.abs(h.rel) < Math.abs(hits[b].rel) ? i : b), -1)
   const sel = hover !== null && hover < hits.length ? hits[hover] : hits[ahead]
   const gap = beamGap(r, L.samples, L.minAngle, L.maxAngle)
+  // Drag the robot in the figure; the x/y sliders stay the keyboard path.
+  const drag = (e: PointerEvent<SVGCircleElement>) => {
+    if (e.type === 'pointerdown') e.currentTarget.setPointerCapture(e.pointerId)
+    else if (!e.currentTarget.hasPointerCapture(e.pointerId)) return
+    const p = arenaPoint(e.clientX, e.clientY, e.currentTarget.ownerSVGElement!.getBoundingClientRect())
+    setX(p.x)
+    setY(p.y)
+  }
   return (
     <>
       <div className="figure">
@@ -37,6 +46,7 @@ export default function ScanChapter({ t }: { t: Strings }) {
             onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)} />)}
           <circle className="robot" cx={x} cy={y} r={NAV2.robotRadius} />
           <path className="heading" d={`M${x} ${y}l${0.35 * Math.cos(pose.yaw)} ${0.35 * Math.sin(pose.yaw)}`} />
+          <circle className="grab" cx={x} cy={y} r="0.4" onPointerDown={drag} onPointerMove={drag} />
         </Arena>
       </div>
       <div className="panel">

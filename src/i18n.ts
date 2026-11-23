@@ -28,6 +28,7 @@ const en = {
     lines: [
       '360 beams, one per degree, 5 times a second. Each beam returns the nearest wall or obstacle, if it is closer than 3.5 m.',
       'Neighbouring beams spread apart with range: anything narrower than the gap can fall between them.',
+      'Drag the robot on the map to move the scan.',
     ],
     x: 'Robot x (m)',
     y: 'Robot y (m)',
@@ -180,6 +181,7 @@ const ja: typeof en = {
     lines: [
       '1 度につき 1 本、計 360 本のビームを毎秒 5 回。各ビームは 3.5 m 以内にある一番近い壁か障害物までの距離を返す。',
       '距離が遠いほど隣のビームとの間隔が広がる。間隔より細い物はビームの間をすり抜け、見えない。',
+      '地図上のロボットをドラッグすると、スキャンも一緒に動く。',
     ],
     x: 'ロボット x (m)',
     y: 'ロボット y (m)',
