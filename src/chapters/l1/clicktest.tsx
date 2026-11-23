@@ -41,7 +41,7 @@ const cases = (l: Lang): Case[] => [
   { name: 'drive break', Body: BODIES.drive, steps: [{ click: '.break' }, { expect: 'challenge', has: DRIVE_STRINGS[l].moving }] },
   { name: 'bfs stack', Body: BfsChapter, steps: [{ expect: 'len', has: '13' }, { click: '.break' }, { expect: 'len', has: '15' }] },
   { name: 'bfs wall click', Body: BfsChapter, steps: [{ click: cell(l, 3, 3) }, { expect: 'len', has: '13' }, { click: cell(l, 0, 2) }, { click: cell(l, 0, 4) }, { click: cell(l, 1, 3) }, { expect: 'len', is: BFS_STRINGS[l].none }] },
-  { name: 'bfs keyboard', Body: BfsChapter, steps: [{ expect: 'tabstops', is: '1' }, { key: 'ArrowDown', on: '.bfs [tabindex="0"]' }, { key: 'ArrowDown', on: ':focus' }, { key: 'ArrowDown', on: ':focus' }, { key: 'ArrowDown', on: ':focus' }, { key: 'Enter', on: ':focus' }, { expect: 'len', has: '13' }, { key: 'ArrowRight', on: ':focus' }, { key: 'Enter', on: ':focus' }, { key: 'ArrowUp', on: ':focus' }, { key: 'ArrowUp', on: ':focus' }, { key: 'ArrowRight', on: ':focus' }, { key: 'Enter', on: ':focus' }, { expect: 'walls', is: '9' }, { expect: 'wallAt', is: BFS_STRINGS[l].cellLabel(2, 4, true) }] },
+  { name: 'bfs keyboard', Body: BfsChapter, steps: [{ expect: 'tabstops', is: '1' }, { key: 'ArrowDown', on: '.ep-bfs [tabindex="0"]' }, { key: 'ArrowDown', on: ':focus' }, { key: 'ArrowDown', on: ':focus' }, { key: 'ArrowDown', on: ':focus' }, { key: 'Enter', on: ':focus' }, { expect: 'len', has: '13' }, { key: 'ArrowRight', on: ':focus' }, { key: 'Enter', on: ':focus' }, { key: 'ArrowUp', on: ':focus' }, { key: 'ArrowUp', on: ':focus' }, { key: 'ArrowRight', on: ':focus' }, { key: 'Enter', on: ':focus' }, { expect: 'walls', is: '9' }, { expect: 'wallAt', is: BFS_STRINGS[l].cellLabel(2, 4, true) }] },
   { name: 'bfs costmap', Body: BfsChapter, steps: [{ click: 'button.costmap' }, { expect: 'len', has: '15' }, { expect: 'cost', has: '15' }, { click: 'button.costmap' }, { expect: 'len', has: '13' }] },
   { name: 'late slider', Body: LateChapter, steps: [{ expect: 'backwards', has: '5' }, { slide: 0.17 }, { expect: 'challenge', ok: true }, { slide: 0.18 }, { expect: 'backwards', has: '1' }] },
   { name: 'late keep-latest', Body: LateChapter, steps: [{ expect: 'count:svg.late rect.env', is: '0' }, { click: '.break' }, { expect: 'count:svg.late rect.env', is: '20' }, { expect: 'backwards', has: '0' }, { expect: 'acted', has: '15' }] },
@@ -82,8 +82,8 @@ async function runCase(c: Case, host: HTMLElement, t: Strings): Promise<string |
       } else {
         const el = host.querySelector(`[data-k="${st.expect}"]`)
         // pseudo readouts of the grid itself: tab stops, wall count, label of the focused cell
-        const txt = st.expect === 'tabstops' ? String(host.querySelectorAll('.bfs [tabindex="0"]').length)
-          : st.expect === 'walls' ? String(host.querySelectorAll('.bfs [aria-pressed="true"]').length)
+        const txt = st.expect === 'tabstops' ? String(host.querySelectorAll('.ep-bfs [tabindex="0"]').length)
+          : st.expect === 'walls' ? String(host.querySelectorAll('.ep-bfs [aria-pressed="true"]').length)
           : st.expect.startsWith('count:') ? String(host.querySelectorAll(st.expect.slice(6)).length)
           : st.expect === 'wallAt' ? document.activeElement?.getAttribute('aria-label') ?? '(no focus)'
           : el?.textContent ?? '(missing)'

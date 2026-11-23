@@ -47,7 +47,7 @@ export default function BfsChapter({ t }: { t: Strings }) {
   return (
     <>
       <div className="figure">
-        <svg className="bfs" viewBox={`0 0 ${W * CS} ${H * CS}`} role="group" aria-label={s.figLabel}>
+        <svg className="ep-bfs" viewBox={`0 0 ${W * CS} ${H * CS}`} role="group" aria-label={s.figLabel}>
           {Array.from({ length: W * H }, (_, k) => {
             const [x, y] = cellOf(k)
             const wall = walls.has(k)
