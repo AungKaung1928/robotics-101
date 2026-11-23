@@ -215,7 +215,9 @@ try {
     const step = async (code) => { const v = await js(code); await sleep(100); return v }
     const bad = []
     const head = await js(`[document.documentElement.lang, [...document.querySelectorAll('.panel h2')].map((h) => h.textContent).join('|')].join(' ')`)
-    if (!head.startsWith(lang + ' ') || head.split('|').length !== 5 || !head.split('|').every((h) => SCRIPT[lang].test(h))) bad.push(`headings: ${head}`)
+    // The 5 numbered steps in the page's script; the 6th heading is the STALE section (Burmese may still fall back to English).
+    const steps = head.split('|').filter((h) => /^\d\./.test(h))
+    if (!head.startsWith(lang + ' ') || head.split('|').length !== 6 || steps.length !== 5 || !steps.every((h) => SCRIPT[lang].test(h))) bad.push(`headings: ${head}`)
     await step(`[...document.querySelectorAll('.pick')].filter((l) => l.textContent.includes('base_link')).forEach((l) => l.querySelector('input').click())`)
     await step(`${q('[data-act="check"]')}.click()`)
     if ((await js(`${q('[data-k="predict"]')}?.textContent.startsWith('✓')`)) !== true) bad.push('1 predict: no ✓ for the base_link pairs')
@@ -229,7 +231,12 @@ try {
     if ((await js(`!${q('[data-k="diag"]')}.textContent.includes('MISSING') && ${q('[data-k="challenge"]')}.textContent.startsWith('✓') && ${q('.tflab-cmd')}.textContent.includes('test_tf_lab_missing_link')`)) !== true) bad.push('5 verify: odom broadcaster should give all OK, ✓ and the colcon test line')
     await step(`${q('[data-act="reset"]')}.click()`)
     if ((await js(`!${q('[data-k="challenge"]')}.textContent.startsWith('✓') && !${q('[data-k="diag"]')}`)) !== true) bad.push('reset: back to the broken chain')
-    report(`TF lab ${lang}: 5 steps (predict, see, inspect, fix, verify) + reset`, bad)
+    // STALE: 0.3 s old reads OK but 12.1 cm off; a fresh transform springs the hits back onto the wall.
+    const stale = () => js(`[${q('[data-k="stale"]')}.textContent, ${q('[data-k="staleoff"]')}.textContent].join(' ')`)
+    if ((await stale()) !== 'OK 12.1 cm') bad.push(`stale before: ${await stale()}`)
+    await step(`${q('[data-act="fresh"]')}.click()`); await sleep(2500)
+    if ((await stale()) !== 'OK 0.0 cm') bad.push(`stale after fresh: ${await stale()}`)
+    report(`TF lab ${lang}: 5 steps (predict, see, inspect, fix, verify) + reset + STALE fresh transform`, bad)
   }
   await js(`document.querySelectorAll('.langs button')[0].click()`)
 

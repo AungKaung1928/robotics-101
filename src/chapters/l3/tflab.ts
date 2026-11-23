@@ -34,3 +34,17 @@ export function apply(edges: readonly Edge[], c: Choice): readonly Edge[] {
   return c === 'odom' ? [...edges, FIX] : c === 'resend' ? [...edges, ['map', 'odom'] as const] : edges
 }
 export const healthy = (edges: readonly Edge[]) => Object.values(diagnose(edges)).every((s) => s === 'OK')
+
+/**
+ * Second failure, STALE: the detector's default max age is 1.0 s (src/tf_anomaly_detector.cpp:10) and a pair is STALE
+ * only when its age is above it (:63). While the robot turns, a transform that is `age` s old puts every laser hit
+ * TURN * age rad off (staleYaw), so the scan is already wrong long before the detector says STALE.
+ */
+export const MAX_AGE = 1.0
+export const ageStatus = (age: number): 'OK' | 'STALE' => (age > MAX_AGE ? 'STALE' : 'OK')
+/** Example turn rate (rad/s) for the picture, not a value from his config; 1 rad/s ≈ 57°/s. */
+export const TURN = 1.0
+/** Laser hits on a wall 2 m ahead, in the laser frame (laser 0.1 m in front of base_link). */
+export const WALL_X = 2
+export const MOUNT = { x: 0.1, y: 0, yaw: 0 }
+export const HITS: [number, number][] = [-0.6, -0.4, -0.2, 0, 0.2, 0.4, 0.6].map((y) => [WALL_X - MOUNT.x, y])
