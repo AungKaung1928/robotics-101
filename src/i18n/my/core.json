@@ -200,6 +200,9 @@
   "ladder": "အကွာအဝေး- LiDAR → clears → marks → window edge",
   "twoMaps": "စက်ရုပ်ရဲ့ costmap နှစ်ခုလုံးက (k 3.0၊ 0.55 m) အတိုင်း အတူတူ ချဲ့ပါတယ်- global က planner အတွက် မြေပုံတစ်ခုလုံးစာ ဖြစ်ပြီး local ကတော့ controller အတွက် 3 × 3 m window အတွင်းမှာ ဖြစ်ပါတယ်။",
   "lethal": "lethal",
-  "inscribed": "inscribed"
+  "inscribed": "inscribed",
+  "obstacle": "အတားအဆီး",
+  "radius": "inflation အချင်းဝက်",
+  "inflated": "inflation နဲ့ ချဲ့ထားတဲ့ ဇုန်"
  }
 }

@@ -132,6 +132,12 @@
   "my": "စက်ရုပ်ဗဟိုမှ အတားအဆီးသို့ အကွာအဝေး (m)",
   "back": "Distance from robot center to obstacle (m)"
  },
+ "core:costmap.inflated": {
+  "status": "pass-alt",
+  "en": "inflated",
+  "my": "inflation နဲ့ ချဲ့ထားတဲ့ ဇုန်",
+  "back": "Zone expanded by inflation"
+ },
  "core:costmap.inscribed": {
   "status": "pass",
   "en": "inscribed",
@@ -167,6 +173,18 @@
   "en": "Inside the configured robot radius (0.22 m) the cost is 253: in the costmap’s circle model the centre there collides.",
   "my": "သတ်မှတ်ထားတဲ့ စက်ရုပ် radius (0.22 m) အတွင်းမှာ cost က 253 ဖြစ်ပါတယ်- costmap ရဲ့ circle model မှာ ဗဟိုချက် အဲဒီနားရောက်ရင် တိုက်မိပါလိမ့်မယ်။",
   "back": "Within the set robot radius (0.22 m), the cost is 253: in the costmap's circle model, if the center point reaches that area, it will collide."
+ },
+ "core:costmap.obstacle": {
+  "status": "pass-alt",
+  "en": "obstacle",
+  "my": "အတားအဆီး",
+  "back": "Obstacle"
+ },
+ "core:costmap.radius": {
+  "status": "pass-alt",
+  "en": "inflation radius",
+  "my": "inflation အချင်းဝက်",
+  "back": "inflation radius"
  },
  "core:costmap.smooth": {
   "status": "pass",
