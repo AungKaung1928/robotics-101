@@ -1,0 +1,16 @@
+/* Level 0.4 distro timeline (lane anim). Ink for ROS 2, ink-2 for ROS 1, robot blue for the app's own distro. */
+.dt { width: 100%; height: auto; display: block; font: 12px var(--mono); }
+.dt text { fill: var(--ink-2); }
+.dt-grid { stroke: var(--rule); }
+.dt-row .dt-life { fill: none; stroke: var(--ink-2); stroke-width: 1; }
+.dt-row .dt-life:not([data-lts]) { stroke-dasharray: 3 2; }
+.dt-row .dt-fill { fill: var(--ink); opacity: 0.85; }
+.dt-row[data-ros='1'] .dt-fill { fill: var(--ink-2); }
+.dt-row[data-mine] .dt-fill { fill: var(--robot); }
+.dt-row[data-mine] .dt-note { fill: var(--robot); }
+.dt-row text { transition: fill 150ms; }
+.dt-row[data-live] text { fill: var(--ink); font-weight: 600; }
+.dt-first { stroke: var(--ink-2); }
+.dt-today { stroke: var(--ray); stroke-dasharray: 4 3; }
+.dt-head { stroke: var(--robot); stroke-width: 2; }
+@media (prefers-reduced-motion: reduce) { .dt-row text { transition: none; } }

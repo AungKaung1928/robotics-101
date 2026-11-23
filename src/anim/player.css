@@ -7,8 +7,15 @@
 .stepper .rail [data-done] .dot { border-color: var(--ink); }
 .stepper .rail [aria-current] { color: var(--ink); }
 .stepper .rail [aria-current] .dot { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+/* The step that becomes current pops (1.15 → 1) on the UI spring: the eye lands on where the story is now. */
+@supports (animation-timing-function: linear(0, 1)) { .stepper .rail [aria-current] .dot { animation: rail-pop var(--spring-ms) var(--spring); } }
+@keyframes rail-pop { from { transform: scale(1.15); } }
 .stepper .rail .wide { max-width: 7rem; text-align: center; }
 .stepper .keys { flex: 1 0 100%; color: var(--ink-2); }
 .stepper kbd { font: inherit; padding: 0 0.3em; border: 1px solid var(--rule); border-radius: 3px; }
+/* Press: 0.97 at once, back on the UI spring (linear() easing set inline by Player); subtle, it is pressed often. */
+.stepper button { transition: transform 160ms ease-out; }
+@supports (transition-timing-function: linear(0, 1)) { .stepper button { transition: transform var(--spring-ms) var(--spring); } }
+.stepper button:active:not(:disabled) { transform: scale(0.97); transition-duration: 60ms; }
 @media (max-width: 600px) { .stepper .wide { display: none; } }
-@media (prefers-reduced-motion: reduce) { .stepper .rail .dot { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .stepper .rail .dot, .stepper button { transition: none; } .stepper .rail [aria-current] .dot { animation: none; } .stepper button:active:not(:disabled) { transform: none; } }

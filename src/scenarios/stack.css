@@ -1,0 +1,7 @@
+/* Level 0.3 tool stack (lane anim). One stroke style; ROS 2 and your code in robot blue, the rest ink. */
+.ts { width: 100%; height: auto; display: block; font: 13px var(--mono); }
+.ts-ground { stroke: var(--ink-2); stroke-width: 2; }
+.ts-layer > rect { fill: var(--surface); stroke: var(--ink); stroke-width: 2; }
+.ts-layer[data-id='ros2'] > rect, .ts-layer[data-id='app'] > rect { stroke: var(--robot); }
+.ts-name { fill: var(--ink); font-weight: 600; }
+.ts-role { fill: var(--ink-2); font-size: 11px; }

@@ -1,7 +1,7 @@
 import { easeInOut } from '../lib/timeline'
 
-/** Glide length for a Step: long enough to see the change happen, short enough not to wait for it (ms). */
-export const GLIDE_MS = 420
+/** Glide length for a Step: long enough to see the change happen, inside the 300 ms UI limit (ms). */
+export const GLIDE_MS = 300
 
 /** Playhead `elapsed` ms into a glide from `from` to `to` lasting `dur` ms; lands exactly on `to`. */
 export function glide(from: number, to: number, elapsed: number, dur = GLIDE_MS): number {
@@ -40,3 +40,6 @@ export const HOLD_KEY = 'r101-hold'
 export function shouldAutoplay(asked: boolean, still: boolean, held: boolean): boolean {
   return asked && !still && !held
 }
+
+/** A click that came from the keyboard (Enter / Space on a focused button): browsers report it with detail 0. */
+export const fromKeyboard = (e: { detail: number }) => e.detail === 0
