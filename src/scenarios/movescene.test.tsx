@@ -99,3 +99,17 @@ describe('MeetScene', () => {
     expect(s).toContain('aria-label="two wheels"')
   })
 })
+
+describe('SimPickScene', () => {
+  it('robot hops to the picked step; picked step highlighted; notes shown', async () => {
+    const { default: SimPickScene } = await import('./SimPickScene')
+    const rungs = [{ name: 'this site', kind: '2D' as const }, { name: 'turtlesim', kind: '2D' as const }, { name: 'Gazebo', kind: '3D' as const }, { name: 'Isaac Sim', kind: '3D' as const, note: 'GPU' }]
+    const h = renderToStaticMarkup(<SimPickScene rungs={rungs} pick={2} from={0} t={2} label="" />)
+    expect(h).toContain('data-pick="2"')
+    expect(count(h, /is-pick/g)).toBe(1)
+    expect(count(h, /sp-side/g)).toBe(2)
+    expect(h).toContain('>GPU<')
+    expect(h).toContain('data-mood="happy"')
+    expect(renderToStaticMarkup(<SimPickScene rungs={rungs} pick={2} from={0} t={0.2} label="" />)).toContain('data-mood="idle"')
+  })
+})
