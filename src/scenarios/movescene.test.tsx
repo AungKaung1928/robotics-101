@@ -294,3 +294,11 @@ describe('MoveScene turn overlay', () => {
     expect(renderToStaticMarkup(<MoveScene vl={0.1} vr={0.2} t={1} label="" />)).not.toContain('ms-turn')
   })
 })
+
+describe('ActScene turn overlay', () => {
+  it('R = v / ω from the dials', async () => {
+    const { default: ActScene } = await import('./ActScene')
+    expect(renderToStaticMarkup(<ActScene v={0.2} w={0.5} tStop={9} decel={0.25} t={1} showTurn label="" />)).toContain('data-turn="0.40"')
+    expect(renderToStaticMarkup(<ActScene v={0.2} w={0} tStop={9} decel={0.25} t={1} showTurn label="" />)).toContain('data-turn="straight"')
+  })
+})

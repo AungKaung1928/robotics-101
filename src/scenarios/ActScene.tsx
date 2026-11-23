@@ -1,5 +1,6 @@
 import RobotTop from './RobotTop'
 import { actAt, wheels } from './act'
+import TurnOverlay from './TurnOverlay'
 import './robottop.css'
 
 const S = 300, X0 = 50, Y0 = 150, VMAX = 0.22, WMAX = 2.84 // px/m, start; Burger top speeds (ROBOTIS e-Manual)
@@ -23,8 +24,8 @@ function Dial({ x, value, max, word }: { x: number; value: number; max: number; 
  * the robot driving the arc. At `tStop` the dials drop to 0 but the wheels slow down over the brake time: the robot
  * rolls on past its ghost (where an instant stop would have left it) by the distance printed between them. From act.ts.
  */
-export default function ActScene({ v, w, tStop, decel, t, vWord = 'v', wWord = 'ω', label }: {
-  v: number; w: number; tStop: number; decel: number; t: number; vWord?: string; wWord?: string; label: string
+export default function ActScene({ v, w, tStop, decel, t, vWord = 'v', wWord = 'ω', showTurn = false, label }: {
+  v: number; w: number; tStop: number; decel: number; t: number; vWord?: string; wWord?: string; showTurn?: boolean; label: string
 }) {
   const f = actAt(v, w, tStop, decel, t), on = t < tStop, [x, y] = scr(f.pose), [gx, gy] = scr(f.ghost), { vl, vr } = wheels(v, w)
   const path = Array.from({ length: Math.floor(t / 0.05) + 2 }, (_, i) => scr(actAt(v, w, tStop, decel, Math.min(i * 0.05, t)).pose))
@@ -39,6 +40,7 @@ export default function ActScene({ v, w, tStop, decel, t, vWord = 'v', wWord = '
         <line className="as-roll" x1={gx} y1={gy} x2={x} y2={y} />
         <text className="as-num" x={(gx + x) / 2} y={Math.min(gy, y) - 30} textAnchor="middle">+{f.rollOn.toFixed(2)} m</text>
       </>}
+      {showTurn && <TurnOverlay vl={vl} vr={vr} p={f.pose} scr={scr} s={S} x={x} y={y} />}{/* R = v / ω: the two dials set the circle */}
       <RobotTop x={x} y={y} deg={deg(f.pose.th)} rolledL={f.rolled.l * S} rolledR={f.rolled.r * S} mood={on ? 'idle' : f.speed > 0 ? 'worried' : 'curious'} />
       <g transform={`translate(${x} ${y}) rotate(${deg(f.pose.th)})`}>{arrow(1, vl)}{arrow(-1, vr)}</g>
       <Dial x={150} value={on ? v : 0} max={VMAX} word={vWord} />
