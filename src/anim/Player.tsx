@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import type { Strings } from '../i18n'
 import { advance, stepEvent } from '../lib/timeline'
-import { GLIDE_MS, currentStep, glide, playerKey } from './motion'
+import { GLIDE_MS, HOLD_KEY, currentStep, glide, playerKey, shouldAutoplay } from './motion'
 import './player.css'
 
+const held = () => typeof sessionStorage !== 'undefined' && sessionStorage.getItem(HOLD_KEY) === '1'
 const reducedMotion = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 
 /**
@@ -14,13 +15,14 @@ const reducedMotion = () => typeof matchMedia === 'function' && matchMedia('(pre
  * `labels` (one per event, ascending order): a numbered step rail under the controls, current step filled, each a
  * button that glides there, and Next names the step it goes to.
  * Reduced motion: Play is disabled, Step jumps, the chapter opens on its end frame.
+ * Pausing holds autoplay off for the rest of the session; pressing Play again releases it.
  */
 export default function Player({ t, setT, end, events, speed, autoplay = false, caption, labels, s }: {
   t: number; setT: (t: number) => void; end: number; events: number[]; speed: number; autoplay?: boolean; caption: ReactNode
   labels?: string[]; s: Strings
 }) {
   const still = reducedMotion()
-  const [playing, setPlaying] = useState(autoplay && !still)
+  const [playing, setPlaying] = useState(() => shouldAutoplay(autoplay, still, held()))
   const [target, setTarget] = useState<number | null>(null)
   const now = useRef(t)
   now.current = t
@@ -54,8 +56,14 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
   const from = target ?? t
   const step = (dir: -1 | 1) => go(stepEvent(events, from, dir))
   const atEnd = t >= end - 1e-9
-  const toggle = () => { setTarget(null); if (!playing && atEnd) setT(0); setPlaying(!playing && !still) }
-  const replay = () => { setTarget(null); setT(0); setPlaying(!still) }
+  const toggle = () => {
+    setTarget(null)
+    if (playing) sessionStorage.setItem(HOLD_KEY, '1') // paused once: later chapters open paused
+    else sessionStorage.removeItem(HOLD_KEY)
+    if (!playing && atEnd) setT(0)
+    setPlaying(!playing && !still)
+  }
+  const replay = () => { setTarget(null); sessionStorage.removeItem(HOLD_KEY); setT(0); setPlaying(!still) }
   const sorted = [...events].sort((a, b) => a - b)
   const here = currentStep(sorted, from)
   const nextLabel = labels?.[here + 1]

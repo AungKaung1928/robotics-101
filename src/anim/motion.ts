@@ -32,3 +32,11 @@ export function currentStep(events: number[], t: number): number {
   for (let k = 0; k < events.length; k++) if (events[k] <= t + 1e-9) i = k
   return i
 }
+
+/** Session key set when the reader pauses a scenario: later chapters then open paused (ciechanow.ski "globally pause"). */
+export const HOLD_KEY = 'r101-hold'
+
+/** Whether a chapter should start playing: it asks to, motion is allowed, and the reader has not paused this session. */
+export function shouldAutoplay(asked: boolean, still: boolean, held: boolean): boolean {
+  return asked && !still && !held
+}

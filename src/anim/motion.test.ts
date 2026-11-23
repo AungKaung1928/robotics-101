@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { GLIDE_MS, currentStep, glide, playerKey } from './motion'
+import { GLIDE_MS, currentStep, glide, playerKey, shouldAutoplay } from './motion'
 
 describe('glide', () => {
   it('starts at from, lands exactly on to, passes the midpoint at half time', () => {
@@ -53,5 +53,14 @@ describe('currentStep', () => {
   })
   it('counts an event reached by float addition as reached', () => {
     expect(currentStep([0.3], 0.1 + 0.2)).toBe(0)
+  })
+})
+
+describe('shouldAutoplay', () => {
+  it('plays only when asked, motion allowed and not held by an earlier pause', () => {
+    expect(shouldAutoplay(true, false, false)).toBe(true)
+    expect(shouldAutoplay(false, false, false)).toBe(false)
+    expect(shouldAutoplay(true, true, false)).toBe(false)
+    expect(shouldAutoplay(true, false, true)).toBe(false)
   })
 })
