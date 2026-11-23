@@ -1,5 +1,7 @@
 # Robotics 101
 
+**Live: https://robotics-101.vercel.app** (work in progress: new chapters land here as they are built)
+
 A mobile robot's first ideas, seen top-down on the floor plan of a simulated ROS 2 setup: one TurtleBot3 in a 10 × 10 m Gazebo arena. Each waypoint is one idea with one interactive figure, and every value comes from the source repo's files ([TF-Transform-Explorer](https://github.com/AungKaung1928/TF-Transform-Explorer)), cited by file and line.
 
 ![The plan, then the seven waypoints in order (10 s): launch timeline stepped to SLAM, TF frames, LiDAR scan, clusters, occupancy grid after 7 scans, costmap, goal](docs/media/demo.gif)
