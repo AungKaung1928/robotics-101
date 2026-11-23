@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { BOUNCY, PRESS, PULSE_S, UI, WOBBLE, arrivalScale, settleTime, springAt, springEasing, springFrom } from './spring'
+import { BOUNCY, CALM, PRESS, PULSE_S, UI, WOBBLE, arrivalScale, settleTime, springAt, springEasing, springFrom } from './spring'
 
 describe('springAt', () => {
   it('starts at x0 and ends at rest', () => {
@@ -34,6 +34,14 @@ describe('settleTime', () => {
       const T = settleTime(s, 1, 0, 0.01)
       for (let t = T; t < T + 2; t += 0.005) expect(Math.abs(springAt(t, s, 1))).toBeLessThanOrEqual(0.01)
       expect(T).toBeLessThan(1.5) // a reaction is over in well under 1.5 s
+    }
+  })
+  it('never ends early for any damping, with or without a kick (CALM ended early before: 3.5e-3 at eps 1e-3)', () => {
+    const springs = [BOUNCY, WOBBLE, PRESS, CALM, UI, springFrom(0.3, 0.05), { k: 100, c: 30 }]
+    for (const s of springs) for (const [x0, v0, eps] of [[1, 0, 1e-2], [0.2, 0, 1e-3], [0, 2, 2e-3], [1, -5, 1e-3]]) {
+      const T = settleTime(s, x0, v0, eps)
+      for (let t = T; t < T + 2; t += 0.002) expect(Math.abs(springAt(t, s, x0, v0))).toBeLessThanOrEqual(eps)
+      if (s.c < 30) expect(T).toBeLessThan(2) // the app's springs; the over-damped test spring is slow by design
     }
   })
 })

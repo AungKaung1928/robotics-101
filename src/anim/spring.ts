@@ -19,12 +19,31 @@ export function springAt(t: number, s: Spring, x0: number, v0 = 0): number {
   return (x0 - b) * Math.exp(r1 * t) + b * Math.exp(r2 * t)
 }
 
-/** Time after which the spring stays within `eps` of rest (envelope bound, so it may end a little late, never early). */
+/**
+ * Time after which the spring stays within `eps` of rest (a bound, so it may end a little late, never early).
+ * Clearly under-damped: envelope e^(−ζω₀t)·(|x0| + |v0 + ζω₀x0| / ω_d). Near-critical, critical and over-damped:
+ * |x(t)| ≤ (|x0| + (|v0| + ω₀|x0|)·t)·e^(−dt) (|sin(ω_d t)/ω_d| ≤ t; 1 − e^(−δt) ≤ δt), solved by bisection: the
+ * plain envelope drops the t factor and ended early for CALM (|x| = 3.5e-3 at a 1e-3 settle time).
+ */
 export function settleTime(s: Spring, x0: number, v0 = 0, eps = 0.01): number {
   const w0 = Math.sqrt(s.k), z = s.c / (2 * w0)
-  const decay = z < 1 ? z * w0 : w0 * (z - Math.sqrt(z * z - 1))
-  const amp = Math.abs(x0) + Math.abs(v0) / (z < 1 ? w0 * Math.sqrt(1 - z * z) : w0) + Math.abs(x0) * z
-  return amp <= eps ? 0 : Math.log(amp / eps) / decay
+  if (z < 0.9) {
+    const decay = z * w0, wd = w0 * Math.sqrt(1 - z * z)
+    const amp = Math.abs(x0) + (Math.abs(v0) + z * w0 * Math.abs(x0)) / wd
+    return amp <= eps ? 0 : Math.log(amp / eps) / decay
+  }
+  const d = z < 1 ? z * w0 : w0 * (z - Math.sqrt(z * z - 1))
+  const a = Math.abs(x0), b = Math.abs(v0) + w0 * a
+  const bound = (t: number) => (a + b * t) * Math.exp(-d * t)
+  if (bound(0) <= eps && b <= d * a) return 0
+  let lo = Math.max(0, 1 / d - a / b), hi = lo + 1 / d // bound is decreasing after its peak at 1/d − a/b
+  while (bound(hi) > eps) hi *= 2
+  for (let i = 0; i < 60; i++) {
+    const m = (lo + hi) / 2
+    if (bound(m) > eps) lo = m
+    else hi = m
+  }
+  return hi
 }
 
 /** Springs the mascot uses (k, c per unit mass): bouncy landing, wobble, and a calm settle. */
