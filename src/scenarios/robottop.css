@@ -92,3 +92,8 @@
 .as-arrow.is-over { stroke: var(--ray); stroke-width: 3; } /* more than the top speed */
 .as-head.is-over { fill: var(--ray); }
 .mt-label.is-hint { fill: var(--ink-2); font-weight: 400; } /* before any tap: what to do */
+/* Idle blink (his style: idle blink): the round eyes close along the heading for ~120 ms every 4.2 s; the shaped eyes
+   (proud, dizzy) do not blink. Reduced motion: no blink. */
+.rtop-eye { transform-box: fill-box; transform-origin: center; animation: rtop-blink 4.2s infinite; }
+@keyframes rtop-blink { 0%, 94%, 100% { transform: scaleX(1); } 97% { transform: scaleX(0.15); } }
+@media (prefers-reduced-motion: reduce) { .rtop-eye { animation: none; } }
