@@ -3,6 +3,7 @@ export const TOPICS_STRINGS = {
   en: {
     title: 'ROS 2: topics',
     learn: 'You will learn: nodes talk through topics, named channels where one node publishes and any number of nodes subscribe.',
+    everyday: 'Everyday: a radio station. It broadcasts on one frequency without knowing who listens, and every radio tuned to it hears the same song. Tune one step off and you hear nothing.',
     lines: [
       'ros_gz_bridge publishes each LiDAR scan on the topic /scan, 5 times a second. It does not know who listens.',
       'slam_toolbox, nav2 and rviz2 each subscribe to /scan, and each gets its own copy of every scan (the dots).',
@@ -33,6 +34,7 @@ export const TOPICS_STRINGS = {
   ja: {
     title: 'ROS 2：トピック',
     learn: '学ぶこと：ノードはトピックで話す。トピックは名前の付いたチャンネルで、1つのノードが publish し、何個のノードでも subscribe できる。',
+    everyday: '身近な例：ラジオ局。だれが聞いているか知らずに1つの周波数で放送し、合わせたラジオはどれも同じ曲を聞く。周波数が少しずれると何も聞こえない。',
     lines: [
       'ros_gz_bridge は LiDAR のスキャンを /scan というトピックに1秒5回 publish する。誰が聞いているかは知らない。',
       'slam_toolbox、nav2、rviz2 はそれぞれ /scan を subscribe し、どのスキャンも自分用のコピーを受け取る（点）。',

@@ -28,3 +28,6 @@
 .tree { min-height: 0; margin-bottom: 0.5rem; }
 .graph .goalc { fill: color-mix(in srgb, var(--free) 18%, transparent); stroke: var(--free); stroke-width: 2; }
 .graph .nd.still { cursor: default; }
+/* "From a real project" box (RealProject.tsx) */
+.real-project { border-left: 4px solid var(--free); padding: 4px 0 4px 12px; margin: 16px 0; }
+.real-project p { margin: 4px 0; }

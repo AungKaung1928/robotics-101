@@ -2,12 +2,13 @@ import { useMemo, useState } from 'react'
 import Player from '../../anim/Player'
 import Slider from '../../components/Slider'
 import { LIDAR, SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { LASERSCAN, LIMITS, SAMPLES, beamAngle, challengeOk, ignored, indexAt, pose, scenario, type Twist } from './msgtypes'
 import { MSGTYPES_STRINGS } from './msgtypes.strings'
 import '../l1/l1.css'
 import './l2.css'
 import Gloss from '../l1/Gloss'
+import RealProject from './RealProject'
 
 const MSG = 'https://github.com/ros2/common_interfaces/blob/humble'
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -16,7 +17,7 @@ const R = 70 // beam length in px (fan drawn at one radius: this chapter is abou
 
 /** 2.3: LaserScan fields fill in, ranges draws as a fan; index slider maps i to its angle; Twist sliders drive a path. */
 export default function MsgTypesChapter({ t }: { t: Strings }) {
-  const s = MSGTYPES_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(MSGTYPES_STRINGS, t, 'l2.msgtypes.MSGTYPES_STRINGS')
   const sc = useMemo(() => scenario(), [])
   const [tS, setTS] = useState(() => (still() ? sc.durationMs / 1000 : 0))
   const now = Math.min(tS, sc.durationMs / 1000)
@@ -80,6 +81,7 @@ export default function MsgTypesChapter({ t }: { t: Strings }) {
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? `✓ ${s.solved} ${tw.angular[2].toFixed(2)} rad/s` : `${s.notYet} linear.x ${tw.linear[0].toFixed(2)}, angular.z ${tw.angular[2].toFixed(2)}`}</p>
         <p className="group-h">{s.words}</p>
         <Gloss items={s.glossary} />
+        <RealProject id="msgtypes" t={t} />
         <p className="src">{t.source}: <a href={`${MSG}/sensor_msgs/msg/LaserScan.msg`}>LaserScan.msg</a>, <a href={`${MSG}/geometry_msgs/msg/Twist.msg`}>Twist.msg</a> (Humble), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L174-L182`}>turtlebot3_burger.urdf.xacro:174-182</a> ({SAMPLES} samples, {LIDAR.minAngle} to {LIDAR.maxAngle} rad), <a href="https://github.com/gazebosim/gz-sensors/blob/ign-sensors6/src/Lidar.cc#L346-L350">ign-sensors6 Lidar.cc:346-350</a> (angle_increment = (max − min) / (samples − 1)), <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L207`}>nav2_params.yaml:207</a>, <a href="https://github.com/gazebosim/gz-sim/blob/gz-sim8/src/systems/diff_drive/DiffDrive.cc#L618-L619">gz-sim DiffDrive.cc:618-619</a> (reads linear.x, angular.z), <a href="https://www.ros.org/reps/rep-0103.html">REP 103</a></p>
       </div>
     </>

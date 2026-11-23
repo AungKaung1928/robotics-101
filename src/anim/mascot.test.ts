@@ -180,3 +180,31 @@ describe('blink phase', () => {
     expect(Math.max(...gaps)).toBeGreaterThan(4000)
   })
 })
+
+describe('entrance', () => {
+  it('rolls in from the left, never backwards, speed falling to 0 at the stop, then settles at rest', async () => {
+    const { enterPose, ENTER_D, ENTER_ROLL, ENTER_S } = await import('./mascot')
+    expect(enterPose(0).x).toBe(-ENTER_D)
+    let last = -Infinity
+    for (let t = 0; t <= ENTER_ROLL; t += 0.01) { const x = enterPose(t).x!; expect(x).toBeGreaterThanOrEqual(last); last = x }
+    const dt = 1e-4, v = (enterPose(ENTER_ROLL - dt).x! - enterPose(ENTER_ROLL - 2 * dt).x!) / dt
+    expect(Math.abs(v)).toBeLessThan(0.05 * (2 * ENTER_D / ENTER_ROLL)) // < 5 % of the starting speed
+    expect(Math.abs(enterPose(ENTER_ROLL + 0.05).rot)).toBeGreaterThan(1) // the brake jolt is visible
+    expect(Math.abs(enterPose(ENTER_S).rot)).toBeLessThan(0.25)
+    expect(enterPose(ENTER_S).x).toBe(0)
+  })
+})
+
+describe('idle phase per robot', () => {
+  it('breath and sway offsets differ between robots, stay inside one period, and match the CSS durations', async () => {
+    const { idlePhase, BREATH_MS, SWAY_MS } = await import('./mascot')
+    const { readFileSync } = await import('node:fs')
+    const a = idlePhase(':r1:'), b = idlePhase(':r2:')
+    expect(a.breath).not.toBe(b.breath)
+    expect(a.sway).not.toBe(b.sway)
+    for (const p of [a, b]) { expect(-p.breath).toBeLessThan(BREATH_MS); expect(-p.sway).toBeLessThan(SWAY_MS) }
+    const css = readFileSync('src/anim/mascot.css', 'utf8')
+    expect(css).toContain(`m-breath ${BREATH_MS / 1000}s`)
+    expect(css).toContain(`m-sway ${SWAY_MS / 1000}s`)
+  })
+})

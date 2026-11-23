@@ -19,7 +19,7 @@ export default function EventLog({ rows, t, seek, head, label, hot = null, onHot
       <thead><tr><th>#</th>{head.map((h) => <th key={h}>{h}</th>)}</tr></thead>
       <tbody>
         {rows.map((r, i) => (
-          <tr key={i} data-state={st[i]} data-hot={hot === i || undefined} aria-current={st[i] === 'now' ? 'step' : undefined} onClick={() => seek(r.t)}
+          <tr key={i} data-state={st[i]} data-hot={hot === i || undefined} onClick={() => seek(r.t)}
             onPointerEnter={() => onHot?.(i)} onPointerLeave={() => onHot?.(null)} onFocus={() => onHot?.(i)} onBlur={() => onHot?.(null)}>
             <td><button type="button" onClick={(e) => { e.stopPropagation(); seek(r.t) }}>{i + 1}</button></td>{r.cells.map((c, k) => <td key={k}>{c}</td>)}
           </tr>

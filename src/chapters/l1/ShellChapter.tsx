@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import Mascot from '../../anim/Mascot'
 import Player from '../../anim/Player'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { SCRIPT, challengeOk, exec, fresh, prompt, scenario, session } from './shell'
 import { SHELL_STRINGS } from './shell.strings'
 import Term from './Term'
@@ -19,7 +19,7 @@ const prompts = (cmds: string[]) => {
 
 /** 1.5: a typed demo of the 8 commands, then the reader's own pretend terminal. */
 export default function ShellChapter({ t }: { t: Strings }) {
-  const s = SHELL_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(SHELL_STRINGS, t, 'l1.shell.SHELL_STRINGS')
   const sc = useMemo(() => scenario(), [])
   const demo = useMemo(() => session(SCRIPT).lines, [])
   const demoPrompts = useMemo(() => prompts(SCRIPT), [])

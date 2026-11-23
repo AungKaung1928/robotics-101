@@ -29,7 +29,7 @@ describe('simpick page', () => {
   })
   it.skipIf(!FACTS || !existsSync(FACTS))('every URL on the page is in the facts file (checked 2026-11-23)', () => {
     const facts = readFileSync(FACTS, 'utf8')
-    const urls = [...LADDER.map((r) => r.url).filter(Boolean), SOURCES.classicEol, SOURCES.webots]
+    const urls = [...LADDER.map((r) => r.url).filter(Boolean), SOURCES.classicEol, SOURCES.webots, SOURCES.stage, SOURCES.flatland]
     for (const u of urls) expect(facts).toContain(u)
     for (const b of ['humble', 'jazzy']) expect(facts).toContain(`turtlebot3_simulations/${b}/turtlebot3_gazebo/package.xml`)
   })

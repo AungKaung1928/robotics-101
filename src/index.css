@@ -93,6 +93,10 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .chapter .chead, .steps { grid-column: 1 / -1; }
 .chead { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); }
 .chead h1 { margin: 0; }
+.pathline { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s3); margin: var(--s1) 0 0; font-size: var(--t-small); color: var(--ink-2); }
+.dots { display: inline-flex; gap: 3px; }
+.dots i { width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid var(--free); }
+.dots i.on { background: var(--free); }
 .spot { margin: var(--s2) 0 0; font: 600 1.375rem var(--mono); }
 .spot .kind { font: 600 0.6875rem var(--mono); color: var(--free); border: 1px solid currentColor; border-radius: var(--radius); padding: 0 var(--s1); vertical-align: middle; }
 .miniplan svg { width: 96px; height: 96px; display: block; }
@@ -246,3 +250,4 @@ h1 .icon { width: 0.8em; height: 0.8em; }
   .levelmap li { grid-template-columns: 2rem minmax(0, 1fr); }
   .lv-chs, .lv-groups { grid-column: 1 / -1; }
 }
+.timeline .is-hot .node { r: 6; } .timeline .is-hot text { font-weight: 700; }

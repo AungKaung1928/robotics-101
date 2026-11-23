@@ -52,3 +52,22 @@ const markColour = (file: string, sel: string, t: Record<string, string>) => {
 describe.each([['light', light], ['dark', dark]] as const)('%s theme: meaningful marks', (_, t) => {
   it.each(MEANING)('%s %s (%s) >= 3:1 on paper', (file, sel) => expect(ratio(markColour(file, sel, t), t.paper)).toBeGreaterThanOrEqual(3))
 })
+
+describe('think ladder marks (data) keep 3:1 on the surface', () => {
+  const mix = (a: string, b: string, p: number) => '#' + [1, 3, 5].map((i) => Math.round(parseInt(a.slice(i, i + 2), 16) * p + parseInt(b.slice(i, i + 2), 16) * (1 - p)).toString(16).padStart(2, '0')).join('')
+  it('solid ink-2 and robot pass in light and dark; the old 35 % robot blend did not in dark', () => {
+    for (const th of [light, dark]) {
+      expect(ratio(th['ink-2'], th.surface)).toBeGreaterThanOrEqual(3)
+      expect(ratio(th.robot, th.surface)).toBeGreaterThanOrEqual(3)
+    }
+    expect(ratio(mix(dark.robot, dark.surface, 0.35), dark.surface)).toBeLessThan(3)
+  })
+})
+
+// Player scrubber: unplayed track = color-mix(ink-2 65 %, paper) (player.css); the step gaps show the page through it.
+describe.each([['light', light], ['dark', dark]] as const)('%s scrubber track', (_, t) => {
+  it('unplayed track vs page >= 3:1', () => {
+    expect(readFileSync('src/anim/player.css', 'utf8')).toContain('--scrub-rest: color-mix(in srgb, var(--ink-2) 65%, var(--paper))')
+    expect(ratio(over(t['ink-2'], 0.65, t.paper), t.paper)).toBeGreaterThanOrEqual(3)
+  })
+})

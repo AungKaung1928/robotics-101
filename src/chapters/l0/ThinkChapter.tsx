@@ -3,22 +3,24 @@ import Mascot from '../../anim/Mascot'
 import Player from '../../anim/Player'
 import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
-import RobotSide from '../l1/RobotSide'
+import { stringsFor, type Strings } from '../../i18n'
+import ThinkScene from '../../scenarios/ThinkScene'
 import '../l1/l1.css'
-import { RULE_M, SCAN_HZ, SPEED, run, scenario } from './think'
+import { RULE_M, SCAN_HZ, SPEED, START_M, run, scenario } from './think'
 import { THINK_STRINGS } from './think.strings'
 import './l0.css'
 import './think.css'
 
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 const m = (v: number) => v.toFixed(2)
+const MODEL = { run, speed: SPEED, startM: START_M } // the same decide.run the readouts use
+const LADDER = [0, 0.25, 0.5, 0.75, 1] // faint marks: where the robot ends for other rules (0 = a bump)
 type Answer = 'earlier' | 'later' | 'never'
 const ANSWERS: Answer[] = ['earlier', 'later', 'never']
 
-/** Level 0 "think": the 1.1 rule and figure (RobotSide, decide.run) with the number as the only control; no code. */
+/** Level 0 "think": the 1.1 rule (decide.run) in the cute ThinkScene with the number as the only control; no code. */
 export default function ThinkChapter({ t }: { t: Strings }) {
-  const s = THINK_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(THINK_STRINGS, t, 'l0.think.THINK_STRINGS')
   const [rule, setRule] = useState(RULE_M)
   const [picked, setPicked] = useState<Answer | null>(null)
   const [cheer, setCheer] = useState(0)
@@ -34,7 +36,7 @@ export default function ThinkChapter({ t }: { t: Strings }) {
   return (
     <>
       <div className="figure">
-        <RobotSide f={f} stopAt={rule} tS={now} label={s.title} crashed={s.bumped} plain={s.fig} />
+        <ThinkScene model={MODEL} stopAt={rule} t={now} ladder={LADDER} stopWord={s.fig.stop} label={s.title} />
         <Player t={now} setT={setTS} end={sc.durationMs / 1000} events={sc.eventsMs!.map((e) => e / 1000)} speed={1} autoplay={!still()} s={t}
           caption={s.caption(f.tick + 1, m(k.distance), k.decision === 'go')} />
       </div>

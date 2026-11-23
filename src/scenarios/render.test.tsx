@@ -85,3 +85,34 @@ describe('scenario figures render from their models', () => {
     expect(at(0.05)).toMatch(/class="env-id"[^>]*>#(<!-- -->)?0<\/text>/) // row id matches the timeline's #n
   })
 })
+
+describe('TfChain renders from chainAt()', () => {
+  it('broken chain: gap drawn, robot dizzy at odom; fixed: link drawn, robot happy at base_link', async () => {
+    const { default: TfChain } = await import('./TfChain')
+    const { BROKEN, apply } = await import('../chapters/l3/tflab')
+    const { chainEnd } = await import('./tfchain')
+    const fixed = apply(BROKEN, 'odom')
+    const a = renderToStaticMarkup(<TfChain edges={BROKEN} before={BROKEN} t={1} label="chain" />)
+    expect(a).toContain('data-outcome="stuck"')
+    expect(a).toContain('data-mood="oops"')
+    expect(count(a, /class="tfc-gap"/g)).toBe(1)
+    expect(count(a, /is-reached/g)).toBe(2)
+    const b = renderToStaticMarkup(<TfChain edges={fixed} before={BROKEN} t={chainEnd(fixed, BROKEN)} label="chain" still />)
+    expect(b).toContain('data-mood="happy"')
+    expect(count(b, /class="tfc-gap"/g)).toBe(0)
+    expect(count(b, /class="tfc-link"/g)).toBe(2)
+    expect(count(b, /is-reached/g)).toBe(3)
+    expect(b).toContain('m-spark') // still frame keeps the proud sparks
+  })
+})
+
+describe('EventLog next to the mini plan', () => {
+  it('the log marks its current row with data-state only, so the page has exactly one aria-current step (the mini plan waypoint)', async () => {
+    const { default: MiniPlan } = await import('../components/MiniPlan')
+    const { STRINGS } = await import('../i18n')
+    const rows = [{ t: 0, cells: ['a'] }, { t: 1, cells: ['b'] }, { t: 2, cells: ['c'] }]
+    const html = renderToStaticMarkup(<><MiniPlan current="bringup" t={STRINGS.en} /><EventLog rows={rows} t={1.5} seek={() => {}} head={['x']} label="" /></>)
+    expect(count(html, /aria-current="step"/g)).toBe(1)
+    expect(count(html, /data-state="now"/g)).toBe(1)
+  })
+})

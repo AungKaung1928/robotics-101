@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import Player from '../../anim/Player'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { BENCH } from './bench/result'
 import { COMPILE_MS, DECLS, GCC_ERROR, compile, line, outcome, scenario, type Decl } from './cpp'
 import { CPP_STRINGS } from './cpp.strings'
@@ -12,7 +12,7 @@ const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-red
 
 /** 1.4: the 1.1 example in C++. The declaration picks what the compiler stores, or whether it builds at all. */
 export default function CppChapter({ t }: { t: Strings }) {
-  const s = CPP_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(CPP_STRINGS, t, 'l1.cpp.CPP_STRINGS')
   const [decl, setDecl] = useState<Decl>('double')
   const sc = useMemo(() => scenario(decl), [decl])
   const [tS, setTS] = useState(() => (still() ? sc.durationMs / 1000 : 0))

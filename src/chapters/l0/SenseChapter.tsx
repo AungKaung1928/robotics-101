@@ -2,11 +2,14 @@ import { useMemo, useState } from 'react'
 import Mascot from '../../anim/Mascot'
 import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { BEAMS, FRONT_MAX, FRONT_START, MAX_M, ROOM, VIEW, front, perSecond, turn, valid } from './sense'
 import { SENSE_STRINGS } from './sense.strings'
 import './l0.css'
 import './sense.css'
+import Face from './Face'
+import { mood } from './robotmood'
+import './face.css'
 
 const { px: PX, ox: OX, oy: OY } = VIEW
 const sx = (x: number) => OX + x * PX
@@ -16,7 +19,7 @@ const ANSWERS: Answer[] = ['five', 'limit', 'nothing']
 
 /** Level 0 "sense": drag the front wall; one beam gives the front number, the ring shows all BEAMS readings; break it = cover. */
 export default function SenseChapter({ t }: { t: Strings }) {
-  const s = SENSE_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(SENSE_STRINGS, t, 'l0.sense.SENSE_STRINGS')
   const [wall, setWall] = useState(FRONT_START)
   const [covered, setCovered] = useState(false)
   const [picked, setPicked] = useState<Answer | null>(null)
@@ -42,8 +45,7 @@ export default function SenseChapter({ t }: { t: Strings }) {
           <rect x={OX - 12} y={OY - 18} width="24" height="6" rx="2" fill="currentColor" />
           <rect x={OX - 12} y={OY + 12} width="24" height="6" rx="2" fill="currentColor" />
           <circle className="sense-body" cx={OX} cy={OY} r="18" />
-          <circle className="sense-eye" cx={OX + 9} cy={OY - 6} r="2.5" />
-          <circle className="sense-eye" cx={OX + 9} cy={OY + 6} r="2.5" />
+          <g transform={`translate(${OX} ${OY})`}><Face k={0.9} mood={mood({ broken: covered, solved: picked === 'nothing', sensing: true })} /></g>
           <circle className="sense-top" cx={OX - 3} cy={OY} r="5" />
           {covered && <circle className="sense-hand" cx={OX - 3} cy={OY} r="12" />}
           <text className="sense-say" x={sx(Math.min(wall, MAX_M) / 2)} y={OY - 10} textAnchor="middle">{f === null ? s.nothing : `${f.toFixed(2)} m`}</text>
@@ -72,7 +74,7 @@ export default function SenseChapter({ t }: { t: Strings }) {
         </div>
         <p className="group-h">{s.words}</p>
         <dl className="gloss">{s.glossary.map(([w, m]) => <div key={w} style={{ display: 'contents' }}><dt>{w}</dt><dd>{m}</dd></div>)}</dl>
-        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L168`}>turtlebot3_burger.urdf.xacro:168</a> (5 turns/s), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L174`}>:174</a> (360), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L181-L182`}>:181-182</a> (0.12-3.5 m).</p>
+        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L168`}>turtlebot3_burger.urdf.xacro:168</a> (5 turns/s), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L174`}>:174</a> (360), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L181-L182`}>:181-182</a> (0.12-3.5 m), <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/appendix_lds_01/">LDS-01</a> and <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/appendix_lds_02/">LDS-02</a> specifications, <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/sbc_setup/">SBC setup</a> (three LDS models) (ROBOTIS e-Manual).</p>
       </div>
     </>
   )

@@ -12,6 +12,7 @@ describe('1.1 bridges back to Level 0 think', () => {
     const line = DECIDE_STRINGS[l].already
     expect(line).toContain(THINK_STRINGS[l].title.split(/[:：]/)[0])
     expect(line).toContain(`${RULE_M} m`)
+    expect(line, 'the header PathLine already says it').not.toContain(STRINGS[l].levels.knows) // no second 'You already know'
     expect(renderToStaticMarkup(<DecideChapter t={STRINGS[l]} />)).toContain('data-k="already"')
   })
 })

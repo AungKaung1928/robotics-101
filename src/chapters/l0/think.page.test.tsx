@@ -1,7 +1,8 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { STRINGS } from '../../i18n'
-import { RULE_M, SCAN_HZ, blindCm, largestBumpCm, run } from './think'
+import { TOP_SPEED } from './move'
+import { RULE_M, SCAN_HZ, SPEED, blindCm, largestBumpCm, run } from './think'
 import ThinkChapter from './ThinkChapter'
 import { THINK_STRINGS } from './think.strings'
 
@@ -23,6 +24,13 @@ describe('think page', () => {
     for (const st of en.steps) expect(words(st)).toBeLessThanOrEqual(80)
     expect(en.glossary.length).toBeLessThanOrEqual(3)
     expect([en.learn, ...en.steps, en.brokenNote, en.check, ...en.glossary.flat()].join(' ')).not.toMatch(BANNED)
+  })
+  it('says why it drives 0.26 m/s when move and act give the real Burger 0.22 m/s as top speed', () => {
+    expect(SPEED).toBeGreaterThan(TOP_SPEED)
+    for (const l of ['en', 'ja'] as const) {
+      const step = THINK_STRINGS[l].steps.find((st) => st.includes(`${blindCm()} cm`))!
+      for (const n of [`${SPEED} m/s`, `${TOP_SPEED} m/s`]) expect(step).toContain(n)
+    }
   })
   it('text numbers = model numbers (0.5 m, 5 checks/s, 5.2 cm, 2 cm bump) and the page opens at the rule', () => {
     for (const l of ['en', 'ja'] as const) {

@@ -3,11 +3,14 @@ import Mascot from '../../anim/Mascot'
 import Player from '../../components/Player'
 import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { LEFT, SECONDS, SLIP, TOP_SPEED, WHEEL_GAP_M, kind, path, turnsPerS, VIEW, type Kind } from './move'
 import { MOVE_STRINGS } from './move.strings'
 import './l0.css'
 import './move.css'
+import Face from './Face'
+import { mood } from './robotmood'
+import './face.css'
 
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 const { px: PX, ox: OX, oy: OY } = VIEW
@@ -18,7 +21,7 @@ const ANSWERS: Kind[] = ['curveLeft', 'curveRight', 'straight']
 
 /** Level 0 "move": drag the right wheel speed, the path of the two-wheel model is drawn; break it = the left wheel slips. */
 export default function MoveChapter({ t }: { t: Strings }) {
-  const s = MOVE_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(MOVE_STRINGS, t, 'l0.move.MOVE_STRINGS')
   const [right, setRight] = useState(0.22)
   const [slip, setSlip] = useState(false)
   const [picked, setPicked] = useState<Kind | null>(null)
@@ -46,8 +49,7 @@ export default function MoveChapter({ t }: { t: Strings }) {
             <rect className={`move-wheel${slip ? ' is-slip' : ''}`} x="-10" y={-HALF_GAP - 5} width="20" height="8" rx="2" />
             <rect className="move-wheel" x="-10" y={HALF_GAP - 3} width="20" height="8" rx="2" />
             <circle className="move-body" r={R_BODY} />
-            <circle className="move-eye" cx="10" cy="-6" r="2.5" />
-            <circle className="move-eye" cx="10" cy="6" r="2.5" />
+            <Face mood={mood({ broken: slip, solved: picked === 'curveRight' })} />
             <circle className="move-sensor" cx="-3" r="5" />
           </g>
         </svg>

@@ -9,7 +9,6 @@
 .sw-dot { fill: var(--ray); }
 .sw-empty { fill: var(--surface); font: 18px var(--mono); }
 .sw-body { fill: var(--robot); }
-.sw-eye { fill: var(--surface); }
 .sw-check { display: flex; gap: 12px; align-items: flex-start; }
 .sw-check .pick { margin: 0 6px 6px 0; }
 .sw-check .pick[aria-pressed="true"] { outline: 2px solid var(--free); }

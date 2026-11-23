@@ -43,3 +43,55 @@ describe('Mascot render', () => {
   })
 })
 
+
+describe('sleep face', () => {
+  it('closed eyes and two z, no open eyes', () => {
+    const h = renderToStaticMarkup(<MascotFigure pose={REST} mood="sleep" label="" />)
+    expect(h).toContain('data-mood="sleep"')
+    expect(h).toContain('m-zz')
+    expect(h).toContain('M24 24q3 3 6 0')
+    expect(h).not.toContain('m-eyes')
+  })
+})
+
+describe('entrance first paint', () => {
+  it('with enter the first frame is already off to the left (no flash at rest); without, at rest', () => {
+    expect(renderToStaticMarkup(<Mascot enter label="" />)).toContain('<g transform="translate(-40 0)')
+    expect(renderToStaticMarkup(<Mascot label="" />)).toContain('<g transform="translate(0 0)')
+  })
+})
+
+describe('glance toward the last tap', () => {
+  it('maps a tap left / right of the robot to −1 … 1, 0 straight above, clamped', async () => {
+    const { glanceAt } = await import('./Mascot')
+    expect(glanceAt(132, 100, 64)).toBe(0)
+    expect(glanceAt(132 + 120, 100, 64)).toBeCloseTo(0.5)
+    expect(glanceAt(-5000, 100, 64)).toBe(-1)
+    expect(glanceAt(5000, 100, 64)).toBe(1)
+  })
+})
+
+describe('LiveNote', () => {
+  it('first render is an empty polite status region, even with text (it must exist before it is filled)', async () => {
+    const { default: LiveNote } = await import('./LiveNote')
+    const h = renderToStaticMarkup(<LiveNote text="bumped into the wall" />)
+    expect(h).toContain('role="status"')
+    expect(h).toContain('aria-live="polite"')
+    expect(h).not.toContain('bumped')
+  })
+})
+
+describe('LevelDone', () => {
+  it('done dots filled; they pop in one after another; the burst waits for the last dot', async () => {
+    const { LevelDoneFrame, STAGGER } = await import('./LevelDone')
+    const f = (t: number) => renderToStaticMarkup(<LevelDoneFrame done={5} total={7} t={t} label="" />)
+    expect(f(-1).match(/ld-dot is-done/g)!.length).toBe(5)
+    expect(f(-1).match(/class="ld-dot"/g)!.length).toBe(2)
+    const scales = (h: string) => [...h.matchAll(/scale\(([\d.]+)\)/g)].map((m) => +m[1])
+    const mid = scales(f(2.5 * STAGGER)) // dots 0-2 popping, 3-4 not yet
+    expect(mid[0]).not.toBe(1)
+    expect(mid[4]).toBe(1)
+    expect(f(4 * STAGGER)).not.toContain('class="celebrate"')
+    expect(f(5 * STAGGER + 0.1)).toContain('class="celebrate"')
+  })
+})

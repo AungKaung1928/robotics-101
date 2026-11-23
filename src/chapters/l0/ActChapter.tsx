@@ -2,13 +2,16 @@ import { useMemo, useState } from 'react'
 import Mascot from '../../anim/Mascot'
 import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { TURN_MAX, VIEW, rollOnM, rollOnS, tooFast, wheels } from './act'
 import { ACT_STRINGS } from './act.strings'
 import { SECONDS, TOP_SPEED, path } from './move'
 import './l0.css'
 import './move.css'
 import './act.css'
+import Face from './Face'
+import { mood } from './robotmood'
+import './face.css'
 
 const { px: PX, ox: OX, oy: OY } = VIEW
 const sx = (x: number) => OX + x * PX
@@ -18,7 +21,7 @@ const ANSWERS: Answer[] = ['atOnce', 'later', 'never']
 
 /** Level 0 "act": forward + turn speed -> wheel speeds -> the move path; "stop" shows the roll-on from the brake limit. */
 export default function ActChapter({ t }: { t: Strings }) {
-  const s = ACT_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(ACT_STRINGS, t, 'l0.act.ACT_STRINGS')
   const [v, setV] = useState(0.15)
   const [w, setW] = useState(0.5)
   const [stopped, setStopped] = useState(false)
@@ -42,8 +45,7 @@ export default function ActChapter({ t }: { t: Strings }) {
             <rect className={`move-wheel${Math.abs(k.right) > TOP_SPEED + 1e-9 ? ' is-slip' : ''}`} x="-10" y="-26" width="20" height="8" rx="2" />
             <rect className={`move-wheel${Math.abs(k.left) > TOP_SPEED + 1e-9 ? ' is-slip' : ''}`} x="-10" y="18" width="20" height="8" rx="2" />
             <circle className="move-body" r="19" />
-            <circle className="move-eye" cx="10" cy="-6" r="2.5" />
-            <circle className="move-eye" cx="10" cy="6" r="2.5" />
+            <Face mood={mood({ broken: fast, solved: picked === 'later' })} />
           </g>
           {stopped && <text className="act-stop" x={sx(p.x)} y={sy(p.y) - 34} textAnchor="middle">+{(rollOnM(v) * 100).toFixed(1)} cm</text>}
         </svg>

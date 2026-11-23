@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Mascot from '../../anim/Mascot'
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { FIG, PARTS, isRobot, rcCar, type PartId } from './meet'
 import { MEET_STRINGS } from './meet.strings'
 import './l0.css'
@@ -12,7 +12,7 @@ const ANSWERS: Answer[] = ['robot', 'notRobot']
 
 /** Level 0 "meet": tap the Burger's parts (side-view drawing); the remote-control car test of what a robot is. */
 export default function MeetChapter({ t }: { t: Strings }) {
-  const s = MEET_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(MEET_STRINGS, t, 'l0.meet.MEET_STRINGS')
   const [part, setPart] = useState<PartId | null>(null)
   const [up, setUp] = useState(false)
   const [picked, setPicked] = useState<Answer | null>(null)
@@ -61,7 +61,7 @@ export default function MeetChapter({ t }: { t: Strings }) {
         </div>
         <p className="group-h">{s.words}</p>
         <dl className="gloss">{s.glossary.map(([k, v]) => <div key={k} style={{ display: 'contents' }}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
-        <p className="src">{t.source}: <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/features/">ROBOTIS e-Manual, TurtleBot3 Features</a> (138 × 178 × 192 mm long × wide × tall, 1 kg, 2 h 30 min), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L16`}>turtlebot3_burger.urdf.xacro:16</a> + <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L117`}>:117</a> (sensor 0.010 + 0.172 m above the floor).</p>
+        <p className="src">{t.source}: <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/features/">ROBOTIS e-Manual, TurtleBot3 Features</a> (138 × 178 × 192 mm long × wide × tall, 1 kg, 2 h 30 min), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L16`}>turtlebot3_burger.urdf.xacro:16</a> + <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L118`}>:118</a> (sensor 0.010 + 0.172 m above the floor).</p>
       </div>
     </>
   )

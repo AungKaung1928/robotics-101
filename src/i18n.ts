@@ -27,6 +27,8 @@ const en = {
     ep: 'Engineering Practice',
     epNote: 'optional, outside the levels',
     opened: 'opened',
+    difficulty: 'Difficulty',
+    knows: 'You already know',
     groups: ['Meet the robot', 'A practice world', 'The software around it'],
   },
   plan: 'Plan',
@@ -120,6 +122,7 @@ const en = {
     waits: 'starts before',
     ok: 'none',
     breakIt: 'Break it: Nav2 before SLAM',
+    logHead: ['stage', 'starts', 'gives'],
   },
   grid: {
     lines: [
@@ -196,6 +199,8 @@ const ja: typeof en = {
     ep: 'エンジニアリング実践',
     epNote: '任意、レベルの外',
     opened: '開いた',
+    difficulty: '難しさ',
+    knows: 'もう知っていること',
     groups: ['ロボットに会う', '練習の世界', 'まわりのソフトウェア'],
   },
   plan: '全体図',
@@ -289,6 +294,7 @@ const ja: typeof en = {
     waits: 'より先に開始',
     ok: 'なし',
     breakIt: 'わざと壊す: SLAM より先に Nav2',
+    logHead: ['段', '開始', '出力'],
   },
   grid: {
     lines: [

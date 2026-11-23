@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import Player from '../../anim/Player'
 import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import Gloss from '../l1/Gloss'
 import '../l1/l1.css'
 import LateEnvelopes from '../../scenarios/LateEnvelopes'
@@ -18,7 +18,7 @@ const x = (ms: number) => X0 + ms * PX
 
 /** EP2: late messages. The timeline is the model's own stamps and arrivals; the slider and fix toggle re-run it. */
 export default function LateChapter({ t }: { t: Strings }) {
-  const s = LATE_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(LATE_STRINGS, t, 'ep.late.LATE_STRINGS')
   const [maxAge, setMaxAge] = useState(1)
   const [keepLatest, setKeepLatest] = useState(false)
   const [windowMs, setWindowMs] = useState(200)
