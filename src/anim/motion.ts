@@ -84,3 +84,17 @@ export function scrubFrac(x: number, width: number): number {
 // Play triangle and pause bars as the same two 4-corner shapes (left half, right half), so CSS morphs one into the other.
 export const PLAY_D = 'M2 1L5.5 3L5.5 7L2 9ZM5.5 3L9 5L9 5L5.5 7Z'
 export const PAUSE_D = 'M2 1L4 1L4 9L2 9ZM6 1L8 1L8 9L6 9Z'
+
+/** Playback rates the speed button cycles through (protocol-explorer reference: a speed select next to Play). */
+export const RATES = [1, 2, 0.5] as const
+export const RATE_KEY = 'r101-rate'
+/** Next rate in the cycle; an unknown rate starts the cycle again at 1×. */
+export function nextRate(rate: number): number {
+  const i = RATES.indexOf(rate as (typeof RATES)[number])
+  return RATES[(i + 1) % RATES.length]
+}
+/** Stored rate if it is one of RATES, else 1 (the reader's choice carries to later chapters, like the pause hold). */
+export function storedRate(raw: string | null): number {
+  const r = Number(raw)
+  return (RATES as readonly number[]).includes(r) ? r : 1
+}

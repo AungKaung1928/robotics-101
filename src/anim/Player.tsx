@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type ReactNode } from 'react'
 import type { Strings } from '../i18n'
 import { advance, stepEvent } from '../lib/timeline'
-import { GLIDE_MS, HOLD_KEY, PAUSE_D, PLAY_D, currentStep, fromKeyboard, glide, playStop, playerKey, SCRUB_THUMB_PX, scrubFrac, scrubTrack, shouldAutoplay } from './motion'
+import { GLIDE_MS, HOLD_KEY, PAUSE_D, PLAY_D, RATE_KEY, nextRate, storedRate, currentStep, fromKeyboard, glide, playStop, playerKey, SCRUB_THUMB_PX, scrubFrac, scrubTrack, shouldAutoplay } from './motion'
 import { UI_STYLE } from './spring'
 import './player.css'
 import './range.css'
@@ -16,17 +16,21 @@ const reducedMotion = () => typeof matchMedia === 'function' && matchMedia('(pre
  * Keys inside the group: Space / k play-pause, r replay, ← / → step, Home / End jump.
  * `labels` (one per event, ascending order): a numbered step rail under the controls, current step filled, each a
  * button that glides there, and Next names the step it goes to.
- * Reduced motion: Play is disabled, Step jumps, the chapter opens on its end frame.
+ * `speedLabel`: a rate button (1× → 2× → 0.5×) after Play; the rate is kept for the session.
+ * Reduced motion: Play is disabled (and the rate button hidden), Step jumps, the chapter opens on its end frame.
  * Pausing holds autoplay off for the rest of the session; pressing Play again releases it.
  */
-export default function Player({ t, setT, end, events, speed, autoplay = false, pauseAtSteps = false, caption, labels, s }: {
+export default function Player({ t, setT, end, events, speed, autoplay = false, pauseAtSteps = false, caption, labels, speedLabel, s }: {
   t: number; setT: (t: number) => void; end: number; events: number[]; speed: number; autoplay?: boolean; caption: ReactNode
   labels?: string[]; s: Strings
+  speedLabel?: string // given: a 1× / 2× / 0.5× button after Play (accessible name = this word + the rate); the rate carries to later chapters
   pauseAtSteps?: boolean // Play stops at the next step (Mayer's segmenting: learner-paced segments, d = 0.98)
 }) {
   const still = reducedMotion()
   const [playing, setPlaying] = useState(() => shouldAutoplay(autoplay, still, held()))
   const [target, setTarget] = useState<number | null>(null)
+  const [rate, setRate] = useState(() => typeof sessionStorage === 'undefined' ? 1 : storedRate(sessionStorage.getItem(RATE_KEY)))
+  useEffect(() => { if (typeof sessionStorage !== 'undefined') sessionStorage.setItem(RATE_KEY, String(rate)) }, [rate])
   const [tip, setTip] = useState<{ i: number; x: number; f: number } | null>(null) // step name under the pointer on the scrubber
   const now = useRef(t)
   now.current = t
@@ -35,7 +39,7 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
     let last = performance.now(), id = 0
     const stop = playStop(events, now.current, end, pauseAtSteps)
     const frame = (ms: number) => {
-      const next = advance(now.current, (ms - last) / 1000, speed, stop)
+      const next = advance(now.current, (ms - last) / 1000, speed * rate, stop)
       last = ms
       setT(next)
       if (next >= stop) setPlaying(false)
@@ -43,7 +47,7 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
     }
     id = requestAnimationFrame(frame)
     return () => cancelAnimationFrame(id)
-  }, [playing, speed, end, setT, pauseAtSteps, events])
+  }, [playing, speed, rate, end, setT, pauseAtSteps, events])
   useEffect(() => {
     if (target === null) return
     const from = now.current, t0 = performance.now()
@@ -91,6 +95,12 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
       <button type="button" disabled={still} aria-pressed={playing} onClick={toggle}>
         <svg className="pp" viewBox="0 0 10 10" aria-hidden="true"><path d={playing ? PAUSE_D : PLAY_D} /></svg>{playing ? s.player.pause : s.player.play}
       </button>
+      {speedLabel && !still && (
+        <button type="button" className="rate" aria-label={`${speedLabel} ${rate}×`}
+          onClick={() => setRate((r) => nextRate(r))}>
+          <span key={rate}>{rate}×</span>
+        </button>
+      )}
       <button type="button" onClick={(e) => step(1, still || fromKeyboard(e))} disabled={from >= Math.max(...events) - 1e-9}>
         {s.next}{nextLabel && <span className="wide">: {nextLabel}</span>} →
       </button>

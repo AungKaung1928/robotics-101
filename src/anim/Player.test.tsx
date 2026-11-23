@@ -33,4 +33,12 @@ describe('Player render', () => {
     expect(render(3)).toContain('aria-valuetext="4/4 d"')
     expect(renderToStaticMarkup(<Player t={1} setT={() => {}} end={3} events={[0, 1, 3]} speed={1} caption="c" s={STRINGS.en} />)).not.toContain('aria-valuetext')
   })
+  it('speed button only with speedLabel and motion allowed; its name says word + rate', () => {
+    const sp = () => renderToStaticMarkup(<Player t={0} setT={() => {}} end={3} events={[0, 3]} speed={1} caption="c" speedLabel="Speed" s={STRINGS.en} />)
+    motion(false)
+    expect(sp()).toContain('aria-label="Speed 1×"><span>1×</span>')
+    expect(render(0)).not.toContain('class="rate"')
+    motion(true)
+    expect(sp()).not.toContain('class="rate"')
+  })
 })

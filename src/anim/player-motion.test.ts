@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { PAUSE_D, PLAY_D, scrubFrac, scrubTrack } from './motion'
+import { PAUSE_D, PLAY_D, nextRate, scrubFrac, scrubTrack, storedRate } from './motion'
 
 const stops = (bg: string) => bg.slice('linear-gradient(to right, '.length, -1).split(/, (?=var|transparent)/)
 
@@ -38,5 +38,14 @@ describe('play/pause icon', () => {
     const cmds = (d: string) => d.replace(/[^A-Za-z]/g, '')
     expect(cmds(PLAY_D)).toBe(cmds(PAUSE_D))
     expect(PLAY_D.match(/[\d.]+/g)).toHaveLength(PAUSE_D.match(/[\d.]+/g)!.length)
+  })
+})
+
+describe('playback rate', () => {
+  it('cycles 1 -> 2 -> 0.5 -> 1; unknown starts at 1', () => {
+    expect([nextRate(1), nextRate(2), nextRate(0.5), nextRate(3)]).toEqual([2, 0.5, 1, 1])
+  })
+  it('stored rate only if it is one of the offered rates', () => {
+    expect([storedRate('2'), storedRate('0.5'), storedRate(null), storedRate('9'), storedRate('abc')]).toEqual([2, 0.5, 1, 1, 1])
   })
 })
