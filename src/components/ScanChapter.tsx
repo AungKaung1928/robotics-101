@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { LIDAR, MEASURED, NAV2, SOURCE_REPO, WORLD } from '../content/world'
 import type { Strings } from '../i18n'
 import { beamAngles, beamGap, castRay, movePerScan, sensorPose } from '../lib/scan'
+import { sweep } from '../lib/timeline'
+import Player from './Player'
 import Arena from './Arena'
 import Grab from './Grab'
 import { routeParam } from '../lib/route'
@@ -9,6 +11,9 @@ import Slider from './Slider'
 
 const L = LIDAR
 const ANGLES = beamAngles(L.samples, L.minAngle, L.maxAngle)
+const SCAN_S = 1 / L.hz // one revolution: 0.2 s at 5 Hz
+const SLOW = 15 // the 0.2 s scan plays in 3 s
+const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 
 export default function ScanChapter({ t }: { t: Strings }) {
   const s = t.scan
@@ -19,20 +24,27 @@ export default function ScanChapter({ t }: { t: Strings }) {
   const [hz, setHz] = useState(L.hz)
   const pose = { x, y, yaw: (yaw * Math.PI) / 180 }
   const sp = sensorPose(pose) // rays start at base_scan, 3.2 cm behind the centre
-  const hits = ANGLES.map((rel) => ({ rel, a: pose.yaw + rel, d: castRay(sp, rel, WORLD, L.minRange, L.maxRange) })).filter((h) => h.d < Infinity)
+  const hits = ANGLES.map((rel, i) => ({ i, rel, a: pose.yaw + rel, d: castRay(sp, rel, WORLD, L.minRange, L.maxRange) })).filter((h) => h.d < Infinity)
   const [hover, setHover] = useState<number | null>(null)
   // Shown beam: the hovered one, else the return closest to straight ahead.
   const ahead = hits.reduce((b, h, i) => (b < 0 || Math.abs(h.rel) < Math.abs(hits[b].rel) ? i : b), -1)
   const sel = hover !== null && hover < hits.length ? hits[hover] : hits[ahead]
   const gap = beamGap(r, L.samples, L.minAngle, L.maxAngle)
+  // '#/scan?t=0.1' opens paused mid-revolution; plain '#/scan' sweeps one scan (full scan under reduced motion).
+  const deep = /[?&]t=/.test(location.hash)
+  const [time, setTime] = useState(() => (deep ? routeParam(location.hash, 't', SCAN_S, 0, SCAN_S) : still() ? SCAN_S : 0))
+  const sw = sweep(L.samples, time, SCAN_S)
+  const shown = hits.filter((h) => h.i < sw.fired)
+  const sweepA = pose.yaw + (ANGLES[Math.max(0, sw.fired - 1)] ?? 0)
   return (
     <>
       <div className="figure">
         <Arena label={t.chapters.scan}>
           <circle className="range" cx={sp.x} cy={sp.y} r={L.maxRange} />
           <circle className="inspect" cx={sp.x} cy={sp.y} r={r} />
-          <path className="rays" d={hits.map((h) => `M${sp.x} ${sp.y}L${sp.x + h.d * Math.cos(h.a)} ${sp.y + h.d * Math.sin(h.a)}`).join('')} />
-          {hits.map((h, i) => <circle key={i} className="hit" cx={sp.x + h.d * Math.cos(h.a)} cy={sp.y + h.d * Math.sin(h.a)} r="0.035" />)}
+          <path className="rays" d={shown.map((h) => `M${sp.x} ${sp.y}L${sp.x + h.d * Math.cos(h.a)} ${sp.y + h.d * Math.sin(h.a)}`).join('')} />
+          {shown.map((h) => <circle key={h.i} className="hit" style={{ opacity: Math.max(0.35, 1 - sw.age(h.i) * 1.5) }} cx={sp.x + h.d * Math.cos(h.a)} cy={sp.y + h.d * Math.sin(h.a)} r="0.035" />)}
+          {sw.fired < L.samples && <path className="sweep" d={`M${sp.x} ${sp.y}L${sp.x + L.maxRange * Math.cos(sweepA)} ${sp.y + L.maxRange * Math.sin(sweepA)}`} />}
           {sel && <path className="sel-ray" d={`M${sp.x} ${sp.y}L${sp.x + sel.d * Math.cos(sel.a)} ${sp.y + sel.d * Math.sin(sel.a)}`} />}
           {hits.map((h, i) => <circle key={`t${i}`} className="hit-target" cx={sp.x + h.d * Math.cos(h.a)} cy={sp.y + h.d * Math.sin(h.a)} r="0.12"
             onMouseEnter={() => setHover(i)} onMouseLeave={() => setHover(null)} />)}
@@ -40,6 +52,8 @@ export default function ScanChapter({ t }: { t: Strings }) {
           <path className="heading" d={`M${x} ${y}l${0.35 * Math.cos(pose.yaw)} ${0.35 * Math.sin(pose.yaw)}`} />
           <Grab x={x} y={y} onMove={(p) => { setX(p.x); setY(p.y) }} />
         </Arena>
+        <Player t={time} setT={setTime} end={SCAN_S} events={[0, SCAN_S / 4, SCAN_S / 2, (3 * SCAN_S) / 4, SCAN_S]} speed={1 / SLOW} autoplay={!deep && !still()} s={t}
+          caption={<>t = {(time * 1000).toFixed(0)} / {SCAN_S * 1000} ms · {s.fired} <b data-k="fired">{sw.fired} / {L.samples}</b></>} />
       </div>
       <div className="panel">
         {s.lines.map((l) => <p key={l}>{l}</p>)}

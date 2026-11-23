@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { advance, easeInOut, progress, stepEvent } from './timeline'
+import { advance, easeInOut, progress, stepEvent, sweep } from './timeline'
 
 describe('advance', () => {
   it('moves speed × dt and stops at the end', () => {
@@ -38,5 +38,20 @@ describe('easing', () => {
     expect(progress(9, 3, 8)).toBe(1)
     expect(progress(5.5, 3, 8)).toBeCloseTo(0.5, 9)
     expect(progress(5, 5, 5)).toBe(1)
+  })
+})
+
+describe('sweep', () => {
+  it('fires beams in order over one revolution', () => {
+    expect(sweep(360, 0, 0.2).fired).toBe(0)
+    expect(sweep(360, 0.05, 0.2).fired).toBe(90)
+    expect(sweep(360, 0.2, 0.2).fired).toBe(360)
+    expect(sweep(360, 0.3, 0.2).fired).toBe(360)
+  })
+  it('newest beam is youngest, unfired beams count as oldest', () => {
+    const s = sweep(360, 0.1, 0.2)
+    expect(s.age(179)).toBeCloseTo(1 / 360, 9)
+    expect(s.age(0)).toBeCloseTo(0.5, 9)
+    expect(s.age(200)).toBe(1)
   })
 })

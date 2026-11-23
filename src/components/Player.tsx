@@ -37,7 +37,7 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
       <button type="button" disabled={still} aria-pressed={playing}
         onClick={() => { if (!playing && atEnd) setT(0); setPlaying(!playing) }}>{playing ? s.player.pause : s.player.play}</button>
       <button type="button" onClick={() => step(1)} disabled={t >= Math.max(...events) - 1e-9}>{s.next} →</button>
-      <input className="scrub" type="range" min={0} max={end} step={0.1} value={t} aria-label={s.player.scrub}
+      <input className="scrub" type="range" min={0} max={end} step={end / 200} value={t} aria-label={s.player.scrub}
         onChange={(e) => { setPlaying(false); setT(Number(e.target.value)) }} />
       <span className="caption" data-k="step">{caption}</span>
     </div>

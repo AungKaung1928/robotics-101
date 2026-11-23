@@ -28,6 +28,7 @@ const en = {
     goal: 'Reaching a goal',
   } satisfies Record<ChapterId, string>,
   scan: {
+    fired: 'beams fired (one scan, 15× slower)',
     lines: [
       '360 beams, one per degree, 5 times a second. Each beam returns the nearest wall or obstacle, if it is closer than 3.5 m.',
       'Neighbouring beams spread apart with range: anything narrower than the gap can fall between them.',
@@ -185,6 +186,7 @@ const ja: typeof en = {
     goal: 'ゴールに着く',
   },
   scan: {
+    fired: '発射済みのビーム (1 スキャン、15 倍スロー)',
     lines: [
       '1 度につき 1 本、計 360 本のビームを毎秒 5 回。各ビームは 3.5 m 以内にある一番近い壁か障害物までの距離を返す。',
       '距離が遠いほど隣のビームとの間隔が広がる。間隔より細い物はビームの間をすり抜け、見えない。',

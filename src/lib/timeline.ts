@@ -22,3 +22,13 @@ export function easeInOut(x: number): number {
 export function progress(t: number, t0: number, t1: number): number {
   return t1 <= t0 ? (t >= t1 ? 1 : 0) : easeInOut((t - t0) / (t1 - t0))
 }
+
+/**
+ * A rotating sensor's sweep at time t of one revolution lasting `period`: how many of `n` beams have fired, and each
+ * fired beam's age as a fraction of the revolution (0 = just fired), for fading trails.
+ */
+export function sweep(n: number, t: number, period: number): { fired: number; age: (i: number) => number } {
+  const f = Math.min(Math.max(t / period, 0), 1)
+  const fired = Math.round(f * n)
+  return { fired, age: (i) => (i < fired ? f - i / n : 1) }
+}
