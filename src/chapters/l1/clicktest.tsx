@@ -1,4 +1,4 @@
-// Dev-only: drives every Level 1-2 and EP chapter in a real browser (DOM clicks, typed input, slider input events)
+// Dev-only: drives every Level 1-2, EP and app2 Level 0 chapter in a real browser (DOM clicks, typed input, slider input events)
 // and prints CLICKS PASS/FAIL into #out. Run: bash src/chapters/l1/clicktest.sh (headless Chrome --dump-dom).
 import type { ComponentType } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -7,6 +7,8 @@ import '../../index.css'
 import { STRINGS, type Strings } from '../../i18n'
 import BfsChapter from '../ep/BfsChapter'
 import LateChapter from '../ep/LateChapter'
+import MoveChapter from '../l0/MoveChapter'
+import { MOVE_STRINGS } from '../l0/move.strings'
 import { BODIES } from '../l2/bodies'
 import { BFS_STRINGS } from '../ep/bfs.strings'
 import { ACTIONS_STRINGS } from '../l2/actions.strings'
@@ -48,6 +50,9 @@ const cases = (l: Lang): Case[] => [
   { name: 'late reorder', Body: LateChapter, steps: [{ expect: 'r-dropped', is: '4' }, { slide: 450, in: '.reorder input[type=range]' }, { expect: 'r-used', is: '20' }, { expect: 'r-delay', has: '0.45' }] },
   { name: 'late backpressure', Body: LateChapter, steps: [{ slide: 100, in: '.bp-work input[type=range]' }, { expect: 'b-dropped', is: '0' }, { slide: 150, in: '.bp-work input[type=range]' }, { slide: 1, in: '.bp-depth input[type=range]' }, { expect: 'b-dropped', re: /^[1-9]/ }] },
   { name: 'late keep-latest', Body: LateChapter, steps: [{ expect: 'count:svg.late rect.env', is: '0' }, { click: '.break' }, { expect: 'count:svg.late rect.env', is: '20' }, { expect: 'backwards', has: '0' }, { expect: 'acted', has: '15' }] },
+  { name: 'move straight + spin', Body: MoveChapter, steps: [{ expect: 'kind', is: MOVE_STRINGS[l].kind.curveLeft }, { slide: 0.15 }, { expect: 'kind', is: MOVE_STRINGS[l].kind.straight }, { slide: -0.15 }, { expect: 'kind', is: MOVE_STRINGS[l].kind.spin }] },
+  { name: 'move slip', Body: MoveChapter, steps: [{ slide: 0.15 }, { click: '.break' }, { expect: 'kind', is: MOVE_STRINGS[l].kind.curveLeft }] },
+  { name: 'move check', Body: MoveChapter, steps: [{ click: 'button.pick', text: MOVE_STRINGS[l].answers.curveRight }, { expect: 'check', ok: true }, { a11y: true }] },
 ]
 
 const setValue = (el: HTMLInputElement, v: string) => {
