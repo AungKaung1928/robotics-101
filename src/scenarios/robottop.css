@@ -47,3 +47,6 @@
 .sp-name { fill: var(--ink); font: 700 13px var(--mono); }
 .sp-sub { fill: var(--ink-2); font: 600 11px var(--mono); }
 .sp-note { fill: var(--ray); }
+.tk-rung { fill: var(--robot); opacity: 0.35; }
+.tk-rung.is-bump { fill: none; stroke: var(--occ); stroke-width: 2; opacity: 0.6; }
+.tk-rung.is-pick { opacity: 1; }

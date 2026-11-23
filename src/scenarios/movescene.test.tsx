@@ -126,3 +126,14 @@ describe('LoopActor', () => {
     expect(sense).toContain('translate(2.5px') // eyes shifted fully toward the wall
   })
 })
+
+describe('ThinkScene ladder', () => {
+  it('one mark per stopAt; values at or under the 0.12 m sensor floor are bumps', async () => {
+    const { default: ThinkScene } = await import('./ThinkScene')
+    const h = renderToStaticMarkup(<ThinkScene stopAt={0.5} t={0} ladder={[0.1, 0.12, 0.2, 0.3, 0.5, 0.7]} label="" />)
+    expect(count(h, /class="tk-rung is-bump"/g)).toBe(2)
+    expect(count(h, /class="tk-rung"/g)).toBe(3)
+    expect(count(h, /class="tk-rung is-pick"/g)).toBe(1) // the current stopAt, bold
+    expect(renderToStaticMarkup(<ThinkScene stopAt={0.5} t={0} label="" />)).not.toContain('tk-rung')
+  })
+})
