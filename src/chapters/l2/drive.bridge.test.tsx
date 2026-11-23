@@ -11,6 +11,7 @@ describe('2.7 bridges back to Level 0 act', () => {
     const line = DRIVE_STRINGS[l].already
     expect(line).toContain(ACT_STRINGS[l].title.split(/[:：]/)[0])
     for (const w of [ACT_STRINGS[l].glossary[0][0], ACT_STRINGS[l].glossary[1][0], 'linear.x', 'angular.z']) expect(line).toContain(w)
+    expect(line, 'the header PathLine already says it').not.toContain(STRINGS[l].levels.knows) // no second 'You already know'
     expect(renderToStaticMarkup(<DriveChapter t={STRINGS[l]} />)).toContain('data-k="already"')
   })
 })

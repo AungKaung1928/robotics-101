@@ -3,7 +3,7 @@ export const DECIDE_STRINGS = {
   en: {
     title: 'Python: a value and a decision',
     learn: 'You will learn: a variable holds a number, and if turns that number into stop or go.',
-    already: 'You already know: the rule "wall closer than 0.5 m: stop" from Level 0 "How a robot thinks". Same robot, same numbers; now you write it as code.',
+    already: 'In Level 0 "How a robot thinks" you set the rule "wall closer than 0.5 m: stop". Same robot, same numbers; now you write it as code.',
     lines: [
       'The robot reads one number from its LiDAR: how far the wall in front is, in metres. The program keeps it in a variable called distance.',
       'Each time a new number arrives (5 times a second), one if line compares it with stop_at. Smaller: stop. Otherwise: go.',
@@ -26,13 +26,14 @@ export const DECIDE_STRINGS = {
     solved: 'Solved: stopped at',
     notYet: 'Not yet: stopped at',
     brokenNote: 'With > the test is true at 2 m, so the robot never starts. One character, and it does the opposite.',
+    realSensor: 'On a real sensor, a wall closer than its 12 cm minimum is a special case: the ROS rule REP 117 says to report -inf, meaning "too close", and the simulator here does. In Python -inf < stop_at is True, so the simulated robot stops 2.4 cm from the wall even with stop_at = 0.',
     caption: (k: number, d: string, dec: string) => `scan ${k} · distance = ${d} m → ${dec}`,
     srcNote: 'Speed 0.26 m/s and 5 scans/s come from the TF-Transform-Explorer example config.',
   },
   ja: {
     title: 'Python：値と判断',
     learn: '学ぶこと：変数は数値を入れておく箱。if がその数値を「止まる」か「進む」に変える。',
-    already: 'もう知っていること：レベル 0「ロボットの考え方」のルール「壁が 0.5 m より近い：止まる」。同じロボット、同じ数字。今度はそれをコードで書く。',
+    already: 'レベル 0「ロボットの考え方」で、ルール「壁が 0.5 m より近い：止まる」を決めた。同じロボット、同じ数字。今度はそれをコードで書く。',
     lines: [
       'ロボットは LiDAR から数値を1つ読む：前の壁までの距離（m）。プログラムはそれを distance という変数に入れる。',
       '新しい数値が届くたび（1秒に5回）、if の1行が stop_at と比べる。小さければ止まる。それ以外は進む。',
@@ -55,6 +56,7 @@ export const DECIDE_STRINGS = {
     solved: '成功：停止位置',
     notYet: 'まだ：停止位置',
     brokenNote: '> だと 2 m の時点で条件が真になり、ロボットは動き出さない。1文字で正反対の動きになる。',
+    realSensor: '本物のセンサーでは、最小の 12 cm より近い壁は特別扱い：ROS の決まり REP 117 は「近すぎる」という意味の -inf を返すよう定めていて、ここのシミュレーターもそうする。Python では -inf < stop_at は True なので、stop_at = 0 でもシミュレーターのロボットは壁から 2.4 cm で止まる。',
     caption: (k: number, d: string, dec: string) => `スキャン ${k} · distance = ${d} m → ${dec}`,
     srcNote: '速度 0.26 m/s と 1秒5スキャンは TF-Transform-Explorer の設定ファイルの値。',
   },
