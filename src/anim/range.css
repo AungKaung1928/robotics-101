@@ -1,0 +1,12 @@
+/* Opt-in cute slider (lane anim): <input type="range" className="squish-range" style={PRESS_STYLE}>. Round thumb that
+   squishes a little on press (press spring from spring.ts via --spring / --spring-ms), robot-blue fill, visible focus
+   ring. WebKit and Firefox thumb rules are kept separate: a browser drops a whole rule with an unknown vendor selector
+   (Chrome modern-web guidance, slider). Reduced motion: no transition, no squish. */
+.squish-range { -webkit-appearance: none; appearance: none; height: 6px; border-radius: 3px; background: var(--rule); accent-color: var(--robot); outline: none; }
+.squish-range::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--surface); border: 3px solid var(--robot); transition: transform var(--spring-ms, 200ms) var(--spring, ease-out); }
+.squish-range::-moz-range-thumb { width: 16px; height: 16px; border-radius: 50%; background: var(--surface); border: 3px solid var(--robot); transition: transform var(--spring-ms, 200ms) var(--spring, ease-out); }
+.squish-range:active::-webkit-slider-thumb { transform: scale(1.25, 0.85); }
+.squish-range:active::-moz-range-thumb { transform: scale(1.25, 0.85); }
+.squish-range:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 4px color-mix(in srgb, var(--robot) 35%, transparent); }
+.squish-range:focus-visible::-moz-range-thumb { box-shadow: 0 0 0 4px color-mix(in srgb, var(--robot) 35%, transparent); }
+@media (prefers-reduced-motion: reduce) { .squish-range::-webkit-slider-thumb { transition: none; } .squish-range::-moz-range-thumb { transition: none; } .squish-range:active::-webkit-slider-thumb { transform: none; } .squish-range:active::-moz-range-thumb { transform: none; } }

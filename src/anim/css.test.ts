@@ -66,3 +66,12 @@ describe('keyframe names across the app', () => {
     expect(dup).toEqual([])
   })
 })
+
+describe('squish-range', () => {
+  it('never puts the WebKit and Firefox thumb selectors in one rule (a browser would drop it), and has a reduced-motion block', async () => {
+    const { readFileSync } = await import('node:fs')
+    const css = readFileSync('src/anim/range.css', 'utf8').replace(/\/\*[\s\S]*?\*\//g, '')
+    for (const sel of css.match(/[^{}]+(?=\{)/g)!) expect(sel.includes('-webkit-slider-thumb') && sel.includes('-moz-range-thumb')).toBe(false)
+    expect(css).toContain('prefers-reduced-motion: reduce')
+  })
+})
