@@ -1,5 +1,7 @@
 import { spawnSync } from 'node:child_process'
 import { describe, expect, it } from 'vitest'
+import { CHALLENGE_MIN, NEAR, dijkstra, initialWalls, nearWall, pathCost, search, steps } from './bfs'
+import { BFS_STRINGS } from './bfs.strings'
 import { DELAYS_MS, PERIOD_MS, messages } from './late'
 import { LATE_STRINGS } from './late.strings'
 
@@ -28,6 +30,25 @@ describe('EP2 text numbers == delay model', () => {
     expect(en).toContain('#6-#9')
     expect(ja).toContain('0.6 秒')
     expect(ja).toContain('#6〜#9')
+  })
+})
+
+describe('EP1 text numbers == grid model', () => {
+  const w = initialWalls(), d = dijkstra(w), b = search(w)
+  const [ds, dc, bs, bc] = [steps(d), pathCost(d.path!, w), steps(b), pathCost(b.path!, w)]
+  it('costNote: "costs 5 instead of 1", Dijkstra "15 steps at cost 15", BFS "13 steps at cost 41" (EN and JA)', () => {
+    expect([1 + NEAR, ds, dc, bs, bc]).toEqual([5, 15, 15, 13, 41])
+    expect(BFS_STRINGS.en.costNote).toContain(`costs ${1 + NEAR} instead of 1`)
+    expect(BFS_STRINGS.en.costNote).toContain(`${ds} steps at cost ${dc}, against the BFS path's ${bs} steps at cost ${bc}`)
+    expect(BFS_STRINGS.ja.costNote).toContain(`${1 + NEAR}。`)
+    expect(BFS_STRINGS.ja.costNote).toContain(`${ds} 歩でコスト ${dc}。BFS の道は ${bs} 歩でコスト ${bc}`)
+  })
+  it('"never brushing a wall": no cell on the Dijkstra path touches a wall', () => {
+    expect(d.path!.filter((k) => nearWall(k, w))).toEqual([])
+  })
+  it('challenge text names CHALLENGE_MIN steps', () => {
+    expect(BFS_STRINGS.en.challenge).toContain(`at least ${CHALLENGE_MIN} steps`)
+    expect(BFS_STRINGS.ja.challenge).toContain(`${CHALLENGE_MIN} 歩以上`)
   })
 })
 
