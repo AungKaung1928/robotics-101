@@ -4,6 +4,7 @@ import { LIDAR, NAV2 } from '../../content/world'
 import { CHECK_MS, DEFAULT } from './params'
 import { MAX_ACC, WHEEL_R, WHEEL_SEP } from './drive'
 import { NODES } from './nodes'
+import { NODES_STRINGS } from './nodes.strings'
 
 /**
  * Level 1-2 numbers cite TF-Transform-Explorer by file:line. With TFE_REPO=<a clone of it>, read each cited line at
@@ -37,4 +38,10 @@ describe.skipIf(!REPO)('Level 1-2 numbers == TF-Transform-Explorer cited lines (
     const period = show('launch/tf_explorer.launch.py').slice(a - 1, b).join('\n').match(/period=([\d.]+)/)
     expect(period ? Number(period[1]) : 0).toBe(startS) // no TimerAction in the range = starts at launch
   })
+  it('2.1 patrol goals: x and y uniform in [-1.0, 1.0] (the "2 × 2 m area" the page names)', () => {
+    const hpp = show('include/tf_explorer/patrol_node.hpp')
+    for (const [n, v] of [[50, 'x'], [51, 'y']] as const) expect(hpp[n - 1]).toMatch(new RegExp(`dis_${v}\\(-1\\.0, 1\\.0\\)`))
+    expect(NODES_STRINGS.en.jobs.patrol).toContain('2 × 2 m')
+  })
 })
+
