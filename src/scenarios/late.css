@@ -1,0 +1,6 @@
+/* EP2 (lane anim): envelopes in ink while flying, used ones land in the free colour, dropped ones in the ray colour and fade. */
+.late .lane-line { stroke: var(--rule); stroke-width: 1; }
+.late .env { fill: var(--surface); stroke: var(--ink); stroke-width: 1.5; }
+.late .env.used { stroke: var(--free); }
+.late .env.stale, .late .env.old { stroke: var(--ray); }
+.late .env-label { font: 9px var(--mono); fill: var(--ink-2); text-anchor: middle; }
