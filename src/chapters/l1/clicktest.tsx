@@ -29,6 +29,14 @@ import { NODES_STRINGS } from '../l2/nodes.strings'
 import { SCRIPT } from '../l2/ws'
 import { WS_STRINGS } from '../l2/ws.strings'
 import { SHELL_STRINGS } from './shell.strings'
+import { LIDAR } from '../../content/world'
+import { run as decideRun } from './decide'
+import { closestOf, readings as boxReadings, updates as boxUpdates } from './closest'
+import { keepsUp } from './callback'
+import { CALLBACK_STRINGS } from './callback.strings'
+import { caught, falseAlarms } from '../l2/params'
+import { PARAMS_STRINGS } from '../l2/params.strings'
+import { wheels } from '../l2/drive'
 
 type Step =
   | { click: string; text?: string }
@@ -55,6 +63,13 @@ const cases = (l: Lang): Case[] => [
   { name: 'msgtypes break', Body: BODIES.msgtypes, steps: [{ click: '.break' }, { expect: 'ignored', has: 'angular.x' }] },
   { name: 'actions unreachable', Body: BODIES.actions, steps: [{ click: '.break', text: S(ACTIONS_STRINGS, l, 'l2.actions.ACTIONS_STRINGS').breakIt }, { expect: 'status', has: 'ABORTED (6)' }] },
   { name: 'params break', Body: BODIES.params, steps: [{ click: '.break' }, { expect: 'false', has: '19' }] },
+  // Sliders of Levels 1-2: the readout after one slide equals the chapter's own model for that value (DOM wiring check).
+  { name: 'decide slide', Body: BODIES.decide, steps: [{ slide: 0.25 }, { expect: 'final', has: decideRun(0.25).final.toFixed(2) }, { expect: 'reads', is: String(decideRun(0.25).ticks.length) }] },
+  { name: 'closest slide', Body: BODIES.closest, steps: [{ slide: 2 }, { expect: 'closest', has: closestOf(boxReadings(2)).toFixed(2) }, { expect: 'updates', is: String(boxUpdates(boxReadings(2))) }] },
+  { name: 'callback slide', Body: BODIES.callback, steps: [{ slide: 600 }, { expect: 'challenge', has: S(CALLBACK_STRINGS, l, 'l1.callback.CALLBACK_STRINGS')[keepsUp(600) ? 'keeps' : 'lags'] }, { slide: 100 }, { expect: 'challenge', has: S(CALLBACK_STRINGS, l, 'l1.callback.CALLBACK_STRINGS')[keepsUp(100) ? 'keeps' : 'lags'] }] },
+  { name: 'params slide', Body: BODIES.params, steps: [{ slide: 0.1 }, { expect: 'false', is: String(falseAlarms(0.1)) }, { expect: 'caught', is: S(PARAMS_STRINGS, l, 'l2.params.PARAMS_STRINGS')[caught(0.1) ? 'yes' : 'no'] }] },
+  { name: 'drive slide', Body: BODIES.drive, steps: [{ slide: 0.1 }, { expect: 'wl', has: wheels(0.1, 0.5).left.toFixed(3) }, { expect: 'wr', has: wheels(0.1, 0.5).right.toFixed(3) }] },
+  { name: 'msgtypes slide', Body: BODIES.msgtypes, steps: [{ slide: 0 }, { expect: 'angle', has: `${LIDAR.minAngle.toFixed(3)} rad` }] },
   { name: 'ws challenge', Body: BODIES.ws, steps: [...typeAll(SCRIPT), { expect: 'challenge', ok: true }] },
   { name: 'ws new terminal forgets', Body: BODIES.ws, steps: [...typeAll(SCRIPT), { expect: 'challenge', ok: true }, { click: '.break', text: S(WS_STRINGS, l, 'l2.ws.WS_STRINGS').newTerm }, { expect: 'challenge', is: S(WS_STRINGS, l, 'l2.ws.WS_STRINGS').notYet }] },
   { name: 'shell new terminal forgets', Body: BODIES.shell, steps: [...typeAll(['source /opt/ros/humble/setup.bash', 'ros2 pkg list']), { expect: 'challenge', ok: true }, { click: '.break' }, ...typeAll(['ros2 pkg list']), { expect: 'challenge', is: S(SHELL_STRINGS, l, 'l1.shell.SHELL_STRINGS').notYet }] },
