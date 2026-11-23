@@ -33,10 +33,10 @@ export default function ActScene({ v, w, tStop, decel, t, vWord = 'v', wWord = '
     .map(([px, py], i) => `${i ? 'L' : 'M'}${px.toFixed(1)} ${py.toFixed(1)}`).join('')
   // a wheel asked for more than the top speed (the chapter's tooFast): its arrow turns warning-coloured, the robot worries
   const over = (sp: number) => Math.abs(sp) > VMAX + 1e-9, fast = over(vl) || over(vr)
-  const arrow = (side: 1 | -1, sp: number) => { const len = (sp / VMAX) * 22 * f.speed; return len ? <path className={over(sp) ? 'as-arrow is-over' : 'as-arrow'} d={`M0 ${-side * 26}h${len}`} markerEnd="url(#as-head)" /> : null }
+  const arrow = (side: 1 | -1, sp: number) => { const len = (sp / VMAX) * 22 * f.speed; return len ? <path className={over(sp) ? 'as-arrow is-over' : 'as-arrow'} d={`M0 ${-side * 26}h${len}`} markerEnd={over(sp) ? 'url(#as-head-over)' : 'url(#as-head)'} /> : null }
   return (
     <svg className="act-scene" viewBox="0 0 460 320" role="img" aria-label={label} data-phase={on ? 'driving' : f.speed > 0 ? 'rolling' : 'stopped'} data-fast={fast || undefined}>
-      <defs><marker id="as-head" viewBox="0 0 6 6" refX="3" refY="3" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L6 3 0 6z" className="as-head" /></marker></defs>
+      <defs>{[['as-head', 'as-head'], ['as-head-over', 'as-head is-over']].map(([id, c]) => <marker key={id} id={id} viewBox="0 0 6 6" refX="3" refY="3" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L6 3 0 6z" className={c} /></marker>)}</defs>
       <path className="ms-trail" d={path} />
       {!on && <g opacity={0.35}><RobotTop x={gx} y={gy} deg={deg(f.ghost.th)} /></g>}
       {cm !== '0.0' && <>

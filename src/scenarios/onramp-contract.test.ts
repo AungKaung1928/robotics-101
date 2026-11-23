@@ -206,7 +206,7 @@ describe('ActScene too fast = the chapter tooFast', () => {
     const off: string[] = []
     for (let v = 0; v <= mv.TOP_SPEED + 1e-9; v += 0.02) for (let w = -act.TURN_MAX; w <= act.TURN_MAX + 1e-9; w += 0.3) {
       const h = renderToStaticMarkup(createElement(ActScene, { v, w, tStop: 3, decel: act.BRAKE, t: 1, label: '' }))
-      if (h.includes('data-fast') !== act.tooFast(v, w) || h.includes('is-over') !== act.tooFast(v, w)) off.push(`v ${v.toFixed(2)} w ${w.toFixed(1)}`)
+      if (h.includes('data-fast') !== act.tooFast(v, w) || h.includes('as-arrow is-over') !== act.tooFast(v, w)) off.push(`v ${v.toFixed(2)} w ${w.toFixed(1)}`)
     }
     if (off.length) console.log('FAST-OFF', off.join(' | '))
     expect(off).toEqual([])
