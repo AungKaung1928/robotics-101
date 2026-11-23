@@ -3,18 +3,24 @@ import { burst } from './mascot'
 import './celebrate.css'
 
 const LIFE = 0.8 // s
+const STILL = 0.15, STILL_MS = 900 // reduced motion: one frame of the burst, held like the mascot's still cues
 
 const reduced = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 
 /**
  * A light celebration inside a chapter's SVG figure: when `n` changes (a challenge solved), eight sparks burst from
- * (x, y) and fall away (same physics as the mascot's sparks, scaled to page px by `scale`). Reduced motion: nothing
- * moves (the chapter's own text already says it was solved).
+ * (x, y) and fall away (same physics as the mascot's sparks, scaled to page px by `scale`). Reduced motion: one still
+ * frame of the burst for 900 ms, nothing moves (same as the mascot's cues).
  */
 export default function Celebrate({ x, y, n, scale = 2 }: { x: number; y: number; n: number; scale?: number }) {
   const [t, setT] = useState(-1)
   useEffect(() => {
-    if (!n || reduced()) return
+    if (!n) return
+    if (reduced()) {
+      setT(STILL)
+      const id = setTimeout(() => setT(-1), STILL_MS)
+      return () => clearTimeout(id)
+    }
     const t0 = performance.now()
     let id = 0
     const frame = (ms: number) => {
