@@ -184,3 +184,16 @@ describe('queueAt from the callback model', () => {
     expect(queueAt(slow, end).busy).toBe(true)
   })
 })
+
+describe('closestCue from the Closest model', () => {
+  it('eyes follow the pass left to right, rest on the closest beam, oops when the broken start never updates', async () => {
+    const { closestCue } = await import('./ClosestActor')
+    const { scenario, STEP_MS, BASE } = await import('../chapters/l1/closest')
+    const sc = scenario(3), f = (k: number) => sc.frame(k * STEP_MS + 1)
+    expect(closestCue(f(0)).look).toBeCloseTo(-1) // first beam is the leftmost (+45°)
+    expect(closestCue(f(BASE.length - 1)).look).toBeCloseTo(1)
+    const end = sc.frame(sc.durationMs)
+    expect(closestCue(end)).toEqual({ look: expect.closeTo(-1 + (2 * 3) / (BASE.length - 1)), oops: 0 }) // box at beam 3
+    expect(closestCue(scenario(3, 'zero').frame(1e9)).oops).toBe(1)
+  })
+})
