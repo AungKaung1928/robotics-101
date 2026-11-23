@@ -22,3 +22,17 @@ describe.each([['light', light], ['dark', dark]] as const)('%s theme contrast', 
   it.each(Object.keys(MARKS))('--%s vs paper >= 3:1 (data mark)', (k) => expect(ratio(t[k], t.paper)).toBeGreaterThanOrEqual(3))
   it.each(Object.keys(TEXT))('--%s vs paper >= 4.5:1 (text)', (k) => expect(ratio(t[k], t.paper)).toBeGreaterThanOrEqual(4.5))
 })
+
+// Composited marks: a translucent mark over a translucent fill, opacities read from the stylesheet.
+const hex = (s: string) => [1, 3, 5].map((i) => parseInt(s.slice(i, i + 2), 16))
+const toHex = (c: number[]) => '#' + c.map((v) => Math.round(v).toString(16).padStart(2, '0')).join('')
+const over = (top: string, o: number, bg: string) => toHex(hex(top).map((v, i) => v * o + hex(bg)[i] * (1 - o)))
+const bfs = readFileSync('src/scenarios/bfswave.css', 'utf8')
+const opacity = (sel: string) => parseFloat(new RegExp(`\\.bfs \\.${sel} \\{[^}]*opacity: ([\\d.]+)`).exec(bfs)![1])
+
+describe.each([['light', light], ['dark', dark]] as const)('%s theme: BFS parent arrows on explored cells', (_, t) => {
+  it('arrow vs explored fill >= 3:1 (the arrows carry "explored": the fill alone is ~1.3:1)', () => {
+    const seen = over(t.free, opacity('seen'), t.paper)
+    expect(ratio(over(t['ink-2'], opacity('came'), seen), seen)).toBeGreaterThanOrEqual(3)
+  })
+})
