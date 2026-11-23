@@ -17,3 +17,8 @@
 .ss-hit { fill: var(--ray); }
 .ss-num { fill: var(--ink); font: 700 15px var(--mono); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; }
 .ss-paw ellipse, .ss-paw circle { fill: var(--surface); stroke: var(--ink); stroke-width: 2.5; stroke-linejoin: round; }
+.think-scene { width: 100%; height: auto; background: var(--surface); }
+.ts-mark { stroke: var(--robot); stroke-width: 2; stroke-dasharray: 4 4; }
+.tk-bubble rect, .tk-bubble circle { fill: var(--surface); stroke: var(--ink-2); stroke-width: 2; }
+.tk-bubble text { fill: var(--ink); font: 600 13px var(--mono); }
+.tk-bubble.is-fired rect, .tk-bubble.is-fired circle { stroke: var(--free); stroke-width: 3; fill: color-mix(in srgb, var(--free) 12%, var(--surface)); }

@@ -42,3 +42,17 @@ describe('SenseScene', () => {
     expect(count(c, /class="ss-hit"/g)).toBe(180)
   })
 })
+
+describe('ThinkScene', () => {
+  it('driving -> fired + proud for 0.5 m; bumped + dizzy for 0.12 m', async () => {
+    const { default: ThinkScene } = await import('./ThinkScene')
+    expect(renderToStaticMarkup(<ThinkScene stopAt={0.5} t={0.5} label="" />)).toContain('data-state="driving"')
+    const a = renderToStaticMarkup(<ThinkScene stopAt={0.5} t={20} label="" />)
+    expect(a).toContain('data-state="fired"')
+    expect(a).toContain('data-mood="proud"')
+    expect(a).toContain('tk-bubble is-fired')
+    const b = renderToStaticMarkup(<ThinkScene stopAt={0.12} t={20} label="" />)
+    expect(b).toContain('data-state="bumped"')
+    expect(b).toContain('data-mood="dizzy"')
+  })
+})
