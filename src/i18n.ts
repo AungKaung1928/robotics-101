@@ -3,7 +3,7 @@ import type { ChapterId } from './lib/route'
 export type Lang = 'en' | 'ja'
 
 const en = {
-  title: 'Robotics First Steps',
+  title: 'Robotics 101',
   lede: 'One simulated TurtleBot3 in a 10 × 10 m Gazebo arena. Each waypoint is one idea of a mobile robot, with its value from that setup’s ROS 2 Nav2 config.',
   open: 'Open a waypoint',
   start: 'Start at waypoint 1',
@@ -159,7 +159,7 @@ const en = {
 }
 
 const ja: typeof en = {
-  title: 'ロボティクス はじめの一歩',
+  title: 'ロボティクス 101',
   lede: '10 × 10 m の Gazebo アリーナにシミュレーションの TurtleBot3 が 1 台。各ウェイポイントで移動ロボットの考え方を 1 つずつ扱い、値はその ROS 2 Nav2 設定から取る。',
   open: 'ウェイポイントを開く',
   start: 'ウェイポイント 1 から始める',

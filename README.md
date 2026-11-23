@@ -1,4 +1,4 @@
-# Robotics First Steps
+# Robotics 101
 
 A mobile robot's first ideas, seen top-down on the floor plan of a simulated ROS 2 setup: one TurtleBot3 in a 10 × 10 m Gazebo arena. Each waypoint is one idea with one interactive figure, and every value comes from the source repo's files ([TF-Transform-Explorer](https://github.com/AungKaung1928/TF-Transform-Explorer)), cited by file and line.
 
@@ -21,8 +21,8 @@ The GIF is rebuilt from the page check's screenshots: `scripts/verify.sh && pyth
 Needs Node 22.12+ (vitest 5 requires it) and, for the page check, Chrome.
 
 ```bash
-git clone https://github.com/AungKaung1928/robotics-first-steps
-cd robotics-first-steps
+git clone https://github.com/AungKaung1928/robotics-101
+cd robotics-101
 npm ci
 npm run dev          # open the printed localhost URL
 npm test             # launch order, ray cast, clustering, occupancy update, transforms, detector rule, time to goal, inflation cost, routes, patrol path
