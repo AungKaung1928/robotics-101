@@ -312,3 +312,16 @@ describe('SimWhatScene controlled hot', () => {
     expect(r({ hot0: 4 })).toContain('ss-wall is-movable is-hot')
   })
 })
+
+describe('MeetScene for the meet chapter: hint, pressed state, the chapter hears the pick', () => {
+  it('hint only before a tap; every part button says aria-pressed', async () => {
+    const { default: MeetScene, MeetFrame } = await import('./MeetScene')
+    const words = { sensor: 's', computer: 'c', battery: 'b', wheels: 'w' }
+    const before = renderToStaticMarkup(<MeetScene words={words} hint="Tap a part" label="" />)
+    expect(before).toContain('class="mt-label is-hint"')
+    expect(before).toContain('>Tap a part</text>')
+    expect((before.match(/aria-pressed="false"/g) ?? []).length).toBe(4)
+    const after = renderToStaticMarkup(<MeetFrame part="battery" t={9} words={words} hint="Tap a part" label="" />)
+    expect(after).not.toContain('is-hint')
+  })
+})

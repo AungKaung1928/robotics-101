@@ -91,3 +91,4 @@
 .ms-start { fill: var(--surface); stroke: var(--ink-2); stroke-width: 2; }
 .as-arrow.is-over { stroke: var(--ray); stroke-width: 3; } /* more than the top speed */
 .as-head.is-over { fill: var(--ray); }
+.mt-label.is-hint { fill: var(--ink-2); font-weight: 400; } /* before any tap: what to do */

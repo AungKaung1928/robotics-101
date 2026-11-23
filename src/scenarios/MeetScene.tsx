@@ -11,8 +11,9 @@ export type Part = keyof typeof PARTS
 const K = 1.7, OX = 16, OY = 8, KICK = 120 // drawing scale, offset, wiggle kick (deg/s)
 
 /** One frame: `part` was tapped `t` s ago: its outline wiggles on a wobble spring, its label springs out beside it. */
-export function MeetFrame({ part, t, words, label, children }: { part: Part | null; t: number; words: Record<Part, string>; label: string; children?: ReactNode }) {
-  const ref = useRef<SVGSVGElement>(null), vw = Math.max(300, 154 + useTextWidth(ref, '.mt-label', part ? words[part] : '') * 1.1 + 6) // label springs to 1.1x
+export function MeetFrame({ part, t, words, label, hint, children }: { part: Part | null; t: number; words: Record<Part, string>; label: string; hint?: string; children?: ReactNode }) {
+  // the label (or, before any tap, the hint) sets the width: the figure grows instead of clipping long words
+  const ref = useRef<SVGSVGElement>(null), vw = Math.max(300, 154 + useTextWidth(ref, '.mt-label', part ? words[part] : hint ?? '') * 1.1 + 6) // label springs to 1.1x
   const box = part && PARTS[part], cx = box ? OX + K * (box[0] + box[2] / 2) : 0, cy = box ? OY + K * (box[1] + box[3] / 2) : 0
   return (
     <svg ref={ref} className="meet-scene" viewBox={`0 0 ${vw} 130`} role={children ? 'group' : 'img'} aria-label={label} data-part={part ?? 'none'}>
@@ -23,6 +24,7 @@ export function MeetFrame({ part, t, words, label, children }: { part: Part | nu
         <line className="mt-lead" x1={OX + K * (box[0] + box[2]) + 4} y1={cy} x2={150} y2={cy} />
         <g transform={`translate(154 ${cy}) scale(${arrivalScale(t)})`}><text className="mt-label" y={5}>{words[part!]}</text></g>
       </>}
+      {!part && hint && <text className="mt-label is-hint" x={154} y={70}>{hint}</text>}
       {children}
     </svg>
   )
@@ -31,7 +33,7 @@ export function MeetFrame({ part, t, words, label, children }: { part: Part | nu
 const reduced = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 
 /** On-ramp "meet": tap (or Tab + Enter) a part of the robot; it wiggles and its name springs out. Reduced motion: still. */
-export default function MeetScene({ words, label }: { words: Record<Part, string>; label: string }) {
+export default function MeetScene({ words, label, hint, onPart }: { words: Record<Part, string>; label: string; hint?: string; onPart?: (p: Part) => void }) {
   const [part, setPart] = useState<Part | null>(null), [n, setN] = useState(0), [t, setT] = useState(9)
   useEffect(() => {
     if (!part || reduced()) return setT(9)
@@ -41,11 +43,11 @@ export default function MeetScene({ words, label }: { words: Record<Part, string
     id = requestAnimationFrame(f)
     return () => cancelAnimationFrame(id)
   }, [part, n])
-  const pick = (p: Part) => { setPart(p); setN(n + 1) }
+  const pick = (p: Part) => { setPart(p); setN(n + 1); onPart?.(p) } // the chapter can show its own note for the part
   return (
-    <MeetFrame part={part} t={t} words={words} label={label}>{/* hit areas inside the figure: they scale with it when the label widens it */}
+    <MeetFrame part={part} t={t} words={words} label={label} hint={hint}>{/* hit areas inside the figure: they scale with it when the label widens it */}
       {(Object.keys(PARTS) as Part[]).map((p) => { const [x, y, w, h] = PARTS[p]; return (
-        <rect key={p} className="mt-hit" x={OX + K * x} y={OY + K * y} width={K * w} height={K * h} role="button" tabIndex={0} aria-label={words[p]}
+        <rect key={p} className="mt-hit" x={OX + K * x} y={OY + K * y} width={K * w} height={K * h} role="button" tabIndex={0} aria-label={words[p]} aria-pressed={part === p}
           onClick={() => pick(p)} onKeyDown={(e: KeyboardEvent) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(p) } }} />
       ) })}
     </MeetFrame>
