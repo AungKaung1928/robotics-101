@@ -3,11 +3,12 @@ import { LIDAR, NAV2 } from '../../content/world'
 import { easeInOut } from '../../lib/timeline'
 import { decide, type Decision } from '../l1/decide'
 
-export const START_M = 1.0 // front of the robot to the wall at t = 0 (page choice)
+export const START_M = 1.1 // front of the robot to the wall at t = 0 (page choice: at 1.0 m a 1 Hz loop happened to stop only 2 cm past the line, so slowing it showed nothing)
 export const STOP_AT = 0.5 // stop when the wall is closer than this (page choice)
 export const SPEED = NAV2.maxVelX // m/s while it goes
 export const HZ = LIDAR.hz // one sense → think → act loop per LiDAR scan
 export const MAX_BLIND_M = 0.1 // challenge: drive at most this far between two looks (m)
+export const SLOW_HZ = 1 // break it: one look per second
 export const PHASE_S = 1.2 // the page shows one loop in 1.2 s; the real loop takes 1 / hz
 
 export type Stage = 'sense' | 'think' | 'act'
@@ -33,6 +34,9 @@ export function loopRun(hz: number, blindFrom = Infinity): LoopRun {
   }
   return { ticks, final: front, crashed: false }
 }
+
+/** How far past the stop line the robot came to rest (m), 0 when it stopped before it. */
+export const pastLine = (r: LoopRun) => Math.max(0, STOP_AT - r.final)
 
 /** Distance driven between two looks at the sensor (m). */
 export const blindM = (hz: number) => SPEED / hz

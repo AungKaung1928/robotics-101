@@ -232,6 +232,22 @@ try {
     report(`TF lab ${lang}: 5 steps (predict, see, inspect, fix, verify) + reset`, bad)
   }
   await js(`document.querySelectorAll('.langs button')[0].click()`)
+
+  // 0.6 loop, break it 'slow the loop to once per second': 26 cm between looks, stops 18 cm past the line, warning note; fix = back to 5 Hz.
+  {
+    await open('#/0/loop')
+    const read = () => js(`[document.querySelector('[data-k="blind"]').textContent, document.querySelector('[data-k="result"]').textContent, document.querySelector('[data-k="past"]')?.textContent, !!document.querySelector('[data-k="slow"]')].join(' | ')`)
+    const before = await read()
+    await js(`document.querySelector('[data-act="slow"]').click()`); await sleep(150)
+    const slow = await read()
+    await js(`document.querySelector('[data-act="slow"]').click()`); await sleep(150)
+    const fixed = await read()
+    report('Loop break it: slow to 1 Hz overshoots the line, fix restores 5 Hz', [
+      ...(/^5\.2 cm \| stopped 0\.48 m \| 2 cm \| false$/.test(before) ? [] : [`before: ${before}`]),
+      ...(/^26\.0 cm \| stopped 0\.32 m \| 18 cm \| true$/.test(slow) ? [] : [`slow: ${slow}`]),
+      ...(fixed === before ? [] : [`after fix: ${fixed}, expected ${before}`]),
+    ])
+  }
 } finally {
   chrome.kill()
   vite.kill()
