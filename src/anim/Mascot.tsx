@@ -1,5 +1,5 @@
 import { useEffect, useId, useRef, useState, type CSSProperties } from 'react'
-import { BOOP_S, HAPPY_S, JOLT_S, OOPS_S, REST, WHEEL_R, boopPose, headLag, brakePose, startPose, eyeShift, wheelAngle, happyPose, oopsPose, sparks, dizzyStars, faceSwap, SWAP_S, STILL_DIZZY, STILL_SPARK, blinkDelay, enterPose, ENTER_S, type Pose } from './mascot'
+import { BOOP_S, HAPPY_S, JOLT_S, OOPS_S, REST, WHEEL_R, boopPose, headLag, brakePose, startPose, eyeShift, wheelAngle, happyPose, oopsPose, sparks, dizzyStars, faceSwap, SWAP_S, STILL_DIZZY, STILL_SPARK, blinkDelay, idlePhase, enterPose, ENTER_S, type Pose } from './mascot'
 import { PRESS_STYLE } from './spring'
 import './mascot.css'
 
@@ -90,7 +90,8 @@ export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look
 export function MascotFigure({ pose, mood, size = 64, label, spark = 0, dizzy = 0, eyes, look = 0, roll = 0, head = { rot: 0, dy: 0 } }: {
   pose: Pose; mood: Mood; size?: number; label: string; spark?: number; dizzy?: number; eyes?: { mood: Mood; sy: number }; look?: number; roll?: number; head?: { rot: number; dy: number }
 }) {
-  const blink = { ...PRESS_STYLE, '--blink-delay': `${blinkDelay(useId())}ms` } as CSSProperties
+  const id = useId(), ph = idlePhase(id)
+  const blink = { ...PRESS_STYLE, '--blink-delay': `${blinkDelay(id)}ms`, '--breath-delay': `${ph.breath}ms`, '--sway-delay': `${ph.sway}ms` } as CSSProperties
   const stars = dizzyStars(dizzy)
   const starPath = (p: (typeof stars)[number], i: number) => <path key={i} className="m-star" d="M0-3L.8-.8 3 0 .8.8 0 3-.8.8-3 0-.8-.8Z" transform={`translate(${p.x} ${p.y}) scale(${p.s})`} opacity={p.o} />
   const body = `translate(${pose.x ?? 0} 0) translate(32 58) translate(0 ${-pose.y}) rotate(${pose.rot}) scale(${pose.sx} ${pose.sy}) translate(-32 -58)`

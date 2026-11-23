@@ -150,8 +150,13 @@ export const STILL_SPARK = SPARK_AT + 0.15
 
 /** Per-robot blink phase (ms, ≤ 0) from a stable id, so two robots on one page do not blink in sync. */
 export const BLINK_MS = 9400
-export function blinkDelay(id: string): number {
-  let h = 2166136261 // FNV-1a
+export const blinkDelay = (id: string): number => phaseDelay(id, BLINK_MS)
+/** A stable negative delay in (−period, 0] from an id (FNV-1a hash): a per-robot start offset for a CSS loop. */
+function phaseDelay(id: string, period: number): number {
+  let h = 2166136261
   for (let i = 0; i < id.length; i++) h = Math.imul(h ^ id.charCodeAt(i), 16777619) >>> 0
-  return -(h % BLINK_MS)
+  return -(h % period)
 }
+export const BREATH_MS = 3200, SWAY_MS = 5300 // must match the m-breath / m-sway durations in mascot.css
+/** Per-robot phase for the breath and sway loops too, so two robots on one page never move in lockstep. */
+export const idlePhase = (id: string) => ({ breath: phaseDelay(id + 'b', BREATH_MS), sway: phaseDelay(id + 's', SWAY_MS) })

@@ -194,3 +194,17 @@ describe('entrance', () => {
     expect(enterPose(ENTER_S).x).toBe(0)
   })
 })
+
+describe('idle phase per robot', () => {
+  it('breath and sway offsets differ between robots, stay inside one period, and match the CSS durations', async () => {
+    const { idlePhase, BREATH_MS, SWAY_MS } = await import('./mascot')
+    const { readFileSync } = await import('node:fs')
+    const a = idlePhase(':r1:'), b = idlePhase(':r2:')
+    expect(a.breath).not.toBe(b.breath)
+    expect(a.sway).not.toBe(b.sway)
+    for (const p of [a, b]) { expect(-p.breath).toBeLessThan(BREATH_MS); expect(-p.sway).toBeLessThan(SWAY_MS) }
+    const css = readFileSync('src/anim/mascot.css', 'utf8')
+    expect(css).toContain(`m-breath ${BREATH_MS / 1000}s`)
+    expect(css).toContain(`m-sway ${SWAY_MS / 1000}s`)
+  })
+})
