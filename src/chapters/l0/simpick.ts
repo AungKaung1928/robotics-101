@@ -2,13 +2,13 @@
 // the R101_SIM_FACTS.md notes (checked 2026-11-23); the URLs here are the ones listed there.
 
 export type RowId = 'site' | 'turtlesim' | 'fake' | 'mvsim' | 'gazebo' | 'isaac'
-export interface Row { id: RowId; dim: '2D' | '3D' | 'none'; url: string; mentionOnly?: true } // none = no world, only the robot shown in RViz
+export interface Row { id: RowId; dim: '2D' | '2.5D' | '3D' | 'none'; url: string; mentionOnly?: true } // none = no world, only the robot shown in RViz
 
 export const LADDER: Row[] = [
   { id: 'site', dim: '2D', url: '' },
   { id: 'turtlesim', dim: '2D', url: 'https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Introducing-Turtlesim/Introducing-Turtlesim.html' },
   { id: 'fake', dim: 'none', url: 'https://emanual.robotis.com/docs/en/platform/turtlebot3/fakenode_simulation/' },
-  { id: 'mvsim', dim: '2D', url: 'https://index.ros.org/p/mvsim/' },
+  { id: 'mvsim', dim: '2.5D', url: 'https://index.ros.org/p/mvsim/' },
   { id: 'gazebo', dim: '3D', url: 'https://emanual.robotis.com/docs/en/platform/turtlebot3/simulation/' },
   { id: 'isaac', dim: '3D', url: 'https://docs.isaacsim.omniverse.nvidia.com/6.0.1/installation/requirements.html', mentionOnly: true },
 ]
