@@ -3545,6 +3545,894 @@
   "my": "ဝေါဟာရများ",
   "back": "Glossary"
  },
+ "l1/callback:age": {
+  "status": "pass-alt",
+  "en": "oldest data acted on",
+  "my": "သုံးခဲ့တဲ့ data ထဲက အဟောင်းဆုံး",
+  "back": "oldest of the data used"
+ },
+ "l1/callback:arrive": {
+  "status": "pass-alt",
+  "en": "scan arrives",
+  "my": "scan ရောက်",
+  "back": "scan arrives"
+ },
+ "l1/callback:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: make on_scan take 600 ms",
+  "my": "ဖျက်ကြည့်: on_scan ကို 600 ms ကြာအောင် လုပ်",
+  "back": "Break it: make on_scan take 600 ms"
+ },
+ "l1/callback:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: find the slowest on_scan that never makes a scan wait.",
+  "my": "စိန်ခေါ်မှု: scan တစ်ခုကိုမှ မစောင့်ခိုင်းရတဲ့ အနှေးဆုံး on_scan ကို ရှာပါ။",
+  "back": "Challenge: find the slowest on_scan that makes not a single scan wait."
+ },
+ "l1/callback:count": {
+  "status": "pass-alt",
+  "en": "self.count (calls so far)",
+  "my": "self.count (အခုထိ ခေါ်ခဲ့တဲ့ အကြိမ်ရေ)",
+  "back": "self.count (number of times called so far)"
+ },
+ "l1/callback:everyday": {
+  "status": "pass-alt",
+  "en": "Everyday: a doorbell. You do not stand at the door checking; the bell calls you when someone arrives. If more guests ring while you are busy, they wait in line.",
+  "my": "နေ့စဉ်ဘဝက ဥပမာ: တံခါးခေါင်းလောင်းပါ။ တံခါးနားမှာ ရပ်ပြီး စောင့်ကြည့်နေစရာ မလိုပါဘူး။ တစ်ယောက်ယောက် ရောက်လာရင် ခေါင်းလောင်းက သင့်ကို ခေါ်ပါတယ်။ သင် အလုပ်ရှုပ်နေတုန်း ဧည့်သည် နောက်ထပ် လာတီးရင် သူတို့ တန်းစီပြီး စောင့်ကြပါတယ်။",
+  "back": "Everyday example: a doorbell. You do not need to stand by the door and keep watching. When someone arrives, the bell calls you. If you are busy and another guest comes and rings, they line up and wait."
+ },
+ "l1/callback:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "class",
+  "my": "class",
+  "back": "class"
+ },
+ "l1/callback:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "a blueprint that bundles data (self.count) with functions (methods)",
+  "my": "data (self.count) နဲ့ function တွေ (method) ကို တစ်ခုတည်းအဖြစ် စုပေးတဲ့ ပုံစံခွက်",
+  "back": "A template that bundles data (self.count) and functions (method) together as one"
+ },
+ "l1/callback:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "self",
+  "my": "self",
+  "back": "self"
+ },
+ "l1/callback:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "this object: where a method keeps values between calls",
+  "my": "ဒီ object ကိုယ်တိုင်: method တစ်ခုက ခေါ်တဲ့ကြားမှာ တန်ဖိုးတွေကို သိမ်းထားတဲ့ နေရာ",
+  "back": "this object itself: the place where values are kept between a method's calls"
+ },
+ "l1/callback:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "callback",
+  "my": "callback",
+  "back": "callback"
+ },
+ "l1/callback:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "a function you pass to someone else, who calls it later",
+  "my": "တခြားတစ်ယောက်ကို လွှဲပေးထားပြီး သူက နောက်မှ ခေါ်မယ့် function",
+  "back": "a function handed over to someone else, who will call it later"
+ },
+ "l1/callback:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "queue",
+  "my": "queue",
+  "back": "queue"
+ },
+ "l1/callback:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "a line of waiting messages; first in, first out",
+  "my": "စောင့်နေတဲ့ message တွေရဲ့ တန်း၊ အရင်ဝင်တာ အရင်ထွက်",
+  "back": "a line of waiting messages, first in first out"
+ },
+ "l1/callback:keeps": {
+  "status": "pass-alt",
+  "en": "keeps up",
+  "my": "အချိန်မီ",
+  "back": "in time"
+ },
+ "l1/callback:lags": {
+  "status": "pass-alt",
+  "en": "scans wait",
+  "my": "scan တွေ စောင့်နေ",
+  "back": "scans waiting"
+ },
+ "l1/callback:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: a class keeps data and functions together; a callback is a function you hand to ROS, and ROS calls it when a message arrives.",
+  "my": "သင်ယူရမှာ: class က data နဲ့ function တွေကို အတူတူ စုထားပါတယ်။ callback ဆိုတာ ROS ကို လွှဲပေးထားတဲ့ function ဖြစ်ပြီး message တစ်ခု ရောက်လာတဲ့အခါ ROS က အဲဒါကို ခေါ်ပါတယ်။",
+  "back": "What you will learn: a class keeps data and functions together. A callback is a function handed over to ROS, and when a message arrives, ROS calls it."
+ },
+ "l1/callback:lines.0": {
+  "status": "pass-alt",
+  "en": "You do not write \"wait for the next scan\". You give ROS the method self.on_scan, and ROS calls it with each new scan, 5 times a second.",
+  "my": "\"နောက် scan ကို စောင့်\" လို့ ရေးစရာ မလိုပါဘူး။ ROS ကို self.on_scan method ကို ပေးလိုက်ရုံပါပဲ၊ ROS က scan အသစ် ရောက်တိုင်း အဲဒါကို ခေါ်ပါတယ်၊ တစ်စက္ကန့်ကို 5 ကြိမ်ပါ။",
+  "back": "You do not need to write \"wait for the next scan\". You just give ROS the self.on_scan method, and ROS calls it every time a new scan arrives, 5 times per second."
+ },
+ "l1/callback:lines.1": {
+  "status": "pass-alt",
+  "en": "The class keeps what must survive between calls: stop_at and count live on self.",
+  "my": "ခေါ်တဲ့ကြားမှာ ဆက်ရှိနေရမယ့် အရာတွေကို class က သိမ်းထားပါတယ်: stop_at နဲ့ count က self ပေါ်မှာ ရှိပါတယ်။",
+  "back": "The class stores the things that must persist between calls: stop_at and count are on self."
+ },
+ "l1/callback:lines.2": {
+  "status": "pass-alt",
+  "en": "ROS runs one call at a time. If on_scan takes longer than 200 ms, new scans wait in a queue of 10. When the queue is full the oldest is thrown away.",
+  "my": "ROS က တစ်ကြိမ်မှာ တစ်ခုပဲ ခေါ်ပါတယ်။ on_scan က 200 ms ထက် ပိုကြာရင် scan အသစ်တွေက 10 ခုဆံ့တဲ့ queue ထဲမှာ စောင့်ရပါတယ်။ queue ပြည့်သွားရင် အဟောင်းဆုံးကို လွှင့်ပစ်ပါတယ်။",
+  "back": "ROS calls only one at a time. If on_scan takes longer than 200 ms, new scans wait in a queue that holds 10. When the queue is full, the oldest is thrown away."
+ },
+ "l1/callback:lost": {
+  "status": "pass-alt",
+  "en": "scans dropped",
+  "my": "လွှင့်ပစ်ခံရတဲ့ scan",
+  "back": "scans thrown away"
+ },
+ "l1/callback:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet:",
+  "my": "မရသေးပါ:",
+  "back": "Not yet:"
+ },
+ "l1/callback:queue": {
+  "status": "pass-alt",
+  "en": "waiting",
+  "my": "စောင့်နေ",
+  "back": "waiting"
+ },
+ "l1/callback:repo": {
+  "status": "pass-alt",
+  "en": "The same line in the python-ros2-reference repo:",
+  "my": "python-ros2-reference repo ထဲက တူညီတဲ့ စာကြောင်း:",
+  "back": "The same lines in the python-ros2-reference repo:"
+ },
+ "l1/callback:run": {
+  "status": "pass-alt",
+  "en": "on_scan runs",
+  "my": "on_scan အလုပ်လုပ်",
+  "back": "on_scan runs"
+ },
+ "l1/callback:runsHere": {
+  "status": "pass-alt",
+  "en": "Python shown; the page runs a JavaScript model of the same queue. Simplified: no network delay, fixed callback time.",
+  "my": "ပြထားတာက Python ပါ။ ဒီစာမျက်နှာက အဲဒီ queue ကိုပဲ JavaScript model နဲ့ အလုပ်လုပ်စေပါတယ်။ ရိုးရှင်းအောင် လုပ်ထားပါတယ်: ကွန်ရက် နှောင့်နှေးမှု မရှိပါဘူး၊ callback ကြာချိန် ပုံသေပါ။",
+  "back": "What is shown is Python. This page makes that same queue run with a JavaScript model. It is kept simple: there is no network delay, and the callback duration is fixed."
+ },
+ "l1/callback:solved": {
+  "status": "pass-alt",
+  "en": "Solved:",
+  "my": "အောင်မြင်ပြီ:",
+  "back": "Success:"
+ },
+ "l1/callback:title": {
+  "status": "pass-alt",
+  "en": "Python: classes and callbacks",
+  "my": "Python: class နဲ့ callback",
+  "back": "Python: class and callback"
+ },
+ "l1/callback:waiting": {
+  "status": "pass-alt",
+  "en": "scans waiting",
+  "my": "စောင့်နေတဲ့ scan",
+  "back": "waiting scans"
+ },
+ "l1/callback:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရ",
+  "back": "Terms"
+ },
+ "l1/callback:work": {
+  "status": "pass-alt",
+  "en": "on_scan takes (ms)",
+  "my": "on_scan ကြာချိန် (ms)",
+  "back": "on_scan duration (ms)"
+ },
+ "l1/closest:boxAt": {
+  "status": "pass-alt",
+  "en": "box in front of beam",
+  "my": "beam ရှေ့က သေတ္တာ",
+  "back": "box in front of the beam"
+ },
+ "l1/closest:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: start with closest = 0",
+  "my": "ဖျက်ကြည့်: closest = 0 နဲ့ စ",
+  "back": "Break it: start with closest = 0"
+ },
+ "l1/closest:brokenNote": {
+  "status": "pass-alt",
+  "en": "Nothing is smaller than 0, so the if is never true: the function returns 0 m, a wall that is not there.",
+  "my": "0 ထက် ငယ်တာ ဘာမှ မရှိတဲ့အတွက် if က ဘယ်တော့မှ true မဖြစ်ပါဘူး: function က 0 m ကို ပြန်ပေးပါတယ်၊ တကယ်မရှိတဲ့ နံရံတစ်ခုပါ။",
+  "back": "Because nothing is smaller than 0, the if is never true: the function returns 0 m, a wall that does not actually exist."
+ },
+ "l1/closest:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: move the box so closest changes only once during the loop.",
+  "my": "စိန်ခေါ်မှု: loop အတွင်းမှာ closest တစ်ကြိမ်ပဲ ပြောင်းအောင် သေတ္တာကို ရွှေ့ပါ။",
+  "back": "Challenge: move the box so that closest changes only once inside the loop."
+ },
+ "l1/closest:changes": {
+  "status": "pass-alt",
+  "en": "times closest changed",
+  "my": "closest ပြောင်းသွားတဲ့ အကြိမ်ရေ",
+  "back": "number of times closest changed"
+ },
+ "l1/closest:everyday": {
+  "status": "pass-alt",
+  "en": "Everyday: finding the lowest card in a shuffled deck. You turn over one card at a time and keep the lowest so far; when the deck is empty, you hold the lowest.",
+  "my": "နေ့စဉ်ဘဝက ဥပမာ: ရောထားတဲ့ ဖဲထုပ်ထဲက အငယ်ဆုံး ဖဲကို ရှာတာပါ။ ဖဲကို တစ်ချပ်ချင်း လှန်ပြီး အခုထိ အငယ်ဆုံး ဖဲကို ကိုင်ထားပါတယ်။ ဖဲထုပ် ကုန်သွားတဲ့အခါ သင့်လက်ထဲမှာ အငယ်ဆုံး ဖဲ ရှိနေပါပြီ။",
+  "back": "Everyday example: finding the smallest card in a shuffled deck. You flip the cards one by one and hold the smallest card so far. When the deck runs out, you have the smallest card in your hand."
+ },
+ "l1/closest:fixIt": {
+  "status": "pass-alt",
+  "en": "Fix it: back to float(\"inf\")",
+  "my": "ပြင်ကြည့်: float(\"inf\") ကို ပြန်ပြောင်း",
+  "back": "Fix it: change back to float(\"inf\")"
+ },
+ "l1/closest:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "list",
+  "my": "list",
+  "back": "list"
+ },
+ "l1/closest:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "many values in one variable: [1.8, 1.6, ...]",
+  "my": "variable တစ်ခုထဲက တန်ဖိုး အများကြီး: [1.8, 1.6, ...]",
+  "back": "many values in a single variable: [1.8, 1.6, ...]"
+ },
+ "l1/closest:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "for loop",
+  "my": "for loop",
+  "back": "for loop"
+ },
+ "l1/closest:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "run the same lines once for each item in a list",
+  "my": "list ထဲက item တစ်ခုစီအတွက် တူညီတဲ့ စာကြောင်းတွေကို တစ်ကြိမ်စီ အလုပ်လုပ်စေ",
+  "back": "make the same lines run once for each item in a list"
+ },
+ "l1/closest:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "function",
+  "my": "function",
+  "back": "function"
+ },
+ "l1/closest:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "named lines (def) you call; return hands back the answer",
+  "my": "ခေါ်လို့ရတဲ့ နာမည်ပေးထားတဲ့ စာကြောင်းတွေ (def)၊ return က အဖြေကို ပြန်ပေး",
+  "back": "lines given a callable name (def), return gives back the answer"
+ },
+ "l1/closest:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "float(\"inf\")",
+  "my": "float(\"inf\")",
+  "back": "float(\"inf\")"
+ },
+ "l1/closest:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "infinity: bigger than any real distance",
+  "my": "အဆုံးမရှိ တန်ဖိုး: ဘယ်လို တကယ့် အကွာအဝေးထက်မဆို ပိုကြီး",
+  "back": "endless value: bigger than any real distance whatsoever"
+ },
+ "l1/closest:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: a for loop looks at every reading once; a function gives that loop a name you can call again.",
+  "my": "သင်ယူရမှာ: for loop က တိုင်းတာချက် တိုင်းကို တစ်ကြိမ်စီ ကြည့်ပါတယ်။ function က အဲဒီ loop ကို ထပ်ခေါ်လို့ရတဲ့ နာမည်တစ်ခု ပေးပါတယ်။",
+  "back": "What you will learn: a for loop looks at each measurement once. A function gives that loop a name that can be called again."
+ },
+ "l1/closest:lines.0": {
+  "status": "pass-alt",
+  "en": "One scan gives many distances, not one. Here: 10 readings across the front of the robot, left to right.",
+  "my": "scan တစ်ခုက အကွာအဝေး တစ်ခုတည်း မဟုတ်ဘဲ အများကြီး ပေးပါတယ်။ ဒီမှာတော့ စက်ရုပ်ရဲ့ ရှေ့ဘက်တစ်လျှောက် ဘယ်ကနေ ညာအထိ တိုင်းတာချက် 10 ခု ရှိပါတယ်။",
+  "back": "A scan gives many distances, not just a single one. Here there are 10 measurements across the front of the robot, from left to right."
+ },
+ "l1/closest:lines.1": {
+  "status": "pass-alt",
+  "en": "The for loop takes them one at a time. closest starts at infinity, so the first reading always beats it. After that, only a smaller reading replaces it.",
+  "my": "for loop က သူတို့ကို တစ်ခုချင်း ယူပါတယ်။ closest က အဆုံးမရှိ တန်ဖိုး (infinity) ကနေ စတာကြောင့် ပထမ တိုင်းတာချက်က အမြဲ သူ့ကို နိုင်ပါတယ်။ အဲဒီနောက်မှာတော့ ပိုငယ်တဲ့ တိုင်းတာချက်ကပဲ သူ့နေရာကို အစားထိုးပါတယ်။",
+  "back": "The for loop takes them one by one. Because closest starts from an endless value (infinity), the first measurement always beats it. After that, only a smaller measurement replaces its place."
+ },
+ "l1/closest:lines.2": {
+  "status": "pass-alt",
+  "en": "Wrapped in def closest(readings): the same 5 lines run on every new scan with one call.",
+  "my": "def closest(readings): ထဲမှာ ထုပ်ထားရင် အဲဒီ စာကြောင်း 5 ကြောင်းက scan အသစ်တိုင်းမှာ ခေါ်မှု တစ်ကြိမ်နဲ့ အလုပ်လုပ်ပါတယ်။",
+  "back": "If wrapped inside def closest(readings):, those 5 lines run with one call on every new scan."
+ },
+ "l1/closest:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet: changed",
+  "my": "မရသေးပါ: ပြောင်းခဲ့တာ",
+  "back": "Not yet: changed"
+ },
+ "l1/closest:result": {
+  "status": "pass-alt",
+  "en": "closest(readings) returns",
+  "my": "closest(readings) က ပြန်ပေးတာ",
+  "back": "what closest(readings) returns"
+ },
+ "l1/closest:runsHere": {
+  "status": "pass-alt",
+  "en": "Python shown; the page runs the same logic in JavaScript. Readings are example values.",
+  "my": "ပြထားတာက Python ပါ။ ဒီစာမျက်နှာက အဲဒီ logic ကိုပဲ JavaScript နဲ့ အလုပ်လုပ်စေပါတယ်။ တိုင်းတာချက်တွေက ဥပမာ တန်ဖိုးတွေပါ။",
+  "back": "What is shown is Python. This page makes that same logic run in JavaScript. The measurements are example values."
+ },
+ "l1/closest:solved": {
+  "status": "pass-alt",
+  "en": "Solved: changed",
+  "my": "အောင်မြင်ပြီ: ပြောင်းခဲ့တာ",
+  "back": "Success: changed"
+ },
+ "l1/closest:times": {
+  "status": "pass-alt",
+  "en": "times",
+  "my": "ကြိမ်",
+  "back": "times"
+ },
+ "l1/closest:title": {
+  "status": "pass-alt",
+  "en": "Python: loops and functions",
+  "my": "Python: loop နဲ့ function",
+  "back": "Python: loop and function"
+ },
+ "l1/closest:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရ",
+  "back": "Terms"
+ },
+ "l1/cpp:bench": {
+  "status": "pass-alt",
+  "en": "closest() on 360 readings, one call",
+  "my": "ဖတ်ထားတဲ့ တန်ဖိုး 360 ခုပေါ်မှာ closest()၊ တစ်ကြိမ် ခေါ်မှု",
+  "back": "closest() on 360 read values, one call"
+ },
+ "l1/cpp:built": {
+  "status": "pass-alt",
+  "en": "compiled → ./stopper",
+  "my": "compile ပြီး → ./stopper",
+  "back": "compile done → ./stopper"
+ },
+ "l1/cpp:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: pick the declaration that makes the compiler catch the bug for you.",
+  "my": "စိန်ခေါ်မှု: compiler က သင့်အတွက် bug ကို ဖမ်းပေးမယ့် ကြေညာချက်ကို ရွေးပါ။",
+  "back": "Challenge: choose the declaration where the compiler will catch the bug for you."
+ },
+ "l1/cpp:compiling": {
+  "status": "pass-alt",
+  "en": "g++ compiling…",
+  "my": "g++ နဲ့ compile လုပ်နေဆဲ…",
+  "back": "Still compiling with g++..."
+ },
+ "l1/cpp:crashed": {
+  "status": "pass-alt",
+  "en": "hit the wall",
+  "my": "နံရံကို တိုက်မိ",
+  "back": "Hit the wall"
+ },
+ "l1/cpp:decl": {
+  "status": "pass-alt",
+  "en": "declaration",
+  "my": "ကြေညာချက်",
+  "back": "Declaration"
+ },
+ "l1/cpp:failed": {
+  "status": "pass-alt",
+  "en": "compile error: no program",
+  "my": "compile အမှား: ပရိုဂရမ် မရှိ",
+  "back": "compile error: no program"
+ },
+ "l1/cpp:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "type",
+  "my": "type",
+  "back": "type"
+ },
+ "l1/cpp:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "what kind of value a variable holds: double, int, bool",
+  "my": "variable တစ်ခု သိမ်းထားတဲ့ တန်ဖိုး အမျိုးအစား: double၊ int၊ bool",
+  "back": "The kind of value a variable stores: double, int, bool"
+ },
+ "l1/cpp:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "compile",
+  "my": "compile",
+  "back": "compile"
+ },
+ "l1/cpp:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "translate the whole file to machine code before running",
+  "my": "run မလုပ်ခင် ဖိုင်တစ်ခုလုံးကို စက်ကုဒ် အဖြစ် ဘာသာပြန်တာ",
+  "back": "Translating the whole file into machine code before running"
+ },
+ "l1/cpp:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "g++",
+  "my": "g++",
+  "back": "g++"
+ },
+ "l1/cpp:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "the C++ compiler on Ubuntu",
+  "my": "Ubuntu ပေါ်က C++ compiler",
+  "back": "The C++ compiler on Ubuntu"
+ },
+ "l1/cpp:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "ns",
+  "my": "ns",
+  "back": "ns"
+ },
+ "l1/cpp:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "nanosecond: one billionth of a second",
+  "my": "nanosecond: တစ်စက္ကန့်ရဲ့ ဘီလီယံပုံ တစ်ပုံ",
+  "back": "nanosecond: one billionth of a second"
+ },
+ "l1/cpp:held": {
+  "status": "pass-alt",
+  "en": "stop_at really holds",
+  "my": "stop_at ထဲမှာ တကယ်ရှိတဲ့ တန်ဖိုး",
+  "back": "The value actually in stop_at"
+ },
+ "l1/cpp:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: in C++ every variable has a type, and a compiler turns your code into a program before it runs.",
+  "my": "သင်ယူရမယ့်အရာ: C++ မှာ variable တိုင်းမှာ type ရှိပါတယ်၊ ပြီးတော့ run မလုပ်ခင် compiler က သင့်ကုဒ်ကို ပရိုဂရမ်အဖြစ် ပြောင်းပေးပါတယ်။",
+  "back": "What you learn: in C++ every variable has a type, and before it runs, a compiler turns your code into a program."
+ },
+ "l1/cpp:lines.0": {
+  "status": "pass-alt",
+  "en": "This is chapter 1.1 again, in C++. Python turns your file into bytecode and its interpreter runs it step by step. C++ is compiled by g++ into machine code before it runs; the robot runs that machine code directly.",
+  "my": "ဒါက အခန်း 1.1 ကိုပဲ C++ နဲ့ ပြန်ရေးထားတာပါ။ Python က သင့်ဖိုင်ကို bytecode အဖြစ် ပြောင်းပြီး သူ့ interpreter က တစ်ဆင့်ချင်း run ပါတယ်။ C++ ကိုတော့ run မလုပ်ခင် g++ က စက်ကုဒ် အဖြစ် compile လုပ်ပါတယ်၊ စက်ရုပ်က အဲဒီ စက်ကုဒ် ကို တိုက်ရိုက် run ပါတယ်။",
+  "back": "This is just chapter 1.1 rewritten in C++. Python turns your file into bytecode and its interpreter runs it step by step. C++ is compiled by g++ into machine code before running, and the robot runs that machine code directly."
+ },
+ "l1/cpp:lines.1": {
+  "status": "pass-alt",
+  "en": "You must say what each variable holds: double for a number with a fraction, int for a whole number. The type decides what is stored.",
+  "my": "variable တစ်ခုစီမှာ ဘာသိမ်းမလဲဆိုတာ ပြောပေးရပါမယ်: ဒသမပါတဲ့ ကိန်းအတွက် double၊ ကိန်းပြည့်အတွက် int ပါ။ ဘာသိမ်းမလဲဆိုတာကို type က ဆုံးဖြတ်ပါတယ်။",
+  "back": "For each variable you must say what it will store: double for a number with a decimal, int for a whole number. The type decides what gets stored."
+ },
+ "l1/cpp:lines.2": {
+  "status": "pass-alt",
+  "en": "Why robots use it: the same closest() over 360 readings, measured below, runs many times faster.",
+  "my": "စက်ရုပ်တွေမှာ ဘာကြောင့် သုံးလဲ- ဖတ်ထားတဲ့ တန်ဖိုး 360 ခုပေါ်မှာ run တဲ့ closest() အတူတူက အောက်မှာ တိုင်းထားသလို အဆ အများကြီး ပိုမြန်ပါတယ်။",
+  "back": "Why it is used in robots: the same closest() that runs on 360 read values is many times faster, as measured below."
+ },
+ "l1/cpp:noRun": {
+  "status": "pass-alt",
+  "en": "never ran",
+  "my": "run မဖြစ်ခဲ့",
+  "back": "Did not run"
+ },
+ "l1/cpp:notYet": {
+  "status": "pass-alt",
+  "en": "Try another:",
+  "my": "နောက်တစ်ခု စမ်းကြည့်ပါ:",
+  "back": "Try the next one:"
+ },
+ "l1/cpp:note.double": {
+  "status": "pass-alt",
+  "en": "double keeps 0.5. Same result as Python.",
+  "my": "double က 0.5 ကို ထိန်းထားပါတယ်။ Python နဲ့ ရလဒ် အတူတူပါပဲ။",
+  "back": "double keeps 0.5. The result is the same as Python."
+ },
+ "l1/cpp:note.int": {
+  "status": "pass-alt",
+  "en": "int keeps whole numbers only: 0.5 becomes 0, with no warning even under -Wall -Wextra. stop_at = 0 is the 1.1 crash.",
+  "my": "int က ကိန်းပြည့်ကိုပဲ သိမ်းပါတယ်: 0.5 က 0 ဖြစ်သွားပြီး -Wall -Wextra သုံးရင်တောင် သတိပေးချက် မပေါ်ပါဘူး။ stop_at = 0 က 1.1 မှာ နံရံကို တိုက်မိခဲ့တဲ့ ပြဿနာပါပဲ။",
+  "back": "int stores only whole numbers: 0.5 becomes 0, and even with -Wall -Wextra no warning appears. stop_at = 0 is the same problem as hitting the wall in 1.1."
+ },
+ "l1/cpp:note.int{}": {
+  "status": "pass-alt",
+  "en": "Braces forbid the silent cut: g++ refuses to build. A compile error is the cheap place to find this bug.",
+  "my": "တွန့်ကွင်းက တိတ်တိတ်လေး ဖြတ်ချတာကို တားပါတယ်: g++ က build မလုပ်ပေးပါဘူး။ ဒီ bug ကို တွေ့ဖို့ ကုန်ကျစရိတ် အနည်းဆုံး နေရာက compile အမှားပါပဲ။",
+  "back": "The curly braces prevent silent truncation: g++ will not build it. The place that costs the least to find this bug is the compile error."
+ },
+ "l1/cpp:result": {
+  "status": "pass-alt",
+  "en": "robot",
+  "my": "စက်ရုပ်",
+  "back": "Robot"
+ },
+ "l1/cpp:solved": {
+  "status": "pass-alt",
+  "en": "Solved:",
+  "my": "ဖြေရှင်းပြီး:",
+  "back": "Solved:"
+ },
+ "l1/cpp:stopped": {
+  "status": "pass-alt",
+  "en": "stopped at",
+  "my": "ရပ်သွားတဲ့ နေရာ",
+  "back": "Where it stopped"
+ },
+ "l1/cpp:title": {
+  "status": "pass-alt",
+  "en": "C++: the same robot, compiled",
+  "my": "C++: စက်ရုပ် အတူတူ၊ compile လုပ်ထားတဲ့ ပုံစံ",
+  "back": "C++: the same robot, in compiled form"
+ },
+ "l1/cpp:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရ",
+  "back": "Glossary"
+ },
+ "l1/decide:already": {
+  "status": "pass-alt",
+  "en": "In Level 0 \"How a robot thinks\" you set the rule \"wall closer than 0.5 m: stop\". Same robot, same numbers; now you write it as code.",
+  "my": "Level 0 \"စက်ရုပ် တစ်ခု ဘယ်လို စဉ်းစားသလဲ\" မှာ \"နံရံက 0.5 m ထက် နီးရင်- ရပ်\" ဆိုတဲ့ စည်းကမ်းချက်ကို သင် သတ်မှတ်ခဲ့ပါတယ်။ စက်ရုပ်လည်း အတူတူ၊ ကိန်းဂဏန်းတွေလည်း အတူတူပါပဲ၊ အခု အဲဒါကို ကုဒ်အဖြစ် ရေးပါမယ်။",
+  "back": "In Level 0 \"How a robot thinks\" you defined the rule \"If the wall is closer than 0.5 m: stop\". The robot is the same, the numbers are the same, now we will write that as code."
+ },
+ "l1/decide:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: type > instead of <",
+  "my": "ဖျက်ကြည့်: < အစား > ရိုက်",
+  "back": "Break it: type > instead of <"
+ },
+ "l1/decide:brokenNote": {
+  "status": "pass-alt",
+  "en": "With > the test is true at 2 m, so the robot never starts. One character, and it does the opposite.",
+  "my": "> ဆိုရင် 2 m မှာတင် စစ်ဆေးချက်က မှန်နေလို့ စက်ရုပ်က ဘယ်တော့မှ မစထွက်ပါဘူး။ စာလုံး တစ်လုံးတည်းကြောင့် ပြောင်းပြန် လုပ်သွားပါတယ်။",
+  "back": "With >, the check is already true at 2 m, so the robot never starts moving. One single character made it work in reverse."
+ },
+ "l1/decide:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: set stop_at so the robot stops with its front 20–30 cm from the wall.",
+  "my": "စိန်ခေါ်မှု: စက်ရုပ်ရဲ့ ရှေ့ပိုင်းက နံရံနဲ့ 20–30 cm အကွာမှာ ရပ်အောင် stop_at ကို သတ်မှတ်ပါ။",
+  "back": "Challenge: set stop_at so the robot stops 20–30 cm away from the wall in front of it."
+ },
+ "l1/decide:crashed": {
+  "status": "pass-alt",
+  "en": "hit the wall",
+  "my": "နံရံကို တိုက်မိ",
+  "back": "Hit the wall"
+ },
+ "l1/decide:decisions": {
+  "status": "pass-alt",
+  "en": "decisions (one per scan)",
+  "my": "ဆုံးဖြတ်ချက် (scan တစ်ခါကို တစ်ခု)",
+  "back": "Decision (one per scan)"
+ },
+ "l1/decide:final": {
+  "status": "pass-alt",
+  "en": "stopped at",
+  "my": "ရပ်သွားတဲ့ နေရာ",
+  "back": "Where it stopped"
+ },
+ "l1/decide:fixIt": {
+  "status": "pass-alt",
+  "en": "Fix it: back to <",
+  "my": "ပြင်ကြည့်: < ကို ပြန်ပြောင်း",
+  "back": "Fix it: change back to <"
+ },
+ "l1/decide:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "LiDAR",
+  "my": "LiDAR",
+  "back": "LiDAR"
+ },
+ "l1/decide:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "a sensor that sends out laser beams and measures how far away each one hits something",
+  "my": "laser beam တွေ ထုတ်လွှတ်ပြီး beam တစ်ခုစီ တစ်ခုခုကို ထိတဲ့အထိ ဘယ်လောက် ဝေးလဲ တိုင်းတဲ့ ဆင်ဆာ",
+  "back": "A sensor that emits laser beams and measures how far each beam travels until it hits something"
+ },
+ "l1/decide:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "variable",
+  "my": "variable",
+  "back": "variable"
+ },
+ "l1/decide:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "a name that holds a value, like distance",
+  "my": "တန်ဖိုး တစ်ခုကို သိမ်းထားတဲ့ နာမည်၊ ဥပမာ distance",
+  "back": "A name that stores a value, for example distance"
+ },
+ "l1/decide:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "value",
+  "my": "တန်ဖိုး",
+  "back": "value"
+ },
+ "l1/decide:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "the number itself, like 1.20",
+  "my": "ကိန်းဂဏန်း ကိုယ်တိုင်၊ ဥပမာ 1.20",
+  "back": "The number itself, for example 1.20"
+ },
+ "l1/decide:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "if / else",
+  "my": "if / else",
+  "back": "if / else"
+ },
+ "l1/decide:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "run one block when the test is true, the other when it is false",
+  "my": "စစ်ဆေးချက် မှန်ရင် block တစ်ခုကို၊ မှားရင် ကျန်တဲ့ block ကို run",
+  "back": "If the check is true, run one block; if false, run the other block"
+ },
+ "l1/decide:glossary.4.0": {
+  "status": "pass-alt",
+  "en": "<",
+  "my": "<",
+  "back": "<"
+ },
+ "l1/decide:glossary.4.1": {
+  "status": "pass-alt",
+  "en": "\"less than\": 0.4 < 0.5 is true, 0.5 < 0.5 is false",
+  "my": "\"ထက်ငယ်\": 0.4 < 0.5 က မှန်၊ 0.5 < 0.5 က မှား",
+  "back": "\"less than\": 0.4 < 0.5 is true, 0.5 < 0.5 is false"
+ },
+ "l1/decide:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: a variable holds a number, and if turns that number into stop or go.",
+  "my": "သင်ယူရမယ့်အရာ: variable တစ်ခုက ကိန်းဂဏန်း တစ်ခုကို သိမ်းထားပြီး if က အဲဒီ ကိန်းဂဏန်းကို ရပ် ဒါမှမဟုတ် သွား အဖြစ် ပြောင်းပေးပါတယ်။",
+  "back": "What you learn: a variable stores one number, and if turns that number into stop or go."
+ },
+ "l1/decide:lines.0": {
+  "status": "pass-alt",
+  "en": "The robot reads one number from its LiDAR: how far the wall in front is, in metres. The program keeps it in a variable called distance.",
+  "my": "စက်ရုပ်က သူ့ LiDAR ကနေ ကိန်းဂဏန်း တစ်ခုကို ဖတ်ပါတယ်: ရှေ့က နံရံ ဘယ်လောက် ဝေးလဲဆိုတာကို မီတာနဲ့ ပြတာပါ။ ပရိုဂရမ်က အဲဒါကို distance လို့ ခေါ်တဲ့ variable ထဲမှာ သိမ်းထားပါတယ်။",
+  "back": "The robot reads one number from its LiDAR: how far the wall ahead is, in meters. The program stores that in a variable called distance."
+ },
+ "l1/decide:lines.1": {
+  "status": "pass-alt",
+  "en": "Each time a new number arrives (5 times a second), one if line compares it with stop_at. Smaller: stop. Otherwise: go.",
+  "my": "ကိန်းဂဏန်း အသစ် ရောက်လာတိုင်း (တစ်စက္ကန့်ကို 5 ကြိမ်) if စာကြောင်း တစ်ကြောင်းက အဲဒါကို stop_at နဲ့ နှိုင်းယှဉ်ပါတယ်။ ပိုငယ်ရင် ရပ်ပါတယ်။ မဟုတ်ရင် သွားပါတယ်။",
+  "back": "Every time a new number arrives (5 times per second), one if line compares it with stop_at. If it is smaller, it stops. Otherwise it goes."
+ },
+ "l1/decide:lines.2": {
+  "status": "pass-alt",
+  "en": "Between two readings the robot drives blind for 0.2 s, about 5 cm. So it always stops a little closer than stop_at.",
+  "my": "ဖတ်တာ 2 ကြိမ်ကြားမှာ စက်ရုပ်က 0.2 s (5 cm လောက်) မမြင်ဘဲ မောင်းနေပါတယ်။ ဒါကြောင့် stop_at ထက် နည်းနည်း ပိုနီးတဲ့ နေရာမှာ အမြဲ ရပ်ပါတယ်။",
+  "back": "Between 2 reads the robot drives for 0.2 s (about 5 cm) without seeing. So it always stops a little closer than stop_at."
+ },
+ "l1/decide:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet: stopped at",
+  "my": "မရသေး: ရပ်သွားတဲ့ နေရာ",
+  "back": "Not yet: where it stopped"
+ },
+ "l1/decide:realSensor": {
+  "status": "pass-alt",
+  "en": "On a real sensor, a wall closer than its 12 cm minimum is a special case: the ROS rule REP 117 says to report -inf, meaning \"too close\", and the simulator here does. In Python -inf < stop_at is True, so the simulated robot stops 2.4 cm from the wall even with stop_at = 0.",
+  "my": "တကယ့် ဆင်ဆာမှာ သူ့ရဲ့ အနည်းဆုံး 12 cm ထက် ပိုနီးတဲ့ နံရံက အထူးကိစ္စ ဖြစ်ပါတယ်: ROS စည်းမျဉ်း REP 117 က \"နီးလွန်းတယ်\" လို့ အဓိပ္ပာယ်ရတဲ့ -inf ကို ပြန်ပို့ဖို့ ပြောထားပြီး ဒီက ဆင်မျူလေတာကလည်း အဲဒီအတိုင်း လုပ်ပါတယ်။ Python မှာ -inf < stop_at က True ဖြစ်လို့ stop_at = 0 ဖြစ်နေရင်တောင် ဆင်မျူလေတာထဲက စက်ရုပ်က နံရံနဲ့ 2.4 cm အကွာမှာ ရပ်ပါတယ်။",
+  "back": "On a real sensor, a wall closer than its minimum of 12 cm is a special case: the ROS rule REP 117 says to return -inf, meaning \"too close\", and the simulator here does the same. In Python -inf < stop_at is True, so even if stop_at = 0, the robot in the simulator stops 2.4 cm from the wall."
+ },
+ "l1/decide:runsHere": {
+  "status": "pass-alt",
+  "en": "Python shown; the page runs the same logic in JavaScript.",
+  "my": "ဒီမှာ Python ကို ပြထားပါတယ်၊ ဒီစာမျက်နှာကတော့ အဲဒီ logic အတိုင်းကို JavaScript နဲ့ run ပါတယ်။",
+  "back": "Python is shown here, and this page runs exactly that logic in JavaScript."
+ },
+ "l1/decide:solved": {
+  "status": "pass-alt",
+  "en": "Solved: stopped at",
+  "my": "ဖြေရှင်းပြီး: ရပ်သွားတဲ့ နေရာ",
+  "back": "Solved: where it stopped"
+ },
+ "l1/decide:srcNote": {
+  "status": "pass-alt",
+  "en": "Speed 0.26 m/s and 5 scans/s come from the TF-Transform-Explorer example config.",
+  "my": "အမြန်နှုန်း 0.26 m/s နဲ့ 5 scans/s ဆိုတာ TF-Transform-Explorer ရဲ့ နမူနာ config ကနေ ယူထားတာပါ။",
+  "back": "The speed of 0.26 m/s and 5 scans/s are taken from the sample config of TF-Transform-Explorer."
+ },
+ "l1/decide:stopAt": {
+  "status": "pass-alt",
+  "en": "stop_at (m)",
+  "my": "stop_at (m)",
+  "back": "stop_at (m)"
+ },
+ "l1/decide:title": {
+  "status": "pass-alt",
+  "en": "Python: a value and a decision",
+  "my": "Python: တန်ဖိုး တစ်ခုနဲ့ ဆုံးဖြတ်ချက် တစ်ခု",
+  "back": "Python: one value and one decision"
+ },
+ "l1/decide:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရ",
+  "back": "Glossary"
+ },
+ "l1/intro:lead": {
+  "status": "pass-alt",
+  "en": "One robot, one wall, five small steps. By the end you can read the code that makes it stop in time: in Python, in C++, started from a terminal.",
+  "my": "စက်ရုပ် တစ်စီး၊ နံရံ တစ်ခု၊ အဆင့်ငယ် 5 ဆင့်ပါ။ အဆုံးမှာ စက်ရုပ်ကို အချိန်မီ ရပ်စေတဲ့ ကုဒ်ကို Python နဲ့ C++ နဲ့ ဖတ်နိုင်ပြီး terminal ကနေ စတင်နိုင်ပါပြီ။",
+  "back": "One robot, one wall, 5 small steps. At the end, you will be able to read, in Python and C++, the code that makes the robot stop in time, and start it from the terminal."
+ },
+ "l1/intro:start": {
+  "status": "pass-alt",
+  "en": "Start with 1.1 →",
+  "my": "1.1 ကနေ စ →",
+  "back": "Start from 1.1 →"
+ },
+ "l1/intro:title": {
+  "status": "pass-alt",
+  "en": "Level 1: programming for robots",
+  "my": "Level 1: စက်ရုပ်အတွက် ပရိုဂရမ်ရေးနည်း",
+  "back": "Level 1: how to write programs for a robot"
+ },
+ "l1/shell:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: in a new terminal, make ros2 pkg list print the packages.",
+  "my": "စိန်ခေါ်မှု: terminal အသစ်တစ်ခုမှာ ros2 pkg list က package တွေကို ပြအောင် လုပ်ပါ။",
+  "back": "Challenge: in a new terminal, make ros2 pkg list show the packages."
+ },
+ "l1/shell:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "pwd",
+  "my": "pwd",
+  "back": "pwd"
+ },
+ "l1/shell:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "print the folder you are in",
+  "my": "သင်ရှိနေတဲ့ folder ကို ပြ",
+  "back": "Show the folder you are in"
+ },
+ "l1/shell:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "ls",
+  "my": "ls",
+  "back": "ls"
+ },
+ "l1/shell:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "list what is in a folder",
+  "my": "folder ထဲမှာ ဘာတွေ ရှိလဲ စာရင်းပြ",
+  "back": "List what is in the folder"
+ },
+ "l1/shell:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "cd",
+  "my": "cd",
+  "back": "cd"
+ },
+ "l1/shell:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "change folder (cd .. = up one, cd ~ = home)",
+  "my": "folder ပြောင်း (cd .. = တစ်ဆင့် အပေါ်၊ cd ~ = home)",
+  "back": "Change folder (cd .. = one level up, cd ~ = home)"
+ },
+ "l1/shell:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "mkdir",
+  "my": "mkdir",
+  "back": "mkdir"
+ },
+ "l1/shell:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "make a new folder",
+  "my": "folder အသစ် ဆောက်",
+  "back": "Create a new folder"
+ },
+ "l1/shell:glossary.4.0": {
+  "status": "pass-alt",
+  "en": "cat",
+  "my": "cat",
+  "back": "cat"
+ },
+ "l1/shell:glossary.4.1": {
+  "status": "pass-alt",
+  "en": "print a file",
+  "my": "ဖိုင်ကို ပြ",
+  "back": "Show a file"
+ },
+ "l1/shell:glossary.5.0": {
+  "status": "pass-alt",
+  "en": "source",
+  "my": "source",
+  "back": "source"
+ },
+ "l1/shell:glossary.5.1": {
+  "status": "pass-alt",
+  "en": "run a setup file in this terminal (adds ros2)",
+  "my": "setup ဖိုင်ကို ဒီ terminal ထဲမှာ run (ros2 ကို ထည့်ပေး)",
+  "back": "Run the setup file in this terminal (puts ros2 in)"
+ },
+ "l1/shell:glossary.6.0": {
+  "status": "pass-alt",
+  "en": "echo",
+  "my": "echo",
+  "back": "echo"
+ },
+ "l1/shell:glossary.6.1": {
+  "status": "pass-alt",
+  "en": "print text or a variable: echo $ROS_DISTRO",
+  "my": "စာသား ဒါမှမဟုတ် variable ကို ပြ: echo $ROS_DISTRO",
+  "back": "Show text or a variable: echo $ROS_DISTRO"
+ },
+ "l1/shell:glossary.7.0": {
+  "status": "pass-alt",
+  "en": "ros2",
+  "my": "ros2",
+  "back": "ros2"
+ },
+ "l1/shell:glossary.7.1": {
+  "status": "pass-alt",
+  "en": "the ROS 2 command: ros2 pkg list, ros2 topic list, ...",
+  "my": "ROS 2 command: ros2 pkg list၊ ros2 topic list စတာတွေပါ။",
+  "back": "ROS 2 commands: ros2 pkg list, ros2 topic list, and so on."
+ },
+ "l1/shell:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: the 8 terminal commands you use every day with ROS 2, and why ros2 is \"not found\" in a new terminal.",
+  "my": "သင်ယူရမယ့်အရာ: ROS 2 နဲ့ နေ့တိုင်း သုံးတဲ့ terminal command 8 ခုနဲ့ terminal အသစ်မှာ ros2 က ဘာကြောင့် \"not found\" ဖြစ်ရလဲဆိုတာပါ။",
+  "back": "What you learn: the 8 terminal commands used every day with ROS 2, and why ros2 is \"not found\" in a new terminal."
+ },
+ "l1/shell:lines.0": {
+  "status": "pass-alt",
+  "en": "The terminal is a text window where you type a command, press Enter, and read the answer. Robots are run this way.",
+  "my": "terminal ဆိုတာ command တစ်ခု ရိုက်ထည့်၊ Enter နှိပ်ပြီး အဖြေကို ဖတ်ရတဲ့ စာသား window တစ်ခုပါ။ စက်ရုပ်တွေကို ဒီနည်းနဲ့ run ကြပါတယ်။",
+  "back": "A terminal is a text window where you type a command, press Enter, and read the answer. This is how robots are run."
+ },
+ "l1/shell:lines.1": {
+  "status": "pass-alt",
+  "en": "You are always inside one folder. pwd shows it, ls lists it, cd moves you.",
+  "my": "သင်ဟာ folder တစ်ခုထဲမှာ အမြဲ ရှိနေပါတယ်။ pwd က အဲဒီ folder ကို ပြပါတယ်၊ ls က အထဲက အရာတွေကို စာရင်းပြပါတယ်၊ cd က သင့်ကို ရွှေ့ပေးပါတယ်။",
+  "back": "You are always inside a folder. pwd shows that folder, ls lists what is inside, cd moves you."
+ },
+ "l1/shell:lines.2": {
+  "status": "pass-alt",
+  "en": "ros2 only exists after source /opt/ros/humble/setup.bash. A new terminal starts without it, unless ~/.bashrc sources it.",
+  "my": "ros2 က source /opt/ros/humble/setup.bash လုပ်ပြီးမှသာ ရှိပါတယ်။ ~/.bashrc က အဲဒါကို source မလုပ်ထားရင် terminal အသစ်က အဲဒါ မပါဘဲ စပါတယ်။",
+  "back": "ros2 exists only after you do source /opt/ros/humble/setup.bash. If ~/.bashrc does not source it, a new terminal starts without it."
+ },
+ "l1/shell:newTerm": {
+  "status": "pass-alt",
+  "en": "Break it: open a new terminal",
+  "my": "ဖျက်ကြည့်: terminal အသစ် ဖွင့်",
+  "back": "Break it: open a new terminal"
+ },
+ "l1/shell:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet: ros2 has not worked in this terminal.",
+  "my": "မရသေး: ဒီ terminal မှာ ros2 မအလုပ်လုပ်သေးပါဘူး။",
+  "back": "Not yet: ros2 does not work in this terminal yet."
+ },
+ "l1/shell:runsHere": {
+  "status": "pass-alt",
+  "en": "A pretend terminal in the page (JavaScript), not your computer: one folder tree, 8 commands.",
+  "my": "ဒါက သင့်ကွန်ပျူတာ မဟုတ်ပါဘူး၊ စာမျက်နှာထဲက အတု terminal (JavaScript) ပါ: folder tree တစ်ခုနဲ့ command 8 ခု ပါပါတယ်။",
+  "back": "This is not your computer; it is a fake terminal (JavaScript) inside the page: it has a folder tree and 8 commands."
+ },
+ "l1/shell:solved": {
+  "status": "pass-alt",
+  "en": "Solved: ros2 works in this terminal.",
+  "my": "ဖြေရှင်းပြီး: ဒီ terminal မှာ ros2 အလုပ်လုပ်ပါပြီ။",
+  "back": "Solved: ros2 works in this terminal."
+ },
+ "l1/shell:title": {
+  "status": "pass-alt",
+  "en": "The terminal: 8 commands",
+  "my": "terminal: command 8 ခု",
+  "back": "terminal: 8 commands"
+ },
+ "l1/shell:words": {
+  "status": "pass-alt",
+  "en": "The 8 commands",
+  "my": "command 8 ခု",
+  "back": "8 commands"
+ },
+ "l1/shell:yours": {
+  "status": "pass-alt",
+  "en": "Your terminal: type a command, press Enter",
+  "my": "သင့် terminal: command တစ်ခု ရိုက်ပြီး Enter နှိပ်",
+  "back": "Your terminal: type a command and press Enter"
+ },
  "l3/tflab:check": {
   "status": "pass",
   "en": "Check my guess",

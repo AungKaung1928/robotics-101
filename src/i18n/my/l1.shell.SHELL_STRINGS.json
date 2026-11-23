@@ -1,0 +1,50 @@
+{
+ "title": "terminal: command 8 ခု",
+ "learn": "သင်ယူရမယ့်အရာ: ROS 2 နဲ့ နေ့တိုင်း သုံးတဲ့ terminal command 8 ခုနဲ့ terminal အသစ်မှာ ros2 က ဘာကြောင့် \"not found\" ဖြစ်ရလဲဆိုတာပါ။",
+ "lines": [
+  "terminal ဆိုတာ command တစ်ခု ရိုက်ထည့်၊ Enter နှိပ်ပြီး အဖြေကို ဖတ်ရတဲ့ စာသား window တစ်ခုပါ။ စက်ရုပ်တွေကို ဒီနည်းနဲ့ run ကြပါတယ်။",
+  "သင်ဟာ folder တစ်ခုထဲမှာ အမြဲ ရှိနေပါတယ်။ pwd က အဲဒီ folder ကို ပြပါတယ်၊ ls က အထဲက အရာတွေကို စာရင်းပြပါတယ်၊ cd က သင့်ကို ရွှေ့ပေးပါတယ်။",
+  "ros2 က source /opt/ros/humble/setup.bash လုပ်ပြီးမှသာ ရှိပါတယ်။ ~/.bashrc က အဲဒါကို source မလုပ်ထားရင် terminal အသစ်က အဲဒါ မပါဘဲ စပါတယ်။"
+ ],
+ "runsHere": "ဒါက သင့်ကွန်ပျူတာ မဟုတ်ပါဘူး၊ စာမျက်နှာထဲက အတု terminal (JavaScript) ပါ: folder tree တစ်ခုနဲ့ command 8 ခု ပါပါတယ်။",
+ "yours": "သင့် terminal: command တစ်ခု ရိုက်ပြီး Enter နှိပ်",
+ "newTerm": "ဖျက်ကြည့်: terminal အသစ် ဖွင့်",
+ "challenge": "စိန်ခေါ်မှု: terminal အသစ်တစ်ခုမှာ ros2 pkg list က package တွေကို ပြအောင် လုပ်ပါ။",
+ "solved": "ဖြေရှင်းပြီး: ဒီ terminal မှာ ros2 အလုပ်လုပ်ပါပြီ။",
+ "notYet": "မရသေး: ဒီ terminal မှာ ros2 မအလုပ်လုပ်သေးပါဘူး။",
+ "words": "command 8 ခု",
+ "glossary": [
+  [
+   "pwd",
+   "သင်ရှိနေတဲ့ folder ကို ပြ"
+  ],
+  [
+   "ls",
+   "folder ထဲမှာ ဘာတွေ ရှိလဲ စာရင်းပြ"
+  ],
+  [
+   "cd",
+   "folder ပြောင်း (cd .. = တစ်ဆင့် အပေါ်၊ cd ~ = home)"
+  ],
+  [
+   "mkdir",
+   "folder အသစ် ဆောက်"
+  ],
+  [
+   "cat",
+   "ဖိုင်ကို ပြ"
+  ],
+  [
+   "source",
+   "setup ဖိုင်ကို ဒီ terminal ထဲမှာ run (ros2 ကို ထည့်ပေး)"
+  ],
+  [
+   "echo",
+   "စာသား ဒါမှမဟုတ် variable ကို ပြ: echo $ROS_DISTRO"
+  ],
+  [
+   "ros2",
+   "ROS 2 command: ros2 pkg list၊ ros2 topic list စတာတွေပါ။"
+  ]
+ ]
+}
