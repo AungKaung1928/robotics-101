@@ -1,0 +1,3 @@
+/* Challenge-solved burst (lane anim): the mascot's two spark colours. */
+.celebrate circle { fill: var(--robot); }
+.celebrate circle[data-i='1'] { fill: var(--free); }

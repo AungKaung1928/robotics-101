@@ -43,11 +43,18 @@ export const SPARK_AT = CROUCH + AIR / 2
  * Positions in the mascot's 64-unit box.
  */
 export function sparks(time: number): { x: number; y: number; o: number }[] {
-  const t = time - SPARK_AT
-  if (t <= 0 || t >= SPARK_S) return []
-  return Array.from({ length: SPARKS }, (_, i) => {
-    const a = ((i / (SPARKS - 1)) * 120 - 60) * (Math.PI / 180), v = SPEED * (Math.min(i, SPARKS - 1 - i) % 2 ? 0.8 : 1)
-    return { x: 32 + v * Math.sin(a) * t, y: 12 - HEIGHT - v * Math.cos(a) * t + 0.5 * G * t * t, o: 1 - t / SPARK_S }
+  return burst(time - SPARK_AT, 32, 12 - HEIGHT)
+}
+
+/**
+ * A burst of `n` sparks from (x, y): thrown in a fan (−60° … +60° from straight up), every other one a little slower,
+ * then falling under gravity and fading over `life` s. Units are the figure's own (px in the mascot's 64 box).
+ */
+export function burst(t: number, x: number, y: number, n = SPARKS, speed = SPEED, g = G, life = SPARK_S): { x: number; y: number; o: number }[] {
+  if (t <= 0 || t >= life) return []
+  return Array.from({ length: n }, (_, i) => {
+    const a = ((i / (n - 1)) * 120 - 60) * (Math.PI / 180), v = speed * (Math.min(i, n - 1 - i) % 2 ? 0.8 : 1)
+    return { x: x + v * Math.sin(a) * t, y: y - v * Math.cos(a) * t + 0.5 * g * t * t, o: 1 - t / life }
   })
 }
 
