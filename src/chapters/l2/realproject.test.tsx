@@ -5,6 +5,7 @@ import { STRINGS } from '../../i18n'
 import { LEVEL2_CHAPTERS } from '.'
 import RealProject from './RealProject'
 import { REAL } from './realproject'
+import { REALPROJECT_STRINGS } from './realproject.strings'
 
 const REPO = process.env.TFE_REPO
 const show = (file: string) => spawnSync('git', ['-C', REPO!, 'show', `origin/main:${file}`], { encoding: 'utf8' }).stdout.split('\n')
@@ -17,7 +18,13 @@ describe('from a real project (Level 2)', () => {
     for (const l of ['en', 'ja'] as const) {
       const html = renderToStaticMarkup(<RealProject id={id} t={STRINGS[l]} />)
       for (const c of REAL[id].cites) expect(html).toContain(`blob/main/${c.file}#L${c.line}`)
+      const sentence = REALPROJECT_STRINGS[l][id as keyof typeof REALPROJECT_STRINGS.en]
+      expect(sentence.length).toBeGreaterThan(20)
+      expect(html).toContain(renderToStaticMarkup(<>{sentence}</>)) // the sentence from the strings file (Burmese-translatable)
     }
+  })
+  it('the strings file has exactly the box ids plus the heading, in EN and JA', () => {
+    for (const l of ['en', 'ja'] as const) expect(Object.keys(REALPROJECT_STRINGS[l]).sort()).toEqual(['head', ...Object.keys(REAL)].sort())
   })
   describe.skipIf(!REPO)('cited lines at origin/main hold what the box says (TFE_REPO)', () => {
     it.each(Object.entries(REAL).flatMap(([id, b]) => b.cites.map((c) => [id, c.file, c.line, c.needle] as const)))('%s: %s:%i', (_, file, line, needle) => {
