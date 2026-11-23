@@ -36,3 +36,13 @@ describe('EP2 late messages', () => {
     expect(sc.frame(1080)).toEqual(sc.frame(1080))
   })
 })
+
+describe('EP2 challenge on the real slider (0.02..1.00 s, step 0.01)', () => {
+  it('solvable exactly from 0.04 to 0.17 s: below drops good data, above lets #9 back in', () => {
+    const solved: number[] = []
+    for (let v = 2; v <= 100; v++) if (inGoal(run(v * 10))) solved.push(v / 100)
+    expect(solved[0]).toBe(0.04)
+    expect(solved.at(-1)).toBe(0.17)
+    expect(solved).toHaveLength(14)
+  })
+})
