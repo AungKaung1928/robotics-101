@@ -11,7 +11,10 @@ const S = 280, M = 20, VW = 2 * M + 1.5 * S, VH = 2 * M + S
 
 /** The chapter's own model (src/chapters/l0/think.ts = l1/decide): d = the robot's FRONT to the wall, one decision per
  * scan, starting startM away; run(stopAt) gives where it stopped (final) or that it crashed. */
-export type ThinkModel = { run: (stopAt: number) => { final: number; crashed: boolean; stopS: number }; speed: number; startM: number }
+// ticks (optional): every check the chapter's loop made (time, front distance), drawn as marks under the path
+export type ThinkModel = {
+  run: (stopAt: number) => { final: number; crashed: boolean; stopS: number; ticks?: { tS: number; distance: number }[] }; speed: number; startM: number
+}
 
 type Out = { stopX: number; tStop: number; fired: boolean; bumped: boolean }
 /** Geometry and outcomes for the built-in model (think.ts: centre reading, 0.12 m sensor floor) or a chapter model. */
@@ -49,6 +52,7 @@ export default function ThinkScene({ stopAt, t, v = 0.2, wallX = 1.2, stopWord =
   const pop = fired ? arrivalScale(since) : 1, by0 = Y(Y0), bx = Math.max(M + 34, Math.min(X(x), VW - M - bw + 24)), by = Y(Y0) - 98 // bubble inside the room, above the wall top
   // The d the rule reads, drawn at sensor height: a line from where d is measured to the wall, its value on top; lit while d < stopAt.
   // '?' = the sensor sees nothing (built-in model under 0.12 m): the reader sees why a tiny rule never fires.
+  const seen = (model?.run(stopAt).ticks ?? []).filter((k) => k.tS <= t + 1e-9)
   const d = sim.reading(x), dOn = d !== null && d < stopAt, dy = Y(Y0), d0 = X(sim.from(x)), d1 = X(d === null ? sim.wallAt : sim.from(x) + d)
   const dText = d === null ? 'd = ?' : `d = ${d.toFixed(2)} m`, dw = dText.length * 8.4 // 14 px monospace: 0.6 em per letter
   const wide = d1 - d0 > dw + 10
@@ -66,6 +70,9 @@ export default function ThinkScene({ stopAt, t, v = 0.2, wallX = 1.2, stopWord =
       <g transform={`translate(${X(x) + 20} ${Y(Y0)}) scale(${sx} ${1 / sx}) translate(${-X(x) - 20} ${-Y(Y0)})`}>
         <RobotTop x={X(x)} y={Y(Y0)} deg={0} rolledL={X(x) - X(sim.x0)} rolledR={X(x) - X(sim.x0)} mood={bumped ? 'dizzy' : fired ? 'proud' : 'curious'} t={since} />
       </g>
+      {/* one mark per check made so far, where the robot's front was: the loop only looks at these spots (chapter model) */}
+      <g className="tk-ticks" data-ticks={seen.length}>{seen.map((k, i) => { const last = i === seen.length - 1 && fired, kx = X(sim.mark(k.distance))
+        return <line key={i} className={last ? 'tk-tick is-fired' : 'tk-tick'} x1={kx} x2={kx} y1={dy + 20} y2={dy + (last ? 30 : 25)} /> })}</g>
       <g className={dOn ? 'tk-d is-on' : d === null ? 'tk-d is-blind' : 'tk-d'} data-d={d === null ? 'none' : d.toFixed(2)}>
         <line x1={d0} x2={d1} y1={dy} y2={dy} /><line x1={d1} x2={d1} y1={dy - 4} y2={dy + 4} />
         {/* room on the line: centred above it; near the wall: beyond the wall if the room goes on, else below the robot */}

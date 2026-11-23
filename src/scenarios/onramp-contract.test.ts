@@ -119,6 +119,26 @@ describe('ThinkScene with the chapter model tells the chapter story', () => {
   })
 })
 
+describe('ThinkScene check marks are the chapter loop ticks', () => {
+  it('one mark per tick made by t; the last is lit only when the rule fired; spacing = STEP_M', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: ThinkScene } = await import('./ThinkScene')
+    const th = await import('../chapters/l0/think'), dc = await import('../chapters/l1/decide')
+    const model = { run: (a: number) => th.run(a), speed: th.SPEED, startM: th.START_M }
+    const at = (a: number, t: number) => renderToStaticMarkup(createElement(ThinkScene, { stopAt: a, t, model, label: '' }))
+    for (const a of [th.RULE_M, 0.25, 0.01]) {
+      const r = th.run(a), h = at(a, 60)
+      expect(h).toContain(`data-ticks="${r.ticks.length}"`)
+      expect((h.match(/tk-tick is-fired/g) ?? []).length).toBe(r.crashed ? 0 : 1)
+      const xs = [...h.matchAll(/class="tk-tick[^"]*" x1="([\d.]+)"/g)].map((m) => +m[1])
+      const gaps = xs.slice(1).map((x, i) => x - xs[i])
+      expect(Math.max(...gaps) - Math.min(...gaps)).toBeLessThan(1e-6) // equal spacing: one STEP_M per check
+    }
+    expect(at(th.RULE_M, 1)).toContain(`data-ticks="${Math.floor(1 * dc.SCAN_HZ) + 1}"`) // ticks at 0, 1/HZ, ... <= 1 s
+  })
+})
+
 describe('ThinkScene built-in model: d is the sensor reading', () => {
   it('a rule under the 0.12 m floor: at the end the sensor sees nothing, d is drawn as ?', async () => {
     const { renderToStaticMarkup } = await import('react-dom/server')
