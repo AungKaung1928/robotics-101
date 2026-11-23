@@ -9,6 +9,10 @@ import { SECONDS, TOP_SPEED, path } from './move'
 import './l0.css'
 import './move.css'
 import './act.css'
+import AlreadyKnow from './AlreadyKnow'
+import Face from './Face'
+import { mood } from './robotmood'
+import './face.css'
 
 const { px: PX, ox: OX, oy: OY } = VIEW
 const sx = (x: number) => OX + x * PX
@@ -42,14 +46,14 @@ export default function ActChapter({ t }: { t: Strings }) {
             <rect className={`move-wheel${Math.abs(k.right) > TOP_SPEED + 1e-9 ? ' is-slip' : ''}`} x="-10" y="-26" width="20" height="8" rx="2" />
             <rect className={`move-wheel${Math.abs(k.left) > TOP_SPEED + 1e-9 ? ' is-slip' : ''}`} x="-10" y="18" width="20" height="8" rx="2" />
             <circle className="move-body" r="19" />
-            <circle className="move-eye" cx="10" cy="-6" r="2.5" />
-            <circle className="move-eye" cx="10" cy="6" r="2.5" />
+            <Face mood={mood({ broken: fast, solved: picked === 'later' })} />
           </g>
           {stopped && <text className="act-stop" x={sx(p.x)} y={sy(p.y) - 34} textAnchor="middle">+{(rollOnM(v) * 100).toFixed(1)} cm</text>}
         </svg>
       </div>
       <div className="panel">
         <p className="learn">{s.learn}</p>
+        <AlreadyKnow id="act" t={t} />
         {s.steps.map((l) => <p key={l}>{l}</p>)}
         <Slider hint={t.drag} label={s.forward} value={v} min={0} max={TOP_SPEED} step={0.01} mark={0.15} fmt={(x) => x.toFixed(2)} onChange={(x) => setV(Math.round(x * 100) / 100)} />
         <div className="act-turn"><Slider label={s.turn} value={w} min={-TURN_MAX} max={TURN_MAX} step={0.1} mark={0} fmt={(x) => x.toFixed(1)} onChange={(x) => setW(Math.round(x * 10) / 10)} /></div>

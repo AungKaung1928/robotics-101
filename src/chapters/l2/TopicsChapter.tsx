@@ -7,6 +7,7 @@ import { TOPICS_STRINGS } from './topics.strings'
 import '../l1/l1.css'
 import './l2.css'
 import Gloss from '../l1/Gloss'
+import RealProject from './RealProject'
 
 const W = 640, H = 330, BW = 170, BH = 40
 const PUB = { x: 100, y: 150 }
@@ -69,6 +70,7 @@ export default function TopicsChapter({ t }: { t: Strings }) {
       <div className="panel">
         <p className="learn">{s.learn}</p>
         {s.lines.map((l) => <p key={l}>{l}</p>)}
+        <p className="note" data-k="everyday">{s.everyday}</p>
         <label className="slider"><span>{s.mine}</span>
           <input className="code" style={{ width: '100%', minWidth: 0 }} value={mine} spellCheck={false} autoCapitalize="off"
             onChange={(e) => { setMine(e.target.value); setTS(DURATION_MS / 1000) }} />
@@ -87,6 +89,7 @@ export default function TopicsChapter({ t }: { t: Strings }) {
         <p className="runs">{s.cliNote(TOPICS[0].measuredHz)}</p>
         <p className="group-h">{s.words}</p>
         <Gloss items={s.glossary} />
+        <RealProject id="topics" t={t} />
         <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/config/gz_bridge.yaml#L8-L31`}>gz_bridge.yaml:8-31</a>, <a href={`${SOURCE_REPO}/blob/main/config/slam_params.yaml#L7`}>slam_params.yaml:7</a>, <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L99`}>nav2_params.yaml:99, 129</a> (/scan), <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L18`}>:18</a> (controller_frequency 20), <a href={`${SOURCE_REPO}/blob/main/README.md`}>README (measured rates)</a> · <a href="https://design.ros2.org/articles/topic_and_service_names.html">ROS 2 design: topic names</a>, <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html">Humble: Understanding topics</a></p>
       </div>
     </>

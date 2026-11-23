@@ -16,6 +16,7 @@ import { LANG_LABEL, STRINGS, initialLang, titleOf, type Lang, type Strings } fr
 import { CHAPTER_ICON, Icon } from './icons'
 import type { ChapterMeta } from './anim/contract'
 import { LEVEL_BODY, levelPage, readingIndex, type LevelPage } from './content/levels'
+import { DOTS, GROWS_FROM, findChapter } from './content/path'
 import { markDone } from './lib/progress'
 import { CHAPTERS, keyTarget, neighbour, parseRoute, type ChapterId } from './lib/route'
 
@@ -94,6 +95,18 @@ export default function App() {
   )
 }
 
+/** Difficulty dots and the earlier chapter this one grows from (src/content/path.ts); nothing for chapters outside the scale. */
+function PathLine({ id, t }: { id: string; t: Strings }) {
+  const dots = DOTS[id], from = GROWS_FROM[id] ? findChapter(GROWS_FROM[id]) : null
+  if (!dots && !from) return null
+  return (
+    <p className="pathline">
+      {dots ? <span className="dots" role="img" aria-label={`${t.levels.difficulty} ${dots} / 5`} data-k="dots">{[1, 2, 3, 4, 5].map((i) => <i key={i} className={i <= dots ? 'on' : undefined} />)}</span> : null}
+      {from ? <span>{t.levels.knows}: <a href={from.href}>{from.num} {titleOf(from.meta, t)}</a></span> : null}
+    </p>
+  )
+}
+
 function LevelChapter({ p, t }: { p: LevelPage; t: Strings }) {
   const Body = LEVEL_BODY[p.meta.id]
   const title = (c: ChapterMeta) => titleOf(c, t)
@@ -104,6 +117,7 @@ function LevelChapter({ p, t }: { p: LevelPage; t: Strings }) {
         <div>
           <p className="eyebrow">{p.meta.level === 'ep' ? `${t.levels.ep} · ${t.levels.epNote}` : `${t.levels.one} ${p.meta.level} · ${t.levels.names[p.meta.level]}`}</p>
           <h1><span className="num">{p.num}</span> <Icon name={p.meta.icon} /> {title(p.meta)}</h1>
+          <PathLine id={p.meta.id} t={t} />
         </div>
       </div>
       <Body t={t} />

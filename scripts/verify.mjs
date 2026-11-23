@@ -3,9 +3,12 @@ import { spawn, spawnSync } from 'node:child_process'
 import { existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { createServer } from 'node:net'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
-const PORT = Number(process.env.VERIFY_PORT ?? 4191)
+// A free port per run: on a fixed port a second worktree's preview answered instead of ours and its build was checked (2026-11-24).
+const freePort = () => new Promise((ok) => { const s = createServer().listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => ok(p)) }) })
+const PORT = Number(process.env.VERIFY_PORT ?? (await freePort()))
 const BASE = `http://localhost:${PORT}/`
 const DIST = process.env.VERIFY_DIST ?? 'dist'
 const OUT = join(ROOT, 'verify-out')
@@ -30,6 +33,7 @@ const ROUTES = [
   { hash: '#/grid', readouts: ['cells', 'scans', 'known'], equals: { scans: '1', kept: '1.9 s', between: '8.7–9.2', republish: '5 s' }, has: ' %"' }, // canvas label carries the result
   { hash: '#/0/loop', has: 'class="num">0.6<', equals: { blind: '5.2 cm' } },
   { hash: '#/0/meet', has: 'class="num">0.1<' },
+  { hash: '#/0/think', has: 'class="pathline"' },
   { hash: '#/0/pipe', has: 'class="num">0.9<' },
   { hash: '#/3/tflab', has: 'class="num">3.3<' },
   { hash: '#/ep/bfs', has: 'class="num">EP1<' },
