@@ -50,3 +50,27 @@ export function playStop(events: number[], t: number, end: number, pauseAtSteps:
   const next = [...events].sort((a, b) => a - b).find((e) => e > t + 1e-9)
   return next === undefined ? end : Math.min(next, end)
 }
+
+/** Thumb diameter of .squish-range (range.css); the thumb centre travels from THUMB/2 to width - THUMB/2. */
+export const SCRUB_THUMB_PX = 22
+
+/**
+ * Scrubber track as one CSS gradient: played part filled, the rest plain, a 3 px transparent gap at every step event
+ * inside (0, end), like chapter markers on a video progress bar, so the segments are seen before Play. Gaps show the
+ * page behind (any theme). Positions follow the thumb centre (THUMB/2 + (100% - THUMB) * f), so the thumb sits exactly
+ * on a gap when t is at that event.
+ */
+export function scrubTrack(events: number[], t: number, end: number): string {
+  const at = (f: number) => `calc(${SCRUB_THUMB_PX / 2}px + (100% - ${SCRUB_THUMB_PX}px) * ${+f.toFixed(4)})`
+  const f = end > 0 ? Math.min(1, Math.max(0, t / end)) : 0
+  const gaps = [...new Set(events)].filter((e) => e > 1e-9 && e < end - 1e-9).map((e) => e / end).sort((a, b) => a - b)
+  const stops: string[] = []
+  const seg = (a: number, b: number, to: string) => {
+    if (f > a && f < b) stops.push(`var(--robot) 0 ${at(f)}`)
+    stops.push(`${b <= f ? 'var(--robot)' : 'var(--rule)'} 0 ${to}`)
+  }
+  let prev = 0
+  for (const g of gaps) { seg(prev, g, `calc(${at(g)} - 1.5px)`); stops.push(`transparent 0 calc(${at(g)} + 1.5px)`); prev = g }
+  seg(prev, 1, '100%')
+  return `linear-gradient(to right, ${stops.join(', ')})`
+}

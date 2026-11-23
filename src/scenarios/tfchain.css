@@ -1,0 +1,8 @@
+.tfc { width: 100%; height: auto; overflow: visible; }
+.tfc-node circle { fill: var(--surface); stroke: var(--ink-2); stroke-width: 2.5; transition: stroke 0.2s; }
+.tfc-node.is-reached circle { stroke: var(--free); }
+.tfc-node text { fill: var(--ink); font: 600 14px var(--mono); }
+.tfc-link { stroke: var(--free); stroke-width: 4; stroke-linecap: round; }
+.tfc-gap { stroke: var(--occ); stroke-width: 3; stroke-dasharray: 6 6; }
+.tfc-pulse { fill: var(--free); }
+@media (prefers-reduced-motion: reduce) { .tfc-node circle { transition: none; } }

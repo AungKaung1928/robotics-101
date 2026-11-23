@@ -15,7 +15,7 @@ export function bfs(w: number, h: number, blocked: boolean[], start: number): Bf
   for (let head = 0; head < q.length; head++) {
     const c = q[head], x = c % w, y = (c - x) / w
     order.push(c)
-    for (const [nx, ny] of [[x + 1, y], [x, y + 1], [x - 1, y], [x, y - 1]]) {
+    for (const [nx, ny] of [[x, y - 1], [x + 1, y], [x, y + 1], [x - 1, y]]) {
       if (nx < 0 || ny < 0 || nx >= w || ny >= h) continue
       const n = ny * w + nx
       if (blocked[n] || dist[n] >= 0) continue

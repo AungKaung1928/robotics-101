@@ -1,3 +1,7 @@
 /* Challenge-solved burst (lane anim): the mascot's two spark colours. */
 .celebrate circle { fill: var(--robot); }
 .celebrate circle[data-i='1'] { fill: var(--free); }
+.level-done-wrap { display: inline-flex; align-items: flex-end; gap: 4px; }
+.level-done { width: auto; height: 70px; overflow: visible; }
+.ld-dot { fill: var(--surface); stroke: var(--ink-2); stroke-width: 2; }
+.ld-dot.is-done { fill: var(--free); stroke: var(--free); }

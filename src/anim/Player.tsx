@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import type { Strings } from '../i18n'
 import { advance, stepEvent } from '../lib/timeline'
-import { GLIDE_MS, HOLD_KEY, currentStep, fromKeyboard, glide, playStop, playerKey, shouldAutoplay } from './motion'
+import { GLIDE_MS, HOLD_KEY, currentStep, fromKeyboard, glide, playStop, playerKey, scrubTrack, shouldAutoplay } from './motion'
 import { UI_STYLE } from './spring'
 import './player.css'
+import './range.css'
 
 const held = () => typeof sessionStorage !== 'undefined' && sessionStorage.getItem(HOLD_KEY) === '1'
 const reducedMotion = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -89,7 +90,8 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
       <button type="button" onClick={(e) => step(1, still || fromKeyboard(e))} disabled={from >= Math.max(...events) - 1e-9}>
         {s.next}{nextLabel && <span className="wide">: {nextLabel}</span>} →
       </button>
-      <input className="scrub" type="range" min={0} max={end} step={end / 200} value={t} aria-label={s.player.scrub}
+      <input className="scrub squish-range" type="range" min={0} max={end} step={end / 200} value={t} aria-label={s.player.scrub}
+        style={{ backgroundImage: scrubTrack(events, t, end) }}
         onChange={(e) => { setPlaying(false); setTarget(null); setT(Number(e.target.value)) }} />
       <span className="caption" data-k="step" aria-live="polite">{caption}</span>
       {labels && (

@@ -8,6 +8,7 @@ import DetectChapter from './components/DetectChapter'
 import GoalChapter from './components/GoalChapter'
 import GridChapter from './components/GridChapter'
 import MiniPlan from './components/MiniPlan'
+import PathLine from './components/PathLine'
 import { waypointValues } from './content/waypoints'
 import Overview from './components/Overview'
 import ScanChapter from './components/ScanChapter'
@@ -104,6 +105,7 @@ function LevelChapter({ p, t }: { p: LevelPage; t: Strings }) {
         <div>
           <p className="eyebrow">{p.meta.level === 'ep' ? `${t.levels.ep} · ${t.levels.epNote}` : `${t.levels.one} ${p.meta.level} · ${t.levels.names[p.meta.level]}`}</p>
           <h1><span className="num">{p.num}</span> <Icon name={p.meta.icon} /> {title(p.meta)}</h1>
+          <PathLine id={p.meta.id} t={t} />
         </div>
       </div>
       <Body t={t} />
