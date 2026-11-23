@@ -5,6 +5,7 @@ import { titleOf, type Strings } from '../i18n'
 import { CHAPTERS, type ChapterId } from '../lib/route'
 import { CHAPTER_ICON, Icon } from '../icons'
 import { EP_CHAPTERS } from '../chapters/ep'
+import { LEVEL0_GROUPS } from '../chapters/l0'
 import { LEVELS } from '../content/levels'
 import { readDone } from '../lib/progress'
 import Arena from './Arena'
@@ -35,6 +36,12 @@ export default function Overview({ t }: { t: Strings }) {
         onMouseEnter={() => setPeek(c)} onFocus={() => setPeek(c)}>{body}</a>
     )
   })
+  const chip = (c: (typeof LEVELS)[number][number], n: number, i: number) => (
+    <a key={c.id} href={`#/${n}/${c.id}`} className={done.has(c.id) ? 'is-done' : undefined}>
+      <Icon name={c.icon} /> <span>{n}.{i + 1} {titleOf(c, t)}</span>
+      {done.has(c.id) && <span className="tick" aria-label={t.levels.opened}>✓</span>}
+    </a>
+  )
   const map = (
     <section className="levelmap" aria-labelledby="levels-h">
       <h2 id="levels-h">{t.levels.heading}</h2>
@@ -43,15 +50,16 @@ export default function Overview({ t }: { t: Strings }) {
           <li key={n} className={chs.length ? undefined : 'is-soon'}>
             <span className="lv-n">{n}</span>
             <span className="lv-name">{t.levels.names[n]}</span>
-            {chs.length ? (
-              <span className="lv-chs">
-                {chs.map((c, i) => (
-                  <a key={c.id} href={`#/${n}/${c.id}`} className={done.has(c.id) ? 'is-done' : undefined}>
-                    <Icon name={c.icon} /> <span>{n}.{i + 1} {titleOf(c, t)}</span>
-                    {done.has(c.id) && <span className="tick" aria-label={t.levels.opened}>✓</span>}
-                  </a>
+            {chs.length ? (n === 0 ? (
+              <span className="lv-groups">
+                {LEVEL0_GROUPS.map((ids, g) => (
+                  <span key={g} className="lv-group" role="group" aria-label={t.levels.groups[g]}>
+                    <span className="lv-gname" aria-hidden="true">{t.levels.groups[g]}</span>
+                    <span className="lv-chs">{chs.filter((c) => ids.includes(c.id)).map((c) => chip(c, n, chs.indexOf(c)))}</span>
+                  </span>
                 ))}
               </span>
+            ) : <span className="lv-chs">{chs.map((c, i) => chip(c, n, i))}</span>
             ) : <span className="lv-chs note">{t.levels.soon}</span>}
           </li>
         ))}
