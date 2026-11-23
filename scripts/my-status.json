@@ -4433,6 +4433,1374 @@
   "my": "သင့် terminal: command တစ်ခု ရိုက်ပြီး Enter နှိပ်",
   "back": "Your terminal: type a command and press Enter"
  },
+ "l2/actions:attempt": {
+  "status": "pass-alt",
+  "en": "attempt",
+  "my": "ကြိုးစားမှု",
+  "back": "Attempt"
+ },
+ "l2/actions:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: goal inside a wall",
+  "my": "ဖျက်ကြည့်: နံရံထဲမှာ ပန်းတိုင်",
+  "back": "Break it: goal inside a wall"
+ },
+ "l2/actions:brokenNote": {
+  "status": "pass-alt",
+  "en": "Nav2 accepts the goal, cannot plan, and aborts. patrol_controller waits 2 s, retries up to max_retries = 3, then skips the waypoint.",
+  "my": "Nav2 က ပန်းတိုင်ကို လက်ခံပါတယ်၊ ဒါပေမဲ့ လမ်းကြောင်း မဆွဲနိုင်လို့ ရပ်ဆိုင်းလိုက်ပါတယ်။ patrol_controller က 2 s စောင့်ပြီး max_retries = 3 ကြိမ်အထိ ထပ်ကြိုးစားပါတယ်၊ ပြီးရင် အဲဒီ waypoint ကို ကျော်သွားပါတယ်။",
+  "back": "Nav2 accepts the goal, but it cannot plan a path so it aborts. patrol_controller waits 2 s and retries up to max_retries = 3 times, then skips that waypoint."
+ },
+ "l2/actions:cancel": {
+  "status": "pass-alt",
+  "en": "Cancel the goal now",
+  "my": "ပန်းတိုင်ကို အခု ပယ်ဖျက်",
+  "back": "Cancel the goal now"
+ },
+ "l2/actions:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: cancel the goal after the feedback says less than 1 m is left.",
+  "my": "စိန်ခေါ်မှု: 1 m ထက်နည်းတာပဲ ကျန်တော့တယ်လို့ feedback က ပြောပြီးမှ ပန်းတိုင်ကို ပယ်ဖျက်ပါ။",
+  "back": "Challenge: cancel the goal only after the feedback says less than 1 m remains."
+ },
+ "l2/actions:compare.0.0": {
+  "status": "pass-alt",
+  "en": "topic",
+  "my": "topic",
+  "back": "topic"
+ },
+ "l2/actions:compare.0.1": {
+  "status": "pass-alt",
+  "en": "a stream, nobody answers",
+  "my": "ဆက်တိုက် စီးဆင်းမှု၊ ဘယ်သူမှ မဖြေ",
+  "back": "Continuous stream, nobody answers"
+ },
+ "l2/actions:compare.0.2": {
+  "status": "pass-alt",
+  "en": "/scan",
+  "my": "/scan",
+  "back": "/scan"
+ },
+ "l2/actions:compare.1.0": {
+  "status": "pass-alt",
+  "en": "service",
+  "my": "service",
+  "back": "service"
+ },
+ "l2/actions:compare.1.1": {
+  "status": "pass-alt",
+  "en": "one request → one response",
+  "my": "တောင်းဆိုချက် တစ်ခု → တုံ့ပြန်ချက် တစ်ခု",
+  "back": "One request → one response"
+ },
+ "l2/actions:compare.1.2": {
+  "status": "pass-alt",
+  "en": "/slam_toolbox/save_map",
+  "my": "/slam_toolbox/save_map",
+  "back": "/slam_toolbox/save_map"
+ },
+ "l2/actions:compare.2.0": {
+  "status": "pass-alt",
+  "en": "action",
+  "my": "action",
+  "back": "action"
+ },
+ "l2/actions:compare.2.1": {
+  "status": "pass-alt",
+  "en": "goal → feedback … → result, can cancel",
+  "my": "ပန်းတိုင် → feedback … → ရလဒ်၊ ပယ်ဖျက်နိုင်",
+  "back": "Goal → feedback … → result, can be cancelled"
+ },
+ "l2/actions:compare.2.2": {
+  "status": "pass-alt",
+  "en": "navigate_to_pose",
+  "my": "navigate_to_pose",
+  "back": "navigate_to_pose"
+ },
+ "l2/actions:distance": {
+  "status": "pass-alt",
+  "en": "goal distance (m)",
+  "my": "ပန်းတိုင် အကွာအဝေး (m)",
+  "back": "Goal distance (m)"
+ },
+ "l2/actions:ev.accepted": {
+  "status": "pass-alt",
+  "en": "accepted",
+  "my": "လက်ခံပြီး",
+  "back": "Accepted"
+ },
+ "l2/actions:ev.goal": {
+  "status": "pass-alt",
+  "en": "goal",
+  "my": "ပန်းတိုင်",
+  "back": "Goal"
+ },
+ "l2/actions:ev.result": {
+  "status": "pass-alt",
+  "en": "result",
+  "my": "ရလဒ်",
+  "back": "Result"
+ },
+ "l2/actions:ev.skip": {
+  "status": "pass-alt",
+  "en": "patrol skips this waypoint",
+  "my": "ကင်းလှည့်မှုက ဒီ waypoint ကို ကျော်",
+  "back": "Patrol skips this waypoint"
+ },
+ "l2/actions:everyday": {
+  "status": "pass-alt",
+  "en": "Everyday: ordering a food delivery is an action. The shop accepts the order, the app shows where the courier is (feedback), then the food arrives (result); you can cancel on the way. Asking \"are you open?\" is a service.",
+  "my": "နေ့စဉ်ဘဝ ဥပမာ: အစားအစာ ပို့ဆောင်မှု မှာယူတာဟာ action တစ်ခုပါ။ ဆိုင်က အော်ဒါကို လက်ခံပါတယ်၊ app က ပို့ဆောင်သူ ဘယ်မှာ ရောက်နေလဲ ပြပါတယ် (feedback)၊ ပြီးရင် အစားအစာ ရောက်လာပါတယ် (ရလဒ်)။ လမ်းခုလတ်မှာ ပယ်ဖျက်လို့လည်း ရပါတယ်။ \"ဆိုင်ဖွင့်လား?\" လို့ မေးတာကတော့ service ပါ။",
+  "back": "Everyday example: ordering food delivery is an action. The shop accepts the order, the app shows where the courier is (feedback), then the food arrives (result). You can also cancel midway. Asking \"Is the shop open?\" is a service."
+ },
+ "l2/actions:fixIt": {
+  "status": "pass-alt",
+  "en": "Fix it: reachable goal",
+  "my": "ပြင်ကြည့်: ရောက်နိုင်တဲ့ ပန်းတိုင်",
+  "back": "Fix it: reachable goal"
+ },
+ "l2/actions:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "service",
+  "my": "service",
+  "back": "service"
+ },
+ "l2/actions:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "a request with exactly one response",
+  "my": "တုံ့ပြန်ချက် တစ်ခုတည်းသာ ရှိတဲ့ တောင်းဆိုချက်",
+  "back": "A request that has only one response"
+ },
+ "l2/actions:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "action",
+  "my": "action",
+  "back": "action"
+ },
+ "l2/actions:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "a long job: goal, feedback while it runs, one result; can be canceled",
+  "my": "အချိန်ကြာတဲ့ အလုပ်: ပန်းတိုင်၊ အလုပ်လုပ်နေစဉ် feedback၊ ရလဒ် တစ်ခု၊ ပယ်ဖျက်နိုင်",
+  "back": "Long-running job: goal, feedback while working, one result, can be cancelled"
+ },
+ "l2/actions:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "feedback",
+  "my": "feedback",
+  "back": "feedback"
+ },
+ "l2/actions:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "progress messages from the action server",
+  "my": "action server ဆီက အလုပ်တိုးတက်မှု message တွေ",
+  "back": "Progress messages from the action server"
+ },
+ "l2/actions:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "status 4 / 5 / 6",
+  "my": "အခြေအနေ 4 / 5 / 6",
+  "back": "Status 4 / 5 / 6"
+ },
+ "l2/actions:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "SUCCEEDED / CANCELED / ABORTED (action_msgs GoalStatus)",
+  "my": "SUCCEEDED / CANCELED / ABORTED (action_msgs GoalStatus)",
+  "back": "SUCCEEDED / CANCELED / ABORTED (action_msgs GoalStatus)"
+ },
+ "l2/actions:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: besides topics, nodes can ask a question (service) or give a long job with progress reports (action).",
+  "my": "သင်ယူရမယ့်အရာ: topic အပြင် node တွေက မေးခွန်းတစ်ခု မေးနိုင်ပါတယ် (service)၊ ဒါမှမဟုတ် အလုပ်တိုးတက်မှုကို အစီရင်ခံပေးတဲ့ အချိန်ကြာတဲ့ အလုပ်တစ်ခုကို ခိုင်းနိုင်ပါတယ် (action)။",
+  "back": "What to learn: besides topics, nodes can ask a question (service), or can ask for a long-running job that reports its progress (action)."
+ },
+ "l2/actions:left": {
+  "status": "pass-alt",
+  "en": "m left",
+  "my": "m ကျန်",
+  "back": "m remaining"
+ },
+ "l2/actions:lines.0": {
+  "status": "pass-alt",
+  "en": "A service is one request and one response, like \"save the map now\". The caller waits for the answer.",
+  "my": "service ဆိုတာ တောင်းဆိုချက် တစ်ခုနဲ့ တုံ့ပြန်ချက် တစ်ခုပါ၊ \"မြေပုံကို အခု သိမ်းပါ\" လိုမျိုးပါ။ ခေါ်တဲ့ဘက်က အဖြေကို စောင့်ပါတယ်။",
+  "back": "A service is one request and one response, like \"Save the map now\". The caller waits for the answer."
+ },
+ "l2/actions:lines.1": {
+  "status": "pass-alt",
+  "en": "An action is for jobs that take time, like \"drive to this point\". The server first accepts the goal, then sends feedback while it works, then one result. You can cancel it halfway.",
+  "my": "action ကို အချိန်ကြာတဲ့ အလုပ်တွေအတွက် သုံးပါတယ်၊ \"ဒီနေရာအထိ မောင်းသွားပါ\" လိုမျိုးပါ။ server က ပထမ ပန်းတိုင်ကို လက်ခံပါတယ်၊ အလုပ်လုပ်နေစဉ် feedback ပို့ပါတယ်၊ ပြီးတော့ ရလဒ် တစ်ခု ပို့ပါတယ်။ တစ်ဝက်တစ်ပျက်မှာ ပယ်ဖျက်လို့ ရပါတယ်။",
+  "back": "An action is used for long-running jobs, like \"Drive to this spot\". The server accepts the goal first, sends feedback while working, and then sends one result. It can be cancelled halfway."
+ },
+ "l2/actions:lines.2": {
+  "status": "pass-alt",
+  "en": "ros2-patrol-project's patrol_controller sends each waypoint to Nav2 as a NavigateToPose action. Nav2 reports distance_remaining in its feedback; this controller's feedback_callback ignores it.",
+  "my": "ros2-patrol-project ရဲ့ patrol_controller က waypoint တစ်ခုစီကို NavigateToPose action အဖြစ် Nav2 ဆီ ပို့ပါတယ်။ Nav2 က သူ့ feedback ထဲမှာ distance_remaining ကို ပြောပါတယ်၊ ဒါပေမဲ့ ဒီ controller ရဲ့ feedback_callback က အဲဒါကို လျစ်လျူရှုပါတယ်။",
+  "back": "The patrol_controller of ros2-patrol-project sends each waypoint to Nav2 as a NavigateToPose action. Nav2 reports distance_remaining in its feedback, but this controller's feedback_callback ignores it."
+ },
+ "l2/actions:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet:",
+  "my": "မရသေးပါ:",
+  "back": "Not yet:"
+ },
+ "l2/actions:reset": {
+  "status": "pass-alt",
+  "en": "Send a new goal",
+  "my": "ပန်းတိုင်အသစ် ပို့",
+  "back": "Send a new goal"
+ },
+ "l2/actions:solved": {
+  "status": "pass-alt",
+  "en": "Solved: canceled with",
+  "my": "အောင်မြင်: ပယ်ဖျက်ချိန်မှာ",
+  "back": "Success: at the time of cancelling"
+ },
+ "l2/actions:status": {
+  "status": "pass-alt",
+  "en": "final status",
+  "my": "နောက်ဆုံး အခြေအနေ",
+  "back": "Final status"
+ },
+ "l2/actions:title": {
+  "status": "pass-alt",
+  "en": "ROS 2: services and actions",
+  "my": "ROS 2: service နဲ့ action",
+  "back": "ROS 2: service and action"
+ },
+ "l2/actions:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရများ",
+  "back": "Glossary"
+ },
+ "l2/drive:already": {
+  "status": "pass-alt",
+  "en": "In Level 0 \"How a robot acts\" you used two numbers, forward speed and turn speed. A Twist carries them as linear.x and angular.z; its other four fields stay 0 on this robot.",
+  "my": "Level 0 \"စက်ရုပ် ဘယ်လို အလုပ်လုပ်သလဲ\" မှာ နံပါတ် 2 ခု သုံးခဲ့ပါတယ်၊ ရှေ့သွား အမြန်နှုန်းနဲ့ လှည့် အမြန်နှုန်းပါ။ Twist က အဲဒါတွေကို linear.x နဲ့ angular.z အဖြစ် သယ်ပါတယ်၊ ကျန်တဲ့ field 4 ခုကတော့ ဒီစက်ရုပ်မှာ 0 အဖြစ်ပဲ ရှိနေပါတယ်။",
+  "back": "In Level 0 \"How a robot works\" we used 2 numbers, forward speed and turning speed. Twist carries them as linear.x and angular.z, and the other 4 fields just stay at 0 for this robot."
+ },
+ "l2/drive:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: Ctrl+C without zeros",
+  "my": "ဖျက်ကြည့်: သုည မပို့ဘဲ Ctrl+C",
+  "back": "Break it: Ctrl+C without sending zeros"
+ },
+ "l2/drive:brokenNote": {
+  "status": "pass-alt",
+  "en": "The publisher is gone, the last Twist is not. The robot drives on until it hits something.",
+  "my": "publisher မရှိတော့ပါဘူး၊ ဒါပေမဲ့ နောက်ဆုံး Twist က ရှိနေဆဲပါ။ စက်ရုပ်က တစ်ခုခုကို မတိုက်မချင်း ဆက်မောင်းပါတယ်။",
+  "back": "The publisher is gone, but the last Twist is still there. The robot keeps driving until it hits something."
+ },
+ "l2/drive:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: end inside the green circle, standing still.",
+  "my": "စိန်ခေါ်မှု: အစိမ်းရောင် စက်ဝိုင်းထဲမှာ ရပ်နေတဲ့ အခြေအနေနဲ့ ပြီးဆုံးပါ။",
+  "back": "Challenge: finish while stopped inside the green circle."
+ },
+ "l2/drive:dur": {
+  "status": "pass-alt",
+  "en": "publish for (s)",
+  "my": "publish လုပ်မယ့် ကြာချိန် (s)",
+  "back": "Duration to publish (s)"
+ },
+ "l2/drive:fixIt": {
+  "status": "pass-alt",
+  "en": "Fix it: publish zeros",
+  "my": "ပြင်ကြည့်: သုညတွေ publish",
+  "back": "Fix it: publish zeros"
+ },
+ "l2/drive:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "/cmd_vel",
+  "my": "/cmd_vel",
+  "back": "/cmd_vel"
+ },
+ "l2/drive:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "the topic a mobile robot reads its speed commands from",
+  "my": "ရွေ့လျားနိုင်တဲ့ စက်ရုပ်က သူ့ အမြန်နှုန်း command တွေကို ဖတ်တဲ့ topic",
+  "back": "The topic from which a movable robot reads its speed commands"
+ },
+ "l2/drive:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "ros2 topic pub",
+  "my": "ros2 topic pub",
+  "back": "ros2 topic pub"
+ },
+ "l2/drive:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "publish a message from the terminal; --rate 10 = 10 per second, --once = one",
+  "my": "terminal ကနေ message တစ်ခု publish လုပ်; --rate 10 = တစ်စက္ကန့်ကို 10 ခု, --once = တစ်ခု",
+  "back": "Publish one message from the terminal; --rate 10 = 10 per second, --once = one"
+ },
+ "l2/drive:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "diff drive",
+  "my": "diff drive",
+  "back": "diff drive"
+ },
+ "l2/drive:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "a two-wheel robot that turns by spinning its wheels at different speeds",
+  "my": "ဘီး 2 ဘီးပါတဲ့ စက်ရုပ်၊ ဘီးတွေကို မတူတဲ့ အမြန်နှုန်းနဲ့ လည်စေပြီး ကွေ့ပါတယ်",
+  "back": "A robot with 2 wheels; it turns by making the wheels spin at different speeds"
+ },
+ "l2/drive:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "{}",
+  "my": "{}",
+  "back": "{}"
+ },
+ "l2/drive:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "a message with every field at its default: all zeros",
+  "my": "field အားလုံး default တန်ဖိုး ဖြစ်နေတဲ့ message: အားလုံး သုည",
+  "back": "A message in which all fields are at default values: all zero"
+ },
+ "l2/drive:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: to move the robot, publish a Twist on /cmd_vel, and to stop it, publish zeros.",
+  "my": "သင်ယူရမယ့်အရာ: စက်ရုပ်ကို ရွှေ့ဖို့ /cmd_vel ပေါ်မှာ Twist တစ်ခု publish လုပ်ပါ၊ ရပ်ဖို့ သုညတွေကို publish လုပ်ပါ။",
+  "back": "What to learn: to move the robot, publish a Twist on /cmd_vel; to stop, publish zeros."
+ },
+ "l2/drive:lines.0": {
+  "status": "pass-alt",
+  "en": "ros2 topic pub --rate 10 sends a Twist 10 times a second (without --rate: once a second).",
+  "my": "ros2 topic pub --rate 10 က Twist ကို တစ်စက္ကန့်မှာ 10 ကြိမ် ပို့ပါတယ် (--rate မပါရင် တစ်စက္ကန့်မှာ တစ်ကြိမ်)။",
+  "back": "ros2 topic pub --rate 10 sends the Twist 10 times per second (without --rate, once per second)."
+ },
+ "l2/drive:lines.1": {
+  "status": "pass-alt",
+  "en": "The simulator turns linear.x and angular.z into two wheel speeds, as in Level 0: turning left spins the right wheel faster.",
+  "my": "ဆင်မျူလေတာက linear.x နဲ့ angular.z ကို Level 0 မှာလိုပဲ ဘီး အမြန်နှုန်း 2 ခု အဖြစ် ပြောင်းပါတယ်: ဘယ်ဘက် လှည့်ရင် ညာဘီးက ပိုမြန်မြန် လည်ပါတယ်။",
+  "back": "The simulator converts linear.x and angular.z into 2 wheel speeds just as in Level 0: when turning left, the right wheel spins faster."
+ },
+ "l2/drive:lines.2": {
+  "status": "pass-alt",
+  "en": "The robot speeds up at most 1 m/s² (its config), so it starts smoothly even when you ask for full speed at once.",
+  "my": "စက်ရုပ်က အများဆုံး 1 m/s² နှုန်းနဲ့ပဲ အရှိန်တက်ပါတယ် (သူ့ config)၊ ဒါကြောင့် အမြန်ဆုံး အမြန်နှုန်းကို ချက်ချင်း တောင်းရင်တောင် ချောချောမွေ့မွေ့ စထွက်ပါတယ်။",
+  "back": "The robot accelerates at only up to 1 m/s² (its config), so even if you ask for top speed immediately it starts off smoothly."
+ },
+ "l2/drive:lines.3": {
+  "status": "pass-alt",
+  "en": "Pressing Ctrl+C stops the publisher, not the robot. The simulated base keeps the last command until a new one arrives.",
+  "my": "Ctrl+C နှိပ်ရင် publisher ရပ်သွားတာပါ၊ စက်ရုပ် မရပ်ပါဘူး။ ဆင်မျူလေတာထဲက base က command အသစ် မရောက်မချင်း နောက်ဆုံး command ကို ဆက်ထိန်းထားပါတယ်။",
+  "back": "Pressing Ctrl+C stops the publisher, not the robot. The base in the simulator keeps holding the last command until a new command arrives."
+ },
+ "l2/drive:moving": {
+  "status": "pass-alt",
+  "en": "still moving",
+  "my": "လှုပ်ရှားနေဆဲ",
+  "back": "Still moving"
+ },
+ "l2/drive:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet: ended at",
+  "my": "မရသေးပါ: ပြီးဆုံးတဲ့နေရာ",
+  "back": "Not yet: where it ended"
+ },
+ "l2/drive:solved": {
+  "status": "pass-alt",
+  "en": "Solved: parked at",
+  "my": "အောင်မြင်: ရပ်ထားတဲ့နေရာ",
+  "back": "Success: where it stopped"
+ },
+ "l2/drive:speed": {
+  "status": "pass-alt",
+  "en": "speed now",
+  "my": "လက်ရှိ အမြန်နှုန်း",
+  "back": "Current speed"
+ },
+ "l2/drive:stopped": {
+  "status": "pass-alt",
+  "en": "standing still",
+  "my": "ရပ်နေ",
+  "back": "Stopped"
+ },
+ "l2/drive:title": {
+  "status": "pass-alt",
+  "en": "ROS 2: first drive",
+  "my": "ROS 2: ပထမဆုံး မောင်းနှင်ခြင်း",
+  "back": "ROS 2: First drive"
+ },
+ "l2/drive:v": {
+  "status": "pass-alt",
+  "en": "linear.x (m/s)",
+  "my": "linear.x (m/s)",
+  "back": "linear.x (m/s)"
+ },
+ "l2/drive:w": {
+  "status": "pass-alt",
+  "en": "angular.z (rad/s)",
+  "my": "angular.z (rad/s)",
+  "back": "angular.z (rad/s)"
+ },
+ "l2/drive:wheelL": {
+  "status": "pass-alt",
+  "en": "left wheel",
+  "my": "ဘယ်ဘီး",
+  "back": "Left wheel"
+ },
+ "l2/drive:wheelR": {
+  "status": "pass-alt",
+  "en": "right wheel",
+  "my": "ညာဘီး",
+  "back": "Right wheel"
+ },
+ "l2/drive:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရများ",
+  "back": "Glossary"
+ },
+ "l2/drive:zeros": {
+  "status": "pass-alt",
+  "en": "then publish zeros ({})",
+  "my": "ပြီးရင် သုညတွေ publish ({})",
+  "back": "Then publish zeros ({})"
+ },
+ "l2/intro:lead": {
+  "status": "pass-alt",
+  "en": "The same robot, now as a team of small programs that start one by one and pass messages. Seven steps: from what a node is to driving the robot yourself.",
+  "my": "စက်ရုပ် အတူတူပါပဲ၊ ဒီတစ်ခါ တစ်ခုပြီးတစ်ခု စတင်ပြီး message တွေ ပို့ပေးကြတဲ့ ပရိုဂရမ်လေးတွေရဲ့ အဖွဲ့အဖြစ် ကြည့်ပါမယ်။ အဆင့် 7 ဆင့်: node ဆိုတာ ဘာလဲ ကနေ စက်ရုပ်ကို ကိုယ်တိုင် မောင်းတဲ့အထိပါ။",
+  "back": "Same robot, but this time we look at it as a group of small programs that start one after another and send messages to each other. 7 steps: from what a node is, to driving the robot yourself."
+ },
+ "l2/intro:start": {
+  "status": "pass-alt",
+  "en": "Start with 2.1 →",
+  "my": "2.1 ကနေ စပါ →",
+  "back": "Start from 2.1 →"
+ },
+ "l2/intro:title": {
+  "status": "pass-alt",
+  "en": "Level 2: ROS 2 basics",
+  "my": "Level 2: ROS 2 အခြေခံ",
+  "back": "Level 2: ROS 2 basics"
+ },
+ "l2/msgtypes:after": {
+  "status": "pass-alt",
+  "en": "after 2 s",
+  "my": "2 s ကြာပြီးနောက်",
+  "back": "after 2 s"
+ },
+ "l2/msgtypes:ahead": {
+  "status": "pass-alt",
+  "en": "straight ahead is index",
+  "my": "တည့်တည့်ရှေ့က index",
+  "back": "index straight ahead"
+ },
+ "l2/msgtypes:angZ": {
+  "status": "pass-alt",
+  "en": "angular.z (rad/s)",
+  "my": "angular.z (rad/s)",
+  "back": "angular.z (rad/s)"
+ },
+ "l2/msgtypes:angle": {
+  "status": "pass-alt",
+  "en": "angle of ranges[i]",
+  "my": "ranges[i] ရဲ့ ထောင့်",
+  "back": "angle of ranges[i]"
+ },
+ "l2/msgtypes:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: put the turn in angular.x",
+  "my": "ဖျက်ကြည့်: လှည့်တာကို angular.x ထဲ ထည့်",
+  "back": "Try breaking it: put the turn in angular.x"
+ },
+ "l2/msgtypes:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: make the robot turn left on the spot.",
+  "my": "စိန်ခေါ်မှု: စက်ရုပ်ကို နေရာမှာပဲ ဘယ်ဘက်ကို လှည့်အောင် လုပ်ပါ။",
+  "back": "Challenge: make the robot turn left in place."
+ },
+ "l2/msgtypes:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "message type",
+  "my": "message type",
+  "back": "message type"
+ },
+ "l2/msgtypes:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "the fixed shape of a message: field names and their types",
+  "my": "message တစ်ခုရဲ့ ပုံသေ ပုံစံ: field နာမည်တွေနဲ့ သူတို့ရဲ့ type တွေ",
+  "back": "The fixed shape of a message: field names and their types"
+ },
+ "l2/msgtypes:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "field",
+  "my": "field",
+  "back": "field"
+ },
+ "l2/msgtypes:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "one named value inside a message, like range_min",
+  "my": "message ထဲက နာမည်ပါတဲ့ တန်ဖိုး တစ်ခု၊ ဥပမာ range_min",
+  "back": "One named value inside a message, for example range_min"
+ },
+ "l2/msgtypes:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "float32[]",
+  "my": "float32[]",
+  "back": "float32[]"
+ },
+ "l2/msgtypes:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "a list of decimal numbers",
+  "my": "ဒဿမ ဂဏန်းတွေရဲ့ စာရင်း",
+  "back": "A list of decimal numbers"
+ },
+ "l2/msgtypes:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "REP 103",
+  "my": "REP 103",
+  "back": "REP 103"
+ },
+ "l2/msgtypes:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "the ROS rule for directions: x forward, y left, z up, positive turn = left",
+  "my": "ဦးတည်ရာအတွက် ROS စည်းကမ်းချက်: x ရှေ့၊ y ဘယ်၊ z အပေါ်၊ အပေါင်း လှည့်ခြင်း = ဘယ်ဘက်",
+  "back": "ROS convention for orientation: x forward, y left, z up, positive rotation = left"
+ },
+ "l2/msgtypes:index": {
+  "status": "pass-alt",
+  "en": "index i in ranges",
+  "my": "ranges ထဲက index i",
+  "back": "index i in ranges"
+ },
+ "l2/msgtypes:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: every topic carries one message type, a fixed list of named fields. You read and write those fields by name.",
+  "my": "သင်ယူရမယ့်အရာ: topic တိုင်းက message type တစ်ခုကို သယ်ဆောင်ပါတယ်။ message type ဆိုတာ နာမည်ပါတဲ့ field တွေရဲ့ ပုံသေစာရင်း ဖြစ်ပါတယ်။ အဲဒီ field တွေကို နာမည်နဲ့ ဖတ်ပြီး ရေးပါတယ်။",
+  "back": "What to learn: every topic carries one message type. A message type is a fixed list of named fields. Those fields are read and written by name."
+ },
+ "l2/msgtypes:linX": {
+  "status": "pass-alt",
+  "en": "linear.x (m/s)",
+  "my": "linear.x (m/s)",
+  "back": "linear.x (m/s)"
+ },
+ "l2/msgtypes:lines.0": {
+  "status": "pass-alt",
+  "en": "/scan carries sensor_msgs/msg/LaserScan. Most fields describe the sensor; the distances themselves are in ranges, 360 numbers.",
+  "my": "/scan က sensor_msgs/msg/LaserScan ကို သယ်ဆောင်ပါတယ်။ field အများစုက ဆင်ဆာအကြောင်း ဖော်ပြပါတယ်၊ အကွာအဝေးတွေ ကိုယ်တိုင်ကတော့ ranges ထဲမှာ ဂဏန်း 360 ခုအဖြစ် ရှိပါတယ်။",
+  "back": "/scan carries sensor_msgs/msg/LaserScan. Most fields describe the sensor; the distances themselves are in ranges, as 360 numbers."
+ },
+ "l2/msgtypes:lines.1": {
+  "status": "pass-alt",
+  "en": "ranges[i] is not \"the i-th degree\". Its angle is angle_min + i × angle_increment. On this robot ranges[0] looks backwards.",
+  "my": "ranges[i] ဟာ \"i ကြိမ်မြောက် ဒီဂရီ\" မဟုတ်ပါဘူး။ သူ့ရဲ့ ထောင့်က angle_min + i × angle_increment ဖြစ်ပါတယ်။ ဒီ စက်ရုပ်မှာ ranges[0] က နောက်ဘက်ကို ကြည့်ပါတယ်။",
+  "back": "ranges[i] is not \"the i-th degree\". Its angle is angle_min + i × angle_increment. On this robot, ranges[0] looks toward the back."
+ },
+ "l2/msgtypes:lines.2": {
+  "status": "pass-alt",
+  "en": "/cmd_vel carries geometry_msgs/msg/Twist: 6 numbers. A two-wheel robot only uses linear.x (forward speed) and angular.z (turn rate).",
+  "my": "/cmd_vel က geometry_msgs/msg/Twist ကို သယ်ဆောင်ပါတယ်၊ ဂဏန်း 6 ခု ပါပါတယ်။ ဘီး 2 ဘီးပါတဲ့ စက်ရုပ်က linear.x (ရှေ့သွားတဲ့ အမြန်နှုန်း) နဲ့ angular.z (လှည့်နှုန်း) ကိုပဲ သုံးပါတယ်။",
+  "back": "/cmd_vel carries geometry_msgs/msg/Twist, which holds 6 numbers. A robot with 2 wheels uses only linear.x (forward speed) and angular.z (turning rate)."
+ },
+ "l2/msgtypes:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet:",
+  "my": "မပြီးသေးပါ:",
+  "back": "Not yet done:"
+ },
+ "l2/msgtypes:reset": {
+  "status": "pass-alt",
+  "en": "Reset the Twist",
+  "my": "Twist ကို ပြန်စ",
+  "back": "Reset Twist"
+ },
+ "l2/msgtypes:solved": {
+  "status": "pass-alt",
+  "en": "Solved: spinning left at",
+  "my": "ဖြေရှင်းပြီး: ဘယ်ဘက် လှည့်နှုန်း",
+  "back": "Solved: left turning rate"
+ },
+ "l2/msgtypes:title": {
+  "status": "pass-alt",
+  "en": "ROS 2: message types",
+  "my": "ROS 2: message type များ",
+  "back": "ROS 2: message types"
+ },
+ "l2/msgtypes:unknown": {
+  "status": "pass-alt",
+  "en": "set by the driver",
+  "my": "driver က သတ်မှတ်ထား",
+  "back": "set by the driver"
+ },
+ "l2/msgtypes:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရများ",
+  "back": "Glossary"
+ },
+ "l2/nodes:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: stop ros_gz_bridge",
+  "my": "ဖျက်ကြည့်: ros_gz_bridge ကို ရပ်",
+  "back": "Try breaking it: stop ros_gz_bridge"
+ },
+ "l2/nodes:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: stop as many nodes as you can while the robot keeps patrolling.",
+  "my": "စိန်ခေါ်မှု: စက်ရုပ် ကင်းလှည့်နေတုန်းမှာပဲ node တွေကို တတ်နိုင်သမျှ များများ ရပ်ပါ။",
+  "back": "Challenge: stop as many nodes as you can while the robot keeps patrolling."
+ },
+ "l2/nodes:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "node",
+  "my": "node",
+  "back": "node"
+ },
+ "l2/nodes:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "one running program with one job, for example slam_toolbox",
+  "my": "အလုပ်တစ်ခု ရှိပြီး အလုပ်လုပ်နေတဲ့ ပရိုဂရမ် တစ်ခု၊ ဥပမာ slam_toolbox",
+  "back": "A running program that has one job, for example slam_toolbox"
+ },
+ "l2/nodes:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "launch file",
+  "my": "launch file",
+  "back": "launch file"
+ },
+ "l2/nodes:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "a script that starts many nodes at once, with settings and start delays",
+  "my": "ဆက်တင်တွေနဲ့ စတင်ချိန် နှောင့်နှေးမှုတွေ ပါဝင်ပြီး node အများကြီးကို တစ်ပြိုင်နက် စပေးတဲ့ script",
+  "back": "A script that starts many nodes at the same time, including settings and start-up delays"
+ },
+ "l2/nodes:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "ROS 2 graph",
+  "my": "ROS 2 graph",
+  "back": "ROS 2 graph"
+ },
+ "l2/nodes:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "all nodes running now and how their data connects",
+  "my": "အခု အလုပ်လုပ်နေတဲ့ node အားလုံးနဲ့ သူတို့ရဲ့ ဒေတာ ချိတ်ဆက်ပုံ",
+  "back": "All the nodes running right now and how their data is connected"
+ },
+ "l2/nodes:jobs.anomaly": {
+  "status": "pass-alt",
+  "en": "watches the robot's position for sudden jumps",
+  "my": "စက်ရုပ်ရဲ့ တည်နေရာ ရုတ်တရက် ခုန်သွားတာကို စောင့်ကြည့်",
+  "back": "Watch for the robot's position suddenly jumping"
+ },
+ "l2/nodes:jobs.bridge": {
+  "status": "pass-alt",
+  "en": "connects to the simulated robot: LiDAR scans and wheel odometry in, speed commands out",
+  "my": "ဆင်မျူလေတာထဲက စက်ရုပ်နဲ့ ချိတ်ဆက်: LiDAR scan တွေနဲ့ ဘီး odometry ဝင်လာ၊ အမြန်နှုန်း command တွေ ထွက်သွား",
+  "back": "Connect with the robot in the simulator: LiDAR scans and wheel odometry come in, speed commands go out"
+ },
+ "l2/nodes:jobs.nav2": {
+  "status": "pass-alt",
+  "en": "plans a path and drives to a goal",
+  "my": "လမ်းကြောင်း စီစဉ်ပြီး ပန်းတိုင်ဆီ မောင်း",
+  "back": "Plan a path and drive to the goal"
+ },
+ "l2/nodes:jobs.patrol": {
+  "status": "pass-alt",
+  "en": "sends Nav2 one random goal after another, inside a 2 × 2 m area",
+  "my": "2 × 2 m ဧရိယာထဲမှာ ကျပန်း ပန်းတိုင်တွေကို တစ်ခုပြီးတစ်ခု Nav2 ဆီ ပို့",
+  "back": "Send random goals one after another to Nav2 within a 2 × 2 m area"
+ },
+ "l2/nodes:jobs.rsp": {
+  "status": "pass-alt",
+  "en": "tells everyone where each robot part sits (the LiDAR on the base)",
+  "my": "စက်ရုပ် အစိတ်အပိုင်း တစ်ခုစီ ဘယ်နေရာမှာ ရှိလဲဆိုတာ အားလုံးကို ပြော (base ပေါ်က LiDAR)",
+  "back": "Tell where every robot part is (LiDAR on the base)"
+ },
+ "l2/nodes:jobs.rviz": {
+  "status": "pass-alt",
+  "en": "draws all of it on your screen",
+  "my": "အားလုံးကို သင့် မျက်နှာပြင်ပေါ်မှာ ဆွဲပြ",
+  "back": "Draw everything on your screen"
+ },
+ "l2/nodes:jobs.slam": {
+  "status": "pass-alt",
+  "en": "builds the map",
+  "my": "မြေပုံကို တည်ဆောက်",
+  "back": "Build the map"
+ },
+ "l2/nodes:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: a ROS 2 robot is not one program but many small ones, called nodes, each with one job.",
+  "my": "သင်ယူရမယ့်အရာ: ROS 2 စက်ရုပ်တစ်ခုဟာ ပရိုဂရမ် တစ်ခုတည်း မဟုတ်ပါဘူး၊ node လို့ ခေါ်တဲ့ ပရိုဂရမ်ငယ် အများကြီး ဖြစ်ပြီး တစ်ခုစီမှာ အလုပ်တစ်ခုစီ ရှိပါတယ်။",
+  "back": "What to learn: a ROS 2 robot is not one single program; it is many small programs called nodes, each with its own job."
+ },
+ "l2/nodes:left": {
+  "status": "pass-alt",
+  "en": "Left out to keep it simple: spawn_burger (puts the robot in the world once), tf_monitor_node, frame_broadcaster_node.",
+  "my": "ရိုးရှင်းအောင် ချန်ထားတာ: spawn_burger (စက်ရုပ်ကို world ထဲ တစ်ကြိမ်တည်း ထည့်ပေးပါတယ်)၊ tf_monitor_node၊ frame_broadcaster_node။",
+  "back": "Left out for simplicity: spawn_burger (puts the robot into the world once), tf_monitor_node, frame_broadcaster_node."
+ },
+ "l2/nodes:lines.0": {
+  "status": "pass-alt",
+  "en": "One launch file starts the patrol robot from Level 1 as separate programs. Each box is one node.",
+  "my": "launch file တစ်ခုက Level 1 က ကင်းလှည့် စက်ရုပ်ကို သီးခြား ပရိုဂရမ်တွေအဖြစ် စတင်ပါတယ်။ အကွက် တစ်ခုစီဟာ node တစ်ခု ဖြစ်ပါတယ်။",
+  "back": "One launch file starts the Level 1 patrol robot as separate programs. Each box is one node."
+ },
+ "l2/nodes:lines.1": {
+  "status": "pass-alt",
+  "en": "Nodes use each other's data (the arrows). A node is only useful when the nodes it needs are running too.",
+  "my": "node တွေက တစ်ခုနဲ့တစ်ခုရဲ့ ဒေတာကို သုံးကြပါတယ် (မြှားတွေ)။ node တစ်ခုဟာ သူလိုအပ်တဲ့ node တွေလည်း အလုပ်လုပ်နေမှသာ အသုံးဝင်ပါတယ်။",
+  "back": "Nodes use each other's data (the arrows). A node is useful only if the nodes it needs are also running."
+ },
+ "l2/nodes:lines.2": {
+  "status": "pass-alt",
+  "en": "Because they are separate programs, one node can stop without killing the others. Click a box to stop or start it.",
+  "my": "သီးခြား ပရိုဂရမ်တွေ ဖြစ်လို့ node တစ်ခု ရပ်သွားလည်း တခြား node တွေ မပျက်ပါဘူး။ ရပ်ဖို့ ဒါမှမဟုတ် စဖို့ အကွက်တစ်ခုကို နှိပ်ပါ။",
+  "back": "Because they are separate programs, if one node stops the other nodes do not break. Click a box to stop or start it."
+ },
+ "l2/nodes:no": {
+  "status": "pass-alt",
+  "en": "no",
+  "my": "မဟုတ်",
+  "back": "No"
+ },
+ "l2/nodes:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet:",
+  "my": "မပြီးသေးပါ:",
+  "back": "Not yet done:"
+ },
+ "l2/nodes:patrol": {
+  "status": "pass-alt",
+  "en": "robot patrols",
+  "my": "စက်ရုပ် ကင်းလှည့်",
+  "back": "Robot patrol"
+ },
+ "l2/nodes:reset": {
+  "status": "pass-alt",
+  "en": "Start all nodes",
+  "my": "node အားလုံးကို စ",
+  "back": "Start all nodes"
+ },
+ "l2/nodes:solved": {
+  "status": "pass-alt",
+  "en": "Solved: the patrol does not need",
+  "my": "ဖြေရှင်းပြီး: ကင်းလှည့်ဖို့ မလိုအပ်တာ",
+  "back": "Solved: not needed for patrolling"
+ },
+ "l2/nodes:state.off": {
+  "status": "pass-alt",
+  "en": "stopped",
+  "my": "ရပ်ထား",
+  "back": "stopped"
+ },
+ "l2/nodes:state.ok": {
+  "status": "pass-alt",
+  "en": "working",
+  "my": "အလုပ်လုပ်နေ",
+  "back": "running"
+ },
+ "l2/nodes:state.starved": {
+  "status": "pass-alt",
+  "en": "running, but waiting for data",
+  "my": "အလုပ်လုပ်နေပေမယ့် ဒေတာ စောင့်နေ",
+  "back": "running but waiting for data"
+ },
+ "l2/nodes:stopped": {
+  "status": "pass-alt",
+  "en": "stopped",
+  "my": "ရပ်ထား",
+  "back": "stopped"
+ },
+ "l2/nodes:stoppedN": {
+  "status": "pass-alt",
+  "en": "nodes stopped",
+  "my": "ရပ်ထားတဲ့ node အရေအတွက်",
+  "back": "Number of stopped nodes"
+ },
+ "l2/nodes:tap": {
+  "status": "pass-alt",
+  "en": "Click a node to stop or start it",
+  "my": "ရပ်ဖို့ ဒါမှမဟုတ် စဖို့ node တစ်ခုကို နှိပ်ပါ",
+  "back": "Click a node to stop or start it"
+ },
+ "l2/nodes:title": {
+  "status": "pass-alt",
+  "en": "ROS 2: nodes",
+  "my": "ROS 2: node များ",
+  "back": "ROS 2: nodes"
+ },
+ "l2/nodes:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရများ",
+  "back": "Glossary"
+ },
+ "l2/nodes:yes": {
+  "status": "pass-alt",
+  "en": "yes",
+  "my": "ဟုတ်",
+  "back": "Yes"
+ },
+ "l2/params:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: max_position_jump = 0.1",
+  "my": "ဖျက်ကြည့်: max_position_jump = 0.1",
+  "back": "Try breaking it: max_position_jump = 0.1"
+ },
+ "l2/params:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: override the default (launch file or command line) with a value that warns about the jump and about nothing else.",
+  "my": "စိန်ခေါ်မှု: default တန်ဖိုးကို (launch file ဒါမှမဟုတ် command line နဲ့) အစားထိုးပြီး ခုန်တာကိုပဲ သတိပေးကာ တခြားဘာကိုမှ မသတိပေးတဲ့ တန်ဖိုး ထားပါ။",
+  "back": "Challenge: override the default value (with a launch file or the command line) and set a value that warns only about the jump and warns about nothing else."
+ },
+ "l2/params:everyday": {
+  "status": "pass-alt",
+  "en": "Everyday: a thermostat. The heater's program stays the same; you only change the set temperature.",
+  "my": "နေ့စဉ်ဘဝ ဥပမာ: thermostat (အပူချိန် ထိန်းကိရိယာ)။ အပူပေးစက်ရဲ့ ပရိုဂရမ်က မပြောင်းပါဘူး၊ သတ်မှတ်ထားတဲ့ အပူချိန်ကိုပဲ ပြောင်းပါတယ်။",
+  "back": "Everyday example: a thermostat (temperature control device). The heater's program does not change; only the set temperature changes."
+ },
+ "l2/params:false": {
+  "status": "pass-alt",
+  "en": "false alarms",
+  "my": "မှားယွင်းတဲ့ သတိပေးချက်",
+  "back": "false warning"
+ },
+ "l2/params:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "parameter",
+  "my": "parameter",
+  "back": "parameter"
+ },
+ "l2/params:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "a named setting of one node, read with get_parameter",
+  "my": "node တစ်ခုရဲ့ နာမည်ပါတဲ့ ဆက်တင်၊ get_parameter နဲ့ ဖတ်",
+  "back": "A named setting of a node, read with get_parameter"
+ },
+ "l2/params:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "default",
+  "my": "default တန်ဖိုး",
+  "back": "default value"
+ },
+ "l2/params:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "the value in declare_parameter, used when nobody overrides it",
+  "my": "ဘယ်သူမှ အစားထိုး မသတ်မှတ်တဲ့အခါ သုံးတဲ့ declare_parameter ထဲက တန်ဖိုး",
+  "back": "The value in declare_parameter that is used when nobody overrides it"
+ },
+ "l2/params:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "launch file",
+  "my": "launch file",
+  "back": "launch file"
+ },
+ "l2/params:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "a Python script that starts nodes with their parameters",
+  "my": "node တွေကို သူတို့ရဲ့ parameter တွေနဲ့ စတင်ပေးတဲ့ Python script",
+  "back": "A Python script that starts nodes with their parameters"
+ },
+ "l2/params:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "--ros-args -p",
+  "my": "--ros-args -p",
+  "back": "--ros-args -p"
+ },
+ "l2/params:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "set a parameter from the command line",
+  "my": "command line ကနေ parameter တစ်ခု သတ်မှတ်",
+  "back": "Set a parameter from the command line"
+ },
+ "l2/params:jump": {
+  "status": "pass-alt",
+  "en": "real jump caught",
+  "my": "တကယ့် ခုန်မှုကို ဖမ်းမိ",
+  "back": "caught the real jump"
+ },
+ "l2/params:jumpNote": {
+  "status": "pass-alt",
+  "en": "The 0.8 m jump at 6 s is a made-up relocalization to test the setting.",
+  "my": "6 s မှာ ဖြစ်တဲ့ 0.8 m ခုန်မှုဟာ ဆက်တင်ကို စမ်းဖို့ လုပ်ထားတဲ့ အတု relocalization (နေရာ ပြန်ရှာခြင်း) ဖြစ်ပါတယ်။",
+  "back": "The 0.8 m jump that happens at 6 s is a fake relocalization (re-finding the position) made to test the setting."
+ },
+ "l2/params:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: a parameter is a setting a node reads by name, so you can change its behaviour without changing its code. A launch file starts nodes and passes them settings.",
+  "my": "သင်ယူရမယ့်အရာ: parameter ဆိုတာ node တစ်ခုက နာမည်နဲ့ ဖတ်တဲ့ ဆက်တင် ဖြစ်ပါတယ်၊ ဒါကြောင့် ကုဒ်ကို မပြောင်းဘဲ သူ့ရဲ့ အပြုအမူကို ပြောင်းနိုင်ပါတယ်။ launch file က node တွေကို စတင်ပြီး ဆက်တင်တွေ ပေးပါတယ်။",
+  "back": "What to learn: a parameter is a setting that a node reads by name, so you can change its behavior without changing the code. A launch file starts the nodes and gives them settings."
+ },
+ "l2/params:lines.0": {
+  "status": "pass-alt",
+  "en": "tf_anomaly_detector checks the robot's position every 0.5 s and warns when it moved more than max_position_jump since the last check.",
+  "my": "tf_anomaly_detector က စက်ရုပ်ရဲ့ တည်နေရာကို 0.5 s တိုင်း စစ်ပြီး နောက်ဆုံး စစ်ချိန်ကနေ max_position_jump ထက် ပိုရွေ့သွားရင် သတိပေးပါတယ်။",
+  "back": "tf_anomaly_detector checks the robot's position every 0.5 s and warns if it has moved more than max_position_jump since the last check."
+ },
+ "l2/params:lines.1": {
+  "status": "pass-alt",
+  "en": "The code says declare_parameter(\"max_position_jump\", 0.5): 0.5 m unless someone overrides it from a launch file or the command line.",
+  "my": "ကုဒ်ထဲမှာ declare_parameter(\"max_position_jump\", 0.5) လို့ ရေးထားပါတယ်၊ launch file ဒါမှမဟုတ် command line ကနေ တစ်ယောက်ယောက်က အစားထိုး မသတ်မှတ်ရင် 0.5 m ဖြစ်ပါတယ်။",
+  "back": "In the code it is written as declare_parameter(\"max_position_jump\", 0.5); if nobody overrides it from a launch file or the command line, it is 0.5 m."
+ },
+ "l2/params:lines.2": {
+  "status": "pass-alt",
+  "en": "Driving at 0.26 m/s, the robot moves 0.13 m between checks. Set the limit below that and every normal check is a warning.",
+  "my": "0.26 m/s နဲ့ မောင်းရင် စက်ရုပ်က စစ်ချိန် တစ်ခုနဲ့တစ်ခုကြားမှာ 0.13 m ရွေ့ပါတယ်။ ကန့်သတ်ချက်ကို အဲဒီထက် နည်းအောင် ထားရင် ပုံမှန် စစ်ဆေးမှု တိုင်းက သတိပေးချက် ဖြစ်သွားပါတယ်။",
+  "back": "Driving at 0.26 m/s, the robot moves 0.13 m between one check and the next. If you set the limit lower than that, every normal check becomes a warning."
+ },
+ "l2/params:no": {
+  "status": "pass-alt",
+  "en": "no",
+  "my": "မဟုတ်",
+  "back": "No"
+ },
+ "l2/params:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet:",
+  "my": "မပြီးသေးပါ:",
+  "back": "Not yet done:"
+ },
+ "l2/params:runtimeNote": {
+  "status": "pass-alt",
+  "en": "Trap: this node reads the parameter once, at start-up (tf_anomaly_detector.cpp:13-14). ros2 param set at runtime changes the stored value but not what the node does. Restart it, or the node needs a parameter callback. Checked on the real node: after ros2 param set to 1.0 it still flags a 0.93 m jump against 0.50 m.",
+  "my": "ထောင်ချောက်: ဒီ node က parameter ကို စတင်ချိန်မှာ တစ်ကြိမ်ပဲ ဖတ်ပါတယ် (tf_anomaly_detector.cpp:13-14)။ အလုပ်လုပ်နေချိန်မှာ ros2 param set လုပ်ရင် သိမ်းထားတဲ့ တန်ဖိုးကို ပြောင်းပေမယ့် node လုပ်ပုံကို မပြောင်းပါဘူး။ node ကို ပြန်စပါ၊ ဒါမှမဟုတ် node မှာ parameter callback တစ်ခု လိုပါတယ်။ တကယ့် node ပေါ်မှာ စစ်ပြီးပါပြီ၊ ros2 param set နဲ့ 1.0 ပြောင်းပြီးနောက်မှာတောင် 0.50 m နဲ့ နှိုင်းယှဉ်ပြီး 0.93 m ခုန်တာကို သတိပေးနေဆဲ ဖြစ်ပါတယ်။",
+  "back": "Trap: this node reads the parameter only once, at start-up (tf_anomaly_detector.cpp:13-14). If you run ros2 param set while it is running, the stored value changes but the node's behavior does not change. Restart the node, or the node needs a parameter callback. Checked on the real node: even after changing to 1.0 with ros2 param set, it still warns about a 0.93 m jump, comparing against 0.50 m."
+ },
+ "l2/params:solved": {
+  "status": "pass-alt",
+  "en": "Solved:",
+  "my": "ဖြေရှင်းပြီး:",
+  "back": "Solved:"
+ },
+ "l2/params:source": {
+  "status": "pass-alt",
+  "en": "set from",
+  "my": "သတ်မှတ်ခဲ့တဲ့နေရာ",
+  "back": "where it was set"
+ },
+ "l2/params:sources.cli": {
+  "status": "pass-alt",
+  "en": "command line",
+  "my": "command line",
+  "back": "command line"
+ },
+ "l2/params:sources.default": {
+  "status": "pass-alt",
+  "en": "code default",
+  "my": "ကုဒ်ရဲ့ default တန်ဖိုး",
+  "back": "the code's default value"
+ },
+ "l2/params:sources.launch": {
+  "status": "pass-alt",
+  "en": "launch file",
+  "my": "launch file",
+  "back": "launch file"
+ },
+ "l2/params:title": {
+  "status": "pass-alt",
+  "en": "ROS 2: parameters and launch files",
+  "my": "ROS 2: parameter နဲ့ launch file များ",
+  "back": "ROS 2: parameters and launch files"
+ },
+ "l2/params:value": {
+  "status": "pass-alt",
+  "en": "max_position_jump (m)",
+  "my": "max_position_jump (m)",
+  "back": "max_position_jump (m)"
+ },
+ "l2/params:warns": {
+  "status": "pass-alt",
+  "en": "warnings in 10 s",
+  "my": "10 s အတွင်း သတိပေးချက်",
+  "back": "Warnings within 10 s"
+ },
+ "l2/params:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရများ",
+  "back": "Glossary"
+ },
+ "l2/params:yes": {
+  "status": "pass-alt",
+  "en": "yes",
+  "my": "ဟုတ်",
+  "back": "Yes"
+ },
+ "l2/realproject:actions": {
+  "status": "pass-alt",
+  "en": "The patrol node is an action client of Nav2's navigate_to_pose: it sends a goal, waits for the result, then sends the next.",
+  "my": "patrol node က Nav2 ရဲ့ navigate_to_pose အတွက် action client တစ်ခုပါ: ပန်းတိုင်တစ်ခု ပို့ပါတယ်၊ ရလဒ်ကို စောင့်ပါတယ်၊ ပြီးရင် နောက်တစ်ခု ပို့ပါတယ်။",
+  "back": "The patrol node is an action client for Nav2's navigate_to_pose: it sends one goal, waits for the result, then sends the next."
+ },
+ "l2/realproject:drive": {
+  "status": "pass-alt",
+  "en": "The wiggle recovery node publishes Twist on /cmd_vel and only sets angular.z: left, then right, to shake the robot free.",
+  "my": "wiggle recovery node က /cmd_vel ပေါ်မှာ Twist ကို publish လုပ်ပြီး angular.z ကိုပဲ သတ်မှတ်ပါတယ်: စက်ရုပ်ကို လှုပ်ပြီး လွတ်အောင် ဘယ်ဘက်၊ ပြီးရင် ညာဘက် လှည့်ပါတယ်။",
+  "back": "The wiggle recovery node publishes a Twist on /cmd_vel and sets only angular.z: it turns the robot left, then right, to wiggle free."
+ },
+ "l2/realproject:head": {
+  "status": "pass-alt",
+  "en": "From a real project",
+  "my": "တကယ့် project တစ်ခုကနေ",
+  "back": "From a real project"
+ },
+ "l2/realproject:msgtypes": {
+  "status": "pass-alt",
+  "en": "When no standard type fits, the project defines its own message type, TFDiagnostics, for the health of one transform.",
+  "my": "စံ type တစ်ခုမှ မကိုက်ညီတဲ့အခါ project က transform တစ်ခုရဲ့ ကျန်းမာရေး အခြေအနေအတွက် ကိုယ်ပိုင် message type ဖြစ်တဲ့ TFDiagnostics ကို သတ်မှတ်ပါတယ်။",
+  "back": "When no standard type fits, the project defines its own message type, TFDiagnostics, for the health status of a transform."
+ },
+ "l2/realproject:nodes": {
+  "status": "pass-alt",
+  "en": "Four of the project's own nodes, each a separate program, are started by one launch file, 9 s after launch.",
+  "my": "project ကိုယ်ပိုင် node 4 ခု (တစ်ခုစီက သီးခြား ပရိုဂရမ်) ကို launch file တစ်ခုက launch လုပ်ပြီး 9 s အကြာမှာ စတင်ပါတယ်။",
+  "back": "The project's own 4 nodes (each a separate program) are launched by one launch file and start after 9 s."
+ },
+ "l2/realproject:params": {
+  "status": "pass-alt",
+  "en": "The anomaly detector reads its jump limit, 0.5 m, as a parameter, so it can change without rebuilding.",
+  "my": "ပုံမှန်မဟုတ်တာ ရှာတဲ့ node က သူ့ ခုန်ကျော်မှု ကန့်သတ်ချက် 0.5 m ကို parameter အဖြစ် ဖတ်ပါတယ်၊ ဒါကြောင့် ပြန် build မလုပ်ဘဲ ပြောင်းလို့ ရပါတယ်။",
+  "back": "The anomaly-detecting node reads its jump limit of 0.5 m as a parameter, so it can be changed without rebuilding."
+ },
+ "l2/realproject:topics": {
+  "status": "pass-alt",
+  "en": "The simulator's LiDAR reaches ROS 2 as the topic /scan through a bridge config.",
+  "my": "ဆင်မျူလေတာရဲ့ LiDAR က bridge config ကနေတစ်ဆင့် ROS 2 ဆီ /scan topic အဖြစ် ရောက်ပါတယ်။",
+  "back": "The simulator's LiDAR arrives in ROS 2 as the /scan topic through the bridge config."
+ },
+ "l2/realproject:ws": {
+  "status": "pass-alt",
+  "en": "One package, five programs: each C++ node is one add_executable line in the same CMakeLists.txt.",
+  "my": "package တစ်ခု၊ ပရိုဂရမ် 5 ခု: C++ node တစ်ခုစီက CMakeLists.txt တစ်ခုတည်းထဲက add_executable စာကြောင်း တစ်ကြောင်းပါ။",
+  "back": "One package, 5 programs: each C++ node is a single add_executable line in one CMakeLists.txt."
+ },
+ "l2/topics:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: slam_toolbox listens on /laser_scan",
+  "my": "ဖျက်ကြည့်: slam_toolbox က /laser_scan ကို နားထောင်",
+  "back": "Break it: slam_toolbox listens to /laser_scan"
+ },
+ "l2/topics:brokenNote": {
+  "status": "pass-alt",
+  "en": "/laser_scan is a valid name, so nothing complains. slam_toolbox simply never gets a scan, and the map never grows.",
+  "my": "/laser_scan က မှန်ကန်တဲ့ နာမည်ပုံစံ ဖြစ်လို့ ဘာမှ သတိမပေးပါဘူး။ slam_toolbox ဆီကို scan တစ်ခုမှ ရောက်မလာတော့ပါဘူး၊ မြေပုံလည်း ဘယ်တော့မှ ကြီးမလာပါဘူး။",
+  "back": "/laser_scan is a valid name format, so it gives no warning. Not a single scan reaches slam_toolbox anymore, and the map never grows."
+ },
+ "l2/topics:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: type a topic name so my_node gets the LiDAR scans.",
+  "my": "စိန်ခေါ်မှု: my_node က LiDAR scan တွေကို ရအောင် topic နာမည်တစ်ခု ရိုက်ထည့်ပါ။",
+  "back": "Challenge: type in a topic name so that my_node gets the LiDAR scans."
+ },
+ "l2/topics:cli": {
+  "status": "pass-alt",
+  "en": "Check it on a real robot",
+  "my": "စက်ရုပ် အစစ်ပေါ်မှာ စစ်ကြည့်",
+  "back": "Check on a real robot"
+ },
+ "l2/topics:everyday": {
+  "status": "pass-alt",
+  "en": "Everyday: a radio station. It broadcasts on one frequency without knowing who listens, and every radio tuned to it hears the same song. Tune one step off and you hear nothing.",
+  "my": "နေ့စဉ်ဘဝက ဥပမာ: ရေဒီယို အသံလွှင့်ဌာန တစ်ခုပါ။ ဘယ်သူ နားထောင်နေလဲ မသိဘဲ လှိုင်းနှုန်း တစ်ခုတည်းမှာ အသံလွှင့်ပါတယ်၊ အဲဒီလှိုင်းကို ချိန်ထားတဲ့ ရေဒီယိုတိုင်းက သီချင်း တစ်ပုဒ်တည်းကို ကြားရပါတယ်။ တစ်ဆင့်လောက် လွဲချိန်လိုက်ရင် ဘာမှ မကြားရပါဘူး။",
+  "back": "Everyday example: a radio broadcasting station. It broadcasts on a single frequency without knowing who is listening, and every radio tuned to that frequency hears the same one song. If you tune one step off, you hear nothing."
+ },
+ "l2/topics:fixIt": {
+  "status": "pass-alt",
+  "en": "Fix it: back to /scan",
+  "my": "ပြင်ကြည့်: /scan ကို ပြန်ပြောင်း",
+  "back": "Fix it: change back to /scan"
+ },
+ "l2/topics:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "/cmd_vel",
+  "my": "/cmd_vel",
+  "back": "/cmd_vel"
+ },
+ "l2/topics:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "the topic a mobile robot reads its speed commands from",
+  "my": "ရွေ့လျားတဲ့ စက်ရုပ်က အမြန်နှုန်း command တွေကို ဖတ်ယူတဲ့ topic",
+  "back": "The topic from which a moving robot reads speed commands"
+ },
+ "l2/topics:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "topic",
+  "my": "topic",
+  "back": "topic"
+ },
+ "l2/topics:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "a named channel, like /scan",
+  "my": "နာမည်ပေးထားတဲ့ ချန်နယ်၊ ဥပမာ /scan",
+  "back": "A named channel, for example /scan"
+ },
+ "l2/topics:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "publish",
+  "my": "publish",
+  "back": "publish"
+ },
+ "l2/topics:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "send a message on a topic",
+  "my": "topic တစ်ခုပေါ်မှာ message တစ်ခု ပို့",
+  "back": "Send a message on a topic"
+ },
+ "l2/topics:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "subscribe",
+  "my": "subscribe",
+  "back": "subscribe"
+ },
+ "l2/topics:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "ask to receive every message on a topic",
+  "my": "topic တစ်ခုပေါ်က message တိုင်းကို လက်ခံဖို့ တောင်းဆို",
+  "back": "Request to receive every message on a topic"
+ },
+ "l2/topics:glossary.4.0": {
+  "status": "pass-alt",
+  "en": "message type",
+  "my": "message type",
+  "back": "message type"
+ },
+ "l2/topics:glossary.4.1": {
+  "status": "pass-alt",
+  "en": "the shape of the data, like sensor_msgs/msg/LaserScan (chapter 2.3)",
+  "my": "ဒေတာရဲ့ ပုံစံ၊ ဥပမာ sensor_msgs/msg/LaserScan (အခန်း 2.3)",
+  "back": "The shape of the data, for example sensor_msgs/msg/LaserScan (section 2.3)"
+ },
+ "l2/topics:got": {
+  "status": "pass-alt",
+  "en": "messages received in 3 s",
+  "my": "3 s အတွင်း ရရှိတဲ့ message အရေအတွက်",
+  "back": "Number of messages received within 3 s"
+ },
+ "l2/topics:invalid": {
+  "status": "pass-alt",
+  "en": "not a valid topic name",
+  "my": "မှန်ကန်တဲ့ topic နာမည် မဟုတ်",
+  "back": "Not a valid topic name"
+ },
+ "l2/topics:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: nodes talk through topics, named channels where one node publishes and any number of nodes subscribe.",
+  "my": "သင်ယူရမယ့်အရာ: node တွေဟာ topic တွေကနေတစ်ဆင့် ဆက်သွယ်ကြပါတယ်။ topic ဆိုတာ နာမည်ပေးထားတဲ့ ချန်နယ်တစ်ခုပါ၊ အဲဒီမှာ node တစ်ခုက publish လုပ်ပြီး node ဘယ်နှစ်ခုမဆို subscribe လုပ်နိုင်ပါတယ်။",
+  "back": "What to learn: nodes communicate through topics. A topic is a named channel; one node publishes on it and any number of nodes can subscribe."
+ },
+ "l2/topics:lines.0": {
+  "status": "pass-alt",
+  "en": "ros_gz_bridge publishes each LiDAR scan on the topic /scan, 5 times a second. It does not know who listens.",
+  "my": "ros_gz_bridge က LiDAR scan တစ်ခုစီကို /scan ဆိုတဲ့ topic ပေါ်မှာ တစ်စက္ကန့်ကို 5 ကြိမ် publish လုပ်ပါတယ်။ ဘယ်သူ နားထောင်နေလဲ ဆိုတာ သူ မသိပါဘူး။",
+  "back": "ros_gz_bridge publishes each LiDAR scan on a topic called /scan, 5 times per second. It does not know who is listening."
+ },
+ "l2/topics:lines.1": {
+  "status": "pass-alt",
+  "en": "slam_toolbox, nav2 and rviz2 each subscribe to /scan, and each gets its own copy of every scan (the dots).",
+  "my": "slam_toolbox၊ nav2 နဲ့ rviz2 တို့က တစ်ခုစီ /scan ကို subscribe လုပ်ကြပြီး scan တိုင်းရဲ့ ကိုယ်ပိုင် မိတ္တူကို တစ်ခုစီ ရကြပါတယ် (အစက်လေးတွေ)။",
+  "back": "slam_toolbox, nav2 and rviz2 each subscribe to /scan, and each gets its own copy of every scan (the little dots)."
+ },
+ "l2/topics:lines.2": {
+  "status": "pass-alt",
+  "en": "Nav2 answers on another topic, /cmd_vel: speed commands, 20 times a second, back to the robot.",
+  "my": "Nav2 က နောက်ထပ် topic တစ်ခုဖြစ်တဲ့ /cmd_vel ပေါ်မှာ ပြန်ဖြေပါတယ်: အမြန်နှုန်း command တွေကို တစ်စက္ကန့်ကို 20 ကြိမ် စက်ရုပ်ဆီ ပြန်ပို့ပါတယ်။",
+  "back": "Nav2 replies on another topic, /cmd_vel: it sends speed commands back to the robot 20 times per second."
+ },
+ "l2/topics:lines.3": {
+  "status": "pass-alt",
+  "en": "The name is the only link. One wrong letter and the node hears nothing, and ROS prints no error.",
+  "my": "ချိတ်ဆက်ပေးတာ နာမည် တစ်ခုတည်းပါ။ စာလုံး တစ်လုံး မှားရင် node က ဘာမှ မကြားရပါဘူး၊ ROS ကလည်း အမှား ဘာမှ မပြပါဘူး။",
+  "back": "The only thing that connects them is a single name. If one letter is wrong, the node hears nothing, and ROS shows no error at all."
+ },
+ "l2/topics:mine": {
+  "status": "pass-alt",
+  "en": "my_node subscribes to",
+  "my": "my_node က subscribe လုပ်တဲ့ နာမည်",
+  "back": "The name my_node subscribes to"
+ },
+ "l2/topics:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet: my_node hears",
+  "my": "မရသေး: my_node ကြားရတာ",
+  "back": "Not yet: what my_node hears"
+ },
+ "l2/topics:nothing": {
+  "status": "pass-alt",
+  "en": "nothing",
+  "my": "ဘာမှ မရှိ",
+  "back": "Nothing"
+ },
+ "l2/topics:resolves": {
+  "status": "pass-alt",
+  "en": "resolves to",
+  "my": "အပြည့်အစုံ ဖြစ်သွားတဲ့ နာမည်",
+  "back": "A name that has become complete"
+ },
+ "l2/topics:solved": {
+  "status": "pass-alt",
+  "en": "Solved: my_node hears",
+  "my": "အောင်မြင်ပြီ: my_node ကြားရတာ",
+  "back": "Success: what my_node hears"
+ },
+ "l2/topics:title": {
+  "status": "pass-alt",
+  "en": "ROS 2: topics",
+  "my": "ROS 2: topic များ",
+  "back": "ROS 2: topics"
+ },
+ "l2/topics:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရများ",
+  "back": "Glossary"
+ },
+ "l2/ws:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: skip the first source",
+  "my": "ဖျက်ကြည့်: ပထမ source ကို ကျော်",
+  "back": "Break it: skip the first source"
+ },
+ "l2/ws:brokenNote": {
+  "status": "pass-alt",
+  "en": "Without ROS sourced, CMake cannot find ament_cmake, the build tool every ROS C++ package needs. The build fails before compiling anything.",
+  "my": "ROS ကို source မလုပ်ထားရင် CMake က ament_cmake ကို ရှာမတွေ့ပါဘူး။ ament_cmake ဆိုတာ ROS C++ package တိုင်း လိုအပ်တဲ့ build ကိရိယာပါ။ ဘာမှ compile မလုပ်ရခင်မှာပဲ build က မအောင်မြင်ပါဘူး။",
+  "back": "If ROS is not sourced, CMake cannot find ament_cmake. ament_cmake is the build tool that every ROS C++ package needs. The build fails before anything is compiled."
+ },
+ "l2/ws:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: in a new terminal, get ros2 run tf_explorer tf_anomaly_detector to start.",
+  "my": "စိန်ခေါ်မှု: terminal အသစ်တစ်ခုမှာ ros2 run tf_explorer tf_anomaly_detector စတင် အလုပ်လုပ်အောင် လုပ်ပါ။",
+  "back": "Challenge: in a new terminal, get ros2 run tf_explorer tf_anomaly_detector to start running."
+ },
+ "l2/ws:fixIt": {
+  "status": "pass-alt",
+  "en": "Fix it: source ROS first",
+  "my": "ပြင်ကြည့်: ROS ကို အရင် source လုပ်",
+  "back": "Fix it: source ROS first"
+ },
+ "l2/ws:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "package",
+  "my": "package",
+  "back": "package"
+ },
+ "l2/ws:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "a folder with package.xml: one unit of ROS code",
+  "my": "package.xml ပါတဲ့ folder: ROS ကုဒ်ရဲ့ ယူနစ် တစ်ခု",
+  "back": "A folder containing package.xml: one unit of ROS code"
+ },
+ "l2/ws:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "workspace",
+  "my": "workspace",
+  "back": "workspace"
+ },
+ "l2/ws:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "a folder holding src/ with your packages",
+  "my": "သင့် package တွေပါတဲ့ src/ ကို ထည့်ထားတဲ့ folder",
+  "back": "The folder that holds src/ containing your packages"
+ },
+ "l2/ws:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "colcon build",
+  "my": "colcon build",
+  "back": "colcon build"
+ },
+ "l2/ws:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "builds every package under the current folder",
+  "my": "လက်ရှိ folder အောက်က package အားလုံးကို build လုပ်",
+  "back": "Build all packages under the current folder"
+ },
+ "l2/ws:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "overlay",
+  "my": "overlay",
+  "back": "overlay"
+ },
+ "l2/ws:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "your install/ on top of ROS: source it after /opt/ros/humble",
+  "my": "ROS ပေါ်မှာ ထပ်တင်ထားတဲ့ သင့် install/: /opt/ros/humble ပြီးမှ source လုပ်",
+  "back": "Your install/ layered on top of ROS: source it after /opt/ros/humble"
+ },
+ "l2/ws:insideSrc": {
+  "status": "pass-alt",
+  "en": "Try it: run colcon build inside src/ and watch where install/ appears.",
+  "my": "စမ်းကြည့်: src/ ထဲမှာ colcon build ကို run ပြီး install/ ဘယ်မှာ ပေါ်လာလဲ ကြည့်ပါ။",
+  "back": "Try it: run colcon build in src/ and see where install/ appears."
+ },
+ "l2/ws:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: your code lives in packages inside a workspace; colcon build turns them into programs; source install/setup.bash makes ROS find them.",
+  "my": "သင်ယူရမယ့်အရာ: သင့်ကုဒ်က workspace ထဲက package တွေထဲမှာ ရှိပါတယ်။ colcon build က အဲဒါတွေကို ပရိုဂရမ်အဖြစ် ပြောင်းပေးပါတယ်။ source install/setup.bash က ROS ကို အဲဒါတွေ ရှာတွေ့အောင် လုပ်ပေးပါတယ်။",
+  "back": "What to learn: your code lives in packages inside a workspace. colcon build turns them into programs. source install/setup.bash makes ROS able to find them."
+ },
+ "l2/ws:lines.0": {
+  "status": "pass-alt",
+  "en": "A package is one folder with a package.xml (name, dependencies) and a CMakeLists.txt (what to build). tf_explorer is one package with 5 programs.",
+  "my": "package ဆိုတာ package.xml (နာမည်၊ မှီခိုတဲ့ package တွေ) နဲ့ CMakeLists.txt (ဘာကို build လုပ်မလဲ) ပါတဲ့ folder တစ်ခုပါ။ tf_explorer က ပရိုဂရမ် 5 ခုပါတဲ့ package တစ်ခုပါ။",
+  "back": "A package is a folder containing package.xml (name, dependent packages) and CMakeLists.txt (what to build). tf_explorer is a package with 5 programs."
+ },
+ "l2/ws:lines.1": {
+  "status": "pass-alt",
+  "en": "A workspace is a folder with src/ inside. You clone packages into src/, then run colcon build from the workspace folder. It creates build/, install/ and log/ next to src/.",
+  "my": "workspace ဆိုတာ အထဲမှာ src/ ပါတဲ့ folder တစ်ခုပါ။ package တွေကို src/ ထဲကို clone လုပ်ပြီး workspace folder ထဲကနေ colcon build ကို run ပါ။ အဲဒါက src/ ဘေးမှာ build/၊ install/ နဲ့ log/ ကို ဖန်တီးပေးပါတယ်။",
+  "back": "A workspace is a folder that contains src/. Clone packages into src/ and run colcon build from the workspace folder. It creates build/, install/ and log/ next to src/."
+ },
+ "l2/ws:lines.2": {
+  "status": "pass-alt",
+  "en": "Two sources, in order: /opt/ros/humble first (ROS itself), then install/setup.bash (your packages). Every new terminal needs both.",
+  "my": "source 2 ခုကို ဒီအစဉ်အတိုင်း လုပ်ပါ: ပထမ /opt/ros/humble (ROS ကိုယ်တိုင်)၊ ပြီးရင် install/setup.bash (သင့် package တွေ)။ terminal အသစ်တိုင်းမှာ နှစ်ခုလုံး လိုပါတယ်။",
+  "back": "Source 2 sources in this order: first /opt/ros/humble (ROS itself), then install/setup.bash (your packages). Both are needed in every new terminal."
+ },
+ "l2/ws:newTerm": {
+  "status": "pass-alt",
+  "en": "Open a new terminal",
+  "my": "terminal အသစ်တစ်ခု ဖွင့်",
+  "back": "Open a new terminal"
+ },
+ "l2/ws:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet.",
+  "my": "မရသေးပါဘူး။",
+  "back": "Not yet."
+ },
+ "l2/ws:runsHere": {
+  "status": "pass-alt",
+  "en": "A pretend terminal (JavaScript): no real build. Real error and log lines are copied; lines in (parentheses) are shortened.",
+  "my": "terminal အတု (JavaScript) ပါ: build အစစ် မလုပ်ပါဘူး။ အမှား စာကြောင်းနဲ့ log စာကြောင်း အစစ်တွေကို ကူးထားပါတယ်၊ (ကွင်း) ထဲက စာကြောင်းတွေကို တိုထားပါတယ်။",
+  "back": "It is a fake terminal (JavaScript): it does not do a real build. The error lines and log lines are copied from real ones, and the lines inside (parentheses) are shortened."
+ },
+ "l2/ws:solved": {
+  "status": "pass-alt",
+  "en": "Solved: the node started.",
+  "my": "အောင်မြင်ပြီ: node စတင်သွားပါပြီ။",
+  "back": "Success: the node has started."
+ },
+ "l2/ws:title": {
+  "status": "pass-alt",
+  "en": "ROS 2: workspace, packages, colcon build",
+  "my": "ROS 2: workspace၊ package များ၊ colcon build",
+  "back": "ROS 2: workspace, packages, colcon build"
+ },
+ "l2/ws:tree": {
+  "status": "pass-alt",
+  "en": "tf_explorer_ws/",
+  "my": "tf_explorer_ws/",
+  "back": "tf_explorer_ws/"
+ },
+ "l2/ws:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရများ",
+  "back": "Glossary"
+ },
+ "l2/ws:yours": {
+  "status": "pass-alt",
+  "en": "Your terminal: build and run it yourself",
+  "my": "သင့် terminal: ကိုယ်တိုင် build လုပ်ပြီး run ကြည့်",
+  "back": "Your terminal: build and run it yourself"
+ },
  "l3/tflab:check": {
   "status": "pass",
   "en": "Check my guess",

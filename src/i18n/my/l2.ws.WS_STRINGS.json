@@ -1,0 +1,39 @@
+{
+ "title": "ROS 2: workspace၊ package များ၊ colcon build",
+ "learn": "သင်ယူရမယ့်အရာ: သင့်ကုဒ်က workspace ထဲက package တွေထဲမှာ ရှိပါတယ်။ colcon build က အဲဒါတွေကို ပရိုဂရမ်အဖြစ် ပြောင်းပေးပါတယ်။ source install/setup.bash က ROS ကို အဲဒါတွေ ရှာတွေ့အောင် လုပ်ပေးပါတယ်။",
+ "lines": [
+  "package ဆိုတာ package.xml (နာမည်၊ မှီခိုတဲ့ package တွေ) နဲ့ CMakeLists.txt (ဘာကို build လုပ်မလဲ) ပါတဲ့ folder တစ်ခုပါ။ tf_explorer က ပရိုဂရမ် 5 ခုပါတဲ့ package တစ်ခုပါ။",
+  "workspace ဆိုတာ အထဲမှာ src/ ပါတဲ့ folder တစ်ခုပါ။ package တွေကို src/ ထဲကို clone လုပ်ပြီး workspace folder ထဲကနေ colcon build ကို run ပါ။ အဲဒါက src/ ဘေးမှာ build/၊ install/ နဲ့ log/ ကို ဖန်တီးပေးပါတယ်။",
+  "source 2 ခုကို ဒီအစဉ်အတိုင်း လုပ်ပါ: ပထမ /opt/ros/humble (ROS ကိုယ်တိုင်)၊ ပြီးရင် install/setup.bash (သင့် package တွေ)။ terminal အသစ်တိုင်းမှာ နှစ်ခုလုံး လိုပါတယ်။"
+ ],
+ "tree": "tf_explorer_ws/",
+ "yours": "သင့် terminal: ကိုယ်တိုင် build လုပ်ပြီး run ကြည့်",
+ "breakIt": "ဖျက်ကြည့်: ပထမ source ကို ကျော်",
+ "fixIt": "ပြင်ကြည့်: ROS ကို အရင် source လုပ်",
+ "brokenNote": "ROS ကို source မလုပ်ထားရင် CMake က ament_cmake ကို ရှာမတွေ့ပါဘူး။ ament_cmake ဆိုတာ ROS C++ package တိုင်း လိုအပ်တဲ့ build ကိရိယာပါ။ ဘာမှ compile မလုပ်ရခင်မှာပဲ build က မအောင်မြင်ပါဘူး။",
+ "newTerm": "terminal အသစ်တစ်ခု ဖွင့်",
+ "insideSrc": "စမ်းကြည့်: src/ ထဲမှာ colcon build ကို run ပြီး install/ ဘယ်မှာ ပေါ်လာလဲ ကြည့်ပါ။",
+ "challenge": "စိန်ခေါ်မှု: terminal အသစ်တစ်ခုမှာ ros2 run tf_explorer tf_anomaly_detector စတင် အလုပ်လုပ်အောင် လုပ်ပါ။",
+ "solved": "အောင်မြင်ပြီ: node စတင်သွားပါပြီ။",
+ "notYet": "မရသေးပါဘူး။",
+ "runsHere": "terminal အတု (JavaScript) ပါ: build အစစ် မလုပ်ပါဘူး။ အမှား စာကြောင်းနဲ့ log စာကြောင်း အစစ်တွေကို ကူးထားပါတယ်၊ (ကွင်း) ထဲက စာကြောင်းတွေကို တိုထားပါတယ်။",
+ "words": "ဝေါဟာရများ",
+ "glossary": [
+  [
+   "package",
+   "package.xml ပါတဲ့ folder: ROS ကုဒ်ရဲ့ ယူနစ် တစ်ခု"
+  ],
+  [
+   "workspace",
+   "သင့် package တွေပါတဲ့ src/ ကို ထည့်ထားတဲ့ folder"
+  ],
+  [
+   "colcon build",
+   "လက်ရှိ folder အောက်က package အားလုံးကို build လုပ်"
+  ],
+  [
+   "overlay",
+   "ROS ပေါ်မှာ ထပ်တင်ထားတဲ့ သင့် install/: /opt/ros/humble ပြီးမှ source လုပ်"
+  ]
+ ]
+}

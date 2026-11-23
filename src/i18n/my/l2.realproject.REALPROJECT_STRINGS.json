@@ -1,0 +1,10 @@
+{
+ "head": "တကယ့် project တစ်ခုကနေ",
+ "nodes": "project ကိုယ်ပိုင် node 4 ခု (တစ်ခုစီက သီးခြား ပရိုဂရမ်) ကို launch file တစ်ခုက launch လုပ်ပြီး 9 s အကြာမှာ စတင်ပါတယ်။",
+ "topics": "ဆင်မျူလေတာရဲ့ LiDAR က bridge config ကနေတစ်ဆင့် ROS 2 ဆီ /scan topic အဖြစ် ရောက်ပါတယ်။",
+ "msgtypes": "စံ type တစ်ခုမှ မကိုက်ညီတဲ့အခါ project က transform တစ်ခုရဲ့ ကျန်းမာရေး အခြေအနေအတွက် ကိုယ်ပိုင် message type ဖြစ်တဲ့ TFDiagnostics ကို သတ်မှတ်ပါတယ်။",
+ "actions": "patrol node က Nav2 ရဲ့ navigate_to_pose အတွက် action client တစ်ခုပါ: ပန်းတိုင်တစ်ခု ပို့ပါတယ်၊ ရလဒ်ကို စောင့်ပါတယ်၊ ပြီးရင် နောက်တစ်ခု ပို့ပါတယ်။",
+ "params": "ပုံမှန်မဟုတ်တာ ရှာတဲ့ node က သူ့ ခုန်ကျော်မှု ကန့်သတ်ချက် 0.5 m ကို parameter အဖြစ် ဖတ်ပါတယ်၊ ဒါကြောင့် ပြန် build မလုပ်ဘဲ ပြောင်းလို့ ရပါတယ်။",
+ "ws": "package တစ်ခု၊ ပရိုဂရမ် 5 ခု: C++ node တစ်ခုစီက CMakeLists.txt တစ်ခုတည်းထဲက add_executable စာကြောင်း တစ်ကြောင်းပါ။",
+ "drive": "wiggle recovery node က /cmd_vel ပေါ်မှာ Twist ကို publish လုပ်ပြီး angular.z ကိုပဲ သတ်မှတ်ပါတယ်: စက်ရုပ်ကို လှုပ်ပြီး လွတ်အောင် ဘယ်ဘက်၊ ပြီးရင် ညာဘက် လှည့်ပါတယ်။"
+}
