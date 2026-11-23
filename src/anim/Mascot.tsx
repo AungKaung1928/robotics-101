@@ -28,12 +28,13 @@ export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look
   const [pose, setPose] = useState<Pose>(() => (enter && !reduced() ? enterPose(0) : REST)) // entrance: first paint already off to the left, no jump
   const [t, setT] = useState(0)
   useEffect(() => { if (enter && !reduced()) setAct({ kind: 'enter', n: 1 }) }, []) // once, on mount; reduced motion: already in place
-  useEffect(() => { if (cheer) setAct({ kind: 'happy', n: cheer }) }, [cheer])
+  // Trigger counters react only when they RISE: a count that falls (the reader fixed something) or resets stays quiet
+  useRise(cheer, () => setAct({ kind: 'happy', n: cheer }))
   // boop from elsewhere (Comeau: the trigger can be a nearby control): never cuts a running reaction short
-  useEffect(() => { if (boopN) setAct((a) => a ?? { kind: 'boop', n: boopN }) }, [boopN])
-  useEffect(() => { if (oops) setAct({ kind: 'oops', n: oops }) }, [oops])
-  useEffect(() => { if (brake) setAct({ kind: 'brake', n: brake }) }, [brake])
-  useEffect(() => { if (start) setAct({ kind: 'start', n: start }) }, [start])
+  useRise(boopN, () => setAct((a) => a ?? { kind: 'boop', n: boopN }))
+  useRise(oops, () => setAct({ kind: 'oops', n: oops }))
+  useRise(brake, () => setAct({ kind: 'brake', n: brake }))
+  useRise(start, () => setAct({ kind: 'start', n: start }))
   useEffect(() => {
     if (!act) return
     const { pose: f, end } = REACTION[act.kind]
@@ -171,4 +172,13 @@ export function useGlance(ref: { current: Element | null }, on: boolean): number
     return () => window.removeEventListener('pointerdown', tap)
   }, [ref, on])
   return g
+}
+
+/** Runs `fire` after a render where `n` went up (not on the first render with n = 0, not when it falls or resets). */
+export function useRise(n: number, fire: () => void) {
+  const prev = useRef(0)
+  useEffect(() => {
+    if (n > prev.current) fire()
+    prev.current = n
+  }, [n]) // fire is a fresh closure each render, read only when n changes, on purpose
 }
