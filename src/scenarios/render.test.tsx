@@ -77,5 +77,6 @@ describe('scenario figures render from their models', () => {
     expect(count(at(9), /class="env stale"/g)).toBe(2) // rect + flap of message 1, overtaken by 2
     expect(count(at(9), /class="env used"/g)).toBe(6)
     expect(at(9)).toContain('class="mascot"')
+    expect(at(0.05)).toMatch(/class="env-id"[^>]*>#(<!-- -->)?0<\/text>/) // row id matches the timeline's #n
   })
 })
