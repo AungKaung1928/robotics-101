@@ -12,6 +12,10 @@ describe('Burmese encoding check', () => {
   }
   for (const [name, s] of Object.entries(zawgyi)) it(`rejects Zawgyi: ${name}`, () => expect(encodingErrors(s)).not.toEqual([]))
 
+  it('rejects letters from other scripts', () => {
+    for (const s of ['ยัง MISSING ဖြစ်နေတုန်းပါပဲ', 'ロボット ကို ရပ်ပါ။', '机器人', 'робот']) expect(encodingErrors(s), s).not.toEqual([])
+    expect(encodingErrors('θ = 0.5 rad, LiDAR → ကြည့်ပါ။')).toEqual([])
+  })
   it('accepts Unicode Burmese', () => {
     for (const s of ['မောင်', 'မြန်မာ', 'ကျွန်တော်', 'ကျောင်း', 'မန္တလေး', 'စင်္ကာပူ', 'စက်ရုပ်ကို ရပ်ပါ။']) expect(encodingErrors(s), s).toEqual([])
   })
