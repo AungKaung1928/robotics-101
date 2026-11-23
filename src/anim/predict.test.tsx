@@ -22,4 +22,9 @@ describe('predict before reveal', () => {
     expect(at(0.1)).not.toContain('class="truth"')
     expect(at(-1, null)).toBe('<svg></svg>')
   })
+  it('yUp: the gap text is flipped back so it reads upright in a map frame', () => {
+    const html = (yUp: boolean) => renderToStaticMarkup(<svg><PredictMark guess={[0, 0]} truth={[3, 4]} sinceReveal={1} tol={1} r={1} gapText={() => 'x'} yUp={yUp} /></svg>)
+    expect(html(true)).toContain('scale(1 -1)')
+    expect(html(false)).not.toContain('scale(1 -1)')
+  })
 })
