@@ -118,3 +118,36 @@ describe('reduced motion switches off the same selector', () => {
     expect(Object.keys(SAFE).filter((s) => !seen.has(s)), 'stale SAFE entries').toEqual([])
   })
 })
+
+describe('entrances never start from (almost) nothing', () => {
+  // Emil Kowalski's animation skill: never animate from scale(0); start at 0.9+ with opacity (things do not appear from nowhere)
+  it('every @keyframes "from" / "0%" scale in src/anim and src/scenarios is at least 0.9', () => {
+    const low: string[] = []
+    for (const f of files) {
+      const css = read(f).replace(/\/\*[\s\S]*?\*\//g, '')
+      for (const k of css.matchAll(/@keyframes\s+([\w-]+)\s*\{\s*(?:from|0%)\s*\{([^}]*)\}/g)) {
+        for (const m of k[2].matchAll(/scale\(([\d.]+)/g)) if (+m[1] < 0.9) low.push(`${f} ${k[1]}: scale(${m[1]})`)
+      }
+    }
+    expect(low).toEqual([])
+  })
+})
+
+describe('hover styles only where a pointer can hover', () => {
+  // touch browsers keep :hover after a tap (sticky hover); wrap hover-only looks in @media (hover: hover)
+  it('every :hover selector in src/anim and src/scenarios sits inside @media (hover: hover)', () => {
+    const bare: string[] = []
+    for (const f of files) {
+      const css = read(f).replace(/\/\*[\s\S]*?\*\//g, ''), stack: string[] = []
+      let buf = ''
+      for (const ch of css) {
+        if (ch === '{') { stack.push(buf.trim()); buf = '' }
+        else if (ch === '}') { stack.pop(); buf = '' }
+        else if (ch === ';') buf = ''
+        else buf += ch
+        if (ch === '{' && stack.at(-1)!.includes(':hover') && !stack.slice(0, -1).some((a) => /@media[^{]*hover:\s*hover/.test(a))) bare.push(`${f}: ${stack.at(-1)}`)
+      }
+    }
+    expect(bare).toEqual([])
+  })
+})

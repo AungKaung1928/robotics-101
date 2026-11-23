@@ -31,6 +31,7 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
   const [target, setTarget] = useState<number | null>(null)
   const [rate, setRate] = useState(() => typeof sessionStorage === 'undefined' ? 1 : storedRate(sessionStorage.getItem(RATE_KEY)))
   useEffect(() => { if (typeof sessionStorage !== 'undefined') sessionStorage.setItem(RATE_KEY, String(rate)) }, [rate])
+  const [kbd, setKbd] = useState(false) // last input was a Player key
   const [tip, setTip] = useState<{ i: number; x: number; f: number } | null>(null) // step name under the pointer on the scrubber
   const now = useRef(t)
   now.current = t
@@ -82,6 +83,7 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
     const k = playerKey(e.key, (e.target as HTMLElement).classList?.contains('scrub'))
     if (!k) return
     e.preventDefault()
+    setKbd(true) // keyboard actions repeat often: no pops or morphs for them (Emil Kowalski: never animate keyboard-initiated actions)
     e.stopPropagation() // inside the Player, ← / → step the scenario; the page's chapter arrows must not also fire
     if (k === 'toggle') toggle()
     else if (k === 'replay') replay()
@@ -91,7 +93,7 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
     else go(k === 'start' ? 0 : end, true)
   }
   return (
-    <div className="stepper" role="group" aria-label={s.player.label} onKeyDown={onKey} style={UI_STYLE}>
+    <div className="stepper" role="group" aria-label={s.player.label} onKeyDown={onKey} onPointerDown={() => setKbd(false)} data-kbd={kbd || undefined} style={UI_STYLE}>
       <button type="button" onClick={(e) => step(-1, still || fromKeyboard(e))} disabled={from <= Math.min(...events) + 1e-9}>← {s.back}</button>
       <button type="button" disabled={still} aria-pressed={playing} onClick={toggle}>
         {atEnd && !playing && !still

@@ -62,7 +62,8 @@ describe('MoveScene arrows stay in the frame over the chapter range', () => {
   it('left 0.15, right -0.22..0.22, slip off / on, every 0.5 s to 4 s: every arrow tip inside 460 x 340 (5 px room)', async () => {
     const mv = await import('../chapters/l0/move')
     const out: string[] = []
-    for (let r = -mv.TOP_SPEED; r <= mv.TOP_SPEED + 1e-9; r += 0.01) for (const slip of [0, 1 - mv.SLIP]) for (let t = 0; t <= mv.SECONDS; t += 0.5) {
+    // right every 0.02 m/s (both ends included): 414 renders, about 2.5 s; the 0.01 grid took 5.7 s under load (flaky at 5 s)
+    for (let r = -mv.TOP_SPEED; r <= mv.TOP_SPEED + 1e-9; r += 0.02) for (const slip of [0, 1 - mv.SLIP]) for (let t = 0; t <= mv.SECONDS; t += 0.5) {
       const h = renderToStaticMarkup(<MoveScene vl={mv.LEFT} vr={r} t={t} slip={slip} arrows label="" />)
       for (const m of h.matchAll(/class="ms-v[^"]*"[^>]*><path d="M[-\d.]+ [-\d.]+L([-\d.]+) ([-\d.]+)"/g)) {
         const x = +m[1], y = +m[2]
@@ -71,5 +72,5 @@ describe('MoveScene arrows stay in the frame over the chapter range', () => {
     }
     if (out.length) console.log('ARROW-OFF', out.length, out.slice(0, 6).join(' | '))
     expect(out).toEqual([])
-  })
+   }, 20_000)
 })
