@@ -107,3 +107,18 @@ export function headLag(f: (t: number) => Pose, t: number, lag = HEAD_LAG): { ro
   const now = f(t), before = f(Math.max(t - lag, 0))
   return { rot: before.rot - now.rot, dy: now.y - before.y }
 }
+
+const STARS = 3, STAR_TURN_S = 0.6 // stars, seconds per lap
+/**
+ * Dizzy stars while the wobble runs: `STARS` stars on an ellipse above the head (a circle seen from the side, so the
+ * motion follows an arc), one lap per STAR_TURN_S; stars on the far side are smaller, fainter and drawn behind the head
+ * (`front` false), and all fade over the last 40 % of the wobble. Empty outside (0, OOPS_S).
+ */
+export function dizzyStars(t: number, cx = 32, cy = 7, rx = 13, ry = 3.5): { x: number; y: number; s: number; o: number; front: boolean }[] {
+  if (t <= 0 || t >= OOPS_S) return []
+  const fade = Math.min(1, (OOPS_S - t) / (0.4 * OOPS_S))
+  return Array.from({ length: STARS }, (_, i) => {
+    const a = (2 * Math.PI * t) / STAR_TURN_S + (2 * Math.PI * i) / STARS, near = (Math.sin(a) + 1) / 2 // 1 = front
+    return { x: cx + rx * Math.cos(a), y: cy + ry * Math.sin(a), s: 0.85 + 0.35 * near, o: fade * (0.45 + 0.55 * near), front: near >= 0.5 }
+  })
+}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { BOOP_S, HAPPY_S, HEAD_LAG, JOLT_S, WHEEL_R, headLag, brakePose, startPose, eyeShift, wheelAngle, OOPS_S, REST, SPARK_AT, boopPose, happyPose, oopsPose, sparks } from './mascot'
+import { BOOP_S, HAPPY_S, HEAD_LAG, JOLT_S, WHEEL_R, headLag, brakePose, startPose, eyeShift, wheelAngle, OOPS_S, REST, SPARK_AT, boopPose, happyPose, oopsPose, sparks, dizzyStars } from './mascot'
 
 const ts = (end: number) => Array.from({ length: 601 }, (_, i) => (i / 600) * end)
 
@@ -111,5 +111,24 @@ describe('headLag (follow-through)', () => {
     expect(headLag(happyPose, 0.12).dy).toBeGreaterThan(0)
     const d = Array.from({ length: 200 }, (_, i) => Math.abs(headLag(happyPose, (i / 200) * HAPPY_S).dy))
     expect(Math.max(...d)).toBeLessThan(5)
+  })
+})
+
+describe('dizzy stars', () => {
+  it('only during the wobble, three of them, on the ellipse above the head', () => {
+    expect(dizzyStars(0)).toEqual([])
+    expect(dizzyStars(OOPS_S)).toEqual([])
+    const s = dizzyStars(0.1)
+    expect(s).toHaveLength(3)
+    for (const p of s) expect(((p.x - 32) / 13) ** 2 + ((p.y - 7) / 3.5) ** 2).toBeCloseTo(1, 9)
+  })
+  it('far side smaller and fainter; all fade out toward the end', () => {
+    const s = dizzyStars(0.1), front = s.reduce((a, b) => (b.y > a.y ? b : a)), back = s.reduce((a, b) => (b.y < a.y ? b : a))
+    expect(front.s).toBeGreaterThan(back.s)
+    expect(front.o).toBeGreaterThan(back.o)
+    expect(front.front).toBe(true)
+    expect(back.front).toBe(false)
+    const late = dizzyStars(OOPS_S * 0.99)
+    expect(Math.max(...late.map((p) => p.o))).toBeLessThan(0.05)
   })
 })
