@@ -1,0 +1,6 @@
+/* Predict before reveal (lane anim): the guess is a hollow ring in ink, the truth a robot-blue dot, the gap dashed. */
+.predict .guess { fill: none; stroke: var(--ink); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
+.predict .truth { fill: var(--robot); }
+.predict .gap { stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 3 3; vector-effect: non-scaling-stroke; }
+.predict .gap-text { font-family: var(--mono); fill: var(--ink-2); text-anchor: middle; }
+.predict[data-close='true'] .gap-text { fill: var(--free); }
