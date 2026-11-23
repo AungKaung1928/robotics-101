@@ -158,3 +158,16 @@ describe('NodeFace and sinceLanding (Topics model)', () => {
     expect(renderToStaticMarkup(<svg><NodeFace x={0} y={0} starved since={0.05} off /></svg>)).toContain('data-mood="off"') // off wins: asleep, not worried
   })
 })
+
+describe('actionCues from the Actions model', () => {
+  it('reachable: start once, cheer at the end; unreachable: one wobble per attempt; cancel: brake', async () => {
+    const { actionCues } = await import('./ActionActor')
+    const { run } = await import('../chapters/l2/actions')
+    const ok = run(1, true, null)
+    expect(actionCues(ok.slice(0, 1)).thinking).toBe(true)
+    expect(actionCues(ok)).toMatchObject({ start: 1, cheer: 1, oops: 0, brake: 0, thinking: false })
+    const bad = run(1, false, null)
+    expect(actionCues(bad).oops).toBe(4) // MAX_RETRIES + 1 attempts
+    expect(actionCues(run(2, true, 1500))).toMatchObject({ brake: 1, cheer: 0 })
+  })
+})
