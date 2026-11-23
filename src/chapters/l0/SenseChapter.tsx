@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import Mascot from '../../anim/Mascot'
 import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { BEAMS, FRONT_MAX, FRONT_START, MAX_M, ROOM, VIEW, front, perSecond, turn, valid } from './sense'
 import { SENSE_STRINGS } from './sense.strings'
 import './l0.css'
@@ -19,7 +19,7 @@ const ANSWERS: Answer[] = ['five', 'limit', 'nothing']
 
 /** Level 0 "sense": drag the front wall; one beam gives the front number, the ring shows all BEAMS readings; break it = cover. */
 export default function SenseChapter({ t }: { t: Strings }) {
-  const s = SENSE_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(SENSE_STRINGS, t, 'l0.sense.SENSE_STRINGS')
   const [wall, setWall] = useState(FRONT_START)
   const [covered, setCovered] = useState(false)
   const [picked, setPicked] = useState<Answer | null>(null)

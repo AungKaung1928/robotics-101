@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import Player from '../../anim/Player'
 import Slider from '../../components/Slider'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { DEPTH, PERIOD_MS, challengeOk, dropped, keepsUp, maxAgeMs, scenario, simulate } from './callback'
 import { CALLBACK_STRINGS } from './callback.strings'
 import './l1.css'
@@ -16,7 +16,7 @@ const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-red
 
 /** 1.3: ROS calls the method you registered, one call at a time; a slow callback fills the queue. */
 export default function CallbackChapter({ t }: { t: Strings }) {
-  const s = CALLBACK_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(CALLBACK_STRINGS, t, 'l1.callback.CALLBACK_STRINGS')
   const [work, setWork] = useState(20)
   const ms = useMemo(() => simulate(work), [work])
   const sc = useMemo(() => scenario(work), [work])

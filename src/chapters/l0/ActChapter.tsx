@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import Mascot from '../../anim/Mascot'
 import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { TURN_MAX, VIEW, rollOnM, rollOnS, tooFast, wheels } from './act'
 import { ACT_STRINGS } from './act.strings'
 import { SECONDS, TOP_SPEED, path } from './move'
@@ -21,7 +21,7 @@ const ANSWERS: Answer[] = ['atOnce', 'later', 'never']
 
 /** Level 0 "act": forward + turn speed -> wheel speeds -> the move path; "stop" shows the roll-on from the brake limit. */
 export default function ActChapter({ t }: { t: Strings }) {
-  const s = ACT_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(ACT_STRINGS, t, 'l0.act.ACT_STRINGS')
   const [v, setV] = useState(0.15)
   const [w, setW] = useState(0.5)
   const [stopped, setStopped] = useState(false)

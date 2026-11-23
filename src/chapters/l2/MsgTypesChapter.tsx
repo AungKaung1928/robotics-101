@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import Player from '../../anim/Player'
 import Slider from '../../components/Slider'
 import { LIDAR, SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { LASERSCAN, LIMITS, SAMPLES, beamAngle, challengeOk, ignored, indexAt, pose, scenario, type Twist } from './msgtypes'
 import { MSGTYPES_STRINGS } from './msgtypes.strings'
 import '../l1/l1.css'
@@ -17,7 +17,7 @@ const R = 70 // beam length in px (fan drawn at one radius: this chapter is abou
 
 /** 2.3: LaserScan fields fill in, ranges draws as a fan; index slider maps i to its angle; Twist sliders drive a path. */
 export default function MsgTypesChapter({ t }: { t: Strings }) {
-  const s = MSGTYPES_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(MSGTYPES_STRINGS, t, 'l2.msgtypes.MSGTYPES_STRINGS')
   const sc = useMemo(() => scenario(), [])
   const [tS, setTS] = useState(() => (still() ? sc.durationMs / 1000 : 0))
   const now = Math.min(tS, sc.durationMs / 1000)

@@ -1,6 +1,6 @@
 import { useMemo, useState, type KeyboardEvent } from 'react'
 import Player from '../../anim/Player'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import Gloss from '../l1/Gloss'
 import '../l1/l1.css'
 import { GOAL, H, START, W, cellOf, initialWalls, inGoal, key, nearWall, pathCost, scenario, steps, type Order } from './bfs'
@@ -12,7 +12,7 @@ const CS = 40 // px per cell in the SVG
 
 /** EP1: BFS on an occupancy grid. The animation is the model's own pop order; clicks and break-it rebuild it. */
 export default function BfsChapter({ t }: { t: Strings }) {
-  const s = BFS_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(BFS_STRINGS, t, 'ep.bfs.BFS_STRINGS')
   const [walls, setWalls] = useState(initialWalls)
   const [order, setOrder] = useState<Order>('queue')
   const sc = useMemo(() => scenario(walls, order), [walls, order])

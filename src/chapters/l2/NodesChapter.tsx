@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import Player from '../../anim/Player'
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { byId, challengeOk, optional, patrols, scenario, working, type NodeId } from './nodes'
 import { NODES_STRINGS } from './nodes.strings'
 import '../l1/l1.css'
@@ -15,7 +15,7 @@ const LAUNCH = `${SOURCE_REPO}/blob/main/launch/tf_explorer.launch.py`
 
 /** 2.1: the patrol robot as 7 nodes from its launch file; click a node to stop it and see who starves. */
 export default function NodesChapter({ t }: { t: Strings }) {
-  const s = NODES_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(NODES_STRINGS, t, 'l2.nodes.NODES_STRINGS')
   const [stopped, setStopped] = useState<Set<NodeId>>(new Set())
   const sc = useMemo(() => scenario(stopped), [stopped])
   const [tS, setTS] = useState(() => (still() ? sc.durationMs / 1000 : 0))

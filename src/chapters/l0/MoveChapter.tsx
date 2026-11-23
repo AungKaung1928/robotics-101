@@ -3,7 +3,7 @@ import Mascot from '../../anim/Mascot'
 import Player from '../../components/Player'
 import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { LEFT, SECONDS, SLIP, TOP_SPEED, WHEEL_GAP_M, kind, path, turnsPerS, VIEW, type Kind } from './move'
 import { MOVE_STRINGS } from './move.strings'
 import './l0.css'
@@ -21,7 +21,7 @@ const ANSWERS: Kind[] = ['curveLeft', 'curveRight', 'straight']
 
 /** Level 0 "move": drag the right wheel speed, the path of the two-wheel model is drawn; break it = the left wheel slips. */
 export default function MoveChapter({ t }: { t: Strings }) {
-  const s = MOVE_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(MOVE_STRINGS, t, 'l0.move.MOVE_STRINGS')
   const [right, setRight] = useState(0.22)
   const [slip, setSlip] = useState(false)
   const [picked, setPicked] = useState<Kind | null>(null)
