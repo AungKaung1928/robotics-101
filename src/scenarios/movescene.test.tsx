@@ -84,3 +84,18 @@ describe('SimWhatScene', () => {
     expect(off).toContain('ss-wall is-movable')
   })
 })
+
+describe('MeetScene', () => {
+  it('no part: no outline; a part: outline, its label, happy face; four tappable parts with names', async () => {
+    const { MeetFrame, default: MeetScene } = await import('./MeetScene')
+    const words = { sensor: 'distance sensor', computer: 'small computer', battery: 'battery', wheels: 'two wheels' }
+    expect(renderToStaticMarkup(<MeetFrame part={null} t={0} words={words} label="" />)).not.toContain('mt-outline')
+    const h = renderToStaticMarkup(<MeetFrame part="sensor" t={2} words={words} label="" />)
+    expect(h).toContain('data-part="sensor"')
+    expect(h).toContain('distance sensor')
+    expect(h).toContain('data-mood="happy"')
+    const s = renderToStaticMarkup(<MeetScene words={words} label="" />)
+    expect(count(s, /role="button"/g)).toBe(4)
+    expect(s).toContain('aria-label="two wheels"')
+  })
+})

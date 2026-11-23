@@ -34,3 +34,11 @@
 .sw-pane.is-view { fill: color-mix(in srgb, var(--ink) 4%, var(--surface)); }
 .sw-self { fill: var(--robot); }
 .sw-cap { fill: var(--ink-2); font: 600 12px var(--mono); }
+.meet-wrap { position: relative; }
+.meet-scene, .meet-hits { width: 100%; height: auto; display: block; }
+.meet-hits { position: absolute; inset: 0; }
+.mt-hit { fill: transparent; cursor: pointer; }
+.mt-hit:focus-visible { outline: none; stroke: var(--robot); stroke-width: 2; stroke-dasharray: 3 3; }
+.mt-outline { fill: none; stroke: var(--robot); stroke-width: 2.5; }
+.mt-lead { stroke: var(--ink-2); stroke-width: 1.5; stroke-dasharray: 2 3; }
+.mt-label { fill: var(--ink); font: 700 15px var(--mono); }
