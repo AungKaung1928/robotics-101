@@ -45,3 +45,17 @@ describe('SimWhatScene with the chapter box draws the chapter view', () => {
     }
   })
 })
+
+describe('SenseScene with the chapter box shows the chapter reading', () => {
+  it('reading = sense.front(turn(front)) for open, too-close and covered cases', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: SenseScene } = await import('./SenseScene')
+    const sn = await import('../chapters/l0/sense')
+    for (const [front, covered] of [[1.5, false], [0.6, false], [0.1, false], [1.5, true]] as const) {
+      const want = sn.front(sn.turn(front, covered))
+      const h = renderToStaticMarkup(createElement(SenseScene, { box: { ...sn.ROOM, front, maxFront: 3 }, mode: 'beam', covered, label: '' }))
+      expect(h).toContain(`data-reading="${want === null ? 'none' : want.toFixed(2)}"`)
+    }
+  })
+})

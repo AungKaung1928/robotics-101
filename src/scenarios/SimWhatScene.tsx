@@ -1,30 +1,15 @@
 import { useState, type PointerEvent } from 'react'
 import RobotTop from './RobotTop'
-import { room, sweep, type Seg } from './sense'
+import { sweep } from './sense'
+import { roomLayout, type Box } from './room'
 import './robottop.css'
 
 const M = 12, PW = 1.5 * 130 + 2 * M, PH = 130 + 2 * M // panel size stays fixed; the world is scaled into it
 
-/** A chapter's own room (src/chapters/l0/sense.ts ROOM): robot at the origin facing +x, walls at x = back and x = front,
- * y = ±side; front is the wall the reader moves, scaled for maxFront so dragging it never rescales the picture. */
-export type Box = { back: number; front: number; side: number; maxFront: number }
+/** The simulator panel's layout (built-in room or a chapter box). */
+export const layout = (wallX: number, box?: Box) => roomLayout(wallX, box, PW, PH, M, 130)
+export type { Box }
 
-/** Walls, robot position, the movable wall's index and metres -> panel mapping, for the built-in room or a chapter's box. */
-export function layout(wallX: number, box?: Box): { walls: Seg[]; O: { x: number; y: number }; movable: number; X: (x: number) => number; Y: (y: number) => number } {
-  if (!box) return { walls: room(wallX), O: { x: 0.3, y: 0.5 }, movable: 4, X: (x) => M + x * 130, Y: (y) => M + (1 - y) * 130 }
-  const { back, front, side, maxFront } = box, k = Math.min((PW - 2 * M) / (maxFront - back), (PH - 2 * M) / (2 * side))
-  const walls: Seg[] = [[back, -side, back, side], [back, side, front, side], [front, side, front, -side], [front, -side, back, -side]]
-  return { walls, O: { x: 0, y: 0 }, movable: 2, X: (x) => M + (x - back) * k, Y: (y) => PH / 2 - y * k }
-}
-
-/**
- * On-ramp "simulator": left, the world (the simulator: walls, the robot); right, what the robot believes (the
- * RViz-style view: only its own scan points, nothing else). One scan from sense.sweep() feeds the right side, so
- * moving the wall moves the points; `sensorOn` false empties the view while the world keeps its wall. Linked
- * highlighting (Red Blob Games): hover or focus a wall, or one of its points, and the wall and its points light up together
- * while the rest dims, so each point is seen to come from a wall. `hot0` = the wall lit at first (tests, still frames).
- * `box` = draw the chapter's own room instead of the built-in one (wallX is then unused).
- */
 export default function SimWhatScene({ wallX = 1, box, sensorOn = true, worldWord, viewWord, label, hot0 = null }: {
   wallX?: number; box?: Box; sensorOn?: boolean; worldWord: string; viewWord: string; label: string; hot0?: number | null
 }) {
