@@ -19,3 +19,8 @@
 .graph .fval { fill: var(--robot); }
 .graph .fan { stroke: var(--ray); stroke-width: 0.6; opacity: 0.35; }
 .graph .fan.pick { stroke: var(--robot); stroke-width: 3; opacity: 1; }
+.graph .msg line, .graph .msg path { stroke: var(--ink-2); stroke-width: 2; fill: none; }
+.graph .msg text { font: 15px var(--mono); fill: var(--ink); }
+.graph .msg.fb line, .graph .msg.fb path { stroke: var(--robot); }
+.graph .msg.ok line, .graph .msg.ok path { stroke: var(--free); stroke-width: 3; }
+.graph .msg.bad line, .graph .msg.bad path { stroke: var(--ray); stroke-width: 3; }
