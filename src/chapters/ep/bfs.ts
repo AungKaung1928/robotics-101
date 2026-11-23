@@ -2,7 +2,7 @@ import type { Scenario } from '../../anim/contract'
 
 /** EP1: breadth-first search on an occupancy grid. Pure model, no DOM. */
 export type Cell = [number, number] // [x, y], y down
-export type Order = 'queue' | 'stack'
+export type Order = 'queue' | 'stack' | 'cost'
 
 export const W = 10
 export const H = 7
@@ -83,6 +83,61 @@ export function search(walls: Set<number>, order: Order = 'queue', start = START
   return { popped, pushedAt, dist, path, maxQueue }
 }
 
+/** Example costmap: entering a cell costs 1, plus NEAR when a wall touches it (8 directions). Nav2's inflation layer
+ * instead lets cost fall off smoothly with distance; one step is enough to show why the path moves away from walls. */
+export const NEAR = 4
+export const nearWall = (k: number, walls: Set<number>) => {
+  const [x, y] = cellOf(k)
+  for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) {
+    const nx = x + dx, ny = y + dy
+    if ((dx || dy) && nx >= 0 && nx < W && ny >= 0 && ny < H && walls.has(key([nx, ny]))) return true
+  }
+  return false
+}
+export const cellCost = (k: number, walls: Set<number>, near = NEAR) => 1 + (nearWall(k, walls) ? near : 0)
+export const pathCost = (path: number[], walls: Set<number>, near = NEAR) => path.slice(1).reduce((c, k) => c + cellCost(k, walls, near), 0)
+
+/** Dijkstra with a lazy heap, as in the page's Python (heapq): cheapest total cost first, ties by (x, y). */
+export function dijkstra(walls: Set<number>, near = NEAR, start = START, goal = GOAL): Search {
+  const s = key(start), g = key(goal)
+  const parent = new Map<number, number>()
+  const dist = new Map([[s, 0]])
+  const pushedAt = new Map([[s, 0]])
+  const popped: number[] = []
+  const done = new Set<number>()
+  let heap: [number, number][] = [[0, s]]
+  let maxQueue = 1
+  const before = (a: [number, number], b: [number, number]) => {
+    const [ax, ay] = cellOf(a[1]), [bx, by] = cellOf(b[1])
+    return a[0] - b[0] || ax - bx || ay - by
+  }
+  while (heap.length) {
+    heap.sort(before)
+    const [c, k] = heap[0]
+    heap = heap.slice(1)
+    if (c > dist.get(k)! || done.has(k)) continue // an older, dearer entry
+    done.add(k)
+    popped.push(k)
+    if (k === g) break
+    for (const n of neighbours(cellOf(k), walls)) {
+      const nk = key(n), nc = c + cellCost(nk, walls, near)
+      if (nc < (dist.get(nk) ?? Infinity)) {
+        dist.set(nk, nc)
+        parent.set(nk, k)
+        if (!pushedAt.has(nk)) pushedAt.set(nk, popped.length)
+        heap.push([nc, nk])
+      }
+    }
+    maxQueue = Math.max(maxQueue, heap.length)
+  }
+  let path: number[] | null = null
+  if (dist.has(g)) {
+    path = [g]
+    while (path[0] !== s) path.unshift(parent.get(path[0])!)
+  }
+  return { popped, pushedAt, dist, path, maxQueue }
+}
+
 export const steps = (r: Search) => (r.path ? r.path.length - 1 : null)
 export const inGoal = (r: Search) => r.path !== null && r.path.length - 1 >= CHALLENGE_MIN
 
@@ -96,7 +151,7 @@ export interface BfsScene extends Record<string, unknown> {
 
 /** Frame k shows the first k pops; after the last pop the path lights up. */
 export function scenario(walls: Set<number>, order: Order = 'queue'): Scenario<BfsScene> & { result: Search } {
-  const r = search(walls, order)
+  const r = order === 'cost' ? dijkstra(walls) : search(walls, order)
   const n = r.popped.length
   return {
     id: 'ep1-bfs',

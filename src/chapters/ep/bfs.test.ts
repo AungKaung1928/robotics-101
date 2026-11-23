@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { CHALLENGE_MIN, GOAL, START, W, H, cellOf, initialWalls, inGoal, key, neighbours, scenario, search, steps } from './bfs'
+import { CHALLENGE_MIN, GOAL, NEAR, START, W, H, cellCost, cellOf, dijkstra, initialWalls, inGoal, key, nearWall, neighbours, pathCost, scenario, search, steps } from './bfs'
 
 const manhattan = (a: number, b: number) => { const [ax, ay] = cellOf(a), [bx, by] = cellOf(b); return Math.abs(ax - bx) + Math.abs(ay - by) }
 
@@ -69,5 +69,44 @@ describe('EP1 BFS', () => {
     expect([...end.states.values()].filter((v) => v === 'path')).toHaveLength(14)
     expect(sc.frame(600)).toEqual(sc.frame(600))
     expect(sc.eventsMs!.at(-1)!).toBeLessThanOrEqual(sc.durationMs)
+  })
+})
+
+describe('EP1 costmap step (Dijkstra)', () => {
+  /** Independent check: Bellman-Ford with the same cell costs. */
+  function bellmanCost(walls: Set<number>, near: number): number {
+    const d: number[] = Array.from({ length: W * H }, () => Infinity); d[key(START)] = 0
+    for (let i = 0; i < W * H; i++) for (let c = 0; c < W * H; c++) if (d[c] < Infinity && !walls.has(c))
+      for (const n of neighbours(cellOf(c), walls)) d[key(n)] = Math.min(d[key(n)], d[c] + cellCost(key(n), walls, near))
+    return d[key(GOAL)]
+  }
+
+  it('all costs equal (near = 0): Dijkstra finds the same 13-step length as BFS', () => {
+    const w = initialWalls()
+    expect(steps(dijkstra(w, 0))).toBe(13)
+  })
+
+  it('with cost near walls: cheapest cost matches Bellman-Ford and beats the BFS path under the same costs', () => {
+    const w = initialWalls()
+    const d = dijkstra(w)
+    expect(pathCost(d.path!, w)).toBe(bellmanCost(w, NEAR))
+    expect(d.dist.get(key(GOAL))).toBe(pathCost(d.path!, w))
+    expect(pathCost(d.path!, w)).toBeLessThan(pathCost(search(w).path!, w))
+    expect([steps(d), pathCost(d.path!, w), pathCost(search(w).path!, w)]).toEqual([15, 15, 41]) // numbers quoted on the page
+  })
+
+  it('the cheap path keeps away from walls: fewer wall-touching cells than the BFS path, at the price of more steps', () => {
+    const w = initialWalls()
+    const touching = (p: number[]) => p.filter((k) => nearWall(k, w)).length
+    const d = dijkstra(w).path!, b = search(w).path!
+    expect(touching(d)).toBeLessThan(touching(b))
+    expect(d.length).toBeGreaterThan(b.length)
+  })
+
+  it('scenario in cost mode ends on the Dijkstra path', () => {
+    const w = initialWalls()
+    const sc = scenario(w, 'cost')
+    expect(sc.result.path).toEqual(dijkstra(w).path)
+    expect(sc.frame(sc.durationMs).showPath).toBe(true)
   })
 })

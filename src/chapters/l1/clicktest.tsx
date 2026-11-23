@@ -34,6 +34,7 @@ const CASES: Case[] = [
   { name: 'drive break', Body: BODIES.drive, steps: [{ click: '.break' }, { expect: 'challenge', has: 'still moving' }] },
   { name: 'bfs stack', Body: BfsChapter, steps: [{ expect: 'len', has: '13' }, { click: '.break' }, { expect: 'len', has: '15' }] },
   { name: 'bfs wall click', Body: BfsChapter, steps: [{ click: 'rect[aria-label="cell 3,3"]' }, { expect: 'len', has: '13' }, { click: 'rect[aria-label="cell 0,2"]' }, { click: 'rect[aria-label="cell 0,4"]' }, { click: 'rect[aria-label="cell 1,3"]' }, { expect: 'len', has: 'no path' }] },
+  { name: 'bfs costmap', Body: BfsChapter, steps: [{ click: 'button.costmap' }, { expect: 'len', has: '15' }, { expect: 'cost', has: '15' }, { click: 'button.costmap' }, { expect: 'len', has: '13' }] },
   { name: 'late slider', Body: LateChapter, steps: [{ expect: 'backwards', has: '5' }, { slide: 0.17 }, { expect: 'challenge', ok: true }, { slide: 0.18 }, { expect: 'backwards', has: '1' }] },
   { name: 'late keep-latest', Body: LateChapter, steps: [{ click: '.break' }, { expect: 'backwards', has: '0' }, { expect: 'acted', has: '15' }] },
 ]

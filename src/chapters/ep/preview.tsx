@@ -13,3 +13,6 @@ const self = () => { const u = new URL(location.href); u.searchParams.delete('w'
 createRoot(document.getElementById('root')!).render(w
   ? <iframe src={self()} style={{ width: `${w}px`, height: '100vh', border: 0 }} />
   : <main className="chapter"><Body t={t} /></main>)
+// ?click=<selector>: click it once after mount, to look at a state behind a button (e.g. button.costmap).
+const click = q.get('click')
+if (click && !w) setTimeout(() => document.querySelector<HTMLElement>(click)?.click(), 300)

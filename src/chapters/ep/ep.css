@@ -19,3 +19,6 @@
 .late .msg.back circle, .bfs-legend .lg.back { background: var(--cost); fill: var(--cost); }
 .late .msg.stale circle, .late .msg.older circle, .bfs-legend .lg.stale { background: var(--surface); fill: var(--surface); stroke: var(--ink); stroke-dasharray: 3 2; }
 .late .msg.back line { stroke: var(--cost); stroke-width: 2.5; }
+.bfs .c.near { fill: var(--cost); fill-opacity: 0.12; }
+.bfs .c.near.done, .bfs .c.near.queued { fill-opacity: 0.5; }
+.bfs .c.near.path { fill: var(--robot); fill-opacity: 0.8; }
