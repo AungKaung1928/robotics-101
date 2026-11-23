@@ -24,10 +24,11 @@
   "back": "Starts everything with a single launch file. Most steps wait with set timers to ensure inputs are available first. Only the patrol is checked: waits up to 5 s for Nav2's action server and retries."
  },
  "core:bringup.lines.1": {
-  "status": "pass",
+  "status": "needs-human",
   "en": "Drag SLAM or Nav2 earlier: a stage that starts no later than its input waits on a frame or topic that is not there yet.",
   "my": "SLAM ဒါမှမဟုတ် Nav2 ကို စောပြီး ဆွဲထားရင်- input ထက် မနောက်ကျဘဲ စတင်တဲ့ အဆင့်က မရှိသေးတဲ့ frame ဒါမှမဟုတ် topic ကို စောင့်နေပါလိမ့်မယ်။",
-  "back": "If SLAM or Nav2 are dragged early: the step starting without lagging behind the input will wait for missing frames or topics."
+  "back": "If SLAM or Nav2 are dragged early: the step starting without lagging behind the input will wait for missing frames or topics.",
+  "note": "2026-11-24 audit: Opus blind check garbled (word order of \"starts no later than its input\"); redraft garbled again"
  },
  "core:bringup.logHead.0": {
   "status": "pass-alt",
@@ -307,10 +308,10 @@
   "back": "The goal is considered reached once the robot is within 0.25 m and its heading is within 0.25 rad: so the patrol can stop up to 25 cm early before reaching the goal."
  },
  "core:goal.lines.2": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "Minimum time first ignores acceleration. Nav2’s 2.5 m/s² limit reaches full speed in 0.1 s, the simulated drive’s 1.0 m/s² in 0.26 s: either way it barely matters here.",
-  "my": "အနည်းဆုံး အချိန်ဟာ ပထမတော့ အရှိန်မြှင့်မှုကို လျစ်လျူရှုထားပါတယ်။ Nav2 ရဲ့ 2.5 m/s² အကန့်အသတ်ဟာ 0.1 s အတွင်း အပြည့်အဝ အမြန်နှုန်း ရောက်ရှိပြီး ဆင်မျူလေတာ မောင်းနှင်မှုရဲ့ 1.0 m/s² ကတော့ 0.26 s အတွင်း ရောက်ရှိပါတယ်: ဘာပဲဖြစ်ဖြစ် ဒီနေရာမှာ မသိသာပါဘူး။",
-  "back": "The minimum time ignores acceleration at first. Nav2's 2.5 m/s² limit reaches full speed within 0.1 s, and the simulator's 1.0 m/s² reaches it within 0.26 s: regardless, it is not noticeable here."
+  "my": "အနည်းဆုံး အချိန်ကို တွက်တဲ့အခါ အရှိန်တင်ချိန်ကို အရင် ထည့်မတွက်ပါဘူး။ Nav2 ရဲ့ 2.5 m/s² ကန့်သတ်ချက်နဲ့ဆို 0.1 s မှာ အမြန်ဆုံး ရောက်ပြီး ဆင်မျူလေတာ မောင်းစနစ်ရဲ့ 1.0 m/s² နဲ့ဆို 0.26 s မှာ ရောက်ပါတယ်- ဘယ်လိုပဲဖြစ်ဖြစ် ဒီမှာ သိပ်မထူးပါဘူး။",
+  "back": "When calculating the minimum time, the acceleration ramp-up time is not counted first. With Nav2's 2.5 m/s² limit it arrives fastest at 0.1 s, and with the simulator drive system's 1.0 m/s² it arrives at 0.26 s; either way, it makes little difference here."
  },
  "core:goal.lines.3": {
   "status": "pass",
@@ -409,10 +410,10 @@
   "back": "Cells that are no longer unknown"
  },
  "core:grid.lines.0": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "This page keeps the textbook grid: each cell holds the log-odds that it is occupied; grey is unknown. slam_toolbox instead redraws its map from stored scan poses, so a loop closure can move walls.",
-  "my": "ဒီစာမျက်နှာမှာ textbook grid ကို သုံးထားပါတယ်- cell တစ်ခုစီမှာ နေရာယူထားတဲ့ log-odds တွေ ရှိပြီး မီးခိုးရောင်ကတော့ မသိသေးတဲ့နေရာ ဖြစ်ပါတယ်။ slam_toolbox ကတော့ သိမ်းထားတဲ့ scan pose တွေကနေ မြေပုံကို ပြန်ဆွဲတာမို့ loop closure ဖြစ်ရင် နံရံတွေ ရွေ့သွားနိုင်ပါတယ်။",
-  "back": "This page uses a textbook grid: each cell holds log-odds, and gray represents unknown areas. slam_toolbox reconstructs the map from stored scan poses, so walls may shift if loop closure occurs."
+  "my": "ဒီစာမျက်နှာမှာ textbook grid ကို သုံးထားပါတယ်- cell တစ်ခုစီက အဲဒီ cell မှာ တစ်ခုခု ရှိနိုင်ခြေကို log-odds အဖြစ် သိမ်းထားပြီး မီးခိုးရောင်က မသိသေးတဲ့ cell ပါ။ slam_toolbox ကတော့ သိမ်းထားတဲ့ scan pose တွေကနေ မြေပုံကို ပြန်ဆွဲတာမို့ loop closure ဖြစ်ရင် နံရံတွေ ရွေ့သွားနိုင်ပါတယ်။",
+  "back": "This page uses a textbook grid: each cell stores the likelihood of something being in that cell as log-odds, and gray is a cell not yet known. slam_toolbox, however, redraws the map from the stored scan poses, so when loop closure happens the walls may shift."
  },
  "core:grid.lines.1": {
   "status": "pass",
@@ -849,8 +850,8 @@
  "core:tf.point": {
   "status": "pass-alt",
   "en": "hit at box1 corner",
-  "my": "box1 ဒေါင့်မှာ ထိတဲ့ အမှတ်",
-  "back": "Point that hits at the corner of box1"
+  "my": "box1 ထောင့်မှာ ထိတဲ့ အမှတ်",
+  "back": "The point that touches at the corner of box1"
  },
  "core:tf.scene": {
   "status": "pass",
@@ -2563,8 +2564,8 @@
  "l0/scope:count": {
   "status": "pass-alt",
   "en": "chapters using it",
-  "my": "သုံးတဲ့ အခန်း",
-  "back": "Chapters that use it"
+  "my": "သုံးတဲ့ အခန်း အရေအတွက်",
+  "back": "Number of rooms used"
  },
  "l0/scope:fixIt": {
   "status": "pass-alt",
