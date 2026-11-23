@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { scrubTrack } from './motion'
+import { scrubFrac, scrubTrack } from './motion'
 
 const stops = (bg: string) => bg.slice('linear-gradient(to right, '.length, -1).split(/, (?=var|transparent)/)
 
@@ -19,5 +19,16 @@ describe('scrubTrack', () => {
     expect(scrubTrack([], 9, 4)).toBe('linear-gradient(to right, var(--robot) 0 100%)')
     expect(scrubTrack([], -1, 4)).toBe('linear-gradient(to right, var(--rule) 0 100%)')
     expect(scrubTrack([1], 0, 0)).toBe('linear-gradient(to right, var(--rule) 0 100%)')
+  })
+})
+
+describe('scrubFrac', () => {
+  it('inverse of the scrubTrack position: thumb-centre scale, clamped', () => {
+    expect(scrubFrac(11, 222)).toBe(0)
+    expect(scrubFrac(111, 222)).toBe(0.5)
+    expect(scrubFrac(211, 222)).toBe(1)
+    expect(scrubFrac(-5, 222)).toBe(0)
+    expect(scrubFrac(500, 222)).toBe(1)
+    expect(scrubFrac(5, 10)).toBe(0) // narrower than the thumb
   })
 })

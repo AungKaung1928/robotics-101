@@ -74,3 +74,9 @@ export function scrubTrack(events: number[], t: number, end: number): string {
   seg(prev, 1, '100%')
   return `linear-gradient(to right, ${stops.join(', ')})`
 }
+
+/** Track fraction under a pointer x (px from the input's left edge) on the thumb-centre scale of scrubTrack, clamped. */
+export function scrubFrac(x: number, width: number): number {
+  const span = width - SCRUB_THUMB_PX
+  return span > 0 ? Math.min(1, Math.max(0, (x - SCRUB_THUMB_PX / 2) / span)) : 0
+}

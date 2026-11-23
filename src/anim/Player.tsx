@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type ReactNode } from 'react'
 import type { Strings } from '../i18n'
 import { advance, stepEvent } from '../lib/timeline'
-import { GLIDE_MS, HOLD_KEY, currentStep, fromKeyboard, glide, playStop, playerKey, scrubTrack, shouldAutoplay } from './motion'
+import { GLIDE_MS, HOLD_KEY, currentStep, fromKeyboard, glide, playStop, playerKey, SCRUB_THUMB_PX, scrubFrac, scrubTrack, shouldAutoplay } from './motion'
 import { UI_STYLE } from './spring'
 import './player.css'
 import './range.css'
@@ -27,6 +27,7 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
   const still = reducedMotion()
   const [playing, setPlaying] = useState(() => shouldAutoplay(autoplay, still, held()))
   const [target, setTarget] = useState<number | null>(null)
+  const [tip, setTip] = useState<{ i: number; x: number; f: number } | null>(null) // step name under the pointer on the scrubber
   const now = useRef(t)
   now.current = t
   useEffect(() => {
@@ -70,7 +71,8 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
   }
   const replay = () => { setTarget(null); sessionStorage.removeItem(HOLD_KEY); setT(0); setPlaying(!still) }
   const sorted = [...events].sort((a, b) => a - b)
-  const here = currentStep(sorted, from)
+  const stepAt = (x: number) => currentStep(sorted, x)
+  const here = stepAt(from), atT = stepAt(t)
   const nextLabel = labels?.[here + 1]
   const onKey = (e: KeyboardEvent<HTMLDivElement>) => {
     const k = playerKey(e.key, (e.target as HTMLElement).classList?.contains('scrub'))
@@ -90,9 +92,18 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
       <button type="button" onClick={(e) => step(1, still || fromKeyboard(e))} disabled={from >= Math.max(...events) - 1e-9}>
         {s.next}{nextLabel && <span className="wide">: {nextLabel}</span>} →
       </button>
-      <input className="scrub squish-range" type="range" min={0} max={end} step={end / 200} value={t} aria-label={s.player.scrub}
-        style={{ backgroundImage: scrubTrack(events, t, end) }}
-        onChange={(e) => { setPlaying(false); setTarget(null); setT(Number(e.target.value)) }} />
+      <span className="scrub-wrap">
+        <input className="scrub squish-range" type="range" min={0} max={end} step={end / 200} value={t} aria-label={s.player.scrub}
+          aria-valuetext={labels?.[atT] && `${atT + 1}/${labels.length} ${labels[atT]}`}
+          style={{ backgroundImage: scrubTrack(events, t, end) }}
+          onPointerMove={labels && ((e) => {
+            const r = e.currentTarget.getBoundingClientRect(), f = scrubFrac(e.clientX - r.left, r.width)
+            setTip({ i: stepAt(f * end), x: e.currentTarget.offsetLeft + SCRUB_THUMB_PX / 2 + (r.width - SCRUB_THUMB_PX) * f, f })
+          })}
+          onPointerLeave={() => setTip(null)}
+          onChange={(e) => { setPlaying(false); setTarget(null); setT(Number(e.target.value)) }} />
+        {tip && labels?.[tip.i] && <span className="scrub-tip" aria-hidden="true" style={{ left: tip.x, '--f': tip.f } as CSSProperties} key={tip.i}>{labels[tip.i]}</span>}
+      </span>
       <span className="caption" data-k="step" aria-live="polite">{caption}</span>
       {labels && (
         <ol className="rail">

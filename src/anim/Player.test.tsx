@@ -27,4 +27,10 @@ describe('Player render', () => {
     expect(html).toContain('<span class="wide">: c</span>')
     expect(html).toContain('aria-live="polite"')
   })
+  it('scrubber speaks the step, not the raw time: aria-valuetext = n/total + label; no labels = none', () => {
+    motion(false)
+    expect(render(1.5)).toContain('aria-valuetext="2/4 b"')
+    expect(render(3)).toContain('aria-valuetext="4/4 d"')
+    expect(renderToStaticMarkup(<Player t={1} setT={() => {}} end={3} events={[0, 1, 3]} speed={1} caption="c" s={STRINGS.en} />)).not.toContain('aria-valuetext')
+  })
 })
