@@ -36,7 +36,7 @@ export interface PlayerProps {
 /** One chapter as the level map and router see it. Route: #/<level>/<id>. */
 export interface ChapterMeta {
   id: string
-  level: number
+  level: number | 'ep' // 'ep' = Engineering Practice, outside Levels 0-5
   titleEn: string
   titleJa: string
   icon: IconName

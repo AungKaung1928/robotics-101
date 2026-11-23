@@ -30,3 +30,16 @@ describe('readingIndex', () => {
     expect(readingIndex('#/')).toBe(-1)
   })
 })
+
+describe('Engineering Practice track', () => {
+  it('#/ep/<id> opens EP chapters numbered EP1, EP2 with neighbours inside the track only', () => {
+    const a = levelPage('#/ep/bfs'), b = levelPage('#/ep/late')
+    expect([a?.num, a?.prev, a?.next?.id]).toEqual(['EP1', null, 'late'])
+    expect([b?.num, b?.prev?.id, b?.next]).toEqual(['EP2', 'bfs', null])
+    expect(levelPage('#/ep/nope')).toBeNull()
+  })
+  it('stays outside the numbered levels (never a prerequisite in reading order)', () => {
+    expect(LEVELS.flat().some((c) => c.id === 'bfs' || c.id === 'late')).toBe(false)
+    expect(readingIndex('#/ep/bfs')).toBe(-1)
+  })
+})
