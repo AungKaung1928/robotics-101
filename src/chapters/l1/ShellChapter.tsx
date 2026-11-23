@@ -1,10 +1,11 @@
 import { useMemo, useState } from 'react'
-import Player from '../../components/Player'
+import Player from '../../anim/Player'
 import { STRINGS, type Strings } from '../../i18n'
 import { SCRIPT, challengeOk, exec, fresh, prompt, scenario, session } from './shell'
 import { SHELL_STRINGS } from './shell.strings'
 import Term from './Term'
 import './l1.css'
+import Gloss from './Gloss'
 
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 const DOCS = 'https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Configuring-ROS2-Environment.html'
@@ -49,7 +50,7 @@ export default function ShellChapter({ t }: { t: Strings }) {
         <p><strong>{s.challenge}</strong></p>
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet}</p>
         <p className="group-h">{s.words}</p>
-        <dl className="gloss">{s.glossary.map(([k, v]) => <div key={k} style={{ display: 'contents' }}><dt><code>{k}</code></dt><dd>{v}</dd></div>)}</dl>
+        <Gloss items={s.glossary} />
         <p className="src">{t.source}: <a href={DOCS}>ROS 2 Humble: Configuring environment</a> ("run this command on every new shell you open"), <a href="https://www.gnu.org/software/bash/manual/bash.html#Bourne-Shell-Builtins">Bash manual: cd, source, pwd, echo</a></p>
       </div>
     </>

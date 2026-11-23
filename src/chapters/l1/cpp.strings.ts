@@ -4,7 +4,7 @@ export const CPP_STRINGS = {
     title: 'C++: the same robot, compiled',
     learn: 'You will learn: in C++ every variable has a type, and a compiler turns your code into a program before it runs.',
     lines: [
-      'This is chapter 1.1 again, in C++. Python reads your file line by line while it runs. C++ is first compiled by g++ into machine code; the robot runs that.',
+      'This is chapter 1.1 again, in C++. Python turns your file into bytecode and its interpreter runs it step by step. C++ is compiled by g++ into machine code before it runs; the robot runs that machine code directly.',
       'You must say what each variable holds: double for a number with a fraction, int for a whole number. The type decides what is stored.',
       'Why robots use it: the same closest() over 360 readings, measured below, runs many times faster.',
     ],
@@ -33,7 +33,7 @@ export const CPP_STRINGS = {
     title: 'C++：同じロボットをコンパイルする',
     learn: '学ぶこと：C++ では変数に必ず型がある。実行する前にコンパイラがコードをプログラムに変換する。',
     lines: [
-      'これは 1.1 と同じ例を C++ で書いたもの。Python は実行しながらファイルを1行ずつ読む。C++ は先に g++ がマシンコードにコンパイルし、ロボットはそれを実行する。',
+      'これは 1.1 と同じ例を C++ で書いたもの。Python はファイルをバイトコードに変え、インタプリタが少しずつ実行する。C++ は実行前に g++ がマシンコードにコンパイルし、ロボットはそのマシンコードを直接実行する。',
       '変数が何を持つかを書く必要がある：小数を持つ数は double、整数は int。型が保存される値を決める。',
       'ロボットで使われる理由：360個の読み取り値に対する同じ closest() が、下の実測では何倍も速い。',
     ],

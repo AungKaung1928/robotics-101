@@ -91,7 +91,7 @@ export default function GridChapter({ t }: { t: Strings }) {
         <p className="note">{s.limit(SLAM_MAX_LASER_RANGE, L_MAX)}</p>
         <p className="note">{s.same}</p>
         <p className="note">{s.unknown}</p>
-        <p className="src">{t.source}: <a href="https://github.com/AungKaung1928/TF-Transform-Explorer/blob/main/config/slam_params.yaml#L11-L49">slam_params.yaml:11-49</a>, <a href="https://github.com/AungKaung1928/TF-Transform-Explorer/blob/main/config/nav2_params.yaml#L81">nav2_params.yaml:81, 119, 156</a>, Thrun, Burgard, Fox, <i>Probabilistic Robotics</i>, ch. 9</p>
+        <p className="src">{t.source}: <a href="https://github.com/AungKaung1928/TF-Transform-Explorer/blob/main/config/slam_params.yaml#L11-L49">slam_params.yaml:11-49</a>, <a href="https://github.com/AungKaung1928/TF-Transform-Explorer/blob/main/config/nav2_params.yaml#L81">nav2_params.yaml:81, 119</a>, Thrun, Burgard, Fox, <i>Probabilistic Robotics</i>, ch. 9</p>
       </div>
     </>
   )

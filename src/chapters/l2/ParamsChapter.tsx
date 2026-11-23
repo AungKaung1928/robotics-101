@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import Player from '../../components/Player'
+import Player from '../../anim/Player'
 import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
 import { STRINGS, type Strings } from '../../i18n'
@@ -7,6 +7,7 @@ import { CHECK_MS, DEFAULT, JUMP_M, N, caught, challengeOk, effective, falseAlar
 import { PARAMS_STRINGS } from './params.strings'
 import '../l1/l1.css'
 import './l2.css'
+import Gloss from '../l1/Gloss'
 
 const W = 640, H = 230, X0 = 50, BAR = (W - X0 - 10) / N, Y0 = 190, PX = 180 // px per metre of jump
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -67,7 +68,7 @@ export default function ParamsChapter({ t }: { t: Strings }) {
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet} {max.toFixed(2)} m</p>
         <p className="note">{s.runtimeNote}</p>
         <p className="group-h">{s.words}</p>
-        <dl className="gloss">{s.glossary.map(([k, x]) => <div key={k} style={{ display: 'contents' }}><dt>{k}</dt><dd>{x}</dd></div>)}</dl>
+        <Gloss items={s.glossary} />
         <p className="src">{t.source}: <a href={`${SRC}#L10-L14`}>tf_anomaly_detector.cpp:10-14</a>, <a href={`${SRC}#L25-L26`}>:25-26</a> (500 ms), <a href={`${SRC}#L74-L77`}>:74-77</a> (jump {'>'} max), <a href={`${SOURCE_REPO}/blob/main/launch/tf_explorer.launch.py#L101-L113`}>tf_explorer.launch.py:101-113</a> (passes only use_sim_time) · <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Parameters/Understanding-ROS2-Parameters.html">Humble: Understanding parameters</a>, <a href="https://docs.ros.org/en/humble/Tutorials/Intermediate/Launch/Creating-Launch-Files.html">Creating launch files</a></p>
       </div>
     </>

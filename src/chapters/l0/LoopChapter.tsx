@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import Celebrate from '../../anim/Celebrate'
 import Player from '../../components/Player'
 import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
@@ -18,6 +19,7 @@ export default function LoopChapter({ t }: { t: Strings }) {
   const s = LOOP_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
   const [hz, setHz] = useState(HZ)
   const [blind, setBlind] = useState(false)
+  const [solved, setSolved] = useState(0)
   const r = useMemo(() => loopRun(hz, blind ? 2 : Infinity), [hz, blind])
   const sc = useMemo(() => scenario(r, hz), [r, hz])
   const [tS, setTS] = useState(() => (still() ? sc.durationMs / 1000 : 0))
@@ -50,6 +52,7 @@ export default function LoopChapter({ t }: { t: Strings }) {
           <text className="say" x={xAt(STOP_AT)} y="195" textAnchor="middle">0.5 m</text>
           <rect className="wall" x={X1} y="180" width="12" height="70" />
           <rect className={`bot${r.crashed && f.front <= 0 ? ' is-crashed' : ''}`} x={xAt(f.front) - 40} y="222" width="40" height="22" rx="4" />
+          <Celebrate x={xAt(f.front) - 20} y={222} n={solved} />
           {f.stage === 'sense' && f.t.seen !== null && <line className="beam" x1={xAt(f.front)} x2={X1} y1="233" y2="233" />}
         </svg>
         <Player t={now} setT={setTS} end={sc.durationMs / 1000} events={sc.eventsMs!.map((e) => e / 1000)} speed={1} autoplay={!still()} s={t}
@@ -60,7 +63,7 @@ export default function LoopChapter({ t }: { t: Strings }) {
         <p className="learn">{s.learn}</p>
         {s.lines.map((l) => <p key={l}>{l}</p>)}
         <Slider hint={t.drag} label={s.rate} value={hz} min={1} max={10} step={1} mark={HZ} fmt={(v) => String(v)}
-          onChange={(v) => { setHz(v); restart() }} />
+          onChange={(v) => { if (inGoal(v) && !inGoal(hz)) setSolved(solved + 1); setHz(v); restart() }} />
         <p><button type="button" className="break" onClick={() => { setBlind(!blind); restart() }}>{blind ? s.fixIt : s.breakIt}</button></p>
         {blind && <p className="note">{s.brokenNote}</p>}
         <dl className="readout">

@@ -8,12 +8,12 @@ import { HOME, resolve, short, type Line } from '../l1/shell'
  */
 export const WS = `${HOME}/tf_explorer_ws`
 const ROS_SETUP = '/opt/ros/humble/setup.bash'
-export const EXECUTABLES = ['tf_monitor_node', 'frame_broadcaster_node', 'tf_anomaly_detector', 'simple_wiggle_recovery', 'patrol_node'] // CMakeLists.txt:107-113
+export const EXECUTABLES = ['tf_monitor_node', 'frame_broadcaster_node', 'tf_anomaly_detector', 'simple_wiggle_recovery', 'patrol_node'] // CMakeLists.txt:108-112
 
 export interface Ws { cwd: string; dirs: string[]; ros: boolean; overlay: string | null; builtIn: string | null }
 export const fresh = (): Ws => ({ cwd: HOME, dirs: [HOME, '/opt/ros/humble'], ros: false, overlay: null, builtIn: null })
 
-const NO_AMENT = 'CMake Error: ... asked CMake to find a package configuration file provided by "ament_cmake", but CMake did not find one.'
+export const NO_AMENT = 'CMake Error: ... asked CMake to find a package configuration file provided by "ament_cmake", but CMake did not find one.'
 export const STARTED = '[INFO] [...] [tf_anomaly_detector]: TF Anomaly Detector started (max_age=1.00s, max_jump=0.50m)' // tf_anomaly_detector.cpp:30-31
 
 export function exec(w: Ws, cmd: string): { w: Ws; line: Line } {
@@ -54,13 +54,13 @@ export function exec(w: Ws, cmd: string): { w: Ws; line: Line } {
       return say('Starting >>> tf_explorer\nFinished <<< tf_explorer\nSummary: 1 package finished')
     }
     case 'ros2':
-      if (!s.ros) return say('ros2: command not found', false)
+      if (!s.ros) return say('bash: ros2: command not found', false)
       if (rest[0] !== 'run' || rest[1] !== 'tf_explorer') return say('(usage: ros2 run tf_explorer <executable>)', false)
       if (!s.overlay) return say("Package 'tf_explorer' not found", false)
       if (!EXECUTABLES.includes(rest[2])) return say(`No executable found`, false)
       return say(rest[2] === 'tf_anomaly_detector' ? STARTED : `(${rest[2]} starts)`)
     case '': return say('')
-    default: return say(`${name}: command not found`, false)
+    default: return say(`bash: ${name}: command not found`, false) // interactive bash, no command-not-found helper
   }
 }
 

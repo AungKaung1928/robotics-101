@@ -1,7 +1,7 @@
 /* Level 2 graph styles; code card, glossary and verdict come from ../l1/l1.css. */
 .graph .edge { fill: none; stroke: var(--rule); stroke-width: 2; }
-.graph .edge.live { stroke: var(--ray); stroke-dasharray: 6 6; animation: flow 0.8s linear infinite; }
-@keyframes flow { to { stroke-dashoffset: -12; } }
+.graph .edge.live { stroke: var(--ray); stroke-dasharray: 6 6; animation: l2-flow 0.8s linear infinite; }
+@keyframes l2-flow { to { stroke-dashoffset: -12; } }
 @media (prefers-reduced-motion: reduce) { .graph .edge.live { animation: none; } }
 .graph .nd rect { fill: var(--surface); stroke: var(--rule); stroke-width: 2; rx: 4; }
 .graph .nd { cursor: pointer; }
@@ -27,3 +27,4 @@
 .graph .lim { stroke: var(--ray); stroke-width: 2; }
 .tree { min-height: 0; margin-bottom: 0.5rem; }
 .graph .goalc { fill: color-mix(in srgb, var(--free) 18%, transparent); stroke: var(--free); stroke-width: 2; }
+.graph .nd.still { cursor: default; }

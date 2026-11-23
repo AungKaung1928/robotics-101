@@ -23,7 +23,7 @@ describe('2.6 workspace', () => {
   })
 
   it('a new terminal knows nothing: ros2 run needs both sources again', () => {
-    expect(session(['ros2 run tf_explorer patrol_node']).lines[0].out).toBe('ros2: command not found')
+    expect(session(['ros2 run tf_explorer patrol_node']).lines[0].out).toBe('bash: ros2: command not found')
     const noOverlay = session(['source /opt/ros/humble/setup.bash', 'ros2 run tf_explorer patrol_node']).lines[1]
     expect(noOverlay.out).toBe("Package 'tf_explorer' not found")
   })

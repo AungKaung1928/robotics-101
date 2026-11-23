@@ -58,3 +58,11 @@ describe('root class names', () => {
     expect(ours.size).toBeGreaterThan(5)
   })
 })
+
+describe('keyframe names across the app', () => {
+  it('each @keyframes name is defined in one place only', () => {
+    const all = walk('src').flatMap((f) => names(f).map((n) => `${n} (${f})`))
+    const dup = all.filter((o, i) => all.findIndex((p) => p.split(' ')[0] === o.split(' ')[0]) !== i)
+    expect(dup).toEqual([])
+  })
+})
