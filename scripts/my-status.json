@@ -965,8 +965,8 @@
  "ep/bfs:brokenNote": {
   "status": "pass-alt",
   "en": "pop() takes the newest cell: a stack. It dives down one direction and still reaches G, but the path is longer. Nothing crashes; the answer is just worse.",
-  "my": "pop() က အသစ်ဆုံး cell ကို ထုတ်ပါတယ်: stack တစ်ခုပါ။ ဦးတည်ရာ တစ်ခုတည်းကို နက်နက် ဆင်းသွားပြီး G ကို ရောက်သေးပေမဲ့ လမ်းကြောင်းက ပိုရှည်ပါတယ်။ ဘာမှ crash မဖြစ်ပါဘူး၊ အဖြေ ပိုဆိုးသွားရုံပါ။",
-  "back": "pop() takes out the newest cell: it is a stack. It goes deep in one direction and still reaches G, but the path is longer. Nothing crashes; the answer is just worse."
+  "my": "pop() က အသစ်ဆုံး cell ကို ထုတ်ပါတယ်: stack တစ်ခုပါ။ ဦးတည်ရာ တစ်ခုတည်းကို နက်နက် ဆင်းသွားပြီး G ကို ရောက်တော့ ရောက်ပေမဲ့ လမ်းကြောင်းက ပိုရှည်ပါတယ်။ ဘာမှ crash မဖြစ်ပါဘူး၊ အဖြေ ပိုဆိုးသွားရုံပါ။",
+  "back": "pop() takes out the newest cell: it is a stack. It goes deep down a single direction and does reach G, but the path is longer. Nothing crashes, the answer just gets worse."
  },
  "ep/bfs:challenge": {
   "status": "pass-alt",
@@ -995,8 +995,8 @@
  "ep/bfs:costNote": {
   "status": "pass-alt",
   "en": "Each cell touching a wall now costs 5 instead of 1. Dijkstra takes out the cheapest cell first: 15 steps at cost 15, against the BFS path's 13 steps at cost 41. Longer, but never brushing a wall.",
-  "my": "အခု နံရံနဲ့ ထိနေတဲ့ cell တစ်ခုစီက cost 1 အစား 5 ကျပါတယ်။ Dijkstra က အသက်သာဆုံး cell ကို အရင် ထုတ်ပါတယ်: 15 ဆင့်၊ cost 15 ပါ။ BFS လမ်းကြောင်းကတော့ 13 ဆင့်၊ cost 41 ပါ။ ပိုရှည်ပေမဲ့ နံရံကို ဘယ်တော့မှ မပွတ်ပါဘူး။",
-  "back": "Now each cell touching a wall costs 5 instead of 1. Dijkstra takes out the cheapest cell first: 15 steps, cost 15. The BFS path is 13 steps, cost 41. It is longer but never brushes the wall."
+  "my": "အခု နံရံနဲ့ ထိနေတဲ့ cell တစ်ခုစီက cost 1 အစား 5 ကျပါတယ်။ Dijkstra က အသက်သာဆုံး cell ကို အရင် ထုတ်ပါတယ်: 15 ဆင့်၊ cost 15 ပါ။ BFS လမ်းကြောင်းကတော့ 13 ဆင့်၊ cost 41 ပါ။ Dijkstra လမ်းကြောင်းက ပိုရှည်ပေမဲ့ နံရံကို ဘယ်တော့မှ မပွတ်ပါဘူး။",
+  "back": "Now each cell touching a wall drops to cost 5 instead of cost 1. Dijkstra takes out the cheapest cell first: 15 steps, cost 15. The BFS path, however, is 13 steps, cost 41. The Dijkstra path is longer, but it never brushes the wall."
  },
  "ep/bfs:costOff": {
   "status": "pass-alt",
@@ -1301,8 +1301,8 @@
  "ep/late:envLabel": {
   "status": "pass-alt",
   "en": "Each message as an envelope: flies for its own delay, then is used or dropped",
-  "my": "message တစ်ခုစီကို စာအိတ်အဖြစ် ပြထား: သူ့နောက်ကျချိန်အတိုင်း ပျံသန်းပြီး သုံးခံရ ဒါမှမဟုတ် ပစ်ခံရ",
-  "back": "Each message is shown as an envelope: it flies according to its latency and is used or discarded"
+  "my": "message တစ်ခုစီကို စာအိတ်အဖြစ် ပြထား: သူ့နောက်ကျချိန်အတိုင်း ပျံသွားပြီး သုံးလိုက်တာ ဒါမှမဟုတ် ပစ်လိုက်တာ ဖြစ်",
+  "back": "Show each message as an envelope: it flies according to its delay, and it is either used or thrown away"
  },
  "ep/late:exampleNote": {
   "status": "pass-alt",
@@ -4892,8 +4892,8 @@
  "l2/actions:lines.1": {
   "status": "pass-alt",
   "en": "An action is for jobs that take time, like \"drive to this point\". The server first accepts the goal, then sends feedback while it works, then one result. You can cancel it halfway.",
-  "my": "action ကို အချိန်ကြာတဲ့ အလုပ်တွေအတွက် သုံးပါတယ်၊ \"ဒီနေရာအထိ မောင်းသွားပါ\" လိုမျိုးပါ။ server က ပထမ ပန်းတိုင်ကို လက်ခံပါတယ်၊ အလုပ်လုပ်နေစဉ် feedback ပို့ပါတယ်၊ ပြီးတော့ ရလဒ် တစ်ခု ပို့ပါတယ်။ တစ်ဝက်တစ်ပျက်မှာ ပယ်ဖျက်လို့ ရပါတယ်။",
-  "back": "An action is used for long-running jobs, like \"Drive to this spot\". The server accepts the goal first, sends feedback while working, and then sends one result. It can be cancelled halfway."
+  "my": "action ကို အချိန်ကြာတဲ့ အလုပ်တွေအတွက် သုံးပါတယ်၊ \"ဒီနေရာအထိ မောင်းသွားပါ\" လိုမျိုးပါ။ server က ပန်းတိုင်ကို အရင် လက်ခံပါတယ်၊ အလုပ်လုပ်နေစဉ် feedback ပို့ပါတယ်၊ ပြီးတော့ ရလဒ် တစ်ခု ပို့ပါတယ်။ တစ်ဝက်တစ်ပျက်မှာ ပယ်ဖျက်လို့ ရပါတယ်။",
+  "back": "An action is used for long-running jobs, such as \"drive to this place\". The server first accepts the goal, sends feedback while working, and then sends one result. It can be cancelled halfway."
  },
  "l2/actions:lines.2": {
   "status": "pass-alt",
@@ -5239,8 +5239,8 @@
  "l2/msgtypes:glossary.2.1": {
   "status": "pass-alt",
   "en": "a list of decimal numbers",
-  "my": "ဒဿမ ဂဏန်းတွေရဲ့ စာရင်း",
-  "back": "A list of decimal numbers"
+  "my": "ဒသမ ဂဏန်းတွေရဲ့ စာရင်း",
+  "back": "List of decimal digits"
  },
  "l2/msgtypes:glossary.3.0": {
   "status": "pass-alt",
@@ -5774,13 +5774,13 @@
  "l2/realproject:nodes": {
   "status": "pass-alt",
   "en": "Four of the project's own nodes, each a separate program, are started by one launch file, 9 s after launch.",
-  "my": "project ကိုယ်ပိုင် node 4 ခု (တစ်ခုစီက သီးခြား ပရိုဂရမ်) ကို launch file တစ်ခုက launch လုပ်ပြီး 9 s အကြာမှာ စတင်ပါတယ်။",
-  "back": "The project's own 4 nodes (each a separate program) are launched by one launch file and start after 9 s."
+  "my": "project ကိုယ်ပိုင် node 4 ခု (တစ်ခုစီက သီးခြား ပရိုဂရမ်) ကို launch file တစ်ခုက စပေးပါတယ်၊ launch လုပ်ပြီး 9 s ကြာမှ စပါတယ်။",
+  "back": "A launch file starts 4 project-specific nodes (each a separate program), and they start only after 9 s have passed since launch."
  },
  "l2/realproject:params": {
   "status": "pass-alt",
   "en": "The anomaly detector reads its jump limit, 0.5 m, as a parameter, so it can change without rebuilding.",
-  "my": "ပုံမှန်မဟုတ်တာ ရှာတဲ့ node က သူ့ ခုန်ကျော်မှု ကန့်သတ်ချက် 0.5 m ကို parameter အဖြစ် ဖတ်ပါတယ်၊ ဒါကြောင့် ပြန် build မလုပ်ဘဲ ပြောင်းလို့ ရပါတယ်။",
+  "my": "ပုံမှန်မဟုတ်တာ ရှာတဲ့ node က သူ့ ခုန်မှု ကန့်သတ်ချက် 0.5 m ကို parameter အဖြစ် ဖတ်ပါတယ်၊ ဒါကြောင့် ပြန် build မလုပ်ဘဲ ပြောင်းလို့ ရပါတယ်။",
   "back": "The anomaly-detecting node reads its jump limit of 0.5 m as a parameter, so it can be changed without rebuilding."
  },
  "l2/realproject:topics": {
@@ -6099,8 +6099,8 @@
  "l2/ws:runsHere": {
   "status": "pass-alt",
   "en": "A pretend terminal (JavaScript): no real build. Real error and log lines are copied; lines in (parentheses) are shortened.",
-  "my": "terminal အတု (JavaScript) ပါ: build အစစ် မလုပ်ပါဘူး။ အမှား စာကြောင်းနဲ့ log စာကြောင်း အစစ်တွေကို ကူးထားပါတယ်၊ (ကွင်း) ထဲက စာကြောင်းတွေကို တိုထားပါတယ်။",
-  "back": "It is a fake terminal (JavaScript): it does not do a real build. The error lines and log lines are copied from real ones, and the lines inside (parentheses) are shortened."
+  "my": "terminal အတု (JavaScript) ပါ: build အစစ် မလုပ်ပါဘူး။ အမှား စာကြောင်းနဲ့ log စာကြောင်း အစစ်တွေကို ကူးထားပါတယ်၊ (ကွင်း) ထဲမှာ ပြထားတဲ့ စာကြောင်းတွေကတော့ အတိုချုံ့ထားတာပါ။",
+  "back": "It is a fake terminal (JavaScript): it does not do a real build. The real error lines and log lines have been copied, but the lines shown in (parentheses) are abbreviated."
  },
  "l2/ws:solved": {
   "status": "pass-alt",
