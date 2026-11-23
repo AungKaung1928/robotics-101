@@ -22,6 +22,7 @@ export const TOPICS_STRINGS = {
     cliNote: (m: string) => `In this repo's own run, ros2 topic hz /scan measured ${m} Hz against 5 Hz configured.`,
     words: 'Words',
     glossary: [
+      ['/cmd_vel', 'the topic a mobile robot reads its speed commands from'],
       ['topic', 'a named channel, like /scan'],
       ['publish', 'send a message on a topic'],
       ['subscribe', 'ask to receive every message on a topic'],
@@ -51,6 +52,7 @@ export const TOPICS_STRINGS = {
     cliNote: (m: string) => `このリポジトリの実測では、ros2 topic hz /scan は設定 5 Hz に対し ${m} Hz。`,
     words: '用語',
     glossary: [
+      ['/cmd_vel', '移動ロボットが速度指令を読むトピック'],
       ['トピック', '名前付きのチャンネル。例：/scan'],
       ['publish', 'トピックにメッセージを送る'],
       ['subscribe', 'トピックのメッセージを全部受け取ると申し込む'],

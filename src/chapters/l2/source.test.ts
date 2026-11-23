@@ -26,6 +26,7 @@ const CITES: [string, number, RegExp, number][] = [
   [XACRO, 174, /<samples>(\d+)</, LIDAR.samples],
   [XACRO, 176, /<min_angle>([-\d.]+)</, LIDAR.minAngle],
   [XACRO, 177, /<max_angle>([-\d.]+)</, LIDAR.maxAngle],
+  ['config/nav2_params.yaml', 18, /controller_frequency: ([\d.]+)/, 20],
   ['config/nav2_params.yaml', 39, /max_vel_x: ([\d.]+)/, NAV2.maxVelX],
 ]
 
