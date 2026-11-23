@@ -1,9 +1,9 @@
 import type { ChapterId } from './lib/route'
 
-export type Lang = 'en' | 'ja'
+export type Lang = 'en' | 'ja' | 'my'
 
 // Switch labels: English words in one style for every language (his choice 2026-11-23), not codes.
-export const LANG_LABEL: Record<Lang, string> = { en: 'English', ja: 'Japanese' }
+export const LANG_LABEL: Record<Lang, string> = { en: 'English', ja: 'Japanese', my: 'Burmese' }
 
 const en = {
   title: 'Robotics 101',
@@ -342,11 +342,41 @@ const ja: typeof en = {
   },
 }
 
-export const STRINGS = { en, ja }
+// Burmese: generated overlays in src/i18n/my/<id>.json (shape: src/i18n/my/README.md). Any string missing there shows English.
+const MY = import.meta.glob('./i18n/my/*.json', { eager: true, import: 'default' }) as Record<string, unknown>
+export const myOverlay = (id: string): unknown => MY[`./i18n/my/${id}.json`]
+
+/** `base` with every string leaf replaced by the overlay's string at the same path; functions and missing keys stay as in `base`. */
+export function overlay<T>(base: T, o: unknown): T {
+  if (typeof base === 'string') return (typeof o === 'string' && o.trim() ? o : base) as T
+  if (!o || typeof o !== 'object' || !base || typeof base !== 'object') return base
+  if (Array.isArray(base)) return base.map((b, i) => overlay(b, (o as unknown[])[i])) as T
+  return Object.fromEntries(Object.entries(base).map(([k, b]) => [k, overlay(b, (o as Record<string, unknown>)[k])])) as T
+}
+
+export const STRINGS = { en, ja, my: overlay(en, myOverlay('core')) }
 export type Strings = typeof en
+
+export const langOf = (t: Strings): Lang => (t === STRINGS.ja ? 'ja' : t === STRINGS.my ? 'my' : 'en')
+
+const built = new WeakMap<object, unknown>()
+/** A chapter's strings for the reader's language. `id` = '<level dir>.<file base>.<EXPORT>', e.g. 'l0.tools.TOOLS_STRINGS'. */
+export function stringsFor<T>(table: { en: T; ja: T }, t: Strings, id: string): T {
+  const l = langOf(t)
+  if (l !== 'my') return table[l]
+  if (!built.has(table)) built.set(table, overlay(table.en, myOverlay(id)))
+  return built.get(table) as T
+}
+
+/** Chapter title for the reader's language; Burmese titles from src/i18n/my/titles.json ({ "<chapter id>": "..." }). */
+export function titleOf(c: { id: string; titleEn: string; titleJa: string }, t: Strings): string {
+  const l = langOf(t)
+  return l === 'ja' ? c.titleJa : l === 'my' ? overlay(c.titleEn, (myOverlay('titles') as Record<string, unknown> | undefined)?.[c.id]) : c.titleEn
+}
 
 export function initialLang(): Lang {
   const saved = localStorage.getItem('r101-lang')
-  if (saved === 'en' || saved === 'ja') return saved
-  return navigator.language.startsWith('ja') ? 'ja' : 'en'
+  if (saved === 'en' || saved === 'ja' || saved === 'my') return saved
+  const n = navigator.language
+  return n.startsWith('ja') ? 'ja' : n.startsWith('my') ? 'my' : 'en'
 }

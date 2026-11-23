@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import Player from '../../components/Player'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { JOBS, LAYERS, type JobId, type ToolId, score, scenario, working } from './tools'
 import { TOOLS_STRINGS } from './tools.strings'
 import './l0.css'
@@ -20,7 +20,7 @@ const H = 46
 
 /** 0.3: the tool stack lands layer by layer; break-it pulls one out and what needs it greys; challenge = tool per job. */
 export default function ToolsChapter({ t }: { t: Strings }) {
-  const s = TOOLS_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(TOOLS_STRINGS, t, 'l0.tools.TOOLS_STRINGS')
   const [presses, setPresses] = useState(0)
   const removed = presses % 2 === 1 ? BREAKS[((presses - 1) / 2) % BREAKS.length] : null
   const nextBreak = BREAKS[(presses / 2) % BREAKS.length]

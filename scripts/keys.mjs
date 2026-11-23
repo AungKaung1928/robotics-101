@@ -192,6 +192,12 @@ try {
   const switched = await js(`[document.documentElement.lang, document.querySelector('h1').textContent !== ${JSON.stringify(enTitle)}].join(' ')`)
   await open('#/tf')
   const kept = await js(`[document.documentElement.lang, document.querySelectorAll('.langs button')[1].getAttribute('aria-pressed')].join(' ')`)
+  // Burmese: third button, <html lang="my">, the chapter still renders (English fallback per string), survives a reload.
+  await js(`document.querySelectorAll('.langs button')[2].click()`)
+  await sleep(150)
+  await open('#/tf')
+  const my = await js(`[document.querySelectorAll('.langs button')[2].textContent, document.documentElement.lang, document.querySelector('h1')?.textContent.trim().length > 0, document.querySelectorAll('.langs button')[2].getAttribute('aria-pressed')].join(' ')`)
+  report('Burmese button: label, lang=my, page renders, survives a reload', my === 'Burmese my true true' ? [] : [`got: ${my}, expected Burmese my true true`])
   await js(`document.querySelectorAll('.langs button')[0].click()`)
   report('EN/JA toggle switches title and lang, and survives a reload', [
     ...(switched === 'ja true' ? [] : [`after click: ${switched}, expected ja true`]),
