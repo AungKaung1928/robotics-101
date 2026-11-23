@@ -2,7 +2,7 @@
 
 /** Playhead after `dt` real seconds at `speed` scenario seconds per second, stopped at `end`. */
 export function advance(t: number, dt: number, speed: number, end: number): number {
-  return Math.min(end, t + dt * speed)
+  return Math.min(end, t + Math.max(0, dt) * speed)
 }
 
 /** Step to the next event after `t` (dir 1) or the last one before it (dir -1); none that way → `t` unchanged. */
