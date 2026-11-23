@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { BOOP_S, HAPPY_S, HEAD_LAG, JOLT_S, WHEEL_R, headLag, brakePose, startPose, eyeShift, wheelAngle, OOPS_S, REST, SPARK_AT, boopPose, happyPose, oopsPose, sparks, dizzyStars } from './mascot'
+import { BOOP_S, HAPPY_S, HEAD_LAG, JOLT_S, WHEEL_R, headLag, brakePose, startPose, eyeShift, wheelAngle, OOPS_S, REST, SPARK_AT, boopPose, happyPose, oopsPose, sparks, dizzyStars, faceSwap, SWAP_S } from './mascot'
 
 const ts = (end: number) => Array.from({ length: 601 }, (_, i) => (i / 600) * end)
 
@@ -130,5 +130,23 @@ describe('dizzy stars', () => {
     expect(back.front).toBe(false)
     const late = dizzyStars(OOPS_S * 0.99)
     expect(Math.max(...late.map((p) => p.o))).toBeLessThan(0.05)
+  })
+})
+
+describe('face swap blink-through', () => {
+  it('open, closes to 0.1 at the swap from both sides, reopens on the new face', () => {
+    expect(faceSwap(0)).toEqual({ sy: 1, showNew: false })
+    expect(faceSwap(SWAP_S * 0.5 - 1e-9).sy).toBeCloseTo(0.1, 6)
+    expect(faceSwap(SWAP_S * 0.5 - 1e-9).showNew).toBe(false)
+    expect(faceSwap(SWAP_S * 0.5).sy).toBeCloseTo(0.1, 12)
+    expect(faceSwap(SWAP_S * 0.5).showNew).toBe(true)
+    expect(faceSwap(SWAP_S)).toEqual({ sy: 1, showNew: true })
+  })
+  it('eyes never invert or overshoot', () => {
+    for (let i = 0; i <= 100; i++) {
+      const { sy } = faceSwap((i / 100) * SWAP_S)
+      expect(sy).toBeGreaterThanOrEqual(0.1 - 1e-12)
+      expect(sy).toBeLessThanOrEqual(1)
+    }
   })
 })

@@ -122,3 +122,12 @@ export function dizzyStars(t: number, cx = 32, cy = 7, rx = 13, ry = 3.5): { x: 
     return { x: cx + rx * Math.cos(a), y: cy + ry * Math.sin(a), s: 0.85 + 0.35 * near, o: fade * (0.45 + 0.55 * near), front: near >= 0.5 }
   })
 }
+
+/** Face change as a blink-through: eyes squash shut, the face swaps while closed, eyes reopen (a hard cut otherwise). */
+export const SWAP_S = 0.14
+export function faceSwap(t: number): { sy: number; showNew: boolean } {
+  const u = t / SWAP_S
+  if (u <= 0) return { sy: 1, showNew: false }
+  if (u >= 1) return { sy: 1, showNew: true }
+  return u < 0.5 ? { sy: 1 - 1.8 * u, showNew: false } : { sy: 0.1 + 1.8 * (u - 0.5), showNew: true }
+}

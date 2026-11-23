@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { BOOP_S, HAPPY_S, JOLT_S, OOPS_S, REST, WHEEL_R, boopPose, headLag, brakePose, startPose, eyeShift, wheelAngle, happyPose, oopsPose, sparks, dizzyStars, type Pose } from './mascot'
+import { BOOP_S, HAPPY_S, JOLT_S, OOPS_S, REST, WHEEL_R, boopPose, headLag, brakePose, startPose, eyeShift, wheelAngle, happyPose, oopsPose, sparks, dizzyStars, faceSwap, SWAP_S, type Pose } from './mascot'
 import { PRESS_STYLE } from './spring'
 import './mascot.css'
 
@@ -55,7 +55,24 @@ export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look
   const boop = () => { if (!act) setAct({ kind: 'boop', n: 0 }) }
   const mood: Mood = act && (act.kind === 'happy' || act.kind === 'oops') ? act.kind : thinking ? 'think' : 'idle'
   const head = act && !reduced() ? headLag(REACTION[act.kind].pose, t) : undefined
-  const fig = <MascotFigure pose={pose} mood={mood} size={size} label={label} spark={mood === 'happy' ? t : 0} dizzy={mood === 'oops' ? t : 0} look={look} roll={roll} head={head} />
+  // Face swaps blink through (closed at the swap); reduced motion: instant.
+  const [face, setFace] = useState<{ from: Mood; to: Mood; t: number }>({ from: mood, to: mood, t: SWAP_S })
+  useEffect(() => {
+    if (mood === face.to) return
+    const from = face.t >= SWAP_S / 2 ? face.to : face.from // mid-swap: whatever is on screen now
+    if (reduced()) return setFace({ from: mood, to: mood, t: SWAP_S })
+    const t0 = performance.now()
+    let id = 0
+    const frame = (ms: number) => {
+      const s = Math.min((ms - t0) / 1000, SWAP_S)
+      setFace({ from, to: mood, t: s })
+      if (s < SWAP_S) id = requestAnimationFrame(frame)
+    }
+    id = requestAnimationFrame(frame)
+    return () => cancelAnimationFrame(id)
+  }, [mood]) // face is read only at the moment the mood changes, on purpose
+  const sw = faceSwap(face.t)
+  const fig = <MascotFigure pose={pose} mood={mood} size={size} label={label} spark={mood === 'happy' ? t : 0} dizzy={mood === 'oops' ? t : 0} eyes={{ mood: sw.showNew ? face.to : face.from, sy: sw.sy }} look={look} roll={roll} head={head} />
   // Inside a chapter's SVG figure (place it with a parent <g transform>) the hit area is a <g>, in HTML a <span>.
   return inSvg
     ? <g className="mascot-hit" onPointerEnter={boop} onClick={boop}>{fig}</g>
@@ -63,8 +80,8 @@ export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look
 }
 
 /** One frame of the robot: pose and face in, SVG out (the filmstrip test draws frames with it). label '' = decorative: hidden from screen readers. */
-export function MascotFigure({ pose, mood, size = 64, label, spark = 0, dizzy = 0, look = 0, roll = 0, head = { rot: 0, dy: 0 } }: {
-  pose: Pose; mood: Mood; size?: number; label: string; spark?: number; dizzy?: number; look?: number; roll?: number; head?: { rot: number; dy: number }
+export function MascotFigure({ pose, mood, size = 64, label, spark = 0, dizzy = 0, eyes, look = 0, roll = 0, head = { rot: 0, dy: 0 } }: {
+  pose: Pose; mood: Mood; size?: number; label: string; spark?: number; dizzy?: number; eyes?: { mood: Mood; sy: number }; look?: number; roll?: number; head?: { rot: number; dy: number }
 }) {
   const stars = dizzyStars(dizzy)
   const starPath = (p: (typeof stars)[number], i: number) => <path key={i} className="m-star" d="M0-3L.8-.8 3 0 .8.8 0 3-.8.8-3 0-.8-.8Z" transform={`translate(${p.x} ${p.y}) scale(${p.s})`} opacity={p.o} />
@@ -90,11 +107,13 @@ export function MascotFigure({ pose, mood, size = 64, label, spark = 0, dizzy = 
               <rect className="m-head" x="17" y="12" width="30" height="20" rx="10" />
               <path className="m-lidar" d="M20 18h24" />
               <g className="m-look" style={{ transform: `translate(${mood === 'think' ? 1.5 : eyeShift(look)}px, ${mood === 'think' ? -2 : 0}px)` }}>
-                {mood === 'happy' ? (
+                <g transform={`translate(32 24) scale(1 ${eyes?.sy ?? 1}) translate(-32 -24)`}>
+                {(eyes?.mood ?? mood) === 'happy' ? (
                   <g className="m-face"><path d="M24 25q3-4 6 0M34 25q3-4 6 0" /></g>
                 ) : (
-                  <g className="m-face m-eyes"><circle cx="27" cy="24" r={mood === 'oops' ? 3 : 2.2} /><circle cx="37" cy="24" r={mood === 'oops' ? 3 : 2.2} />{mood === 'oops' && <circle className="m-mouth" cx="32" cy="29.5" r="1.4" />}</g>
+                  <g className="m-face m-eyes"><circle cx="27" cy="24" r={(eyes?.mood ?? mood) === 'oops' ? 3 : 2.2} /><circle cx="37" cy="24" r={(eyes?.mood ?? mood) === 'oops' ? 3 : 2.2} />{(eyes?.mood ?? mood) === 'oops' && <circle className="m-mouth" cx="32" cy="29.5" r="1.4" />}</g>
                 )}
+                </g>
               </g>
             </g>
             {stars.filter((p) => p.front).map(starPath)}
