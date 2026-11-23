@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { LIDAR, NAV2 } from '../../content/world'
 import { CHECK_MS, DEFAULT } from './params'
 import { MAX_ACC, WHEEL_R, WHEEL_SEP } from './drive'
+import { NODES } from './nodes'
 
 /**
  * Level 1-2 numbers cite TF-Transform-Explorer by file:line. With TFE_REPO=<a clone of it>, read each cited line at
@@ -30,5 +31,10 @@ describe.skipIf(!REPO)('Level 1-2 numbers == TF-Transform-Explorer cited lines (
     const m = show(file)[line - 1]?.match(re)
     expect(m, `${file}:${line} does not match ${re}`).toBeTruthy()
     expect(Number(m![1])).toBe(used)
+  })
+  it.each(NODES.map((n) => [n.name, n.lines, n.startS] as const))('2.1 %s (launch:%s) starts at %d s', (_, lines, startS) => {
+    const [a, b] = lines.split('-').map(Number)
+    const period = show('launch/tf_explorer.launch.py').slice(a - 1, b).join('\n').match(/period=([\d.]+)/)
+    expect(period ? Number(period[1]) : 0).toBe(startS) // no TimerAction in the range = starts at launch
   })
 })
