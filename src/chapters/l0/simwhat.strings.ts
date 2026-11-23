@@ -3,6 +3,7 @@ export const SIMWHAT_STRINGS = {
   en: {
     title: 'A practice world: what a simulator is',
     learn: 'You will learn: a simulator is a pretend world, and the window that shows the robot\'s view is something else.',
+    everyday: 'Everyday: pilots train in a flight simulator, a pretend cockpit with pretend weather, long before they fly a real plane.',
     steps: [
       'A simulator is a pretend world on your computer: a pretend robot, pretend walls and pretend sensor numbers. The program that drives the pretend robot can later drive the real one.',
       'Why people start there: it is free, nothing breaks, the same test runs the same way every time, and one click puts everything back. This site has been a tiny 2D simulator all along.',
@@ -34,6 +35,7 @@ export const SIMWHAT_STRINGS = {
   ja: {
     title: '練習の世界：シミュレーターとは',
     learn: '学ぶこと：シミュレーターは作りものの世界。ロボットの見ているものを映す窓は、それとは別のもの。',
+    everyday: '身近な例：パイロットは本物の飛行機に乗る前に、作りものの操縦席と天気があるフライトシミュレーターで練習する。',
     steps: [
       'シミュレーターはコンピューターの中の作りものの世界：作りもののロボット、作りものの壁、作りもののセンサーの数字。作りもののロボットを動かすプログラムは、あとで本物も動かせる。',
       'そこから始める理由：お金がかからず、何も壊れず、同じテストが毎回同じように動き、ワンクリックで全部元にもどる。このサイトもずっと小さな 2D シミュレーターだった。',

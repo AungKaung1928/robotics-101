@@ -58,6 +58,7 @@ export default function SimwhatChapter({ t }: { t: Strings }) {
         <p className="learn">{s.learn}</p>
         <AlreadyKnow id="simwhat" t={t} />
         {s.steps.map((l) => <p key={l}>{l}</p>)}
+        <p className="note" data-k="everyday">{s.everyday}</p>
         <Slider hint={t.drag} label={s.wall} value={front} min={FRONT_MIN} max={FRONT_MAX} step={0.1} fmt={(v) => v.toFixed(1)} onChange={(v) => setFront(Math.round(v * 10) / 10)} />
         <p><button type="button" className="break" onClick={() => { if (on) setOops(oops + 1); setOn(!on) }}>{on ? s.breakIt : s.fixIt}</button></p>
         {!on && <p className="note">{s.brokenNote}</p>}

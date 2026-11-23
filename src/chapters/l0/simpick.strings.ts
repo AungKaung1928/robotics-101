@@ -3,6 +3,7 @@ export const SIMPICK_STRINGS = {
   en: {
     title: 'Which simulator to start with',
     learn: 'You will learn: there is a ladder of simulators, and you only need the first step that fits your computer.',
+    everyday: 'Everyday: you learn to drive in an empty car park before the motorway. Pick the step that fits today; the next one waits.',
     steps: [
       'Many simulators exist. Think of them as a ladder: each step adds one thing to learn and asks a little more of your computer.',
       'Answer the three questions below and one step lights up. Start there; the others can wait.',
@@ -43,6 +44,7 @@ export const SIMPICK_STRINGS = {
   ja: {
     title: 'どのシミュレーターから始めるか',
     learn: '学ぶこと：シミュレーターにははしごがあり、必要なのは自分のコンピューターに合う最初の1段だけ。',
+    everyday: '身近な例：車の運転は、高速道路の前にまず空いた駐車場で練習する。今の自分に合う段を選び、次の段は後でいい。',
     steps: [
       'シミュレーターはたくさんある。はしごだと考えよう：1段ごとに学ぶことが1つ増え、コンピューターへの要求も少し増える。',
       '下の3つの質問に答えると、1段が光る。そこから始めよう。ほかは後でいい。',

@@ -58,6 +58,7 @@ export default function SimpickChapter({ t }: { t: Strings }) {
         <p className="learn">{s.learn}</p>
         <AlreadyKnow id="simpick" t={t} />
         {s.steps.map((l) => <p key={l}>{l}</p>)}
+        <p className="note" data-k="everyday">{s.everyday}</p>
         <p className="readout-line" data-k="start">{s.start}: {s.rows[lit].name}</p>
         <div className="sp-check">
           <Mascot cheer={cheer} oops={oops} label={s.mascot} />
