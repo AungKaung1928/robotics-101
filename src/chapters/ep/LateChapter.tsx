@@ -6,7 +6,7 @@ import { STRINGS, type Strings } from '../../i18n'
 import Gloss from '../l1/Gloss'
 import '../l1/l1.css'
 import LateEnvelopes from '../../scenarios/LateEnvelopes'
-import { DELAYS_MS, END_MS, PERIOD_MS, inGoal, run, scenario, summary } from './late'
+import { DELAYS_MS, END_MS, PERIOD_MS, backpressure, inGoal, reorder, run, scenario, summary } from './late'
 import { LATE_STRINGS } from './late.strings'
 import './ep.css'
 
@@ -21,6 +21,11 @@ export default function LateChapter({ t }: { t: Strings }) {
   const s = LATE_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
   const [maxAge, setMaxAge] = useState(1)
   const [keepLatest, setKeepLatest] = useState(false)
+  const [windowMs, setWindowMs] = useState(200)
+  const ro = reorder(windowMs)
+  const [workMs, setWorkMs] = useState(150)
+  const [depth, setDepth] = useState(10)
+  const bp = backpressure(workMs, depth)
   const o = useMemo(() => run(Math.round(maxAge * 1000), keepLatest), [maxAge, keepLatest])
   const sum = summary(o)
   const sc = useMemo(() => scenario(), [])
@@ -62,6 +67,7 @@ export default function LateChapter({ t }: { t: Strings }) {
         {s.lines.map((l) => <p key={l}>{l}</p>)}
         <pre className="code" aria-label="Python">
           <span className="ln">def on_msg(msg):</span>
+          <span className="ln">    global newest   <span className="cmt"># kept between calls</span></span>
           <span className="ln">    stamp = msg.header.stamp   <span className="cmt"># when it was measured</span></span>
           <span className="ln">    if now() - stamp {'>'} max_age: return   <span className="cmt"># max_age = <span className="val">{maxAge.toFixed(2)}</span></span></span>
           <span className={`ln${keepLatest ? ' on' : ''}`}>    {keepLatest ? '' : '# '}if stamp {'<'} newest: return   <span className="cmt"># stamp check</span></span>
@@ -80,6 +86,24 @@ export default function LateChapter({ t }: { t: Strings }) {
         </dl>
         <p><strong>{s.challenge}</strong></p>
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet} {s.goalText(sum.acted, sum.backwards)}</p>
+        <p className="group-h">{s.reorderTitle}</p>
+        <p>{s.reorderText}</p>
+        <div className="reorder">
+          <Slider label={s.window} value={windowMs} min={0} max={500} step={10} fmt={(v) => String(v)} onChange={setWindowMs} />
+        </div>
+        <dl className="readout">
+          <div><dt>{s.rUsed}</dt><dd data-k="r-used">{ro.used.length}</dd></div>
+          <div><dt>{s.rDropped}</dt><dd data-k="r-dropped">{ro.dropped.length}</dd></div>
+          <div><dt>{s.rDelay}</dt><dd data-k="r-delay">{(ro.addedDelayMs / 1000).toFixed(2)} s</dd></div>
+        </dl>
+        <p className="group-h">{s.bpTitle}</p>
+        <p>{s.bpText}</p>
+        <div className="bp-work"><Slider label={s.work} value={workMs} min={50} max={300} step={10} fmt={(v) => String(v)} onChange={setWorkMs} /></div>
+        <div className="bp-depth"><Slider label={s.depth} value={depth} min={1} max={10} step={1} fmt={(v) => String(v)} onChange={setDepth} /></div>
+        <dl className="readout">
+          <div><dt>{s.bDropped}</dt><dd data-k="b-dropped">{bp.dropped}</dd></div>
+          <div><dt>{s.bOldest}</dt><dd data-k="b-oldest">{(bp.oldestMs / 1000).toFixed(2)} s</dd></div>
+        </dl>
         <p className="group-h">{s.words}</p>
         <Gloss items={s.glossary} />
         <p className="src">{t.source}: <a href="https://github.com/ros2/common_interfaces/blob/humble/std_msgs/msg/Header.msg">std_msgs/Header.msg (Humble)</a> · <a href={`${SOURCE_REPO}/blob/main/src/tf_anomaly_detector.cpp#L10-L14`}>tf_anomaly_detector.cpp:10-14</a>. {s.repoNote} {s.exampleNote}</p>

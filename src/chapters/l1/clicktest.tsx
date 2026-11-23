@@ -1,4 +1,4 @@
-// Dev-only: drives every Level 1-2 and EP chapter in a real browser (DOM clicks, typed input, slider input events)
+// Dev-only: drives every Level 1-2, EP and app2 Level 0 chapter in a real browser (DOM clicks, typed input, slider input events)
 // and prints CLICKS PASS/FAIL into #out. Run: bash src/chapters/l1/clicktest.sh (headless Chrome --dump-dom).
 import type { ComponentType } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -7,6 +7,20 @@ import '../../index.css'
 import { STRINGS, type Strings } from '../../i18n'
 import BfsChapter from '../ep/BfsChapter'
 import LateChapter from '../ep/LateChapter'
+import MoveChapter from '../l0/MoveChapter'
+import SenseChapter from '../l0/SenseChapter'
+import ThinkChapter from '../l0/ThinkChapter'
+import ActChapter from '../l0/ActChapter'
+import SimwhatChapter from '../l0/SimwhatChapter'
+import SimpickChapter from '../l0/SimpickChapter'
+import MeetChapter from '../l0/MeetChapter'
+import { MEET_STRINGS } from '../l0/meet.strings'
+import { SIMPICK_STRINGS } from '../l0/simpick.strings'
+import { SIMWHAT_STRINGS } from '../l0/simwhat.strings'
+import { ACT_STRINGS } from '../l0/act.strings'
+import { THINK_STRINGS } from '../l0/think.strings'
+import { SENSE_STRINGS } from '../l0/sense.strings'
+import { MOVE_STRINGS } from '../l0/move.strings'
 import { BODIES } from '../l2/bodies'
 import { BFS_STRINGS } from '../ep/bfs.strings'
 import { ACTIONS_STRINGS } from '../l2/actions.strings'
@@ -17,7 +31,7 @@ import { SCRIPT } from '../l2/ws'
 type Step =
   | { click: string; text?: string }
   | { type: string; value: string; submit?: boolean }
-  | { slide: number }
+  | { slide: number; in?: string }
   | { key: string; on: string }
   | { a11y: true }
   | { expect: string; has?: string; is?: string; ok?: true; re?: RegExp }
@@ -45,7 +59,30 @@ const cases = (l: Lang): Case[] => [
   { name: 'bfs keyboard', Body: BfsChapter, steps: [{ expect: 'tabstops', is: '1' }, { key: 'ArrowDown', on: '.ep-bfs [tabindex="0"]' }, { key: 'ArrowDown', on: ':focus' }, { key: 'ArrowDown', on: ':focus' }, { key: 'ArrowDown', on: ':focus' }, { key: 'Enter', on: ':focus' }, { expect: 'len', has: '13' }, { key: 'ArrowRight', on: ':focus' }, { key: 'Enter', on: ':focus' }, { key: 'ArrowUp', on: ':focus' }, { key: 'ArrowUp', on: ':focus' }, { key: 'ArrowRight', on: ':focus' }, { key: 'Enter', on: ':focus' }, { expect: 'walls', is: '9' }, { expect: 'wallAt', is: BFS_STRINGS[l].cellLabel(2, 4, true) }] },
   { name: 'bfs costmap', Body: BfsChapter, steps: [{ click: 'button.costmap' }, { expect: 'len', has: '15' }, { expect: 'cost', has: '15' }, { click: 'button.costmap' }, { expect: 'len', has: '13' }] },
   { name: 'late slider', Body: LateChapter, steps: [{ expect: 'backwards', has: '5' }, { slide: 0.17 }, { expect: 'challenge', ok: true }, { slide: 0.18 }, { expect: 'backwards', has: '1' }] },
+  { name: 'late reorder', Body: LateChapter, steps: [{ expect: 'r-dropped', is: '4' }, { slide: 450, in: '.reorder input[type=range]' }, { expect: 'r-used', is: '20' }, { expect: 'r-delay', has: '0.45' }] },
+  { name: 'late backpressure', Body: LateChapter, steps: [{ slide: 100, in: '.bp-work input[type=range]' }, { expect: 'b-dropped', is: '0' }, { slide: 150, in: '.bp-work input[type=range]' }, { slide: 1, in: '.bp-depth input[type=range]' }, { expect: 'b-dropped', re: /^[1-9]/ }] },
   { name: 'late keep-latest', Body: LateChapter, steps: [{ expect: 'count:svg.late rect.env', is: '0' }, { click: '.break' }, { expect: 'count:svg.late rect.env', is: '20' }, { expect: 'backwards', has: '0' }, { expect: 'acted', has: '15' }] },
+  { name: 'move straight + spin', Body: MoveChapter, steps: [{ expect: 'kind', is: MOVE_STRINGS[l].kind.curveLeft }, { slide: 0.15 }, { expect: 'kind', is: MOVE_STRINGS[l].kind.straight }, { slide: -0.15 }, { expect: 'kind', is: MOVE_STRINGS[l].kind.spin }] },
+  { name: 'move slip', Body: MoveChapter, steps: [{ slide: 0.15 }, { click: '.break' }, { expect: 'kind', is: MOVE_STRINGS[l].kind.curveLeft }] },
+  { name: 'move check', Body: MoveChapter, steps: [{ click: 'button.pick', text: MOVE_STRINGS[l].answers.curveRight }, { expect: 'check', ok: true }, { a11y: true }] },
+  { name: 'sense wall', Body: SenseChapter, steps: [{ slide: 0.5 }, { expect: 'front', is: '0.50 m' }, { slide: 3.8 }, { expect: 'front', is: SENSE_STRINGS[l].nothing }] },
+  { name: 'sense cover', Body: SenseChapter, steps: [{ click: '.break' }, { expect: 'count', has: '0 /' }, { expect: 'front', is: SENSE_STRINGS[l].nothing }] },
+  { name: 'sense check', Body: SenseChapter, steps: [{ click: 'button.pick', text: SENSE_STRINGS[l].answers.nothing }, { expect: 'check', ok: true }, { a11y: true }] },
+  { name: 'think rule', Body: ThinkChapter, steps: [{ slide: 0.9 }, { expect: 'final', re: /^0\.8\d m$/ }, { slide: 0.02 }, { expect: 'final', is: THINK_STRINGS[l].bumped }] },
+  { name: 'think break', Body: ThinkChapter, steps: [{ click: '.break' }, { expect: 'final', is: THINK_STRINGS[l].bumped }, { click: '.break' }, { expect: 'final', has: '0.4' }] },
+  { name: 'think check', Body: ThinkChapter, steps: [{ click: 'button.pick', text: THINK_STRINGS[l].answers.earlier }, { expect: 'check', ok: true }, { a11y: true }] },
+  { name: 'act wheels', Body: ActChapter, steps: [{ slide: 0, in: '.act-turn input[type=range]' }, { expect: 'left', is: '0.15 m/s' }, { expect: 'right', is: '0.15 m/s' }, { slide: 0.22 }, { slide: 1.5, in: '.act-turn input[type=range]' }, { expect: 'right', has: ACT_STRINGS[l].tooFast }] },
+  { name: 'act stop', Body: ActChapter, steps: [{ slide: 0.22 }, { click: '.break' }, { expect: 'rolled', is: '1.0 cm' }, { expect: 'note', has: '0.09' }] },
+  { name: 'act check', Body: ActChapter, steps: [{ click: 'button.pick', text: ACT_STRINGS[l].answers.later }, { expect: 'check', ok: true }, { a11y: true }] },
+  { name: 'simwhat wall', Body: SimwhatChapter, steps: [{ slide: 3 }, { expect: 'world', is: '3.0 m' }, { expect: 'dots', is: '360' }] },
+  { name: 'simwhat sensor off', Body: SimwhatChapter, steps: [{ click: '.break' }, { expect: 'dots', is: '0' }, { expect: 'world', is: '1.5 m' }, { expect: 'count:svg.simwhat circle.sw-dot', is: '0' }] },
+  { name: 'simwhat check', Body: SimwhatChapter, steps: [{ click: 'button.pick', text: SIMWHAT_STRINGS[l].answers.empty }, { expect: 'check', ok: true }, { a11y: true }] },
+  { name: 'simpick no gpu + sensor', Body: SimpickChapter, steps: [{ expect: 'start', has: SIMPICK_STRINGS[l].rows.site.name }, { click: '[data-q="gpu"] button', text: SIMPICK_STRINGS[l].no }, { click: '[data-q="sensor"] button', text: SIMPICK_STRINGS[l].yes }, { click: '[data-q="physics"] button', text: SIMPICK_STRINGS[l].no }, { expect: 'start', has: 'mvsim' }] },
+  { name: 'simpick gpu + physics', Body: SimpickChapter, steps: [{ click: '[data-q="gpu"] button', text: SIMPICK_STRINGS[l].yes }, { click: '[data-q="sensor"] button', text: SIMPICK_STRINGS[l].no }, { click: '[data-q="physics"] button', text: SIMPICK_STRINGS[l].yes }, { expect: 'start', has: 'Gazebo' }, { expect: 'count:li.sp-row.is-lit', is: '1' }] },
+  { name: 'simpick check', Body: SimpickChapter, steps: [{ click: '.sp-check button.pick', text: 'mvsim' }, { expect: 'check', ok: true }, { a11y: true }] },
+  { name: 'meet parts', Body: MeetChapter, steps: [{ click: 'g.meet-part.is-sensor' }, { expect: 'part', is: MEET_STRINGS[l].parts.sensor }, { click: 'g.meet-part.is-wheels' }, { expect: 'part', is: MEET_STRINGS[l].parts.wheels }] },
+  { name: 'meet car', Body: MeetChapter, steps: [{ expect: 'robot', is: MEET_STRINGS[l].no }, { click: '.break' }, { expect: 'robot', is: MEET_STRINGS[l].yes }, { expect: 'decides', is: MEET_STRINGS[l].itself }] },
+  { name: 'meet check', Body: MeetChapter, steps: [{ click: '.meet-check button.pick', text: MEET_STRINGS[l].answers.notRobot }, { expect: 'check', ok: true }, { a11y: true }] },
 ]
 
 const setValue = (el: HTMLInputElement, v: string) => {
@@ -87,7 +124,7 @@ async function runCase(c: Case, host: HTMLElement, t: Strings): Promise<string |
         if (st.on !== ':focus') el.focus()
         el.dispatchEvent(new KeyboardEvent('keydown', { key: st.key, bubbles: true }))
       } else if ('slide' in st) {
-        const el = host.querySelector<HTMLInputElement>('.slider input[type=range]')
+        const el = host.querySelector<HTMLInputElement>(st.in ?? '.slider input[type=range]')
         if (!el) return 'no slider'
         setValue(el, String(st.slide))
       } else {

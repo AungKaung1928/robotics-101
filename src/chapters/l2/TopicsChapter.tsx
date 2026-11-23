@@ -87,7 +87,7 @@ export default function TopicsChapter({ t }: { t: Strings }) {
         <p className="runs">{s.cliNote(TOPICS[0].measuredHz)}</p>
         <p className="group-h">{s.words}</p>
         <Gloss items={s.glossary} />
-        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/config/gz_bridge.yaml#L8-L31`}>gz_bridge.yaml:8-31</a>, <a href={`${SOURCE_REPO}/blob/main/config/slam_params.yaml#L7`}>slam_params.yaml:7</a>, <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L99`}>nav2_params.yaml:99, 129, 203</a>, <a href={`${SOURCE_REPO}/blob/main/README.md`}>README (measured rates)</a> · <a href="https://design.ros2.org/articles/topic_and_service_names.html">ROS 2 design: topic names</a>, <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html">Humble: Understanding topics</a></p>
+        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/config/gz_bridge.yaml#L8-L31`}>gz_bridge.yaml:8-31</a>, <a href={`${SOURCE_REPO}/blob/main/config/slam_params.yaml#L7`}>slam_params.yaml:7</a>, <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L99`}>nav2_params.yaml:99, 129</a> (/scan), <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L18`}>:18</a> (controller_frequency 20), <a href={`${SOURCE_REPO}/blob/main/README.md`}>README (measured rates)</a> · <a href="https://design.ros2.org/articles/topic_and_service_names.html">ROS 2 design: topic names</a>, <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html">Humble: Understanding topics</a></p>
       </div>
     </>
   )

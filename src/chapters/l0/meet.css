@@ -1,0 +1,14 @@
+/* Level 0 "meet": side-view drawing of the Burger with tappable parts. Colours from the tokens in index.css. */
+.meet { width: 100%; max-width: 420px; height: auto; display: block; margin: 0 auto; }
+.meet-frame { fill: none; stroke: var(--rule); stroke-width: 3; }
+.meet-post { stroke: var(--rule); stroke-width: 4; }
+.meet-part { cursor: pointer; }
+.meet-part rect, .meet-part circle { fill: var(--surface); stroke: var(--ink-2); stroke-width: 3; transition: fill var(--motion), stroke var(--motion); }
+.meet-part.is-wheels circle { fill: var(--ink); }
+.meet-part.is-sensor rect { fill: var(--robot); }
+.meet-part:hover rect, .meet-part:hover circle, .meet-part:focus-visible rect, .meet-part:focus-visible circle { stroke: var(--free); }
+.meet-part.is-on rect, .meet-part.is-on circle { stroke: var(--free); stroke-width: 5; }
+.meet-hint { fill: var(--ink-2); font: 16px var(--font); }
+.meet-check { display: flex; gap: 12px; align-items: flex-start; }
+.meet-check .pick { margin: 0 6px 6px 0; }
+.meet-check .pick[aria-pressed="true"] { outline: 2px solid var(--free); }

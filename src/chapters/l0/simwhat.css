@@ -1,0 +1,15 @@
+/* Level 0 "simwhat": world panel beside the view panel. Colours from the tokens in index.css. */
+.simwhat { width: 100%; height: auto; }
+.sw-panel { fill: var(--surface); stroke: var(--rule); stroke-width: 2; }
+.sw-panel.is-view { fill: var(--ink); }
+.sw-title { fill: var(--ink-2); font: 600 20px var(--font); }
+.sw-title.is-view { fill: var(--surface); }
+.sw-room { fill: none; stroke: var(--occ); stroke-width: 5; }
+.sw-wall { fill: var(--occ); }
+.sw-dot { fill: var(--ray); }
+.sw-empty { fill: var(--surface); font: 18px var(--mono); }
+.sw-body { fill: var(--robot); }
+.sw-eye { fill: var(--surface); }
+.sw-check { display: flex; gap: 12px; align-items: flex-start; }
+.sw-check .pick { margin: 0 6px 6px 0; }
+.sw-check .pick[aria-pressed="true"] { outline: 2px solid var(--free); }

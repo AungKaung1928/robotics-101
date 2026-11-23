@@ -8,7 +8,8 @@ import { LIDAR } from '../../content/world'
  */
 export interface Field { name: string; type: string; line: number; value: string | null }
 export const SAMPLES = LIDAR.samples
-/** gz gpu_lidar spacing: the samples span [min, max] with both ends included (formula, not read from a running robot). */
+/** Gazebo's lidar spacing, both ends included: Lidar::AngleResolution() = (max - min) / (RangeCount - 1)
+ * (ign-sensors6 src/Lidar.cc:346-350, gz-sensors8 :357-361). Not read from a running robot. */
 export const INC = (LIDAR.maxAngle - LIDAR.minAngle) / (SAMPLES - 1)
 
 export const LASERSCAN: Field[] = [
@@ -31,7 +32,7 @@ export const indexAt = (angle: number) => Math.min(SAMPLES - 1, Math.max(0, Math
 
 export interface Twist { linear: [number, number, number]; angular: [number, number, number] }
 export const TWIST_FIELDS = ['linear.x', 'linear.y', 'linear.z', 'angular.x', 'angular.y', 'angular.z'] as const
-export const LIMITS = { linX: 0.26, angZ: 1.0 } // nav2_params.yaml:206 velocity_smoother max_velocity [0.26, 0.0, 1.0]
+export const LIMITS = { linX: 0.26, angZ: 1.0 } // nav2_params.yaml:207 velocity_smoother max_velocity [0.26, 0.0, 1.0]
 
 /** A two-wheel (diff drive) robot can only use linear.x and angular.z; every other field is ignored. */
 export const used = (tw: Twist) => ({ v: tw.linear[0], w: tw.angular[2] })

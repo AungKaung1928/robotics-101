@@ -47,6 +47,7 @@ export default function DriveChapter({ t }: { t: Strings }) {
       </div>
       <div className="panel">
         <p className="learn">{s.learn}</p>
+        <p className="note" data-k="already">{s.already}</p>
         {s.lines.map((l) => <p key={l}>{l}</p>)}
         <Slider hint={t.drag} label={s.v} value={v} min={-0.26} max={0.26} step={0.01} onChange={(x) => { setV(x); show() }} fmt={(x) => x.toFixed(2)} />
         <Slider label={s.w} value={w} min={-1} max={1} step={0.01} onChange={(x) => { setW(x); show() }} fmt={(x) => x.toFixed(2)} />

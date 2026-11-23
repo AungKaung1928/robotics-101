@@ -1,0 +1,19 @@
+/* Level 0 "sense": top view of the room, the front beam and the ring of readings. Colours from the tokens in index.css. */
+.sense { width: 100%; height: auto; }
+.sense-wall { fill: var(--rule); }
+.sense-room { fill: none; stroke: var(--rule); stroke-width: 8; }
+.sense-dot { fill: var(--ray); r: 2.5px; }
+.sense-beam { stroke: var(--ray); stroke-width: 2.5; }
+.sense-beam.is-none { stroke: var(--ink-2); stroke-dasharray: 4 5; }
+.sense-limit { fill: none; stroke: var(--rule); stroke-dasharray: 3 6; }
+.sense-body { fill: var(--robot); }
+.sense-eye { fill: var(--surface); }
+.sense-top { fill: var(--surface); stroke: var(--ink); stroke-width: 1.5; }
+.sense-hand { fill: var(--ink-2); }
+.sense-say { fill: var(--ink); font: 600 18px var(--mono); }
+.sense-sweep { stroke: var(--free); stroke-width: 2; opacity: 0.6; transform-box: fill-box; transform-origin: 0 50%; }
+@media (prefers-reduced-motion: no-preference) { .sense-sweep { animation: sense-spin 2s linear infinite; } }
+@keyframes sense-spin { to { transform: rotate(-360deg); } }
+.sense-check { display: flex; gap: 12px; align-items: flex-start; }
+.sense-check .pick { margin: 0 6px 6px 0; }
+.sense-check .pick[aria-pressed="true"] { outline: 2px solid var(--free); }
