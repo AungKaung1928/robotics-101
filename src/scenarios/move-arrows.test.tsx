@@ -11,10 +11,10 @@ const len = (h: string, k: string) => { // drawn length of the solid arrow of wh
 
 describe('MoveScene wheel arrows', () => {
   it('off by default', () => expect(renderToStaticMarkup(<MoveScene vl={0.2} vr={0.1} t={1} label="" />)).not.toContain('ms-v'))
-  it('each arrow = that wheel ground speed over 1 s (300 px per m)', () => {
+  it('each arrow = that wheel ground speed over 0.5 s (300 px per m)', () => {
     const h = at(0.2, 0.1)
-    expect(len(h, 'left')).toBeCloseTo(60, 0)
-    expect(len(h, 'right')).toBeCloseTo(30, 0)
+    expect(len(h, 'left')).toBeCloseTo(30, 0)
+    expect(len(h, 'right')).toBeCloseTo(15, 0)
   })
   it('slip: solid left arrow = (1 - slip) vl, as poseAt moves the robot; dashed = vl spun', () => {
     const h = at(0.2, 0.2, 0.5)
@@ -50,10 +50,26 @@ describe('MoveScene tEnd and solved (the chapter figure shows the whole path and
     const h = renderToStaticMarkup(<MoveScene vl={0.15} vr={0.1} t={1} tEnd={4} solved label="" />)
     const d = /class="ms-ahead" d="([^"]+)"/.exec(h)![1], pts = [...d.matchAll(/[ML]([-\d.]+) ([-\d.]+)/g)].map((m) => [+m[1], +m[2]])
     const now = poseAt(0.15, 0.1, 1), end = poseAt(0.15, 0.1, 4)
-    expect(pts[0][0]).toBeCloseTo(60 + now.x * 300, 0); expect(pts[0][1]).toBeCloseTo(200 - now.y * 300, 0)
-    expect(pts.at(-1)![0]).toBeCloseTo(60 + end.x * 300, 0); expect(pts.at(-1)![1]).toBeCloseTo(200 - end.y * 300, 0)
+    expect(pts[0][0]).toBeCloseTo(100 + now.x * 300, 0); expect(pts[0][1]).toBeCloseTo(200 - now.y * 300, 0)
+    expect(pts.at(-1)![0]).toBeCloseTo(100 + end.x * 300, 0); expect(pts.at(-1)![1]).toBeCloseTo(200 - end.y * 300, 0)
     expect(h).toContain('class="ms-start"')
     expect(h).toContain('data-mood="proud"')
     expect(renderToStaticMarkup(<MoveScene vl={0.15} vr={0.1} t={4} tEnd={4} label="" />)).not.toContain('ms-ahead') // at the end nothing is ahead
+  })
+})
+
+describe('MoveScene arrows stay in the frame over the chapter range', () => {
+  it('left 0.15, right -0.22..0.22, slip off / on, every 0.5 s to 4 s: every arrow tip inside 460 x 340 (5 px room)', async () => {
+    const mv = await import('../chapters/l0/move')
+    const out: string[] = []
+    for (let r = -mv.TOP_SPEED; r <= mv.TOP_SPEED + 1e-9; r += 0.01) for (const slip of [0, 1 - mv.SLIP]) for (let t = 0; t <= mv.SECONDS; t += 0.5) {
+      const h = renderToStaticMarkup(<MoveScene vl={mv.LEFT} vr={r} t={t} slip={slip} arrows label="" />)
+      for (const m of h.matchAll(/class="ms-v[^"]*"[^>]*><path d="M[-\d.]+ [-\d.]+L([-\d.]+) ([-\d.]+)"/g)) {
+        const x = +m[1], y = +m[2]
+        if (x < 5 || x > 455 || y < 5 || y > 335) { out.push(`r ${r.toFixed(2)} slip ${slip} t ${t}: ${x},${y}`); break }
+      }
+    }
+    if (out.length) console.log('ARROW-OFF', out.length, out.slice(0, 6).join(' | '))
+    expect(out).toEqual([])
   })
 })
