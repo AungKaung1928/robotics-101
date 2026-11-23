@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { WAYPOINT_VALUE as VALUE } from '../content/waypoints'
+import { waypointValues } from '../content/waypoints'
 import { SOURCE_REPO, STACK, WAYPOINTS } from '../content/world'
 import type { Strings } from '../i18n'
 import { CHAPTERS, type ChapterId } from '../lib/route'
@@ -7,6 +7,7 @@ import Arena from './Arena'
 
 export default function Overview({ t }: { t: Strings }) {
   const [peek, setPeek] = useState<ChapterId>(CHAPTERS[0])
+  const VALUE = waypointValues(t.wv)
   const path = WAYPOINTS.map(({ x, y }, i) => `${i ? 'L' : 'M'}${x} ${y}`).join('') + 'Z'
   const labels = CHAPTERS.map((c, i) => {
     const { x, y, side } = WAYPOINTS[i]

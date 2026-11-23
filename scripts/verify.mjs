@@ -78,6 +78,9 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
         if (lang === 'ja') {
           const prose = [...dom.matchAll(/<p(?: class="(?:lede|note)")?>([^<]+)<\/p>|<dt>(.*?)<\/dt>/g)].map((m) => (m[1] ?? m[2]).replace(/<[^>]+>/g, '').trim())
           for (const t of prose) if (!JA_TEXT.test(t)) fails.push(`${name}: English left on the Japanese page: '${t.slice(0, 50)}'`)
+          // Headline values (title spot, overview waypoints): numbers and units only, no English word of 3+ letters.
+          const values = [...dom.matchAll(/data-k="spot"[^>]*>([^<]*)|class="wp-value"[^>]*>([^<]*)/g)].map((m) => (m[1] ?? m[2]).trim())
+          for (const v of values) if (/\b[a-z]{3,}\b/.test(v)) fails.push(`${name}: English in a headline value: '${v}'`)
         }
         if (!/<(svg|canvas)[^>]*role="(img|group)"/.test(dom)) fails.push(`${name}: no figure`)
         // Links inside role="img" are hidden from screen readers.

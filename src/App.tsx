@@ -5,7 +5,7 @@ import DetectChapter from './components/DetectChapter'
 import GoalChapter from './components/GoalChapter'
 import GridChapter from './components/GridChapter'
 import MiniPlan from './components/MiniPlan'
-import { WAYPOINT_VALUE } from './content/waypoints'
+import { waypointValues } from './content/waypoints'
 import Overview from './components/Overview'
 import ScanChapter from './components/ScanChapter'
 import TfChapter from './components/TfChapter'
@@ -40,6 +40,7 @@ export default function App() {
   }, [route])
 
   const idx = route.page === 'chapter' ? CHAPTERS.indexOf(route.id) : -1
+  const spot = route.page === 'chapter' ? waypointValues(t.wv)[route.id] : null
   const Body = route.page === 'chapter' ? BODY[route.id] : null
   const prev = route.page === 'chapter' ? neighbour(route.id, -1) : null
   const next = route.page === 'chapter' ? neighbour(route.id, 1) : null
@@ -60,7 +61,7 @@ export default function App() {
           <div className="chead">
             <div>
               <h1><span className="num">{idx + 1}</span> {t.chapters[route.id]}</h1>
-              <p className="spot" data-k="spot">{WAYPOINT_VALUE[route.id].v} <b className="kind">{t.kind[WAYPOINT_VALUE[route.id].kind]}</b></p>
+              <p className="spot" data-k="spot">{spot?.v} <b className="kind">{spot && t.kind[spot.kind]}</b></p>
             </div>
             <MiniPlan current={route.id} t={t} />
           </div>
