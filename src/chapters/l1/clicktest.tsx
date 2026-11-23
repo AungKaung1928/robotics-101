@@ -4,7 +4,7 @@ import type { ComponentType } from 'react'
 import { createRoot } from 'react-dom/client'
 import { flushSync } from 'react-dom'
 import '../../index.css'
-import { STRINGS, type Strings } from '../../i18n'
+import { STRINGS, stringsFor, type Lang, type Strings } from '../../i18n'
 import BfsChapter from '../ep/BfsChapter'
 import LateChapter from '../ep/LateChapter'
 import MoveChapter from '../l0/MoveChapter'
@@ -38,56 +38,57 @@ type Step =
 interface Case { name: string; Body: ComponentType<{ t: Strings }>; steps: Step[] }
 
 const typeAll = (lines: string[]): Step[] => lines.map((value) => ({ type: 'input.code', value, submit: true }))
-type Lang = 'en' | 'ja'
+/** Expected text as the page gets it: stringsFor (Burmese overlay, English fallback per string), like the chapters. */
+const S = <T,>(table: { en: T; ja: T }, l: Lang, id: string): T => stringsFor(table, STRINGS[l], id)
 /** Readouts and buttons that carry words come from the chapter's own strings, so both languages run the same cases. */
-const cell = (l: Lang, x: number, y: number) => `rect[aria-label="${BFS_STRINGS[l].cellLabel(x, y, false)}"]`
+const cell = (l: Lang, x: number, y: number) => `rect[aria-label="${S(BFS_STRINGS, l, 'ep.bfs.BFS_STRINGS').cellLabel(x, y, false)}"]`
 const cases = (l: Lang): Case[] => [
   { name: 'decide break', Body: BODIES.decide, steps: [{ click: '.break' }, { expect: 'final', has: '2.00 m' }] },
   { name: 'closest break', Body: BODIES.closest, steps: [{ click: '.break' }, { expect: 'closest', has: '0.00 m' }] },
   { name: 'callback break', Body: BODIES.callback, steps: [{ click: '.break' }, { expect: 'dropped', re: /[1-9]/ }] },
   { name: 'cpp challenge', Body: BODIES.cpp, steps: [{ click: 'button', text: 'int stop_at{0.5};' }, { expect: 'challenge', ok: true }] },
   { name: 'shell challenge', Body: BODIES.shell, steps: [...typeAll(['source /opt/ros/humble/setup.bash', 'ros2 pkg list']), { expect: 'challenge', ok: true }] },
-  { name: 'nodes stop bridge', Body: BODIES.nodes, steps: [{ click: 'g[aria-label^="ros_gz_bridge"]' }, { expect: 'patrols', is: NODES_STRINGS[l].no }] },
+  { name: 'nodes stop bridge', Body: BODIES.nodes, steps: [{ click: 'g[aria-label^="ros_gz_bridge"]' }, { expect: 'patrols', is: S(NODES_STRINGS, l, 'l2.nodes.NODES_STRINGS').no }] },
   { name: 'topics challenge', Body: BODIES.topics, steps: [{ type: 'input.code', value: 'scan' }, { expect: 'challenge', ok: true }] },
   { name: 'msgtypes break', Body: BODIES.msgtypes, steps: [{ click: '.break' }, { expect: 'ignored', has: 'angular.x' }] },
-  { name: 'actions unreachable', Body: BODIES.actions, steps: [{ click: '.break', text: ACTIONS_STRINGS[l].breakIt }, { expect: 'status', has: 'ABORTED (6)' }] },
+  { name: 'actions unreachable', Body: BODIES.actions, steps: [{ click: '.break', text: S(ACTIONS_STRINGS, l, 'l2.actions.ACTIONS_STRINGS').breakIt }, { expect: 'status', has: 'ABORTED (6)' }] },
   { name: 'params break', Body: BODIES.params, steps: [{ click: '.break' }, { expect: 'false', has: '19' }] },
   { name: 'ws challenge', Body: BODIES.ws, steps: [...typeAll(SCRIPT), { expect: 'challenge', ok: true }] },
-  { name: 'drive break', Body: BODIES.drive, steps: [{ click: '.break' }, { expect: 'challenge', has: DRIVE_STRINGS[l].moving }] },
+  { name: 'drive break', Body: BODIES.drive, steps: [{ click: '.break' }, { expect: 'challenge', has: S(DRIVE_STRINGS, l, 'l2.drive.DRIVE_STRINGS').moving }] },
   { name: 'bfs stack', Body: BfsChapter, steps: [{ expect: 'len', has: '13' }, { click: '.break' }, { expect: 'len', has: '15' }] },
-  { name: 'bfs wall click', Body: BfsChapter, steps: [{ click: cell(l, 3, 3) }, { expect: 'len', has: '13' }, { click: cell(l, 0, 2) }, { click: cell(l, 0, 4) }, { click: cell(l, 1, 3) }, { expect: 'len', is: BFS_STRINGS[l].none }] },
-  { name: 'bfs keyboard', Body: BfsChapter, steps: [{ expect: 'tabstops', is: '1' }, { key: 'ArrowDown', on: '.ep-bfs [tabindex="0"]' }, { key: 'ArrowDown', on: ':focus' }, { key: 'ArrowDown', on: ':focus' }, { key: 'ArrowDown', on: ':focus' }, { key: 'Enter', on: ':focus' }, { expect: 'len', has: '13' }, { key: 'ArrowRight', on: ':focus' }, { key: 'Enter', on: ':focus' }, { key: 'ArrowUp', on: ':focus' }, { key: 'ArrowUp', on: ':focus' }, { key: 'ArrowRight', on: ':focus' }, { key: 'Enter', on: ':focus' }, { expect: 'walls', is: '9' }, { expect: 'wallAt', is: BFS_STRINGS[l].cellLabel(2, 4, true) }] },
+  { name: 'bfs wall click', Body: BfsChapter, steps: [{ click: cell(l, 3, 3) }, { expect: 'len', has: '13' }, { click: cell(l, 0, 2) }, { click: cell(l, 0, 4) }, { click: cell(l, 1, 3) }, { expect: 'len', is: S(BFS_STRINGS, l, 'ep.bfs.BFS_STRINGS').none }] },
+  { name: 'bfs keyboard', Body: BfsChapter, steps: [{ expect: 'tabstops', is: '1' }, { key: 'ArrowDown', on: '.ep-bfs [tabindex="0"]' }, { key: 'ArrowDown', on: ':focus' }, { key: 'ArrowDown', on: ':focus' }, { key: 'ArrowDown', on: ':focus' }, { key: 'Enter', on: ':focus' }, { expect: 'len', has: '13' }, { key: 'ArrowRight', on: ':focus' }, { key: 'Enter', on: ':focus' }, { key: 'ArrowUp', on: ':focus' }, { key: 'ArrowUp', on: ':focus' }, { key: 'ArrowRight', on: ':focus' }, { key: 'Enter', on: ':focus' }, { expect: 'walls', is: '9' }, { expect: 'wallAt', is: S(BFS_STRINGS, l, 'ep.bfs.BFS_STRINGS').cellLabel(2, 4, true) }] },
   { name: 'bfs costmap', Body: BfsChapter, steps: [{ click: 'button.costmap' }, { expect: 'len', has: '15' }, { expect: 'cost', has: '15' }, { click: 'button.costmap' }, { expect: 'len', has: '13' }] },
   { name: 'late slider', Body: LateChapter, steps: [{ expect: 'backwards', has: '5' }, { slide: 0.17 }, { expect: 'challenge', ok: true }, { slide: 0.18 }, { expect: 'backwards', has: '1' }] },
   { name: 'late reorder', Body: LateChapter, steps: [{ expect: 'r-dropped', is: '4' }, { slide: 450, in: '.reorder input[type=range]' }, { expect: 'r-used', is: '20' }, { expect: 'r-delay', has: '0.45' }] },
   { name: 'late backpressure', Body: LateChapter, steps: [{ slide: 100, in: '.bp-work input[type=range]' }, { expect: 'b-dropped', is: '0' }, { slide: 150, in: '.bp-work input[type=range]' }, { slide: 1, in: '.bp-depth input[type=range]' }, { expect: 'b-dropped', re: /^[1-9]/ }] },
   { name: 'late keep-latest', Body: LateChapter, steps: [{ expect: 'count:svg.late rect.env', is: '0' }, { click: '.break' }, { expect: 'count:svg.late rect.env', is: '20' }, { expect: 'backwards', has: '0' }, { expect: 'acted', has: '15' }] },
-  { name: 'move straight + spin', Body: MoveChapter, steps: [{ expect: 'kind', is: MOVE_STRINGS[l].kind.curveLeft }, { slide: 0.15 }, { expect: 'kind', is: MOVE_STRINGS[l].kind.straight }, { slide: -0.15 }, { expect: 'kind', is: MOVE_STRINGS[l].kind.spin }] },
-  { name: 'move slip', Body: MoveChapter, steps: [{ slide: 0.15 }, { click: '.break' }, { expect: 'kind', is: MOVE_STRINGS[l].kind.curveLeft }] },
-  { name: 'move check', Body: MoveChapter, steps: [{ click: 'button.pick', text: MOVE_STRINGS[l].answers.curveRight }, { expect: 'check', ok: true }, { a11y: true }] },
-  { name: 'sense wall', Body: SenseChapter, steps: [{ slide: 0.5 }, { expect: 'front', is: '0.50 m' }, { slide: 3.8 }, { expect: 'front', is: SENSE_STRINGS[l].nothing }] },
-  { name: 'sense cover', Body: SenseChapter, steps: [{ click: '.break' }, { expect: 'count', has: '0 /' }, { expect: 'front', is: SENSE_STRINGS[l].tooClose }] },
-  { name: 'sense check', Body: SenseChapter, steps: [{ click: 'button.pick', text: SENSE_STRINGS[l].answers.nothing }, { expect: 'check', ok: true }, { a11y: true }] },
-  { name: 'think rule', Body: ThinkChapter, steps: [{ slide: 0.9 }, { expect: 'final', re: /^0\.8\d m$/ }, { slide: 0.02 }, { expect: 'final', is: THINK_STRINGS[l].bumped }] },
-  { name: 'think break', Body: ThinkChapter, steps: [{ click: '.break' }, { expect: 'final', is: THINK_STRINGS[l].bumped }, { click: '.break' }, { expect: 'final', has: '0.4' }] },
-  { name: 'think check', Body: ThinkChapter, steps: [{ click: 'button.pick', text: THINK_STRINGS[l].answers.earlier }, { expect: 'check', ok: true }, { a11y: true }] },
-  { name: 'act wheels', Body: ActChapter, steps: [{ slide: 0, in: '.act-turn input[type=range]' }, { expect: 'left', is: '0.15 m/s' }, { expect: 'right', is: '0.15 m/s' }, { slide: 0.22 }, { slide: 1.5, in: '.act-turn input[type=range]' }, { expect: 'right', has: ACT_STRINGS[l].tooFast }] },
+  { name: 'move straight + spin', Body: MoveChapter, steps: [{ expect: 'kind', is: S(MOVE_STRINGS, l, 'l0.move.MOVE_STRINGS').kind.curveLeft }, { slide: 0.15 }, { expect: 'kind', is: S(MOVE_STRINGS, l, 'l0.move.MOVE_STRINGS').kind.straight }, { slide: -0.15 }, { expect: 'kind', is: S(MOVE_STRINGS, l, 'l0.move.MOVE_STRINGS').kind.spin }] },
+  { name: 'move slip', Body: MoveChapter, steps: [{ slide: 0.15 }, { click: '.break' }, { expect: 'kind', is: S(MOVE_STRINGS, l, 'l0.move.MOVE_STRINGS').kind.curveLeft }] },
+  { name: 'move check', Body: MoveChapter, steps: [{ click: 'button.pick', text: S(MOVE_STRINGS, l, 'l0.move.MOVE_STRINGS').answers.curveRight }, { expect: 'check', ok: true }, { a11y: true }] },
+  { name: 'sense wall', Body: SenseChapter, steps: [{ slide: 0.5 }, { expect: 'front', is: '0.50 m' }, { slide: 3.8 }, { expect: 'front', is: S(SENSE_STRINGS, l, 'l0.sense.SENSE_STRINGS').nothing }] },
+  { name: 'sense cover', Body: SenseChapter, steps: [{ click: '.break' }, { expect: 'count', has: '0 /' }, { expect: 'front', is: S(SENSE_STRINGS, l, 'l0.sense.SENSE_STRINGS').tooClose }] },
+  { name: 'sense check', Body: SenseChapter, steps: [{ click: 'button.pick', text: S(SENSE_STRINGS, l, 'l0.sense.SENSE_STRINGS').answers.nothing }, { expect: 'check', ok: true }, { a11y: true }] },
+  { name: 'think rule', Body: ThinkChapter, steps: [{ slide: 0.9 }, { expect: 'final', re: /^0\.8\d m$/ }, { slide: 0.02 }, { expect: 'final', is: S(THINK_STRINGS, l, 'l0.think.THINK_STRINGS').bumped }] },
+  { name: 'think break', Body: ThinkChapter, steps: [{ click: '.break' }, { expect: 'final', is: S(THINK_STRINGS, l, 'l0.think.THINK_STRINGS').bumped }, { click: '.break' }, { expect: 'final', has: '0.4' }] },
+  { name: 'think check', Body: ThinkChapter, steps: [{ click: 'button.pick', text: S(THINK_STRINGS, l, 'l0.think.THINK_STRINGS').answers.earlier }, { expect: 'check', ok: true }, { a11y: true }] },
+  { name: 'act wheels', Body: ActChapter, steps: [{ slide: 0, in: '.act-turn input[type=range]' }, { expect: 'left', is: '0.15 m/s' }, { expect: 'right', is: '0.15 m/s' }, { slide: 0.22 }, { slide: 1.5, in: '.act-turn input[type=range]' }, { expect: 'right', has: S(ACT_STRINGS, l, 'l0.act.ACT_STRINGS').tooFast }] },
   { name: 'act stop', Body: ActChapter, steps: [{ slide: 0.22 }, { click: '.break' }, { expect: 'rolled', is: '1.0 cm' }, { expect: 'note', has: '0.09' }] },
-  { name: 'act check', Body: ActChapter, steps: [{ click: 'button.pick', text: ACT_STRINGS[l].answers.later }, { expect: 'check', ok: true }, { a11y: true }] },
+  { name: 'act check', Body: ActChapter, steps: [{ click: 'button.pick', text: S(ACT_STRINGS, l, 'l0.act.ACT_STRINGS').answers.later }, { expect: 'check', ok: true }, { a11y: true }] },
   { name: 'simwhat wall', Body: SimwhatChapter, steps: [{ slide: 3 }, { expect: 'world', is: '3.0 m' }, { expect: 'dots', is: '360' }] },
   { name: 'simwhat sensor off', Body: SimwhatChapter, steps: [{ click: '.break' }, { expect: 'dots', is: '0' }, { expect: 'world', is: '1.5 m' }, { expect: 'count:svg.simwhat circle.sw-dot', is: '0' }] },
-  { name: 'simwhat check', Body: SimwhatChapter, steps: [{ click: 'button.pick', text: SIMWHAT_STRINGS[l].answers.empty }, { expect: 'check', ok: true }, { a11y: true }] },
-  { name: 'simpick no gpu + sensor', Body: SimpickChapter, steps: [{ expect: 'start', has: SIMPICK_STRINGS[l].rows.site.name }, { click: '[data-q="gpu"] button', text: SIMPICK_STRINGS[l].no }, { click: '[data-q="sensor"] button', text: SIMPICK_STRINGS[l].yes }, { click: '[data-q="physics"] button', text: SIMPICK_STRINGS[l].no }, { expect: 'start', has: 'mvsim' }] },
-  { name: 'simpick gpu + physics', Body: SimpickChapter, steps: [{ click: '[data-q="gpu"] button', text: SIMPICK_STRINGS[l].yes }, { click: '[data-q="sensor"] button', text: SIMPICK_STRINGS[l].no }, { click: '[data-q="physics"] button', text: SIMPICK_STRINGS[l].yes }, { expect: 'start', has: 'Gazebo' }, { expect: 'count:li.sp-row.is-lit', is: '1' }] },
+  { name: 'simwhat check', Body: SimwhatChapter, steps: [{ click: 'button.pick', text: S(SIMWHAT_STRINGS, l, 'l0.simwhat.SIMWHAT_STRINGS').answers.empty }, { expect: 'check', ok: true }, { a11y: true }] },
+  { name: 'simpick no gpu + sensor', Body: SimpickChapter, steps: [{ expect: 'start', has: S(SIMPICK_STRINGS, l, 'l0.simpick.SIMPICK_STRINGS').rows.site.name }, { click: '[data-q="gpu"] button', text: S(SIMPICK_STRINGS, l, 'l0.simpick.SIMPICK_STRINGS').no }, { click: '[data-q="sensor"] button', text: S(SIMPICK_STRINGS, l, 'l0.simpick.SIMPICK_STRINGS').yes }, { click: '[data-q="physics"] button', text: S(SIMPICK_STRINGS, l, 'l0.simpick.SIMPICK_STRINGS').no }, { expect: 'start', has: 'mvsim' }] },
+  { name: 'simpick gpu + physics', Body: SimpickChapter, steps: [{ click: '[data-q="gpu"] button', text: S(SIMPICK_STRINGS, l, 'l0.simpick.SIMPICK_STRINGS').yes }, { click: '[data-q="sensor"] button', text: S(SIMPICK_STRINGS, l, 'l0.simpick.SIMPICK_STRINGS').no }, { click: '[data-q="physics"] button', text: S(SIMPICK_STRINGS, l, 'l0.simpick.SIMPICK_STRINGS').yes }, { expect: 'start', has: 'Gazebo' }, { expect: 'count:li.sp-row.is-lit', is: '1' }] },
   { name: 'simpick check', Body: SimpickChapter, steps: [{ click: '.sp-check button.pick', text: 'mvsim' }, { expect: 'check', ok: true }, { a11y: true }] },
-  { name: 'meet parts', Body: MeetChapter, steps: [{ click: 'g.meet-part.is-sensor' }, { expect: 'part', is: MEET_STRINGS[l].parts.sensor }, { click: 'g.meet-part.is-wheels' }, { expect: 'part', is: MEET_STRINGS[l].parts.wheels }] },
-  { name: 'meet car', Body: MeetChapter, steps: [{ expect: 'robot', is: MEET_STRINGS[l].no }, { click: '.break' }, { expect: 'robot', is: MEET_STRINGS[l].yes }, { expect: 'decides', is: MEET_STRINGS[l].itself }] },
+  { name: 'meet parts', Body: MeetChapter, steps: [{ click: 'g.meet-part.is-sensor' }, { expect: 'part', is: S(MEET_STRINGS, l, 'l0.meet.MEET_STRINGS').parts.sensor }, { click: 'g.meet-part.is-wheels' }, { expect: 'part', is: S(MEET_STRINGS, l, 'l0.meet.MEET_STRINGS').parts.wheels }] },
+  { name: 'meet car', Body: MeetChapter, steps: [{ expect: 'robot', is: S(MEET_STRINGS, l, 'l0.meet.MEET_STRINGS').no }, { click: '.break' }, { expect: 'robot', is: S(MEET_STRINGS, l, 'l0.meet.MEET_STRINGS').yes }, { expect: 'decides', is: S(MEET_STRINGS, l, 'l0.meet.MEET_STRINGS').itself }] },
   { name: 'face move slip dizzy', Body: MoveChapter, steps: [{ click: '.break' }, { expect: 'count:svg.move [data-mood=dizzy]', is: '1' }] },
-  { name: 'face sense proud', Body: SenseChapter, steps: [{ click: '.sense-check button.pick', text: SENSE_STRINGS[l].answers.nothing }, { expect: 'count:svg.sense [data-mood=proud]', is: '1' }, { click: '.break' }, { expect: 'count:svg.sense [data-mood=dizzy]', is: '1' }] },
+  { name: 'face sense proud', Body: SenseChapter, steps: [{ click: '.sense-check button.pick', text: S(SENSE_STRINGS, l, 'l0.sense.SENSE_STRINGS').answers.nothing }, { expect: 'count:svg.sense [data-mood=proud]', is: '1' }, { click: '.break' }, { expect: 'count:svg.sense [data-mood=dizzy]', is: '1' }] },
   { name: 'face simwhat off dizzy', Body: SimwhatChapter, steps: [{ click: '.break' }, { expect: 'count:svg.simwhat [data-mood=dizzy]', is: '1' }, { expect: 'count:svg.simwhat [data-mood=idle]', is: '1' }] },
   { name: 'face act too fast dizzy', Body: ActChapter, steps: [{ slide: 0.22 }, { slide: 1.5, in: '.act-turn input[type=range]' }, { expect: 'count:svg.move [data-mood=dizzy]', is: '1' }] },
-  { name: 'meet keyboard', Body: MeetChapter, steps: [{ key: 'Enter', on: 'g.meet-part.is-battery' }, { expect: 'part', is: MEET_STRINGS[l].parts.battery }, { key: ' ', on: 'g.meet-part.is-computer' }, { expect: 'part', is: MEET_STRINGS[l].parts.computer }] },
-  { name: 'meet check', Body: MeetChapter, steps: [{ click: '.meet-check button.pick', text: MEET_STRINGS[l].answers.notRobot }, { expect: 'check', ok: true }, { a11y: true }] },
+  { name: 'meet keyboard', Body: MeetChapter, steps: [{ key: 'Enter', on: 'g.meet-part.is-battery' }, { expect: 'part', is: S(MEET_STRINGS, l, 'l0.meet.MEET_STRINGS').parts.battery }, { key: ' ', on: 'g.meet-part.is-computer' }, { expect: 'part', is: S(MEET_STRINGS, l, 'l0.meet.MEET_STRINGS').parts.computer }] },
+  { name: 'meet check', Body: MeetChapter, steps: [{ click: '.meet-check button.pick', text: S(MEET_STRINGS, l, 'l0.meet.MEET_STRINGS').answers.notRobot }, { expect: 'check', ok: true }, { a11y: true }] },
 ]
 
 const setValue = (el: HTMLInputElement, v: string) => {
@@ -157,7 +158,7 @@ async function main() {
   let pass = 0, total = 0
   const ALL = { ...BODIES, bfs: BfsChapter, late: LateChapter }
   const named: Case[] = Object.entries(ALL).map(([id, Body]) => ({ name: `a11y names ${id}`, Body, steps: [{ a11y: true }] }))
-  for (const l of ['en', 'ja'] as const) for (const c of [...cases(l), ...named]) {
+  for (const l of ['en', 'ja', 'my'] as const) for (const c of [...cases(l), ...named]) {
     total++
     const host = document.createElement('div')
     document.body.append(host)
