@@ -1,6 +1,7 @@
 /** Level 0 "sense" text, EN + JA, same keys (sense.page.test checks). Group A: no software words, no code. */
 export const SENSE_STRINGS = {
   en: {
+    srcGloss: { turns: '5 turns/s', models: 'three LDS models', and: 'and', specs: 'specifications' },
     title: 'How a robot senses: one beam, then a ring',
     learn: 'You will learn: a distance sensor turns the world into numbers, and where those numbers stop.',
     steps: [
@@ -32,6 +33,7 @@ export const SENSE_STRINGS = {
     mascot: 'the robot',
   },
   ja: {
+    srcGloss: { turns: '1秒に5回転', models: 'LDS は 3 種類', and: 'と', specs: 'の仕様' },
     title: 'ロボットの感じ方：1本の光から、ぐるりと1周へ',
     learn: '学ぶこと：距離センサーは世界を数字に変える。そして、その数字が届かない所もある。',
     steps: [

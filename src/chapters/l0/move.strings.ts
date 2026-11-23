@@ -1,6 +1,7 @@
 /** Level 0 "move" text, EN + JA, same keys (move.page.test checks). Group A: no software words, no code. */
 export const MOVE_STRINGS = {
   en: {
+    srcGloss: { wheels: 'wheels' },
     title: 'How a robot moves: two wheels',
     learn: 'You will learn: a robot like ours steers with nothing but two wheel speeds.',
     steps: [
@@ -32,6 +33,7 @@ export const MOVE_STRINGS = {
     mascot: 'the robot',
   },
   ja: {
+    srcGloss: { wheels: '車輪' },
     title: 'ロボットの動き方：2つの車輪',
     learn: '学ぶこと：このロボットは、2つの車輪の速さだけで向きを変える。',
     steps: [

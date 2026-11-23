@@ -68,7 +68,7 @@ export default function SimpickChapter({ t }: { t: Strings }) {
         </div>
         <p className="group-h">{s.words}</p>
         <dl className="gloss">{s.glossary.map(([k, v]) => <div key={k} style={{ display: 'contents' }}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
-        <p className="src">{t.source}: {s.checked} <a href={SOURCES.gazeboHumble}>turtlebot3_gazebo humble</a>, <a href={SOURCES.gazeboJazzy}>jazzy</a> (package.xml), <a href={SOURCES.classicEol}>Gazebo Classic</a>, <a href={SOURCES.webots}>Webots TurtleBot3</a>; row links above.</p>
+        <p className="src">{t.source}: {s.checked} <a href={SOURCES.gazeboHumble}>turtlebot3_gazebo humble</a>, <a href={SOURCES.gazeboJazzy}>jazzy</a> (package.xml), <a href={SOURCES.classicEol}>Gazebo Classic</a>, <a href={SOURCES.webots}>Webots TurtleBot3</a>; {s.srcGloss.rows}.</p>
       </div>
     </>
   )

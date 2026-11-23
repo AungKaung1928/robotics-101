@@ -72,7 +72,7 @@ export default function ParamsChapter({ t }: { t: Strings }) {
         <p className="group-h">{s.words}</p>
         <Gloss items={s.glossary} />
         <RealProject id="params" t={t} />
-        <p className="src">{t.source}: <a href={`${SRC}#L10-L14`}>tf_anomaly_detector.cpp:10-14</a>, <a href={`${SRC}#L25-L26`}>:25-26</a> (500 ms), <a href={`${SRC}#L74-L77`}>:74-77</a> (jump {'>'} max), <a href={`${SOURCE_REPO}/blob/main/launch/tf_explorer.launch.py#L101-L113`}>tf_explorer.launch.py:101-113</a> (passes only use_sim_time) · <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Parameters/Understanding-ROS2-Parameters.html">Humble: Understanding parameters</a>, <a href="https://docs.ros.org/en/humble/Tutorials/Intermediate/Launch/Creating-Launch-Files.html">Creating launch files</a></p>
+        <p className="src">{t.source}: <a href={`${SRC}#L10-L14`}>tf_anomaly_detector.cpp:10-14</a>, <a href={`${SRC}#L25-L26`}>:25-26</a> (500 ms), <a href={`${SRC}#L74-L77`}>:74-77</a> (jump {'>'} max), <a href={`${SOURCE_REPO}/blob/main/launch/tf_explorer.launch.py#L101-L113`}>tf_explorer.launch.py:101-113</a> ({s.srcGloss.simTime}) · <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Parameters/Understanding-ROS2-Parameters.html">Humble: Understanding parameters</a>, <a href="https://docs.ros.org/en/humble/Tutorials/Intermediate/Launch/Creating-Launch-Files.html">Creating launch files</a></p>
       </div>
     </>
   )

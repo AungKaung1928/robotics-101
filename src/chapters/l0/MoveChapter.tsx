@@ -77,7 +77,7 @@ export default function MoveChapter({ t }: { t: Strings }) {
         </div>
         <p className="group-h">{s.words}</p>
         <dl className="gloss">{s.glossary.map(([w, m]) => <div key={w} style={{ display: 'contents' }}><dt>{w}</dt><dd>{m}</dd></div>)}</dl>
-        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L146-L147`}>turtlebot3_burger.urdf.xacro:146-147</a> (wheels), <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/features/">ROBOTIS e-Manual, TurtleBot3 Features</a> (0.22 m/s).</p>
+        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L146-L147`}>turtlebot3_burger.urdf.xacro:146-147</a> ({s.srcGloss.wheels}), <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/features/">ROBOTIS e-Manual, TurtleBot3 Features</a> (0.22 m/s).</p>
       </div>
     </>
   )
