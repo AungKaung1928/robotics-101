@@ -33,6 +33,7 @@ export default function DecideChapter({ t }: { t: Strings }) {
       </div>
       <div className="panel">
         <p className="learn">{s.learn}</p>
+        <p className="note" data-k="already">{s.already}</p>
         {s.lines.map((l) => <p key={l}>{l}</p>)}
         <pre className="code" aria-label="Python">
           <span className="ln">distance = <span className="val">{m(r.ticks[f.tick].distance)}</span>   <span className="cmt"># m, from the LiDAR</span></span>

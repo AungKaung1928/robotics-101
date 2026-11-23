@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { SOURCE_REPO } from '../../content/world'
 import { BROKEN, CHOICES, PAIRS, apply, diagnose, healthy, pairKey, type Edge } from './tflab'
 import { TFLAB_STRINGS } from './tflab.strings'
@@ -11,7 +11,7 @@ const FRAMES = ['map', 'odom', 'base_link'] as const
 
 /** 3.3: predict → see → inspect → fix → verify, on the same broken chain as the repo's lab test. */
 export default function TfLabChapter({ t }: { t: Strings }) {
-  const s = TFLAB_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(TFLAB_STRINGS, t, 'l3.tflab.TFLAB_STRINGS')
   const [guess, setGuess] = useState<Set<string>>(new Set())
   const [checked, setChecked] = useState(false)
   const [ran, setRan] = useState(false)

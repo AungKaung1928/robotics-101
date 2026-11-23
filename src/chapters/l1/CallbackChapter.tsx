@@ -6,6 +6,9 @@ import { DEPTH, PERIOD_MS, challengeOk, dropped, keepsUp, maxAgeMs, scenario, si
 import { CALLBACK_STRINGS } from './callback.strings'
 import './l1.css'
 import Gloss from './Gloss'
+import { QUEUE_ENV, QUEUE_RUNS } from './bench/queue/result'
+
+const RUN600 = QUEUE_RUNS.find((r) => r.workMs === 600)!
 
 const W = 640, L = 150, R = 625, Y_IN = 40, Y_RUN = 100, Y_Q = 160, H = 200
 const REPO = 'https://github.com/AungKaung1928/python-ros2-reference/blob/main/13_classes/classes.py#L120-L121'
@@ -63,7 +66,7 @@ export default function CallbackChapter({ t }: { t: Strings }) {
             <>        self.stop = min(msg.ranges) {'<'} self.stop_at</>,
           ].map((c, i) => <span key={i} className={`ln${f.running !== null && i >= 6 ? ' on' : ''}`}>{c}</span>)}
         </pre>
-        <p className="runs">{s.runsHere}</p>
+        <p className="runs">{s.runsHere} {s.measured(RUN600.dropped, (RUN600.maxAgeMs / 1000).toFixed(2), QUEUE_ENV)}</p>
         <Slider hint={t.drag} label={s.work} value={work} min={10} max={800} step={10} mark={PERIOD_MS} onChange={(v) => { setWork(v); show() }} />
         <p><button type="button" className="break" onClick={() => { setWork(600); show() }}>{s.breakIt}</button></p>
         <dl className="readout">

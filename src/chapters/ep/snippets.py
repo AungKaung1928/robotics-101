@@ -1,8 +1,8 @@
-"""The Python shown on the EP1/EP2 pages, run for real on the same map and delays.
-snippets.test.ts compares its JSON with the TypeScript models (python3 -I src/chapters/ep/snippets.py)."""
+"""EP1 costmap view: the heapq Dijkstra the page shows in that mode, run on the page's map.
+The default-mode BFS (EP1) and on_msg (EP2) are run from the rendered page text instead (bfs_harness.py, on_msg_harness.py);
+the costmap mode is behind a button, so its code is written out here. snippets.test.tsx compares the JSON with the model."""
 import heapq
 import json
-from collections import deque
 
 MAP = [
     '..........',
@@ -34,17 +34,6 @@ def walk(parent, goal):
     return path
 
 
-def bfs(start, goal, stack=False):  # EP1 page snippet; stack=True is the break-it (pop instead of popleft)
-    queue = deque([start]); parent = {start: None}
-    while queue:
-        cell = queue.pop() if stack else queue.popleft()
-        if cell == goal: break
-        for n in neighbours(cell):
-            if n not in parent:
-                parent[n] = cell; queue.append(n)
-    return walk(parent, goal) if goal in parent else None
-
-
 def near_wall(c):
     return any((c[0] + dx, c[1] + dy) in WALLS for dx in (-1, 0, 1) for dy in (-1, 0, 1) if dx or dy)
 
@@ -67,27 +56,5 @@ def dijkstra(start, goal):  # EP1 costmap snippet
     return walk(parent, goal), best[goal]
 
 
-DELAYS = [30, 25, 35, 30, 40, 30, 450, 380, 280, 180, 35, 30, 25, 40, 260, 30, 35, 30, 25, 30]
-
-
-def late(max_age, keep_latest):  # EP2 snippet: on_msg per arrival, in arrival order
-    msgs = sorted(((i * 100 + d, i * 100) for i, d in enumerate(DELAYS)))  # (arrive, stamp)
-    newest, acted, back = -inf, 0, 0
-    for now, stamp in msgs:
-        if now - stamp > max_age: continue
-        if keep_latest and stamp < newest: continue
-        back += stamp < newest
-        newest = max(newest, stamp)
-        acted += 1
-    return acted, back
-
-
-q, s = bfs(START, GOAL), bfs(START, GOAL, stack=True)
 dpath, dcost = dijkstra(START, GOAL)
-print(json.dumps({
-    'bfs_path': q, 'stack_path': s, 'dijkstra_path': dpath,
-    'bfs_steps': len(q) - 1, 'stack_steps': len(s) - 1,
-    'bfs_path_cost': sum(cost(c) for c in q[1:]),
-    'dijkstra_steps': len(dpath) - 1, 'dijkstra_cost': dcost,
-    'late_1000': late(1000, False), 'late_179': late(179, False), 'late_180': late(180, False), 'late_keep': late(1000, True),
-}))
+print(json.dumps({'dijkstra_path': dpath, 'dijkstra_steps': len(dpath) - 1, 'dijkstra_cost': dcost}))

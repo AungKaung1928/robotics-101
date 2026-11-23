@@ -3,7 +3,7 @@ import Celebrate from '../../anim/Celebrate'
 import Player from '../../components/Player'
 import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { Icon, type IconName } from '../../icons'
 import { HZ, START_M, STOP_AT, blindM, inGoal, loopRun, scenario, type Stage } from './loop'
 import { LOOP_STRINGS } from './loop.strings'
@@ -16,7 +16,7 @@ const xAt = (front: number) => X1 - (front / START_M) * (X1 - X0)
 
 /** 0.1: the sense → think → act loop, driven by loopRun (the same model the rate slider and break-it change). */
 export default function LoopChapter({ t }: { t: Strings }) {
-  const s = LOOP_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(LOOP_STRINGS, t, 'l0.loop.LOOP_STRINGS')
   const [hz, setHz] = useState(HZ)
   const [blind, setBlind] = useState(false)
   const [solved, setSolved] = useState(0)

@@ -1,0 +1,4 @@
+/* Level 0 "think": the check question beside the mascot (the figure is 1.1's RobotSide, styled by l1.css). */
+.think-check { display: flex; gap: 12px; align-items: flex-start; }
+.think-check .pick { margin: 0 6px 6px 0; }
+.think-check .pick[aria-pressed="true"] { outline: 2px solid var(--free); }

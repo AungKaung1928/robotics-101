@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react'
 import Player from '../../components/Player'
 import Slider from '../../components/Slider'
-import { STRINGS, type Strings } from '../../i18n'
+import { STRINGS, stringsFor, type Strings } from '../../i18n'
 import { DISTROS, END, TODAY, humbleLast, label, scenario, supported, unsupportedFor } from './ros'
 import { ROS_STRINGS } from './ros.strings'
 import './l0.css'
@@ -13,7 +13,7 @@ const x = (i: number) => X0 + (i / END) * (X1 - X0)
 /** 0.4: ROS distributions on a timeline; the date sweeps to today; break-it = a project on EOL Iron; challenge = Humble's last month. */
 export default function RosChapter({ t }: { t: Strings }) {
   const ja = t === STRINGS.ja
-  const s = ROS_STRINGS[ja ? 'ja' : 'en']
+  const s = stringsFor(ROS_STRINGS, t, 'l0.ros.ROS_STRINGS')
   const [onIron, setOnIron] = useState(false)
   const [pick, setPick] = useState<number | null>(null)
   const sc = useMemo(() => scenario(), [])

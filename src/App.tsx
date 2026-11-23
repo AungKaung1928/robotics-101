@@ -12,7 +12,7 @@ import { waypointValues } from './content/waypoints'
 import Overview from './components/Overview'
 import ScanChapter from './components/ScanChapter'
 import TfChapter from './components/TfChapter'
-import { LANG_LABEL, STRINGS, initialLang, type Lang, type Strings } from './i18n'
+import { LANG_LABEL, STRINGS, initialLang, titleOf, type Lang, type Strings } from './i18n'
 import { CHAPTER_ICON, Icon } from './icons'
 import type { ChapterMeta } from './anim/contract'
 import { LEVEL_BODY, levelPage, readingIndex, type LevelPage } from './content/levels'
@@ -69,12 +69,12 @@ export default function App() {
         {!lvl && <span>/waypoint {idx < 0 ? '–' : idx + 1}/{CHAPTERS.length}</span>}
         <span>/{lvl ? `${lvl.meta.level}/${lvl.meta.id}` : route.page === 'chapter' ? route.id : 'plan'}</span>
         <span className="langs">
-          {(['en', 'ja'] as const).map((l) => (
+          {(['en', 'ja', 'my'] as const).map((l) => (
             <button key={l} type="button" aria-pressed={lang === l} onClick={() => setLang(l)}>{LANG_LABEL[l]}</button>
           ))}
         </span>
       </header>
-      {lvl ? <LevelChapter p={lvl} t={t} ja={lang === 'ja'} /> : route.page === 'overview' || !Body ? <Overview t={t} /> : (
+      {lvl ? <LevelChapter p={lvl} t={t} /> : route.page === 'overview' || !Body ? <Overview t={t} /> : (
         <main className="chapter">
           <div className="chead">
             <div>
@@ -94,9 +94,9 @@ export default function App() {
   )
 }
 
-function LevelChapter({ p, t, ja }: { p: LevelPage; t: Strings; ja: boolean }) {
+function LevelChapter({ p, t }: { p: LevelPage; t: Strings }) {
   const Body = LEVEL_BODY[p.meta.id]
-  const title = (c: ChapterMeta) => (ja ? c.titleJa : c.titleEn)
+  const title = (c: ChapterMeta) => titleOf(c, t)
   const link = (c: ChapterMeta) => `#/${c.level}/${c.id}`
   return (
     <main className="chapter">

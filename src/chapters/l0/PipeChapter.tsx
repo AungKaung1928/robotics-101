@@ -3,7 +3,7 @@ import Player from '../../components/Player'
 import Celebrate from '../../anim/Celebrate'
 import { arrivalScale } from '../../anim/spring'
 import { SOURCE_REPO } from '../../content/world'
-import { STRINGS, type Strings } from '../../i18n'
+import { stringsFor, type Strings } from '../../i18n'
 import { easeInOut } from '../../lib/timeline'
 import { HOP_S, PIPE, found, scenario } from './pipe'
 import { PIPE_STRINGS } from './pipe.strings'
@@ -15,7 +15,7 @@ const W = 108, GAP = 14, x0 = (i: number) => 8 + i * (W + GAP)
 
 /** 0.2: one scan hops through the programs of his stack; break-it stops one, the reader finds which. */
 export default function PipeChapter({ t }: { t: Strings }) {
-  const s = PIPE_STRINGS[t === STRINGS.ja ? 'ja' : 'en']
+  const s = stringsFor(PIPE_STRINGS, t, 'l0.pipe.PIPE_STRINGS')
   const [presses, setPresses] = useState(0)
   const broken = presses % 2 === 1 ? BREAKS[((presses - 1) / 2) % BREAKS.length] : null
   const [clicked, setClicked] = useState<number | null>(null)

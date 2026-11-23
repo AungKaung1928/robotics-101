@@ -1,0 +1,5 @@
+/* Level 0 "act": reuses move.css for the robot and path; only the stop label and the check row are new. */
+.act-stop { fill: var(--ray); font: 600 13px var(--mono); }
+.act-check { display: flex; gap: 12px; align-items: flex-start; }
+.act-check .pick { margin: 0 6px 6px 0; }
+.act-check .pick[aria-pressed="true"] { outline: 2px solid var(--free); }
