@@ -3,6 +3,7 @@ export const DRIVE_STRINGS = {
   en: {
     title: 'ROS 2: first drive',
     learn: 'You will learn: to move the robot, publish a Twist on /cmd_vel, and to stop it, publish zeros.',
+    already: 'You already know: the two numbers from Level 0 "How a robot acts", forward speed and turn speed. A Twist carries them as linear.x and angular.z; its other four fields stay 0 on this robot.',
     lines: [
       'ros2 topic pub --rate 10 sends a Twist 10 times a second (without --rate: once a second). The simulator turns linear.x and angular.z into two wheel speeds: turning left spins the right wheel faster.',
       'The robot speeds up at most 1 m/s² (its config), so it starts smoothly even when you ask for full speed at once.',
@@ -27,6 +28,7 @@ export const DRIVE_STRINGS = {
   ja: {
     title: 'ROS 2：はじめての走行',
     learn: '学ぶこと：ロボットを動かすには /cmd_vel に Twist を publish し、止めるにはゼロを publish する。',
+    already: 'もう知っていること：レベル 0「ロボットの動かし方」の2つの数字、前に進む速さと向きを変える速さ。Twist はそれを linear.x と angular.z で運ぶ。残りの 4 つの値は、このロボットでは 0 のまま。',
     lines: [
       'ros2 topic pub --rate 10 は Twist を1秒10回送る（--rate なしなら1秒1回）。シミュレータは linear.x と angular.z を2つの車輪速度に変える：左に曲がるときは右の車輪が速く回る。',
       'ロボットの加速は最大 1 m/s²（設定値）なので、いきなり全速を頼んでもなめらかに動き出す。',
