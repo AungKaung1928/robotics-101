@@ -31,10 +31,10 @@ export default function TfLabChapter({ t }: { t: Strings }) {
         {PAIRS.map((p) => (
           <label key={pairKey(p)} className="pick"><input type="checkbox" checked={guess.has(pairKey(p))} onChange={() => toggle(pairKey(p))} /> <code>{pairKey(p)}</code></label>
         ))}
-        <p><button type="button" onClick={() => setChecked(true)}>{s.check}</button></p>
+        <p><button type="button" data-act="check" onClick={() => setChecked(true)}>{s.check}</button></p>
         {checked && <p className={`verdict ${right ? 'ok' : 'no'}`} data-k="predict">{right ? '✓ ' + s.right : s.wrong}</p>}
         <h2>{s.s2}</h2>
-        <p><button type="button" onClick={() => setRan(true)}>{s.run}</button></p>
+        <p><button type="button" data-act="run" onClick={() => setRan(true)}>{s.run}</button></p>
         {ran && <pre role="log" data-k="diag">{PAIRS.map((p) => `${pairKey(p)}: ${diag[pairKey(p)]}`).join('\n')}</pre>}
         <h2>{s.s3}</h2>
         <ul className="tflab-code">{CODE.map((c, i) => <li key={c}><a href={`${SOURCE_REPO}/blob/main/${c}`}><code>{c.replace('#L', ':').replace('-L', '-')}</code></a>: {s.code[i]}</li>)}</ul>
@@ -46,7 +46,7 @@ export default function TfLabChapter({ t }: { t: Strings }) {
         <p className={`verdict ${healthy(edges) ? 'ok' : 'no'}`} data-k="challenge">{healthy(edges) ? '✓ ' + s.ok : s.notYet}</p>
         {healthy(edges) && <>
           <pre className="tflab-cmd"><code>{`colcon test --packages-select tf_explorer --ctest-args -R test_tf_lab_missing_link\n# ${TEST}`}</code></pre>
-          <p><button type="button" onClick={() => { setEdges(BROKEN); setRan(false) }}>{s.reset}</button></p>
+          <p><button type="button" data-act="reset" onClick={() => { setEdges(BROKEN); setRan(false) }}>{s.reset}</button></p>
         </>}
       </div>
     </>
