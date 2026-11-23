@@ -1,0 +1,53 @@
+/** Chapter 0.12 text, EN + JA. Same keys in both (strings parity test). */
+export const SCOPE_STRINGS = {
+  en: {
+    title: 'How much you need',
+    learn: 'You will learn: which skills the rest of this course uses, counted from the chapters themselves.',
+    lines: [
+      'Each dot is one later chapter. A dot sits in a column when that chapter shows the skill: Python code, C++ code, ROS 2, or terminal commands.',
+      'You do not need all four on day one. Each chapter teaches the piece it uses, the first time it uses it.',
+    ],
+    skill: { py: 'Python', cpp: 'C++', ros2: 'ROS 2', shell: 'terminal' },
+    level: (r: string) => (r === 'EP' ? 'EP' : `Level ${r}`),
+    caption: (n: number, total: number) => `${n} of ${total} rows shown`,
+    count: 'chapters using it',
+    breakIt: 'Break it: skip C++',
+    fixIt: 'Fix it: learn a little C++',
+    brokenNote: (n: number, names: string) => `Skipping C++ locks ${n} chapters: ${names}. Reading C++ is enough for most of them.`,
+    challenge: 'Challenge: which one skill do the most chapters use?',
+    solved: (name: string, n: number, total: number) => `Right: ${name}, in ${n} of ${total} chapters.`,
+    wrong: (name: string, n: number) => `${name} is in ${n} chapters. Count the dots per column again.`,
+    words: 'Words',
+    src: 'the chapters of this course: the code, links and commands each one shows (counted again by a test on every build).',
+    glossary: [
+      ['Python', 'the language most robot examples start in; quick to change'],
+      ['C++', 'the language for fast, real-time robot code'],
+      ['terminal', 'the text window where you type commands like ros2 run'],
+    ] as [string, string][],
+  },
+  ja: {
+    title: 'どれくらい必要か',
+    learn: '学ぶこと：このコースの残りの章がどのスキルを使うか。章そのものから数える。',
+    lines: [
+      '点1つが後の章1つ。その章が Python のコード、C++ のコード、ROS 2、ターミナルのコマンドを見せるとき、その列に点が入る。',
+      '初日に4つ全部はいらない。各章は、そのスキルを初めて使うときに必要な分を教える。',
+    ],
+    skill: { py: 'Python', cpp: 'C++', ros2: 'ROS 2', shell: 'ターミナル' },
+    level: (r: string) => (r === 'EP' ? 'EP' : `レベル ${r}`),
+    caption: (n: number, total: number) => `${total} 行中 ${n} 行を表示`,
+    count: '使う章の数',
+    breakIt: '壊す：C++ を飛ばす',
+    fixIt: '直す：C++ を少し学ぶ',
+    brokenNote: (n: number, names: string) => `C++ を飛ばすと ${n} 章が読めなくなる：${names}。ほとんどは C++ が読めれば十分。`,
+    challenge: 'チャレンジ：一番多くの章が使うスキルはどれ？',
+    solved: (name: string, n: number, total: number) => `正解：${name}、${total} 章中 ${n} 章。`,
+    wrong: (name: string, n: number) => `${name} は ${n} 章。列ごとに点をもう一度数えよう。`,
+    words: '用語',
+    src: 'このコースの各章：それぞれが見せるコード、リンク、コマンド（ビルドのたびにテストで数え直す）。',
+    glossary: [
+      ['Python', '多くのロボットの例が最初に使う言語。すぐ書き換えられる'],
+      ['C++', '速くリアルタイムで動くロボットのコード用の言語'],
+      ['ターミナル', 'ros2 run のようなコマンドを打つ文字の画面'],
+    ] as [string, string][],
+  },
+}
