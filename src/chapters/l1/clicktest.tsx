@@ -8,6 +8,8 @@ import { STRINGS, type Strings } from '../../i18n'
 import BfsChapter from '../ep/BfsChapter'
 import LateChapter from '../ep/LateChapter'
 import MoveChapter from '../l0/MoveChapter'
+import SenseChapter from '../l0/SenseChapter'
+import { SENSE_STRINGS } from '../l0/sense.strings'
 import { MOVE_STRINGS } from '../l0/move.strings'
 import { BODIES } from '../l2/bodies'
 import { BFS_STRINGS } from '../ep/bfs.strings'
@@ -53,6 +55,9 @@ const cases = (l: Lang): Case[] => [
   { name: 'move straight + spin', Body: MoveChapter, steps: [{ expect: 'kind', is: MOVE_STRINGS[l].kind.curveLeft }, { slide: 0.15 }, { expect: 'kind', is: MOVE_STRINGS[l].kind.straight }, { slide: -0.15 }, { expect: 'kind', is: MOVE_STRINGS[l].kind.spin }] },
   { name: 'move slip', Body: MoveChapter, steps: [{ slide: 0.15 }, { click: '.break' }, { expect: 'kind', is: MOVE_STRINGS[l].kind.curveLeft }] },
   { name: 'move check', Body: MoveChapter, steps: [{ click: 'button.pick', text: MOVE_STRINGS[l].answers.curveRight }, { expect: 'check', ok: true }, { a11y: true }] },
+  { name: 'sense wall', Body: SenseChapter, steps: [{ slide: 0.5 }, { expect: 'front', is: '0.50 m' }, { slide: 3.8 }, { expect: 'front', is: SENSE_STRINGS[l].nothing }] },
+  { name: 'sense cover', Body: SenseChapter, steps: [{ click: '.break' }, { expect: 'count', has: '0 /' }, { expect: 'front', is: SENSE_STRINGS[l].nothing }] },
+  { name: 'sense check', Body: SenseChapter, steps: [{ click: 'button.pick', text: SENSE_STRINGS[l].answers.nothing }, { expect: 'check', ok: true }, { a11y: true }] },
 ]
 
 const setValue = (el: HTMLInputElement, v: string) => {
