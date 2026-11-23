@@ -8,7 +8,7 @@ import './l0.css'
 import './simwhat.css'
 import AlreadyKnow from './AlreadyKnow'
 import Face from './Face'
-import { mood, type Mood } from './face'
+import { mood, type Mood } from './robotmood'
 import './face.css'
 
 const { px: PX, ox: OX, oy: OY } = VIEW

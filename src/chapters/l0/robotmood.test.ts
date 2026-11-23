@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { mood } from './face'
+import { mood } from './robotmood'
 
 describe('robot face mood', () => {
   it('broken beats everything, then solved, then sensing', () => {

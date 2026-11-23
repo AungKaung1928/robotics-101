@@ -1,4 +1,4 @@
-import type { Mood } from './face'
+import type { Mood } from './robotmood'
 
 /** Eyes of the round robot, drawn in the robot's own frame (it faces +x); k scales a 19-unit body. */
 export default function Face({ mood, k = 1 }: { mood: Mood; k?: number }) {

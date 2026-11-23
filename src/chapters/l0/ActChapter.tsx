@@ -11,7 +11,7 @@ import './move.css'
 import './act.css'
 import AlreadyKnow from './AlreadyKnow'
 import Face from './Face'
-import { mood } from './face'
+import { mood } from './robotmood'
 import './face.css'
 
 const { px: PX, ox: OX, oy: OY } = VIEW

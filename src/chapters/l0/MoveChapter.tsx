@@ -10,7 +10,7 @@ import './l0.css'
 import './move.css'
 import AlreadyKnow from './AlreadyKnow'
 import Face from './Face'
-import { mood } from './face'
+import { mood } from './robotmood'
 import './face.css'
 
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
