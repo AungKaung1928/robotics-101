@@ -87,7 +87,10 @@ async function main() {
   writeFileSync(join(ROOT, DIST, 'phone.html'), `<!doctype html><body style="margin:0"><iframe id="f" style="width:390px;height:844px;border:0"></iframe><script>
 const f = document.getElementById('f'); f.src = '/' + location.hash
 f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
-  document.body.append('PHONE ' + d.scrollWidth + ' ' + d.clientWidth) }, 800)</script>`)
+  // A slider's 'drag me' hint must not sit on top of the element above the slider (2.4 actions table, 2026-11-24).
+  const hit = [...d.querySelectorAll('.slider .hint')].filter((h) => { const o = h.closest('.slider').previousElementSibling
+    if (!o) return false; const a = h.getBoundingClientRect(), b = o.getBoundingClientRect(); return a.top < b.bottom && a.bottom > b.top && a.left < b.right && a.right > b.left }).length
+  document.body.append('PHONE ' + d.scrollWidth + ' ' + d.clientWidth + ' HINTX ' + hit) }, 800)</script>`)
   const vite = spawn(join(ROOT, 'node_modules/.bin/vite'), ['preview', '--outDir', DIST, '--port', String(PORT), '--strictPort'], { cwd: ROOT, stdio: 'ignore' })
   const fails = []
   const seen = {} // dom per route and language, for checks that compare two pages
@@ -144,10 +147,11 @@ f.onload = () => setTimeout(() => { const d = f.contentDocument.documentElement
           if (!want.test(v ?? '')) fails.push(`${name}: readout ${k} '${v}', want ${want}`)
         }
         // One retry, as for the DOM dump: under load the dump can end before the frame has printed its widths.
-        const measure = () => chrome(BASE + 'phone.html' + r.hash, { lang, size: '390,844' }).match(/PHONE (\d+) (\d+)/)
+        const measure = () => chrome(BASE + 'phone.html' + r.hash, { lang, size: '390,844' }).match(/PHONE (\d+) (\d+) HINTX (\d+)/)
         const phone = measure() ?? measure()
         if (!phone) fails.push(`${name}: 390 px frame not measured`)
         else if (+phone[1] > +phone[2]) fails.push(`${name}: sideways scroll at 390 px (${phone[1]} > ${phone[2]})`)
+        if (phone && +phone[3] > 0) fails.push(`${name}: 'drag me' hint covers the element above its slider at 390 px`)
         console.log(`${name}: checked`)
       }
     }

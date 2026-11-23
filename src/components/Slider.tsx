@@ -8,7 +8,7 @@ export default function Slider(p: {
   const [touched, setTouched] = useState(false)
   const pct = p.mark === undefined ? null : ((p.mark - p.min) / (p.max - p.min)) * 100
   return (
-    <label className="slider">
+    <label className={p.hint ? "slider has-hint" : "slider"}>
       <span>{p.label} <output>{(p.fmt ?? String)(p.value)}</output></span>
       <input type="range" min={p.min} max={p.max} step={p.step} value={p.value}
         onChange={(e) => { setTouched(true); p.onChange(Number(e.target.value)) }} />
