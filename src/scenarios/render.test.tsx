@@ -5,6 +5,7 @@ import EventLog from './EventLog'
 import InflationRipple from './InflationRipple'
 import SpeedProfile from './SpeedProfile'
 import TfLab from './TfLab'
+import BfsWave from './BfsWave'
 import ToolStack from './ToolStack'
 import { year } from './distros'
 import { driveProfile } from './drive'
@@ -51,5 +52,17 @@ describe('scenario figures render from their models', () => {
     expect(end).toContain('data-mood="happy"')
     expect(end).toContain('off 0.0 cm')
     expect(end).toContain('class="mascot"')
+  })
+  it('BfsWave: front grows by layer, path appears once the goal is reached, unreachable goal never shows a path', () => {
+    const rows = ['..#..', '..#..', '.....'], blocked = rows.join('').split('').map((c) => c === '#')
+    const at = (t: number, goal = 4, b = blocked) => renderToStaticMarkup(<BfsWave w={5} h={3} blocked={b} start={0} goal={goal} t={t} label="" />)
+    expect(at(0)).toContain('data-layer="0"')
+    expect(count(at(0), /class="front"/g)).toBe(1)
+    expect(at(1)).toContain('data-layer="4"')
+    expect(at(1)).not.toContain('class="path"')
+    expect(at(2)).toContain('class="path"') // goal at layer 8, 0.25 s per layer
+    expect(count(at(9), /class="wall"/g)).toBe(2)
+    const shut = blocked.map((b, i) => b || i === 3 || i === 8 || i === 13)
+    expect(at(9, 4, shut)).not.toContain('class="path"')
   })
 })
