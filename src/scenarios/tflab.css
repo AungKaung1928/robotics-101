@@ -1,0 +1,9 @@
+/* TF lab (lane anim): wall in ink, true hit spots as faint ghosts, drawn hits in the ray colour, the gap to the wall dashed. */
+.tflab .wall { stroke: var(--ink); stroke-width: 0.03; stroke-linecap: round; }
+.tflab .ghost { fill: none; stroke: var(--rule); stroke-width: 0.012; }
+.tflab .hit { fill: var(--ray); }
+.tflab .gap { stroke: var(--ray); stroke-width: 0.01; stroke-dasharray: 0.03 0.03; }
+.tflab .ax-x { stroke: var(--axis-x); stroke-width: 0.02; }
+.tflab .ax-y { stroke: var(--axis-y); stroke-width: 0.02; }
+.tflab .tf-readout { font-family: var(--mono); fill: var(--ink-2); }
+.tflab .ray { stroke: var(--ray); stroke-width: 0.008; opacity: 0.35; }

@@ -1,0 +1,6 @@
+/* EP1 BFS (lane anim): walls in ink, explored cells a light green, the current front outlined, the found path in robot blue. */
+.bfs .wall { fill: var(--occ); }
+.bfs .seen { fill: var(--free); opacity: 0.18; }
+.bfs .front { fill: var(--free); opacity: 0.45; stroke: var(--free); stroke-width: 0.06; }
+.bfs .path { fill: none; stroke: var(--robot); stroke-width: 0.12; stroke-linecap: round; stroke-linejoin: round; }
+.bfs .goal { fill: none; stroke: var(--robot); stroke-width: 0.1; }
