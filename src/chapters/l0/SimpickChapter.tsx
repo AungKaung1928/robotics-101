@@ -5,6 +5,7 @@ import { LADDER, SOURCES, pick, type Answers } from './simpick'
 import { SIMPICK_STRINGS } from './simpick.strings'
 import './l0.css'
 import './simpick.css'
+import AlreadyKnow from './AlreadyKnow'
 
 type Q = keyof Answers
 const QS: Q[] = ['gpu', 'sensor', 'physics']
@@ -51,11 +52,13 @@ export default function SimpickChapter({ t }: { t: Strings }) {
             )
           })}
         </ol>
-        <p className="note">{s.others}</p>
+        <p className="note">{s.others} <a href={SOURCES.stage}>stage_ros2</a>, <a href={SOURCES.flatland}>Flatland (ROS index)</a></p>
       </div>
       <div className="panel">
         <p className="learn">{s.learn}</p>
+        <AlreadyKnow id="simpick" t={t} />
         {s.steps.map((l) => <p key={l}>{l}</p>)}
+        <p className="note" data-k="everyday">{s.everyday}</p>
         <p className="readout-line" data-k="start">{s.start}: {s.rows[lit].name}</p>
         <div className="sp-check">
           <Mascot cheer={cheer} oops={oops} label={s.mascot} />

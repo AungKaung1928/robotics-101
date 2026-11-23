@@ -3,6 +3,7 @@ export const ACTIONS_STRINGS = {
   en: {
     title: 'ROS 2: services and actions',
     learn: 'You will learn: besides topics, nodes can ask a question (service) or give a long job with progress reports (action).',
+    everyday: 'Everyday: ordering a food delivery is an action. The shop accepts the order, the app shows where the courier is (feedback), then the food arrives (result); you can cancel on the way. Asking "are you open?" is a service.',
     lines: [
       'A service is one request and one response, like "save the map now". The caller waits for the answer.',
       'An action is for jobs that take time, like "drive to this point". The server first accepts the goal, then sends feedback while it works, then one result. You can cancel it halfway.',
@@ -30,6 +31,7 @@ export const ACTIONS_STRINGS = {
   ja: {
     title: 'ROS 2：サービスとアクション',
     learn: '学ぶこと：トピックのほかに、ノードは質問（サービス）や、途中報告付きの長い仕事（アクション）を頼める。',
+    everyday: '身近な例：フードデリバリーの注文はアクション。店が注文を受け、アプリが配達員の位置を見せ（フィードバック）、料理が届く（結果）。途中でキャンセルもできる。「営業していますか？」と聞くのはサービス。',
     lines: [
       'サービスは1回の要求と1回の応答。例：「今すぐ地図を保存して」。呼んだ側は答えを待つ。',
       'アクションは時間のかかる仕事用。例：「この地点まで走って」。サーバーはまずゴールを受け付け、作業中はフィードバックを送り、最後に結果を1つ返す。途中でキャンセルもできる。',

@@ -8,6 +8,7 @@ import { MSGTYPES_STRINGS } from './msgtypes.strings'
 import '../l1/l1.css'
 import './l2.css'
 import Gloss from '../l1/Gloss'
+import RealProject from './RealProject'
 
 const MSG = 'https://github.com/ros2/common_interfaces/blob/humble'
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -80,6 +81,7 @@ export default function MsgTypesChapter({ t }: { t: Strings }) {
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? `✓ ${s.solved} ${tw.angular[2].toFixed(2)} rad/s` : `${s.notYet} linear.x ${tw.linear[0].toFixed(2)}, angular.z ${tw.angular[2].toFixed(2)}`}</p>
         <p className="group-h">{s.words}</p>
         <Gloss items={s.glossary} />
+        <RealProject id="msgtypes" t={t} />
         <p className="src">{t.source}: <a href={`${MSG}/sensor_msgs/msg/LaserScan.msg`}>LaserScan.msg</a>, <a href={`${MSG}/geometry_msgs/msg/Twist.msg`}>Twist.msg</a> (Humble), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L174-L182`}>turtlebot3_burger.urdf.xacro:174-182</a> ({SAMPLES} samples, {LIDAR.minAngle} to {LIDAR.maxAngle} rad), <a href="https://github.com/gazebosim/gz-sensors/blob/ign-sensors6/src/Lidar.cc#L346-L350">ign-sensors6 Lidar.cc:346-350</a> (angle_increment = (max − min) / (samples − 1)), <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L207`}>nav2_params.yaml:207</a>, <a href="https://github.com/gazebosim/gz-sim/blob/gz-sim8/src/systems/diff_drive/DiffDrive.cc#L618-L619">gz-sim DiffDrive.cc:618-619</a> (reads linear.x, angular.z), <a href="https://www.ros.org/reps/rep-0103.html">REP 103</a></p>
       </div>
     </>

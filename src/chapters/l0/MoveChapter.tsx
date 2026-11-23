@@ -8,6 +8,10 @@ import { LEFT, SECONDS, SLIP, TOP_SPEED, WHEEL_GAP_M, kind, path, turnsPerS, VIE
 import { MOVE_STRINGS } from './move.strings'
 import './l0.css'
 import './move.css'
+import AlreadyKnow from './AlreadyKnow'
+import Face from './Face'
+import { mood } from './robotmood'
+import './face.css'
 
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 const { px: PX, ox: OX, oy: OY } = VIEW
@@ -46,8 +50,7 @@ export default function MoveChapter({ t }: { t: Strings }) {
             <rect className={`move-wheel${slip ? ' is-slip' : ''}`} x="-10" y={-HALF_GAP - 5} width="20" height="8" rx="2" />
             <rect className="move-wheel" x="-10" y={HALF_GAP - 3} width="20" height="8" rx="2" />
             <circle className="move-body" r={R_BODY} />
-            <circle className="move-eye" cx="10" cy="-6" r="2.5" />
-            <circle className="move-eye" cx="10" cy="6" r="2.5" />
+            <Face mood={mood({ broken: slip, solved: picked === 'curveRight' })} />
             <circle className="move-sensor" cx="-3" r="5" />
           </g>
         </svg>
@@ -55,6 +58,7 @@ export default function MoveChapter({ t }: { t: Strings }) {
       </div>
       <div className="panel">
         <p className="learn">{s.learn}</p>
+        <AlreadyKnow id="move" t={t} />
         {s.steps.map((l) => <p key={l}>{l}</p>)}
         <Slider hint={t.drag} label={s.right} value={right} min={-TOP_SPEED} max={TOP_SPEED} step={0.01} mark={LEFT} fmt={(v) => v.toFixed(2)}
           onChange={(v) => { setRight(Math.round(v * 100) / 100); restart() }} />

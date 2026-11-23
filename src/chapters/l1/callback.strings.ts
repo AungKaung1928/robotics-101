@@ -3,6 +3,7 @@ export const CALLBACK_STRINGS = {
   en: {
     title: 'Python: classes and callbacks',
     learn: 'You will learn: a class keeps data and functions together; a callback is a function you hand to ROS, and ROS calls it when a message arrives.',
+    everyday: 'Everyday: a doorbell. You do not stand at the door checking; the bell calls you when someone arrives. If more guests ring while you are busy, they wait in line.',
     lines: [
       'You do not write "wait for the next scan". You give ROS the method self.on_scan, and ROS calls it with each new scan, 5 times a second.',
       'The class keeps what must survive between calls: stop_at and count live on self.',
@@ -30,6 +31,7 @@ export const CALLBACK_STRINGS = {
   ja: {
     title: 'Python：クラスとコールバック',
     learn: '学ぶこと：クラスはデータと関数をひとまとめにする。コールバックは ROS に渡す関数で、メッセージが届くと ROS がそれを呼ぶ。',
+    everyday: '身近な例：玄関のチャイム。ドアの前で見張らなくても、だれか来るとチャイムが呼んでくれる。手がふさがっている間に別の客が鳴らすと、その客は並んで待つ。',
     lines: [
       '「次のスキャンを待つ」とは書かない。ROS にメソッド self.on_scan を渡すと、ROS が新しいスキャンごとに（1秒に5回）それを呼ぶ。',
       'クラスは呼び出しの間も残すべきものを持つ：stop_at と count は self にある。',
