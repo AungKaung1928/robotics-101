@@ -1607,11 +1607,311 @@
   "my": "မမှန်သေးပါဘူး။ ညာဘက် ဘီးကို 0.05 ထားပြီး ကြည့်ကြည့်ပါ။",
   "back": "Not right yet. Try setting the right wheel to 0.05 and look."
  },
+ "l0/pipe:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: stop one program",
+  "my": "ဖျက်ကြည့် - ပရိုဂရမ် တစ်ခုကို ရပ်လိုက်ပါ",
+  "back": "Break it - stop one program"
+ },
+ "l0/pipe:brokenNote": {
+  "status": "pass-alt",
+  "en": "One program receives the scan but passes nothing on. The robot just stands still: no error on screen. Which one is it?",
+  "my": "ပရိုဂရမ် တစ်ခုက scan ဖတ်တာကို လက်ခံရရှိပေမဲ့ ဘာမှ ထပ်မပို့ပါဘူး။ စက်ရုပ်က ရပ်နေပြီး screen ပေါ်မှာလည်း အမှား မပြပါဘူး။ ဘယ်ပရိုဂရမ် ဖြစ်မလဲ။",
+  "back": "One program receives the scan reading but sends nothing further. The robot is stopped and the screen also shows no error. Which program could it be?"
+ },
+ "l0/pipe:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: break it, watch where the data stops, then click the broken program.",
+  "my": "စိန်ခေါ်မှု - ဖျက်ကြည့်ပါ၊ အချက်အလက်တွေ ဘယ်နေရာမှာ ရပ်သွားလဲဆိုတာ ကြည့်ပြီး ပျက်နေတဲ့ ပရိုဂရမ်ကို နှိပ်ပါ။",
+  "back": "Challenge - break it, look at where the information stops, and click the broken program."
+ },
+ "l0/pipe:does.controller": {
+  "status": "pass-alt",
+  "en": "turns the path into wheel speeds",
+  "my": "လမ်းကြောင်းကို ဘီး အမြန်နှုန်းတွေအဖြစ် ပြောင်းလဲ",
+  "back": "Convert the path into wheel speeds"
+ },
+ "l0/pipe:does.costmap": {
+  "status": "pass-alt",
+  "en": "marks where it is unsafe",
+  "my": "မလုံခြုံတဲ့ နေရာတွေကို မှတ်သား",
+  "back": "Mark unsafe places"
+ },
+ "l0/pipe:does.lidar": {
+  "status": "pass-alt",
+  "en": "measures distances",
+  "my": "အကွာအဝေးကို တိုင်းတာ",
+  "back": "Measure distance"
+ },
+ "l0/pipe:does.planner": {
+  "status": "pass-alt",
+  "en": "finds a path",
+  "my": "လမ်းကြောင်းကို ရှာဖွေ",
+  "back": "Find the path"
+ },
+ "l0/pipe:does.slam": {
+  "status": "pass-alt",
+  "en": "builds the map",
+  "my": "မြေပုံကို တည်ဆောက်",
+  "back": "Build the map"
+ },
+ "l0/pipe:fixIt": {
+  "status": "pass-alt",
+  "en": "Fix it: all programs running",
+  "my": "ပြင်ကြည့် - ပရိုဂရမ်အားလုံး ပုံမှန်လည်ပတ်နေတယ်",
+  "back": "Fix it - all programs are running normally"
+ },
+ "l0/pipe:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "program",
+  "my": "ပရိုဂရမ်",
+  "back": "Program"
+ },
+ "l0/pipe:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "a list of instructions a computer runs",
+  "my": "ကွန်ပျူတာက လုပ်ဆောင်ရမယ့် ညွှန်ကြားချက်များ",
+  "back": "Instructions that a computer has to carry out"
+ },
+ "l0/pipe:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "data",
+  "my": "data",
+  "back": "data"
+ },
  "l0/pipe:glossary.1.1": {
   "status": "pass-alt",
   "en": "the numbers passed between programs, like one LiDAR scan",
   "my": "ပရိုဂရမ်တွေကြား ပို့ပေးတဲ့ ဂဏန်းတွေ၊ ဥပမာ LiDAR scan တစ်ခု",
   "back": "Numbers sent between programs, for example one LiDAR scan"
+ },
+ "l0/pipe:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: a robot runs many small programs that pass data along, and the job is to build, connect and fix them.",
+  "my": "စက်ရုပ် တစ်ခုမှာ အချက်အလက်တွေ အပြန်အလှန် ပေးပို့တဲ့ ပရိုဂရမ် အသေးစားလေးတွေ အများကြီး ပါဝင်ပုံနဲ့ အဲဒါတွေကို တည်ဆောက်၊ ချိတ်ဆက်၊ ပြင်ဆင်ပုံတွေကို လေ့လာရပါမယ်။",
+  "back": "You will study how a robot contains many small programs that send information back and forth to each other, and how to build, connect and fix them."
+ },
+ "l0/pipe:lines.0": {
+  "status": "pass-alt",
+  "en": "No single program drives the robot. Each small program does one job and passes its result to the next.",
+  "my": "စက်ရုပ်ကို မောင်းနှင်ဖို့ ပရိုဂရမ် တစ်ခုတည်းနဲ့ လုပ်တာ မဟုတ်ပါဘူး။ ပရိုဂရမ် အသေးစားလေး တစ်ခုစီက အလုပ် တစ်ခုစီ လုပ်ပြီး ရလဒ်ကို နောက်တစ်ခုဆီ ပေးပို့တာ ဖြစ်ပါတယ်။",
+  "back": "A robot is not driven by a single program. Each small program does one job and passes the result on to the next one."
+ },
+ "l0/pipe:lines.1": {
+  "status": "pass-alt",
+  "en": "A robotics software engineer writes these programs, connects them, tests them, and finds out which one broke when the robot misbehaves.",
+  "my": "စက်ရုပ် ဆော့ဖ်ဝဲ အင်ဂျင်နီယာ တစ်ယောက်ဟာ ဒီပရိုဂရမ်တွေကို ရေးသား၊ ချိတ်ဆက်၊ စမ်းသပ်မှု လုပ်ရပါတယ်။ စက်ရုပ် ပုံမှန်မဟုတ်ဘဲ ဖြစ်နေတဲ့အခါ ဘယ်ပရိုဂရမ် ပျက်နေလဲဆိုတာကိုလည်း ရှာဖွေရပါတယ်။",
+  "back": "A robot software engineer has to write, connect and test these programs. When the robot is behaving abnormally, they also have to find which program is broken."
+ },
+ "l0/pipe:lines.2": {
+  "status": "pass-alt",
+  "en": "Each box below is a later chapter of this app. Click one to jump there.",
+  "my": "အောက်က box တစ်ခုစီဟာ ဒီ app ရဲ့ နောက်ပိုင်း သင်ခန်းစာတွေ ဖြစ်ပါတယ်။ အဲဒီသင်ခန်းစာဆီ သွားဖို့ တစ်ခုခုကို နှိပ်ကြည့်ပါ။",
+  "back": "Each box below is a later lesson of this app. Click any one of them to go to that lesson."
+ },
+ "l0/pipe:names.controller": {
+  "status": "pass-alt",
+  "en": "Controller",
+  "my": "Controller",
+  "back": "Controller"
+ },
+ "l0/pipe:names.costmap": {
+  "status": "pass-alt",
+  "en": "Costmap",
+  "my": "Costmap",
+  "back": "Costmap"
+ },
+ "l0/pipe:names.lidar": {
+  "status": "pass-alt",
+  "en": "LiDAR driver",
+  "my": "LiDAR driver",
+  "back": "LiDAR driver"
+ },
+ "l0/pipe:names.planner": {
+  "status": "pass-alt",
+  "en": "Planner",
+  "my": "Planner",
+  "back": "Planner"
+ },
+ "l0/pipe:names.slam": {
+  "status": "pass-alt",
+  "en": "SLAM (map)",
+  "my": "SLAM (မြေပုံ)",
+  "back": "SLAM (map)"
+ },
+ "l0/pipe:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet.",
+  "my": "မရသေးပါဘူး။",
+  "back": "Not yet."
+ },
+ "l0/pipe:solved": {
+  "status": "pass-alt",
+  "en": "Solved: you found it.",
+  "my": "အောင်မြင်ပါပြီ။ သင် ရှာတွေ့သွားပါပြီ။",
+  "back": "Success. You found it."
+ },
+ "l0/pipe:stuck": {
+  "status": "pass-alt",
+  "en": "robot does not move",
+  "my": "စက်ရုပ် မလှုပ်ရှားတော့ပါ",
+  "back": "The robot no longer moves"
+ },
+ "l0/pipe:title": {
+  "status": "pass-alt",
+  "en": "Robotics software: many small programs",
+  "my": "စက်ရုပ် ဆော့ဖ်ဝဲ - ပရိုဂရမ် အသေးစားလေးများ",
+  "back": "Robot software - many small programs"
+ },
+ "l0/pipe:wheels": {
+  "status": "pass-alt",
+  "en": "wheels move",
+  "my": "ဘီးတွေ လှုပ်ရှား",
+  "back": "Wheels move"
+ },
+ "l0/pipe:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရများ",
+  "back": "Glossary"
+ },
+ "l0/ros:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: start a new project on Iron",
+  "my": "ဖျက်ကြည့်- Iron မှာ project အသစ် စတင်ပါ",
+  "back": "Break it - start a new project on Iron"
+ },
+ "l0/ros:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: drag the date to the last month Humble gets fixes.",
+  "my": "စိန်ခေါ်မှု- Humble ပြင်ဆင်ချက်တွေ ရနိုင်တဲ့ နောက်ဆုံးလအထိ ရက်စွဲကို ဆွဲရွှေ့ပါ။",
+  "back": "Challenge - drag the date to the last month in which Humble fixes are available."
+ },
+ "l0/ros:date": {
+  "status": "pass-alt",
+  "en": "date",
+  "my": "ရက်စွဲ",
+  "back": "Date"
+ },
+ "l0/ros:fixIt": {
+  "status": "pass-alt",
+  "en": "Fix it: start on Humble",
+  "my": "ပြင်ကြည့်- Humble မှာ စတင်ပါ",
+  "back": "Fix it - start on Humble"
+ },
+ "l0/ros:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "distribution",
+  "my": "distribution",
+  "back": "distribution"
+ },
+ "l0/ros:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "one named, tested release of ROS (Humble, Jazzy, ...)",
+  "my": "နာမည်ပေးထားပြီး စမ်းသပ်ပြီးသား ROS ထုတ်ဝေမှု တစ်ခု (Humble၊ Jazzy၊ ...)။",
+  "back": "A named and tested ROS release (Humble, Jazzy, ...)."
+ },
+ "l0/ros:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "LTS",
+  "my": "LTS",
+  "back": "LTS"
+ },
+ "l0/ros:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "long-term support: fixes for 5 years",
+  "my": "ရေရှည်ပံ့ပိုးမှု- 5 နှစ်ကြာ ပြင်ဆင်ချက်များ ရရှိခြင်း",
+  "back": "Long-term support - receiving fixes for 5 years"
+ },
+ "l0/ros:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "EOL",
+  "my": "EOL",
+  "back": "EOL"
+ },
+ "l0/ros:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "end of life: no more fixes",
+  "my": "သက်တမ်းကုန်ဆုံးချိန်- ပြင်ဆင်ချက်များ ထပ်မရတော့ခြင်း",
+  "back": "End of life - no longer receiving fixes"
+ },
+ "l0/ros:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: ROS is not an operating system, why ROS 2 replaced ROS 1, and how to pick a distribution.",
+  "my": "ROS ဟာ operating system တစ်ခု မဟုတ်တဲ့အကြောင်း၊ ROS 1 နေရာမှာ ROS 2 ဘာကြောင့် အစားထိုးလာရတဲ့အကြောင်းနဲ့ distribution တစ်ခုကို ဘယ်လို ရွေးချယ်ရမလဲဆိုတာ လေ့လာရပါမယ်။",
+  "back": "You will study that ROS is not an operating system, why ROS 2 came to replace ROS 1, and how to choose a distribution."
+ },
+ "l0/ros:lines.0": {
+  "status": "pass-alt",
+  "en": "ROS is a set of tools and libraries plus one agreed way for programs to talk. It runs on top of Linux; it does not replace it.",
+  "my": "ROS ဆိုတာ ကိရိယာတွေ၊ libraries တွေ အစုအဝေး တစ်ခုနဲ့ ပရိုဂရမ်တွေ အချင်းချင်း စကားပြောဖို့ အားလုံး သဘောတူထားတဲ့ နည်းလမ်း တစ်ခု ဖြစ်ပါတယ်။ Linux ပေါ်မှာ အလုပ်လုပ်တာ ဖြစ်ပြီး Linux ကို အစားမထိုးပါဘူး။",
+  "back": "ROS is a set of tools and libraries, plus an agreed-upon way for programs to talk to each other. It runs on Linux and does not replace Linux."
+ },
+ "l0/ros:lines.1": {
+  "status": "pass-alt",
+  "en": "ROS 1 needed one central program, roscore, so the others could find each other. ROS 2 programs find each other directly (DDS), so there is no single program whose crash stops everything.",
+  "my": "ROS 1 မှာ ပရိုဂရမ်တွေ အချင်းချင်း ရှာတွေ့ဖို့ roscore ဆိုတဲ့ ဗဟို ပရိုဂရမ် တစ်ခု လိုအပ်ပါတယ်။ ROS 2 ပရိုဂရမ်တွေကတော့ (DDS) သုံးပြီး တိုက်ရိုက် ရှာဖွေနိုင်တဲ့အတွက် ပရိုဂရမ် တစ်ခု ပျက်ရုံနဲ့ အားလုံး ရပ်သွားတာမျိုး မရှိပါဘူး။",
+  "back": "In ROS 1, a central program called roscore is needed for programs to find each other. ROS 2 programs can find each other directly using (DDS), so there is no case where everything stops just because one program fails."
+ },
+ "l0/ros:lines.2": {
+  "status": "pass-alt",
+  "en": "Each release is a distribution with a name. LTS releases get fixes for 5 years, the others for about a year and a half. This app uses Humble, the version the example repos use; the ideas are the same on Jazzy.",
+  "my": "ထွက်ရှိတဲ့ ဗားရှင်း တစ်ခုစီဟာ နာမည်ပါတဲ့ distribution တစ်ခု ဖြစ်ပါတယ်။ LTS ဗားရှင်းတွေက 5 နှစ်အထိ ပြင်ဆင်ချက်တွေ ရပြီး တခြား ဗားရှင်းတွေကတော့ တစ်နှစ်ခွဲလောက်ပဲ ရပါတယ်။ ဒီ app မှာ နမူနာ repo တွေ သုံးတဲ့ ဗားရှင်း Humble ကို သုံးထားပါတယ်။ Jazzy မှာလည်း အယူအဆတွေက အတူတူပါပဲ။",
+  "back": "Each release is a distribution that has a name. LTS versions get fixes for up to 5 years, while the other versions get them for only about a year and a half. This app uses the version Humble, which the example repos use. In Jazzy, the ideas are the same."
+ },
+ "l0/ros:lts": {
+  "status": "pass-alt",
+  "en": "LTS",
+  "my": "LTS",
+  "back": "LTS"
+ },
+ "l0/ros:none": {
+  "status": "pass-alt",
+  "en": "none",
+  "my": "မရှိပါ",
+  "back": "None"
+ },
+ "l0/ros:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet.",
+  "my": "မရသေးပါဘူး။",
+  "back": "Not yet."
+ },
+ "l0/ros:ros1": {
+  "status": "pass-alt",
+  "en": "ROS 1",
+  "my": "ROS 1",
+  "back": "ROS 1"
+ },
+ "l0/ros:solved": {
+  "status": "pass-alt",
+  "en": "Solved: May 2027. After that, move to Jazzy or Lyrical.",
+  "my": "ဖြေရှင်းပြီး- 2027 ခုနှစ် မေလ။ အဲဒီနောက်ပိုင်းမှာ Jazzy ဒါမှမဟုတ် Lyrical ကို ပြောင်းပါ။",
+  "back": "Solved - May 2027. After that, switch to Jazzy or Lyrical."
+ },
+ "l0/ros:supported": {
+  "status": "pass-alt",
+  "en": "getting fixes",
+  "my": "ပြင်ဆင်ချက်များ ရရှိနေဆဲ",
+  "back": "Still receiving fixes"
+ },
+ "l0/ros:title": {
+  "status": "pass-alt",
+  "en": "What ROS is, and which version",
+  "my": "ROS ဆိုတာ ဘာလဲ၊ ဘယ် version ကို သုံးမလဲ",
+  "back": "What ROS is, and which version to use"
+ },
+ "l0/ros:today": {
+  "status": "pass-alt",
+  "en": "today",
+  "my": "ယနေ့",
+  "back": "Today"
+ },
+ "l0/ros:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရများ",
+  "back": "Glossary"
  },
  "l0/sense:answers.five": {
   "status": "pass-alt",
@@ -1787,11 +2087,71 @@
   "my": "ဟုတ်ပါတယ်- 5 m က အကန့်အသတ်ဖြစ်တဲ့ 3.5 m ထက် ကျော်လွန်နေတဲ့အတွက် ဆင်ဆာ က မမြင်နိုင်တော့ပါဘူး။",
   "back": "Correct: because 5 m is beyond the limit of 3.5 m, the sensor can no longer see it."
  },
+ "l0/simpick:answers.gazebo": {
+  "status": "pass-alt",
+  "en": "Gazebo",
+  "my": "Gazebo",
+  "back": "Gazebo"
+ },
+ "l0/simpick:answers.isaac": {
+  "status": "pass-alt",
+  "en": "Isaac Sim",
+  "my": "Isaac Sim",
+  "back": "Isaac Sim"
+ },
+ "l0/simpick:answers.mvsim": {
+  "status": "pass-alt",
+  "en": "mvsim",
+  "my": "mvsim",
+  "back": "mvsim"
+ },
+ "l0/simpick:check": {
+  "status": "pass-alt",
+  "en": "Check: your laptop has no graphics card and you want a distance sensor. Where do you start?",
+  "my": "စစ်ကြည့်- သင့် လက်ပ်တော့ မှာ graphics card မပါဘူး၊ ပြီးတော့ အကွာအဝေး ဆင်ဆာ ကိုလည်း သုံးချင်တယ်။ ဘယ်ကနေ စတင်မလဲ။",
+  "back": "Check: your laptop has no graphics card, and you also want to use a distance sensor. Where do you start?"
+ },
+ "l0/simpick:checked": {
+  "status": "pass-alt",
+  "en": "Facts checked against each tool's own pages on 2026-11-23.",
+  "my": "2026-11-23 မှာ tool တစ်ခုချင်းစီရဲ့ page တွေက အချက်အလက်တွေနဲ့ တိုက်ဆိုင်စစ်ဆေးထားတာ ဖြစ်ပါတယ်။",
+  "back": "On 2026-11-23 it was cross-checked against the information on each tool's page."
+ },
+ "l0/simpick:dim.2D": {
+  "status": "pass-alt",
+  "en": "2D",
+  "my": "2D",
+  "back": "2D"
+ },
+ "l0/simpick:dim.3D": {
+  "status": "pass-alt",
+  "en": "3D",
+  "my": "3D",
+  "back": "3D"
+ },
+ "l0/simpick:dim.none": {
+  "status": "pass-alt",
+  "en": "no world",
+  "my": "ကမ္ဘာ မရှိ",
+  "back": "No world"
+ },
+ "l0/simpick:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "graphics card",
+  "my": "graphics card",
+  "back": "graphics card"
+ },
  "l0/simpick:glossary.0.1": {
   "status": "pass-alt",
   "en": "a chip that draws 3D pictures fast; laptops without one draw 3D slowly or not at all",
   "my": "3D ပုံတွေကို မြန်မြန် ဆွဲပေးတဲ့ chip၊ မပါတဲ့ လက်ပ်တော့တွေက 3D ကို နှေးနှေး ဆွဲတယ် ဒါမှမဟုတ် လုံးဝ မဆွဲနိုင်ဘူး",
   "back": "A chip that draws 3D images quickly; laptops without it draw 3D slowly or cannot draw it at all"
+ },
+ "l0/simpick:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "physics",
+  "my": "physics",
+  "back": "physics"
  },
  "l0/simpick:glossary.1.1": {
   "status": "pass-alt",
@@ -1799,11 +2159,281 @@
   "my": "အလေးချိန်၊ ပွတ်တိုက်မှုနဲ့ ပြုတ်ကျတာတွေကို ဆင်မျူလေတာက တွက်ပေးတာ",
   "back": "What the simulator calculates for weight, friction, and falling"
  },
+ "l0/simpick:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: there is a ladder of simulators, and you only need the first step that fits your computer.",
+  "my": "သင် သင်ယူရမှာက- ဆင်မျူလေတာ တွေမှာ အဆင့်ဆင့် ရှိပြီး သင့် ကွန်ပျူတာ နဲ့ ကိုက်ညီမယ့် ပထမဆုံး အဆင့်ကိုပဲ လိုအပ်တာ ဖြစ်ပါတယ်။",
+  "back": "What you will learn: simulators come in levels, and you only need the first level that fits your computer."
+ },
+ "l0/simpick:mascot": {
+  "status": "pass-alt",
+  "en": "the robot",
+  "my": "စက်ရုပ်",
+  "back": "robot"
+ },
+ "l0/simpick:mentionOnly": {
+  "status": "pass-alt",
+  "en": "mention only",
+  "my": "အမည်ဖော်ပြရုံသာ",
+  "back": "Name only"
+ },
+ "l0/simpick:no": {
+  "status": "pass-alt",
+  "en": "no",
+  "my": "မဟုတ်ပါ",
+  "back": "No"
+ },
+ "l0/simpick:others": {
+  "status": "pass-alt",
+  "en": "Other 2D simulators: Stage and Flatland (not checked here).",
+  "my": "တခြား 2D ဆင်မျူလေတာတွေ- Stage နဲ့ Flatland (ဒီမှာ မစစ်ထားပါဘူး)။",
+  "back": "Other 2D simulators: Stage and Flatland (not checked here)."
+ },
+ "l0/simpick:q.gpu": {
+  "status": "pass-alt",
+  "en": "Does your computer have an NVIDIA or other separate graphics card?",
+  "my": "သင့် ကွန်ပျူတာ မှာ NVIDIA ဒါမှမဟုတ် အခြား graphics card သီးသန့် ပါသလား။",
+  "back": "Does your computer have an NVIDIA or other dedicated graphics card?"
+ },
+ "l0/simpick:q.physics": {
+  "status": "pass-alt",
+  "en": "Do you need physics (weight, friction, falling)?",
+  "my": "ရူပဗေဒ (အလေးချိန်၊ ပွတ်တိုက်မှု၊ ပြုတ်ကျမှု) တွေ လိုအပ်သလား။",
+  "back": "Do you need physics (weight, friction, falling)?"
+ },
+ "l0/simpick:q.sensor": {
+  "status": "pass-alt",
+  "en": "Do you want to practise with a distance sensor (walls, maps)?",
+  "my": "အကွာအဝေး ဆင်ဆာ (နံရံတွေ၊ မြေပုံတွေ) နဲ့ လေ့ကျင့်ချင်သလား။",
+  "back": "Want to practice with a distance sensor (walls, maps)?"
+ },
+ "l0/simpick:right": {
+  "status": "pass-alt",
+  "en": "Yes: a light 2D simulator with a distance sensor, no graphics card needed.",
+  "my": "ဟုတ်ပါတယ် - အကွာအဝေး ဆင်ဆာ ပါတဲ့ ပေါ့ပါးတဲ့ 2D ဆင်မျူလေတာ ဖြစ်ပြီး graphics card မလိုပါဘူး။",
+  "back": "Yes - it is a lightweight 2D simulator with a distance sensor and needs no graphics card."
+ },
+ "l0/simpick:rows.fake.learn": {
+  "status": "pass-alt",
+  "en": "Speed commands, where the robot thinks it is, RViz.",
+  "my": "အမြန်နှုန်း အမိန့်တွေ၊ စက်ရုပ်က ကိုယ့်ကိုယ်ကို ဘယ်မှာ ရှိတယ်လို့ ထင်သလဲ၊ RViz။",
+  "back": "Speed commands, where the robot thinks it is, RViz."
+ },
+ "l0/simpick:rows.fake.name": {
+  "status": "pass-alt",
+  "en": "TurtleBot3 fake node + RViz",
+  "my": "TurtleBot3 fake node + RViz",
+  "back": "TurtleBot3 fake node + RViz"
+ },
+ "l0/simpick:rows.fake.what": {
+  "status": "pass-alt",
+  "en": "The TurtleBot3 without a world: it moves, but has no sensors.",
+  "my": "ကမ္ဘာ မရှိတဲ့ TurtleBot3- လှုပ်ရှားနိုင်ပေမဲ့ ဆင်ဆာ တွေ မပါပါဘူး။",
+  "back": "TurtleBot3 with no world: it can move but has no sensors."
+ },
+ "l0/simpick:rows.gazebo.learn": {
+  "status": "pass-alt",
+  "en": "Physics, 3D sensors, the full robot.",
+  "my": "Physics၊ 3D ဆင်ဆာ များ၊ စက်ရုပ် တစ်ခုလုံး။",
+  "back": "Physics, 3D sensors, the whole robot."
+ },
+ "l0/simpick:rows.gazebo.name": {
+  "status": "pass-alt",
+  "en": "Gazebo",
+  "my": "Gazebo",
+  "back": "Gazebo"
+ },
+ "l0/simpick:rows.gazebo.what": {
+  "status": "pass-alt",
+  "en": "The usual 3D simulator with physics and the TurtleBot3 worlds. On Humble the TurtleBot3 packages use Gazebo Classic (support ended January 2025); on Jazzy, the new Gazebo. Webots is another free 3D option with a TurtleBot3 model.",
+  "my": "physics နဲ့ TurtleBot3 ကမ္ဘာ တွေပါတဲ့ ပုံမှန်သုံးနေကျ 3D ဆင်မျူလေတာ ဖြစ်ပါတယ်။ Humble မှာတော့ TurtleBot3 package တွေက Gazebo Classic (ပံ့ပိုးမှုက 2025 ခုနှစ် ဇန်နဝါရီလမှာ ကုန်ဆုံးပါတယ်) ကို သုံးပြီး Jazzy မှာတော့ Gazebo အသစ်ကို သုံးပါတယ်။ Webots ကလည်း TurtleBot3 မော်ဒယ်ပါတဲ့ အခြား အခမဲ့ 3D ရွေးချယ်စရာ တစ်ခု ဖြစ်ပါတယ်။",
+  "back": "It is the commonly used standard 3D simulator with physics and TurtleBot3 worlds. On Humble, the TurtleBot3 packages use Gazebo Classic (support ended in January 2025), and on Jazzy they use the new Gazebo. Webots is also another free 3D option that has a TurtleBot3 model."
+ },
+ "l0/simpick:rows.isaac.learn": {
+  "status": "pass-alt",
+  "en": "Not needed for this course.",
+  "my": "ဒီသင်တန်းအတွက် မလိုပါဘူး။",
+  "back": "Not needed for this course."
+ },
+ "l0/simpick:rows.isaac.name": {
+  "status": "pass-alt",
+  "en": "Isaac Sim",
+  "my": "Isaac Sim",
+  "back": "Isaac Sim"
+ },
+ "l0/simpick:rows.isaac.what": {
+  "status": "pass-alt",
+  "en": "Photoreal 3D for robot learning; needs an NVIDIA RTX graphics card (version 6.0.1 asks for at least an RTX 4080 with 16 GB).",
+  "my": "စက်ရုပ် လေ့လာမှုအတွက် လက်တွေ့ကျတဲ့ 3D ဖြစ်ပါတယ်၊ NVIDIA RTX graphics card (ဗားရှင်း 6.0.1 အတွက် အနည်းဆုံး 16 GB ရှိတဲ့ RTX 4080 လိုအပ်ပါတယ်) လိုအပ်ပါတယ်။",
+  "back": "It is a realistic 3D for robot learning and needs an NVIDIA RTX graphics card (for version 6.0.1, an RTX 4080 with at least 16 GB is required)."
+ },
+ "l0/simpick:rows.mvsim.learn": {
+  "status": "pass-alt",
+  "en": "Distance sensor, wall following, maps.",
+  "my": "အကွာအဝေး ဆင်ဆာ၊ နံရံ အတိုင်း လိုက်သွားတာ၊ မြေပုံတွေ။",
+  "back": "Distance sensor, following along a wall, maps."
+ },
+ "l0/simpick:rows.mvsim.name": {
+  "status": "pass-alt",
+  "en": "mvsim",
+  "my": "mvsim",
+  "back": "mvsim"
+ },
+ "l0/simpick:rows.mvsim.what": {
+  "status": "pass-alt",
+  "en": "A light 2D-style simulator with walls and distance sensors; a ready package for ROS 2 Humble.",
+  "my": "နံရံ တွေနဲ့ အကွာအဝေး ဆင်ဆာ တွေပါတဲ့ ပေါ့ပါးတဲ့ 2D ပုံစံ ဆင်မျူလေတာ ဖြစ်ပါတယ်၊ ROS 2 Humble အတွက် အဆင်သင့် package ဖြစ်ပါတယ်။",
+  "back": "It is a lightweight 2D-style simulator with walls and distance sensors; it is a ready-made package for ROS 2 Humble."
+ },
+ "l0/simpick:rows.site.learn": {
+  "status": "pass-alt",
+  "en": "Move, sense, think, act.",
+  "my": "လှုပ်ရှားခြင်း၊ အာရုံခံခြင်း၊ စဉ်းစားခြင်း၊ လုပ်ဆောင်ခြင်း။",
+  "back": "Moving, sensing, thinking, acting."
+ },
+ "l0/simpick:rows.site.name": {
+  "status": "pass-alt",
+  "en": "This site",
+  "my": "ဒီဆိုဒ်",
+  "back": "This site"
+ },
+ "l0/simpick:rows.site.what": {
+  "status": "pass-alt",
+  "en": "Nothing to install.",
+  "my": "ဘာမှ install လုပ်ဖို့ မလိုပါဘူး။",
+  "back": "Nothing needs to be installed."
+ },
+ "l0/simpick:rows.turtlesim.learn": {
+  "status": "pass-alt",
+  "en": "Programs talking to each other, driving.",
+  "my": "ပရိုဂရမ် အချင်းချင်း စကားပြောခြင်း၊ မောင်းနှင်ခြင်း။",
+  "back": "Programs talking to each other, driving."
+ },
+ "l0/simpick:rows.turtlesim.name": {
+  "status": "pass-alt",
+  "en": "turtlesim",
+  "my": "turtlesim",
+  "back": "turtlesim"
+ },
+ "l0/simpick:rows.turtlesim.what": {
+  "status": "pass-alt",
+  "en": "A 2D turtle used by the official ROS 2 beginner tutorials; often already installed with ROS 2.",
+  "my": "ROS 2 တရားဝင် အခြေခံ သင်ခန်းစာတွေမှာ သုံးတဲ့ 2D လိပ်ကလေး ဖြစ်ပါတယ်၊ ROS 2 နဲ့အတူ install လုပ်ပြီးသား ဖြစ်နေတတ်ပါတယ်။",
+  "back": "It is the little 2D turtle used in the official ROS 2 basic tutorials; it is often already installed together with ROS 2."
+ },
+ "l0/simpick:start": {
+  "status": "pass-alt",
+  "en": "Start here",
+  "my": "ဒီက စပါ",
+  "back": "Start here"
+ },
+ "l0/simpick:steps.0": {
+  "status": "pass-alt",
+  "en": "Many simulators exist. Think of them as a ladder: each step adds one thing to learn and asks a little more of your computer.",
+  "my": "ဆင်မျူလေတာ တွေ အများကြီး ရှိပါတယ်။ သူတို့ကို လှေကားထစ်တွေလို စဉ်းစားကြည့်ပါ- အဆင့်တစ်ခုစီတိုင်းမှာ သင်ယူစရာ တစ်ခုစီ တိုးလာပြီး ကွန်ပျူတာ ရဲ့ လုပ်ဆောင်နိုင်စွမ်းကိုလည်း ပိုတောင်းဆိုလာပါလိမ့်မယ်။",
+  "back": "There are many simulators. Think of them like steps of a staircase: each step adds one more thing to learn and also demands more of the computer's capability."
+ },
+ "l0/simpick:steps.1": {
+  "status": "pass-alt",
+  "en": "Answer the three questions below and one step lights up. Start there; the others can wait.",
+  "my": "အောက်က မေးခွန်း 3 ခုကို ဖြေကြည့်ရင် အဆင့်တစ်ခုက လင်းလာပါလိမ့်မယ်။ အဲဒီကနေ စတင်ပါ၊ ကျန်တာတွေကို နောက်မှ လုပ်လို့ ရပါတယ်။",
+  "back": "If you answer the 3 questions below, a level will become bright. Start from there; you can do the rest later."
+ },
+ "l0/simpick:steps.2": {
+  "status": "pass-alt",
+  "en": "From the projects behind this course: on a Windows laptop running Linux inside it (WSL2) with no graphics card, the 3D window of Gazebo Classic stayed black, while the 2D tools worked. So: start in 2D.",
+  "my": "ဒီသင်ခန်းစာကို အခြေခံထားတဲ့ ပရောဂျက်တွေမှာ တွေ့ခဲ့တာက- graphics card မပါတဲ့ Windows လက်ပ်တော့ ထဲမှာ Linux (WSL2) ကို run တဲ့အခါ Gazebo Classic ရဲ့ 3D window က မည်းနေခဲ့ပြီး 2D ကိရိယာတွေကတော့ အလုပ်လုပ်ပါတယ်။ ဒါကြောင့် 2D နဲ့ စပါ။",
+  "back": "What was found in the projects this lesson is based on: when running Linux (WSL2) on a Windows laptop without a graphics card, Gazebo Classic's 3D window was black, while the 2D tools worked. So start with 2D."
+ },
+ "l0/simpick:steps.3": {
+  "status": "pass-alt",
+  "en": "Isaac Sim is only mentioned here: photoreal 3D for robot learning, and it needs a strong NVIDIA graphics card. This course does not need it.",
+  "my": "Isaac Sim ကိုတော့ ဒီမှာ အမည်ပဲ ဖော်ပြထားပါတယ်- အဲဒါက စက်ရုပ် လေ့လာမှုအတွက် လက်တွေ့ကျတဲ့ 3D ဖြစ်ပြီး အားကောင်းတဲ့ NVIDIA graphics card လိုအပ်ပါတယ်။ ဒီသင်တန်းအတွက်တော့ အဲဒါ မလိုပါဘူး။",
+  "back": "Isaac Sim is only mentioned by name here: it is a realistic 3D for robot learning and needs a powerful NVIDIA graphics card. It is not needed for this course."
+ },
+ "l0/simpick:title": {
+  "status": "pass-alt",
+  "en": "Which simulator to start with",
+  "my": "ဘယ် ဆင်မျူလေတာ နဲ့ စတင်မလဲ",
+  "back": "Which simulator should you start with?"
+ },
+ "l0/simpick:words": {
+  "status": "pass-alt",
+  "en": "Words you met",
+  "my": "တွေ့ခဲ့ရတဲ့ စကားလုံးများ",
+  "back": "Words encountered"
+ },
  "l0/simpick:wrong": {
   "status": "pass-alt",
   "en": "Not quite: answer the three questions and see which step lights up.",
   "my": "မမှန်သေးပါဘူး- မေးခွန်း 3 ခုကို ဖြေပြီး ဘယ်အဆင့် မီးလင်းလာလဲ ကြည့်ပါ။",
   "back": "Not correct yet: answer the 3 questions and see which level lights up."
+ },
+ "l0/simpick:yes": {
+  "status": "pass-alt",
+  "en": "yes",
+  "my": "ဟုတ်ကဲ့",
+  "back": "Yes"
+ },
+ "l0/simwhat:answers.empty": {
+  "status": "pass-alt",
+  "en": "nothing: an empty view",
+  "my": "ဘာမှမရှိ - ဗလာ မြင်ကွင်း",
+  "back": "Nothing - an empty view"
+ },
+ "l0/simwhat:answers.gone": {
+  "status": "pass-alt",
+  "en": "the wall has left the world",
+  "my": "ကမ္ဘာထဲကနေ နံရံ ပျောက်သွားတယ်",
+  "back": "The wall disappears from the world"
+ },
+ "l0/simwhat:answers.wall": {
+  "status": "pass-alt",
+  "en": "the wall, as before",
+  "my": "အရင်အတိုင်း နံရံ",
+  "back": "The wall as before"
+ },
+ "l0/simwhat:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: switch the sensor off",
+  "my": "ဖျက်ကြည့် - ဆင်ဆာ ကို ပိတ်လိုက်ပါ",
+  "back": "Try breaking it - turn off the sensor"
+ },
+ "l0/simwhat:brokenNote": {
+  "status": "pass-alt",
+  "en": "The wall is still in the world, but nothing reaches the view: the window can only show what the robot is told.",
+  "my": "နံရံ က ကမ္ဘာထဲမှာ ရှိနေသေးပေမဲ့ မြင်ကွင်းထဲကို ဘာမှ ရောက်မလာပါဘူး - ဒီ window က စက်ရုပ် ဆီ ရောက်လာတဲ့ အချက်အလက်ကိုပဲ ပြနိုင်လို့ပါ။",
+  "back": "The wall is still in the world, but nothing reaches the view - because this window can only show the information that reaches the robot."
+ },
+ "l0/simwhat:check": {
+  "status": "pass-alt",
+  "en": "Check: the sensor is off. What does the view window show?",
+  "my": "စစ်ကြည့် - ဆင်ဆာ ပိတ်ထားပါတယ်။ မြင်ကွင်း window မှာ ဘာပြမလဲ။",
+  "back": "Check - the sensor is off. What will the view window show?"
+ },
+ "l0/simwhat:dots": {
+  "status": "pass-alt",
+  "en": "Dots in the view",
+  "my": "မြင်ကွင်းထဲက အစက်အပြောက်များ",
+  "back": "Dots in the view"
+ },
+ "l0/simwhat:empty": {
+  "status": "pass-alt",
+  "en": "no sensor data",
+  "my": "ဆင်ဆာ အချက်အလက် မရှိပါ",
+  "back": "No sensor data"
+ },
+ "l0/simwhat:fixIt": {
+  "status": "pass-alt",
+  "en": "Fix it: switch the sensor on",
+  "my": "ပြင်ကြည့် - ဆင်ဆာ ကို ဖွင့်လိုက်ပါ",
+  "back": "Try fixing it - turn on the sensor"
+ },
+ "l0/simwhat:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "simulator",
+  "my": "ဆင်မျူလေတာ",
+  "back": "simulator"
  },
  "l0/simwhat:glossary.0.1": {
   "status": "pass-alt",
@@ -1811,11 +2441,119 @@
   "my": "ကွန်ပျူတာပေါ်က အတုကမ္ဘာ၊ စက်ရုပ်အတုနဲ့ ဆင်ဆာအတုတွေ ပါတယ်",
   "back": "A fake world on the computer, with a fake robot and fake sensors"
  },
+ "l0/simwhat:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "2D / 3D",
+  "my": "2D / 3D",
+  "back": "2D / 3D"
+ },
+ "l0/simwhat:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "flat top view / height, weight and things that fall",
+  "my": "အပေါ်စီးကနေ ပြန့်ပြန့်လေး မြင်ရတာ / အမြင့်၊ အလေးချိန်နဲ့ ပြုတ်ကျတတ်တဲ့ အရာဝတ္ထုများ",
+  "back": "Seen flat from above / height, weight and objects that tend to fall"
+ },
+ "l0/simwhat:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "RViz",
+  "my": "RViz",
+  "back": "RViz"
+ },
  "l0/simwhat:glossary.2.1": {
   "status": "pass-alt",
   "en": "a window that shows what the robot believes; it is not a simulator",
   "my": "စက်ရုပ်က ဘာကို ယုံကြည်နေလဲ ပြတဲ့ window၊ ဆင်မျူလေတာ မဟုတ်ဘူး",
   "back": "A window showing what the robot believes, not the simulator"
+ },
+ "l0/simwhat:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: a simulator is a pretend world, and the window that shows the robot's view is something else.",
+  "my": "သင်ယူရမှာက- ဆင်မျူလေတာ ဆိုတာ အတုကမ္ဘာ တစ်ခု ဖြစ်ပြီး စက်ရုပ်ရဲ့ မြင်ကွင်းကို ပြတဲ့ window က သီးခြား တခြားအရာ ဖြစ်ပါတယ်။",
+  "back": "What you learn: a simulator is a fake world, and the window that shows the robot's view is a separate, different thing."
+ },
+ "l0/simwhat:mascot": {
+  "status": "pass-alt",
+  "en": "the robot",
+  "my": "စက်ရုပ်",
+  "back": "robot"
+ },
+ "l0/simwhat:no": {
+  "status": "pass-alt",
+  "en": "Not quite: switch the sensor off and compare the left and right sides.",
+  "my": "သိပ်မမှန်သေးပါဘူး - ဆင်ဆာ ကို ပိတ်ပြီး ဘယ်ဘက်နဲ့ ညာဘက်ကို နှိုင်းယှဉ်ကြည့်ပါ။",
+  "back": "Not quite right yet - turn off the sensor and compare the left and right sides."
+ },
+ "l0/simwhat:steps.0": {
+  "status": "pass-alt",
+  "en": "A simulator is a pretend world on your computer: a pretend robot, pretend walls and pretend sensor numbers. The program that drives the pretend robot can later drive the real one.",
+  "my": "ဆင်မျူလေတာ ဆိုတာ ကွန်ပျူတာ ပေါ်က ဖန်တီးထားတဲ့ ကမ္ဘာတစ်ခု ဖြစ်ပါတယ် - ဖန်တီးထားတဲ့ စက်ရုပ်၊ ဖန်တီးထားတဲ့ နံရံ တွေနဲ့ ဖန်တီးထားတဲ့ ဆင်ဆာ ဂဏန်းတွေ ပါဝင်ပါတယ်။ ဖန်တီးထားတဲ့ စက်ရုပ် ကို မောင်းနှင်တဲ့ ပရိုဂရမ် က နောက်ပိုင်းမှာ တကယ့် စက်ရုပ် ကိုလည်း မောင်းနှင်နိုင်ပါတယ်။",
+  "back": "A simulator is a created world on a computer - it contains a created robot, created walls and created sensor numbers. The program that drives the created robot can later also drive a real robot."
+ },
+ "l0/simwhat:steps.1": {
+  "status": "pass-alt",
+  "en": "Why people start there: it is free, nothing breaks, the same test runs the same way every time, and one click puts everything back. This site has been a tiny 2D simulator all along.",
+  "my": "ဒါကို ဘာလို့ အရင်သုံးကြတာလဲဆိုရင် အလကားရတယ်၊ ဘာမှမပျက်စီးဘူး၊ စမ်းသပ်မှု တစ်ခုကို လုပ်တိုင်း အမြဲတမ်း ပုံစံတူ ထွက်တယ်၊ ပြီးတော့ ကလစ် တစ်ချက်နှိပ်ရုံနဲ့ အားလုံးကို မူလအတိုင်း ပြန်လုပ်လို့ရလို့ပါ။ ဒီ website ကလည်း အစကတည်းက 2D ဆင်မျူလေတာ အသေးလေး တစ်ခု ဖြစ်ပါတယ်။",
+  "back": "The reason people use it first is that it is free, nothing gets broken, every time you run an experiment it comes out identical, and with a single click everything can be reset to the original. This website too is, from the start, a small 2D simulator."
+ },
+ "l0/simwhat:steps.2": {
+  "status": "pass-alt",
+  "en": "2D means a flat top view, like these pages. 3D adds height, weight and friction: things can tip over and fall.",
+  "my": "2D ဆိုတာ ဒီစာမျက်နှာတွေလိုမျိုး အပေါ်စီးကနေ ပြန့်ပြန့်လေး မြင်ရတာ ဖြစ်ပါတယ်။ 3D ကတော့ အမြင့်၊ အလေးချိန်နဲ့ ပွတ်တိုက်မှုတွေ ပါလာပြီး အရာဝတ္ထုတွေ မှောက်တာ၊ ပြုတ်ကျတာတွေ ဖြစ်နိုင်ပါတယ်။",
+  "back": "2D means seeing it flat from above, like these pages. 3D brings in height, weight and friction, and objects can tip over or fall off."
+ },
+ "l0/simwhat:steps.3": {
+  "status": "pass-alt",
+  "en": "The common mix-up: RViz is not a simulator. It is a window that shows what the robot believes: its sensor dots, its map, where it thinks it is. It works the same with a simulator or with a real robot.",
+  "my": "လူအများ ရောထွေးတတ်တာက- RViz ဟာ ဆင်မျူလေတာ မဟုတ်ပါဘူး။ စက်ရုပ်က ဘာကို ယုံကြည်နေလဲ ပြတဲ့ window တစ်ခု ဖြစ်ပါတယ်- သူ့ ဆင်ဆာ အစက်တွေ၊ သူ့ မြေပုံ၊ သူ ဘယ်မှာ ရှိတယ်လို့ ထင်သလဲ ဆိုတာတွေပါ။ ဆင်မျူလေတာ နဲ့ သုံးသုံး၊ တကယ့် စက်ရုပ် နဲ့ သုံးသုံး အတူတူပဲ အလုပ်လုပ်ပါတယ်။",
+  "back": "What people commonly confuse: RViz is not a simulator. It is a window that shows what the robot believes: its sensor points, its map, where it thinks it is. It works the same whether you use it with a simulator or with a real robot."
+ },
+ "l0/simwhat:steps.4": {
+  "status": "pass-alt",
+  "en": "Move the wall on the left: the dots on the right follow. Then switch the sensor off.",
+  "my": "ဘယ်ဘက်က နံရံ ကို ရွှေ့ကြည့်ပါ - ညာဘက်က အစက်တွေ လိုက်ပါလာပါလိမ့်မယ်။ ပြီးရင် ဆင်ဆာ ကို ပိတ်လိုက်ပါ။",
+  "back": "Try moving the wall on the left - the dots on the right will follow along. Then turn off the sensor."
+ },
+ "l0/simwhat:title": {
+  "status": "pass-alt",
+  "en": "A practice world: what a simulator is",
+  "my": "လေ့ကျင့်ဖို့ ကမ္ဘာ - ဆင်မျူလေတာ ဆိုတာ ဘာလဲ",
+  "back": "A world to practice in - what is a simulator?"
+ },
+ "l0/simwhat:viewTitle": {
+  "status": "pass-alt",
+  "en": "The robot's view (RViz)",
+  "my": "စက်ရုပ် ရဲ့ မြင်ကွင်း (RViz)",
+  "back": "Robot's view (RViz)"
+ },
+ "l0/simwhat:wall": {
+  "status": "pass-alt",
+  "en": "Wall in front, in the world (m)",
+  "my": "ကမ္ဘာထဲက ရှေ့မှာရှိတဲ့ နံရံ (m)",
+  "back": "Wall ahead in the world (m)"
+ },
+ "l0/simwhat:words": {
+  "status": "pass-alt",
+  "en": "Words you met",
+  "my": "တွေ့ခဲ့ရတဲ့ စကားလုံးများ",
+  "back": "Words encountered"
+ },
+ "l0/simwhat:worldTitle": {
+  "status": "pass-alt",
+  "en": "The world (simulator)",
+  "my": "ကမ္ဘာ (ဆင်မျူလေတာ)",
+  "back": "World (simulator)"
+ },
+ "l0/simwhat:worldWall": {
+  "status": "pass-alt",
+  "en": "Wall in the world",
+  "my": "ကမ္ဘာထဲက နံရံ",
+  "back": "Wall in the world"
+ },
+ "l0/simwhat:yes": {
+  "status": "pass-alt",
+  "en": "Yes: the world did not change, but the robot gets no numbers, so the view is empty.",
+  "my": "ဟုတ်ပါတယ် - ကမ္ဘာ က ပြောင်းလဲမသွားပေမဲ့ စက်ရုပ် ဆီကို ဂဏန်းတွေ ရောက်မလာတော့တာကြောင့် မြင်ကွင်း က ဗလာ ဖြစ်သွားတာပါ။",
+  "back": "Yes - the world did not change, but since numbers no longer reach the robot, the view became empty."
  },
  "l0/think:answers.earlier": {
   "status": "pass-alt",
@@ -1985,17 +2723,185 @@
   "my": "ဟုတ်ပါတယ် - နံရံ က 0.9 m ထက် နည်းသွားတာနဲ့ စည်းကမ်းချက်က စတင် အလုပ်လုပ်တာကြောင့် ပိုစောစော ရပ် သွားတာ ဖြစ်ပါတယ်။",
   "back": "Yes - as soon as the wall is less than 0.9 m, the rule starts working, so it stops earlier."
  },
+ "l0/tools:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: pick the right tool for each job.",
+  "my": "စိန်ခေါ်မှု: အလုပ်တစ်ခုချင်းစီအတွက် မှန်ကန်တဲ့ ကိရိယာကို ရွေးချယ်ပါ။",
+  "back": "Challenge: choose the correct tool for each job."
+ },
+ "l0/tools:fixIt": {
+  "status": "pass-alt",
+  "en": "Fix it: put every layer back",
+  "my": "ပြင်ကြည့်: အလွှာအားလုံးကို ပြန်ထည့်ဖို့",
+  "back": "Fix it: to put all the layers back"
+ },
+ "l0/tools:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "Linux",
+  "my": "Linux",
+  "back": "Linux"
+ },
+ "l0/tools:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "a free operating system; Ubuntu is one version of it",
+  "my": "အခမဲ့သုံးနိုင်တဲ့ operating system တစ်ခု ဖြစ်ပြီး Ubuntu ကတော့ အဲဒီထဲက ဗားရှင်းတစ်ခု",
+  "back": "A freely usable operating system, of which Ubuntu is one version"
+ },
+ "l0/tools:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "terminal",
+  "my": "terminal",
+  "back": "terminal"
+ },
+ "l0/tools:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "a window where you type commands instead of clicking",
+  "my": "click နှိပ်မယ့်အစား command တွေရိုက်ရတဲ့ window တစ်ခု",
+  "back": "A window where you type commands instead of clicking"
+ },
+ "l0/tools:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "compiled",
+  "my": "compiled",
+  "back": "compiled"
+ },
  "l0/tools:glossary.2.1": {
   "status": "pass-alt",
   "en": "turned into machine code before it runs (C++), instead of read line by line (Python)",
   "my": "run မလုပ်ခင် စက်ကုဒ် အဖြစ် ပြောင်းထားတာ (C++)၊ တစ်ကြောင်းချင်း ဖတ်တာ (Python) မဟုတ်ဘူး",
   "back": "Converted into machine code before run (C++), not read line by line (Python)"
  },
+ "l0/tools:jobs.connect": {
+  "status": "pass-alt",
+  "en": "Let the LiDAR program send scans to the map program",
+  "my": "LiDAR ပရိုဂရမ်ကနေ scan တွေကို မြေပုံ ပရိုဂရမ်ဆီ ပို့ပေးဖို့",
+  "back": "To send scans from the LiDAR program to the map program"
+ },
+ "l0/tools:jobs.fast": {
+  "status": "pass-alt",
+  "en": "A motor loop that must answer on time, every time",
+  "my": "အမြဲတမ်း အချိန်တိကျစွာ တုံ့ပြန်ရမယ့် မော်တာ loop",
+  "back": "A motor loop that must always respond with precise timing"
+ },
+ "l0/tools:jobs.idea": {
+  "status": "pass-alt",
+  "en": "Try a new idea for the patrol in ten minutes",
+  "my": "ကင်းလှည့်ဖို့ အိုင်ဒီယာအသစ်ကို 10 မိနစ်အတွင်း စမ်းကြည့်ဖို့",
+  "back": "To try a new idea for patrolling within 10 minutes"
+ },
+ "l0/tools:jobs.install": {
+  "status": "pass-alt",
+  "en": "Install a package and start the simulator",
+  "my": "package တစ်ခုကို install လုပ်ပြီး ဆင်မျူလေတာကို စတင်ဖို့",
+  "back": "To install a package and start the simulator"
+ },
  "l0/tools:learn": {
   "status": "pass-alt",
   "en": "You will learn: the four tools under a robot program, and which job each one is for.",
   "my": "သင်ယူရမှာက- စက်ရုပ် ပရိုဂရမ် တစ်ခုရဲ့ အောက်က tool 4 ခုနဲ့ တစ်ခုချင်းစီ ဘာအလုပ်အတွက်လဲ ဆိုတာပါ။",
   "back": "What you learn: the 4 tools under a robot program, and what job each one is for."
+ },
+ "l0/tools:lines.0": {
+  "status": "pass-alt",
+  "en": "Each tool stands on the one below it. Linux is the ground: the robot computer and the simulator both run it.",
+  "my": "tool တစ်ခုစီဟာ သူ့အောက်က tool အပေါ်မှာ အခြေခံထားပါတယ်။ Linux ကတော့ အောက်ခြေ အုတ်မြစ် ဖြစ်ပါတယ် - စက်ရုပ် ကွန်ပျူတာ ရော ဆင်မျူလေတာ ရော နှစ်ခုလုံးကို Linux နဲ့ မောင်းနှင်ပါတယ်။",
+  "back": "Each tool is based on the tool beneath it. Linux is the foundation - both the robot computer and the simulator are run on Linux."
+ },
+ "l0/tools:lines.1": {
+  "status": "pass-alt",
+  "en": "Python is quick to write and try. C++ is compiled and gives you control over speed and timing. Most robot teams use both.",
+  "my": "Python က ရေးရတာနဲ့ စမ်းကြည့်ရတာ မြန်ဆန်ပါတယ်။ C++ ကတော့ compiled လုပ်ရပြီး အမြန်နှုန်း နဲ့ အချိန်ကို စိတ်ကြိုက် ထိန်းချုပ်နိုင်ပါတယ်။ စက်ရုပ် အဖွဲ့ တော်တော်များများကတော့ နှစ်ခုလုံးကို သုံးကြပါတယ်။",
+  "back": "Python is fast to write and to try out. C++ has to be compiled, and you can control speed and timing as you wish. Quite a lot of robot teams use both."
+ },
+ "l0/tools:lines.2": {
+  "status": "pass-alt",
+  "en": "ROS 2 is the layer that lets many programs talk. This app uses ROS 2 Humble on Ubuntu 22.04, the pair the example repos use.",
+  "my": "ROS 2 ဆိုတာ ပရိုဂရမ် အများအပြားကို အချင်းချင်း စကားပြောခွင့်ပေးတဲ့ layer ဖြစ်ပါတယ်။ ဒီ app မှာတော့ နမူနာ repository တွေမှာ သုံးတဲ့အတိုင်း Ubuntu 22.04 ပေါ်မှာ ROS 2 Humble ကို သုံးထားပါတယ်။",
+  "back": "ROS 2 is a layer that lets many programs talk to each other. In this app, ROS 2 Humble is used on Ubuntu 22.04, as used in the example repositories."
+ },
+ "l0/tools:names.cpp": {
+  "status": "pass-alt",
+  "en": "C++",
+  "my": "C++",
+  "back": "C++"
+ },
+ "l0/tools:names.linux": {
+  "status": "pass-alt",
+  "en": "Linux (Ubuntu 22.04)",
+  "my": "Linux (Ubuntu 22.04)",
+  "back": "Linux (Ubuntu 22.04)"
+ },
+ "l0/tools:names.python": {
+  "status": "pass-alt",
+  "en": "Python",
+  "my": "Python",
+  "back": "Python"
+ },
+ "l0/tools:names.ros": {
+  "status": "pass-alt",
+  "en": "ROS 2 Humble",
+  "my": "ROS 2 Humble",
+  "back": "ROS 2 Humble"
+ },
+ "l0/tools:names.terminal": {
+  "status": "pass-alt",
+  "en": "Terminal",
+  "my": "terminal",
+  "back": "terminal"
+ },
+ "l0/tools:repos": {
+  "status": "pass-alt",
+  "en": "Same robot code in both languages",
+  "my": "ဘာသာစကား နှစ်မျိုးလုံးမှာ တူညီတဲ့ စက်ရုပ် ကုဒ်",
+  "back": "Robot code that is the same in both languages"
+ },
+ "l0/tools:solved": {
+  "status": "pass-alt",
+  "en": "Solved: every job has its tool.",
+  "my": "ဖြေရှင်းပြီးပါပြီ: အလုပ်တိုင်းအတွက် ကိရိယာ ရှိသွားပါပြီ။",
+  "back": "Solved: there is now a tool for every job."
+ },
+ "l0/tools:title": {
+  "status": "pass-alt",
+  "en": "The tools and why",
+  "my": "အသုံးပြုတဲ့ tool တွေနဲ့ ဘာကြောင့် သုံးရသလဲ",
+  "back": "The tools used and why they are used"
+ },
+ "l0/tools:why.cpp": {
+  "status": "pass-alt",
+  "en": "code that must be fast and on time",
+  "my": "မြန်ဆန်ပြီး အချိန်တိကျရမယ့် ကုဒ်",
+  "back": "Code that must be fast and precisely timed"
+ },
+ "l0/tools:why.linux": {
+  "status": "pass-alt",
+  "en": "the operating system robots run",
+  "my": "စက်ရုပ် တွေ မောင်းနှင်တဲ့ operating system",
+  "back": "The operating system that drives robots"
+ },
+ "l0/tools:why.python": {
+  "status": "pass-alt",
+  "en": "write and test ideas fast",
+  "my": "အိုင်ဒီယာတွေကို မြန်မြန်ရေးပြီး စမ်းသပ်ဖို့",
+  "back": "For quickly writing and testing ideas"
+ },
+ "l0/tools:why.ros": {
+  "status": "pass-alt",
+  "en": "connects the programs",
+  "my": "ပရိုဂရမ်တွေကို ချိတ်ဆက်ပေးဖို့",
+  "back": "For connecting programs together"
+ },
+ "l0/tools:why.terminal": {
+  "status": "pass-alt",
+  "en": "type commands: install, build, run",
+  "my": "command တွေရိုက်ဖို့: install၊ build၊ run",
+  "back": "For typing commands: install, build, run"
+ },
+ "l0/tools:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရများ",
+  "back": "Glossary"
  },
  "l3/tflab:check": {
   "status": "pass",
