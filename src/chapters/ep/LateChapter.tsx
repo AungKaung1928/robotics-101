@@ -62,6 +62,7 @@ export default function LateChapter({ t }: { t: Strings }) {
         {s.lines.map((l) => <p key={l}>{l}</p>)}
         <pre className="code" aria-label="Python">
           <span className="ln">def on_msg(msg):</span>
+          <span className="ln">    global newest   <span className="cmt"># kept between calls</span></span>
           <span className="ln">    stamp = msg.header.stamp   <span className="cmt"># when it was measured</span></span>
           <span className="ln">    if now() - stamp {'>'} max_age: return   <span className="cmt"># max_age = <span className="val">{maxAge.toFixed(2)}</span></span></span>
           <span className={`ln${keepLatest ? ' on' : ''}`}>    {keepLatest ? '' : '# '}if stamp {'<'} newest: return   <span className="cmt"># stamp check</span></span>
