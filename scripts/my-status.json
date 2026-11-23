@@ -29,6 +29,24 @@
   "my": "SLAM ဒါမှမဟုတ် Nav2 ကို စောပြီး ဆွဲထားရင်- input ထက် မနောက်ကျဘဲ စတင်တဲ့ အဆင့်က မရှိသေးတဲ့ frame ဒါမှမဟုတ် topic ကို စောင့်နေပါလိမ့်မယ်။",
   "back": "If SLAM or Nav2 are dragged early: the step starting without lagging behind the input will wait for missing frames or topics."
  },
+ "core:bringup.logHead.0": {
+  "status": "pass-alt",
+  "en": "stage",
+  "my": "အဆင့်",
+  "back": "Level"
+ },
+ "core:bringup.logHead.1": {
+  "status": "pass-alt",
+  "en": "starts",
+  "my": "စတာ",
+  "back": "Starts"
+ },
+ "core:bringup.logHead.2": {
+  "status": "pass-alt",
+  "en": "gives",
+  "my": "ပေးတာ",
+  "back": "Gives"
+ },
  "core:bringup.nav2": {
   "status": "pass",
   "en": "Nav2 starts at (s)",
@@ -479,6 +497,12 @@
   "my": "10 × 10 m Gazebo ကွင်းထဲမှာ simulation လုပ်ထားတဲ့ TurtleBot3 စက်ရုပ် 1 စီး ရှိပါတယ်။ waypoint တစ်ခုစီဟာ ရွှေ့လျားစက်ရုပ်ရဲ့ အယူအဆ တစ်ခုစီ ဖြစ်ပြီး တန်ဖိုးတွေကိုတော့ အဲဒီ setup ရဲ့ ROS 2 Nav2 config ကနေ ယူထားတာ ဖြစ်ပါတယ်။",
   "back": "There is 1 TurtleBot3 robot simulated in a 10 × 10 m Gazebo area. Each waypoint is a concept for the mobile robot and the values are taken from the ROS 2 Nav2 config of that setup."
  },
+ "core:levels.difficulty": {
+  "status": "pass-alt",
+  "en": "Difficulty",
+  "my": "ခက်ခဲမှု",
+  "back": "Difficulty"
+ },
  "core:levels.ep": {
   "status": "pass",
   "en": "Engineering Practice",
@@ -514,6 +538,12 @@
   "en": "Levels",
   "my": "အဆင့်များ",
   "back": "Levels"
+ },
+ "core:levels.knows": {
+  "status": "pass-alt",
+  "en": "You already know",
+  "my": "သင် သိပြီးသား",
+  "back": "What you already know"
  },
  "core:levels.names.0": {
   "status": "pass",
@@ -594,10 +624,10 @@
   "back": "Plan"
  },
  "core:player.label": {
-  "status": "needs-human",
+  "status": "pass-alt",
   "en": "Scenario",
-  "my": "စင်္ကာရီယို",
-  "note": "blind back-translation \"Cingario\": the transliteration of scenario is not understood; kept English | 2026-11-24 redraft ဖြစ်စဉ် back \"Process\": drift again"
+  "my": "ပြကွက်",
+  "back": "Scene"
  },
  "core:player.pause": {
   "status": "pass",
@@ -612,10 +642,10 @@
   "back": "Play"
  },
  "core:player.scrub": {
-  "status": "needs-human",
+  "status": "pass-alt",
   "en": "Scenario time",
-  "my": "စင်္ကာရီယို အချိန်",
-  "note": "blind back-translation \"Cingario\": the transliteration of scenario is not understood; kept English | 2026-11-24 redraft ဖြစ်စဉ် အချိန် back \"Process time\": drift again"
+  "my": "ပြကွက် အချိန်",
+  "back": "Scene time"
  },
  "core:scan.beam": {
   "status": "pass",
@@ -1326,10 +1356,10 @@
   "back": "At 0.6 s the Wi-Fi stutters briefly. Values #6-#9 are stuck and arrive only after #10. If the robot uses each message as soon as it arrives, it uses #10 and then jumps back to the older #6: the robot's view of the world goes back into the past."
  },
  "ep/late:lines.2": {
-  "status": "needs-human",
+  "status": "pass-alt",
   "en": "Two fixes. A max age drops anything measured too long ago, but the number needs tuning. A stamp check drops anything older than the newest reading already used, and needs no tuning.",
-  "my": "ပြင်နည်း 2 ခု ရှိပါတယ်။ max age က အရမ်းကြာခဲ့ပြီ တိုင်းထားတာမှန်သမျှကို ပစ်ပါတယ်၊ ဒါပေမဲ့ နံပါတ်ကို ချိန်ညှိဖို့ လိုပါတယ်။ stamp စစ်ဆေးမှုက သုံးပြီးသား အသစ်ဆုံး တန်ဖိုးထက် ဟောင်းတာမှန်သမျှကို ပစ်ပါတယ်၊ ချိန်ညှိဖို့ မလိုပါဘူး။",
-  "note": "blind check: Garbled clause: 'အရမ်းကြာခဲ့ပြီ တိုင်းထားတာမှန်သမျှ' lacks a connecting particle/relative marker; hard to parse"
+  "my": "ပြင်နည်း 2 ခု ရှိပါတယ်။ max age က တိုင်းတာပြီး ကြာလွန်းသွားတဲ့ ဒေတာ မှန်သမျှကို ပစ်ပါတယ်၊ ဒါပေမဲ့ အဲဒီ ဂဏန်းကို ညှိပေးရပါတယ်။ stamp စစ်တာကတော့ သုံးပြီးသား အသစ်ဆုံး ဒေတာထက် ဟောင်းတာ မှန်သမျှကို ပစ်ပါတယ်၊ ဘာမှ ညှိစရာ မလိုပါဘူး။",
+  "back": "There are 2 fixes. The max age measures and discards all data that has become too old, but that number has to be tuned. The stamp check, on the other hand, discards all data older than the newest data already used, and nothing needs to be tuned."
  },
  "ep/late:maxAge": {
   "status": "pass-alt",
@@ -1352,8 +1382,8 @@
  "ep/late:rDelay": {
   "status": "needs-human",
   "en": "every reading used later by",
-  "my": "တန်ဖိုးတိုင်း နောက်ကျပြီး သုံးရတဲ့ ကြာချိန်",
-  "note": "blind check: Garbled word order: 'တန်ဖိုးတိုင်း နောက်ကျပြီး သုံးရတဲ့ ကြာချိန်' - meaning unclear"
+  "my": "ဒေတာတိုင်း နောက်ကျပြီး သုံးရတဲ့ အချိန်",
+  "note": "garbled in 2 blind checks (2026-11-24)"
  },
  "ep/late:rDropped": {
   "status": "pass-alt",
@@ -1915,9 +1945,9 @@
  },
  "l0/meet:parts.sensor": {
   "status": "pass-alt",
-  "en": "A spinning distance sensor on top, 18 cm above the floor: it measures all around. Chapter: how it senses.",
-  "my": "အပေါ်ကနေ လည်နေတဲ့ အကွာအဝေးတိုင်း ဆင်ဆာ ဖြစ်ပြီး ကြမ်းပြင်ကနေ 18 cm အမြင့်မှာ ရှိပါတယ်- ပတ်ပတ်လည် အကုန်လုံးကို တိုင်းတာပေးပါတယ်။ သင်ခန်းစာ- ဘယ်လို သိမြင်သလဲ။",
-  "back": "The distance sensor spinning on top is 18 cm high from the floor - it measures everything all around. Lesson: how does it sense?"
+  "en": "A spinning sensor on top, 18 cm above the floor: it measures how far things are, all around. Chapter: how it senses.",
+  "my": "အပေါ်မှာ လည်နေတဲ့ ဆင်ဆာ၊ ကြမ်းပြင်ကနေ 18 cm အမြင့်မှာ ရှိပါတယ်- ပတ်ပတ်လည်က အရာတွေ ဘယ်လောက် ဝေးလဲ တိုင်းပါတယ်။ သင်ခန်းစာ- ဘယ်လို အာရုံခံသလဲ။",
+  "back": "A sensor spinning on top, at a height of 18 cm from the floor: it measures how far the things around it are. Lesson: how does it sense?"
  },
  "l0/meet:parts.wheels": {
   "status": "pass-alt",
@@ -2629,15 +2659,15 @@
  },
  "l0/sense:real": {
   "status": "pass-alt",
-  "en": "The real TurtleBot3 Burger: 360 numbers per turn, 5 turns a second, from 12 cm to 3.5 m.",
-  "my": "တကယ့် TurtleBot3 Burger- တစ်ပတ်ကို 360 ဂဏန်း၊ တစ်စက္ကန့်ကို 5 ပတ်၊ 12 cm ကနေ 3.5 m အထိ ဖြစ်ပါတယ်။",
-  "back": "The real TurtleBot3 Burger: 360 numbers per turn, 5 turns per second, from 12 cm to 3.5 m."
+  "en": "Our simulated Burger carries the LDS-01: 360 numbers per turn, 5 turns a second, from 12 cm to 3.5 m. Real Burgers ship with one of three models (LDS-01, LDS-02, LDS-03); the LDS-02 measures from 16 cm to 8 m.",
+  "my": "ကျွန်တော်တို့ simulation ထဲက Burger မှာ LDS-01 တပ်ထားပါတယ်- တစ်ပတ်ကို ဂဏန်း 360 ခု၊ တစ်စက္ကန့်ကို 5 ပတ်၊ 12 cm ကနေ 3.5 m အထိပါ။ တကယ့် Burger တွေမှာတော့ မော်ဒယ် 3 မျိုး (LDS-01, LDS-02, LDS-03) ထဲက တစ်ခု ပါလာပါတယ်၊ LDS-02 က 16 cm ကနေ 8 m အထိ တိုင်းပါတယ်။",
+  "back": "The Burger in our simulation has an LDS-01 fitted: 360 numbers per revolution, 5 revolutions per second, from 12 cm to 3.5 m. Real Burgers, however, come with one of 3 models (LDS-01, LDS-02, LDS-03); the LDS-02 measures from 16 cm to 8 m."
  },
  "l0/sense:steps.0": {
   "status": "pass-alt",
-  "en": "A distance sensor sends out a beam of light and times how long it takes to come back from a wall. Out comes one number: the distance in metres. A laser tape measure works the same way.",
-  "my": "အကွာအဝေး ဆင်ဆာ က အလင်း beam တစ်ခုကို လွှတ်ထုတ်ပြီး နံရံ ကနေ ပြန်လာဖို့ ဘယ်လောက်ကြာလဲဆိုတာကို အချိန်တိုင်းပါတယ်။ အဲဒီကနေ ကိန်းဂဏန်းတစ်ခု ထွက်လာပါတယ်- အဲဒါကတော့ metres နဲ့ ပြထားတဲ့ အကွာအဝေး ဖြစ်ပါတယ်။ လေဆာ ပေကြိုးတွေလည်း ဒီအတိုင်းပဲ အလုပ်လုပ်ပါတယ်။",
-  "back": "A distance sensor sends out one beam of light and times how long it takes to come back from a wall. From that comes one number - that is the distance shown in metres. Laser tape measures work this same way too."
+  "en": "A distance sensor sends out a beam of light and measures the light that comes back from a wall. Out comes one number: the distance in metres. A laser tape measure works on the same idea.",
+  "my": "အကွာအဝေး ဆင်ဆာက အလင်း beam တစ်ခု လွှတ်ပြီး နံရံကနေ ပြန်လာတဲ့ အလင်းကို တိုင်းပါတယ်။ ဂဏန်း တစ်ခု ထွက်လာပါတယ်- မီတာနဲ့ အကွာအဝေးပါ။ လေဆာ ပေကြိုးလည်း ဒီ သဘောတရားနဲ့ပဲ အလုပ်လုပ်ပါတယ်။",
+  "back": "A range sensor sends out a light beam and measures the light that comes back from the wall. One number comes out: the distance in meters. A laser tape measure also works on this same principle."
  },
  "l0/sense:steps.1": {
   "status": "pass-alt",
@@ -2711,6 +2741,12 @@
   "my": "2026-11-23 မှာ tool တစ်ခုချင်းစီရဲ့ page တွေက အချက်အလက်တွေနဲ့ တိုက်ဆိုင်စစ်ဆေးထားတာ ဖြစ်ပါတယ်။",
   "back": "On 2026-11-23 it was cross-checked against the information on each tool's page."
  },
+ "l0/simpick:dim.2.5D": {
+  "status": "pass-alt",
+  "en": "2.5D",
+  "my": "2.5D",
+  "back": "2.5D"
+ },
  "l0/simpick:dim.2D": {
   "status": "pass-alt",
   "en": "2D",
@@ -2728,6 +2764,12 @@
   "en": "no world",
   "my": "ကမ္ဘာ မရှိ",
   "back": "No world"
+ },
+ "l0/simpick:everyday": {
+  "status": "pass-alt",
+  "en": "Everyday: you learn to drive in an empty car park before the motorway. Pick the step that fits today; the next one waits.",
+  "my": "နေ့စဉ်ဘဝမှာ- အဝေးပြေးလမ်းမ မတက်ခင် လူရှင်းတဲ့ ကားပါကင်မှာ ကားမောင်း သင်ပါတယ်။ ဒီနေ့ ကိုက်တဲ့ အဆင့်ကို ရွေးပါ၊ နောက်အဆင့်က စောင့်နေပါလိမ့်မယ်။",
+  "back": "In everyday life: before getting on the highway, you learn to drive in an empty car park. Pick the level that fits today; the next level will be waiting."
  },
  "l0/simpick:glossary.0.0": {
   "status": "pass-alt",
@@ -2779,9 +2821,9 @@
  },
  "l0/simpick:others": {
   "status": "pass-alt",
-  "en": "Other 2D simulators: Stage and Flatland (not checked here).",
-  "my": "တခြား 2D ဆင်မျူလေတာတွေ- Stage နဲ့ Flatland (ဒီမှာ မစစ်ထားပါဘူး)။",
-  "back": "Other 2D simulators: Stage and Flatland (not checked here)."
+  "en": "Other 2D simulators: Stage has a ROS 2 bridge you build from source yourself (no ready package), and Flatland has no ROS 2 Humble or Jazzy release. That is why mvsim is the pick here.",
+  "my": "တခြား 2D ဆင်မျူလေတာတွေ- Stage မှာ ROS 2 bridge ကို source ကနေ ကိုယ်တိုင် build ရပါတယ် (အသင့်သုံး package မရှိပါဘူး)၊ Flatland မှာ ROS 2 Humble ဒါမှမဟုတ် Jazzy အတွက် release မရှိပါဘူး။ ဒါကြောင့် ဒီမှာ mvsim ကို ရွေးပါတယ်။",
+  "back": "Other 2D simulators: for Stage you have to build the ROS 2 bridge yourself from source (there is no ready-to-use package); Flatland has no release for ROS 2 Humble or Jazzy. So here mvsim is chosen."
  },
  "l0/simpick:q.gpu": {
   "status": "pass-alt",
@@ -2803,9 +2845,9 @@
  },
  "l0/simpick:right": {
   "status": "pass-alt",
-  "en": "Yes: a light 2D simulator with a distance sensor, no graphics card needed.",
-  "my": "ဟုတ်ပါတယ် - အကွာအဝေး ဆင်ဆာ ပါတဲ့ ပေါ့ပါးတဲ့ 2D ဆင်မျူလေတာ ဖြစ်ပြီး graphics card မလိုပါဘူး။",
-  "back": "Yes - it is a lightweight 2D simulator with a distance sensor and needs no graphics card."
+  "en": "Yes: a lightweight 2.5D simulator with a distance sensor; its GPU ray-tracing is only optional.",
+  "my": "ဟုတ်ပါတယ်- အကွာအဝေး ဆင်ဆာ ပါတဲ့ ပေါ့ပါးတဲ့ 2.5D ဆင်မျူလေတာပါ၊ သူ့ GPU ray-tracing က မဖြစ်မနေ မလိုပါဘူး။",
+  "back": "Yes: it is a lightweight 2.5D simulator with a range sensor; its GPU ray-tracing is not strictly required."
  },
  "l0/simpick:rows.fake.learn": {
   "status": "pass-alt",
@@ -2875,9 +2917,9 @@
  },
  "l0/simpick:rows.mvsim.what": {
   "status": "pass-alt",
-  "en": "A light 2D-style simulator with walls and distance sensors; a ready package for ROS 2 Humble.",
-  "my": "နံရံ တွေနဲ့ အကွာအဝေး ဆင်ဆာ တွေပါတဲ့ ပေါ့ပါးတဲ့ 2D ပုံစံ ဆင်မျူလေတာ ဖြစ်ပါတယ်၊ ROS 2 Humble အတွက် အဆင်သင့် package ဖြစ်ပါတယ်။",
-  "back": "It is a lightweight 2D-style simulator with walls and distance sensors; it is a ready-made package for ROS 2 Humble."
+  "en": "A lightweight 2.5D simulator: a flat world with simple physics, walls and distance sensors; a ready package for ROS 2 Humble.",
+  "my": "ပေါ့ပါးတဲ့ 2.5D ဆင်မျူလေတာ- ရိုးရှင်းတဲ့ physics၊ နံရံတွေနဲ့ အကွာအဝေး ဆင်ဆာတွေ ပါတဲ့ ပြားပြား ကမ္ဘာ၊ ROS 2 Humble အတွက် အသင့်သုံး package ပါ။",
+  "back": "A lightweight 2.5D simulator: simple physics, a flat world with walls and range sensors, a ready-to-use package for ROS 2 Humble."
  },
  "l0/simpick:rows.site.learn": {
   "status": "pass-alt",
@@ -3016,6 +3058,12 @@
   "en": "no sensor data",
   "my": "ဆင်ဆာ အချက်အလက် မရှိပါ",
   "back": "No sensor data"
+ },
+ "l0/simwhat:everyday": {
+  "status": "pass-alt",
+  "en": "Everyday: pilots train in a flight simulator, a pretend cockpit with pretend weather, long before they fly a real plane.",
+  "my": "နေ့စဉ်ဘဝမှာ- လေယာဉ်မှူးတွေဟာ တကယ့် လေယာဉ် မမောင်းခင် အချိန်အကြာကြီး လေယာဉ် ဆင်မျူလေတာ ထဲမှာ လေ့ကျင့်ပါတယ်၊ အတု cockpit နဲ့ အတု ရာသီဥတုပါ။",
+  "back": "In everyday life: pilots train for a long time in a flight simulator before flying a real aircraft, with a fake cockpit and fake weather."
  },
  "l0/simwhat:fixIt": {
   "status": "pass-alt",
@@ -3175,9 +3223,9 @@
  },
  "l0/think:brokenNote": {
   "status": "pass-alt",
-  "en": "Nothing is ever closer than 0 m, so the rule never says stop. The robot drives into the wall.",
-  "my": "0 m ထက် နီးတာ ဘာမှမရှိနိုင်တဲ့အတွက် စည်းကမ်းချက်က 'ရပ်' ဖို့ ဘယ်တော့မှ ပြောမှာ မဟုတ်ပါဘူး။ ဒါကြောင့် စက်ရုပ် က နံရံ ကို ဝင်တိုက်ပါလိမ့်မယ်။",
-  "back": "Since nothing can be closer than 0 m, the rule will never say 'stop'. So the robot will crash into the wall."
+  "en": "Nothing is ever closer than 0 m, so the rule never says stop. The robot drives into the wall. (This page uses a perfect sensor; chapter 1.1 shows what a real one reports.)",
+  "my": "0 m ထက် နီးတာ ဘယ်တော့မှ မရှိလို့ စည်းကမ်းချက်က ရပ်လို့ ဘယ်တော့မှ မပြောပါဘူး။ စက်ရုပ်က နံရံထဲ မောင်းဝင်သွားပါတယ်။ (ဒီစာမျက်နှာက အပြစ်အနာအဆာ မရှိတဲ့ ဆင်ဆာကို သုံးပါတယ်၊ တကယ့် ဆင်ဆာ ဘာပြလဲ ဆိုတာ အခန်း 1.1 မှာ ပြပါတယ်။)",
+  "back": "It is never closer than 0 m, so the rule never says to stop. The robot drives into the wall. (This page uses a flawless sensor; what a real sensor shows is presented in Chapter 1.1.)"
  },
  "l0/think:bumped": {
   "status": "pass-alt",
@@ -3289,9 +3337,9 @@
  },
  "l0/think:steps.2": {
   "status": "pass-alt",
-  "en": "Between two checks the robot drives 5.2 cm without looking. Set the rule to 2 cm or less and the moment passes between two checks: the robot touches the wall.",
-  "my": "စစ်ဆေးမှု 2 ခုကြားမှာ စက်ရုပ် က ဘာကိုမှ မကြည့်ဘဲ 5.2 cm အထိ မောင်းနှင်ပါတယ်။ စည်းကမ်းချက်ကို 2 cm ဒါမှမဟုတ် အဲဒီထက် နည်းအောင် ထားလိုက်ရင် စစ်ဆေးမှု 2 ခုကြားမှာ ရပ် ရမယ့် အချိန် ကျော်သွားပြီး စက်ရုပ် က နံရံ ကို တိုက်မိသွားပါလိမ့်မယ်။",
-  "back": "Between two checks the robot drives up to 5.2 cm without looking at anything. If you set the rule to 2 cm or less, the time to stop between two checks is passed and the robot will hit the wall."
+  "en": "Here the robot drives at 0.26 m/s, the speed set in the example project this page takes its numbers from: a little over the 0.22 m/s the maker lists for the real Burger. Between two checks it drives 5.2 cm without looking. Set the rule to 2 cm or less and the moment passes between two checks: the robot touches the wall.",
+  "my": "ဒီမှာ စက်ရုပ်က 0.26 m/s နဲ့ သွားပါတယ်၊ ဒီစာမျက်နှာ ဂဏန်းတွေ ယူထားတဲ့ နမူနာ project ထဲက သတ်မှတ်ထားတဲ့ အမြန်နှုန်းပါ- ထုတ်လုပ်သူက တကယ့် Burger အတွက် ပြထားတဲ့ 0.22 m/s ထက် နည်းနည်း ပိုမြန်ပါတယ်။ စစ်ဆေးမှု 2 ခုကြားမှာ မကြည့်ဘဲ 5.2 cm သွားပါတယ်။ စည်းကမ်းချက်ကို 2 cm ဒါမှမဟုတ် ဒီထက် နည်းအောင် ထားရင် ရပ်ရမယ့် အချိန်က စစ်ဆေးမှု 2 ခုကြားမှာ ကျော်သွားပြီး စက်ရုပ်က နံရံကို ထိသွားပါတယ်။",
+  "back": "Here the robot moves at 0.26 m/s, the speed set in the sample project this page's numbers are taken from: slightly faster than the 0.22 m/s the manufacturer shows for the real Burger. It travels 5.2 cm without looking between 2 checks. If the rule is set to 2 cm or less, the time to stop passes between 2 checks and the robot hits the wall."
  },
  "l0/think:steps.3": {
   "status": "pass-alt",
