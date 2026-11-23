@@ -259,3 +259,13 @@ describe('detectCue', () => {
     expect(detectCue(2, 3, true).oops).toBe(1)
   })
 })
+
+describe('tfCue from the anomaly verdict', () => {
+  it('healthy calm, stale worried, jump wobbles', async () => {
+    const { tfCue } = await import('./cues')
+    const { verdict } = await import('../lib/anomaly')
+    expect(tfCue(verdict(0.1, 0.1, 1, 0.5))).toEqual({ worried: false, oops: 0 })
+    expect(tfCue(verdict(2, 0.1, 1, 0.5))).toEqual({ worried: true, oops: 0 })
+    expect(tfCue(verdict(0.1, 0.8, 1, 0.5))).toEqual({ worried: false, oops: 1 })
+  })
+})

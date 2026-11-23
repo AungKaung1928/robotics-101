@@ -4,6 +4,7 @@ import { challengeOk as twistOk, ignored, used, type Twist } from '../chapters/l
 import { STARTED } from '../chapters/l2/ws'
 import type { Line } from '../chapters/l1/shell'
 import { INSCRIBED } from '../lib/inflation'
+import type { Verdict } from '../lib/anomaly'
 
 /**
  * Mascot trigger props from chapter models, for chapters that only need the robot's reaction (spread into <Mascot>).
@@ -47,4 +48,10 @@ export function costCue(cost: number) {
  * or two objects merged (too few). */
 export function detectCue(found: number, truth: number, done: boolean) {
   return { thinking: !done, cheer: done && found === truth ? 1 : 0, oops: done && found !== truth ? 1 : 0 }
+}
+
+/** TF (3.x): the anomaly detector's verdict (lib/anomaly verdict()): worried while the transform is stale (older than
+ * max_age), the oops wobble each time a jump is flagged (0 -> 1 on every entry, so useRise reacts per jump). */
+export function tfCue(v: Verdict) {
+  return { worried: v === 'stale', oops: v === 'jump' ? 1 : 0 }
 }
