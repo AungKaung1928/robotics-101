@@ -1,0 +1,3 @@
+/* Speed profile (lane anim): area driven filled in the cost colour, faint; the curve and playhead reuse app classes. */
+.speed { width: 100%; height: auto; display: block; }
+.speed .driven { fill: var(--cost); opacity: 0.25; }
