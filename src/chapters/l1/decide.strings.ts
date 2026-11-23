@@ -3,7 +3,7 @@ export const DECIDE_STRINGS = {
   en: {
     title: 'Python: a value and a decision',
     learn: 'You will learn: a variable holds a number, and if turns that number into stop or go.',
-    already: 'You already know: the rule "wall closer than 0.5 m: stop" from Level 0 "How a robot thinks". Same robot, same numbers; now you write it as code.',
+    already: 'In Level 0 "How a robot thinks" you set the rule "wall closer than 0.5 m: stop". Same robot, same numbers; now you write it as code.',
     lines: [
       'The robot reads one number from its LiDAR: how far the wall in front is, in metres. The program keeps it in a variable called distance.',
       'Each time a new number arrives (5 times a second), one if line compares it with stop_at. Smaller: stop. Otherwise: go.',
@@ -32,7 +32,7 @@ export const DECIDE_STRINGS = {
   ja: {
     title: 'Python：値と判断',
     learn: '学ぶこと：変数は数値を入れておく箱。if がその数値を「止まる」か「進む」に変える。',
-    already: 'もう知っていること：レベル 0「ロボットの考え方」のルール「壁が 0.5 m より近い：止まる」。同じロボット、同じ数字。今度はそれをコードで書く。',
+    already: 'レベル 0「ロボットの考え方」で、ルール「壁が 0.5 m より近い：止まる」を決めた。同じロボット、同じ数字。今度はそれをコードで書く。',
     lines: [
       'ロボットは LiDAR から数値を1つ読む：前の壁までの距離（m）。プログラムはそれを distance という変数に入れる。',
       '新しい数値が届くたび（1秒に5回）、if の1行が stop_at と比べる。小さければ止まる。それ以外は進む。',
