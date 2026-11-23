@@ -9,18 +9,26 @@ export function glide(from: number, to: number, elapsed: number, dur = GLIDE_MS)
   return from + (to - from) * easeInOut(elapsed / dur)
 }
 
-export type PlayerKey = 'toggle' | 'back' | 'next' | 'start' | 'end' | null
+export type PlayerKey = 'toggle' | 'replay' | 'back' | 'next' | 'start' | 'end' | null
 
 /**
- * Keyboard map of the Player group: Space / k play-pause, ← / → step by event, Home / End jump.
+ * Keyboard map of the Player group: Space / k play-pause, r replay from 0, ← / → step by event, Home / End jump.
  * On the scrubber the arrows and Home/End stay the range input's own (fine scrubbing), so they map to null there.
  */
 export function playerKey(key: string, onScrubber: boolean): PlayerKey {
   if (key === ' ' || key === 'k') return 'toggle'
+  if (key === 'r' || key === 'R') return 'replay'
   if (onScrubber) return null
   if (key === 'ArrowLeft') return 'back'
   if (key === 'ArrowRight') return 'next'
   if (key === 'Home') return 'start'
   if (key === 'End') return 'end'
   return null
+}
+
+/** Index of the step the playhead is on: the last event at or before `t` (events sorted ascending), -1 before the first. */
+export function currentStep(events: number[], t: number): number {
+  let i = -1
+  for (let k = 0; k < events.length; k++) if (events[k] <= t + 1e-9) i = k
+  return i
 }

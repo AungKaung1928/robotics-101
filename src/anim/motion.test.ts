@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { GLIDE_MS, glide, playerKey } from './motion'
+import { GLIDE_MS, currentStep, glide, playerKey } from './motion'
 
 describe('glide', () => {
   it('starts at from, lands exactly on to, passes the midpoint at half time', () => {
@@ -32,10 +32,26 @@ describe('playerKey', () => {
     expect(playerKey('ArrowRight', false)).toBe('next')
     expect(playerKey('Home', false)).toBe('start')
     expect(playerKey('End', false)).toBe('end')
+    expect(playerKey('r', true)).toBe('replay')
   })
   it('leaves arrows and Home/End to the scrubber, ignores other keys', () => {
     for (const k of ['ArrowLeft', 'ArrowRight', 'Home', 'End']) expect(playerKey(k, true)).toBeNull()
     expect(playerKey('a', false)).toBeNull()
     expect(playerKey('Tab', false)).toBeNull()
+  })
+})
+
+describe('currentStep', () => {
+  const ev = [0, 0.5, 1.2, 2]
+  it('is the last event at or before t', () => {
+    expect(currentStep(ev, -0.1)).toBe(-1)
+    expect(currentStep(ev, 0)).toBe(0)
+    expect(currentStep(ev, 0.49)).toBe(0)
+    expect(currentStep(ev, 0.5)).toBe(1)
+    expect(currentStep(ev, 1.9)).toBe(2)
+    expect(currentStep(ev, 9)).toBe(3)
+  })
+  it('counts an event reached by float addition as reached', () => {
+    expect(currentStep([0.3], 0.1 + 0.2)).toBe(0)
   })
 })
