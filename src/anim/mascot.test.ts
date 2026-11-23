@@ -1,0 +1,39 @@
+import { describe, expect, it } from 'vitest'
+import { HAPPY_S, OOPS_S, REST, happyPose, oopsPose } from './mascot'
+
+const ts = (end: number) => Array.from({ length: 601 }, (_, i) => (i / 600) * end)
+
+describe('happyPose', () => {
+  it('starts and ends at rest, lasts under 1.2 s', () => {
+    expect(happyPose(0)).toEqual(REST)
+    const e = happyPose(HAPPY_S)
+    expect(e.y).toBe(0)
+    expect(Math.abs(e.sy - 1)).toBeLessThan(0.005)
+    expect(HAPPY_S).toBeLessThan(1.2)
+  })
+  it('keeps the area (sx · sy = 1) and lifts 10 px at the top', () => {
+    for (const t of ts(HAPPY_S)) {
+      const p = happyPose(t)
+      expect(p.sx * p.sy).toBeCloseTo(1, 12)
+      expect(p.y).toBeGreaterThanOrEqual(0)
+    }
+    expect(Math.max(...ts(HAPPY_S).map((t) => happyPose(t).y))).toBeCloseTo(10, 1)
+  })
+  it('squashes before take-off, stretches in the air, squashes on landing and overshoots back up', () => {
+    expect(happyPose(0.07).sy).toBeLessThan(0.9)
+    expect(happyPose(0.1).sy).toBeGreaterThan(1.05)
+    const after = ts(HAPPY_S).filter((t) => t > 0.38).map((t) => happyPose(t).sy)
+    expect(Math.min(...after)).toBeLessThan(0.93)
+    expect(Math.max(...after)).toBeGreaterThan(1.01)
+  })
+})
+
+describe('oopsPose', () => {
+  it('rocks both ways, dies out, under 1.5 s', () => {
+    const r = ts(OOPS_S).map((t) => oopsPose(t).rot)
+    expect(Math.max(...r)).toBeGreaterThan(5)
+    expect(Math.min(...r)).toBeLessThan(-2)
+    expect(Math.abs(oopsPose(OOPS_S).rot)).toBeLessThan(0.3)
+    expect(OOPS_S).toBeLessThan(1.5)
+  })
+})

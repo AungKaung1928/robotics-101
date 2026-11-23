@@ -1,0 +1,14 @@
+/* Guide robot (lane anim). Ink line, surface fill, robot blue only on the LiDAR; idle = breath + blink. */
+.mascot { overflow: visible; display: inline-block; vertical-align: middle; }
+.mascot .m-shadow { fill: var(--ink); opacity: 0.12; }
+.mascot .m-wheel, .mascot .m-plate, .mascot .m-head { fill: var(--surface); stroke: var(--ink); stroke-width: 2.2; }
+.mascot .m-wheel { fill: var(--ink); }
+.mascot .m-lidar { stroke: var(--robot); stroke-width: 3; stroke-linecap: round; }
+.mascot .m-face circle { fill: var(--ink); }
+.mascot .m-face .m-mouth { fill: none; stroke: var(--ink); stroke-width: 1.6; }
+.mascot .m-face path { fill: none; stroke: var(--ink); stroke-width: 2.2; stroke-linecap: round; }
+.mascot .m-breath { transform-box: view-box; transform-origin: 32px 58px; animation: m-breath 3.2s ease-in-out infinite; }
+.mascot .m-eyes { transform-box: fill-box; transform-origin: center; animation: m-blink 4.1s infinite; }
+@keyframes m-breath { 50% { transform: scale(0.992, 1.015); } }
+@keyframes m-blink { 0%, 94%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.12); } }
+@media (prefers-reduced-motion: reduce) { .mascot .m-breath, .mascot .m-eyes { animation: none; } }
