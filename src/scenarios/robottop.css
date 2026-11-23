@@ -58,3 +58,9 @@
 .nface[data-mood='off'] .nface-body { fill: color-mix(in srgb, var(--ink) 6%, var(--surface)); }
 .cb-env { fill: none; stroke: var(--rule); stroke-width: 1; }
 .cb-env.is-full { fill: var(--ray); stroke: var(--ray); }
+.sw-hitarea { stroke: transparent; stroke-width: 12; }
+.sw-link { cursor: pointer; outline: none; }
+.sw-link:focus-visible .sw-hitarea { stroke: color-mix(in srgb, var(--robot) 25%, transparent); }
+.is-hot { stroke-width: 4; } .ss-hit.is-hot { r: 2.8; }
+.ss-wall.is-hot { stroke: var(--robot); } .ss-hit.is-hot { fill: var(--robot); }
+.is-dim { opacity: 0.25; }

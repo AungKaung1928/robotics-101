@@ -269,3 +269,17 @@ describe('tfCue from the anomaly verdict', () => {
     expect(tfCue(verdict(0.1, 0.8, 1, 0.5))).toEqual({ worried: false, oops: 1 })
   })
 })
+
+describe('SimWhatScene linked highlighting', () => {
+  it('a lit wall lights exactly its own scan points and dims the rest; every wall is focusable', async () => {
+    const { default: SimWhatScene } = await import('./SimWhatScene')
+    const { room, sweep } = await import('./sense')
+    const h = renderToStaticMarkup(<SimWhatScene wallX={1} worldWord="w" viewWord="v" label="" hot0={4} />)
+    const own = sweep({ x: 0.3, y: 0.5 }, room(1), 1, 1).filter((p) => p.w === 4).length
+    expect(own).toBeGreaterThan(5)
+    expect(count(h, /class="ss-hit is-hot"/g)).toBe(own)
+    expect(count(h, /class="ss-hit is-dim"/g)).toBe(180 - own)
+    expect(count(h, /class="ss-wall is-movable is-hot"/g)).toBe(1)
+    expect(count(h, /tabindex="0"/g)).toBe(5)
+  })
+})
