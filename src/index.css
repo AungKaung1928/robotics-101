@@ -94,6 +94,7 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .chead { display: flex; align-items: center; justify-content: space-between; gap: var(--s4); }
 .chead h1 { margin: 0; }
 .pathline { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s1) var(--s3); margin: var(--s1) 0 0; font-size: var(--t-small); color: var(--ink-2); }
+.grow { margin: var(--s1) 0 0; max-width: 60ch; color: var(--ink-2); }
 .dots { display: inline-flex; gap: 3px; }
 .dots i { width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid var(--free); }
 .dots i.on { background: var(--free); }
