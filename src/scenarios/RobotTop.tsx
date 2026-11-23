@@ -11,12 +11,12 @@ const PITCH = 6 // stripe pitch: minPitch(0.22 m/s, the Burger top speed in the 
  * (y down, `deg` clockwise). Wheel stripes slide by each wheel's own rolled distance; the face shows the mood.
  * `t` (s) only spins the dizzy stars; every mood is readable as a still frame.
  */
-export default function RobotTop({ x, y, deg, rolledL = 0, rolledR = 0, mood = 'idle', t = 0, sensor = true }: {
-  x: number; y: number; deg: number; rolledL?: number; rolledR?: number; mood?: TopMood; t?: number; sensor?: boolean
+export default function RobotTop({ x, y, deg, rolledL = 0, rolledR = 0, mood = 'idle', t = 0, sensor = true, stretch = 1 }: {
+  x: number; y: number; deg: number; rolledL?: number; rolledR?: number; mood?: TopMood; t?: number; sensor?: boolean; stretch?: number
 }) {
   return (
     <g className="rtop" data-mood={mood} transform={`translate(${x} ${y})`}>
-      <g transform={`rotate(${deg})`}>
+      <g transform={`rotate(${deg}) scale(${stretch} ${1 / stretch})`}>{/* stretch along the heading, area kept (squash and stretch) */}
         {/* wheels run along +x (TreadWheel runs along +y: a quarter turn); left wheel on −y (screen up); seen from above the top of a wheel moves forward */}
         <g transform="rotate(-90)"><TreadWheel x={BODY - 2} y={-WH / 2} w={WW} h={WH} rolled={rolledL} pitch={PITCH} /></g>
         <g transform="rotate(-90)"><TreadWheel x={-BODY - WW + 2} y={-WH / 2} w={WW} h={WH} rolled={rolledR} pitch={PITCH} /></g>

@@ -30,3 +30,15 @@ describe('act model', () => {
     expect(progress(1 + tb, 1, tb)).toBeCloseTo(progress(1 + 3 * tb, 1, tb))
   })
 })
+
+describe('brake stretch', () => {
+  it('1 while driving, stretched while braking, overshoots into a squash after the stop, settles to 1', async () => {
+    const { brakeStretch, brakeTime } = await import('./act')
+    const v = 0.2, a = 0.5, ts = 1, end = ts + brakeTime(v, 0, a)
+    expect(brakeStretch(v, 0, ts, a, 0.5)).toBe(1)
+    expect(brakeStretch(v, 0, ts, a, ts + 0.2)).toBeGreaterThan(1.05)
+    const after = Array.from({ length: 60 }, (_, i) => brakeStretch(v, 0, ts, a, end + i * 0.01))
+    expect(Math.min(...after)).toBeLessThan(0.99) // the squash
+    expect(brakeStretch(v, 0, ts, a, end + 3)).toBeCloseTo(1, 3)
+  })
+})

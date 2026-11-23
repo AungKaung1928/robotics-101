@@ -1,3 +1,4 @@
+import { BOUNCY, springAt } from '../anim/spring'
 import { TRACK, poseAt, type Pose2 } from './diffdrive'
 
 /**
@@ -24,4 +25,16 @@ export function actAt(v: number, w: number, tStop: number, decel: number, t: num
   const { vl, vr } = wheels(v, w), tb = brakeTime(v, w, decel), p = progress(t, tStop, tb)
   const speed = t <= tStop ? 1 : Math.max(0, 1 - (t - tStop) / tb)
   return { pose: poseAt(vl, vr, p), ghost: poseAt(vl, vr, Math.min(t, tStop)), rollOn: Math.abs(v) * (p - Math.min(t, tStop)), speed, rolled: { l: vl * p, r: vr * p } }
+}
+
+const LEAN = 0.07, LEAN_IN = 0.08 // stretch while braking, s to lean in
+/**
+ * Squash and stretch for the stop: 1 while driving; while the wheels brake the body stretches forward (inertia), easing
+ * in over LEAN_IN s; when it has stopped it springs back past 1 (a small squash) and settles (BOUNCY spring).
+ */
+export function brakeStretch(v: number, w: number, tStop: number, decel: number, t: number): number {
+  const tb = brakeTime(v, w, decel), end = tStop + tb
+  if (t <= tStop || tb === 0) return 1
+  if (t < end) return 1 + LEAN * Math.min(1, (t - tStop) / LEAN_IN)
+  return 1 + springAt(t - end, BOUNCY, LEAN * Math.min(1, tb / LEAN_IN))
 }
