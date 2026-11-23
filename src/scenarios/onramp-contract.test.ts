@@ -197,6 +197,22 @@ describe('SenseScene ring = the chapter ring', () => {
   })
 })
 
+describe('ActScene too fast = the chapter tooFast', () => {
+  it('data-fast and a warning arrow exactly when act.tooFast(v, w), over the slider grid', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: ActScene } = await import('./ActScene')
+    const act = await import('../chapters/l0/act'), mv = await import('../chapters/l0/move')
+    const off: string[] = []
+    for (let v = 0; v <= mv.TOP_SPEED + 1e-9; v += 0.02) for (let w = -act.TURN_MAX; w <= act.TURN_MAX + 1e-9; w += 0.3) {
+      const h = renderToStaticMarkup(createElement(ActScene, { v, w, tStop: 3, decel: act.BRAKE, t: 1, label: '' }))
+      if (h.includes('data-fast') !== act.tooFast(v, w) || h.includes('is-over') !== act.tooFast(v, w)) off.push(`v ${v.toFixed(2)} w ${w.toFixed(1)}`)
+    }
+    if (off.length) console.log('FAST-OFF', off.join(' | '))
+    expect(off).toEqual([])
+  })
+})
+
 describe('SimWhatScene sensor off says why the view is blank', () => {
   it('emptyWord in the view only when the sensor is off; no dots then', async () => {
     const { renderToStaticMarkup } = await import('react-dom/server')
