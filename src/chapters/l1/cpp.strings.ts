@@ -1,0 +1,61 @@
+/** Chapter 1.4 text, EN + JA. Same keys in both (cpp.test checks). */
+export const CPP_STRINGS = {
+  en: {
+    title: 'C++: the same robot, compiled',
+    learn: 'You will learn: in C++ every variable has a type, and a compiler turns your code into a program before it runs.',
+    lines: [
+      'This is chapter 1.1 again, in C++. Python reads your file line by line while it runs. C++ is first compiled by g++ into machine code; the robot runs that.',
+      'You must say what each variable holds: double for a number with a fraction, int for a whole number. The type decides what is stored.',
+      'Why robots use it: the same closest() over 360 readings, measured below, runs many times faster.',
+    ],
+    decl: 'declaration',
+    compiling: 'g++ compiling…', built: 'compiled → ./stopper', failed: 'compile error: no program',
+    note: {
+      double: 'double keeps 0.5. Same result as Python.',
+      int: 'int keeps whole numbers only: 0.5 becomes 0, with no warning even under -Wall -Wextra. stop_at = 0 is the 1.1 crash.',
+      'int{}': 'Braces forbid the silent cut: g++ refuses to build. A compile error is the cheap place to find this bug.',
+    },
+    held: 'stop_at really holds', result: 'robot',
+    stopped: 'stopped at', crashed: 'hit the wall', noRun: 'never ran',
+    bench: 'closest() on 360 readings, one call',
+    benchNote: (py: string, c: string) => `Measured on one laptop, best of 3 runs: Python ${py}, ${c}. Rerun: src/chapters/l1/bench/run.sh.`,
+    challenge: 'Challenge: pick the declaration that makes the compiler catch the bug for you.',
+    solved: 'Solved:', notYet: 'Try another:',
+    words: 'Words',
+    glossary: [
+      ['type', 'what kind of value a variable holds: double, int, bool'],
+      ['compile', 'translate the whole file to machine code before running'],
+      ['g++', 'the C++ compiler on Ubuntu'],
+      ['ns', 'nanosecond: one billionth of a second'],
+    ] as [string, string][],
+  },
+  ja: {
+    title: 'C++：同じロボットをコンパイルする',
+    learn: '学ぶこと：C++ では変数に必ず型がある。実行する前にコンパイラがコードをプログラムに変換する。',
+    lines: [
+      'これは 1.1 と同じ例を C++ で書いたもの。Python は実行しながらファイルを1行ずつ読む。C++ は先に g++ がマシンコードにコンパイルし、ロボットはそれを実行する。',
+      '変数が何を持つかを書く必要がある：小数を持つ数は double、整数は int。型が保存される値を決める。',
+      'ロボットで使われる理由：360個の読み取り値に対する同じ closest() が、下の実測では何倍も速い。',
+    ],
+    decl: '宣言',
+    compiling: 'g++ でコンパイル中…', built: 'コンパイル完了 → ./stopper', failed: 'コンパイルエラー：プログラムなし',
+    note: {
+      double: 'double は 0.5 を保つ。Python と同じ結果。',
+      int: 'int は整数だけを持つ：0.5 は 0 になり、-Wall -Wextra でも警告は出ない。stop_at = 0 は 1.1 の衝突と同じ。',
+      'int{}': '波かっこは黙って切り捨てることを禁止する：g++ はビルドを拒否する。このバグを見つけるならコンパイルエラーが一番安い。',
+    },
+    held: 'stop_at の実際の値', result: 'ロボット',
+    stopped: '停止位置', crashed: '壁に衝突', noRun: '実行されない',
+    bench: '360個の読み取り値で closest() を1回',
+    benchNote: (py: string, c: string) => `1台のノートPCで実測、3回中の最良値：Python ${py}、${c}。再実行：src/chapters/l1/bench/run.sh。`,
+    challenge: 'チャレンジ：コンパイラがバグを見つけてくれる宣言を選ぼう。',
+    solved: '成功：', notYet: '別のものを試そう：',
+    words: '用語',
+    glossary: [
+      ['型', '変数が持つ値の種類：double、int、bool'],
+      ['コンパイル', '実行前にファイル全体をマシンコードに変換すること'],
+      ['g++', 'Ubuntu の C++ コンパイラ'],
+      ['ns', 'ナノ秒：10億分の1秒'],
+    ] as [string, string][],
+  },
+}
