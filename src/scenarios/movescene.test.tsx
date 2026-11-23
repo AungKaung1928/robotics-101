@@ -108,7 +108,7 @@ describe('SimPickScene', () => {
     expect(h).toContain('data-pick="2"')
     expect(count(h, /is-pick/g)).toBe(1)
     expect(count(h, /sp-side/g)).toBe(2)
-    expect(h).toContain('>GPU<')
+    expect(h).toContain('GPU</tspan>')
     expect(h).toContain('data-mood="happy"')
     expect(renderToStaticMarkup(<SimPickScene rungs={rungs} pick={2} from={0} t={0.2} label="" />)).toContain('data-mood="idle"')
   })

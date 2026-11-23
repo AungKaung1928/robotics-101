@@ -1,4 +1,6 @@
+import { useRef } from 'react'
 import { arrivalScale } from '../anim/spring'
+import { useTextWidth } from './fit'
 import Mascot from '../anim/Mascot'
 import { consume, flight, type Msg } from './late'
 import './late.css'
@@ -13,9 +15,11 @@ export default function LateEnvelopes({ msgs, maxAge, t, label, fateText }: {
   msgs: Msg[]; maxAge: number; t: number; label: string; fateText: (f: 'used' | 'stale' | 'old') => string
 }) {
   const fates = consume(msgs, maxAge), X0 = 34, W = 300, row = 22, H = msgs.length * row + 10
+  const ref = useRef<SVGSVGElement>(null), lw = Math.max(60, useTextWidth(ref, '.env-label', fates.map((f) => fateText(f.fate)).join('|')))
+  const MX = W + 5 + lw + 8 // the robot stands right of the widest fate word, so no label runs under it
   const drops = fates.filter((f) => f.fate !== 'used' && f.at <= t).length
   return (
-    <svg className="inset late" viewBox={`0 0 ${W + 110} ${H}`} role="img" aria-label={label}>
+    <svg ref={ref} className="inset late" viewBox={`0 0 ${MX + 36} ${H}`} role="img" aria-label={label}>
       {msgs.map((m, i) => {
         const f = fates.find((x) => x.id === m.id)!, y = 10 + i * row, p = flight(m, t), landed = t >= f.at
         if (t < m.stamp) return null
@@ -35,7 +39,7 @@ export default function LateEnvelopes({ msgs, maxAge, t, label, fateText }: {
           </g>
         )
       })}
-      <g transform={`translate(${W + 70} ${H / 2 - 16}) scale(0.5)`}>
+      <g transform={`translate(${MX} ${H / 2 - 16}) scale(0.5)`}>
         <Mascot inSvg label="" oops={drops} />
       </g>
     </svg>

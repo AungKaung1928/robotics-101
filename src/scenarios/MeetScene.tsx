@@ -1,4 +1,5 @@
-import { useEffect, useState, type KeyboardEvent } from 'react'
+import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
+import { useTextWidth } from './fit'
 import { MascotFigure } from '../anim/Mascot'
 import { REST } from '../anim/mascot'
 import { WOBBLE, arrivalScale, springAt } from '../anim/spring'
@@ -10,10 +11,11 @@ export type Part = keyof typeof PARTS
 const K = 1.7, OX = 16, OY = 8, KICK = 120 // drawing scale, offset, wiggle kick (deg/s)
 
 /** One frame: `part` was tapped `t` s ago: its outline wiggles on a wobble spring, its label springs out beside it. */
-export function MeetFrame({ part, t, words, label }: { part: Part | null; t: number; words: Record<Part, string>; label: string }) {
+export function MeetFrame({ part, t, words, label, children }: { part: Part | null; t: number; words: Record<Part, string>; label: string; children?: ReactNode }) {
+  const ref = useRef<SVGSVGElement>(null), vw = Math.max(300, 154 + useTextWidth(ref, '.mt-label', part ? words[part] : '') * 1.1 + 6) // label springs to 1.1x
   const box = part && PARTS[part], cx = box ? OX + K * (box[0] + box[2] / 2) : 0, cy = box ? OY + K * (box[1] + box[3] / 2) : 0
   return (
-    <svg className="meet-scene" viewBox="0 0 300 130" role="img" aria-label={label} data-part={part ?? 'none'}>
+    <svg ref={ref} className="meet-scene" viewBox={`0 0 ${vw} 130`} role={children ? 'group' : 'img'} aria-label={label} data-part={part ?? 'none'}>
       <g transform={`translate(${OX} ${OY})`}><MascotFigure pose={REST} mood={part ? 'happy' : 'idle'} size={64 * K} label="" /></g>
       {box && <>
         <rect className="mt-outline" x={OX + K * box[0] - 3} y={OY + K * box[1] - 3} width={K * box[2] + 6} height={K * box[3] + 6} rx={8}
@@ -21,6 +23,7 @@ export function MeetFrame({ part, t, words, label }: { part: Part | null; t: num
         <line className="mt-lead" x1={OX + K * (box[0] + box[2]) + 4} y1={cy} x2={150} y2={cy} />
         <g transform={`translate(154 ${cy}) scale(${arrivalScale(t)})`}><text className="mt-label" y={5}>{words[part!]}</text></g>
       </>}
+      {children}
     </svg>
   )
 }
@@ -40,14 +43,11 @@ export default function MeetScene({ words, label }: { words: Record<Part, string
   }, [part, n])
   const pick = (p: Part) => { setPart(p); setN(n + 1) }
   return (
-    <div className="meet-wrap">
-      <MeetFrame part={part} t={t} words={words} label={label} />
-      <svg className="meet-hits" viewBox="0 0 300 130">
-        {(Object.keys(PARTS) as Part[]).map((p) => { const [x, y, w, h] = PARTS[p]; return (
-          <rect key={p} className="mt-hit" x={OX + K * x} y={OY + K * y} width={K * w} height={K * h} role="button" tabIndex={0} aria-label={words[p]}
-            onClick={() => pick(p)} onKeyDown={(e: KeyboardEvent) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(p) } }} />
-        ) })}
-      </svg>
-    </div>
+    <MeetFrame part={part} t={t} words={words} label={label}>{/* hit areas inside the figure: they scale with it when the label widens it */}
+      {(Object.keys(PARTS) as Part[]).map((p) => { const [x, y, w, h] = PARTS[p]; return (
+        <rect key={p} className="mt-hit" x={OX + K * x} y={OY + K * y} width={K * w} height={K * h} role="button" tabIndex={0} aria-label={words[p]}
+          onClick={() => pick(p)} onKeyDown={(e: KeyboardEvent) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(p) } }} />
+      ) })}
+    </MeetFrame>
   )
 }

@@ -1,38 +1,41 @@
+import { useRef } from 'react'
 import { MascotFigure } from '../anim/Mascot'
 import { REST, happyPose } from '../anim/mascot'
 import { arrivalScale } from '../anim/spring'
+import { useTextWidth } from './fit'
 import './robottop.css'
 
 export type Rung = { name: string; kind: '2D' | '3D'; note?: string } // note e.g. "needs a graphics card"
-const SW = 74, SH = 24, HOP = 0.45 // step width, rise, hop time (s)
-const stepX = (i: number) => 6 + i * (SW + 10), stepY = (i: number, n: number) => 70 + (n - 1 - i) * SH // gap 10 > the 3D side's 8
-const base = (n: number) => stepY(0, n) + 52 // floor: the lowest step is still tall enough for name, kind and note
+const VW = 360, RIGHT = 350, RH = 54, BH = 46, NOTCH = 36, TOP = 40, HOP = 0.45 // px; NOTCH = room for the 32 px robot
+const ROBOT = 32, LINE = 1.8 * 13 // line pitch 1.8x: Burmese stacks marks above and below the line
 
 /**
- * On-ramp "which simulator": the ladder as steps rising to the right (flat 2D tiles, then 3D blocks, the far ones
- * bigger). The robot hops from step `from` to `pick` along an arc over HOP s, lands with the happy bounce, and the
- * chosen step bounces once. Notes (like the graphics-card warning) hang under their step. `t` = s since the pick.
+ * On-ramp "which simulator": the ladder as a staircase of shelves, easiest at the bottom; each shelf starts one notch
+ * further right, so the robot stands in the notch on top of its shelf and every shelf keeps a full line for its name
+ * (readable on a phone in any script). 3D shelves get a depth face. The robot hops from shelf `from` to `pick` along
+ * an arc over HOP s, lands with the happy bounce, and the chosen shelf bounces once. `t` = s since the pick.
  */
 export default function SimPickScene({ rungs, pick, from = pick, t, label }: { rungs: Rung[]; pick: number; from?: number; t: number; label: string }) {
-  const n = rungs.length, u = Math.min(1, Math.max(0, t / HOP)), top = (i: number) => stepY(i, n)
-  const rx = stepX(from) + (stepX(pick) - stepX(from)) * u + SW / 2 - 16
-  const ry = top(from) + (top(pick) - top(from)) * u - 40 * 4 * u * (1 - u) * (from === pick ? 0 : 1) - 30
-  const landed = t >= HOP || from === pick
+  const ref = useRef<SVGSVGElement>(null), n = rungs.length
+  const wide = useTextWidth(ref, '.sp-name, .sp-sub', rungs.map((r) => r.name + (r.note ?? '')).join('|'))
+  const notch = Math.max(ROBOT + 4, Math.min(NOTCH, (RIGHT - 8 - wide - 20) / Math.max(1, n - 1))) // shrink toward the robot's width for long words
+  const left = (i: number) => 8 + i * notch, top = (i: number) => TOP + (n - 1 - i) * RH
+  const u = Math.min(1, Math.max(0, t / HOP)), hop = from === pick ? 0 : 1, landed = t >= HOP || !hop
+  const rx = left(from) + (left(pick) - left(from)) * u + 2, ry = top(from) + (top(pick) - top(from)) * u - 30 * 4 * u * (1 - u) * hop - ROBOT
   return (
-    <svg className="simpick-scene" viewBox={`0 0 ${stepX(n - 1) + SW + 12} ${base(n) + 4}`} role="img" aria-label={label} data-pick={pick}>
+    <svg ref={ref} className="simpick-scene" viewBox={`0 0 ${VW} ${TOP + n * RH}`} role="img" aria-label={label} data-pick={pick}>
       {rungs.map((r, i) => {
-        const s = i === pick && landed ? arrivalScale(t - (from === pick ? 0 : HOP)) : 1, x = stepX(i), y = top(i)
+        const x = left(i), y = top(i), w = RIGHT - x, s = i === pick && landed ? arrivalScale(t - (hop ? HOP : 0)) : 1
         return (
-          <g key={r.name} className={`sp-step is-${r.kind.toLowerCase()}${i === pick ? ' is-pick' : ''}`} transform={`translate(${x + SW / 2} ${y}) scale(${s}) translate(${-x - SW / 2} ${-y})`}>
-            {r.kind === '3D' && <path className="sp-side" d={`M${x + SW} ${y}l8 -6V${base(n)}h-8z`} />}
-            <rect className="sp-face" x={x} y={y} width={SW} height={base(n) - y} rx={6} />
-            <text className="sp-name" x={x + SW / 2} y={y + 17} textAnchor="middle">{r.name}</text>
-            <text className="sp-kind" x={x + SW / 2} y={y + 32} textAnchor="middle">{r.kind}</text>
-            {r.note && <text className="sp-note" x={x + SW / 2} y={y + 46} textAnchor="middle">{r.note}</text>}
+          <g key={i} className={`sp-step is-${r.kind.toLowerCase()}${i === pick ? ' is-pick' : ''}`} transform={`translate(${x + w / 2} ${y + BH / 2}) scale(${s}) translate(${-x - w / 2} ${-y - BH / 2})`}>
+            {r.kind === '3D' && <path className="sp-side" d={`M${x + w} ${y}l6 -5v${BH}l-6 5z`} />}
+            <rect className="sp-face" x={x} y={y} width={w} height={BH} rx={6} />
+            <text className="sp-name" x={x + 8} y={y + 18}>{r.name}</text>
+            <text className="sp-sub" x={x + 8} y={y + 18 + LINE}>{r.kind}{r.note && <tspan className="sp-note">{`  ${r.note}`}</tspan>}</text>
           </g>
         )
       })}
-      <g transform={`translate(${rx} ${ry})`}><MascotFigure pose={landed && from !== pick ? happyPose(t - HOP) : REST} mood={landed ? 'happy' : 'idle'} size={32} label="" /></g>
+      <g transform={`translate(${rx} ${ry})`}><MascotFigure pose={landed && hop ? happyPose(t - HOP) : REST} mood={landed ? 'happy' : 'idle'} size={ROBOT} label="" /></g>
     </svg>
   )
 }
