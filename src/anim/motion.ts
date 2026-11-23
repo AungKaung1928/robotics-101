@@ -86,6 +86,8 @@ export function scrubFrac(x: number, width: number): number {
 
 // Play triangle and pause bars as the same two 4-corner shapes (left half, right half), so CSS morphs one into the other.
 export const PLAY_D = 'M2 1L5.5 3L5.5 7L2 9ZM5.5 3L9 5L9 5L5.5 7Z'
+// At the end Play restarts from 0, so the icon becomes a replay arrow (video players' end state): three-quarter circle + chevron.
+export const REPLAY_D = 'M8.5 5A3.5 3.5 0 1 1 5 1.5M3.6 0.2L5 1.5L3.6 2.8'
 export const PAUSE_D = 'M2 1L4 1L4 9L2 9ZM6 1L8 1L8 9L6 9Z'
 
 /** Playback rates the speed button cycles through (protocol-explorer reference: a speed select next to Play). */

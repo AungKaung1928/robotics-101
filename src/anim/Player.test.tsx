@@ -41,4 +41,9 @@ describe('Player render', () => {
     motion(true)
     expect(sp()).not.toContain('class="rate"')
   })
+  it('at the end and paused, Play shows the replay arrow (Play restarts from 0); while playing the pause bars', () => {
+    motion(false)
+    expect(render(3, false)).toMatch(/<svg class="pp is-replay"[^>]*><path d="M8.5 5A[^"]*"><\/path><\/svg>Play</)
+    expect(render(1, false)).not.toContain('is-replay')
+  })
 })

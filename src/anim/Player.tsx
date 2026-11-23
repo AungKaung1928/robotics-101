@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type CSSProperties, type KeyboardEvent, type ReactNode } from 'react'
 import type { Strings } from '../i18n'
 import { advance, stepEvent } from '../lib/timeline'
-import { GLIDE_MS, HOLD_KEY, PAUSE_D, PLAY_D, RATE_KEY, nextRate, shiftRate, storedRate, currentStep, fromKeyboard, glide, playStop, playerKey, SCRUB_THUMB_PX, scrubFrac, scrubTrack, shouldAutoplay } from './motion'
+import { GLIDE_MS, HOLD_KEY, PAUSE_D, PLAY_D, RATE_KEY, REPLAY_D, nextRate, shiftRate, storedRate, currentStep, fromKeyboard, glide, playStop, playerKey, SCRUB_THUMB_PX, scrubFrac, scrubTrack, shouldAutoplay } from './motion'
 import { UI_STYLE } from './spring'
 import './player.css'
 import './range.css'
@@ -94,7 +94,9 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
     <div className="stepper" role="group" aria-label={s.player.label} onKeyDown={onKey} style={UI_STYLE}>
       <button type="button" onClick={(e) => step(-1, still || fromKeyboard(e))} disabled={from <= Math.min(...events) + 1e-9}>← {s.back}</button>
       <button type="button" disabled={still} aria-pressed={playing} onClick={toggle}>
-        <svg className="pp" viewBox="0 0 10 10" aria-hidden="true"><path d={playing ? PAUSE_D : PLAY_D} /></svg>{playing ? s.player.pause : s.player.play}
+        {atEnd && !playing && !still
+          ? <svg className="pp is-replay" viewBox="0 0 10 10" aria-hidden="true"><path d={REPLAY_D} /></svg>
+          : <svg className="pp" viewBox="0 0 10 10" aria-hidden="true"><path d={playing ? PAUSE_D : PLAY_D} /></svg>}{playing ? s.player.pause : s.player.play}
       </button>
       {speedLabel && !still && (
         <button type="button" className="rate" aria-label={`${speedLabel} ${rate}×`}

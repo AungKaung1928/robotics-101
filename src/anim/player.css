@@ -23,6 +23,8 @@
 .stepper .scrub { min-height: 24px; }
 /* Play icon: triangle morphs into pause bars (same command list, CSS d transition; browsers without it swap at once). */
 .stepper .pp { width: 0.8em; height: 0.8em; margin-right: 0.4em; vertical-align: -0.05em; fill: currentColor; }
+.stepper .pp.is-replay path { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; }
+.stepper .pp.is-replay { overflow: visible; }
 .stepper .pp path { transition: d var(--spring-ms, 200ms) var(--spring, ease-out); }
 /* Speed button: fixed width so the row does not jump; the new rate pops in on the UI spring. */
 .stepper .rate span { display: inline-block; min-width: 2.2em; }
