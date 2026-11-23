@@ -25,3 +25,4 @@
 .graph .msg.ok line, .graph .msg.ok path { stroke: var(--free); stroke-width: 3; }
 .graph .msg.bad line, .graph .msg.bad path { stroke: var(--ray); stroke-width: 3; }
 .graph .lim { stroke: var(--ray); stroke-width: 2; }
+.tree { min-height: 0; margin-bottom: 0.5rem; }
