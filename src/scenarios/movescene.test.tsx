@@ -302,3 +302,13 @@ describe('ActScene turn overlay', () => {
     expect(renderToStaticMarkup(<ActScene v={0.2} w={0} tStop={9} decel={0.25} t={1} showTurn label="" />)).toContain('data-turn="straight"')
   })
 })
+
+describe('SimWhatScene controlled hot', () => {
+  it('a chapter-owned hot lights that wall; null lights nothing; hot overrides hot0', async () => {
+    const { default: SimWhatScene } = await import('./SimWhatScene')
+    const r = (p: object) => renderToStaticMarkup(<SimWhatScene wallX={1} worldWord="w" viewWord="v" label="" {...p} />)
+    expect(r({ hot: 2 })).toContain('class="ss-wall is-hot"')
+    expect(r({ hot: null, hot0: 4 })).not.toContain('is-hot')
+    expect(r({ hot0: 4 })).toContain('ss-wall is-movable is-hot')
+  })
+})

@@ -10,10 +10,14 @@ const M = 12, PW = 1.5 * 130 + 2 * M, PH = 130 + 2 * M // panel size stays fixed
 export const layout = (wallX: number, box?: Box) => roomLayout(wallX, box, PW, PH, M, 130)
 export type { Box }
 
-export default function SimWhatScene({ wallX = 1, box, sensorOn = true, worldWord, viewWord, label, hot0 = null }: {
+export default function SimWhatScene({ wallX = 1, box, sensorOn = true, worldWord, viewWord, label, hot0 = null, hot: hotIn, onHot }: {
   wallX?: number; box?: Box; sensorOn?: boolean; worldWord: string; viewWord: string; label: string; hot0?: number | null
+  hot?: number | null; onHot?: (wall: number | null) => void
 }) {
-  const { walls, O, movable, X, Y } = layout(wallX, box), hits = sweep(O, walls, 1, 1, Math.PI / 90, !sensorOn), [hot, setHot] = useState<number | null>(hot0)
+  const { walls, O, movable, X, Y } = layout(wallX, box), hits = sweep(O, walls, 1, 1, Math.PI / 90, !sensorOn), [own, setOwn] = useState<number | null>(hot0)
+  // controlled when the chapter passes `hot` (its text can light a wall, Nicky Case's 'text sets the diagram'); else own state
+  const hot = hotIn !== undefined ? hotIn : own
+  const setHot = (v: number | null | ((h: number | null) => number | null)) => { const next = typeof v === 'function' ? v(hot) : v; setOwn(next); onHot?.(next) }
   const cls = (base: string, i: number) => `${base}${hot === null ? '' : hot === i ? ' is-hot' : ' is-dim'}`
   // Mouse: hover lights, leave clears. Touch has no hover and fires pointerleave right after pointerup (W3C pointerevents
   // issue #431), so a tap toggles instead and touch enter/leave are ignored. Keyboard: focus / blur.
