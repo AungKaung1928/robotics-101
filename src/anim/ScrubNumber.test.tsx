@@ -1,3 +1,4 @@
+import { readFileSync } from 'node:fs'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import ScrubNumber from './ScrubNumber'
@@ -9,4 +10,10 @@ describe('ScrubNumber markup', () => {
       expect(html).toContain(s)
     expect(html).not.toContain('data-drag')
   })
+  it('touch: vertical page scroll is left to the browser, and a cancelled drag ends cleanly', () => {
+    const css = readFileSync('src/anim/scrub.css', 'utf8'), src = readFileSync('src/anim/ScrubNumber.tsx', 'utf8')
+    expect(css).toMatch(/\.scrub-num \{[^}]*touch-action: pan-y/)
+    expect(src).toMatch(/onPointerCancel=\{\(\) => \{ start\.current = null; setDrag\(false\) \}\}/)
+  })
 })
+
