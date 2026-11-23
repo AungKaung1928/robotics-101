@@ -132,3 +132,22 @@ describe('entrances never start from (almost) nothing', () => {
     expect(low).toEqual([])
   })
 })
+
+describe('hover styles only where a pointer can hover', () => {
+  // touch browsers keep :hover after a tap (sticky hover); wrap hover-only looks in @media (hover: hover)
+  it('every :hover selector in src/anim and src/scenarios sits inside @media (hover: hover)', () => {
+    const bare: string[] = []
+    for (const f of files) {
+      const css = read(f).replace(/\/\*[\s\S]*?\*\//g, ''), stack: string[] = []
+      let buf = ''
+      for (const ch of css) {
+        if (ch === '{') { stack.push(buf.trim()); buf = '' }
+        else if (ch === '}') { stack.pop(); buf = '' }
+        else if (ch === ';') buf = ''
+        else buf += ch
+        if (ch === '{' && stack.at(-1)!.includes(':hover') && !stack.slice(0, -1).some((a) => /@media[^{]*hover:\s*hover/.test(a))) bare.push(`${f}: ${stack.at(-1)}`)
+      }
+    }
+    expect(bare).toEqual([])
+  })
+})

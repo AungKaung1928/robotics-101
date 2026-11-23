@@ -8,7 +8,9 @@
 .stepper .rail .dot { display: grid; place-items: center; width: 1.5rem; height: 1.5rem; border: 1px solid var(--rule); border-radius: 50%; background: var(--surface); transition: background-color 200ms, color 200ms, border-color 200ms, transform var(--spring-ms, 200ms) var(--spring, ease-out); }
 .stepper .rail [data-done] .dot { border-color: var(--ink); }
 /* A step dot is a button: on hover / keyboard focus it lifts 2 px and its ring darkens (a jump target, not a picture). */
-.stepper .rail button:is(:hover, :focus-visible) .dot { transform: translateY(-2px); border-color: var(--ink); }
+.stepper .rail button:focus-visible .dot { transform: translateY(-2px); border-color: var(--ink); }
+/* Hover only where a pointer can hover: on touch a tapped dot would stay lifted (sticky :hover). */
+@media (hover: hover) { .stepper .rail button:hover .dot { transform: translateY(-2px); border-color: var(--ink); } }
 .stepper .rail [aria-current] { color: var(--ink); }
 .stepper .rail [aria-current] .dot { background: var(--ink); color: var(--surface); border-color: var(--ink); }
 /* The step that becomes current pops (1.15 → 1) on the UI spring: the eye lands on where the story is now. */
