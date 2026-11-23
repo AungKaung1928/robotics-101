@@ -36,3 +36,19 @@ describe.each([['light', light], ['dark', dark]] as const)('%s theme: BFS parent
     expect(ratio(over(t['ink-2'], opacity('came'), seen), seen)).toBeGreaterThanOrEqual(3)
   })
 })
+
+// Marks that carry meaning, read from their stylesheets: stroke or fill token (and opacity, if any) composited on paper.
+const MEANING: [file: string, sel: string, what: string][] = [
+  ['src/scenarios/tflab.css', '.tflab .ghost', 'true hit spots'],
+  ['src/scenarios/tflab.css', '.tflab .hit', 'drawn hits'],
+  ['src/scenarios/late.css', '.late .env', 'envelope in flight'],
+]
+const markColour = (file: string, sel: string, t: Record<string, string>) => {
+  const rule = new RegExp(`${sel.replace(/\./g, '\\.')} \\{([^}]*)\\}`).exec(readFileSync(file, 'utf8'))![1]
+  // the outline carries hollow and paper-filled marks; a filled mark without stroke is its fill
+  const tok = (/stroke: var\(--([\w-]+)\)/.exec(rule) ?? /fill: var\(--([\w-]+)\)/.exec(rule))![1], op = /opacity: ([\d.]+)/.exec(rule)
+  return over(t[tok], op ? parseFloat(op[1]) : 1, t.paper)
+}
+describe.each([['light', light], ['dark', dark]] as const)('%s theme: meaningful marks', (_, t) => {
+  it.each(MEANING)('%s %s (%s) >= 3:1 on paper', (file, sel) => expect(ratio(markColour(file, sel, t), t.paper)).toBeGreaterThanOrEqual(3))
+})

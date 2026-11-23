@@ -1,6 +1,6 @@
-/* TF lab (lane anim): wall in ink, true hit spots as faint ghosts, drawn hits in the ray colour, the gap to the wall dashed. */
+/* TF lab (lane anim): wall in ink, true hit spots as dashed ghosts (ink-2: 3:1+, dashed so they are not read as a guess ring), drawn hits in the ray colour, the gap to the wall dashed. */
 .tflab .wall { stroke: var(--ink); stroke-width: 0.03; stroke-linecap: round; }
-.tflab .ghost { fill: none; stroke: var(--rule); stroke-width: 0.012; }
+.tflab .ghost { fill: none; stroke: var(--ink-2); stroke-width: 0.012; stroke-dasharray: 0.02 0.015; }
 .tflab .hit { fill: var(--ray); }
 .tflab .gap { stroke: var(--ray); stroke-width: 0.01; stroke-dasharray: 0.03 0.03; }
 .tflab .ax-x { stroke: var(--axis-x); stroke-width: 0.02; }
