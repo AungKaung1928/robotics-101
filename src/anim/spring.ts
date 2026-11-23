@@ -56,3 +56,11 @@ export function springFrom(visualDuration: number, bounce: number): Spring {
   const z = Math.max(1 - Math.min(Math.max(bounce, 0), 1), 0.05), w0 = (2 * Math.PI) / (visualDuration * 1.2)
   return { k: w0 * w0, c: 2 * z * w0 }
 }
+
+const PULSE_V = 2 // scale units / s at the hit
+
+/** Scale of a node `t` s after a message lands on it: a quick swell (≈ 4 %) that springs back; 1 before and after. */
+export function arrivalScale(t: number): number {
+  return t <= 0 ? 1 : 1 + springAt(t, PRESS, 0, PULSE_V)
+}
+export const PULSE_S = settleTime(PRESS, 0, PULSE_V, 0.002)

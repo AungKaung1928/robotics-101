@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { BOUNCY, PRESS, WOBBLE, settleTime, springAt, springEasing, springFrom } from './spring'
+import { BOUNCY, PRESS, PULSE_S, WOBBLE, arrivalScale, settleTime, springAt, springEasing, springFrom } from './spring'
 
 describe('springAt', () => {
   it('starts at x0 and ends at rest', () => {
@@ -66,5 +66,17 @@ describe('springFrom (Motion visualDuration + bounce)', () => {
     expect(min).toBeLessThan(0)
     expect(min).toBeGreaterThan(-0.05)
     expect(settleTime(s, 1)).toBeLessThan(0.6)
+  })
+})
+
+describe('arrivalScale', () => {
+  it('1 before, swells 3-5 %, dips a little below 1, back within 0.3 s', () => {
+    const v = Array.from({ length: 300 }, (_, i) => arrivalScale(i / 1000))
+    expect(arrivalScale(-0.1)).toBe(1)
+    expect(Math.max(...v)).toBeGreaterThan(1.03)
+    expect(Math.max(...v)).toBeLessThan(1.05)
+    expect(Math.min(...v)).toBeLessThan(1)
+    expect(PULSE_S).toBeLessThan(0.3)
+    expect(Math.abs(arrivalScale(PULSE_S) - 1)).toBeLessThan(0.002)
   })
 })
