@@ -22,6 +22,10 @@ describe('Burmese encoding check', () => {
 })
 
 describe('lint', () => {
+  it('rejects known misspellings (ရွှေ့လျား "move something" where ရွေ့လျား "moves" is meant)', () => {
+    expect(lint('The robot moves.', 'စက်ရုပ် ရွှေ့လျားပါတယ်။', 'body').fail.join()).toMatch(/misspelling/)
+    expect(lint('The robot moves.', 'စက်ရုပ် ရွေ့လျားပါတယ်။', 'body').fail).toEqual([])
+  })
   it('rejects literary forms in labels too, and the attributive သည့် (pinned UI verbs excepted)', () => {
     expect(lint('Bring-up order', 'စက်နှိုးသည့် အစီအစဉ်', 'label').fail.join()).toMatch(/literary/)
     expect(lint('beams with a return', 'ပြန်လာသော beam တွေ', 'label').fail.join()).toMatch(/literary/)
