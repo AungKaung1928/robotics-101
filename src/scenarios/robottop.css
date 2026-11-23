@@ -68,3 +68,4 @@
 .ms-turn-r { stroke: var(--ink-2); stroke-width: 1.5; stroke-dasharray: 4 3; }
 .ms-turn-c { fill: var(--ink); }
 .ms-turn-label { fill: var(--ink); font: 600 13px var(--mono); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; }
+.sp-step.is-none .sp-face { stroke-dasharray: 5 4; }

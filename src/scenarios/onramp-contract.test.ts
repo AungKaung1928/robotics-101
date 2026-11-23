@@ -74,3 +74,19 @@ describe('ThinkScene with the chapter model tells the chapter story', () => {
     expect(th.run(0.01).crashed).toBe(true) // a rule smaller than one step of driving misses the wall
   })
 })
+
+describe('SimPickScene takes the chapter ladder', () => {
+  it('one shelf per LADDER row, 3D rows get a side, none rows dashed, the picked row lit', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: SimPickScene } = await import('./SimPickScene')
+    const sp = await import('../chapters/l0/simpick')
+    const rungs = sp.LADDER.map((r) => ({ name: r.id, kind: r.dim }))
+    const at = sp.LADDER.findIndex((r) => r.id === sp.pick({ gpu: false, sensor: true, physics: false }))
+    const h = renderToStaticMarkup(createElement(SimPickScene, { rungs, pick: at, t: 9, label: '' }))
+    expect(h.match(/class="sp-step/g)!.length).toBe(sp.LADDER.length)
+    expect(h.match(/sp-side/g)?.length ?? 0).toBe(sp.LADDER.filter((r) => r.dim === '3D').length)
+    expect(h.match(/is-none/g)?.length ?? 0).toBe(sp.LADDER.filter((r) => r.dim === 'none').length)
+    expect(h).toContain(`data-pick="${at}"`)
+  })
+})

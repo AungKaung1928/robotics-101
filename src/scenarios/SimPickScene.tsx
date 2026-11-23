@@ -5,7 +5,7 @@ import { arrivalScale } from '../anim/spring'
 import { useTextWidth } from './fit'
 import './robottop.css'
 
-export type Rung = { name: string; kind: '2D' | '3D'; note?: string } // note e.g. "needs a graphics card"
+export type Rung = { name: string; kind: '2D' | '3D' | 'none'; note?: string } // none = no world (only the robot in RViz): dashed shelf; note e.g. "needs a graphics card"
 const VW = 360, RIGHT = 350, RH = 54, BH = 46, NOTCH = 36, TOP = 40, HOP = 0.45 // px; NOTCH = room for the 32 px robot
 const ROBOT = 32, LINE = 1.8 * 13 // line pitch 1.8x: Burmese stacks marks above and below the line
 
@@ -31,7 +31,7 @@ export default function SimPickScene({ rungs, pick, from = pick, t, label }: { r
             {r.kind === '3D' && <path className="sp-side" d={`M${x + w} ${y}l6 -5v${BH}l-6 5z`} />}
             <rect className="sp-face" x={x} y={y} width={w} height={BH} rx={6} />
             <text className="sp-name" x={x + 8} y={y + 18}>{r.name}</text>
-            <text className="sp-sub" x={x + 8} y={y + 18 + LINE}>{r.kind}{r.note && <tspan className="sp-note">{`  ${r.note}`}</tspan>}</text>
+            <text className="sp-sub" x={x + 8} y={y + 18 + LINE}>{r.kind === 'none' ? '' : r.kind}{r.note && <tspan className="sp-note">{`${r.kind === 'none' ? '' : '  '}${r.note}`}</tspan>}</text>
           </g>
         )
       })}
