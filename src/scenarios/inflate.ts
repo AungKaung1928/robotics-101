@@ -1,6 +1,7 @@
 /**
  * Costmap inflation as a scenario. Nav2's InflationLayer fills cells outward from the obstacle in order of distance
- * (inflation_layer.cpp: cells queued in distance bins, nearest bin first), so the playhead is a distance front moving
+ * (nav2_costmap_2d/plugins/inflation_layer.cpp, humble, lines 253-256: "Process cells by increasing distance", one
+ * bin per distance, nearest first), so the playhead is a distance front moving
  * from 0 to the inflation radius; a cell shows its cost once the front has reached it.
  */
 
