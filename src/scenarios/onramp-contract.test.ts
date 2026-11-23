@@ -20,7 +20,7 @@ describe('on-ramp scenes agree with the chapter models', () => {
       expect(a.vl).toBeCloseTo(b.left)
       expect(a.vr).toBeCloseTo(b.right)
     }
-    for (const v of [0.1, 0.22]) expect(actAt(v, 0, 1, act.BRAKE, 10).rollOn).toBeCloseTo(act.rollOnM(v), 9)
+    for (const v of [0.1, 0.22]) for (const w of [0, 0.6, -1.5]) expect(actAt(v, w, 1, act.BRAKE, 10).rollOn, `v ${v} w ${w}`).toBeCloseTo(act.rollOnM(v), 9)
   })
   it('slip meaning: the chapter SLIP is the share delivered, MoveScene slip is the share lost -> pass 1 - SLIP', () => {
     const p = poseAt(move.LEFT, move.LEFT, 2, 1 - move.SLIP), straight = poseAt(move.LEFT, move.LEFT, 2)
@@ -119,6 +119,32 @@ describe('ThinkScene with the chapter model tells the chapter story', () => {
   })
 })
 
+describe('ThinkScene check marks are the chapter loop ticks', () => {
+  it('one mark per tick made by t; the last is lit only when the rule fired; spacing = STEP_M', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: ThinkScene } = await import('./ThinkScene')
+    const th = await import('../chapters/l0/think'), dc = await import('../chapters/l1/decide')
+    const model = { run: (a: number) => th.run(a), speed: th.SPEED, startM: th.START_M }
+    const at = (a: number, t: number) => renderToStaticMarkup(createElement(ThinkScene, { stopAt: a, t, model, label: '' }))
+    for (const a of [th.RULE_M, 0.25, 0.01]) {
+      const r = th.run(a), h = at(a, 60)
+      expect(h).toContain(`data-ticks="${r.ticks.length}"`)
+      expect((h.match(/tk-tick is-fired/g) ?? []).length).toBe(r.crashed ? 0 : 1)
+      const xs = [...h.matchAll(/class="tk-tick[^"]*" x1="([\d.]+)"/g)].map((m) => +m[1])
+      const gaps = xs.slice(1).map((x, i) => x - xs[i])
+      expect(Math.max(...gaps) - Math.min(...gaps)).toBeLessThan(1e-6) // equal spacing: one STEP_M per check
+    }
+    expect(at(th.RULE_M, 1)).toContain(`data-ticks="${Math.floor(1 * dc.SCAN_HZ) + 1}"`) // ticks at 0, 1/HZ, ... <= 1 s
+    const mid = at(th.RULE_M, 1)
+    expect((mid.match(/tk-tick is-now/g) ?? []).length).toBe(1) // driving: exactly the latest check is 'now'
+    expect(mid).not.toContain('is-fired')
+    expect(at(0.01, 60)).not.toContain('is-now') // crashed: no check is current
+    const lad = renderToStaticMarkup(createElement(ThinkScene, { stopAt: 0.5, t: 60, model, ladder: [0, 0.25, 0.5], stopWord: 'stop', label: '' }))
+    for (const a of ['0.00', '0.25', '0.50']) expect(lad).toContain(`<title>d &lt; ${a} m → stop</title>`) // each rung names its rule
+  })
+})
+
 describe('ThinkScene built-in model: d is the sensor reading', () => {
   it('a rule under the 0.12 m floor: at the end the sensor sees nothing, d is drawn as ?', async () => {
     const { renderToStaticMarkup } = await import('react-dom/server')
@@ -148,6 +174,148 @@ describe('SimPickScene takes the chapter ladder', () => {
     expect(h.match(/is-25d/g)?.length ?? 0).toBe(sp.LADDER.filter((r) => r.dim === '2.5D').length)
     expect(h.match(/is-none/g)?.length ?? 0).toBe(sp.LADDER.filter((r) => r.dim === 'none').length)
     expect(h).toContain(`data-pick="${at}"`)
+  })
+})
+
+describe('SenseScene ring = the chapter ring', () => {
+  it('ring BEAMS: drawn readings == the chapter count of valid beams at every wall-slider stop, covered too', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: SenseScene } = await import('./SenseScene')
+    const sn = await import('../chapters/l0/sense')
+    const off: string[] = []
+    for (let k = 3; k <= 40; k++) for (const covered of [false, true]) {
+      const front = k / 10, want = sn.turn(front, covered).filter(sn.valid).length
+      const h = renderToStaticMarkup(createElement(SenseScene, { box: { ...sn.ROOM, front, maxFront: sn.FRONT_MAX }, mode: 'beam', covered, ring: sn.BEAMS, label: '' }))
+      const got = Number(/data-ring="(\d+)"/.exec(h)?.[1] ?? -1)
+      if (got !== want) off.push(`${front}${covered ? ' covered' : ''}: ${got} vs ${want}`)
+    }
+    const one = renderToStaticMarkup(createElement(SenseScene, { box: { ...sn.ROOM, front: 1.5, maxFront: sn.FRONT_MAX }, mode: 'beam', ring: sn.BEAMS, label: '' }))
+    expect(one).toContain(`data-r="${sn.MAX_M}"`) // the range circle is the chapter's MAX_M
+    if (off.length) console.log('RING-OFF', off.join(' | '))
+    expect(off).toEqual([])
+  })
+})
+
+describe('ActScene too fast = the chapter tooFast', () => {
+  it('data-fast and a warning arrow exactly when act.tooFast(v, w), over the slider grid', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: ActScene } = await import('./ActScene')
+    const act = await import('../chapters/l0/act'), mv = await import('../chapters/l0/move')
+    const off: string[] = []
+    for (let v = 0; v <= mv.TOP_SPEED + 1e-9; v += 0.02) for (let w = -act.TURN_MAX; w <= act.TURN_MAX + 1e-9; w += 0.3) {
+      const h = renderToStaticMarkup(createElement(ActScene, { v, w, tStop: 3, decel: act.BRAKE, t: 1, label: '' }))
+      if (h.includes('data-fast') !== act.tooFast(v, w) || h.includes('as-arrow is-over') !== act.tooFast(v, w)) off.push(`v ${v.toFixed(2)} w ${w.toFixed(1)}`)
+    }
+    if (off.length) console.log('FAST-OFF', off.join(' | '))
+    expect(off).toEqual([])
+  })
+})
+
+describe('solved face as the chapters (robotmood: broken wins over proud)', () => {
+  it('sense, simulator, act: proud when solved, worried when broken even if solved', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement: h } = await import('react')
+    const { default: SenseScene } = await import('./SenseScene'), { default: SimWhatScene } = await import('./SimWhatScene'), { default: ActScene } = await import('./ActScene')
+    const mood = (el: ReturnType<typeof h>) => /class="rtop" data-mood="(\w+)"/.exec(renderToStaticMarkup(el))![1]
+    expect(mood(h(SenseScene, { mode: 'beam', solved: true, label: '' }))).toBe('proud')
+    expect(mood(h(SenseScene, { mode: 'beam', solved: true, covered: true, label: '' }))).toBe('worried')
+    expect(mood(h(SimWhatScene, { worldWord: 'w', viewWord: 'v', solved: true, label: '' }))).toBe('proud')
+    expect(mood(h(SimWhatScene, { worldWord: 'w', viewWord: 'v', solved: true, sensorOn: false, label: '' }))).toBe('worried')
+    expect(mood(h(ActScene, { v: 0.1, w: 0, tStop: 3, decel: 2.5, t: 1, solved: true, label: '' }))).toBe('proud')
+    expect(mood(h(ActScene, { v: 0.22, w: 1.5, tStop: 3, decel: 2.5, t: 1, solved: true, label: '' }))).toBe('worried') // too fast wins
+    expect(mood(h(ActScene, { v: 0.1, w: 0, tStop: 3, decel: 2.5, t: 1, label: '' }))).toBe('idle')
+  })
+})
+
+describe('ActScene without a Player: the act chapter stop toggle as two fixed times', () => {
+  it('t just before tStop = driving with the dials up; t long after = stopped, roll-on = the chapter rollOnM in cm', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement: h } = await import('react')
+    const { default: ActScene } = await import('./ActScene')
+    const act = await import('../chapters/l0/act')
+    const T = 3, v = 0.15, w = 0.5
+    const go = renderToStaticMarkup(h(ActScene, { v, w, tStop: T, decel: act.BRAKE, t: T - 1e-3, label: '' }))
+    const stop = renderToStaticMarkup(h(ActScene, { v, w, tStop: T, decel: act.BRAKE, t: T + 10, label: '' }))
+    expect(go).toContain('data-phase="driving"')
+    expect(go).not.toContain('as-num')
+    expect(stop).toContain('data-phase="stopped"')
+    expect(stop).toContain(`+${(act.rollOnM(v) * 100).toFixed(1)} cm</text>`)
+  })
+})
+
+describe('ThinkScene numbers = the think chapter readouts at every rule-slider stop', () => {
+  it('rule 0..1 m step 0.01: end d label text == chapter "Stopped at" text (or 0.00 on a bump), marks == checks made', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement: h } = await import('react')
+    const { default: ThinkScene } = await import('./ThinkScene')
+    const th = await import('../chapters/l0/think')
+    const model = { run: (a: number) => th.run(a), speed: th.SPEED, startM: th.START_M }
+    const off: string[] = []
+    for (let k = 0; k <= 100; k++) {
+      const a = k / 100, r = th.run(a), html = renderToStaticMarkup(h(ThinkScene, { stopAt: a, t: 60, model, label: '' }))
+      const want = r.crashed ? '0.00' : r.final.toFixed(2), got = /d = ([\d.]+) m</.exec(html)?.[1]
+      const marks = Number(/data-ticks="(\d+)"/.exec(html)?.[1])
+      if (got !== want || marks !== r.ticks.length) off.push(`rule ${a}: d ${got} vs ${want}, marks ${marks} vs ${r.ticks.length}`)
+    }
+    if (off.length) console.log('THINK-OFF', off.join(' | '))
+    expect(off).toEqual([])
+  })
+})
+
+describe('SenseScene number = the sense chapter front readout at every wall-slider stop', () => {
+  it('0.3..4.0 m step 0.1, open and covered: printed text == chapter text (number or nothing there)', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement: h } = await import('react')
+    const { default: SenseScene } = await import('./SenseScene')
+    const sn = await import('../chapters/l0/sense'), { SENSE_STRINGS } = await import('../chapters/l0/sense.strings')
+    const nothing = SENSE_STRINGS.en.nothing, off: string[] = []
+    for (let k = 3; k <= 40; k++) for (const covered of [false, true]) {
+      const front = k / 10, f = sn.front(sn.turn(front, covered)), want = f === null ? nothing : `${f.toFixed(2)} m`
+      const html = renderToStaticMarkup(h(SenseScene, { box: { ...sn.ROOM, front, maxFront: sn.FRONT_MAX }, mode: 'beam', covered, noneWord: nothing, label: '' }))
+      const got = /class="ss-num[^"]*"[^>]*>([^<]+)</.exec(html)?.[1]
+      if (got !== want) off.push(`${front}${covered ? ' covered' : ''}: ${got} vs ${want}`)
+    }
+    if (off.length) console.log('SENSE-OFF', off.join(' | '))
+    expect(off).toEqual([])
+  })
+})
+
+describe('ActScene roll-on = the act chapter readout at every speed-slider stop', () => {
+  it('v 0..0.22 step 0.01, w -1.5 / 0 / 1.5, stopped: +x.x cm == chapter (rollOnM(v) * 100).toFixed(1), none while it rounds to 0.0', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement: h } = await import('react')
+    const { default: ActScene } = await import('./ActScene')
+    const act = await import('../chapters/l0/act')
+    const off: string[] = []
+    for (let k = 0; k <= 22; k++) for (const w of [-act.TURN_MAX, 0, act.TURN_MAX]) {
+      const v = Math.round(k) / 100, want = (act.rollOnM(v) * 100).toFixed(1)
+      const html = renderToStaticMarkup(h(ActScene, { v, w, tStop: 3, decel: act.BRAKE, t: 13, label: '' }))
+      const got = /\+([\d.]+) cm</.exec(html)?.[1] ?? '0.0'
+      if (got !== want) off.push(`v ${v} w ${w}: ${got} vs ${want}`)
+    }
+    if (off.length) console.log('ACT-OFF', off.join(' | '))
+    expect(off).toEqual([])
+  })
+})
+
+describe('ThinkScene ghost of the previous rule', () => {
+  it('at the end, a ghost where the previous rule stopped (chapter model); none without a previous rule, mid-drive or same rule', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement: h } = await import('react')
+    const { default: ThinkScene } = await import('./ThinkScene')
+    const th = await import('../chapters/l0/think')
+    const model = { run: (a: number) => th.run(a), speed: th.SPEED, startM: th.START_M }
+    const at = (p: object) => renderToStaticMarkup(h(ThinkScene, { stopAt: 0.5, t: 60, model, label: '', ...p }))
+    const g = at({ prevStopAt: 1 }), robot = at({})
+    const gx = Number(/class="tk-ghost" cx="([\d.]+)"/.exec(g)![1]), rx = Number(/class="rtop" data-mood="\w+" transform="translate\(([\d.]+)/.exec(robot)![1])
+    const other = Number(/class="rtop" data-mood="\w+" transform="translate\(([\d.]+)/.exec(renderToStaticMarkup(h(ThinkScene, { stopAt: 1, t: 60, model, label: '' })))![1])
+    expect(gx).toBeCloseTo(other, 6) // the ghost sits where the robot stops with rule 1
+    expect(gx).toBeLessThan(rx) // a bigger rule stopped earlier: the ghost is behind
+    expect(at({})).not.toContain('tk-ghost')
+    expect(at({ prevStopAt: 0.5 })).not.toContain('tk-ghost')
+    expect(renderToStaticMarkup(h(ThinkScene, { stopAt: 0.5, t: 1, model, prevStopAt: 1, label: '' }))).not.toContain('tk-ghost')
   })
 })
 

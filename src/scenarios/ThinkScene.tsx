@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import RobotTop from './RobotTop'
 import { useTextWidth } from './fit'
-import { BOUNCY, arrivalScale, springAt } from '../anim/spring'
+import { BOUNCY, arrivalScale, springAt, startStretch } from '../anim/spring'
 import { cast, room } from './sense'
 import { RADIUS, thinkRun, thinkX } from './think'
 import { roomLayout } from './room'
@@ -11,7 +11,10 @@ const S = 280, M = 20, VW = 2 * M + 1.5 * S, VH = 2 * M + S
 
 /** The chapter's own model (src/chapters/l0/think.ts = l1/decide): d = the robot's FRONT to the wall, one decision per
  * scan, starting startM away; run(stopAt) gives where it stopped (final) or that it crashed. */
-export type ThinkModel = { run: (stopAt: number) => { final: number; crashed: boolean; stopS: number }; speed: number; startM: number }
+// ticks (optional): every check the chapter's loop made (time, front distance), drawn as marks under the path
+export type ThinkModel = {
+  run: (stopAt: number) => { final: number; crashed: boolean; stopS: number; ticks?: { tS: number; distance: number }[] }; speed: number; startM: number
+}
 
 type Out = { stopX: number; tStop: number; fired: boolean; bumped: boolean }
 /** Geometry and outcomes for the built-in model (think.ts: centre reading, 0.12 m sensor floor) or a chapter model. */
@@ -37,35 +40,50 @@ function simOf(wallX: number, v: number, model?: ThinkModel) {
  * (stopAt under the sensor's 0.12 m) the robot hits the wall: a squash on a bouncy spring and dizzy stars. From think.ts,
  * or from the chapter's own model via `model` (then d is measured from the robot's front, as the chapter says).
  */
-export default function ThinkScene({ stopAt, t, v = 0.2, wallX = 1.2, stopWord = 'stop', ladder, model, label }: {
-  stopAt: number; t: number; v?: number; wallX?: number; stopWord?: string; ladder?: number[]; model?: ThinkModel; label: string
+export default function ThinkScene({ stopAt, t, v = 0.2, wallX = 1.2, stopWord = 'stop', ladder, model, prevStopAt, label }: {
+  stopAt: number; t: number; v?: number; wallX?: number; stopWord?: string; ladder?: number[]; model?: ThinkModel; prevStopAt?: number; label: string
 }) {
-  const ref = useRef<SVGSVGElement>(null), rule = `d < ${stopAt.toFixed(2)} m → ${stopWord}`
+  const rungRule = (a: number) => `d < ${a.toFixed(2)} m → ${stopWord}`
+  const ref = useRef<SVGSVGElement>(null), rule = rungRule(stopAt)
   const bw = Math.max(150, useTextWidth(ref, '.tk-bubble text', rule) + 28) // bubble grows with the words
   const sim = simOf(wallX, v, model), { walls, movable, X, Y } = sim, Y0 = sim.y0
   const run = sim.out(stopAt), x = sim.xAt(run, t), done = t >= run.tStop
+  // the rule before the reader's last change (remembered here, or given): a faint robot where it stopped then, so the
+  // move to the new stop is seen, not just the new number
+  const mem = useRef<{ cur: number; prev?: number }>({ cur: stopAt })
+  if (mem.current.cur !== stopAt) mem.current = { cur: stopAt, prev: mem.current.cur }
+  const prev = prevStopAt ?? mem.current.prev, ghostX = done && prev !== undefined && prev !== stopAt ? X(sim.out(prev).stopX) : null
   const since = t - run.tStop, fired = run.fired && done, bumped = run.bumped && done
   const sx = bumped ? 1 + springAt(since, BOUNCY, -0.22) : 1 // squash against the wall, springs back with overshoot
   const pop = fired ? arrivalScale(since) : 1, by0 = Y(Y0), bx = Math.max(M + 34, Math.min(X(x), VW - M - bw + 24)), by = Y(Y0) - 98 // bubble inside the room, above the wall top
   // The d the rule reads, drawn at sensor height: a line from where d is measured to the wall, its value on top; lit while d < stopAt.
   // '?' = the sensor sees nothing (built-in model under 0.12 m): the reader sees why a tiny rule never fires.
+  const seen = (model?.run(stopAt).ticks ?? []).filter((k) => k.tS <= t + 1e-9)
   const d = sim.reading(x), dOn = d !== null && d < stopAt, dy = Y(Y0), d0 = X(sim.from(x)), d1 = X(d === null ? sim.wallAt : sim.from(x) + d)
   const dText = d === null ? 'd = ?' : `d = ${d.toFixed(2)} m`, dw = dText.length * 8.4 // 14 px monospace: 0.6 em per letter
   const wide = d1 - d0 > dw + 10
   const beyond = !wide && d1 + 8 + dw < VW - M // short line, room past the wall (built-in room): label there
   const [dx, anchor]: [number, 'middle' | 'start' | 'end'] = wide ? [(d0 + d1) / 2, 'middle'] : beyond ? [d1 + 8, 'start'] : [d1 - 6, 'end']
-  const ly = wide ? dy - 6 : beyond ? dy - 26 : dy + 54 // else under the robot and the ladder row (+34), clear of the bubble tail
+  const ly = wide ? dy - 6 : beyond ? dy - 26 : dy + 70 // else under the robot, the ladder row (+34) and the check marks (+42..52)
   return (
     <svg ref={ref} className="think-scene" viewBox={`0 0 ${VW} ${VH}`} role="img" aria-label={label} data-state={fired ? 'fired' : bumped ? 'bumped' : 'driving'}>
       {walls.map(([x1, y1, x2, y2], i) => <line key={i} className={i === movable ? 'ss-wall is-movable' : 'ss-wall'} x1={X(x1)} y1={Y(y1)} x2={X(x2)} y2={Y(y2)} />)}
-      {/* up the ladder of abstraction (Victor): where the robot would end for every stopAt in `ladder`, faint; a bump = x */}
+      {/* up the ladder of abstraction (Victor): where the robot would end for every stopAt in `ladder`, faint; a bump = x;
+          each names its rule in the bubble's notation as a hover tooltip (inside role=img: not read by screen readers) */}
       {ladder?.map((a) => { const r = sim.out(a), cx = X(r.stopX); return r.bumped
-        ? <path key={a} className="tk-rung is-bump" d={`M${cx - 4} ${Y(Y0) + 30}l8 8m0 -8l-8 8`} />
-        : <circle key={a} className={a === stopAt ? 'tk-rung is-pick' : 'tk-rung'} cx={cx} cy={Y(Y0) + 34} r={a === stopAt ? 5 : 4} /> })}
+        ? <path key={a} className="tk-rung is-bump" d={`M${cx - 4} ${Y(Y0) + 30}l8 8m0 -8l-8 8`}><title>{rungRule(a)}</title></path>
+        : <circle key={a} className={a === stopAt ? 'tk-rung is-pick' : 'tk-rung'} cx={cx} cy={Y(Y0) + 34} r={a === stopAt ? 5 : 4}><title>{rungRule(a)}</title></circle> })}
+      {ghostX !== null && <circle className="tk-ghost" cx={ghostX} cy={Y(Y0)} r={20} data-prev={prev} />}
       <line className="ts-mark" x1={X(sim.mark(stopAt))} x2={X(sim.mark(stopAt))} y1={by0 - 50} y2={by0 + 50} />
       <g transform={`translate(${X(x) + 20} ${Y(Y0)}) scale(${sx} ${1 / sx}) translate(${-X(x) - 20} ${-Y(Y0)})`}>
-        <RobotTop x={X(x)} y={Y(Y0)} deg={0} rolledL={X(x) - X(sim.x0)} rolledR={X(x) - X(sim.x0)} mood={bumped ? 'dizzy' : fired ? 'proud' : 'curious'} t={since} />
+        <RobotTop x={X(x)} y={Y(Y0)} deg={0} rolledL={X(x) - X(sim.x0)} rolledR={X(x) - X(sim.x0)} mood={bumped ? 'dizzy' : fired ? 'proud' : 'curious'} t={since} stretch={startStretch(t)} />
       </g>
+      {/* one mark per check made so far, where the robot's front was: the loop only looks at these spots (chapter model).
+          Below the robot and the ladder row (+34), so the last check before a crash stays visible in front of the wall */}
+      <g className="tk-ticks" data-ticks={seen.length}>{seen.map((k, i) => {
+        // the latest check: lit green if it fired the rule, robot blue while the robot is still going (the caption's 'check k')
+        const latest = i === seen.length - 1, cls = latest && fired ? 'tk-tick is-fired' : latest && !bumped ? 'tk-tick is-now' : 'tk-tick', kx = X(sim.mark(k.distance))
+        return <line key={i} className={cls} x1={kx} x2={kx} y1={dy + 42} y2={dy + (latest && !bumped ? 52 : 47)} /> })}</g>
       <g className={dOn ? 'tk-d is-on' : d === null ? 'tk-d is-blind' : 'tk-d'} data-d={d === null ? 'none' : d.toFixed(2)}>
         <line x1={d0} x2={d1} y1={dy} y2={dy} /><line x1={d1} x2={d1} y1={dy - 4} y2={dy + 4} />
         {/* room on the line: centred above it; near the wall: beyond the wall if the room goes on, else below the robot */}
