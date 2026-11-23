@@ -53,3 +53,12 @@ export function sparks(time: number): { x: number; y: number; o: number }[] {
 
 /** Length of the happy reaction: until the landing spring has settled and the last spark has faded. */
 export const HAPPY_S = Math.max(LAND + settleTime(BOUNCY, 0, LAND_V, 0.004), SPARK_AT + SPARK_S)
+
+const BOOP_KICK = 70 // deg / s: a fingertip nudge, well under the oops shove
+
+/** Boop when the pointer arrives (Josh Comeau's "boop"): a small spring tilt and a 2 px hop, then back to rest. */
+export function boopPose(t: number): Pose {
+  if (t <= 0) return REST
+  return { ...REST, rot: springAt(t, BOUNCY, 0, BOOP_KICK), y: t < 0.18 ? 2 * Math.sin((Math.PI * t) / 0.18) : 0 }
+}
+export const BOOP_S = settleTime(BOUNCY, 0, BOOP_KICK, 0.2)

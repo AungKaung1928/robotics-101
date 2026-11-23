@@ -14,3 +14,4 @@
 @keyframes m-breath { 50% { transform: scale(0.992, 1.015); } }
 @keyframes m-blink { 0%, 94%, 100% { transform: scaleY(1); } 96% { transform: scaleY(0.12); } }
 @media (prefers-reduced-motion: reduce) { .mascot .m-breath, .mascot .m-eyes { animation: none; } }
+.mascot-hit { display: inline-block; line-height: 0; }

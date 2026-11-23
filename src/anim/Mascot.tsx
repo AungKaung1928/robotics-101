@@ -1,41 +1,54 @@
 import { useEffect, useState } from 'react'
-import { HAPPY_S, OOPS_S, REST, happyPose, oopsPose, sparks, type Pose } from './mascot'
+import { BOOP_S, HAPPY_S, OOPS_S, REST, boopPose, happyPose, oopsPose, sparks, type Pose } from './mascot'
 import './mascot.css'
 
 const reduced = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 export type Mood = 'idle' | 'happy' | 'oops'
+type Reaction = 'happy' | 'oops' | 'boop'
+const REACTION: Record<Reaction, { pose: (t: number) => Pose; end: number }> = {
+  happy: { pose: happyPose, end: HAPPY_S }, oops: { pose: oopsPose, end: OOPS_S }, boop: { pose: boopPose, end: BOOP_S },
+}
 
 /**
  * The guide robot (TurtleBot3 Burger shape: two wheels, stacked plates, LiDAR dome as the head). Idles with a slow
  * breath and a blink (CSS); bounces when `cheer` changes (a challenge solved) and wobbles when `oops` changes (the
- * reader broke something), both on springs. Reduced motion: no movement, only the face changes for a moment.
+ * reader broke something), both on springs; a pointer arriving (or a tap) gives it a small boop. Reduced motion: no
+ * movement, only the face changes for a moment.
  */
 export default function Mascot({ cheer = 0, oops = 0, size = 64, label }: { cheer?: number; oops?: number; size?: number; label: string }) {
-  const [mood, setMood] = useState<Mood>('idle')
+  const [act, setAct] = useState<{ kind: Reaction; n: number } | null>(null)
   const [pose, setPose] = useState<Pose>(REST)
   const [t, setT] = useState(0)
-  useEffect(() => { if (cheer) return play('happy') }, [cheer])
-  useEffect(() => { if (oops) return play('oops') }, [oops])
-  function play(m: Exclude<Mood, 'idle'>) {
-    setMood(m)
-    const f = m === 'happy' ? happyPose : oopsPose, end = m === 'happy' ? HAPPY_S : OOPS_S
+  useEffect(() => { if (cheer) setAct({ kind: 'happy', n: cheer }) }, [cheer])
+  useEffect(() => { if (oops) setAct({ kind: 'oops', n: oops }) }, [oops])
+  useEffect(() => {
+    if (!act) return
+    const { pose: f, end } = REACTION[act.kind]
+    const done = () => { setPose(REST); setT(0); setAct(null) }
     if (reduced()) {
-      const id = setTimeout(() => setMood('idle'), 900)
+      const id = setTimeout(done, act.kind === 'boop' ? 0 : 900)
       return () => clearTimeout(id)
     }
     const t0 = performance.now()
     let id = 0
     const frame = (ms: number) => {
       const t = (ms - t0) / 1000
-      if (t >= end) { setPose(REST); setMood('idle'); setT(0); return }
+      if (t >= end) return done()
       setPose(f(t))
       setT(t)
       id = requestAnimationFrame(frame)
     }
     id = requestAnimationFrame(frame)
-    return () => { cancelAnimationFrame(id); setPose(REST); setT(0) }
-  }
-  return <MascotFigure pose={pose} mood={mood} size={size} label={label} spark={mood === 'happy' ? t : 0} />
+    return () => cancelAnimationFrame(id)
+  }, [act])
+  // Boop on pointer arrival or tap, only when idle: it never cuts a cheer or an oops short, and runs to the end.
+  const boop = () => { if (!act) setAct({ kind: 'boop', n: 0 }) }
+  const mood: Mood = act && act.kind !== 'boop' ? act.kind : 'idle'
+  return (
+    <span className="mascot-hit" onPointerEnter={boop} onClick={boop}>
+      <MascotFigure pose={pose} mood={mood} size={size} label={label} spark={mood === 'happy' ? t : 0} />
+    </span>
+  )
 }
 
 /** One frame of the robot: pose and face in, SVG out (the filmstrip test draws frames with it). */

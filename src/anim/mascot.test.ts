@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { HAPPY_S, OOPS_S, REST, SPARK_AT, happyPose, oopsPose, sparks } from './mascot'
+import { BOOP_S, HAPPY_S, OOPS_S, REST, SPARK_AT, boopPose, happyPose, oopsPose, sparks } from './mascot'
 
 const ts = (end: number) => Array.from({ length: 601 }, (_, i) => (i / 600) * end)
 
@@ -56,5 +56,18 @@ describe('sparks', () => {
     expect(mid(0.1).y).toBeLessThan(2) // above the head top at the apex (12 − 10)
     expect(mid(0.65).y).toBeGreaterThan(mid(0.3).y)
     expect(mid(0.6).o).toBeLessThan(mid(0.1).o)
+  })
+})
+
+describe('boopPose', () => {
+  it('a small, quick nudge: under a third of the oops swing, rest again within 0.6 s', () => {
+    const ts = Array.from({ length: 301 }, (_, i) => (i / 300) * BOOP_S)
+    const maxBoop = Math.max(...ts.map((t) => Math.abs(boopPose(t).rot)))
+    const maxOops = Math.max(...Array.from({ length: 301 }, (_, i) => Math.abs(oopsPose((i / 300) * OOPS_S).rot)))
+    expect(maxBoop).toBeGreaterThan(1)
+    expect(maxBoop).toBeLessThan(maxOops / 3)
+    expect(BOOP_S).toBeLessThan(0.6)
+    expect(Math.abs(boopPose(BOOP_S).rot)).toBeLessThan(0.2)
+    expect(boopPose(BOOP_S).y).toBe(0)
   })
 })
