@@ -249,3 +249,13 @@ describe('costCue + worried face', () => {
     expect(renderToStaticMarkup(<MascotFigure pose={REST} mood="idle" label="" />)).not.toContain('m-brow')
   })
 })
+
+describe('detectCue', () => {
+  it('thinks while grouping; cheers on a match, wobbles on a split or merge', async () => {
+    const { detectCue } = await import('./cues')
+    expect(detectCue(1, 3, false)).toEqual({ thinking: true, cheer: 0, oops: 0 })
+    expect(detectCue(3, 3, true)).toEqual({ thinking: false, cheer: 1, oops: 0 })
+    expect(detectCue(5, 3, true).oops).toBe(1)
+    expect(detectCue(2, 3, true).oops).toBe(1)
+  })
+})

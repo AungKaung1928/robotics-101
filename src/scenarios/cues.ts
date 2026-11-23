@@ -41,3 +41,10 @@ export function wsCue(lines: Line[]) {
 export function costCue(cost: number) {
   return { worried: cost > 0 && cost < INSCRIBED, oops: cost >= INSCRIBED ? 1 : 0 }
 }
+
+/** Detect (3.x): clusters found vs objects really in view (the chapter's clusterCount / objectsInView). While the scan
+ * is being grouped: thinking. When done: cheer if the counts match, the oops wobble if noise split an object (too many)
+ * or two objects merged (too few). */
+export function detectCue(found: number, truth: number, done: boolean) {
+  return { thinking: !done, cheer: done && found === truth ? 1 : 0, oops: done && found !== truth ? 1 : 0 }
+}
