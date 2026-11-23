@@ -75,3 +75,6 @@
 .tk-d.is-on line { stroke: var(--free); stroke-width: 2.5; }
 .tk-d.is-on text { fill: var(--ink); font-weight: 600; }
 .tk-d.is-blind line { stroke-dasharray: 3 3; }
+/* MoveScene wheel arrows: ground speed per wheel (1 s of travel); dashed = what a slipping wheel spins. */
+.ms-v path { fill: none; stroke: var(--robot); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }
+.ms-v.is-spin path { stroke: var(--ink-2); stroke-width: 1.5; stroke-dasharray: 4 3; }
