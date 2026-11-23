@@ -54,6 +54,9 @@ export function playStop(events: number[], t: number, end: number, pauseAtSteps:
   return next === undefined ? end : Math.min(next, end)
 }
 
+/** Most step gaps the scrubber draws; with more events it shows the plain fill. */
+export const SCRUB_MAX_GAPS = 12
+
 /** Thumb diameter of .squish-range (range.css); the thumb centre travels from THUMB/2 to width - THUMB/2. */
 export const SCRUB_THUMB_PX = 22
 
@@ -66,7 +69,9 @@ export const SCRUB_THUMB_PX = 22
 export function scrubTrack(events: number[], t: number, end: number): string {
   const at = (f: number) => `calc(${SCRUB_THUMB_PX / 2}px + (100% - ${SCRUB_THUMB_PX}px) * ${+f.toFixed(4)})`
   const f = end > 0 ? Math.min(1, Math.max(0, t / end)) : 0
-  const gaps = [...new Set(events)].filter((e) => e > 1e-9 && e < end - 1e-9).map((e) => e / end).sort((a, b) => a - b)
+  const inner = [...new Set(events)].filter((e) => e > 1e-9 && e < end - 1e-9).map((e) => e / end).sort((a, b) => a - b)
+  // segments help only when there are few (a story in parts); one event per sensor check (think: 30) would be a comb
+  const gaps = inner.length <= SCRUB_MAX_GAPS ? inner : []
   const stops: string[] = []
   const seg = (a: number, b: number, to: string) => {
     if (f > a && f < b) stops.push(`var(--robot) 0 ${at(f)}`)

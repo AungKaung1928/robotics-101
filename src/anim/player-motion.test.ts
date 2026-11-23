@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { PAUSE_D, PLAY_D, nextRate, playerKey, shiftRate, scrubFrac, scrubTrack, storedRate } from './motion'
+import { PAUSE_D, PLAY_D, SCRUB_MAX_GAPS, nextRate, playerKey, shiftRate, scrubFrac, scrubTrack, storedRate } from './motion'
 
 const stops = (bg: string) => bg.slice('linear-gradient(to right, '.length, -1).split(/, (?=var|transparent)/)
 
@@ -56,5 +56,14 @@ describe('speed keys', () => {
   })
   it('shiftRate walks 0.5 < 1 < 2 and holds at the ends; unknown -> 1', () => {
     expect([shiftRate(1, 1), shiftRate(2, 1), shiftRate(1, -1), shiftRate(0.5, -1), shiftRate(3, 1)]).toEqual([2, 2, 0.5, 0.5, 1])
+  })
+})
+
+describe('scrubTrack with many events', () => {
+  it('more than SCRUB_MAX_GAPS inner events (think: one per sensor check): no gaps, plain fill', () => {
+    const many = Array.from({ length: 31 }, (_, i) => i / 5) // 0 .. 6 s, 5 checks a second
+    expect(scrubTrack(many, 3, 6)).not.toContain('transparent')
+    const few = Array.from({ length: SCRUB_MAX_GAPS + 2 }, (_, i) => i) // exactly SCRUB_MAX_GAPS inner events
+    expect(scrubTrack(few, 0, few.length - 1).match(/transparent/g)).toHaveLength(SCRUB_MAX_GAPS)
   })
 })
