@@ -47,4 +47,21 @@ describe('on-ramp words', () => {
       }
     }
   })
+  // Plain English before think gives them their robot meaning: "a sensor and a rule" (spec wording for meet), "Check:" (every page's question label).
+  const EVERYDAY = new Set(['rule', 'check'])
+  it('no word is used in an earlier chapter than the one that teaches it (EN text)', () => {
+    const order = [...ONRAMP_A, ...ONRAMP_B]
+    const text = (id: (typeof order)[number]) => {
+      const { glossary: _g, ...rest } = BY_ID[id].en as Record<string, unknown>
+      return JSON.stringify(rest).toLowerCase()
+    }
+    order.forEach((id, i) => {
+      for (const later of order.slice(i + 1)) for (const [w] of BY_ID[later].en.glossary) {
+        if (w.includes('/')) continue // '2D / 3D' is a pair label, not one word
+        if (EVERYDAY.has(w)) continue
+        expect(text(id), `"${w}" (taught in ${later}) already used in ${id}`).not.toMatch(new RegExp(`\\b${w.toLowerCase()}\\b`))
+      }
+    })
+  })
 })
+
