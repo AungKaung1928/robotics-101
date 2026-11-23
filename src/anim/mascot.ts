@@ -88,3 +88,15 @@ export function startPose(t: number): Pose {
   return t <= 0 ? REST : { ...REST, rot: springAt(t, BOUNCY, 0, -JOLT) }
 }
 export const JOLT_S = settleTime(BOUNCY, 0, JOLT, 0.2)
+
+export const HEAD_LAG = 0.04 // s the head trails the body (overlapping action; Cooper, 12 principles in games)
+
+/**
+ * Follow-through for the head: it shows the body's pose from `lag` seconds ago, relative to the body now, so on a
+ * wobble or a hop it trails and then catches up. Zero when the body is still (at rest and after the reaction).
+ */
+export function headLag(f: (t: number) => Pose, t: number, lag = HEAD_LAG): { rot: number; dy: number } {
+  if (t <= 0) return { rot: 0, dy: 0 }
+  const now = f(t), before = f(Math.max(t - lag, 0))
+  return { rot: before.rot - now.rot, dy: now.y - before.y }
+}

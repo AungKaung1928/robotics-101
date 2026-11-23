@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { BOOP_S, HAPPY_S, JOLT_S, OOPS_S, REST, WHEEL_R, boopPose, brakePose, startPose, eyeShift, wheelAngle, happyPose, oopsPose, sparks, type Pose } from './mascot'
+import { BOOP_S, HAPPY_S, JOLT_S, OOPS_S, REST, WHEEL_R, boopPose, headLag, brakePose, startPose, eyeShift, wheelAngle, happyPose, oopsPose, sparks, type Pose } from './mascot'
 import { PRESS_STYLE } from './spring'
 import './mascot.css'
 
@@ -54,7 +54,8 @@ export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look
   // Boop on pointer arrival or tap, only when idle: it never cuts a cheer or an oops short, and runs to the end.
   const boop = () => { if (!act) setAct({ kind: 'boop', n: 0 }) }
   const mood: Mood = act && (act.kind === 'happy' || act.kind === 'oops') ? act.kind : thinking ? 'think' : 'idle'
-  const fig = <MascotFigure pose={pose} mood={mood} size={size} label={label} spark={mood === 'happy' ? t : 0} look={look} roll={roll} />
+  const head = act && !reduced() ? headLag(REACTION[act.kind].pose, t) : undefined
+  const fig = <MascotFigure pose={pose} mood={mood} size={size} label={label} spark={mood === 'happy' ? t : 0} look={look} roll={roll} head={head} />
   // Inside a chapter's SVG figure (place it with a parent <g transform>) the hit area is a <g>, in HTML a <span>.
   return inSvg
     ? <g className="mascot-hit" onPointerEnter={boop} onClick={boop}>{fig}</g>
@@ -62,8 +63,8 @@ export default function Mascot({ cheer = 0, oops = 0, brake = 0, start = 0, look
 }
 
 /** One frame of the robot: pose and face in, SVG out (the filmstrip test draws frames with it). */
-export function MascotFigure({ pose, mood, size = 64, label, spark = 0, look = 0, roll = 0 }: {
-  pose: Pose; mood: Mood; size?: number; label: string; spark?: number; look?: number; roll?: number
+export function MascotFigure({ pose, mood, size = 64, label, spark = 0, look = 0, roll = 0, head = { rot: 0, dy: 0 } }: {
+  pose: Pose; mood: Mood; size?: number; label: string; spark?: number; look?: number; roll?: number; head?: { rot: number; dy: number }
 }) {
   const body = `translate(32 58) translate(0 ${-pose.y}) rotate(${pose.rot}) scale(${pose.sx} ${pose.sy}) translate(-32 -58)`
   const shadow = 1 - pose.y / 25
@@ -74,20 +75,22 @@ export function MascotFigure({ pose, mood, size = 64, label, spark = 0, look = 0
         <g className="m-breath">
           <rect className="m-plate" x="11" y="40" width="42" height="16" rx="7" />
           <rect className="m-plate" x="14" y="31" width="36" height="11" rx="5" />
-          <rect className="m-head" x="17" y="12" width="30" height="20" rx="10" />
-          <path className="m-lidar" d="M20 18h24" />
           {[14, 50].map((cx) => (
             <g key={cx} transform={`rotate(${wheelAngle(roll)} ${cx} 53)`}>
               <circle className="m-wheel" cx={cx} cy="53" r={WHEEL_R} />
               <path className="m-spoke" d={`M${cx} ${53 - WHEEL_R + 1.5}V${53 + WHEEL_R - 1.5}`} />
             </g>
           ))}
-          <g className="m-look" style={{ transform: `translate(${mood === 'think' ? 1.5 : eyeShift(look)}px, ${mood === 'think' ? -2 : 0}px)` }}>
-            {mood === 'happy' ? (
-              <g className="m-face"><path d="M24 25q3-4 6 0M34 25q3-4 6 0" /></g>
-            ) : (
-              <g className="m-face m-eyes"><circle cx="27" cy="24" r={mood === 'oops' ? 3 : 2.2} /><circle cx="37" cy="24" r={mood === 'oops' ? 3 : 2.2} />{mood === 'oops' && <circle className="m-mouth" cx="32" cy="29.5" r="1.4" />}</g>
-            )}
+          <g className="m-headgroup" transform={`translate(0 ${head.dy}) rotate(${head.rot} 32 31)`}>
+            <rect className="m-head" x="17" y="12" width="30" height="20" rx="10" />
+            <path className="m-lidar" d="M20 18h24" />
+            <g className="m-look" style={{ transform: `translate(${mood === 'think' ? 1.5 : eyeShift(look)}px, ${mood === 'think' ? -2 : 0}px)` }}>
+              {mood === 'happy' ? (
+                <g className="m-face"><path d="M24 25q3-4 6 0M34 25q3-4 6 0" /></g>
+              ) : (
+                <g className="m-face m-eyes"><circle cx="27" cy="24" r={mood === 'oops' ? 3 : 2.2} /><circle cx="37" cy="24" r={mood === 'oops' ? 3 : 2.2} />{mood === 'oops' && <circle className="m-mouth" cx="32" cy="29.5" r="1.4" />}</g>
+              )}
+            </g>
           </g>
         </g>
       </g>

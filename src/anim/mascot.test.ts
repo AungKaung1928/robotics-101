@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { BOOP_S, HAPPY_S, JOLT_S, WHEEL_R, brakePose, startPose, eyeShift, wheelAngle, OOPS_S, REST, SPARK_AT, boopPose, happyPose, oopsPose, sparks } from './mascot'
+import { BOOP_S, HAPPY_S, HEAD_LAG, JOLT_S, WHEEL_R, headLag, brakePose, startPose, eyeShift, wheelAngle, OOPS_S, REST, SPARK_AT, boopPose, happyPose, oopsPose, sparks } from './mascot'
 
 const ts = (end: number) => Array.from({ length: 601 }, (_, i) => (i / 600) * end)
 
@@ -97,5 +97,19 @@ describe('brakePose / startPose', () => {
     for (const t of [0.03, 0.1, 0.2]) expect(brakePose(t).rot).toBeCloseTo(-startPose(t).rot, 12)
     expect(JOLT_S).toBeLessThan(0.6)
     expect(Math.abs(brakePose(JOLT_S).rot)).toBeLessThan(0.2)
+  })
+})
+
+describe('headLag (follow-through)', () => {
+  it('still body = still head; during a wobble the head trails; after the reaction it is back', () => {
+    expect(headLag(() => REST, 0.3)).toEqual({ rot: 0, dy: 0 })
+    const r = Array.from({ length: 200 }, (_, i) => Math.abs(headLag(oopsPose, (i / 200) * OOPS_S).rot))
+    expect(Math.max(...r)).toBeGreaterThan(1)
+    expect(Math.abs(headLag(oopsPose, OOPS_S + HEAD_LAG).rot)).toBeLessThan(0.3)
+  })
+  it('on the happy hop the head lags upward motion (dy > 0 while rising) and stays small', () => {
+    expect(headLag(happyPose, 0.12).dy).toBeGreaterThan(0)
+    const d = Array.from({ length: 200 }, (_, i) => Math.abs(headLag(happyPose, (i / 200) * HAPPY_S).dy))
+    expect(Math.max(...d)).toBeLessThan(5)
   })
 })
