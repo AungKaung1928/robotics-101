@@ -73,6 +73,34 @@ describe('ThinkScene with the chapter model tells the chapter story', () => {
     }
     expect(th.run(0.01).crashed).toBe(true) // a rule smaller than one step of driving misses the wall
   })
+  it('the drawn d is the chapter distance: START_M at the start, run().final at the end, lit only when d < rule', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: ThinkScene } = await import('./ThinkScene')
+    const th = await import('../chapters/l0/think')
+    const model = { run: (a: number) => th.run(a), speed: th.SPEED, startM: th.START_M }
+    const at = (a: number, t: number) => renderToStaticMarkup(createElement(ThinkScene, { stopAt: a, t, model, label: '' }))
+    expect(at(th.RULE_M, 0)).toContain(`class="tk-d" data-d="${th.START_M.toFixed(2)}"`)
+    for (const a of [th.RULE_M, 0.25, 0.01]) {
+      const r = th.run(a)
+      expect(at(a, 60)).toContain(`data-d="${Math.max(0, r.final).toFixed(2)}"`)
+      expect(at(a, 60).includes('tk-d is-on')).toBe(r.final < a)
+    }
+  })
+})
+
+describe('ThinkScene built-in model: d is the sensor reading', () => {
+  it('a rule under the 0.12 m floor: at the end the sensor sees nothing, d is drawn as ?', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement } = await import('react')
+    const { default: ThinkScene } = await import('./ThinkScene')
+    const h = renderToStaticMarkup(createElement(ThinkScene, { stopAt: 0.1, t: 60, label: '' }))
+    expect(h).toContain('data-state="bumped"')
+    expect(h).toContain('class="tk-d is-blind" data-d="none"')
+    expect(h).toContain('d = ?')
+    const ok = renderToStaticMarkup(createElement(ThinkScene, { stopAt: 0.5, t: 60, label: '' }))
+    expect(ok).toMatch(/class="tk-d is-on" data-d="0\.[0-4]\d"/)
+  })
 })
 
 describe('SimPickScene takes the chapter ladder', () => {
