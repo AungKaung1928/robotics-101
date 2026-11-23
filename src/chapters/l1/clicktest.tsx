@@ -1,0 +1,97 @@
+// Dev-only: drives every Level 1-2 and EP chapter in a real browser (DOM clicks, typed input, slider input events)
+// and prints CLICKS PASS/FAIL into #out. Run: bash src/chapters/l1/clicktest.sh (headless Chrome --dump-dom).
+import type { ComponentType } from 'react'
+import { createRoot } from 'react-dom/client'
+import { flushSync } from 'react-dom'
+import '../../index.css'
+import { STRINGS, type Strings } from '../../i18n'
+import BfsChapter from '../ep/BfsChapter'
+import LateChapter from '../ep/LateChapter'
+import { BODIES } from '../l2/bodies'
+import { ACTIONS_STRINGS } from '../l2/actions.strings'
+import { SCRIPT } from '../l2/ws'
+
+type Step =
+  | { click: string; text?: string }
+  | { type: string; value: string; submit?: boolean }
+  | { slide: number }
+  | { expect: string; has?: string; ok?: true; re?: RegExp }
+interface Case { name: string; Body: ComponentType<{ t: Strings }>; steps: Step[] }
+
+const typeAll = (lines: string[]): Step[] => lines.map((value) => ({ type: 'input.code', value, submit: true }))
+const CASES: Case[] = [
+  { name: 'decide break', Body: BODIES.decide, steps: [{ click: '.break' }, { expect: 'final', has: '2.00 m' }] },
+  { name: 'closest break', Body: BODIES.closest, steps: [{ click: '.break' }, { expect: 'closest', has: '0.00 m' }] },
+  { name: 'callback break', Body: BODIES.callback, steps: [{ click: '.break' }, { expect: 'dropped', re: /[1-9]/ }] },
+  { name: 'cpp challenge', Body: BODIES.cpp, steps: [{ click: 'button', text: 'int stop_at{0.5};' }, { expect: 'challenge', ok: true }] },
+  { name: 'shell challenge', Body: BODIES.shell, steps: [...typeAll(['source /opt/ros/humble/setup.bash', 'ros2 pkg list']), { expect: 'challenge', ok: true }] },
+  { name: 'nodes stop bridge', Body: BODIES.nodes, steps: [{ click: 'g[aria-label^="ros_gz_bridge"]' }, { expect: 'patrols', has: 'no' }] },
+  { name: 'topics challenge', Body: BODIES.topics, steps: [{ type: 'input.code', value: 'scan' }, { expect: 'challenge', ok: true }] },
+  { name: 'msgtypes break', Body: BODIES.msgtypes, steps: [{ click: '.break' }, { expect: 'ignored', has: 'angular.x' }] },
+  { name: 'actions unreachable', Body: BODIES.actions, steps: [{ click: '.break', text: ACTIONS_STRINGS.en.breakIt }, { expect: 'status', has: 'ABORTED (6)' }] },
+  { name: 'params break', Body: BODIES.params, steps: [{ click: '.break' }, { expect: 'false', has: '19' }] },
+  { name: 'ws challenge', Body: BODIES.ws, steps: [...typeAll(SCRIPT), { expect: 'challenge', ok: true }] },
+  { name: 'drive break', Body: BODIES.drive, steps: [{ click: '.break' }, { expect: 'challenge', has: 'still moving' }] },
+  { name: 'bfs stack', Body: BfsChapter, steps: [{ expect: 'len', has: '13' }, { click: '.break' }, { expect: 'len', has: '15' }] },
+  { name: 'bfs wall click', Body: BfsChapter, steps: [{ click: 'rect[aria-label="cell 3,3"]' }, { expect: 'len', has: '13' }, { click: 'rect[aria-label="cell 0,2"]' }, { click: 'rect[aria-label="cell 0,4"]' }, { click: 'rect[aria-label="cell 1,3"]' }, { expect: 'len', has: 'no path' }] },
+  { name: 'late slider', Body: LateChapter, steps: [{ expect: 'backwards', has: '5' }, { slide: 0.17 }, { expect: 'challenge', ok: true }, { slide: 0.18 }, { expect: 'backwards', has: '1' }] },
+  { name: 'late keep-latest', Body: LateChapter, steps: [{ click: '.break' }, { expect: 'backwards', has: '0' }, { expect: 'acted', has: '15' }] },
+]
+
+const setValue = (el: HTMLInputElement, v: string) => {
+  Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')!.set!.call(el, v)
+  el.dispatchEvent(new Event('input', { bubbles: true }))
+  el.dispatchEvent(new Event('change', { bubbles: true }))
+}
+const tick = () => new Promise((r) => setTimeout(r, 30))
+
+async function runCase(c: Case, host: HTMLElement): Promise<string | null> {
+  const root = createRoot(host)
+  flushSync(() => root.render(<main className="chapter"><c.Body t={STRINGS.en} /></main>))
+  try {
+    for (const st of c.steps) {
+      await tick()
+      if ('click' in st) {
+        const el = [...host.querySelectorAll<HTMLElement | SVGElement>(st.click)].find((e) => !st.text || e.textContent?.includes(st.text))
+        if (!el) return `no element ${st.click}${st.text ? ` "${st.text}"` : ''}`
+        el.dispatchEvent(new MouseEvent('click', { bubbles: true }))
+      } else if ('type' in st) {
+        const el = host.querySelector<HTMLInputElement>(st.type)
+        if (!el) return `no input ${st.type}`
+        setValue(el, st.value)
+        await tick()
+        if (st.submit) el.form!.requestSubmit()
+      } else if ('slide' in st) {
+        const el = host.querySelector<HTMLInputElement>('.slider input[type=range]')
+        if (!el) return 'no slider'
+        setValue(el, String(st.slide))
+      } else {
+        const el = host.querySelector(`[data-k="${st.expect}"]`)
+        const txt = el?.textContent ?? '(missing)'
+        if (st.has && !txt.includes(st.has)) return `[data-k=${st.expect}] "${txt}" lacks "${st.has}"`
+        if (st.re && !st.re.test(txt)) return `[data-k=${st.expect}] "${txt}" !~ ${st.re}`
+        if (st.ok && !el?.classList.contains('ok')) return `[data-k=${st.expect}] not ok: "${txt}"`
+      }
+    }
+    return null
+  } finally {
+    root.unmount()
+  }
+}
+
+async function main() {
+  const out: string[] = []
+  let pass = 0
+  for (const c of CASES) {
+    const host = document.createElement('div')
+    document.body.append(host)
+    let err: string | null
+    try { err = await runCase(c, host) } catch (e) { err = String(e) }
+    host.remove()
+    if (err) out.push(`FAIL ${c.name}: ${err}`)
+    else { pass++; out.push(`ok ${c.name}`) }
+  }
+  out.push(`CLICKS ${pass === CASES.length ? 'PASS' : 'FAIL'} ${pass}/${CASES.length}`)
+  document.getElementById('out')!.textContent = out.join('\n')
+}
+void main()
