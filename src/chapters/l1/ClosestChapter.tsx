@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import Player from '../../components/Player'
+import Player from '../../anim/Player'
 import Slider from '../../components/Slider'
 import { STRINGS, type Strings } from '../../i18n'
 import { BASE, BOX_M, beamDeg, challengeOk, closestOf, readings, scenario, trace, updates, type Start } from './closest'

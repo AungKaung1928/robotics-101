@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import Player from '../../components/Player'
+import Player from '../../anim/Player'
 import { SOURCE_REPO } from '../../content/world'
 import { STRINGS, type Strings } from '../../i18n'
 import { NODES, byId, challengeOk, optional, patrols, scenario, working, type NodeId } from './nodes'

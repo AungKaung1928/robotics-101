@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import Player from '../../components/Player'
+import Player from '../../anim/Player'
 import { STRINGS, type Strings } from '../../i18n'
 import { SCRIPT, challengeOk, exec, fresh, prompt, scenario, session } from './shell'
 import { SHELL_STRINGS } from './shell.strings'
