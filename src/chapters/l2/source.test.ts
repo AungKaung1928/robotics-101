@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest'
 import { LIDAR, NAV2 } from '../../content/world'
 import { CHECK_MS, DEFAULT } from './params'
 import { MAX_ACC, WHEEL_R, WHEEL_SEP } from './drive'
+import { LIMITS } from './msgtypes'
 import { NODES } from './nodes'
 import { NODES_STRINGS } from './nodes.strings'
 import { ACTIONS_STRINGS } from './actions.strings'
@@ -38,6 +39,13 @@ describe.skipIf(!REPO)('Level 1-2 numbers == TF-Transform-Explorer cited lines (
     const [a, b] = lines.split('-').map(Number)
     const period = show('launch/tf_explorer.launch.py').slice(a - 1, b).join('\n').match(/period=([\d.]+)/)
     expect(period ? Number(period[1]) : 0).toBe(startS) // no TimerAction in the range = starts at launch
+  })
+  it('2.2 nav2 reads /scan on nav2_params.yaml:99 and :129 (local + global costmap)', () => {
+    const y = show('config/nav2_params.yaml')
+    for (const n of [99, 129]) expect(y[n - 1]).toMatch(/^\s*topic: \/scan\s*$/)
+  })
+  it('2.3 velocity limits = velocity_smoother max_velocity on nav2_params.yaml:207', () => {
+    expect(show('config/nav2_params.yaml')[206]).toMatch(new RegExp(`max_velocity: \\[${LIMITS.linX}, 0\\.0, ${LIMITS.angZ.toFixed(1)}\\]`))
   })
   it('2.1 patrol goals: x and y uniform in [-1.0, 1.0] (the "2 × 2 m area" the page names)', () => {
     const hpp = show('include/tf_explorer/patrol_node.hpp')

@@ -31,7 +31,7 @@ export const indexAt = (angle: number) => Math.min(SAMPLES - 1, Math.max(0, Math
 
 export interface Twist { linear: [number, number, number]; angular: [number, number, number] }
 export const TWIST_FIELDS = ['linear.x', 'linear.y', 'linear.z', 'angular.x', 'angular.y', 'angular.z'] as const
-export const LIMITS = { linX: 0.26, angZ: 1.0 } // nav2_params.yaml:206 velocity_smoother max_velocity [0.26, 0.0, 1.0]
+export const LIMITS = { linX: 0.26, angZ: 1.0 } // nav2_params.yaml:207 velocity_smoother max_velocity [0.26, 0.0, 1.0]
 
 /** A two-wheel (diff drive) robot can only use linear.x and angular.z; every other field is ignored. */
 export const used = (tw: Twist) => ({ v: tw.linear[0], w: tw.angular[2] })
