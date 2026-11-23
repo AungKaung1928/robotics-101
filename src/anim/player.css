@@ -5,8 +5,10 @@
 /* Connector into a reached step fills left to right (stepper progress): how far the story got reads without counting dots. */
 .stepper .rail li:has(> [data-done], > [aria-current]) + li:has(> [data-done], > [aria-current])::before { background-size: 100% 100%; }
 .stepper .rail button { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 2px; border: 0; background: none; padding: 0; color: var(--ink-2); }
-.stepper .rail .dot { display: grid; place-items: center; width: 1.5rem; height: 1.5rem; border: 1px solid var(--rule); border-radius: 50%; background: var(--surface); transition: background-color 200ms, color 200ms, border-color 200ms; }
+.stepper .rail .dot { display: grid; place-items: center; width: 1.5rem; height: 1.5rem; border: 1px solid var(--rule); border-radius: 50%; background: var(--surface); transition: background-color 200ms, color 200ms, border-color 200ms, transform var(--spring-ms, 200ms) var(--spring, ease-out); }
 .stepper .rail [data-done] .dot { border-color: var(--ink); }
+/* A step dot is a button: on hover / keyboard focus it lifts 2 px and its ring darkens (a jump target, not a picture). */
+.stepper .rail button:is(:hover, :focus-visible) .dot { transform: translateY(-2px); border-color: var(--ink); }
 .stepper .rail [aria-current] { color: var(--ink); }
 .stepper .rail [aria-current] .dot { background: var(--ink); color: var(--surface); border-color: var(--ink); }
 /* The step that becomes current pops (1.15 → 1) on the UI spring: the eye lands on where the story is now. */
