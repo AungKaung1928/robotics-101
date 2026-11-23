@@ -1206,6 +1206,12 @@
   "my": "သုံးခဲ့",
   "back": "Used"
  },
+ "ep/late:backwards": {
+  "status": "pass-alt",
+  "en": "went back in time",
+  "my": "အတိတ်ကို ပြန်သွားခဲ့",
+  "back": "Went back into the past"
+ },
  "ep/late:bDropped": {
   "status": "pass-alt",
   "en": "readings thrown away",
@@ -1217,12 +1223,6 @@
   "en": "oldest data acted on",
   "my": "သုံးခဲ့တဲ့ အဟောင်းဆုံး data",
   "back": "Oldest data used"
- },
- "ep/late:backwards": {
-  "status": "pass-alt",
-  "en": "went back in time",
-  "my": "အတိတ်ကို ပြန်သွားခဲ့",
-  "back": "Went back into the past"
  },
  "ep/late:bpText": {
   "status": "pass-alt",
@@ -1393,12 +1393,6 @@
   "my": "ပစ်လိုက် (စောင့်ချိန်အတွက် နောက်ကျလွန်း)",
   "back": "Discarded (too late for the wait time)"
  },
- "ep/late:rUsed": {
-  "status": "pass-alt",
-  "en": "used, in order",
-  "my": "အစဉ်အတိုင်း သုံးခဲ့",
-  "back": "Used in order"
- },
  "ep/late:reorderText": {
   "status": "pass-alt",
   "en": "Hold each reading until its stamp + a wait, then use them in stamp order. Never back in time, but every reading is used that much later; one that arrives after its wait is dropped.",
@@ -1428,6 +1422,12 @@
   "en": "Python shown; the page runs the same logic in JavaScript.",
   "my": "ဒီမှာ Python နဲ့ ပြထားပါတယ်၊ စာမျက်နှာက တူညီတဲ့ logic ကို JavaScript နဲ့ run ပါတယ်။",
   "back": "It is shown here in Python; the page runs the same logic in JavaScript."
+ },
+ "ep/late:rUsed": {
+  "status": "pass-alt",
+  "en": "used, in order",
+  "my": "အစဉ်အတိုင်း သုံးခဲ့",
+  "back": "Used in order"
  },
  "ep/late:sensor": {
   "status": "pass-alt",
@@ -4026,12 +4026,6 @@
   "my": "run မဖြစ်ခဲ့",
   "back": "Did not run"
  },
- "l1/cpp:notYet": {
-  "status": "pass-alt",
-  "en": "Try another:",
-  "my": "နောက်တစ်ခု စမ်းကြည့်ပါ:",
-  "back": "Try the next one:"
- },
  "l1/cpp:note.double": {
   "status": "pass-alt",
   "en": "double keeps 0.5. Same result as Python.",
@@ -4049,6 +4043,12 @@
   "en": "Braces forbid the silent cut: g++ refuses to build. A compile error is the cheap place to find this bug.",
   "my": "တွန့်ကွင်းက တိတ်တိတ်လေး ဖြတ်ချတာကို တားပါတယ်: g++ က build မလုပ်ပေးပါဘူး။ ဒီ bug ကို တွေ့ဖို့ ကုန်ကျစရိတ် အနည်းဆုံး နေရာက compile အမှားပါပဲ။",
   "back": "The curly braces prevent silent truncation: g++ will not build it. The place that costs the least to find this bug is the compile error."
+ },
+ "l1/cpp:notYet": {
+  "status": "pass-alt",
+  "en": "Try another:",
+  "my": "နောက်တစ်ခု စမ်းကြည့်ပါ:",
+  "back": "Try the next one:"
  },
  "l1/cpp:result": {
   "status": "pass-alt",
@@ -4909,17 +4909,17 @@
   "my": "တည့်တည့်ရှေ့က index",
   "back": "index straight ahead"
  },
- "l2/msgtypes:angZ": {
-  "status": "pass-alt",
-  "en": "angular.z (rad/s)",
-  "my": "angular.z (rad/s)",
-  "back": "angular.z (rad/s)"
- },
  "l2/msgtypes:angle": {
   "status": "pass-alt",
   "en": "angle of ranges[i]",
   "my": "ranges[i] ရဲ့ ထောင့်",
   "back": "angle of ranges[i]"
+ },
+ "l2/msgtypes:angZ": {
+  "status": "pass-alt",
+  "en": "angular.z (rad/s)",
+  "my": "angular.z (rad/s)",
+  "back": "angular.z (rad/s)"
  },
  "l2/msgtypes:breakIt": {
   "status": "pass-alt",
@@ -4993,12 +4993,6 @@
   "my": "သင်ယူရမယ့်အရာ: topic တိုင်းက message type တစ်ခုကို သယ်ဆောင်ပါတယ်။ message type ဆိုတာ နာမည်ပါတဲ့ field တွေရဲ့ ပုံသေစာရင်း ဖြစ်ပါတယ်။ အဲဒီ field တွေကို နာမည်နဲ့ ဖတ်ပြီး ရေးပါတယ်။",
   "back": "What to learn: every topic carries one message type. A message type is a fixed list of named fields. Those fields are read and written by name."
  },
- "l2/msgtypes:linX": {
-  "status": "pass-alt",
-  "en": "linear.x (m/s)",
-  "my": "linear.x (m/s)",
-  "back": "linear.x (m/s)"
- },
  "l2/msgtypes:lines.0": {
   "status": "pass-alt",
   "en": "/scan carries sensor_msgs/msg/LaserScan. Most fields describe the sensor; the distances themselves are in ranges, 360 numbers.",
@@ -5016,6 +5010,12 @@
   "en": "/cmd_vel carries geometry_msgs/msg/Twist: 6 numbers. A two-wheel robot only uses linear.x (forward speed) and angular.z (turn rate).",
   "my": "/cmd_vel က geometry_msgs/msg/Twist ကို သယ်ဆောင်ပါတယ်၊ ဂဏန်း 6 ခု ပါပါတယ်။ ဘီး 2 ဘီးပါတဲ့ စက်ရုပ်က linear.x (ရှေ့သွားတဲ့ အမြန်နှုန်း) နဲ့ angular.z (လှည့်နှုန်း) ကိုပဲ သုံးပါတယ်။",
   "back": "/cmd_vel carries geometry_msgs/msg/Twist, which holds 6 numbers. A robot with 2 wheels uses only linear.x (forward speed) and angular.z (turning rate)."
+ },
+ "l2/msgtypes:linX": {
+  "status": "pass-alt",
+  "en": "linear.x (m/s)",
+  "my": "linear.x (m/s)",
+  "back": "linear.x (m/s)"
  },
  "l2/msgtypes:notYet": {
   "status": "pass-alt",
@@ -5642,17 +5642,17 @@
   "my": "my_node က subscribe လုပ်တဲ့ နာမည်",
   "back": "The name my_node subscribes to"
  },
- "l2/topics:notYet": {
-  "status": "pass-alt",
-  "en": "Not yet: my_node hears",
-  "my": "မရသေး: my_node ကြားရတာ",
-  "back": "Not yet: what my_node hears"
- },
  "l2/topics:nothing": {
   "status": "pass-alt",
   "en": "nothing",
   "my": "ဘာမှ မရှိ",
   "back": "Nothing"
+ },
+ "l2/topics:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet: my_node hears",
+  "my": "မရသေး: my_node ကြားရတာ",
+  "back": "Not yet: what my_node hears"
  },
  "l2/topics:resolves": {
   "status": "pass-alt",
