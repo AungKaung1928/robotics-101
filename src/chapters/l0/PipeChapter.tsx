@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react'
 import Player from '../../components/Player'
+import { arrivalScale } from '../../anim/spring'
 import { SOURCE_REPO } from '../../content/world'
 import { STRINGS, type Strings } from '../../i18n'
+import { easeInOut } from '../../lib/timeline'
 import { HOP_S, PIPE, found, scenario } from './pipe'
 import { PIPE_STRINGS } from './pipe.strings'
 import './l0.css'
@@ -22,7 +24,9 @@ export default function PipeChapter({ t }: { t: Strings }) {
   const f = sc.frame(now * 1000)
   const ok = broken !== null && found(broken, clicked)
   const hop = (now / HOP_S) % 1
-  const px = x0(f.at) + W / 2 + (f.moving ? ((hop - 0.6) / 0.4) * (W + GAP) : 0)
+  const px = x0(f.at) + W / 2 + (f.moving ? easeInOut((hop - 0.6) / 0.4) * (W + GAP) : 0)
+  // The receiving box swells and springs back as the scan lands (box 0 holds it from t = 0, no landing).
+  const landed = f.at > 0 ? now - f.at * HOP_S : 0
   return (
     <>
       <div className="figure">
@@ -30,8 +34,10 @@ export default function PipeChapter({ t }: { t: Strings }) {
           {PIPE.map((p, i) => {
             const box = (
               <>
-                <rect x={x0(i)} y="40" width={W} height="64" rx="8" />
-                <text x={x0(i) + W / 2} y="77" textAnchor="middle">{s.names[p.id]}</text>
+                <g transform={i === f.at && landed > 0 ? `translate(${x0(i) + W / 2} 72) scale(${arrivalScale(landed)}) translate(${-(x0(i) + W / 2)} -72)` : undefined}>
+                  <rect x={x0(i)} y="40" width={W} height="64" rx="8" />
+                  <text x={x0(i) + W / 2} y="77" textAnchor="middle">{s.names[p.id]}</text>
+                </g>
                 {i < PIPE.length - 1 && <path className="pipe-link" d={`M ${x0(i) + W} 72 h ${GAP}`} />}
               </>
             )
