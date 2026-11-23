@@ -56,3 +56,19 @@ describe('ThinkScene', () => {
     expect(b).toContain('data-mood="dizzy"')
   })
 })
+
+describe('ActScene', () => {
+  it('driving -> rolling (dials at 0, ghost, roll-on label) -> stopped', async () => {
+    const { default: ActScene } = await import('./ActScene')
+    const p = (t: number) => renderToStaticMarkup(<ActScene v={0.2} w={0} tStop={1} decel={0.5} t={t} label="" />)
+    expect(p(0.5)).toContain('data-phase="driving"')
+    expect(p(0.5)).toContain('v 0.20')
+    const r = p(1.2)
+    expect(r).toContain('data-phase="rolling"')
+    expect(r).toContain('v 0.00')
+    expect(r).toContain('opacity="0.35"')
+    const s = p(5)
+    expect(s).toContain('data-phase="stopped"')
+    expect(s).toContain('+0.04 m') // 0.2² / (2 · 0.5)
+  })
+})
