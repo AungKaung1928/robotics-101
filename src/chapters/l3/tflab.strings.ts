@@ -18,6 +18,16 @@ export const TFLAB_STRINGS = {
     ok: 'All three pairs OK. The repo checks the same with this test:',
     notYet: 'Still MISSING: that change does not add the missing transform.',
     reset: 'Break it again',
+    stale: {
+      title: 'Second failure: STALE',
+      note: 'The robot turns at 1 rad/s. The laser hits are drawn with a transform that is this many seconds old. The detector calls a pair STALE only above 1.0 s.',
+      age: 'Transform age (s)',
+      status: 'detector says',
+      yaw: 'heading error',
+      off: 'off the wall',
+      lesson: 'The detector still says OK, but the scan is already wrong: a passing check is not the same as correct data.',
+      fresh: 'Send a fresh transform',
+    },
   },
   ja: {
     title: 'TF デバッグ演習：欠けたリンク',
@@ -37,5 +47,15 @@ export const TFLAB_STRINGS = {
     ok: '3 つの組がすべて OK。リポジトリは同じことをこのテストで確かめている：',
     notYet: 'まだ MISSING：その変更では欠けた変換は増えない。',
     reset: 'もう一度壊す',
+    stale: {
+      title: 'もう一つの故障：STALE',
+      note: 'ロボットは 1 rad/s で回っている。レーザーの点は、この秒数だけ古い変換で描かれる。検出器が STALE と言うのは 1.0 秒を超えたときだけ。',
+      age: '変換の古さ (s)',
+      status: '検出器の判定',
+      yaw: '向きのずれ',
+      off: '壁からのずれ',
+      lesson: '検出器はまだ OK と言うが、スキャンはもう間違っている。チェックに通ることと、データが正しいことは別。',
+      fresh: '新しい変換を送る',
+    },
   },
 }
