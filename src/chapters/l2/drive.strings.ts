@@ -1,0 +1,51 @@
+/** Chapter 2.7 text, EN + JA. Same keys in both (drive.test checks). */
+export const DRIVE_STRINGS = {
+  en: {
+    title: 'ROS 2: first drive',
+    learn: 'You will learn: to move the robot, publish a Twist on /cmd_vel, and to stop it, publish zeros.',
+    lines: [
+      'ros2 topic pub sends a Twist 10 times a second. The simulator turns linear.x and angular.z into two wheel speeds: turning left spins the right wheel faster.',
+      'The robot speeds up at most 1 m/s² (its config), so it starts smoothly even when you ask for full speed at once.',
+      'Pressing Ctrl+C stops the publisher, not the robot. The simulated base keeps the last command until a new one arrives.',
+    ],
+    v: 'linear.x (m/s)', w: 'angular.z (rad/s)', dur: 'publish for (s)',
+    zeros: 'then publish zeros ({})',
+    breakIt: 'Break it: Ctrl+C without zeros', fixIt: 'Fix it: publish zeros',
+    brokenNote: 'The publisher is gone, the last Twist is not. The robot drives on until it hits something.',
+    wheelL: 'left wheel', wheelR: 'right wheel', speed: 'speed now', stopped: 'standing still', moving: 'still moving',
+    challenge: 'Challenge: end inside the green circle, standing still.',
+    solved: 'Solved: parked at', notYet: 'Not yet: ended at',
+    words: 'Words',
+    glossary: [
+      ['/cmd_vel', 'the topic a mobile robot reads its speed commands from'],
+      ['ros2 topic pub', 'publish a message from the terminal; --rate 10 = 10 per second, --once = one'],
+      ['diff drive', 'a two-wheel robot that turns by spinning its wheels at different speeds'],
+      ['{}', 'a message with every field at its default: all zeros'],
+    ] as [string, string][],
+    caption: (t: string, v: string) => `t = ${t} s · speed ${v} m/s`,
+  },
+  ja: {
+    title: 'ROS 2：はじめての走行',
+    learn: '学ぶこと：ロボットを動かすには /cmd_vel に Twist を publish し、止めるにはゼロを publish する。',
+    lines: [
+      'ros2 topic pub は Twist を1秒10回送る。シミュレータは linear.x と angular.z を2つの車輪速度に変える：左に曲がるときは右の車輪が速く回る。',
+      'ロボットの加速は最大 1 m/s²（設定値）なので、いきなり全速を頼んでもなめらかに動き出す。',
+      'Ctrl+C で止まるのは publisher で、ロボットではない。シミュレータの台車は新しい指令が来るまで最後の指令を守り続ける。',
+    ],
+    v: 'linear.x（m/s）', w: 'angular.z（rad/s）', dur: 'publish する時間（s）',
+    zeros: 'その後ゼロ（{}）を publish',
+    breakIt: '壊す：ゼロを送らず Ctrl+C', fixIt: '直す：ゼロを publish',
+    brokenNote: 'publisher は消えたが、最後の Twist は残っている。ロボットは何かにぶつかるまで走り続ける。',
+    wheelL: '左車輪', wheelR: '右車輪', speed: '現在の速度', stopped: '停止中', moving: 'まだ動いている',
+    challenge: 'チャレンジ：緑の円の中で止まって終わろう。',
+    solved: '成功：停止位置', notYet: 'まだ：終了位置',
+    words: '用語',
+    glossary: [
+      ['/cmd_vel', '移動ロボットが速度指令を読むトピック'],
+      ['ros2 topic pub', 'ターミナルからメッセージを publish。--rate 10 = 1秒10回、--once = 1回'],
+      ['差動二輪', '左右の車輪の速さを変えて曲がる二輪ロボット'],
+      ['{}', '全フィールドが既定値のメッセージ：すべてゼロ'],
+    ] as [string, string][],
+    caption: (t: string, v: string) => `t = ${t} s · 速度 ${v} m/s`,
+  },
+}

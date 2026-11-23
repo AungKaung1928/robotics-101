@@ -1,5 +1,6 @@
 import type { ChapterMeta } from '../../anim/contract'
 import { ACTIONS_STRINGS } from './actions.strings'
+import { DRIVE_STRINGS } from './drive.strings'
 import { MSGTYPES_STRINGS } from './msgtypes.strings'
 import { NODES_STRINGS } from './nodes.strings'
 import { PARAMS_STRINGS } from './params.strings'
@@ -14,6 +15,7 @@ export const LEVEL2_CHAPTERS: ChapterMeta[] = [
   { id: 'actions', level: 2, titleEn: ACTIONS_STRINGS.en.title, titleJa: ACTIONS_STRINGS.ja.title, icon: 'goal' },
   { id: 'params', level: 2, titleEn: PARAMS_STRINGS.en.title, titleJa: PARAMS_STRINGS.ja.title, icon: 'launch' },
   { id: 'ws', level: 2, titleEn: WS_STRINGS.en.title, titleJa: WS_STRINGS.ja.title, icon: 'map' },
+  { id: 'drive', level: 2, titleEn: DRIVE_STRINGS.en.title, titleJa: DRIVE_STRINGS.ja.title, icon: 'robot' },
 ]
 
 /** Chapter bodies by id; same props as the existing chapters ({ t: Strings }). */
@@ -23,3 +25,4 @@ export { default as MsgTypesChapter } from './MsgTypesChapter'
 export { default as ActionsChapter } from './ActionsChapter'
 export { default as ParamsChapter } from './ParamsChapter'
 export { default as WsChapter } from './WsChapter'
+export { default as DriveChapter } from './DriveChapter'
