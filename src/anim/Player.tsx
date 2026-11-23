@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from 'react'
 import type { Strings } from '../i18n'
 import { advance, stepEvent } from '../lib/timeline'
-import { GLIDE_MS, HOLD_KEY, currentStep, fromKeyboard, glide, playerKey, shouldAutoplay } from './motion'
+import { GLIDE_MS, HOLD_KEY, currentStep, fromKeyboard, glide, playStop, playerKey, shouldAutoplay } from './motion'
 import { UI_STYLE } from './spring'
 import './player.css'
 
@@ -18,9 +18,10 @@ const reducedMotion = () => typeof matchMedia === 'function' && matchMedia('(pre
  * Reduced motion: Play is disabled, Step jumps, the chapter opens on its end frame.
  * Pausing holds autoplay off for the rest of the session; pressing Play again releases it.
  */
-export default function Player({ t, setT, end, events, speed, autoplay = false, caption, labels, s }: {
+export default function Player({ t, setT, end, events, speed, autoplay = false, pauseAtSteps = false, caption, labels, s }: {
   t: number; setT: (t: number) => void; end: number; events: number[]; speed: number; autoplay?: boolean; caption: ReactNode
   labels?: string[]; s: Strings
+  pauseAtSteps?: boolean // Play stops at the next step (Mayer's segmenting: learner-paced segments, d = 0.98)
 }) {
   const still = reducedMotion()
   const [playing, setPlaying] = useState(() => shouldAutoplay(autoplay, still, held()))
@@ -30,16 +31,17 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
   useEffect(() => {
     if (!playing) return
     let last = performance.now(), id = 0
+    const stop = playStop(events, now.current, end, pauseAtSteps)
     const frame = (ms: number) => {
-      const next = advance(now.current, (ms - last) / 1000, speed, end)
+      const next = advance(now.current, (ms - last) / 1000, speed, stop)
       last = ms
       setT(next)
-      if (next >= end) setPlaying(false)
+      if (next >= stop) setPlaying(false)
       else id = requestAnimationFrame(frame)
     }
     id = requestAnimationFrame(frame)
     return () => cancelAnimationFrame(id)
-  }, [playing, speed, end, setT])
+  }, [playing, speed, end, setT, pauseAtSteps, events])
   useEffect(() => {
     if (target === null) return
     const from = now.current, t0 = performance.now()

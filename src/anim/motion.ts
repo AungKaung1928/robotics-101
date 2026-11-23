@@ -43,3 +43,10 @@ export function shouldAutoplay(asked: boolean, still: boolean, held: boolean): b
 
 /** A click that came from the keyboard (Enter / Space on a focused button): browsers report it with detail 0. */
 export const fromKeyboard = (e: { detail: number }) => e.detail === 0
+
+/** Where Play stops: the end, or with pauseAtSteps the next step after t (the end when no step is left). */
+export function playStop(events: number[], t: number, end: number, pauseAtSteps: boolean): number {
+  if (!pauseAtSteps) return end
+  const next = [...events].sort((a, b) => a - b).find((e) => e > t + 1e-9)
+  return next === undefined ? end : Math.min(next, end)
+}

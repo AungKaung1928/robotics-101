@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { GLIDE_MS, currentStep, fromKeyboard, glide, playerKey, shouldAutoplay } from './motion'
+import { GLIDE_MS, currentStep, fromKeyboard, glide, playerKey, shouldAutoplay, playStop } from './motion'
 
 describe('glide', () => {
   it('starts at from, lands exactly on to, passes the midpoint at half time', () => {
@@ -70,5 +70,16 @@ describe('fromKeyboard', () => {
     expect(fromKeyboard({ detail: 0 })).toBe(true)
     expect(fromKeyboard({ detail: 1 })).toBe(false)
     expect(fromKeyboard({ detail: 2 })).toBe(false)
+  })
+})
+
+describe('playStop', () => {
+  it('off: always the end; on: the next step after t, the end when none is left', () => {
+    const ev = [0, 1, 2.5]
+    expect(playStop(ev, 0.3, 4, false)).toBe(4)
+    expect(playStop(ev, 0.3, 4, true)).toBe(1)
+    expect(playStop(ev, 1, 4, true)).toBe(2.5) // sitting on a step: go to the next one
+    expect(playStop(ev, 2.5, 4, true)).toBe(4) // past the last step: the end
+    expect(playStop([0, 9], 1, 4, true)).toBe(4) // a step after the end is clamped
   })
 })
