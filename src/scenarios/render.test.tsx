@@ -69,6 +69,9 @@ describe('scenario figures render from their models', () => {
     expect(at(0.3)).toContain('rotate(180)') // cell 1 (x 1, y 0) points left to its parent, the start
     expect(at(1)).not.toContain('cell-hit')
     expect(count(renderToStaticMarkup(<BfsWave w={5} h={3} blocked={blocked} start={0} goal={4} t={1} label="" onCell={() => {}} />), /class="cell-hit"/g)).toBe(15)
+    const kb = renderToStaticMarkup(<BfsWave w={5} h={3} blocked={blocked} start={0} goal={4} t={1} label="grid" onCell={() => {}} />)
+    expect(kb).toContain('tabindex="0"') // one tab stop for the whole grid
+    expect(kb).toContain('aria-label="grid. 1, 1: free"') // focus starts on the start cell
     const shut = blocked.map((b, i) => b || i === 3 || i === 8 || i === 13)
     expect(at(9, 4, shut)).not.toContain('class="path"')
   })

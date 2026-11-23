@@ -65,3 +65,17 @@ export function toggleCell(blocked: boolean[], c: number, start: number, goal: n
   next[c] = !next[c]
   return next
 }
+
+/** Keyboard focus on the grid: arrows move one cell (stopping at the edges), Home/End jump to the first/last cell. */
+export function moveFocus(c: number, key: string, w: number, h: number): number {
+  const x = c % w, y = (c - x) / w
+  switch (key) {
+    case 'ArrowRight': return y * w + Math.min(x + 1, w - 1)
+    case 'ArrowLeft': return y * w + Math.max(x - 1, 0)
+    case 'ArrowDown': return Math.min(y + 1, h - 1) * w + x
+    case 'ArrowUp': return Math.max(y - 1, 0) * w + x
+    case 'Home': return 0
+    case 'End': return w * h - 1
+    default: return c
+  }
+}

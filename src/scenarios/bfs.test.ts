@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { bfs, bfsTimeline, layerAt, pathTo, robotAt, toggleCell, tracedCells } from './bfs'
+import { bfs, bfsTimeline, layerAt, pathTo, robotAt, toggleCell, tracedCells, moveFocus } from './bfs'
 
 const parse = (rows: string[]) => ({ w: rows[0].length, h: rows.length, blocked: rows.join('').split('').map((c) => c === '#') })
 
@@ -56,5 +56,17 @@ describe('EP1 BFS', () => {
     expect(toggleCell(b, 3, 0, 3)).toBe(b)
     expect(toggleCell(b, 9, 0, 3)).toBe(b)
     expect(b).toEqual([false, false, true, false])
+  })
+  it('moveFocus: arrows move one cell and stop at the edges; Home/End; other keys keep the cell', () => {
+    const w = 5, h = 3 // cells 0..14
+    expect(moveFocus(6, 'ArrowRight', w, h)).toBe(7)
+    expect(moveFocus(9, 'ArrowRight', w, h)).toBe(9) // right edge
+    expect(moveFocus(5, 'ArrowLeft', w, h)).toBe(5) // left edge, no wrap to the row above
+    expect(moveFocus(6, 'ArrowDown', w, h)).toBe(11)
+    expect(moveFocus(11, 'ArrowDown', w, h)).toBe(11)
+    expect(moveFocus(1, 'ArrowUp', w, h)).toBe(1)
+    expect(moveFocus(7, 'Home', w, h)).toBe(0)
+    expect(moveFocus(7, 'End', w, h)).toBe(14)
+    expect(moveFocus(7, 'a', w, h)).toBe(7)
   })
 })

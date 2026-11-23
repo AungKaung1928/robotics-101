@@ -8,3 +8,7 @@
 .bfs .came { fill: none; stroke: var(--ink-2); stroke-width: 0.05; stroke-linecap: round; stroke-linejoin: round; opacity: 0.75; }
 .bfs .came.on-front { stroke: var(--surface); opacity: 1; }
 .bfs .cell-hit { fill: transparent; cursor: pointer; }
+/* Keyboard ring: only while the grid has keyboard focus. */
+.bfs .cell-keys { outline: none; }
+.bfs .cell-focus { fill: none; stroke: var(--robot); stroke-width: 0.08; display: none; }
+.bfs .cell-keys:focus-visible .cell-focus { display: inline; }
