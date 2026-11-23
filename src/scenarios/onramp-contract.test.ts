@@ -229,6 +229,22 @@ describe('solved face as the chapters (robotmood: broken wins over proud)', () =
   })
 })
 
+describe('ActScene without a Player: the act chapter stop toggle as two fixed times', () => {
+  it('t just before tStop = driving with the dials up; t long after = stopped, roll-on = the chapter rollOnM in cm', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement: h } = await import('react')
+    const { default: ActScene } = await import('./ActScene')
+    const act = await import('../chapters/l0/act')
+    const T = 3, v = 0.15, w = 0.5
+    const go = renderToStaticMarkup(h(ActScene, { v, w, tStop: T, decel: act.BRAKE, t: T - 1e-3, label: '' }))
+    const stop = renderToStaticMarkup(h(ActScene, { v, w, tStop: T, decel: act.BRAKE, t: T + 10, label: '' }))
+    expect(go).toContain('data-phase="driving"')
+    expect(go).not.toContain('as-num')
+    expect(stop).toContain('data-phase="stopped"')
+    expect(stop).toContain(`+${(act.rollOnM(v) * 100).toFixed(1)} cm</text>`)
+  })
+})
+
 describe('SimWhatScene sensor off says why the view is blank', () => {
   it('emptyWord in the view only when the sensor is off; no dots then', async () => {
     const { renderToStaticMarkup } = await import('react-dom/server')

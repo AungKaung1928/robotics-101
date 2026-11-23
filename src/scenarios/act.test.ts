@@ -65,8 +65,8 @@ describe('ActScene roll-on label in the chapter unit', () => {
     const { createElement } = await import('react')
     const { default: ActScene } = await import('./ActScene')
     const at = (v: number) => renderToStaticMarkup(createElement(ActScene, { v, w: 0, tStop: 3, decel: 2.5, t: 4, label: '' }))
-    expect(at(0.15)).toContain('+0.5 cm</text>') // 0.15² / 5 = 0.0045 m
-    expect(at(0.22)).toContain('+1.0 cm</text>') // 0.22² / 5 = 0.00968 m
+    expect(at(0.15)).toContain(`+${((0.15 * 0.15) / (2 * 2.5) * 100).toFixed(1)} cm</text>`) // the chapter's rollOnM(0.15) rounds to 0.4
+    expect(at(0.22)).toContain(`+${((0.22 * 0.22) / (2 * 2.5) * 100).toFixed(1)} cm</text>`) // 0.968 -> 1.0
     expect(at(0.02)).not.toContain('as-num') // 0.08 mm
   })
 })

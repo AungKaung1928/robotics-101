@@ -28,7 +28,9 @@ export default function ActScene({ v, w, tStop, decel, t, vWord = 'v', wWord = '
 }) {
   const { s: S, x0, y0 } = actFrame(v, w, tStop, decel), scr = (p: { x: number; y: number }) => [x0 + p.x * S, y0 - p.y * S] as const
   const f = actAt(v, w, tStop, decel, t), on = t < tStop, [x, y] = scr(f.pose), [gx, gy] = scr(f.ghost), { vl, vr } = wheels(v, w)
-  const cm = (f.rollOn * 100).toFixed(1) // the chapter states roll-on in cm, one decimal; hidden while it rounds to 0.0
+  // the chapter states roll-on in cm, one decimal; hidden while it rounds to 0.0. Standing still: the chapter's own
+  // expression v² / (2 decel), so both round the same (0.45 cm: the time-stepped sum gave 0.5, the chapter 0.4)
+  const cm = ((on || f.speed > 0 ? f.rollOn : (v * v) / (2 * decel)) * 100).toFixed(1)
   const path = Array.from({ length: Math.floor(t / 0.05) + 2 }, (_, i) => scr(actAt(v, w, tStop, decel, Math.min(i * 0.05, t)).pose))
     .map(([px, py], i) => `${i ? 'L' : 'M'}${px.toFixed(1)} ${py.toFixed(1)}`).join('')
   // a wheel asked for more than the top speed (the chapter's tooFast): its arrow turns warning-coloured, the robot worries
