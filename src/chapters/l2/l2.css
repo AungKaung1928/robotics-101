@@ -27,3 +27,4 @@
 .graph .lim { stroke: var(--ray); stroke-width: 2; }
 .tree { min-height: 0; margin-bottom: 0.5rem; }
 .graph .goalc { fill: color-mix(in srgb, var(--free) 18%, transparent); stroke: var(--free); stroke-width: 2; }
+.graph .nd.still { cursor: default; }
