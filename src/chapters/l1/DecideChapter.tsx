@@ -55,9 +55,9 @@ export default function DecideChapter({ t }: { t: Strings }) {
         </dl>
         <p><strong>{s.challenge}</strong></p>
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet} {r.crashed ? s.crashed : `${m(r.final)} m`} ({GOAL[0]}–{GOAL[1]} m)</p>
+        <p className="note" data-k="real-sensor">{s.realSensor}</p>
         <p className="group-h">{s.words}</p>
         <Gloss items={s.glossary} />
-        <p className="note" data-k="real-sensor">{s.realSensor}</p>
         <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L39`}>nav2_params.yaml:39</a> (max_vel_x {SPEED}), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L168`}>turtlebot3_burger.urdf.xacro:168</a> (update_rate {SCAN_HZ}) · <a href="https://docs.python.org/3/tutorial/controlflow.html#if-statements">Python tutorial: if</a> · <a href="https://github.com/ros-infrastructure/rep/blob/master/rep-0117.rst">REP 117</a> · <a href="https://github.com/gazebosim/gz-sensors/blob/gz-sensors8/src/GpuLidarSensor.cc#L201-L202">GpuLidarSensor.cc:201</a> (Gazebo Harmonic). {s.srcNote}</p>
       </div>
     </>
