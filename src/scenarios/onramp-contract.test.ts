@@ -245,6 +245,61 @@ describe('ActScene without a Player: the act chapter stop toggle as two fixed ti
   })
 })
 
+describe('ThinkScene numbers = the think chapter readouts at every rule-slider stop', () => {
+  it('rule 0..1 m step 0.01: end d label text == chapter "Stopped at" text (or 0.00 on a bump), marks == checks made', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement: h } = await import('react')
+    const { default: ThinkScene } = await import('./ThinkScene')
+    const th = await import('../chapters/l0/think')
+    const model = { run: (a: number) => th.run(a), speed: th.SPEED, startM: th.START_M }
+    const off: string[] = []
+    for (let k = 0; k <= 100; k++) {
+      const a = k / 100, r = th.run(a), html = renderToStaticMarkup(h(ThinkScene, { stopAt: a, t: 60, model, label: '' }))
+      const want = r.crashed ? '0.00' : r.final.toFixed(2), got = /d = ([\d.]+) m</.exec(html)?.[1]
+      const marks = Number(/data-ticks="(\d+)"/.exec(html)?.[1])
+      if (got !== want || marks !== r.ticks.length) off.push(`rule ${a}: d ${got} vs ${want}, marks ${marks} vs ${r.ticks.length}`)
+    }
+    if (off.length) console.log('THINK-OFF', off.join(' | '))
+    expect(off).toEqual([])
+  })
+})
+
+describe('SenseScene number = the sense chapter front readout at every wall-slider stop', () => {
+  it('0.3..4.0 m step 0.1, open and covered: printed text == chapter text (number or nothing there)', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement: h } = await import('react')
+    const { default: SenseScene } = await import('./SenseScene')
+    const sn = await import('../chapters/l0/sense'), { SENSE_STRINGS } = await import('../chapters/l0/sense.strings')
+    const nothing = SENSE_STRINGS.en.nothing, off: string[] = []
+    for (let k = 3; k <= 40; k++) for (const covered of [false, true]) {
+      const front = k / 10, f = sn.front(sn.turn(front, covered)), want = f === null ? nothing : `${f.toFixed(2)} m`
+      const html = renderToStaticMarkup(h(SenseScene, { box: { ...sn.ROOM, front, maxFront: sn.FRONT_MAX }, mode: 'beam', covered, noneWord: nothing, label: '' }))
+      const got = /class="ss-num[^"]*"[^>]*>([^<]+)</.exec(html)?.[1]
+      if (got !== want) off.push(`${front}${covered ? ' covered' : ''}: ${got} vs ${want}`)
+    }
+    if (off.length) console.log('SENSE-OFF', off.join(' | '))
+    expect(off).toEqual([])
+  })
+})
+
+describe('ActScene roll-on = the act chapter readout at every speed-slider stop', () => {
+  it('v 0..0.22 step 0.01, w -1.5 / 0 / 1.5, stopped: +x.x cm == chapter (rollOnM(v) * 100).toFixed(1), none while it rounds to 0.0', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement: h } = await import('react')
+    const { default: ActScene } = await import('./ActScene')
+    const act = await import('../chapters/l0/act')
+    const off: string[] = []
+    for (let k = 0; k <= 22; k++) for (const w of [-act.TURN_MAX, 0, act.TURN_MAX]) {
+      const v = Math.round(k) / 100, want = (act.rollOnM(v) * 100).toFixed(1)
+      const html = renderToStaticMarkup(h(ActScene, { v, w, tStop: 3, decel: act.BRAKE, t: 13, label: '' }))
+      const got = /\+([\d.]+) cm</.exec(html)?.[1] ?? '0.0'
+      if (got !== want) off.push(`v ${v} w ${w}: ${got} vs ${want}`)
+    }
+    if (off.length) console.log('ACT-OFF', off.join(' | '))
+    expect(off).toEqual([])
+  })
+})
+
 describe('SimWhatScene sensor off says why the view is blank', () => {
   it('emptyWord in the view only when the sensor is off; no dots then', async () => {
     const { renderToStaticMarkup } = await import('react-dom/server')
