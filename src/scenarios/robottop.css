@@ -64,3 +64,7 @@
 .is-hot { stroke-width: 4; } .ss-hit.is-hot { r: 2.8; }
 .ss-wall.is-hot { stroke: var(--robot); } .ss-hit.is-hot { fill: var(--robot); }
 .is-dim { opacity: 0.25; }
+.ms-turn-path { fill: none; stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 2 5; }
+.ms-turn-r { stroke: var(--ink-2); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.ms-turn-c { fill: var(--ink); }
+.ms-turn-label { fill: var(--ink); font: 600 13px var(--mono); paint-order: stroke; stroke: var(--surface); stroke-width: 4px; }

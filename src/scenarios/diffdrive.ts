@@ -29,3 +29,15 @@ export function trail(vl: number, vr: number, t: number, slip = 0, dt = 0.05): P
 
 /** Point under a wheel (side +1 = left, −1 = right) for a pose: where a skid mark is laid down. */
 export const wheelPoint = (p: Pose2, side: 1 | -1) => ({ x: p.x - side * (TRACK / 2) * Math.sin(p.th), y: p.y + side * (TRACK / 2) * Math.cos(p.th) })
+
+/**
+ * The point the robot turns around right now (instantaneous centre of rotation) for wheel ground speeds vl, vr (left
+ * slip applied): on the wheel axis at signed radius R = (L/2)(vr + vl)/(vr − vl), + = to the robot's left. null when
+ * both wheels match (straight line: no centre); R = 0 when they are opposite (spin on the spot).
+ */
+export function turnCentre(vl: number, vr: number, p: Pose2, slip = 0): { x: number; y: number; r: number } | null {
+  const l = vl * (1 - slip)
+  if (Math.abs(vr - l) < 1e-9) return null
+  const r = ((TRACK / 2) * (vr + l)) / (vr - l)
+  return { x: p.x - r * Math.sin(p.th), y: p.y + r * Math.cos(p.th), r }
+}

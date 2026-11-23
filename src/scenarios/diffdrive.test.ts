@@ -31,3 +31,16 @@ describe('differential drive model', () => {
     expect(wheelPoint(p, -1).x).toBeCloseTo(TRACK / 2)
   })
 })
+
+describe('turn centre', () => {
+  it('every trail point sits |R| from the centre; straight = none; opposite wheels = R 0; slip moves it', async () => {
+    const { turnCentre } = await import('./diffdrive')
+    const vl = 0.1, vr = 0.2, c = turnCentre(vl, vr, { x: 0, y: 0, th: 0 })!
+    expect(c.r).toBeCloseTo((TRACK / 2) * 0.3 / 0.1)
+    for (const p of trail(vl, vr, 3)) expect(Math.hypot(p.x - c.x, p.y - c.y)).toBeCloseTo(Math.abs(c.r), 9)
+    expect(turnCentre(0.2, 0.2, { x: 0, y: 0, th: 0 })).toBeNull()
+    expect(turnCentre(-0.1, 0.1, { x: 0, y: 0, th: 0 })!.r).toBeCloseTo(0)
+    const s = turnCentre(0.2, 0.2, { x: 0, y: 0, th: 0 }, 0.3)!
+    for (const p of trail(0.2, 0.2, 3, 0.3)) expect(Math.hypot(p.x - s.x, p.y - s.y)).toBeCloseTo(Math.abs(s.r), 9)
+  })
+})

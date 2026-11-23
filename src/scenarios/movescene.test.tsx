@@ -284,3 +284,13 @@ describe('SimWhatScene linked highlighting', () => {
     expect(count(h, /tabindex="0"/g)).toBe(5)
   })
 })
+
+describe('MoveScene turn overlay', () => {
+  it('curve: centre + radius label from turnCentre; straight: R = ∞; spin: R = 0.00; off by default', async () => {
+    const { default: MoveScene } = await import('./MoveScene')
+    expect(renderToStaticMarkup(<MoveScene vl={0.1} vr={0.2} t={1} showTurn label="" />)).toContain('data-turn="0.24"')
+    expect(renderToStaticMarkup(<MoveScene vl={0.2} vr={0.2} t={1} showTurn label="" />)).toContain('data-turn="straight"')
+    expect(renderToStaticMarkup(<MoveScene vl={-0.1} vr={0.1} t={1} showTurn label="" />)).toContain('data-turn="0.00"')
+    expect(renderToStaticMarkup(<MoveScene vl={0.1} vr={0.2} t={1} label="" />)).not.toContain('ms-turn')
+  })
+})
