@@ -6290,6 +6290,54 @@
   "my": "SLAM က map → odom ကို ပို့ပါတယ်။ ဘယ်သူမှ odom → base_link ကို မပို့ပါဘူး။ detector က အတွဲ 3 တွဲကို 0.5 s တိုင်း စစ်ဆေးပါတယ်။",
   "back": "SLAM sends map → odom. No one sends odom → base_link. The detector checks 3 pairs every 0.5 s."
  },
+ "l3/tflab:stale.age": {
+  "status": "pass-alt",
+  "en": "Transform age (s)",
+  "my": "transform သက်တမ်း (s)",
+  "back": "transform age (s)"
+ },
+ "l3/tflab:stale.fresh": {
+  "status": "pass-alt",
+  "en": "Send a fresh transform",
+  "my": "transform အသစ် ပို့ပါ",
+  "back": "Send a new transform"
+ },
+ "l3/tflab:stale.lesson": {
+  "status": "pass-alt",
+  "en": "The detector still says OK, but the scan is already wrong: a passing check is not the same as correct data.",
+  "my": "detector က OK လို့ ပြောနေတုန်းပဲ၊ ဒါပေမဲ့ scan က မှားနေပါပြီ- စစ်ချက် အောင်တာနဲ့ ဒေတာ မှန်တာ မတူပါဘူး။",
+  "back": "The detector is still saying OK, but the scan is already wrong: the check passing and the data being correct are not the same."
+ },
+ "l3/tflab:stale.note": {
+  "status": "pass-alt",
+  "en": "The robot turns at 1 rad/s. The laser hits are drawn with a transform that is this many seconds old. The detector calls a pair STALE only above 1.0 s.",
+  "my": "စက်ရုပ်က 1 rad/s နဲ့ လှည့်နေပါတယ်။ လေဆာ ထိမှတ်တွေကို ဒီလောက် စက္ကန့် ဟောင်းနေတဲ့ transform နဲ့ ဆွဲထားပါတယ်။ detector က 1.0 s ကျော်မှသာ pair တစ်ခုကို STALE လို့ ခေါ်ပါတယ်။",
+  "back": "The robot is rotating at 1 rad/s. The laser hit points are drawn with a transform that is this many seconds old. The detector calls a pair STALE only after 1.0 s."
+ },
+ "l3/tflab:stale.off": {
+  "status": "pass-alt",
+  "en": "off the wall",
+  "my": "နံရံနဲ့ လွဲနေတာ",
+  "back": "Offset from the wall"
+ },
+ "l3/tflab:stale.status": {
+  "status": "pass-alt",
+  "en": "detector says",
+  "my": "ထောက်လှမ်းကိရိယာရဲ့ ဆုံးဖြတ်ချက်",
+  "back": "The detector's decision"
+ },
+ "l3/tflab:stale.title": {
+  "status": "pass-alt",
+  "en": "Second failure: STALE",
+  "my": "ဒုတိယ အမှား: STALE",
+  "back": "Second error: STALE"
+ },
+ "l3/tflab:stale.yaw": {
+  "status": "pass-alt",
+  "en": "heading error",
+  "my": "ဦးတည်ရာ အမှား",
+  "back": "Heading error"
+ },
  "l3/tflab:title": {
   "status": "pass",
   "en": "TF debugging lab: a missing link",
