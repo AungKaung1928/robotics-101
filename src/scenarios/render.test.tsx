@@ -26,6 +26,12 @@ describe('scenario figures render from their models', () => {
     expect(count(html, /data-live="true"/g)).toBe(4)
     expect(html).toContain('this app')
   })
+  it('EventLog linked highlight: only the hot row is marked', () => {
+    const html = renderToStaticMarkup(<EventLog rows={[{ t: 0, cells: ['a'] }, { t: 1, cells: ['b'] }, { t: 2, cells: ['c'] }]} t={0} seek={() => {}} head={['x']} label="" hot={1} onHot={() => {}} />)
+    expect(html.match(/data-hot="true"/g)).toHaveLength(1)
+    expect(html.indexOf('data-hot')).toBeGreaterThan(html.indexOf('>a<'))
+    expect(html.indexOf('data-hot')).toBeLessThan(html.indexOf('>b<'))
+  })
   it('EventLog, InflationRipple, SpeedProfile render', () => {
     expect(count(renderToStaticMarkup(<EventLog rows={[{ t: 0, cells: ['a'] }, { t: 1, cells: ['b'] }]} t={0.5} seek={() => {}} head={['x']} label="" />), /data-state="now"/g)).toBe(1)
     const cells = [{ x: 0, y: 0, d: 0 }, { x: 0.05, y: 0, d: 0.1 }, { x: 0.1, y: 0, d: 0.4 }]
