@@ -28,3 +28,18 @@ describe('MoveScene wheel arrows', () => {
     expect(Math.sign(m[0])).toBe(-Math.sign(m[1]))
   })
 })
+
+describe('MoveScene framing over the chapter slider range', () => {
+  it('left 0.15, right -0.22..0.22, 4 s, slip off / on: every drawn trail point stays 30 px inside the 460 x 340 frame', async () => {
+    const mv = await import('../chapters/l0/move')
+    const out: string[] = []
+    for (let r = -mv.TOP_SPEED; r <= mv.TOP_SPEED + 1e-9; r += 0.01) for (const slip of [0, 1 - mv.SLIP]) {
+      const h = renderToStaticMarkup(<MoveScene vl={mv.LEFT} vr={r} t={mv.SECONDS} slip={slip} label="" />)
+      const d = /class="ms-trail" d="([^"]+)"/.exec(h)![1], pts = [...d.matchAll(/[ML]([-\d.]+) ([-\d.]+)/g)].map((m) => [+m[1], +m[2]])
+      const bad = pts.find(([x, y]) => x < 30 || x > 430 || y < 30 || y > 310)
+      if (bad) out.push(`right ${r.toFixed(2)} slip ${slip}: ${bad.join(',')}`)
+    }
+    if (out.length) console.log('OFF-FRAME', out.join(' | '))
+    expect(out).toEqual([])
+  })
+})

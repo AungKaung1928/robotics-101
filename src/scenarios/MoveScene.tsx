@@ -3,7 +3,7 @@ import { TRACK, poseAt, rolled, trail, wheelPoint, type Pose2 } from './diffdriv
 import TurnOverlay from './TurnOverlay'
 import './robottop.css'
 
-const S = 300, X0 = 50, Y0 = 200 // px per m (the drawn wheels sit TRACK·S = 48 px apart, as in RobotTop), start point (screen)
+const S = 300, X0 = 60, Y0 = 200 // px per m (the drawn wheels sit TRACK·S = 48 px apart, as in RobotTop), start point (screen)
 const scr = (p: { x: number; y: number }) => [X0 + p.x * S, Y0 - p.y * S] as const
 const OUT = 0.035 // m: arrows start this far outside the wheel, clear of the body
 
