@@ -5,7 +5,7 @@ import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
 import { stringsFor, type Strings } from '../../i18n'
 import { Icon, type IconName } from '../../icons'
-import { HZ, START_M, STOP_AT, blindM, inGoal, loopRun, scenario, type Stage } from './loop'
+import { HZ, SLOW_HZ, START_M, STOP_AT, blindM, inGoal, loopRun, pastLine, scenario, type Stage } from './loop'
 import { LOOP_STRINGS } from './loop.strings'
 import './l0.css'
 
@@ -32,7 +32,10 @@ export default function LoopChapter({ t }: { t: Strings }) {
     think: s.thinkLine(f.t.used.toFixed(2), f.t.decision === 'go'),
     act: f.t.decision === 'go' ? s.actGo((blindM(hz) * 100).toFixed(1)) : s.actStop,
   }
+  const past = pastLine(r)
+  const late = !r.crashed && past > blindM(HZ) // further past the line than one step at the real 5 Hz
   const result = r.crashed ? s.crashed : `${s.stopped} ${r.final.toFixed(2)} m`
+  const setRate = (v: number) => { if (inGoal(v) && !inGoal(hz)) setSolved(solved + 1); setHz(v); restart() }
   return (
     <>
       <div className="figure">
@@ -51,7 +54,7 @@ export default function LoopChapter({ t }: { t: Strings }) {
           <line className="stopline" x1={xAt(STOP_AT)} x2={xAt(STOP_AT)} y1="200" y2="250" />
           <text className="say" x={xAt(STOP_AT)} y="195" textAnchor="middle">0.5 m</text>
           <rect className="wall" x={X1} y="180" width="12" height="70" />
-          <rect className={`bot${r.crashed && f.front <= 0 ? ' is-crashed' : ''}`} x={xAt(f.front) - 40} y="222" width="40" height="22" rx="4" />
+          <rect className={`bot${r.crashed && f.front <= 0 ? ' is-crashed' : late && f.front < STOP_AT ? ' is-late' : ''}`} x={xAt(f.front) - 40} y="222" width="40" height="22" rx="4" />
           <Celebrate x={xAt(f.front) - 20} y={222} n={solved} />
           {f.stage === 'sense' && f.t.seen !== null && <line className="beam" x1={xAt(f.front)} x2={X1} y1="233" y2="233" />}
         </svg>
@@ -63,12 +66,15 @@ export default function LoopChapter({ t }: { t: Strings }) {
         <p className="learn">{s.learn}</p>
         {s.lines.map((l) => <p key={l}>{l}</p>)}
         <Slider hint={t.drag} label={s.rate} value={hz} min={1} max={10} step={1} mark={HZ} fmt={(v) => String(v)}
-          onChange={(v) => { if (inGoal(v) && !inGoal(hz)) setSolved(solved + 1); setHz(v); restart() }} />
+          onChange={setRate} />
         <p><button type="button" className="break" onClick={() => { setBlind(!blind); restart() }}>{blind ? s.fixIt : s.breakIt}</button></p>
         {blind && <p className="note">{s.brokenNote}</p>}
+        <p><button type="button" className="break" data-act="slow" onClick={() => setRate(hz === SLOW_HZ ? HZ : SLOW_HZ)}>{hz === SLOW_HZ ? s.fastIt : s.slowIt}</button></p>
+        {late && <p className="note" data-k="slow">{s.slowNote}</p>}
         <dl className="readout">
           <div><dt>{s.blind}</dt><dd data-k="blind">{(blindM(hz) * 100).toFixed(1)} cm</dd></div>
           <div><dt>{s.result}</dt><dd data-k="result">{result}</dd></div>
+          {!r.crashed && <div><dt>{s.past}</dt><dd data-k="past" className={late ? 'is-warn' : undefined}>{(past * 100).toFixed(0)} cm</dd></div>}
         </dl>
         <p><strong>{s.challenge}</strong></p>
         <p className={`verdict ${inGoal(hz) ? 'ok' : 'no'}`} data-k="challenge">{inGoal(hz) ? '✓ ' + s.solved : s.notYet} {hz} Hz → {(blindM(hz) * 100).toFixed(1)} cm</p>

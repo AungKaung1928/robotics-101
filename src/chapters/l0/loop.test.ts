@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { HZ, SPEED, START_M, STOP_AT, blindM, inGoal, loopRun, scenario } from './loop'
+import { HZ, SLOW_HZ, SPEED, START_M, STOP_AT, blindM, inGoal, loopRun, pastLine, scenario } from './loop'
 
 describe('loopRun', () => {
   it('at his 5 Hz the robot stops inside the stop_at line, less than one step past it', () => {
@@ -23,6 +23,17 @@ describe('loopRun', () => {
   })
 })
 
+describe('break it: slow loop', () => {
+  it('at once per second it stops 18 cm past the 0.5 m line (looks at 1.10, 0.84, 0.58, 0.32 m); at 5 Hz 2.4 cm', () => {
+    const slow = loopRun(SLOW_HZ), fast = loopRun(HZ)
+    expect(slow.ticks.map((t) => +t.front.toFixed(2))).toEqual([1.1, 0.84, 0.58, 0.32])
+    expect(pastLine(slow)).toBeCloseTo(0.18)
+    expect(pastLine(fast)).toBeCloseTo(0.024)
+    expect(pastLine(slow)).toBeGreaterThan(blindM(HZ)) // the page's 'late' warning: only the slow loop trips it
+    expect(pastLine(fast)).toBeLessThan(blindM(HZ))
+  })
+})
+
 describe('scenario', () => {
   it('sense, think, act in thirds of a loop; the robot only moves during act', () => {
     const r = loopRun(HZ), sc = scenario(r, HZ)
@@ -38,5 +49,12 @@ describe('strings', () => {
   it('EN and JA have the same keys', async () => {
     const { LOOP_STRINGS } = await import('./loop.strings')
     expect(Object.keys(LOOP_STRINGS.ja).sort()).toEqual(Object.keys(LOOP_STRINGS.en).sort())
+  })
+})
+
+describe('slow-loop strings', () => {
+  it('the note says 26 cm = the model at SLOW_HZ, in EN and JA', async () => {
+    const { LOOP_STRINGS } = await import('./loop.strings')
+    for (const l of ['en', 'ja'] as const) expect(LOOP_STRINGS[l].slowNote).toContain(`${(blindM(SLOW_HZ) * 100).toFixed(0)} cm`)
   })
 })
