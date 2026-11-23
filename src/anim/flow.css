@@ -1,0 +1,5 @@
+/* Live links (lane anim): dashes move producer -> consumer, one dash per message at the topic rate. */
+.flow { fill: none; stroke: var(--robot); stroke-width: 2.2; stroke-linecap: round; animation: flow var(--flow-dur) linear infinite; }
+.flow-off { fill: none; stroke: var(--rule); stroke-width: 1.5; }
+@keyframes flow { from { stroke-dashoffset: var(--flow-period); } to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: reduce) { .flow { animation: none; } }
