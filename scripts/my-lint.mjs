@@ -23,28 +23,23 @@ export function encodingErrors(s) {
     if (c === '\u1039' && !((CONS.test(p) || kinzi) && CONS.test(ch[i + 1] ?? ''))) e.push(`stack sign ္ at ${i} not between consonants`)
   })
   // Letters from any other script (Japanese, Thai, ...): models sometimes slip one in. Latin and Greek stay (terms, θ ω).
-  const foreign = s.match(/[^\P{L}\u0000-\u024F\u0370-\u03FF\u1000-\u109F]|[^\P{M}\u0300-\u036F\u1000-\u109F]/gu)
+  const foreign = s.match(/[^\P{L}\u0041-\u024F\u0370-\u03FF\u1000-\u109F]|[^\P{M}\u0300-\u036F\u1000-\u109F]/gu)
   if (foreign) e.push(`letters outside Myanmar/Latin/Greek: ${[...new Set(foreign)].join('')}`)
   if (/[၀-၉]/.test(s)) e.push('Burmese digits (use 0-9)')
   return e
 }
 
 const nums = (s) => (s.match(/\d+(?:\.\d+)?/g) ?? []).sort()
-// English number words may become digits in Burmese ("one scan" -> "scan 1 ကြိမ်"): count them as digits on the English side.
-const WORDS = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, twice: 2, once: 1 }
-const numsEn = (en, my) => {
-  const extra = (en.match(/\b(one|two|three|four|five|six|seven|eight|nine|ten|twice|once)\b/gi) ?? []).map((w) => String(WORDS[w.toLowerCase()]))
-  const want = nums(en)
-  const got = nums(my)
-  // Each number word may or may not be written as a digit: keep the ones the Burmese actually uses.
-  for (const d of extra) if (got.filter((x) => x === d).length > want.filter((x) => x === d).length) want.push(d)
-  return want.sort()
-}
+// Same rule as the parity test (src/i18n.parity.test.ts tokens): English number words count as digits and must appear as
+// digits in Burmese; 1 is ignored on both sides ("one scan" may stay a word).
+const WORDS = { zero: 0, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, twelve: 12, twice: 2 }
+const numsEn = (en) => nums(en.replace(/\b(zero|two|three|four|five|six|seven|eight|nine|ten|twelve|twice)\b/gi, (w) => String(WORDS[w.toLowerCase()]))).filter((d) => d !== '1')
 const ticks = (s) => (s.match(/`[^`]+`/g) ?? []).sort()
 // Identifiers, topics, files, commands: a capital after the first letter, digit, _ / . + :: inside the token.
 const idents = (s) => (s.match(/[A-Za-z_/~][\w/.+:-]*/g) ?? []).map((t) => t.replace(/[.:-]+$/, ''))
   .filter((t) => /[_/+]|::|\.\w|\w[A-Z]|\d/.test(t.slice(1)) || /^\/\w/.test(t))
-const word = (w) => new RegExp(`(^|[^A-Za-z])${w.replace(/[.+*?()[\]\\]/g, '\\$&')}s?([^A-Za-z]|$)`, 'i')
+// A glossary word only counts as a word, never as part of an identifier (sensor_msgs, /scan_topic).
+const word = (w) => new RegExp(`(^|[^A-Za-z0-9_/])${w.replace(/[.+*?()[\]\\]/g, '\\$&')}s?([^A-Za-z0-9_/]|$)`, 'i')
 const eq = (a, b) => a.length === b.length && a.every((x, i) => x === b[i])
 
 export function lint(en, my, role = 'body') {
@@ -52,13 +47,15 @@ export function lint(en, my, role = 'body') {
   const warn = []
   if (!my || !my.trim()) return { fail: ['empty'], warn }
   fail.push(...encodingErrors(my))
-  if (!eq(numsEn(en, my), nums(my))) fail.push(`numbers ${numsEn(en, my)} vs ${nums(my)}`)
+  const numsMy = nums(my).filter((d) => d !== '1')
+  if (!eq(numsEn(en), numsMy)) fail.push(`numbers ${numsEn(en)} vs ${numsMy}`)
   if (!eq(ticks(en), ticks(my))) fail.push('backtick spans differ')
   for (const t of idents(en)) if (!my.includes(t)) fail.push(`identifier ${t} missing`)
   for (const t of G.tierA_keepEnglish) if (word(t).test(en) && !word(t).test(my)) fail.push(`tier A "${t}" not kept`)
   if (G.uiVerbs[en] !== undefined && my !== G.uiVerbs[en]) fail.push(`UI verb "${en}" must be ${G.uiVerbs[en]}`)
   for (const [w, b] of Object.entries(G.tierB_loanwords)) if (word(w).test(en) && !my.includes(b)) fail.push(`"${w}" must be ${b}`)
-  if (role === 'body' || role === 'heading') {
+  // Every role: a label in literary register (ပြန်လာသော, စက်နှိုးသည့်) reads as stiffly as a sentence; pinned UI verbs are fixed.
+  if (G.uiVerbs[en] === undefined) {
     let t = my
     for (const a of G.literaryAllow) t = t.split(a).join('')
     for (const l of G.literaryBanned) if (t.includes(l)) fail.push(`literary form ${l}`)

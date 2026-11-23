@@ -1,8 +1,8 @@
 // Every English UI/lesson string with context, for the Burmese drafts: node scripts/my-extract.mjs <out.json>
 // Item = { id, file, out, key, role, chapter, en, ja }; out = the src/i18n/my/<out>.json file it belongs to (README there).
 // titles = { chapter id: item id of its English title } for src/i18n/my/titles.json. Sources: src/i18n.ts STRINGS and every src/chapters/*/*.strings.ts.
-// Function-valued strings (templates with numbers) are listed under "fn" and stay English until the lead's contract says
-// how Burmese templates are written.
+// Function-valued strings (templates with numbers) are listed under "fn" with their English and Japanese source; they stay
+// English until the lead's overlay accepts Burmese templates (scripts/my-templates.json).
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { basename, dirname, join } from 'node:path'
@@ -40,7 +40,9 @@ function walk(file, out, chapter, en, ja, path) {
   if (typeof en === 'string') {
     const key = path.join('.')
     items.push({ id: `${chapter}:${key}`, file, out, key, role: role(key, en), chapter, en, ja: typeof ja === 'string' ? ja : undefined })
-  } else if (typeof en === 'function') fn.push(`${chapter}:${path.join('.')}`)
+  } else if (typeof en === 'function') {
+    fn.push({ id: `${chapter}:${path.join('.')}`, out, key: path.join('.'), chapter, en: en.toString(), ja: typeof ja === 'function' ? ja.toString() : undefined })
+  }
   else if (en && typeof en === 'object') for (const k of Object.keys(en)) walk(file, out, chapter, en[k], ja?.[k], [...path, k])
 }
 
