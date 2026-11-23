@@ -20,7 +20,7 @@ describe('on-ramp scenes agree with the chapter models', () => {
       expect(a.vl).toBeCloseTo(b.left)
       expect(a.vr).toBeCloseTo(b.right)
     }
-    for (const v of [0.1, 0.22]) expect(actAt(v, 0, 1, act.BRAKE, 10).rollOn).toBeCloseTo(act.rollOnM(v), 9)
+    for (const v of [0.1, 0.22]) for (const w of [0, 0.6, -1.5]) expect(actAt(v, w, 1, act.BRAKE, 10).rollOn, `v ${v} w ${w}`).toBeCloseTo(act.rollOnM(v), 9)
   })
   it('slip meaning: the chapter SLIP is the share delivered, MoveScene slip is the share lost -> pass 1 - SLIP', () => {
     const p = poseAt(move.LEFT, move.LEFT, 2, 1 - move.SLIP), straight = poseAt(move.LEFT, move.LEFT, 2)
