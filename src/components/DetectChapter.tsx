@@ -6,6 +6,8 @@ import { gaussian } from '../lib/noise'
 import { beamAngles, castRayHit, sensorPose } from '../lib/scan'
 import Arena from './Arena'
 import Grab from './Grab'
+import Player from './Player'
+import { sweep } from '../lib/timeline'
 import { routeParam } from '../lib/route'
 import Slider from './Slider'
 
@@ -16,6 +18,8 @@ const NOISE = gaussian(L.samples, L.noiseStd, 1)
 const YAW = Math.PI / 4
 // Cluster colours: hues spread by the golden angle so neighbours differ; lightness set per theme in CSS.
 const hue = (k: number) => (k * 137.5) % 360
+const PASS_S = 3 // scenario: the detector's one pass over the 360 points, played in 3 s
+const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 
 export default function DetectChapter({ t }: { t: Strings }) {
   const s = t.detect
@@ -32,15 +36,24 @@ export default function DetectChapter({ t }: { t: Strings }) {
   })
   const label = clusters(pts, th)
   const truth = objectsInView(hits.map((h) => h.shape), WALLS.length)
+  // '#/detect?t=1.5' opens paused half-way through the pass; plain '#/detect' plays it (whole pass under reduced motion).
+  const deep = /[?&]t=/.test(location.hash)
+  const [time, setTime] = useState(() => (deep ? routeParam(location.hash, 't', PASS_S, 0, PASS_S) : still() ? PASS_S : 0))
+  const done = sweep(L.samples, time, PASS_S).fired
+  const soFar = clusterCount(label.slice(0, done))
   return (
     <>
       <div className="figure">
         <Arena label={`${t.chapters.detect}: ${s.found} ${clusterCount(label)}, ${s.truth} ${truth}`}>
           <circle className="range" cx={sp.x} cy={sp.y} r={L.maxRange} />
-          {pts.map((p, i) => p && <circle key={i} className="cl" style={{ '--h': hue(label[i]) } as React.CSSProperties} cx={p[0]} cy={p[1]} r="0.07" />)}
+          {pts.map((p, i) => p && (i < done
+            ? <circle key={i} className="cl" style={{ '--h': hue(label[i]) } as React.CSSProperties} cx={p[0]} cy={p[1]} r="0.07" />
+            : <circle key={i} className="cl-raw" cx={p[0]} cy={p[1]} r="0.05" />))}
           <circle className="robot" cx={x} cy={y} r="0.22" />
           <Grab x={x} y={y} onMove={(p) => { setX(p.x); setY(p.y) }} />
         </Arena>
+        <Player t={time} setT={setTime} end={PASS_S} events={[0, PASS_S / 4, PASS_S / 2, (3 * PASS_S) / 4, PASS_S]} speed={1} autoplay={!deep && !still()} s={t}
+          caption={<>{s.pass} <b data-k="pass">{done} / {L.samples} · {soFar}</b></>} />
       </div>
       <div className="panel">
         {s.lines.map((l) => <p key={l}>{l}</p>)}

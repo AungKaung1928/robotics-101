@@ -130,6 +130,7 @@ const en = {
     model: 'Model: hit p = 0.7, pass p = 0.4 (page choice); beams with no return change nothing.',
   },
   detect: {
+    pass: 'points processed · clusters so far',
     lines: [
       'The simplest LiDAR detector: walk the scan and start a new object wherever two neighbouring hits are farther apart than a threshold.',
       'Too small: one object breaks into pieces, because beams spread with range and land far apart on a surface hit at a shallow angle. Too large: neighbours merge.',
@@ -288,6 +289,7 @@ const ja: typeof en = {
     model: 'モデル: 当たり p = 0.7、通過 p = 0.4 (このページの選択)。反射のないビームは何も変えない。',
   },
   detect: {
+    pass: '処理済みの点 · ここまでのクラスタ数',
     lines: [
       '一番簡単な LiDAR 検出器: スキャンを順にたどり、隣り合う点がしきい値より離れたら新しい物体とする。',
       '小さすぎると 1 つの物体がばらばらになる。ビームは距離とともに広がり、浅い角度で当たる面では点が離れるため。大きすぎると隣の物体がつながる。',

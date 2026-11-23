@@ -16,6 +16,7 @@ const ROUTES = [
   { hash: '#/tf', readouts: ['hit-map', 'hit-base_footprint', 'hit-base_scan', 'odomhz'], equals: { drive: '0.13 m', mapodom: '0.02 s (50 Hz)' }, words: { verdict: /healthy|正常/ } },
   { hash: '#/tf?t=8', readouts: ['hit-map'], words: { scene: /0\.\d\d m (healthy|正常)/ }, has: 'class="trail"' },
   { hash: '#/tf?jump=0.6', readouts: ['hit-map'], words: { verdict: /JUMP/ }, has: 'ghost-move is-bad' },
+  { hash: '#/detect?t=1.5', readouts: ['found'], words: { pass: /^180 \/ 360 · \d$/ }, has: 'cl-raw' },
   { hash: '#/detect?th=0.5', readouts: ['truth'], equals: { found: '3' } },
   { hash: '#/detect?noise=1', readouts: ['truth'], equals: { found: '7' } },
   { hash: '#/costmap?d=0.1', readouts: ['cost'], words: { cost: /^253 \((inscribed|内接)\)$/ } },
