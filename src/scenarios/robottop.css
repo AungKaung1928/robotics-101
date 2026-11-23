@@ -81,3 +81,25 @@
 .ms-v.is-spin path { stroke: var(--ink-2); stroke-width: 1.5; stroke-dasharray: 4 3; }
 .ss-range { stroke: var(--ink-2); stroke-width: 2; stroke-linecap: round; } /* where the sensor's range ends (3.5 m) */
 .sw-none { fill: var(--ink-2); font: 13px var(--mono); } /* SimWhatScene: sensor off, the view says why it is blank */
+/* ThinkScene check marks: where each loop check happened; the one that fired the rule is longer and green. */
+.tk-tick { stroke: var(--ink-2); stroke-width: 1.5; stroke-linecap: round; }
+.tk-tick.is-fired { stroke: var(--free); stroke-width: 2.5; }
+.tk-tick.is-now { stroke: var(--robot); stroke-width: 2.5; } /* the check happening now */
+.ss-limit { fill: none; stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 2 4; opacity: 0.6; } /* SenseScene ring: the 3.5 m range */
+/* MoveScene tEnd: the rest of the path, faint (where it is going); the start point. */
+.ms-ahead { fill: none; stroke: var(--ink-2); stroke-width: 1.5; stroke-dasharray: 2 5; stroke-linecap: round; opacity: 0.7; }
+.ms-start { fill: var(--surface); stroke: var(--ink-2); stroke-width: 2; }
+.as-arrow.is-over { stroke: var(--ray); stroke-width: 3; } /* more than the top speed */
+.as-head.is-over { fill: var(--ray); }
+.mt-label.is-hint { fill: var(--ink-2); font-weight: 400; } /* before any tap: what to do */
+/* Idle blink (his style: idle blink): the round eyes close along the heading for ~120 ms every 4.2 s; the shaped eyes
+   (proud, dizzy) do not blink. Reduced motion: no blink. */
+.rtop-eye { transform-box: fill-box; transform-origin: center; animation: rtop-blink 4.2s infinite; }
+@keyframes rtop-blink { 0%, 94%, 100% { transform: scaleX(1); } 97% { transform: scaleX(0.15); } }
+@media (prefers-reduced-motion: reduce) { .rtop-eye { animation: none; } }
+/* Gentle breathing (his style: idle blink + gentle breathing): the body swells 2 % and back over 3.2 s. Reduced motion: still. */
+.rtop-body { transform-box: fill-box; transform-origin: center; animation: rtop-breath 3.2s ease-in-out infinite; }
+@keyframes rtop-breath { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+@media (prefers-reduced-motion: reduce) { .rtop-body { animation: none; } }
+.tk-ghost { fill: none; stroke: var(--ink-2); stroke-width: 1.5; stroke-dasharray: 3 3; opacity: 0.7; } /* where it stopped with the previous rule */
+.ms-prev { fill: none; stroke: var(--ink-2); stroke-width: 1.5; stroke-dasharray: 1 5; stroke-linecap: round; opacity: 0.45; } /* the path before the last change */

@@ -9,7 +9,13 @@ import { TRACK, poseAt, type Pose2 } from './diffdrive'
 export const wheels = (v: number, w: number) => ({ vl: v - (w * TRACK) / 2, vr: v + (w * TRACK) / 2 })
 
 /** Time to stop after the stop command: the faster wheel's speed / decel. */
-export const brakeTime = (v: number, w: number, decel: number) => { const { vl, vr } = wheels(v, w); return Math.max(Math.abs(vl), Math.abs(vr)) / decel }
+// Brake time: the forward speed v ramps down at `decel` (the chapter's rollOnS = |v| / BRAKE, nav2 decel_lim_x); the turn
+// rate ramps over the same time. Only a spin on the spot (v = 0) falls back to the faster wheel.
+export const brakeTime = (v: number, w: number, decel: number) => {
+  if (Math.abs(v) > 1e-9) return Math.abs(v) / decel
+  const { vl, vr } = wheels(v, w)
+  return Math.max(Math.abs(vl), Math.abs(vr)) / decel
+}
 
 /** Wheel-speed progress (s of full-speed driving) at time t when stop is commanded at tStop: linear ramp down after. */
 export function progress(t: number, tStop: number, tb: number): number {

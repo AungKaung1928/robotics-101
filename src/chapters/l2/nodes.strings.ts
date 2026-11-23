@@ -3,6 +3,7 @@ import type { NodeId } from './nodes'
 /** Chapter 2.1 text, EN + JA. Same keys in both (nodes.test checks). */
 export const NODES_STRINGS = {
   en: {
+    srcGloss: { delays: 'start delays' },
     title: 'ROS 2: nodes',
     learn: 'You will learn: a ROS 2 robot is not one program but many small ones, called nodes, each with one job.',
     lines: [
@@ -37,6 +38,7 @@ export const NODES_STRINGS = {
     tap: 'Click a node to stop or start it',
   },
   ja: {
+    srcGloss: { delays: '起動の遅れ' },
     title: 'ROS 2：ノード',
     learn: '学ぶこと：ROS 2 のロボットは1つのプログラムではなく、ノードと呼ばれる小さなプログラムの集まりで、それぞれ1つの仕事を持つ。',
     lines: [

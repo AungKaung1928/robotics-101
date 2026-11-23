@@ -1,6 +1,7 @@
 /** Level 0 "sense" text, EN + JA, same keys (sense.page.test checks). Group A: no software words, no code. */
 export const SENSE_STRINGS = {
   en: {
+    srcGloss: { turns: '5 turns/s', models: 'three LDS models', and: 'and', specs: 'specifications' },
     title: 'How a robot senses: one beam, then a ring',
     learn: 'You will learn: a distance sensor turns the world into numbers, and where those numbers stop.',
     steps: [
@@ -12,11 +13,12 @@ export const SENSE_STRINGS = {
     wall: 'Wall in front (m)',
     front: 'Front number',
     nothing: 'nothing there',
+    tooClose: 'too close',
     count: 'Numbers that count, this turn',
     perSecond: 'Numbers per second',
     breakIt: 'Break it: cover the sensor with a hand',
     fixIt: 'Fix it: take the hand away',
-    brokenNote: 'The hand is 2 cm away, closer than the 12 cm this sensor can measure. Every reading is thrown away: the walls are still there, but the robot is blind.',
+    brokenNote: 'The hand is 2 cm away, closer than the 12 cm this sensor can measure, so every reading says "too close" and none can be used: the walls are still there, but the robot is blind.',
     real: 'Our simulated Burger carries the LDS-01: 360 numbers per turn, 5 turns a second, from 12 cm to 3.5 m. Real Burgers ship with one of three models (LDS-01, LDS-02, LDS-03); the LDS-02 measures from 16 cm to 8 m.',
     check: 'Check: the wall moves to 5 m in front. What is the front number?',
     answers: { five: '5 m', limit: '3.5 m', nothing: 'nothing there' },
@@ -31,6 +33,7 @@ export const SENSE_STRINGS = {
     mascot: 'the robot',
   },
   ja: {
+    srcGloss: { turns: '1秒に5回転', models: 'LDS は 3 種類', and: 'と', specs: 'の仕様' },
     title: 'ロボットの感じ方：1本の光から、ぐるりと1周へ',
     learn: '学ぶこと：距離センサーは世界を数字に変える。そして、その数字が届かない所もある。',
     steps: [
@@ -42,11 +45,12 @@ export const SENSE_STRINGS = {
     wall: '前の壁 (m)',
     front: '前の数字',
     nothing: '何もない',
+    tooClose: '近すぎる',
     count: '使える数字（この1周）',
     perSecond: '1秒あたりの数字',
     breakIt: '壊してみる：センサーを手でふさぐ',
     fixIt: '直す：手をどける',
-    brokenNote: '手は 2 cm の所にあり、このセンサーが測れる 12 cm より近い。読んだ値はすべて捨てられる。壁はそこにあるのに、ロボットは何も見えない。',
+    brokenNote: '手は 2 cm の所にあり、このセンサーが測れる 12 cm より近い。だから読んだ値はすべて「近すぎる」になり、どれも使えない。壁はそこにあるのに、ロボットは何も見えない。',
     real: 'シミュレーションの Burger は LDS-01 を積む：1周で 360 個の数字、1秒に 5 周、12 cm から 3.5 m まで。本物の Burger は 3 つのモデル（LDS-01、LDS-02、LDS-03）のどれかを積み、LDS-02 は 16 cm から 8 m まで測る。',
     check: 'チェック：壁が前 5 m に動いた。前の数字は？',
     answers: { five: '5 m', limit: '3.5 m', nothing: '何もない' },

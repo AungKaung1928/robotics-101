@@ -1,6 +1,7 @@
 /** Chapter 2.7 text, EN + JA. Same keys in both (drive.test checks). */
 export const DRIVE_STRINGS = {
   en: {
+    srcGloss: { diff: 'DiffDrive, wheel separation 0.160 m, radius 0.033 m, max_linear_acceleration 1.0', last: 'keeps the last command' },
     title: 'ROS 2: first drive',
     learn: 'You will learn: to move the robot, publish a Twist on /cmd_vel, and to stop it, publish zeros.',
     already: 'In Level 0 "How a robot acts" you used two numbers, forward speed and turn speed. A Twist carries them as linear.x and angular.z; its other four fields stay 0 on this robot.',
@@ -27,9 +28,10 @@ export const DRIVE_STRINGS = {
     caption: (t: string, v: string) => `t = ${t} s · speed ${v} m/s`,
   },
   ja: {
+    srcGloss: { diff: 'DiffDrive、車輪の間隔 0.160 m、半径 0.033 m、max_linear_acceleration 1.0', last: '最後の指令を保つ' },
     title: 'ROS 2：はじめての走行',
     learn: '学ぶこと：ロボットを動かすには /cmd_vel に Twist を publish し、止めるにはゼロを publish する。',
-    already: 'レベル 0「ロボットの動かし方」で使った2つの数字、前に進む速さと向きを変える速さ。Twist はそれを linear.x と angular.z で運ぶ。残りの 4 つの値は、このロボットでは 0 のまま。',
+    already: 'レベル 0「ロボットの動かし方」では、前に進む速さと向きを変える速さという2つの数字を使った。Twist はそれを linear.x と angular.z で運ぶ。残りの 4 つの値は、このロボットでは 0 のまま。',
     lines: [
       'ros2 topic pub --rate 10 は Twist を1秒10回送る（--rate なしなら1秒1回）。',
       'シミュレータは linear.x と angular.z を、レベル 0 と同じように2つの車輪速度に変える：左に曲がるときは右の車輪が速く回る。',

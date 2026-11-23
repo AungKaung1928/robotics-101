@@ -80,6 +80,8 @@ export default function App() {
           <div className="chead">
             <div>
               <h1><span className="num">{idx + 1}</span> <Icon name={CHAPTER_ICON[route.id]} /> {t.chapters[route.id]}</h1>
+              <PathLine id={route.id} t={t} />
+              {t.levels.grows[route.id] && <p className="grow" data-k="grow">{t.levels.grows[route.id]}</p>}
               <p className="spot" data-k="spot">{spot?.v} <b className="kind">{spot && t.kind[spot.kind]}</b></p>
             </div>
             <MiniPlan current={route.id} t={t} />

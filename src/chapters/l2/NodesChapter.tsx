@@ -60,7 +60,7 @@ export default function NodesChapter({ t }: { t: Strings }) {
         <p className="group-h">{s.words}</p>
         <Gloss items={s.glossary} />
         <RealProject id="nodes" t={t} />
-        <p className="src">{t.source}: <a href={`${LAUNCH}#L131-L142`}>tf_explorer.launch.py:131-142</a> (TF-Transform-Explorer, start delays), <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Nodes/Understanding-ROS2-Nodes.html">ROS 2 Humble: Understanding nodes</a></p>
+        <p className="src">{t.source}: <a href={`${LAUNCH}#L131-L142`}>tf_explorer.launch.py:131-142</a> (TF-Transform-Explorer, {s.srcGloss.delays}), <a href="https://docs.ros.org/en/humble/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Nodes/Understanding-ROS2-Nodes.html">ROS 2 Humble: Understanding nodes</a></p>
       </div>
     </>
   )

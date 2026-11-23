@@ -22,3 +22,12 @@ describe('path data', () => {
     expect(findChapter('nope')).toBeNull()
   })
 })
+
+describe('older Level 3-4 chapters grow from Level 0', () => {
+  it.each(['scan', 'tf', 'detect', 'grid', 'costmap', 'goal', 'bringup'])('%s: dots, a Level 0 "you already know" link, an intro line in EN and JA', async (id) => {
+    const { STRINGS } = await import('../i18n')
+    expect(DOTS[id]).toBeGreaterThanOrEqual(4)
+    expect(findChapter(GROWS_FROM[id])?.num).toMatch(/^0\./)
+    for (const l of ['en', 'ja'] as const) expect(STRINGS[l].levels.grows[id]?.length).toBeGreaterThan(20)
+  })
+})

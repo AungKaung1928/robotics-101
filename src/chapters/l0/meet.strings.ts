@@ -1,6 +1,7 @@
 /** Level 0 "meet" text, EN + JA, same keys (meet.page.test checks). Group A: no software words, no code. */
 export const MEET_STRINGS = {
   en: {
+    srcGloss: { size: '138 × 178 × 192 mm long × wide × tall, 1 kg, 2 h 30 min', height: 'sensor 0.010 + 0.172 m above the floor' },
     title: 'What is a robot?',
     learn: 'You will learn: what makes a machine a robot, and the four parts of the robot in this course.',
     steps: [
@@ -40,6 +41,7 @@ export const MEET_STRINGS = {
     mascot: 'the robot',
   },
   ja: {
+    srcGloss: { size: '長さ × 幅 × 高さ 138 × 178 × 192 mm、1 kg、2 時間 30 分', height: 'センサーは床から 0.010 + 0.172 m' },
     title: 'ロボットとは？',
     learn: '学ぶこと：機械がロボットになる条件と、このコースのロボットの4つの部品。',
     steps: [

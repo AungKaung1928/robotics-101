@@ -3,7 +3,7 @@ import Mascot from '../../anim/Mascot'
 import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
 import { stringsFor, type Strings } from '../../i18n'
-import { BEAMS, FRONT_MAX, FRONT_START, MAX_M, ROOM, VIEW, front, perSecond, turn, valid } from './sense'
+import { BEAMS, front, FRONT_MAX, FRONT_START, MAX_M, perSecond, ROOM, turn, valid, VIEW, why } from './sense'
 import { SENSE_STRINGS } from './sense.strings'
 import './l0.css'
 import './sense.css'
@@ -27,13 +27,14 @@ export default function SenseChapter({ t }: { t: Strings }) {
   const [oops, setOops] = useState(0)
   const ranges = useMemo(() => turn(wall, covered), [wall, covered])
   const f = front(ranges)
+  const none = why(ranges) === 'near' ? s.tooClose : s.nothing
   const counted = ranges.filter(valid).length
   const answer = (a: Answer) => { setPicked(a); if (a === 'nothing') setCheer(cheer + 1); else setOops(oops + 1) }
   const room = `M ${sx(wall)} ${sy(ROOM.side)} H ${sx(ROOM.back)} V ${sy(-ROOM.side)} H ${sx(wall)}`
   return (
     <>
       <div className="figure">
-        <svg className="sense" viewBox={`0 0 ${VIEW.w} ${VIEW.h}`} role="img" aria-label={`${s.title}: ${s.front} ${f === null ? s.nothing : `${f.toFixed(2)} m`}`}>
+        <svg className="sense" viewBox={`0 0 ${VIEW.w} ${VIEW.h}`} role="img" aria-label={`${s.title}: ${s.front} ${f === null ? none : `${f.toFixed(2)} m`}`}>
           <path className="sense-room" d={room} />
           <rect className="sense-wall" x={sx(wall)} y={sy(ROOM.side) - 3} width="8" height={2 * ROOM.side * PX + 6} />
           <circle className="sense-limit" cx={OX} cy={OY} r={MAX_M * PX} />
@@ -48,7 +49,7 @@ export default function SenseChapter({ t }: { t: Strings }) {
           <g transform={`translate(${OX} ${OY})`}><Face k={0.9} mood={mood({ broken: covered, solved: picked === 'nothing', sensing: true })} /></g>
           <circle className="sense-top" cx={OX - 3} cy={OY} r="5" />
           {covered && <circle className="sense-hand" cx={OX - 3} cy={OY} r="12" />}
-          <text className="sense-say" x={sx(Math.min(wall, MAX_M) / 2)} y={OY - 10} textAnchor="middle">{f === null ? s.nothing : `${f.toFixed(2)} m`}</text>
+          <text className="sense-say" x={sx(Math.min(wall, MAX_M) / 2)} y={OY - 10} textAnchor="middle">{f === null ? none : `${f.toFixed(2)} m`}</text>
         </svg>
       </div>
       <div className="panel">
@@ -59,7 +60,7 @@ export default function SenseChapter({ t }: { t: Strings }) {
         <p><button type="button" className="break" onClick={() => { if (!covered) setOops(oops + 1); setCovered(!covered) }}>{covered ? s.fixIt : s.breakIt}</button></p>
         {covered && <p className="note">{s.brokenNote}</p>}
         <dl className="readout">
-          <div><dt>{s.front}</dt><dd data-k="front">{f === null ? s.nothing : `${f.toFixed(2)} m`}</dd></div>
+          <div><dt>{s.front}</dt><dd data-k="front">{f === null ? none : `${f.toFixed(2)} m`}</dd></div>
           <div><dt>{s.count}</dt><dd data-k="count">{counted} / {BEAMS}</dd></div>
           <div><dt>{s.perSecond}</dt><dd data-k="persec">{perSecond()}</dd></div>
         </dl>
@@ -74,7 +75,7 @@ export default function SenseChapter({ t }: { t: Strings }) {
         </div>
         <p className="group-h">{s.words}</p>
         <dl className="gloss">{s.glossary.map(([w, m]) => <div key={w} style={{ display: 'contents' }}><dt>{w}</dt><dd>{m}</dd></div>)}</dl>
-        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L168`}>turtlebot3_burger.urdf.xacro:168</a> (5 turns/s), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L174`}>:174</a> (360), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L181-L182`}>:181-182</a> (0.12-3.5 m), <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/appendix_lds_01/">LDS-01</a> and <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/appendix_lds_02/">LDS-02</a> specifications, <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/sbc_setup/">SBC setup</a> (three LDS models) (ROBOTIS e-Manual).</p>
+        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L168`}>turtlebot3_burger.urdf.xacro:168</a> ({s.srcGloss.turns}), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L174`}>:174</a> (360), <a href={`${SOURCE_REPO}/blob/main/description/turtlebot3_burger.urdf.xacro#L181-L182`}>:181-182</a> (0.12-3.5 m), <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/appendix_lds_01/">LDS-01</a> {s.srcGloss.and} <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/appendix_lds_02/">LDS-02</a> {s.srcGloss.specs}, <a href="https://emanual.robotis.com/docs/en/platform/turtlebot3/sbc_setup/">SBC setup</a> ({s.srcGloss.models}) (ROBOTIS e-Manual).</p>
       </div>
     </>
   )

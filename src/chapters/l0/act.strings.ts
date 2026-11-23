@@ -1,6 +1,7 @@
 /** Level 0 "act" text, EN + JA, same keys (act.page.test checks). Group A: no software words, no code. */
 export const ACT_STRINGS = {
   en: {
+    srcGloss: { brake: 'brake 2.5 m/s²', gap: 'wheels 0.16 m apart' },
     title: 'How a robot acts: two numbers for the wheels',
     learn: 'You will learn: every choice ends as two numbers, and the robot needs time to follow them.',
     steps: [
@@ -31,6 +32,7 @@ export const ACT_STRINGS = {
     mascot: 'the robot',
   },
   ja: {
+    srcGloss: { brake: 'ブレーキ 2.5 m/s²', gap: '車輪の間隔 0.16 m' },
     title: 'ロボットの動かし方：車輪への2つの数字',
     learn: '学ぶこと：どんな選択も最後は2つの数字になる。そしてロボットがそれに従うには時間がかかる。',
     steps: [
