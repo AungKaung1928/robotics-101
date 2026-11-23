@@ -33,10 +33,12 @@ describe('move model', () => {
   })
   it('every slider value (with and without slip) keeps the robot inside the figure', () => {
     const margin = 30 // body radius + wheel
+    let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity
     for (let r = -TOP_SPEED; r <= TOP_SPEED + 1e-9; r += 0.01) for (const sl of [1, SLIP]) for (const q of path(LEFT, r, 4, sl)) {
       const x = VIEW.ox + q.x * VIEW.px, y = VIEW.oy - q.y * VIEW.px
-      expect(x).toBeGreaterThan(margin); expect(x).toBeLessThan(VIEW.w - margin)
-      expect(y).toBeGreaterThan(margin); expect(y).toBeLessThan(VIEW.h - margin)
+      x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y)
     }
+    expect(x0).toBeGreaterThan(margin); expect(x1).toBeLessThan(VIEW.w - margin)
+    expect(y0).toBeGreaterThan(margin); expect(y1).toBeLessThan(VIEW.h - margin)
   })
 })

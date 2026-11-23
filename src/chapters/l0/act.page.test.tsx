@@ -32,14 +32,16 @@ describe('act page', () => {
     }
   })
   it('every slider setting keeps the robot inside the figure', () => {
+    let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity
     for (let v = 0; v <= TOP_SPEED + 1e-9; v += 0.01) for (let w = -TURN_MAX; w <= TURN_MAX + 1e-9; w += 0.1) {
       const k = wheels(v, w)
       for (const q of path(k.left, k.right, SECONDS)) {
         const x = VIEW.ox + q.x * VIEW.px, y = VIEW.oy - q.y * VIEW.px
-        expect(x).toBeGreaterThan(20); expect(x).toBeLessThan(VIEW.w - 20)
-        expect(y).toBeGreaterThan(20); expect(y).toBeLessThan(VIEW.h - 20)
+        x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y)
       }
     }
+    expect(x0).toBeGreaterThan(20); expect(x1).toBeLessThan(VIEW.w - 20)
+    expect(y0).toBeGreaterThan(20); expect(y1).toBeLessThan(VIEW.h - 20)
   })
   it.each(['en', 'ja'] as const)('%s renders: wheel readouts for 0.15 m/s + 0.5 rad/s (0.11 / 0.19), sources', (l) => {
     const html = renderToStaticMarkup(<ActChapter t={STRINGS[l]} />)
