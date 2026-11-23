@@ -1,0 +1,12 @@
+/* Level 0 "move": top view of the round robot and its drawn path. Colours from the tokens in index.css. */
+.move { width: 100%; height: auto; }
+.move-path { fill: none; stroke: var(--free); stroke-width: 3; stroke-dasharray: 2 6; stroke-linecap: round; }
+.move-start { fill: var(--ink-2); }
+.move-body { fill: var(--robot); }
+.move-wheel { fill: var(--ink); }
+.move-wheel.is-slip { fill: var(--ray); }
+.move-eye { fill: var(--surface); }
+.move-sensor { fill: var(--surface); stroke: var(--ink); stroke-width: 1.5; }
+.move-check { display: flex; gap: 12px; align-items: flex-start; }
+.move-check .pick { margin: 0 6px 6px 0; }
+.move-check .pick[aria-pressed="true"] { outline: 2px solid var(--free); }
