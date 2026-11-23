@@ -5,10 +5,13 @@ import { SOURCE_REPO } from '../../content/world'
 import { STRINGS, type Strings } from '../../i18n'
 import Gloss from '../l1/Gloss'
 import '../l1/l1.css'
-import { END_MS, inGoal, run, scenario, summary } from './late'
+import LateEnvelopes from '../../scenarios/LateEnvelopes'
+import { DELAYS_MS, END_MS, PERIOD_MS, inGoal, run, scenario, summary } from './late'
 import { LATE_STRINGS } from './late.strings'
 import './ep.css'
 
+/** The same 20 messages in the envelope figure's units (s). anim.test checks it gives the page's fates in keep-latest mode. */
+const ENVELOPES = DELAYS_MS.map((d, i) => ({ id: i, stamp: (i * PERIOD_MS) / 1000, latency: d / 1000 }))
 const still = () => typeof matchMedia === 'function' && matchMedia('(prefers-reduced-motion: reduce)').matches
 const X0 = 20, PX = 0.42, TOP = 50, BOT = 300 // timeline geometry (SVG units; PX per ms)
 const x = (ms: number) => X0 + ms * PX
@@ -28,7 +31,7 @@ export default function LateChapter({ t }: { t: Strings }) {
   return (
     <>
       <div className="figure">
-        <svg className="late" viewBox={`0 0 ${x(END_MS) + 20} ${BOT + 30}`} role="img" aria-label={s.figLabel}>
+        <svg className="ep-late" viewBox={`0 0 ${x(END_MS) + 20} ${BOT + 30}`} role="img" aria-label={s.figLabel}>
           <line className="lane" x1={X0} x2={x(END_MS)} y1={TOP} y2={TOP} /><text x={X0} y={TOP - 12}>{s.sensor}</text>
           <line className="lane" x1={X0} x2={x(END_MS)} y1={BOT} y2={BOT} /><text x={X0} y={BOT + 24}>{s.robot}</text>
           {o.map((m) => {
@@ -49,6 +52,8 @@ export default function LateChapter({ t }: { t: Strings }) {
           <span><i className="lg back" />{s.backwards}</span>
           <span><i className="lg stale" />{s.stale} / {s.older}</span>
         </p>
+        {keepLatest && <LateEnvelopes msgs={ENVELOPES} maxAge={maxAge} t={now} label={s.envLabel}
+          fateText={(f) => s.fateShort[f]} />}
         <Player t={now} setT={setTS} end={END_MS / 1000} events={sc.eventsMs!.map((e) => e / 1000)} speed={0.5} autoplay={!still()} s={t}
           caption={s.caption(f.arrived, (f.tMs / 1000).toFixed(2))} />
       </div>

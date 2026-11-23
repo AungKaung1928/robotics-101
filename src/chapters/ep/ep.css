@@ -10,15 +10,15 @@
 .bfs-legend { display: flex; flex-wrap: wrap; gap: 0.25rem 1rem; justify-content: center; font-size: var(--t-small); margin: 0.25rem 0 0; }
 .bfs-legend i { display: inline-block; width: 0.9em; height: 0.9em; margin-right: 0.3em; vertical-align: -0.1em; border: 1px solid var(--rule); }
 @media (prefers-reduced-motion: reduce) { .bfs .c { transition: none; } }
-.late { width: 100%; height: auto; display: block; }
-.late .lane { stroke: var(--rule); stroke-width: 2; }
-.late text { font: 18px var(--mono); fill: var(--ink-2, var(--ink)); }
-.late .msg line { stroke: var(--rule); stroke-width: 1.5; }
-.late .msg circle { fill: var(--ray); }
-.late .msg.acted circle, .bfs-legend .lg.acted { background: var(--robot); fill: var(--robot); }
-.late .msg.back circle, .bfs-legend .lg.back { background: var(--cost); fill: var(--cost); }
-.late .msg.stale circle, .late .msg.older circle, .bfs-legend .lg.stale { background: var(--surface); fill: var(--surface); stroke: var(--ink); stroke-dasharray: 3 2; }
-.late .msg.back line { stroke: var(--cost); stroke-width: 2.5; }
+.ep-late { width: 100%; height: auto; display: block; }
+.ep-late .lane { stroke: var(--rule); stroke-width: 2; }
+.ep-late text { font: 18px var(--mono); fill: var(--ink-2, var(--ink)); }
+.ep-late .msg line { stroke: var(--rule); stroke-width: 1.5; }
+.ep-late .msg circle { fill: var(--ray); }
+.ep-late .msg.acted circle, .bfs-legend .lg.acted { background: var(--robot); fill: var(--robot); }
+.ep-late .msg.back circle, .bfs-legend .lg.back { background: var(--cost); fill: var(--cost); }
+.ep-late .msg.stale circle, .ep-late .msg.older circle, .bfs-legend .lg.stale { background: var(--surface); fill: var(--surface); stroke: var(--ink); stroke-dasharray: 3 2; }
+.ep-late .msg.back line { stroke: var(--cost); stroke-width: 2.5; }
 .bfs .c.near { fill: var(--cost); fill-opacity: 0.12; }
 .bfs .c.near.done, .bfs .c.near.queued { fill-opacity: 0.5; }
 .bfs .c.near.path { fill: var(--robot); fill-opacity: 0.8; }

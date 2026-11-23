@@ -27,6 +27,8 @@ export const LATE_STRINGS = {
       ['out of order', 'a newer message arrives before an older one'],
     ] as [string, string][],
     caption: (n: number, t: string) => `t = ${t} s · ${n} of 20 arrived`,
+    fateShort: { used: 'used', old: 'too old', stale: 'older' },
+    envLabel: 'Each message as an envelope: flies for its own delay, then is used or dropped',
     figLabel: 'Timeline: each reading falls from the sensor line (when measured) to the robot line (when it arrived)',
   },
   ja: {
@@ -56,6 +58,8 @@ export const LATE_STRINGS = {
       ['out of order', '新しいメッセージが古いものより先に届くこと'],
     ] as [string, string][],
     caption: (n: number, t: string) => `t = ${t} 秒 · 20 個中 ${n} 個到着`,
+    fateShort: { used: '使用', old: '古すぎ', stale: '古い' },
+    envLabel: '各メッセージを封筒で表示：自分の遅延の間飛び、届くと使われるか捨てられる',
     figLabel: 'タイムライン：各読み取り値はセンサーの線（測定時刻）からロボットの線（到着時刻）へ落ちる',
   },
 }
