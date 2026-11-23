@@ -24,5 +24,17 @@ for (const [en, forms] of byEn) {
   console.log(`"${en}"`)
   for (const [my, ids] of forms) console.log(`  ${my}  <- ${ids.join(', ')}`)
 }
+// One Burmese word per teaching term: where the English has the term, the Burmese has this word.
+const TERMS = [
+  { en: 'rule', my: 'စည်းကမ်းချက်', except: { 'l1/decide:realSensor': 'a ROS standard (REP 117), not the robot\'s decision rule' } },
+]
+for (const t of TERMS) {
+  const rx = new RegExp(`(^|[^A-Za-z0-9_/])${t.en}s?([^A-Za-z0-9_/]|$)`, 'i')
+  for (const [id, s] of Object.entries(status)) {
+    if ((s.status !== 'pass' && s.status !== 'pass-alt') || !rx.test(s.en) || s.my.includes(t.my) || id in t.except) continue
+    n++
+    console.log(`term "${t.en}" must be ${t.my}: ${id}  ${s.my}`)
+  }
+}
 console.log(`${n} conflicts`)
 process.exit(n ? 1 : 0)

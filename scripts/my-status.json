@@ -1600,8 +1600,8 @@
  "l0/act:steps.0": {
   "status": "pass-alt",
   "en": "The rule chose \"go\" or \"stop\". To act, the robot turns that choice into two numbers: how fast to drive forward, and how fast to turn.",
-  "my": "စည်းမျဉ်းအရ \"သွားမယ်\" ဒါမှမဟုတ် \"ရပ်မယ်\" ဆိုတာကို ရွေးချယ်ပါတယ်။ အလုပ်လုပ်ဖို့အတွက် စက်ရုပ်ဟာ အဲဒီရွေးချယ်မှုကို ကိန်းဂဏန်း 2 ခုအဖြစ် ပြောင်းလဲလိုက်ပါတယ်- အရှေ့ကို ဘယ်လောက် အမြန်နှုန်းနဲ့ သွားမလဲဆိုတာနဲ့ ဘယ်လောက် အမြန်နှုန်းနဲ့ လှည့်မလဲဆိုတာ ဖြစ်ပါတယ်။",
-  "back": "By rule, it chooses \"go\" or \"stop\". To act, the robot converts that choice into two numbers: how fast to go forward and how fast to turn."
+  "my": "စည်းကမ်းချက်အရ \"သွားမယ်\" ဒါမှမဟုတ် \"ရပ်မယ်\" ဆိုတာကို ရွေးချယ်ပါတယ်။ အလုပ်လုပ်ဖို့အတွက် စက်ရုပ်ဟာ အဲဒီရွေးချယ်မှုကို ကိန်းဂဏန်း 2 ခုအဖြစ် ပြောင်းလဲလိုက်ပါတယ်- အရှေ့ကို ဘယ်လောက် အမြန်နှုန်းနဲ့ သွားမလဲဆိုတာနဲ့ ဘယ်လောက် အမြန်နှုန်းနဲ့ လှည့်မလဲဆိုတာ ဖြစ်ပါတယ်။",
+  "back": "According to the rules, it chooses \"go\" or \"stop\". In order to work, the robot converts that choice into 2 numbers: at what speed to go forward, and at what speed to turn."
  },
  "l0/act:steps.1": {
   "status": "pass-alt",
@@ -1844,14 +1844,16 @@
  "l0/meet:car": {
   "status": "pass-alt",
   "en": "Remote-control car",
-  "my": "ရီမုထိန်းကား",
-  "back": "Remote-controlled car"
+  "my": "ရီမုတ်ထိန်းကား",
+  "back": "Remote-controlled car",
+  "note": "spelling: ရီမု -> ရီမုတ် (blind checker, 2026-11-24)"
  },
  "l0/meet:check": {
   "status": "pass-alt",
   "en": "Check: a toy car follows your remote control. Robot or not?",
-  "my": "စစ်ကြည့်- ကစားစရာကားက သင် ရီမုနဲ့ ထိန်းတဲ့အတိုင်း လုပ်ပါတယ်။ စက်ရုပ် လား၊ မဟုတ်ဘူးလား။",
-  "back": "Check: the toy car does as you control it with the remote. Is it a robot or not?"
+  "my": "စစ်ကြည့်- ကစားစရာကားက သင် ရီမုတ်နဲ့ ထိန်းတဲ့အတိုင်း လုပ်ပါတယ်။ စက်ရုပ် လား၊ မဟုတ်ဘူးလား။",
+  "back": "Check: the toy car does as you control it with the remote. Is it a robot or not?",
+  "note": "spelling: ရီမု -> ရီမုတ် (blind checker, 2026-11-24)"
  },
  "l0/meet:decides": {
   "status": "pass-alt",
@@ -1946,8 +1948,8 @@
  "l0/meet:parts.computer": {
   "status": "pass-alt",
   "en": "Small computers inside: they run the rule that decides. Chapter: how it thinks.",
-  "my": "အထဲက ကွန်ပျူတာ အသေးလေးတွေ- ဆုံးဖြတ်ချက်ပေးတဲ့ စည်းမျဉ်းတွေကို အဲဒါတွေက လုပ်ဆောင်ပေးပါတယ်။ သင်ခန်းစာ- ဘယ်လို စဉ်းစားသလဲ။",
-  "back": "Small computers inside: they carry out the rules that give decisions. Lesson: how does it think?"
+  "my": "အထဲက ကွန်ပျူတာ အသေးလေးတွေ- ဆုံးဖြတ်ချက်ပေးတဲ့ စည်းကမ်းချက်တွေကို အဲဒါတွေက လုပ်ဆောင်ပေးပါတယ်။ သင်ခန်းစာ- ဘယ်လို စဉ်းစားသလဲ။",
+  "back": "The tiny computers inside: they carry out the rules that give decisions. Lesson: how does it think?"
  },
  "l0/meet:parts.sensor": {
   "status": "pass-alt",
@@ -2000,8 +2002,9 @@
  "l0/meet:steps.2": {
   "status": "pass-alt",
   "en": "Is a remote-control car a robot? It moves, but a person watches and decides. Give it a sensor and a rule, and it decides by itself: now it is a robot. Try the button.",
-  "my": "ရီမုနဲ့ ထိန်းတဲ့ကားက စက်ရုပ် လား။ အဲဒါက လှုပ်ရှားနိုင်ပေမဲ့ လူက ကြည့်ပြီး ဆုံးဖြတ်ပေးရတာပါ။ ဆင်ဆာ နဲ့ စည်းမျဉ်းတစ်ခု ပေးလိုက်ရင်တော့ သူ့အလိုလို ဆုံးဖြတ်နိုင်သွားပါပြီ- အဲဒီအခါမှာတော့ စက်ရုပ် ဖြစ်သွားပါပြီ။ ခလုတ်ကို စမ်းကြည့်ပါ။",
-  "back": "Is a remote-controlled car a robot? It can move, but a person has to look and decide for it. If you give it a sensor and a rule, it can decide by itself - at that point it becomes a robot. Try the switch."
+  "my": "ရီမုတ်နဲ့ ထိန်းတဲ့ကားက စက်ရုပ် လား။ အဲဒါက လှုပ်ရှားနိုင်ပေမဲ့ လူက ကြည့်ပြီး ဆုံးဖြတ်ပေးရတာပါ။ ဆင်ဆာ နဲ့ စည်းကမ်းချက်တစ်ခု ပေးလိုက်ရင်တော့ သူ့အလိုလို ဆုံးဖြတ်နိုင်သွားပါပြီ- အဲဒီအခါမှာတော့ စက်ရုပ် ဖြစ်သွားပါပြီ။ ခလုတ်ကို စမ်းကြည့်ပါ။",
+  "back": "Is a remo-controlled car a robot? It can move, but a person has to watch and decide. If you give it a sensor and a rule, it becomes able to decide on its own - at that point it has become a robot. Try the button.",
+  "note": "spelling: ရီမု -> ရီမုတ် (blind checker, 2026-11-24)"
  },
  "l0/meet:tapHint": {
   "status": "pass-alt",
@@ -2018,7 +2021,7 @@
  "l0/meet:upgrade": {
   "status": "pass-alt",
   "en": "Give it a sensor and a rule",
-  "my": "ဆင်ဆာ နဲ့ စည်းမျဉ်း ပေးပါ",
+  "my": "ဆင်ဆာ နဲ့ စည်းကမ်းချက် ပေးပါ",
   "back": "Give a sensor and a rule"
  },
  "l0/meet:words": {

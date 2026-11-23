@@ -50,6 +50,7 @@
  ],
  "tierA_rule": "Any token with a capital letter after the first, a digit, _ / . + or :: (identifiers, topics, files, commands), and everything inside backticks, stays exactly as in English. Frame names like map, odom, base_link stay English when they name a frame.",
  "tierB_loanwords": {
+  "remote": "ရီမုတ်",
   "robot": "စက်ရုပ်",
   "sensor": "ဆင်ဆာ",
   "camera": "ကင်မရာ",
