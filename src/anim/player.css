@@ -44,4 +44,7 @@
 .stepper .scrub { --scrub-rest: color-mix(in srgb, var(--ink-2) 65%, var(--paper)); }
 .stepper .scrub.squish-range { height: 24px; background-color: transparent; background-size: 100% 6px; background-repeat: no-repeat; background-position: center; }
 @media (max-width: 600px) { .stepper .wide { display: none; } }
+/* Keyboard-driven (data-kbd): the same state changes, no pops or morphs; a pointer press brings them back. */
+.stepper[data-kbd] .rail [aria-current] .dot, .stepper[data-kbd] .rate span { animation: none; }
+.stepper[data-kbd] .pp path, .stepper[data-kbd] .rail li + li::before { transition: none; }
 @media (prefers-reduced-motion: reduce) { .stepper .rail .dot, .stepper button, .stepper .rail li + li::before, .stepper .pp path { transition: none; } .stepper .rail [aria-current] .dot, .stepper .scrub-tip, .stepper .rate span { animation: none; } .stepper button:active:not(:disabled) { transform: none; } }
