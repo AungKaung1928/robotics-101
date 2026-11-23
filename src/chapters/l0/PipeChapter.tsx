@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import Player from '../../components/Player'
+import Celebrate from '../../anim/Celebrate'
 import { arrivalScale } from '../../anim/spring'
 import { SOURCE_REPO } from '../../content/world'
 import { STRINGS, type Strings } from '../../i18n'
@@ -18,6 +19,8 @@ export default function PipeChapter({ t }: { t: Strings }) {
   const [presses, setPresses] = useState(0)
   const broken = presses % 2 === 1 ? BREAKS[((presses - 1) / 2) % BREAKS.length] : null
   const [clicked, setClicked] = useState<number | null>(null)
+  const [solved, setSolved] = useState(0)
+  const pick = (i: number) => { setClicked(i); if (broken !== null && found(broken, i) && clicked !== i) setSolved(solved + 1) }
   const sc = useMemo(() => scenario(broken), [broken])
   const [tS, setTS] = useState(() => (still() ? sc.durationMs / 1000 : 0))
   const now = Math.min(tS, sc.durationMs / 1000)
@@ -45,8 +48,9 @@ export default function PipeChapter({ t }: { t: Strings }) {
             return broken === null
               ? <a key={p.id} href={p.chapter} className={cls}>{box}</a>
               : <g key={p.id} className={cls} role="button" tabIndex={0} aria-label={s.names[p.id]}
-                  onClick={() => setClicked(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setClicked(i) } }}>{box}</g>
+                  onClick={() => pick(i)} onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); pick(i) } }}>{box}</g>
           })}
+          {broken !== null && <Celebrate x={x0(broken) + W / 2} y={40} n={solved} />}
           {!f.arrived && <circle className="packet" cx={px} cy="120" r="6" />}
           <text className="say" x="310" y="156" textAnchor="middle">{s.does[PIPE[f.at].id]}</text>
           <text className={`say${f.arrived && broken === null ? ' go' : ''}`} x="310" y="190" textAnchor="middle">
@@ -59,7 +63,7 @@ export default function PipeChapter({ t }: { t: Strings }) {
       <div className="panel">
         <p className="learn">{s.learn}</p>
         {s.lines.map((l) => <p key={l}>{l}</p>)}
-        <p><button type="button" className="break" onClick={() => { setPresses(presses + 1); setClicked(null); setTS(0) }}>{broken === null ? s.breakIt : s.fixIt}</button></p>
+        <p><button type="button" className="break" onClick={() => { setPresses(presses + 1); setClicked(null); setSolved(0); setTS(0) }}>{broken === null ? s.breakIt : s.fixIt}</button></p>
         {broken !== null && <p className="note">{s.brokenNote}</p>}
         <p><strong>{s.challenge}</strong></p>
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet}</p>
