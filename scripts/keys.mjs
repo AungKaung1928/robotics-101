@@ -140,7 +140,7 @@ try {
     report(`${hash}: drag the robot 2 m right → x 0.50 → 2.50, y stays 0.50`, xy === '2.50 0.50' ? [] : [`sliders x y = ${xy}`])
   }
 
-  // Bring-up: Play from stage 1 moves the playhead at 5 scenario s per s, lights stages on the way, stops at patrol (25 s).
+  // Bring-up: Play from stage 1 moves the playhead at 5 scenario s per s, lights stages on the way, stops at patrol (24 s: its node at 9 s + startup_delay 15 s).
   await open('#/bringup/1')
   const caption = `document.querySelector('[data-k="step"]').textContent`
   const start = await js(caption)
@@ -151,8 +151,8 @@ try {
   const end = await js(`[${caption}, document.querySelectorAll('.stepper button')[2].disabled].join(' | ')`)
   report('bring-up Play: playhead moves past spawn (3 s) within 1.3 s, stops on patrol', [
     ...(start.startsWith('t = 0 s') ? [] : [`start ${start}`]),
-    ...(mid >= 3 && mid < 25 ? [] : [`after 1.3 s t = ${mid}, expected 3 ≤ t < 25`]),
-    ...(end.startsWith('t = 25 s · patrol') && end.endsWith('true') ? [] : [`end ${end}, expected t = 25 s · patrol and Next disabled`]),
+    ...(mid >= 3 && mid < 24 ? [] : [`after 1.3 s t = ${mid}, expected 3 ≤ t < 24`]),
+    ...(end.startsWith('t = 24 s · patrol') && end.endsWith('true') ? [] : [`end ${end}, expected t = 24 s · patrol and Next disabled`]),
   ])
 
   // Grid: Add scan adds one scan and makes more cells known ('#/grid/1': paused, so the scenario does not add scans itself).

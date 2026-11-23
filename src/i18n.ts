@@ -107,7 +107,7 @@ const en = {
   },
   bringup: {
     lines: [
-      'One launch file starts everything. Most stages wait on fixed timers chosen so their inputs should exist first; nothing checks that they do.',
+      'One launch file starts everything. Most stages wait on fixed timers chosen so their inputs should exist first. Only patrol checks: it waits up to 5 s for Nav2’s action server and retries.',
       'Drag SLAM or Nav2 earlier: a stage that starts no later than its input waits on a frame or topic that is not there yet.',
     ],
     slam: 'SLAM starts at (s)',
@@ -273,7 +273,7 @@ const ja: typeof en = {
   },
   bringup: {
     lines: [
-      '1 つの launch ファイルが全部を起動する。多くの段は固定タイマーで待ち、入力が先に揃っているはずの時刻に起動する。実際に揃っているかは確認しない。',
+      '1 つの launch ファイルが全部を起動する。多くの段は固定タイマーで待ち、入力が先に揃っているはずの時刻に起動する。確認するのは巡回だけで、Nav2 のアクションサーバーを最大 5 秒待ち、なければ再試行する。',
       'SLAM や Nav2 を早めると、入力元と同時か、それより前に始まる段は、まだ存在しないフレームやトピックを待つことになる。',
     ],
     slam: 'SLAM の開始 (秒)',
