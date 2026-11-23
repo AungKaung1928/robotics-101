@@ -1,13 +1,17 @@
 import { useState } from 'react'
 import { waypointValues } from '../content/waypoints'
 import { SOURCE_REPO, STACK, WAYPOINTS } from '../content/world'
-import type { Strings } from '../i18n'
+import { STRINGS, type Strings } from '../i18n'
 import { CHAPTERS, type ChapterId } from '../lib/route'
 import { CHAPTER_ICON, Icon } from '../icons'
+import { LEVELS } from '../content/levels'
+import { readDone } from '../lib/progress'
 import Arena from './Arena'
 
 export default function Overview({ t }: { t: Strings }) {
   const [peek, setPeek] = useState<ChapterId>(CHAPTERS[0])
+  const [done] = useState(() => readDone(localStorage))
+  const ja = t === STRINGS.ja
   const VALUE = waypointValues(t.wv)
   const path = WAYPOINTS.map(({ x, y }, i) => `${i ? 'L' : 'M'}${x} ${y}`).join('') + 'Z'
   const labels = CHAPTERS.map((c, i) => {
@@ -31,7 +35,31 @@ export default function Overview({ t }: { t: Strings }) {
         onMouseEnter={() => setPeek(c)} onFocus={() => setPeek(c)}>{body}</a>
     )
   })
+  const map = (
+    <section className="levelmap" aria-labelledby="levels-h">
+      <h2 id="levels-h">{t.levels.heading}</h2>
+      <ol>
+        {LEVELS.map((chs, n) => (
+          <li key={n} className={chs.length ? undefined : 'is-soon'}>
+            <span className="lv-n">{n}</span>
+            <span className="lv-name">{t.levels.names[n]}</span>
+            {chs.length ? (
+              <span className="lv-chs">
+                {chs.map((c, i) => (
+                  <a key={c.id} href={`#/${n}/${c.id}`} className={done.has(c.id) ? 'is-done' : undefined}>
+                    <Icon name={c.icon} /> <span>{n}.{i + 1} {ja ? c.titleJa : c.titleEn}</span>
+                    {done.has(c.id) && <span className="tick" aria-label={t.levels.opened}>✓</span>}
+                  </a>
+                ))}
+              </span>
+            ) : <span className="lv-chs note">{t.levels.soon}</span>}
+          </li>
+        ))}
+      </ol>
+    </section>
+  )
   return (
+    <>
     <main className="overview">
       <div className="ov-text">
         <p className="eyebrow"><a href={SOURCE_REPO}>{STACK.join(' · ')}</a></p>
@@ -50,5 +78,7 @@ export default function Overview({ t }: { t: Strings }) {
         <circle className="patrol-bot" r="0.22" style={{ offsetPath: `path('${path}')` }} aria-hidden="true" />
       </Arena>
     </main>
+    {map}
+    </>
   )
 }

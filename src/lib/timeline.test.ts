@@ -6,6 +6,9 @@ describe('advance', () => {
     expect(advance(2, 0.5, 4, 25)).toBe(4)
     expect(advance(24, 1, 4, 25)).toBe(25)
   })
+  it('never runs backwards: the first rAF timestamp can be older than the performance.now() taken before it', () => {
+    expect(advance(0, -0.004, 1, 6)).toBe(0)
+  })
 })
 
 describe('stepEvent', () => {

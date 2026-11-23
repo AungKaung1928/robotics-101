@@ -16,6 +16,12 @@ const en = {
   back: 'Back',
   player: { label: 'Scenario', play: 'Play', pause: 'Pause', scrub: 'Scenario time' },
   next: 'Next',
+  levels: {
+    heading: 'Levels',
+    names: ['Start here', 'Programming for robots', 'ROS 2 basics', 'A robot that moves by itself', 'Mapping and navigation', 'Robotics software engineer'],
+    soon: 'Coming next',
+    opened: 'opened',
+  },
   plan: 'Plan',
   source: 'Source',
   chapters: {
@@ -175,6 +181,12 @@ const ja: typeof en = {
   back: '戻る',
   player: { label: 'シナリオ', play: '再生', pause: '一時停止', scrub: 'シナリオの時刻' },
   next: '次へ',
+  levels: {
+    heading: 'レベル',
+    names: ['はじめに', 'ロボットのためのプログラミング', 'ROS 2 の基本', '自分で動くロボット', '地図とナビゲーション', 'ロボットソフトウェアエンジニア'],
+    soon: '準備中',
+    opened: '開いた',
+  },
   plan: '全体図',
   source: '出典',
   chapters: {

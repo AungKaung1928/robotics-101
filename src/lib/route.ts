@@ -4,16 +4,22 @@ export const CHAPTERS = ['bringup', 'tf', 'scan', 'detect', 'grid', 'costmap', '
 export type ChapterId = (typeof CHAPTERS)[number]
 export type Route = { page: 'overview' } | { page: 'chapter'; id: ChapterId }
 
-/** '#/scan' → the scan chapter; '', '#/', unknown ids → overview. */
+/** Path segments of the hash without the query; a leading level number ('#/4/grid') is dropped. */
+function segments(hash: string): string[] {
+  const parts = hash.replace(/^#\/?/, '').split('?')[0].split('/')
+  return /^\d$/.test(parts[0]) && parts.length > 1 ? parts.slice(1) : parts
+}
+
+/** '#/scan' or '#/3/scan' → the scan chapter; '', '#/', unknown ids → overview. */
 export function parseRoute(hash: string): Route {
-  const id = hash.replace(/^#\/?/, '').split(/[/?]/)[0]
+  const id = segments(hash)[0]
   const ch = CHAPTERS.find((c) => c === id)
   return ch ? { page: 'chapter', id: ch } : { page: 'overview' }
 }
 
 /** Step number from '#/<chapter>/<step>' (1-based in the URL) as a 0-based index, clamped to [0, count - 1]; no step → last. */
 export function routeStep(hash: string, count: number): number {
-  const n = Number(hash.replace(/^#\/?/, '').split('/')[1])
+  const n = Number(segments(hash)[1])
   return Number.isInteger(n) && n >= 1 ? Math.min(n, count) - 1 : count - 1
 }
 

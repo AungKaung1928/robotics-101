@@ -1,0 +1,53 @@
+/** Chapter 1.5 text, EN + JA. Same keys in both (shell.test checks). */
+export const SHELL_STRINGS = {
+  en: {
+    title: 'The terminal: 8 commands',
+    learn: 'You will learn: the 8 terminal commands you use every day with ROS 2, and why ros2 is "not found" in a new terminal.',
+    lines: [
+      'The terminal is a text window where you type a command, press Enter, and read the answer. Robots are run this way.',
+      'You are always inside one folder. pwd shows it, ls lists it, cd moves you.',
+      'ros2 only exists after source /opt/ros/humble/setup.bash. Every new terminal starts without it.',
+    ],
+    runsHere: 'A pretend terminal in the page (JavaScript), not your computer: one folder tree, 8 commands.',
+    yours: 'Your terminal: type a command, press Enter',
+    newTerm: 'Break it: open a new terminal',
+    challenge: 'Challenge: in a new terminal, make ros2 pkg list print the packages.',
+    solved: 'Solved: ros2 works in this terminal.', notYet: 'Not yet: ros2 has not worked in this terminal.',
+    words: 'The 8 commands',
+    glossary: [
+      ['pwd', 'print the folder you are in'],
+      ['ls', 'list what is in a folder'],
+      ['cd', 'change folder (cd .. = up one, cd ~ = home)'],
+      ['mkdir', 'make a new folder'],
+      ['cat', 'print a file'],
+      ['source', 'run a setup file in this terminal (adds ros2)'],
+      ['echo', 'print text or a variable: echo $ROS_DISTRO'],
+      ['ros2', 'the ROS 2 command: ros2 pkg list, ros2 topic list, ...'],
+    ] as [string, string][],
+  },
+  ja: {
+    title: 'ターミナル：8つのコマンド',
+    learn: '学ぶこと：ROS 2 で毎日使う8つのターミナルコマンドと、新しいターミナルで ros2 が「見つからない」理由。',
+    lines: [
+      'ターミナルはコマンドを打って Enter を押し、答えを読む文字の画面。ロボットはこうして動かす。',
+      'いつもどこか1つのフォルダの中にいる。pwd で表示、ls で一覧、cd で移動。',
+      'ros2 は source /opt/ros/humble/setup.bash の後にだけ使える。新しいターミナルはいつもそれなしで始まる。',
+    ],
+    runsHere: 'ページ内の疑似ターミナル（JavaScript）で、あなたのコンピュータではない：フォルダ1つ分、コマンド8つ。',
+    yours: 'あなたのターミナル：コマンドを打って Enter',
+    newTerm: '壊す：新しいターミナルを開く',
+    challenge: 'チャレンジ：新しいターミナルで ros2 pkg list がパッケージを表示するようにしよう。',
+    solved: '成功：このターミナルで ros2 が動いた。', notYet: 'まだ：このターミナルで ros2 はまだ動いていない。',
+    words: '8つのコマンド',
+    glossary: [
+      ['pwd', '今いるフォルダを表示'],
+      ['ls', 'フォルダの中身を一覧'],
+      ['cd', 'フォルダを移動（cd .. = 1つ上、cd ~ = ホーム）'],
+      ['mkdir', '新しいフォルダを作る'],
+      ['cat', 'ファイルを表示'],
+      ['source', '設定ファイルをこのターミナルで実行（ros2 が使えるようになる）'],
+      ['echo', '文字や変数を表示：echo $ROS_DISTRO'],
+      ['ros2', 'ROS 2 のコマンド：ros2 pkg list、ros2 topic list など'],
+    ] as [string, string][],
+  },
+}
