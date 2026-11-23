@@ -48,7 +48,7 @@ describe('scenario figures render from their models', () => {
       wallX={2} err0={0.2} sinceFix={since} label="" residualText={(m) => `off ${(m * 100).toFixed(1)} cm`} />)
     const before = at(-1), mid = at(0.1), end = at(fixSettle(0.2))
     expect(before).toContain('data-mood="dizzy"')
-    expect(count(before, /class="hit"/g)).toBe(5)
+    expect(count(before, /a0\.03 0\.03 0 1 0 0\.06 0/g)).toBe(5) // five hit dots in the one hit path
     expect(mid).toContain('data-mood="curious"')
     expect(end).toContain('data-mood="happy"')
     expect(end).toContain('off 0.0 cm')
