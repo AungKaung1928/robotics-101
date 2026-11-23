@@ -1,0 +1,26 @@
+/* Level 1 chapter styles: only the pieces index.css does not have (code card, glossary, verdict). Tokens from index.css. */
+.code { width: 0; min-width: 100%; box-sizing: border-box; /* never widens the panel: scrolls instead */ font: var(--t-small) / 1.6 var(--mono); background: var(--surface); border: 1px solid var(--rule); border-radius: var(--radius); padding: 0.6rem 0.8rem; margin: 0; overflow-x: auto; }
+.code .ln { display: block; padding: 0 0.3rem; border-left: 3px solid transparent; transition: background var(--motion), border-color var(--motion); }
+.code .ln.on { background: color-mix(in srgb, var(--robot) 12%, transparent); border-left-color: var(--robot); }
+.code .val { color: var(--robot); font-weight: 600; }
+.code .cmt { color: var(--ink-2); }
+.code .bad { color: var(--ray); font-weight: 700; }
+.learn { font-weight: 600; }
+.runs { font-size: var(--t-small); color: var(--ink-2); }
+.gloss { display: grid; grid-template-columns: max-content 1fr; gap: 0.2rem 0.8rem; font-size: var(--t-small); margin: 0; }
+.gloss dt { font-family: var(--mono); }
+.gloss dd { margin: 0; color: var(--ink-2); }
+.verdict.ok { color: var(--free); font-weight: 600; }
+.verdict.no { color: var(--ink-2); }
+.side .floor { stroke: var(--rule); stroke-width: 2; }
+.side .wall { fill: var(--occ); }
+.side .body { fill: var(--robot); }
+.side .wheel { fill: var(--surface); stroke: var(--robot); stroke-width: 2; }
+.side .beam { stroke: var(--ray); stroke-width: 2; stroke-dasharray: 4 3; }
+.side .stopline { stroke: var(--ink-2); stroke-dasharray: 3 4; }
+.side .dim { stroke: var(--ink); marker-start: none; }
+.side text { font: 18px var(--mono); fill: var(--ink); }
+.side .tag { font-weight: 700; }
+.side .tag.go { fill: var(--free); }
+.side .tag.stop { fill: var(--ray); }
+.side .is-crash .body { fill: var(--ray); }
