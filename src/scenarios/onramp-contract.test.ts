@@ -300,6 +300,25 @@ describe('ActScene roll-on = the act chapter readout at every speed-slider stop'
   })
 })
 
+describe('ThinkScene ghost of the previous rule', () => {
+  it('at the end, a ghost where the previous rule stopped (chapter model); none without a previous rule, mid-drive or same rule', async () => {
+    const { renderToStaticMarkup } = await import('react-dom/server')
+    const { createElement: h } = await import('react')
+    const { default: ThinkScene } = await import('./ThinkScene')
+    const th = await import('../chapters/l0/think')
+    const model = { run: (a: number) => th.run(a), speed: th.SPEED, startM: th.START_M }
+    const at = (p: object) => renderToStaticMarkup(h(ThinkScene, { stopAt: 0.5, t: 60, model, label: '', ...p }))
+    const g = at({ prevStopAt: 1 }), robot = at({})
+    const gx = Number(/class="tk-ghost" cx="([\d.]+)"/.exec(g)![1]), rx = Number(/class="rtop" data-mood="\w+" transform="translate\(([\d.]+)/.exec(robot)![1])
+    const other = Number(/class="rtop" data-mood="\w+" transform="translate\(([\d.]+)/.exec(renderToStaticMarkup(h(ThinkScene, { stopAt: 1, t: 60, model, label: '' })))![1])
+    expect(gx).toBeCloseTo(other, 6) // the ghost sits where the robot stops with rule 1
+    expect(gx).toBeLessThan(rx) // a bigger rule stopped earlier: the ghost is behind
+    expect(at({})).not.toContain('tk-ghost')
+    expect(at({ prevStopAt: 0.5 })).not.toContain('tk-ghost')
+    expect(renderToStaticMarkup(h(ThinkScene, { stopAt: 0.5, t: 1, model, prevStopAt: 1, label: '' }))).not.toContain('tk-ghost')
+  })
+})
+
 describe('SimWhatScene sensor off says why the view is blank', () => {
   it('emptyWord in the view only when the sensor is off; no dots then', async () => {
     const { renderToStaticMarkup } = await import('react-dom/server')

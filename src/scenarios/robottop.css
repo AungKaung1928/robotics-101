@@ -101,3 +101,4 @@
 .rtop-body { transform-box: fill-box; transform-origin: center; animation: rtop-breath 3.2s ease-in-out infinite; }
 @keyframes rtop-breath { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
 @media (prefers-reduced-motion: reduce) { .rtop-body { animation: none; } }
+.tk-ghost { fill: none; stroke: var(--ink-2); stroke-width: 1.5; stroke-dasharray: 3 3; opacity: 0.7; } /* where it stopped with the previous rule */
