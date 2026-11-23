@@ -34,6 +34,13 @@ export const MY_TEMPLATES: Record<string, Record<string, Tpl>> = {
     brokenNote: (n: number) =>
       `Iron က Dec 4, 2024 မှာ ပြင်ဆင်ချက် ရပ်သွားပါပြီ။ အဲဒီပေါ်မှာ စခဲ့တဲ့ project က လုံခြုံရေး ဒါမှမဟုတ် bug ပြင်ဆင်ချက် မပါဘဲ ${n} လ ကြာသွားပါပြီ။ LTS ကို ရွေးပါ။`,
   },
+  'l0.scope.SCOPE_STRINGS': {
+    level: (r: string) => (r === 'EP' ? 'EP' : `Level ${r}`),
+    caption: (n: number, total: number) => `အတန်း ${total} ခုထဲက ${n} ခု ပြထား`,
+    brokenNote: (n: number, names: string) => `C++ ကို ကျော်ရင် အခန်း ${n} ခု ပိတ်သွားပါတယ်: ${names}။ အဲဒီ အခန်း အများစုအတွက် C++ ဖတ်တတ်ရုံနဲ့ လုံလောက်ပါတယ်။`,
+    solved: (name: string, n: number, total: number) => `မှန်ပါတယ်: ${name}၊ အခန်း ${total} ခုထဲက ${n} ခုမှာ။`,
+    wrong: (name: string, n: number) => `${name} က အခန်း ${n} ခုမှာ ပါပါတယ်။ ကော်လံ တစ်ခုချင်းစီက အစက်တွေကို ပြန်ရေကြည့်ပါ။`,
+  },
   'l0.think.THINK_STRINGS': {
     'fig.distance': (d: number) => `နံရံ ${d} m အကွာ`,
     caption: (n: number, d: number, go: boolean) => `စစ်ချက် ${n}: ${d} m → ${go ? 'သွား' : 'ရပ်'}`,

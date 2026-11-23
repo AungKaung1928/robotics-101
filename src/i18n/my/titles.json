@@ -10,6 +10,7 @@
  "pipe": "စက်ရုပ် ဆော့ဖ်ဝဲ - ပရိုဂရမ် အသေးစားလေးများ",
  "tools": "အသုံးပြုတဲ့ tool တွေနဲ့ ဘာကြောင့် သုံးရသလဲ",
  "ros": "ROS ဆိုတာ ဘာလဲ၊ ဘယ် version ကို သုံးမလဲ",
+ "scope": "ဘယ်လောက် လိုလဲ",
  "decide": "Python: တန်ဖိုး တစ်ခုနဲ့ ဆုံးဖြတ်ချက် တစ်ခု",
  "closest": "Python: loop နဲ့ function",
  "callback": "Python: class နဲ့ callback",

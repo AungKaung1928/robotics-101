@@ -2548,6 +2548,126 @@
   "back": "Glossary",
   "note": "consistency: copied from ep/bfs:words"
  },
+ "l0/scope:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: skip C++",
+  "my": "ဖျက်ကြည့်: C++ ကို ကျော်",
+  "back": "Delete and see: skip C++"
+ },
+ "l0/scope:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: which one skill do the most chapters use?",
+  "my": "စိန်ခေါ်မှု- ဘယ်ကျွမ်းကျင်မှု တစ်ခုကို အခန်း အများဆုံး သုံးလဲ။",
+  "back": "Challenge: which one skill is used by the most chapters?"
+ },
+ "l0/scope:count": {
+  "status": "pass-alt",
+  "en": "chapters using it",
+  "my": "သုံးတဲ့ အခန်း",
+  "back": "Chapters that use it"
+ },
+ "l0/scope:fixIt": {
+  "status": "pass-alt",
+  "en": "Fix it: learn a little C++",
+  "my": "ပြင်ကြည့်: C++ နည်းနည်း သင်",
+  "back": "Fix and see: learn a little C++"
+ },
+ "l0/scope:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "Python",
+  "my": "Python",
+  "back": "Python"
+ },
+ "l0/scope:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "the language most robot examples start in; quick to change",
+  "my": "စက်ရုပ် ဥပမာ အများစု စတင်တဲ့ ဘာသာစကား၊ ပြင်ရ မြန်တယ်",
+  "back": "The language most robot examples start with, quick to fix"
+ },
+ "l0/scope:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "C++",
+  "my": "C++",
+  "back": "C++"
+ },
+ "l0/scope:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "the language for fast, real-time robot code",
+  "my": "မြန်ပြီး အချိန်မှန် အလုပ်လုပ်ရမယ့် စက်ရုပ် ကုဒ်အတွက် ဘာသာစကား",
+  "back": "Language for robot code that must be fast and run in real time"
+ },
+ "l0/scope:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "terminal",
+  "my": "terminal",
+  "back": "terminal"
+ },
+ "l0/scope:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "the text window where you type commands like ros2 run",
+  "my": "ros2 run လို command တွေ ရိုက်ထည့်တဲ့ စာသား window",
+  "back": "Text window where you type commands like ros2 run"
+ },
+ "l0/scope:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: which skills the rest of this course uses, counted from the chapters themselves.",
+  "my": "သင်ယူရမှာက- ဒီသင်တန်းရဲ့ ကျန်တဲ့ အခန်းတွေမှာ ဘယ်ကျွမ်းကျင်မှုတွေ သုံးလဲ ဆိုတာပါ၊ အခန်းတွေထဲကနေ တိုက်ရိုက် ရေတွက်ထားတာပါ။",
+  "back": "What you will learn: which skills the remaining chapters of this course use, counted directly from the chapters."
+ },
+ "l0/scope:lines.0": {
+  "status": "pass-alt",
+  "en": "Each dot is one later chapter. A dot sits in a column when that chapter shows the skill: Python code, C++ code, ROS 2, or terminal commands.",
+  "my": "အစက် တစ်ခုစီက နောက်ပိုင်း အခန်း တစ်ခုပါ။ အဲဒီအခန်းက ကျွမ်းကျင်မှု တစ်ခုကို ပြရင် အဲဒီကော်လံမှာ အစက် ရှိပါတယ်- Python ကုဒ်၊ C++ ကုဒ်၊ ROS 2 ဒါမှမဟုတ် terminal command တွေပါ။",
+  "back": "Each dot is one later chapter. If that chapter shows a skill, there is a dot in that column: Python code, C++ code, ROS 2 or terminal commands."
+ },
+ "l0/scope:lines.1": {
+  "status": "pass-alt",
+  "en": "You do not need all four on day one. Each chapter teaches the piece it uses, the first time it uses it.",
+  "my": "ပထမနေ့မှာ 4 ခုလုံး မလိုပါဘူး။ အခန်းတိုင်းက သူသုံးတဲ့ အပိုင်းကို ပထမဆုံး သုံးတဲ့အခါ သင်ပေးပါတယ်။",
+  "back": "You do not need all 4 on day one. Each chapter teaches the part it uses the first time it uses it."
+ },
+ "l0/scope:skill.cpp": {
+  "status": "pass-alt",
+  "en": "C++",
+  "my": "C++",
+  "back": "C++"
+ },
+ "l0/scope:skill.py": {
+  "status": "pass-alt",
+  "en": "Python",
+  "my": "Python",
+  "back": "Python"
+ },
+ "l0/scope:skill.ros2": {
+  "status": "pass-alt",
+  "en": "ROS 2",
+  "my": "ROS 2",
+  "back": "ROS 2"
+ },
+ "l0/scope:skill.shell": {
+  "status": "pass-alt",
+  "en": "terminal",
+  "my": "terminal",
+  "back": "terminal"
+ },
+ "l0/scope:src": {
+  "status": "pass-alt",
+  "en": "the chapters of this course: the code, links and commands each one shows (counted again by a test on every build).",
+  "my": "ဒီသင်တန်းရဲ့ အခန်းတွေ- အခန်းတစ်ခုစီ ပြတဲ့ ကုဒ်၊ link နဲ့ command တွေပါ (build တိုင်းမှာ test တစ်ခုက ပြန်ရေတွက်ပါတယ်)။",
+  "back": "This course's chapters: the code, links and commands each chapter shows (a test recounts on every build)."
+ },
+ "l0/scope:title": {
+  "status": "pass-alt",
+  "en": "How much you need",
+  "my": "ဘယ်လောက် လိုလဲ",
+  "back": "How much is needed"
+ },
+ "l0/scope:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရ",
+  "back": "Vocabulary"
+ },
  "l0/sense:answers.five": {
   "status": "pass-alt",
   "en": "5 m",
