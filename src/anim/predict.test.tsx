@@ -1,7 +1,7 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import PredictMark from './PredictMark'
-import { gapLine, judge } from './predict'
+import { gapLine, judge, nudgeGuess } from './predict'
 
 describe('predict before reveal', () => {
   it('judge: distance and tolerance', () => {
@@ -27,4 +27,14 @@ describe('predict before reveal', () => {
     expect(html(true)).toContain('scale(1 -1)')
     expect(html(false)).not.toContain('scale(1 -1)')
   })
+  it('nudgeGuess: arrows move by step (Shift x5), clamp to the box, y up in map frames, other keys null', () => {
+    const box: [number, number, number, number] = [0, 0, 2, 1]
+    expect(nudgeGuess([1, 0.5], 'ArrowRight', false, 0.1, box)).toEqual([1.1, 0.5])
+    expect(nudgeGuess([1, 0.5], 'ArrowUp', false, 0.1, box)).toEqual([1, 0.4]) // screen frame: up = -y
+    expect(nudgeGuess([1, 0.5], 'ArrowUp', false, 0.1, box, true)).toEqual([1, 0.6]) // map frame: up = +y
+    expect(nudgeGuess([1, 0.5], 'ArrowLeft', true, 0.1, box)).toEqual([0.5, 0.5])
+    expect(nudgeGuess([1.95, 0.5], 'ArrowRight', true, 0.1, box)).toEqual([2, 0.5])
+    expect(nudgeGuess([1, 0.5], 'Enter', false, 0.1, box)).toBeNull()
+  })
 })
+

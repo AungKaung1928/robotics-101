@@ -20,3 +20,15 @@ export function gapLine(guess: Pt, truth: Pt, t: number, dur = REVEAL_S): Pt {
   const u = Math.min(Math.max(t / dur, 0), 1), e = 1 - (1 - u) ** 3
   return [guess[0] + (truth[0] - guess[0]) * e, guess[1] + (truth[1] - guess[1]) * e]
 }
+
+/**
+ * Keyboard placement of the guess (pointer: click): arrows move it by `step` (Shift: 5 steps) inside `box`
+ * [xmin, ymin, xmax, ymax]; `yUp` for map frames, where ArrowUp means +y. Returns null for keys that are not ours.
+ */
+export function nudgeGuess(g: Pt, key: string, shift: boolean, step: number, box: [number, number, number, number], yUp = false): Pt | null {
+  const d = step * (shift ? 5 : 1), up = yUp ? d : -d
+  const m: Record<string, Pt> = { ArrowLeft: [-d, 0], ArrowRight: [d, 0], ArrowUp: [0, up], ArrowDown: [0, -up] }
+  if (!m[key]) return null
+  const clamp = (v: number, lo: number, hi: number) => +Math.min(Math.max(v, lo), hi).toFixed(10)
+  return [clamp(g[0] + m[key][0], box[0], box[2]), clamp(g[1] + m[key][1], box[1], box[3])]
+}
