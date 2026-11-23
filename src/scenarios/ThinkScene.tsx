@@ -43,7 +43,8 @@ function simOf(wallX: number, v: number, model?: ThinkModel) {
 export default function ThinkScene({ stopAt, t, v = 0.2, wallX = 1.2, stopWord = 'stop', ladder, model, label }: {
   stopAt: number; t: number; v?: number; wallX?: number; stopWord?: string; ladder?: number[]; model?: ThinkModel; label: string
 }) {
-  const ref = useRef<SVGSVGElement>(null), rule = `d < ${stopAt.toFixed(2)} m → ${stopWord}`
+  const rungRule = (a: number) => `d < ${a.toFixed(2)} m → ${stopWord}`
+  const ref = useRef<SVGSVGElement>(null), rule = rungRule(stopAt)
   const bw = Math.max(150, useTextWidth(ref, '.tk-bubble text', rule) + 28) // bubble grows with the words
   const sim = simOf(wallX, v, model), { walls, movable, X, Y } = sim, Y0 = sim.y0
   const run = sim.out(stopAt), x = sim.xAt(run, t), done = t >= run.tStop
@@ -62,10 +63,11 @@ export default function ThinkScene({ stopAt, t, v = 0.2, wallX = 1.2, stopWord =
   return (
     <svg ref={ref} className="think-scene" viewBox={`0 0 ${VW} ${VH}`} role="img" aria-label={label} data-state={fired ? 'fired' : bumped ? 'bumped' : 'driving'}>
       {walls.map(([x1, y1, x2, y2], i) => <line key={i} className={i === movable ? 'ss-wall is-movable' : 'ss-wall'} x1={X(x1)} y1={Y(y1)} x2={X(x2)} y2={Y(y2)} />)}
-      {/* up the ladder of abstraction (Victor): where the robot would end for every stopAt in `ladder`, faint; a bump = x */}
+      {/* up the ladder of abstraction (Victor): where the robot would end for every stopAt in `ladder`, faint; a bump = x;
+          each names its rule in the bubble's notation as a hover tooltip (inside role=img: not read by screen readers) */}
       {ladder?.map((a) => { const r = sim.out(a), cx = X(r.stopX); return r.bumped
-        ? <path key={a} className="tk-rung is-bump" d={`M${cx - 4} ${Y(Y0) + 30}l8 8m0 -8l-8 8`} />
-        : <circle key={a} className={a === stopAt ? 'tk-rung is-pick' : 'tk-rung'} cx={cx} cy={Y(Y0) + 34} r={a === stopAt ? 5 : 4} /> })}
+        ? <path key={a} className="tk-rung is-bump" d={`M${cx - 4} ${Y(Y0) + 30}l8 8m0 -8l-8 8`}><title>{rungRule(a)}</title></path>
+        : <circle key={a} className={a === stopAt ? 'tk-rung is-pick' : 'tk-rung'} cx={cx} cy={Y(Y0) + 34} r={a === stopAt ? 5 : 4}><title>{rungRule(a)}</title></circle> })}
       <line className="ts-mark" x1={X(sim.mark(stopAt))} x2={X(sim.mark(stopAt))} y1={by0 - 50} y2={by0 + 50} />
       <g transform={`translate(${X(x) + 20} ${Y(Y0)}) scale(${sx} ${1 / sx}) translate(${-X(x) - 20} ${-Y(Y0)})`}>
         <RobotTop x={X(x)} y={Y(Y0)} deg={0} rolledL={X(x) - X(sim.x0)} rolledR={X(x) - X(sim.x0)} mood={bumped ? 'dizzy' : fired ? 'proud' : 'curious'} t={since} />

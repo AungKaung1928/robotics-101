@@ -140,6 +140,8 @@ describe('ThinkScene check marks are the chapter loop ticks', () => {
     expect((mid.match(/tk-tick is-now/g) ?? []).length).toBe(1) // driving: exactly the latest check is 'now'
     expect(mid).not.toContain('is-fired')
     expect(at(0.01, 60)).not.toContain('is-now') // crashed: no check is current
+    const lad = renderToStaticMarkup(createElement(ThinkScene, { stopAt: 0.5, t: 60, model, ladder: [0, 0.25, 0.5], stopWord: 'stop', label: '' }))
+    for (const a of ['0.00', '0.25', '0.50']) expect(lad).toContain(`<title>d &lt; ${a} m → stop</title>`) // each rung names its rule
   })
 })
 
