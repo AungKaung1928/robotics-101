@@ -197,6 +197,24 @@ try {
     ...(switched === 'ja true' ? [] : [`after click: ${switched}, expected ja true`]),
     ...(kept === 'ja true' ? [] : [`after reload: ${kept}, expected ja true`]),
   ])
+
+  // 3.3 TF lab: the right guess is the two pairs through base_link; restarting the detector leaves MISSING, the odom broadcaster heals it.
+  await open('#/3/tflab')
+  const q = (sel) => `document.querySelector('${sel}')`
+  await js(`document.querySelectorAll('.pick input')[1].click(); document.querySelectorAll('.pick input')[2].click(); [...document.querySelectorAll('button')].find((b) => b.textContent === 'Check my guess').click()`)
+  await sleep(100)
+  const guess = await js(`${q('[data-k="predict"]')}?.textContent.startsWith('✓')`)
+  await js(`document.querySelectorAll('.choices button')[0].click()`)
+  await sleep(100)
+  const restart = await js(`${q('[data-k="diag"]')}?.textContent.includes('map->base_link: MISSING') && !${q('[data-k="challenge"]')}.textContent.startsWith('✓')`)
+  await js(`document.querySelectorAll('.choices button')[2].click()`)
+  await sleep(100)
+  const fixed = await js(`!${q('[data-k="diag"]')}.textContent.includes('MISSING') && ${q('[data-k="challenge"]')}.textContent.startsWith('✓')`)
+  report('TF lab: right guess, restart does not fix, odom broadcaster does', [
+    ...(guess === true ? [] : [`guess verdict ${guess}`]),
+    ...(restart === true ? [] : ['restart: still expected MISSING and no ✓']),
+    ...(fixed === true ? [] : ['odom broadcaster: expected all OK and ✓']),
+  ])
 } finally {
   chrome.kill()
   vite.kill()
