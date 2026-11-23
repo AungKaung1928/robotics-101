@@ -35,4 +35,11 @@ describe('Mascot render', () => {
     expect(renderToStaticMarkup(<MascotFigure pose={REST} mood="oops" label="" />)).toContain('m-mouth')
     expect(renderToStaticMarkup(<MascotFigure pose={REST} mood="happy" label="" spark={SPARK_AT + 0.2} />).match(/m-spark/g)).toHaveLength(6)
   })
+  it('curious: the face sits in a tilt group that the think mood rotates (CSS), inside the head group', () => {
+    const html = renderToStaticMarkup(<MascotFigure pose={REST} mood="think" label="" />)
+    expect(html).toContain('data-mood="think"')
+    expect(html.indexOf('m-headgroup')).toBeLessThan(html.indexOf('m-tilt'))
+    expect(html.indexOf('m-tilt')).toBeLessThan(html.indexOf('m-sway'))
+  })
 })
+

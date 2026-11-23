@@ -12,18 +12,17 @@ type Doc = Pick<Document, 'documentElement' | 'querySelector'> & { startViewTran
 /**
  * Run `update` (must change the DOM synchronously, e.g. flushSync(() => setRoute(...))) as a page change:
  * View Transition sliding the chapter body the way the reader moved; without the API, a 200 ms fade-in of the new
- * body; under reduced motion, nothing moves.
+ * body. Reduced motion tones it down instead of removing it (Chrome motion guidance): opacity only, no slide, 150 ms.
  */
-export function swap(update: () => void, dir: Dir, doc: Doc = document, still = reduced()): 'vt' | 'fade' | 'none' {
-  if (still) { update(); return 'none' }
+export function swap(update: () => void, dir: Dir, doc: Doc = document, still = reduced()): 'vt' | 'fade' {
   if (doc.startViewTransition) {
     const root = doc.documentElement
-    root.dataset.vt = dir > 0 ? 'next' : dir < 0 ? 'back' : 'fade'
+    root.dataset.vt = still || dir === 0 ? 'fade' : dir > 0 ? 'next' : 'back'
     doc.startViewTransition(update).finished.finally(() => { delete root.dataset.vt })
     return 'vt'
   }
   update()
-  doc.querySelector('main')?.animate?.([{ opacity: 0 }, { opacity: 1 }], { duration: 200, easing: 'ease-out' })
+  doc.querySelector('main')?.animate?.([{ opacity: 0 }, { opacity: 1 }], { duration: still ? 150 : 200, easing: 'ease-out' })
   return 'fade'
 }
 

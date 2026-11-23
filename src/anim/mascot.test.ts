@@ -1,5 +1,6 @@
+import { readFileSync } from 'node:fs'
 import { describe, expect, it } from 'vitest'
-import { BOOP_S, HAPPY_S, HEAD_LAG, JOLT_S, WHEEL_R, headLag, brakePose, startPose, eyeShift, wheelAngle, OOPS_S, REST, SPARK_AT, boopPose, happyPose, oopsPose, sparks } from './mascot'
+import { BOOP_S, HAPPY_S, HEAD_LAG, JOLT_S, WHEEL_R, headLag, brakePose, startPose, eyeShift, wheelAngle, OOPS_S, REST, SPARK_AT, boopPose, happyPose, oopsPose, sparks, dizzyStars, faceSwap, SWAP_S, STILL_DIZZY, STILL_SPARK, blinkDelay, BLINK_MS } from './mascot'
 
 const ts = (end: number) => Array.from({ length: 601 }, (_, i) => (i / 600) * end)
 
@@ -111,5 +112,71 @@ describe('headLag (follow-through)', () => {
     expect(headLag(happyPose, 0.12).dy).toBeGreaterThan(0)
     const d = Array.from({ length: 200 }, (_, i) => Math.abs(headLag(happyPose, (i / 200) * HAPPY_S).dy))
     expect(Math.max(...d)).toBeLessThan(5)
+  })
+})
+
+describe('dizzy stars', () => {
+  it('only during the wobble, three of them, on the ellipse above the head', () => {
+    expect(dizzyStars(0)).toEqual([])
+    expect(dizzyStars(OOPS_S)).toEqual([])
+    const s = dizzyStars(0.1)
+    expect(s).toHaveLength(3)
+    for (const p of s) expect(((p.x - 32) / 13) ** 2 + ((p.y - 7) / 3.5) ** 2).toBeCloseTo(1, 9)
+  })
+  it('far side smaller and fainter; all fade out toward the end', () => {
+    const s = dizzyStars(0.1), front = s.reduce((a, b) => (b.y > a.y ? b : a)), back = s.reduce((a, b) => (b.y < a.y ? b : a))
+    expect(front.s).toBeGreaterThan(back.s)
+    expect(front.o).toBeGreaterThan(back.o)
+    expect(front.front).toBe(true)
+    expect(back.front).toBe(false)
+    const late = dizzyStars(OOPS_S * 0.99)
+    expect(Math.max(...late.map((p) => p.o))).toBeLessThan(0.05)
+  })
+})
+
+describe('face swap blink-through', () => {
+  it('open, closes to 0.1 at the swap from both sides, reopens on the new face', () => {
+    expect(faceSwap(0)).toEqual({ sy: 1, showNew: false })
+    expect(faceSwap(SWAP_S * 0.5 - 1e-9).sy).toBeCloseTo(0.1, 6)
+    expect(faceSwap(SWAP_S * 0.5 - 1e-9).showNew).toBe(false)
+    expect(faceSwap(SWAP_S * 0.5).sy).toBeCloseTo(0.1, 12)
+    expect(faceSwap(SWAP_S * 0.5).showNew).toBe(true)
+    expect(faceSwap(SWAP_S)).toEqual({ sy: 1, showNew: true })
+  })
+  it('eyes never invert or overshoot', () => {
+    for (let i = 0; i <= 100; i++) {
+      const { sy } = faceSwap((i / 100) * SWAP_S)
+      expect(sy).toBeGreaterThanOrEqual(0.1 - 1e-12)
+      expect(sy).toBeLessThanOrEqual(1)
+    }
+  })
+})
+
+describe('reduced-motion still frames', () => {
+  it('stars and sparks are visible at the still times (the cue survives without motion)', () => {
+    const st = dizzyStars(STILL_DIZZY)
+    expect(st).toHaveLength(3)
+    expect(Math.min(...st.map((p) => p.o))).toBeGreaterThan(0.4)
+    const sp = sparks(STILL_SPARK)
+    expect(sp.length).toBeGreaterThan(0)
+    expect(Math.min(...sp.map((p) => p.o))).toBeGreaterThan(0.5)
+  })
+})
+
+describe('blink phase', () => {
+  it('stable per id, inside one cycle, different for different ids', () => {
+    expect(blinkDelay(':r1:')).toBe(blinkDelay(':r1:'))
+    const ds = [':r0:', ':r1:', ':r2:', ':r3:', ':r4:'].map(blinkDelay)
+    for (const d of ds) { expect(d).toBeLessThanOrEqual(0); expect(d).toBeGreaterThan(-BLINK_MS) }
+    expect(new Set(ds).size).toBe(ds.length)
+  })
+  it('the CSS cycle is the same length and has a double blink with uneven gaps', () => {
+    const css = readFileSync('src/anim/mascot.css', 'utf8')
+    expect(css).toContain(`m-blink ${BLINK_MS / 1000}s`)
+    const closed = /@keyframes m-blink[^}]*}[^}]*?([\d.%, ]+)\s*{\s*transform: scaleY\(0\.12\)/.exec(css)![1].split(',').map((x) => parseFloat(x))
+    expect(closed.length).toBe(3)
+    const gaps = closed.map((c, i) => ((closed[(i + 1) % 3] - c + 100) % 100) * BLINK_MS / 100)
+    expect(Math.min(...gaps)).toBeLessThan(500) // the double blink
+    expect(Math.max(...gaps)).toBeGreaterThan(4000)
   })
 })

@@ -37,11 +37,15 @@ describe('swap', () => {
     expect(update).toHaveBeenCalledOnce()
     expect(f.animate).toHaveBeenCalledOnce()
   })
-  it('reduced motion: updates only, nothing animates', () => {
+  it('reduced motion: toned down, not removed: a plain fade (no slide) with the API', () => {
     const f = fakeDoc(true), update = vi.fn()
-    expect(swap(update, 1, f.doc, true)).toBe('none')
+    expect(swap(update, 1, f.doc, true)).toBe('vt')
+    expect(f.root.dataset.vt).toBe('fade')
+  })
+  it('reduced motion without the API: a shorter fade', () => {
+    const f = fakeDoc(false), update = vi.fn()
+    expect(swap(update, -1, f.doc, true)).toBe('fade')
     expect(update).toHaveBeenCalledOnce()
-    expect(f.animate).not.toHaveBeenCalled()
-    expect(f.root.dataset.vt).toBeUndefined()
+    expect(f.animate.mock.calls[0][1]).toMatchObject({ duration: 150 })
   })
 })

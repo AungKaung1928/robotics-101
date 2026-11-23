@@ -57,3 +57,25 @@ export const layerAt = (t: number, layerS: number, goalDist: number) => Math.min
 export function robotAt(t: number, from: number, cellS: number, pathLen: number): number {
   return Math.min(Math.max((t - from) / cellS, 0), Math.max(pathLen - 1, 0))
 }
+
+/** Break-it edit: flip cell `c` between wall and free; the start and the goal can never become walls. */
+export function toggleCell(blocked: boolean[], c: number, start: number, goal: number): boolean[] {
+  if (c === start || c === goal || c < 0 || c >= blocked.length) return blocked
+  const next = blocked.slice()
+  next[c] = !next[c]
+  return next
+}
+
+/** Keyboard focus on the grid: arrows move one cell (stopping at the edges), Home/End jump to the first/last cell. */
+export function moveFocus(c: number, key: string, w: number, h: number): number {
+  const x = c % w, y = (c - x) / w
+  switch (key) {
+    case 'ArrowRight': return y * w + Math.min(x + 1, w - 1)
+    case 'ArrowLeft': return y * w + Math.max(x - 1, 0)
+    case 'ArrowDown': return Math.min(y + 1, h - 1) * w + x
+    case 'ArrowUp': return Math.max(y - 1, 0) * w + x
+    case 'Home': return 0
+    case 'End': return w * h - 1
+    default: return c
+  }
+}

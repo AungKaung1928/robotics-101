@@ -3,4 +3,6 @@
 .late .env { fill: var(--surface); stroke: var(--ink); stroke-width: 1.5; }
 .late .env.used { stroke: var(--free); }
 .late .env.stale, .late .env.old { stroke: var(--ray); }
-.late .env-label { font: 9px var(--mono); fill: var(--ink-2); text-anchor: middle; }
+/* 13 units: the figure is drawn about 0.87x in the chapter column, so labels land near 11 px (9 units gave ~8 px). */
+.late .env-label { font: 13px var(--mono); fill: var(--ink-2); text-anchor: start; }
+.late .env-id { font: 13px var(--mono); fill: var(--ink-2); text-anchor: end; }
