@@ -8,32 +8,38 @@ import { STRINGS, type Strings } from '../../i18n'
 import BfsChapter from '../ep/BfsChapter'
 import LateChapter from '../ep/LateChapter'
 import { BODIES } from '../l2/bodies'
+import { BFS_STRINGS } from '../ep/bfs.strings'
 import { ACTIONS_STRINGS } from '../l2/actions.strings'
+import { DRIVE_STRINGS } from '../l2/drive.strings'
+import { NODES_STRINGS } from '../l2/nodes.strings'
 import { SCRIPT } from '../l2/ws'
 
 type Step =
   | { click: string; text?: string }
   | { type: string; value: string; submit?: boolean }
   | { slide: number }
-  | { expect: string; has?: string; ok?: true; re?: RegExp }
+  | { expect: string; has?: string; is?: string; ok?: true; re?: RegExp }
 interface Case { name: string; Body: ComponentType<{ t: Strings }>; steps: Step[] }
 
 const typeAll = (lines: string[]): Step[] => lines.map((value) => ({ type: 'input.code', value, submit: true }))
-const CASES: Case[] = [
+type Lang = 'en' | 'ja'
+/** Readouts and buttons that carry words come from the chapter's own strings, so both languages run the same cases. */
+const cell = (l: Lang, x: number, y: number) => `rect[aria-label="${BFS_STRINGS[l].cellLabel(x, y, false)}"]`
+const cases = (l: Lang): Case[] => [
   { name: 'decide break', Body: BODIES.decide, steps: [{ click: '.break' }, { expect: 'final', has: '2.00 m' }] },
   { name: 'closest break', Body: BODIES.closest, steps: [{ click: '.break' }, { expect: 'closest', has: '0.00 m' }] },
   { name: 'callback break', Body: BODIES.callback, steps: [{ click: '.break' }, { expect: 'dropped', re: /[1-9]/ }] },
   { name: 'cpp challenge', Body: BODIES.cpp, steps: [{ click: 'button', text: 'int stop_at{0.5};' }, { expect: 'challenge', ok: true }] },
   { name: 'shell challenge', Body: BODIES.shell, steps: [...typeAll(['source /opt/ros/humble/setup.bash', 'ros2 pkg list']), { expect: 'challenge', ok: true }] },
-  { name: 'nodes stop bridge', Body: BODIES.nodes, steps: [{ click: 'g[aria-label^="ros_gz_bridge"]' }, { expect: 'patrols', has: 'no' }] },
+  { name: 'nodes stop bridge', Body: BODIES.nodes, steps: [{ click: 'g[aria-label^="ros_gz_bridge"]' }, { expect: 'patrols', is: NODES_STRINGS[l].no }] },
   { name: 'topics challenge', Body: BODIES.topics, steps: [{ type: 'input.code', value: 'scan' }, { expect: 'challenge', ok: true }] },
   { name: 'msgtypes break', Body: BODIES.msgtypes, steps: [{ click: '.break' }, { expect: 'ignored', has: 'angular.x' }] },
-  { name: 'actions unreachable', Body: BODIES.actions, steps: [{ click: '.break', text: ACTIONS_STRINGS.en.breakIt }, { expect: 'status', has: 'ABORTED (6)' }] },
+  { name: 'actions unreachable', Body: BODIES.actions, steps: [{ click: '.break', text: ACTIONS_STRINGS[l].breakIt }, { expect: 'status', has: 'ABORTED (6)' }] },
   { name: 'params break', Body: BODIES.params, steps: [{ click: '.break' }, { expect: 'false', has: '19' }] },
   { name: 'ws challenge', Body: BODIES.ws, steps: [...typeAll(SCRIPT), { expect: 'challenge', ok: true }] },
-  { name: 'drive break', Body: BODIES.drive, steps: [{ click: '.break' }, { expect: 'challenge', has: 'still moving' }] },
+  { name: 'drive break', Body: BODIES.drive, steps: [{ click: '.break' }, { expect: 'challenge', has: DRIVE_STRINGS[l].moving }] },
   { name: 'bfs stack', Body: BfsChapter, steps: [{ expect: 'len', has: '13' }, { click: '.break' }, { expect: 'len', has: '15' }] },
-  { name: 'bfs wall click', Body: BfsChapter, steps: [{ click: 'rect[aria-label="cell 3,3"]' }, { expect: 'len', has: '13' }, { click: 'rect[aria-label="cell 0,2"]' }, { click: 'rect[aria-label="cell 0,4"]' }, { click: 'rect[aria-label="cell 1,3"]' }, { expect: 'len', has: 'no path' }] },
+  { name: 'bfs wall click', Body: BfsChapter, steps: [{ click: cell(l, 3, 3) }, { expect: 'len', has: '13' }, { click: cell(l, 0, 2) }, { click: cell(l, 0, 4) }, { click: cell(l, 1, 3) }, { expect: 'len', is: BFS_STRINGS[l].none }] },
   { name: 'bfs costmap', Body: BfsChapter, steps: [{ click: 'button.costmap' }, { expect: 'len', has: '15' }, { expect: 'cost', has: '15' }, { click: 'button.costmap' }, { expect: 'len', has: '13' }] },
   { name: 'late slider', Body: LateChapter, steps: [{ expect: 'backwards', has: '5' }, { slide: 0.17 }, { expect: 'challenge', ok: true }, { slide: 0.18 }, { expect: 'backwards', has: '1' }] },
   { name: 'late keep-latest', Body: LateChapter, steps: [{ click: '.break' }, { expect: 'backwards', has: '0' }, { expect: 'acted', has: '15' }] },
@@ -46,9 +52,9 @@ const setValue = (el: HTMLInputElement, v: string) => {
 }
 const tick = () => new Promise((r) => setTimeout(r, 30))
 
-async function runCase(c: Case, host: HTMLElement): Promise<string | null> {
+async function runCase(c: Case, host: HTMLElement, t: Strings): Promise<string | null> {
   const root = createRoot(host)
-  flushSync(() => root.render(<main className="chapter"><c.Body t={STRINGS.en} /></main>))
+  flushSync(() => root.render(<main className="chapter"><c.Body t={t} /></main>))
   try {
     for (const st of c.steps) {
       await tick()
@@ -70,6 +76,7 @@ async function runCase(c: Case, host: HTMLElement): Promise<string | null> {
         const el = host.querySelector(`[data-k="${st.expect}"]`)
         const txt = el?.textContent ?? '(missing)'
         if (st.has && !txt.includes(st.has)) return `[data-k=${st.expect}] "${txt}" lacks "${st.has}"`
+        if (st.is !== undefined && txt !== st.is) return `[data-k=${st.expect}] "${txt}" is not "${st.is}"`
         if (st.re && !st.re.test(txt)) return `[data-k=${st.expect}] "${txt}" !~ ${st.re}`
         if (st.ok && !el?.classList.contains('ok')) return `[data-k=${st.expect}] not ok: "${txt}"`
       }
@@ -82,17 +89,18 @@ async function runCase(c: Case, host: HTMLElement): Promise<string | null> {
 
 async function main() {
   const out: string[] = []
-  let pass = 0
-  for (const c of CASES) {
+  let pass = 0, total = 0
+  for (const l of ['en', 'ja'] as const) for (const c of cases(l)) {
+    total++
     const host = document.createElement('div')
     document.body.append(host)
     let err: string | null
-    try { err = await runCase(c, host) } catch (e) { err = String(e) }
+    try { err = await runCase(c, host, STRINGS[l]) } catch (e) { err = String(e) }
     host.remove()
-    if (err) out.push(`FAIL ${c.name}: ${err}`)
-    else { pass++; out.push(`ok ${c.name}`) }
+    if (err) out.push(`FAIL ${l} ${c.name}: ${err}`)
+    else { pass++; out.push(`ok ${l} ${c.name}`) }
   }
-  out.push(`CLICKS ${pass === CASES.length ? 'PASS' : 'FAIL'} ${pass}/${CASES.length}`)
+  out.push(`CLICKS ${pass === total ? 'PASS' : 'FAIL'} ${pass}/${total}`)
   document.getElementById('out')!.textContent = out.join('\n')
 }
 void main()
