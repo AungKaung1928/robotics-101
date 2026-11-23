@@ -31,7 +31,7 @@ const ROUTES = [
   { hash: '#/scan', equals: { movemeasured: '5.4–5.8 cm', noise: '1 / 1.5 cm' }, readouts: ['hits', 'gap', 'move', 'scanhz', 'beam'], words: { beam: /^-?[01]° → 1\.4\d m$/ } },
   { hash: '#/detect', readouts: ['found', 'truth'] },
   { hash: '#/grid', readouts: ['cells', 'scans', 'known'], equals: { scans: '1', kept: '1.9 s', between: '8.7–9.2', republish: '5 s' }, has: ' %"' }, // canvas label carries the result
-  { hash: '#/0/loop', has: 'class="num">0.6<', equals: { blind: '5.2 cm' } },
+  { hash: '#/0/loop', has: ['class="num">0.6<', 'class="loop-actor"'], equals: { blind: '5.2 cm' } },
   { hash: '#/0/meet', has: 'class="num">0.1<' },
   { hash: '#/0/think', has: ['class="pathline"', 'class="think-scene"'] },
   { hash: '#/0/pipe', has: 'class="num">0.9<' },

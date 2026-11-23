@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import Celebrate from '../../anim/Celebrate'
 import Player from '../../components/Player'
+import LoopActor from '../../scenarios/LoopActor'
 import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
 import { stringsFor, type Strings } from '../../i18n'
@@ -25,7 +26,8 @@ export default function LoopChapter({ t }: { t: Strings }) {
   const [tS, setTS] = useState(() => (still() ? sc.durationMs / 1000 : 0))
   const now = Math.min(tS, sc.durationMs / 1000)
   const f = sc.frame(now * 1000)
-  const restart = () => setTS(Infinity)
+  const [runs, setRuns] = useState(1) // bumps on every replay so the end reaction plays again
+  const restart = () => { setTS(Infinity); setRuns((n) => n + 1) }
   const d = f.t.seen === null ? s.noData : `${f.t.seen.toFixed(2)} m`
   const say: Record<Stage, string> = {
     sense: d,
@@ -54,7 +56,8 @@ export default function LoopChapter({ t }: { t: Strings }) {
           <line className="stopline" x1={xAt(STOP_AT)} x2={xAt(STOP_AT)} y1="200" y2="250" />
           <text className="say" x={xAt(STOP_AT)} y="195" textAnchor="middle">0.5 m</text>
           <rect className="wall" x={X1} y="180" width="12" height="70" />
-          <rect className={`bot${r.crashed && f.front <= 0 ? ' is-crashed' : late && f.front < STOP_AT ? ' is-late' : ''}`} x={xAt(f.front) - 40} y="222" width="40" height="22" rx="4" />
+          <LoopActor x={xAt(f.front)} y={249} stage={f.stage} driven={xAt(f.front) - xAt(START_M)} ended={now >= sc.durationMs / 1000}
+            crashed={r.crashed || late} run={runs} />
           <Celebrate x={xAt(f.front) - 20} y={222} n={solved} />
           {f.stage === 'sense' && f.t.seen !== null && <line className="beam" x1={xAt(f.front)} x2={X1} y1="233" y2="233" />}
         </svg>
