@@ -1790,8 +1790,8 @@
  "l0/loop:slow": {
   "status": "pass-alt",
   "en": "Slowed down: each loop takes 1.2 s here, 0.2 s on the real robot.",
-  "my": "အနှေးပြကွက်- ဒီမှာတော့ loop တစ်ခုကို 1.2 s ကြာပြီး တကယ့် စက်ရုပ်မှာတော့ 0.2 s ကြာပါတယ်။",
-  "back": "Slow motion: here one loop takes 1.2 s, while on a real robot it takes 0.2 s."
+  "my": "အနှေးပြကွက်- ဒီမှာ loop တစ်ခု 1.2 s ကြာပြီး တကယ့် စက်ရုပ်မှာ 0.2 s ကြာပါတယ်။",
+  "back": "Slow-motion scene: here one loop takes 1.2 s, and on a real robot it takes 0.2 s."
  },
  "l0/loop:solved": {
   "status": "pass-alt",
@@ -1926,8 +1926,8 @@
  "l0/meet:learn": {
   "status": "pass-alt",
   "en": "You will learn: what makes a machine a robot, and the four parts of the robot in this course.",
-  "my": "သင် လေ့လာရမှာကတော့- စက် အစိတ်အပိုင်းတွေကို စက်ရုပ် ဖြစ်စေတဲ့ အချက်တွေနဲ့ ဒီသင်ခန်းစာမှာ သုံးမယ့် စက်ရုပ်ရဲ့ အစိတ်အပိုင်း 4 ခုအကြောင်း ဖြစ်ပါတယ်။",
-  "back": "What you will learn: the things that make machine parts a robot, and the four parts of the robot we will use in this lesson."
+  "my": "သင်ယူရမှာက- စက်တစ်ခုကို စက်ရုပ် ဖြစ်စေတာ ဘာလဲ၊ ဒီသင်တန်းက စက်ရုပ်ရဲ့ အစိတ်အပိုင်း 4 ခုပါ။",
+  "back": "What you will learn: what makes a machine a robot; this course has 4 parts of a robot."
  },
  "l0/meet:mascot": {
   "status": "pass-alt",
@@ -2101,8 +2101,8 @@
  "l0/move:glossary.0.1": {
   "status": "pass-alt",
   "en": "how fast a wheel moves the robot along the floor, in metres per second (m/s)",
-  "my": "စက်ရုပ် ကြမ်းပြင်ပေါ်မှာ ရွေ့ဖို့ ဘီး ဘယ်လောက် မြန်မြန် လည်ရမလဲဆိုတဲ့ တစ်စက္ကန့်အတွင်း မီတာနှုန်း (m/s)",
-  "back": "How fast a wheel must spin for the robot to move on the floor, in metres per second (m/s)"
+  "my": "ဘီးက စက်ရုပ်ကို ကြမ်းပြင်ပေါ်မှာ ဘယ်လောက် မြန်မြန် ရွေ့စေလဲ၊ တစ်စက္ကန့်ကို မီတာ (m/s) နဲ့",
+  "back": "How fast the wheels make the robot move on the floor, in metres per second (m/s)"
  },
  "l0/move:glossary.1.0": {
   "status": "pass-alt",
@@ -2257,8 +2257,8 @@
  "l0/pipe:brokenNote": {
   "status": "pass-alt",
   "en": "One program receives the scan but passes nothing on. The robot just stands still: no error on screen. Which one is it?",
-  "my": "ပရိုဂရမ် တစ်ခုက scan ဖတ်တာကို လက်ခံရရှိပေမဲ့ ဘာမှ ထပ်မပို့ပါဘူး။ စက်ရုပ်က ရပ်နေပြီး screen ပေါ်မှာလည်း အမှား မပြပါဘူး။ ဘယ်ပရိုဂရမ် ဖြစ်မလဲ။",
-  "back": "One program receives the scan reading but sends nothing further. The robot is stopped and the screen also shows no error. Which program could it be?"
+  "my": "ပရိုဂရမ် တစ်ခုက scan ကို လက်ခံရပေမဲ့ ဘာမှ ဆက်မပို့ပါဘူး။ စက်ရုပ်က ရပ်နေရုံပါပဲ- screen ပေါ်မှာ အမှား မပြပါဘူး။ ဘယ်ပရိုဂရမ်လဲ။",
+  "back": "A program receives the scan but forwards nothing on. The robot just stands still: no error is shown on the screen. Which program is it?"
  },
  "l0/pipe:challenge": {
   "status": "pass-alt",
@@ -2492,8 +2492,8 @@
  "l0/ros:lines.1": {
   "status": "pass-alt",
   "en": "ROS 1 needed one central program, roscore, so the others could find each other. ROS 2 programs find each other directly (DDS), so there is no single program whose crash stops everything.",
-  "my": "ROS 1 မှာ ပရိုဂရမ်တွေ အချင်းချင်း ရှာတွေ့ဖို့ roscore ဆိုတဲ့ ဗဟို ပရိုဂရမ် တစ်ခု လိုအပ်ပါတယ်။ ROS 2 ပရိုဂရမ်တွေကတော့ (DDS) သုံးပြီး တိုက်ရိုက် ရှာဖွေနိုင်တဲ့အတွက် ပရိုဂရမ် တစ်ခု ပျက်ရုံနဲ့ အားလုံး ရပ်သွားတာမျိုး မရှိပါဘူး။",
-  "back": "In ROS 1, a central program called roscore is needed for programs to find each other. ROS 2 programs can find each other directly using (DDS), so there is no case where everything stops just because one program fails."
+  "my": "ROS 1 မှာ ပရိုဂရမ်တွေ အချင်းချင်း ရှာတွေ့ဖို့ roscore ဆိုတဲ့ ဗဟို ပရိုဂရမ် တစ်ခု လိုပါတယ်။ ROS 2 ပရိုဂရမ်တွေကတော့ အချင်းချင်း တိုက်ရိုက် ရှာတွေ့ပါတယ် (DDS)၊ ဒါကြောင့် ပရိုဂရမ် တစ်ခု ပျက်ရုံနဲ့ အားလုံး ရပ်သွားတာ မရှိပါဘူး။",
+  "back": "In ROS 1, a central program called roscore is needed for programs to find each other. ROS 2 programs find each other directly (DDS), so there is no case where everything stops just because one program crashes."
  },
  "l0/ros:lines.2": {
   "status": "pass-alt",
@@ -2811,8 +2811,8 @@
  "l0/sense:steps.1": {
   "status": "pass-alt",
   "en": "Drag the wall below. The front number follows it. Past 3.5 m, the limit of our robot's sensor, it says \"nothing there\", even though the wall is still in the room.",
-  "my": "အောက်က နံရံ ကို ဆွဲရွှေ့ကြည့်ပါ။ ရှေ့က ဂဏန်းက သူ့နောက်ကို လိုက်ပါလိမ့်မယ်။ ဒီ စက်ရုပ် ရဲ့ ဆင်ဆာ အကန့်အသတ်ဖြစ်တဲ့ 3.5 m ကျော်သွားရင် နံရံ က အခန်းထဲမှာ ရှိနေသေးပေမဲ့ \"ဘာမှမရှိပါ\" လို့ ပြောပါလိမ့်မယ်။",
-  "back": "Drag the wall below. The front number will follow it. When it goes past 3.5 m, which is this robot's sensor limit, it will say \"nothing\" even though the wall is still in the room."
+  "my": "အောက်က နံရံကို ဆွဲရွှေ့ကြည့်ပါ။ ရှေ့ဂဏန်းက နံရံ အကွာအဝေးအတိုင်း ပြောင်းပါတယ်။ ကျွန်တော်တို့ စက်ရုပ်ရဲ့ ဆင်ဆာ ကန့်သတ်ချက် 3.5 m ကျော်သွားရင် နံရံက အခန်းထဲမှာ ရှိနေသေးပေမဲ့ \"ဘာမှမရှိ\" လို့ ပြပါတယ်။",
+  "back": "Try dragging the wall below. The number in front changes according to the wall distance. If it goes beyond our robot's sensor limit of 3.5 m, the wall is still in the room but it shows \"nothing\"."
  },
  "l0/sense:steps.2": {
   "status": "pass-alt",
@@ -2877,8 +2877,8 @@
  "l0/simpick:checked": {
   "status": "pass-alt",
   "en": "Facts checked against each tool's own pages on 2026-11-23.",
-  "my": "2026-11-23 မှာ tool တစ်ခုချင်းစီရဲ့ page တွေက အချက်အလက်တွေနဲ့ တိုက်ဆိုင်စစ်ဆေးထားတာ ဖြစ်ပါတယ်။",
-  "back": "On 2026-11-23 it was cross-checked against the information on each tool's page."
+  "my": "အချက်အလက်တွေကို tool တစ်ခုချင်းစီရဲ့ ကိုယ်ပိုင် page တွေနဲ့ 2026-11-23 မှာ တိုက်စစ်ထားပါတယ်။",
+  "back": "The facts were cross-checked against each tool's own pages on 2026-11-23."
  },
  "l0/simpick:dim.2.5D": {
   "status": "pass-alt",
@@ -3039,8 +3039,8 @@
  "l0/simpick:rows.isaac.what": {
   "status": "pass-alt",
   "en": "Photoreal 3D for robot learning; needs an NVIDIA RTX graphics card (version 6.0.1 asks for at least an RTX 4080 with 16 GB).",
-  "my": "စက်ရုပ် လေ့လာမှုအတွက် လက်တွေ့ကျတဲ့ 3D ဖြစ်ပါတယ်၊ NVIDIA RTX graphics card (ဗားရှင်း 6.0.1 အတွက် အနည်းဆုံး 16 GB ရှိတဲ့ RTX 4080 လိုအပ်ပါတယ်) လိုအပ်ပါတယ်။",
-  "back": "It is a realistic 3D for robot learning and needs an NVIDIA RTX graphics card (for version 6.0.1, an RTX 4080 with at least 16 GB is required)."
+  "my": "စက်ရုပ် လေ့လာမှုအတွက် အစစ်နဲ့တူတဲ့ 3D ပါ၊ NVIDIA RTX graphics card လိုပါတယ် (ဗားရှင်း 6.0.1 က အနည်းဆုံး 16 GB ပါတဲ့ RTX 4080 ကို တောင်းပါတယ်)။",
+  "back": "Realistic 3D for robot study, it needs an NVIDIA RTX graphics card (version 6.0.1 asks for an RTX 4080 with at least 16 GB)."
  },
  "l0/simpick:rows.mvsim.learn": {
   "status": "pass-alt",
@@ -3105,8 +3105,8 @@
  "l0/simpick:steps.0": {
   "status": "pass-alt",
   "en": "Many simulators exist. Think of them as a ladder: each step adds one thing to learn and asks a little more of your computer.",
-  "my": "ဆင်မျူလေတာ တွေ အများကြီး ရှိပါတယ်။ သူတို့ကို လှေကားထစ်တွေလို စဉ်းစားကြည့်ပါ- အဆင့်တစ်ခုစီတိုင်းမှာ သင်ယူစရာ တစ်ခုစီ တိုးလာပြီး ကွန်ပျူတာ ရဲ့ လုပ်ဆောင်နိုင်စွမ်းကိုလည်း ပိုတောင်းဆိုလာပါလိမ့်မယ်။",
-  "back": "There are many simulators. Think of them like steps of a staircase: each step adds one more thing to learn and also demands more of the computer's capability."
+  "my": "ဆင်မျူလေတာတွေ အများကြီး ရှိပါတယ်။ လှေကားထစ်တွေလို စဉ်းစားကြည့်ပါ- အဆင့်တိုင်းမှာ သင်ယူစရာ တစ်ခု တိုးလာပြီး ကွန်ပျူတာကိုလည်း နည်းနည်း ပိုတောင်းပါတယ်။",
+  "back": "There are many simulators. Think of them like stair steps: at every level one more thing to learn is added, and it also asks a little more of the computer."
  },
  "l0/simpick:steps.1": {
   "status": "pass-alt",
@@ -3117,8 +3117,8 @@
  "l0/simpick:steps.2": {
   "status": "pass-alt",
   "en": "From the projects behind this course: on a Windows laptop running Linux inside it (WSL2) with no graphics card, the 3D window of Gazebo Classic stayed black, while the 2D tools worked. So: start in 2D.",
-  "my": "ဒီသင်ခန်းစာကို အခြေခံထားတဲ့ ပရောဂျက်တွေမှာ တွေ့ခဲ့တာက- graphics card မပါတဲ့ Windows လက်ပ်တော့ ထဲမှာ Linux (WSL2) ကို run တဲ့အခါ Gazebo Classic ရဲ့ 3D window က မည်းနေခဲ့ပြီး 2D ကိရိယာတွေကတော့ အလုပ်လုပ်ပါတယ်။ ဒါကြောင့် 2D နဲ့ စပါ။",
-  "back": "What was found in the projects this lesson is based on: when running Linux (WSL2) on a Windows laptop without a graphics card, Gazebo Classic's 3D window was black, while the 2D tools worked. So start with 2D."
+  "my": "ဒီသင်ခန်းစာရဲ့ နောက်ကွယ်က project တွေမှာ တွေ့ခဲ့တာက- graphics card မပါတဲ့ Windows လက်ပ်တော့ ထဲမှာ Linux (WSL2) ကို run တဲ့အခါ Gazebo Classic ရဲ့ 3D window က မည်းနေခဲ့ပြီး 2D ကိရိယာတွေကတော့ အလုပ်လုပ်ပါတယ်။ ဒါကြောင့် 2D နဲ့ စပါ။",
+  "back": "What was found in the projects behind this lesson: when running Linux (WSL2) inside a Windows laptop without a graphics card, the 3D window of Gazebo Classic stayed black, while the 2D tools worked. So start with 2D."
  },
  "l0/simpick:steps.3": {
   "status": "pass-alt",
@@ -3435,8 +3435,8 @@
  "l0/think:glossary.1.1": {
   "status": "pass-alt",
   "en": "one look at the newest number, then one choice: stop or go",
-  "my": "နောက်ဆုံး ဂဏန်းကို တစ်ချက်ကြည့်ပြီး ရွေးချယ်မှု တစ်ခု- ရပ်မလား သွားမလား",
-  "back": "Look at the latest number once and make one choice: stop or go"
+  "my": "နောက်ဆုံး ဂဏန်းကို တစ်ချက်ကြည့်ပြီး ရပ်မလား သွားမလား တစ်ခု ရွေးတာ",
+  "back": "Looking at the final number once and choosing one of stop or go"
  },
  "l0/think:learn": {
   "status": "pass-alt",
@@ -3501,8 +3501,8 @@
  "l0/think:yes": {
   "status": "pass-alt",
   "en": "Yes: the rule fires as soon as the wall is under 0.9 m, which happens sooner.",
-  "my": "ဟုတ်ပါတယ် - နံရံ က 0.9 m ထက် နည်းသွားတာနဲ့ စည်းကမ်းချက်က စတင် အလုပ်လုပ်တာကြောင့် ပိုစောစော ရပ် သွားတာ ဖြစ်ပါတယ်။",
-  "back": "Yes - as soon as the wall is less than 0.9 m, the rule starts working, so it stops earlier."
+  "my": "ဟုတ်ပါတယ်- နံရံက 0.9 m ထက် နီးလာတာနဲ့ စည်းကမ်းချက်က အလုပ်လုပ်တာမို့ ပိုစောစော ရပ်ပါတယ်။",
+  "back": "Yes: the rule acts as soon as the wall gets closer than 0.9 m, so it stops earlier."
  },
  "l0/tools:challenge": {
   "status": "pass-alt",
@@ -3513,8 +3513,8 @@
  "l0/tools:fixIt": {
   "status": "pass-alt",
   "en": "Fix it: put every layer back",
-  "my": "ပြင်ကြည့်: အလွှာအားလုံးကို ပြန်ထည့်ဖို့",
-  "back": "Fix it: to put all the layers back"
+  "my": "ပြင်ကြည့်: အလွှာအားလုံးကို ပြန်ထည့်",
+  "back": "Try fixing: put all the layers back"
  },
  "l0/tools:glossary.0.0": {
   "status": "pass-alt",
