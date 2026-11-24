@@ -22,6 +22,7 @@ export default function TfLabChapter({ t }: { t: Strings }) {
   const [checked, setChecked] = useState(false)
   const [ran, setRan] = useState(false)
   const [edges, setEdges] = useState<readonly Edge[]>(BROKEN)
+  const [tries, setTries] = useState(0) // fix choices since the last break: only a first pick counts
   const diag = diagnose(edges), truth = diagnose(BROKEN)
   const right = PAIRS.every((p) => guess.has(pairKey(p)) === (truth[pairKey(p)] === 'MISSING'))
   // Second failure: the hits drawn through a stale transform; 'fresh' springs the error to 0 (anim's TfLab, FIX spring).
@@ -60,13 +61,14 @@ export default function TfLabChapter({ t }: { t: Strings }) {
         <ul className="tflab-code">{CODE.map((c, i) => <li key={c}><a href={`${SOURCE_REPO}/blob/main/${c}`}><code>{c.replace('#L', ':').replace('-L', '-')}</code></a>: {s.code[i]}</li>)}</ul>
         <h2>{s.s4}</h2>
         <p className="choices">
-          {CHOICES.map((c) => <button key={c} type="button" className="break" onClick={() => { setEdges(apply(BROKEN, c)); setRan(true) }}>{s.choice[c]}</button>)}
+          {CHOICES.map((c) => <button key={c} type="button" className="break" onClick={() => { setEdges(apply(BROKEN, c)); setRan(true); setTries(tries + 1) }}>{s.choice[c]}</button>)}
         </p>
         <h2>{s.s5}</h2>
-        <p className={`verdict ${healthy(edges) ? 'ok' : 'no'}`} data-k="challenge">{healthy(edges) ? '✓ ' + s.ok : s.notYet}</p>
+        <p className={`verdict ${healthy(edges) && tries === 1 ? 'ok' : 'no'}`} data-k="challenge">{healthy(edges) ? (tries === 1 ? '✓ ' : '') + s.ok : s.notYet}</p>
+        {healthy(edges) && tries > 1 && <p className="note" data-k="notfirst">{s.notFirst}</p>}
         {healthy(edges) && <>
           <pre className="tflab-cmd"><code>{`colcon test --packages-select tf_explorer --ctest-args -R test_tf_lab_missing_link\n# ${TEST}`}</code></pre>
-          <p><button type="button" data-act="reset" onClick={() => { setEdges(BROKEN); setRan(false) }}>{s.reset}</button></p>
+          <p><button type="button" data-act="reset" onClick={() => { setEdges(BROKEN); setRan(false); setTries(0) }}>{s.reset}</button></p>
         </>}
         <h2>{s.stale.title}</h2>
         <p className="note">{s.stale.note}</p>
