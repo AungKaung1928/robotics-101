@@ -2,14 +2,14 @@
 export const QOS_STRINGS = {
   en: {
     title: 'ROS 2: QoS, when a topic stays silent',
-    learn: 'You will learn: every publisher and subscriber carries QoS settings (how hard to deliver, whether to keep old messages). If publisher and subscriber ask for incompatible settings, ROS 2 does not connect them: no exception, only a warning line in the log (rclcpp default) and an "incompatible QoS" event your code can subscribe to.',
+    learn: 'You will learn: every publisher and subscriber carries QoS settings (how hard to deliver, whether to keep old messages). If publisher and subscriber ask for incompatible settings, ROS 2 does not connect them: no exception, only a warning line in the log (rclcpp default).',
     everyday: 'Everyday: a phone call versus a radio broadcast. A call retries until it gets through; a radio just sends, and you miss what you did not catch. A listener who insists on a call cannot listen to a radio.',
     lines: [
       'Reliable: a dropped message is sent again. Best effort: a dropped message is gone, but nothing waits for it. Default for both sides: reliable, volatile, keep last 10.',
       'Here a scanner sends 20 scans at 10 Hz over a link that drops every 4th one (made-up, 25 % loss).',
       'Volatile: a subscriber that starts late sees only new messages. Transient local: the publisher keeps the last few (the depth) for late joiners, as a map server does.',
     ],
-    pub: 'publisher (scanner / map server)', sub: 'subscriber (your node / RViz)',
+    pub: 'publisher (scanner / map server: the node that sends a saved map)', sub: 'subscriber (your node / RViz: the ROS 3D viewer)',
     rel: { reliable: 'reliable', best_effort: 'best effort' },
     dur: { volatile: 'volatile', transient_local: 'transient local' },
     depth: 'history depth (keep last)',
@@ -32,14 +32,14 @@ export const QOS_STRINGS = {
   },
   ja: {
     title: 'ROS 2：QoS、トピックが黙るとき',
-    learn: '学ぶこと：パブリッシャとサブスクライバはそれぞれ QoS 設定（どこまで確実に届けるか、古いメッセージを残すか）を持つ。両側の設定が両立しないと ROS 2 は接続しない：例外はなく、ログの警告行（rclcpp の既定）と、コードで購読できる「incompatible QoS」イベントがあるだけ。',
+    learn: '学ぶこと：パブリッシャとサブスクライバはそれぞれ QoS 設定（どこまで確実に届けるか、古いメッセージを残すか）を持つ。両側の設定が両立しないと ROS 2 は接続しない：例外はなく、ログに警告行（rclcpp の既定）が出るだけ。',
     everyday: '身近な例：電話とラジオ放送。電話はつながるまで再送し、ラジオは送るだけで、聞き逃した分は戻らない。電話しか受けない人はラジオを聞けない。',
     lines: [
       'reliable：落ちたメッセージを再送する。best effort：落ちたら消えるが、待つこともない。両側の既定値：reliable、volatile、keep last 10。',
       'ここではスキャナが 10 Hz で 20 本のスキャンを送り、リンクは4本に1本を落とす（架空、損失 25 %）。',
       'volatile：後から起動したサブスクライバは新しいメッセージだけを見る。transient local：パブリッシャが最後の数本（depth）を遅れて来た相手のために残す。地図サーバがこれを使う。',
     ],
-    pub: 'パブリッシャ（スキャナ / 地図サーバ）', sub: 'サブスクライバ（自分のノード / RViz）',
+    pub: 'パブリッシャ（スキャナ / 地図サーバ：保存した地図を送るノード）', sub: 'サブスクライバ（自分のノード / RViz：ROS の3D表示ツール）',
     rel: { reliable: 'reliable', best_effort: 'best effort' },
     dur: { volatile: 'volatile', transient_local: 'transient local' },
     depth: '履歴の深さ（keep last）',
