@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { existsSync, readFileSync } from 'node:fs'
-import { KP_RANGE, P, avoided, challengeOk, closest, collision, run, settleS, spun, tooCloseTicks } from './wall'
+import { KP_RANGE, P, arcMin, avoided, challengeOk, closest, collision, run, settleS, spun, tooCloseTicks } from './wall'
 import { WALL_STRINGS } from './wall.strings'
 
 const ok = (kp: number, la?: number) => challengeOk(run(kp, la))
@@ -12,8 +12,8 @@ describe('3.2 wall follower model', () => {
   it.skipIf(!existsSync(YAML))('uses the repo yaml values', () => {
     const y = readFileSync(YAML, 'utf8')
     const val = (k: string) => Number(new RegExp(`${k}:\\s*([0-9.]+)`).exec(y)![1])
-    expect([val('desired_distance'), val('forward_speed'), val('max_angular_speed'), val('kp'), val('kd'), val('lookahead_distance'), val('wall_min_distance'), val('wall_lost_distance')])
-      .toEqual([P.desired, P.forward, P.maxW, P.kp, P.kd, P.lookahead, P.wallMin, P.wallLost])
+    expect([val('desired_distance'), val('forward_speed'), val('max_angular_speed'), val('kp'), val('kd'), val('lookahead_distance'), val('wall_min_distance'), val('wall_lost_distance'), val('emergency_stop_distance'), val('slow_down_distance'), val('side_clearance')])
+      .toEqual([P.desired, P.forward, P.maxW, P.kp, P.kd, P.lookahead, P.wallMin, P.wallLost, P.stop, P.slow, P.side])
   })
   it('repo default kp 2.0 with look-ahead settles in 8.75 s, closest 0.45 m', () => {
     const ts = run(2.0)
@@ -34,6 +34,11 @@ describe('3.2 wall follower model', () => {
       if (avoided(ts)) { hit.push(`${la}:${(i / 10).toFixed(1)}`); expect(challengeOk(ts)).toBe(false) }
     }
     expect(hit).toEqual(['0:0.6', '0:0.7'])
+    for (const k of [0.6, 0.7]) { // the front-right zone (-50..-20 deg) trips, not the wide one
+      const t = run(k, 0).find((x) => x.mode === 'avoid')!
+      expect(arcMin(t.d, t.alpha, -50, -20, 3)).toBeLessThan(P.stop)
+      expect(arcMin(t.d, t.alpha, -70, -50, 5)).toBeGreaterThan(P.side)
+    }
     expect(closest(run(0.5, 0))).toBeCloseTo(0.305, 2)
   })
   it('collision zones (controller.py:193-224) trip on a steep close approach, not when parallel at 0.5 m', () => {
