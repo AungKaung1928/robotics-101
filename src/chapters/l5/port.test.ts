@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { HALF, LDS, cppIndex, pyIndex, validRange } from './port'
+import { HALF, LDS, citeParts, cppIndex, pyIndex, validRange } from './port'
 import { PORT_STRINGS } from './port.strings'
 
 const keys = (o: object): string[] => Object.entries(o).flatMap(([k, v]) => (v && typeof v === 'object' && !Array.isArray(v) ? keys(v).map((x) => `${k}.${x}`) : [k]))
@@ -31,5 +31,14 @@ describe('5.1 port model (wall_follower_controller.py:142-143 vs wall_detector.c
   it('EN and JA have the same keys and the same glossary terms', () => {
     expect(keys(PORT_STRINGS.ja)).toEqual(keys(PORT_STRINGS.en))
     expect(PORT_STRINGS.ja.glossary.map((g) => g[0])).toEqual(PORT_STRINGS.en.glossary.map((g) => g[0]))
+  })
+})
+
+describe('citeParts (the line range must not wrap away from its colon)', () => {
+  it('splits path and line range', () => {
+    expect(citeParts('wall_following_project/wall_follower_controller.py#L141-L143')).toEqual(['wall_following_project/wall_follower_controller.py', ':141-143'])
+    expect(citeParts('.github/workflows/ci.yml#L12-L13')).toEqual(['.github/workflows/ci.yml', ':12-13'])
+    expect(citeParts('src/a.cpp#L7')).toEqual(['src/a.cpp', ':7'])
+    expect(citeParts('README.md')).toEqual(['README.md', ''])
   })
 })

@@ -39,6 +39,11 @@ export function validRange(r: number, min = 0.12, max = 3.5): number {
 /** The side-by-side lines: what changes in the port. Line refs into each repo. */
 export const DIFFS = ['types', 'wrap', 'owner', 'qos', 'build'] as const
 export type Diff = (typeof DIFFS)[number]
+/** 'dir/f.py#L141-L143' -> ['dir/f.py', ':141-143']: the line part is shown unbroken (a wrap inside it reads as another line). */
+export function citeParts(p: string): [string, string] {
+  const i = p.indexOf('#L')
+  return i < 0 ? [p, ''] : [p.slice(0, i), ':' + p.slice(i + 2).replace('-L', '-')]
+}
 export const PY_REPO = 'https://github.com/AungKaung1928/turtlebot3-wall-follower/blob/f6fb44f'
 export const CPP_REPO = 'https://github.com/AungKaung1928/turtlebot3-wall-follower-cpp/blob/c2961d6'
 export const REFS: Record<Diff, { py: string; cpp: string }> = {
