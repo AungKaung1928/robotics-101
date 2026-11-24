@@ -71,5 +71,7 @@ describe('lint', () => {
   it('rejects a space before ။ / ၊ and between a {slot} and its verb ending (lesson 0.2 slip templates)', () => {
     expect(lint('So the robot {turn}.', 'စက်ရုပ်က {turn} ပါတယ် ။', 'body').fail).toEqual(['space before ။ or ၊', 'space between {slot} and its verb ending'])
     expect(lint('So the robot {turn}.', 'စက်ရုပ်က {turn}ပါတယ်။', 'body').fail).toEqual([])
+    expect(lint('{n} behind.', '{n} နောက်မှာ ရှိပါတယ်။', 'body').fail).toEqual([]) // a word starting like နေ is not an ending
+    expect(lint('{n} places.', '{n} နေရာ ရှိပါတယ်။', 'body').fail).toEqual([])
   })
 })
