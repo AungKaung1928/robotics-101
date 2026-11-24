@@ -4,6 +4,7 @@
  * - ros2 topic echo / ros2 topic hz, rqt_graph: Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics
  * - ros2 bag record / play: Tutorials/Beginner-CLI-Tools/Recording-And-Playing-Back-Data
  * - ros2 run tf2_tools view_frames, ros2 run tf2_ros tf2_echo [source_frame] [target_frame]: Tutorials/Intermediate/Tf2/Introduction-To-Tf2
+ * - rqt_graph defaults (rqt_graph jazzy ac25135 src/rqt_graph/ros_graph.py:141-146 'Nodes only', :243-246 Dead sinks + Leaf topics hidden on first start; states are saved between runs)
  * Tool outputs here are simplified pictures of what each tool shows, not captured terminal output.
  */
 export const DOCS = 'https://docs.ros.org/en/jazzy/Tutorials'

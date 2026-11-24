@@ -15,7 +15,7 @@ export const PORT_STRINGS = {
     diff: {
       types: ['Types', 'Python decides types while running. C++ writes them: double for angles, std::size_t for an index.'],
       wrap: ['The wrap', 'Python % never gives a negative number. C++ std::fmod keeps the minus sign, so the C++ adds 2π back by hand.'],
-      owner: ['Who owns the scan', 'Python keeps a reference. C++ takes a ConstSharedPtr and std::move()s it: no copy of 360 numbers.'],
+      owner: ['Who owns the scan', 'Python keeps a reference. C++ keeps a ConstSharedPtr, a shared handle: the 360 numbers are never copied. std::move() only skips one reference-count increment and its decrement.'],
       qos: ['QoS', 'Python builds a best-effort profile field by field. C++ uses the ready-made rclcpp::SensorDataQoS().'],
       build: ['Build step', 'Python: an entry point in setup.py, no compile. C++: add_executable in CMakeLists.txt, compiled by colcon build.'],
     },
@@ -55,7 +55,7 @@ export const PORT_STRINGS = {
     diff: {
       types: ['型', 'Python は型を実行中に決める。C++ は書く：角度は double、番号は std::size_t。'],
       wrap: ['折り返し', 'Python の % は負の数を返さない。C++ の std::fmod はマイナスを残すので、C++ は 2π を手で足し戻す。'],
-      owner: ['スキャンの持ち主', 'Python は参照を持つだけ。C++ は ConstSharedPtr を受け取り std::move() する：360 個の数をコピーしない。'],
+      owner: ['スキャンの持ち主', 'Python は参照を持つだけ。C++ は共有ハンドルの ConstSharedPtr を持つ：360 個の数はコピーされない。std::move() は参照カウントの増減 1 組を省くだけ。'],
       qos: ['QoS', 'Python は best effort のプロファイルを項目ごとに作る。C++ は既製の rclcpp::SensorDataQoS() を使う。'],
       build: ['ビルド', 'Python：setup.py のエントリポイント、コンパイルなし。C++：CMakeLists.txt の add_executable、colcon build でコンパイル。'],
     },
