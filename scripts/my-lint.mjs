@@ -66,7 +66,7 @@ export function lint(en, my, role = 'body') {
   if (/[က-႟]\s*\.$/.test(my.trim())) fail.push('"." after Burmese text')
   // A template slot and the verb ending after it, or a sentence mark, join with no space: "{turn}ပါတယ်။", never "{turn} ပါတယ် ။".
   if (/\s[။၊]/.test(my)) fail.push('space before ။ or ၊')
-  if (/\}\s+(ပါ|တယ်|နေ)/.test(my)) fail.push('space between {slot} and its verb ending')
+  if (/\}\s+(ပါတယ်|ပါပြီ|ပါဘူး|တယ်|နေပါ|နေတယ်)/.test(my)) fail.push('space between {slot} and its verb ending') // whole endings: နောက် / နေရာ / ပါဝင် after a slot are words, not endings
   const r = [...my].length / [...en].length
   if (en.length > 12 && (r < 0.5 || r > 3)) warn.push(`length ratio ${r.toFixed(2)}`)
   const latinRun = my.replace(/`[^`]+`/g, ' ').match(/[A-Za-z][\w'-]*(\s+[A-Za-z][\w'-]*){3,}/g) ?? []

@@ -23,7 +23,8 @@ const ANSWERS: Kind[] = ['curveLeft', 'curveRight', 'straight']
 export function slipText(s: typeof MOVE_STRINGS.en, right: number) {
   const f = slipFacts(right)
   const tpl = f.dir === 'stop' ? s.slipStop : f.same ? s.slipSame : s.slipDiff
-  return fill(tpl, { told: f.told, eff: f.eff, right: f.right, dir: f.dir === 'stop' ? '' : s.dir[f.dir], turn: s.turn[f.turn] })
+  const v = { told: f.told, eff: f.eff, right: f.right, turn: s.turn[f.turn] }
+  return fill(tpl, f.dir === 'stop' ? v : { ...v, dir: s.dir[f.dir] }) // slipStop has no {dir}: a stray one stays visible
 }
 
 /** Level 0 "move": drag the right wheel speed, the path of the two-wheel model is drawn; break it = the left wheel slips. */

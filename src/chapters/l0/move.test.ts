@@ -77,6 +77,12 @@ describe('move model', () => {
     expect(slipText(MOVE_STRINGS.en, 0.01)).toMatch(/right wheel forward at 0\.01 m\/s/)
     expect(slipText(MOVE_STRINGS.en, -0.01)).toMatch(/right wheel backward at 0\.01 m\/s/)
     for (let i = -22; i <= 22; i++) expect(slipText(MOVE_STRINGS.en, i / 100)).not.toMatch(/(forward|backward) at 0\.00/)
+    // JA/MY: the direction word never sits next to 0.00, and at 0.00 the stop template is used
+    for (const [l, s] of [['ja', MOVE_STRINGS.ja], ['my', my]] as const) for (let i = -22; i <= 22; i++) {
+      const t = slipText(s, i / 100)
+      for (const d of Object.values(s.dir)) expect(t, l).not.toContain(`${d} 0.00`)
+      if (i === 0) expect(t, l).toContain(s.slipStop.split('{told} m/s')[1].split(' ({right}')[0])
+    }
   })
   it('Burmese break-it sentence, equal and unequal commands, rendered: verb ending and ။ join with no space, no slot left', () => {
     const my = MY as unknown as typeof MOVE_STRINGS.en
