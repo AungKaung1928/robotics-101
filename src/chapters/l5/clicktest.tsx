@@ -35,6 +35,10 @@ const CASES: Case[] = [
     click(h, '.break'); await tick(); slide(h, 45); await tick(); slide(h, -45); await tick()
     return want(k(h, 'challenge'), stringsFor(PORT_STRINGS, t, 'l5.port.PORT_STRINGS').solved)
   } },
+  { name: 'port challenge without the slider: break, then −π layout', Body: PortChapter, run: async (h, t) => {
+    click(h, '.break'); await tick(); radio(h, 'port-layout', 1); await tick()
+    return want(k(h, 'challenge'), stringsFor(PORT_STRINGS, t, 'l5.port.PORT_STRINGS').solved)
+  } },
   { name: 'port −π layout hides the bug', Body: PortChapter, run: async (h) => {
     click(h, '.break'); radio(h, 'port-layout', 1); await tick()
     return want(k(h, 'py') + '|' + k(h, 'cpp'), '90|90')
@@ -42,6 +46,12 @@ const CASES: Case[] = [
   { name: 'ci clean push green', Body: CiChapter, run: async (h, t) => {
     click(h, '[data-act="run"]'); await tick()
     return want(k(h, 'step-figure'), stringsFor(CI_STRINGS, t, 'l5.ci.CI_STRINGS').result.success) ?? want(k(h, 'seconds'), '117') ?? want(k(h, 'predict'), '✓')
+  } },
+  { name: 'ci guess changed after the run hides the old verdict', Body: CiChapter, run: async (h) => {
+    radio(h, 'ci-push', 1); radio(h, 'ci-guess', 0); await tick(); click(h, '[data-act="run"]'); await tick()
+    const before = k(h, 'predict').includes('✓') ? 'wrong guess scored right' : null
+    radio(h, 'ci-guess', 1); await tick()
+    return before ?? want(k(h, 'predict'), '(missing)')
   } },
   { name: 'ci typo: build red, test skipped, challenge solved', Body: CiChapter, run: async (h, t) => {
     const s = stringsFor(CI_STRINGS, t, 'l5.ci.CI_STRINGS')
