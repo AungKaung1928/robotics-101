@@ -33,7 +33,7 @@ export const SHELL_STRINGS = {
       'いつもどこか1つのフォルダの中にいる。pwd で表示、ls で一覧、cd で移動。',
       'ros2 は source /opt/ros/humble/setup.bash（Jazzy では /opt/ros/jazzy/setup.bash）の後にだけ使える。~/.bashrc で source していなければ、新しいターミナルはそれなしで始まる。',
     ],
-    runsHere: 'ページ内の疑似ターミナル（JavaScript）で、あなたのコンピュータではない：フォルダ1つ分、コマンド8つ。',
+    runsHere: 'ページ内の疑似ターミナル（JavaScript）で、あなたのコンピュータではない：フォルダの木構造1つ、コマンド8つ。',
     yours: 'あなたのターミナル：コマンドを打って Enter',
     newTerm: '壊す：新しいターミナルを開く',
     challenge: 'チャレンジ：新しいターミナルで ros2 pkg list がパッケージを表示するようにしよう。',
