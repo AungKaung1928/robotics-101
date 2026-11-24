@@ -10,7 +10,7 @@ export type Skill = (typeof SKILLS)[number]
 export const ROWS: { row: '1' | '2' | '3' | '4' | 'EP'; ids: string[] }[] = [
   { row: '1', ids: ['decide', 'closest', 'callback', 'cpp', 'shell'] },
   { row: '2', ids: ['nodes', 'topics', 'msgtypes', 'actions', 'params', 'ws', 'drive'] },
-  { row: '3', ids: ['scan', 'tf', 'tflab', 'detect'] },
+  { row: '3', ids: ['scan', 'wall', 'tf', 'tflab', 'detect'] },
   { row: '4', ids: ['grid', 'costmap', 'goal', 'bringup'] },
   { row: 'EP', ids: ['bfs', 'late'] },
 ]
@@ -19,7 +19,7 @@ export const TAGS: Record<string, readonly Skill[]> = {
   decide: ['py', 'ros2'], closest: ['py'], callback: ['py', 'ros2'], cpp: ['cpp'], shell: ['py', 'cpp', 'ros2', 'shell'],
   nodes: ['py', 'ros2'], topics: ['ros2', 'shell'], msgtypes: ['ros2'], actions: ['py', 'ros2'], params: ['py', 'cpp', 'ros2', 'shell'],
   ws: ['cpp', 'ros2', 'shell'], drive: ['ros2', 'shell'],
-  scan: ['ros2'], tf: ['cpp', 'ros2'], tflab: ['cpp', 'ros2', 'shell'], detect: ['ros2'],
+  scan: ['ros2'], wall: ['py'], tf: ['cpp', 'ros2'], tflab: ['cpp', 'ros2', 'shell'], detect: ['ros2'],
   grid: ['ros2'], costmap: ['ros2'], goal: ['ros2'], bringup: ['py', 'ros2'],
   bfs: ['py', 'cpp', 'ros2'], late: ['py', 'cpp', 'ros2'],
 }

@@ -25,5 +25,6 @@
  "params": "ROS 2: parameter နဲ့ launch file များ",
  "ws": "ROS 2: workspace၊ package များ၊ colcon build",
  "drive": "ROS 2: ပထမဆုံး မောင်းနှင်ခြင်း",
+ "wall": "Reactive control: နံရံတစ်လျှောက် လိုက်မောင်းခြင်း",
  "tflab": "TF အမှားရှာလက်တွေ့စမ်းသပ်ခန်း - ပျောက်နေတဲ့ link တစ်ခု"
 }

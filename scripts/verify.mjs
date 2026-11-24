@@ -36,7 +36,8 @@ const ROUTES = [
   { hash: '#/0/think', has: ['class="pathline"', 'class="think-scene"'] },
   { hash: '#/0/pipe', has: 'class="num">0.9<' },
   { hash: '#/0/scope', has: ['class="num">0.12<', 'class="scope"'], equals: { ros2: '20 / 22', cpp: '8 / 22' } },
-  { hash: '#/3/tflab', has: ['class="num">3.3<', 'class="tfc"', 'class="inset tflab"', 'data-k="stalelesson"'], equals: { stale: 'OK', staleyaw: '17.2°', staleoff: '12.1 cm' } }, // tfc = the animated chain scene; tflab = the STALE scene, 0.3 s old at 1 rad/s
+  { hash: '#/3/wall', has: ['class="num">3.2<', 'class="trail"', 'data-k="tooclose"'], equals: { closest: '0.36 m', settle: 'not in 15 s', spun: 'no' } }, // start kp 0.5: overshoots, never settles (wall.test)
+  { hash: '#/3/tflab', has: ['class="num">3.4<', 'class="tfc"', 'class="inset tflab"', 'data-k="stalelesson"'], equals: { stale: 'OK', staleyaw: '17.2°', staleoff: '12.1 cm' } }, // tfc = the animated chain scene; tflab = the STALE scene, 0.3 s old at 1 rad/s
   { hash: '#/ep/bfs', has: 'class="num">EP1<' },
   { hash: '#/ep/late', has: 'class="num">EP2<' },
   { hash: '#/0/tools', has: 'class="num">0.10<' },

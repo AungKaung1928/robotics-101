@@ -2,7 +2,7 @@ import type { ComponentType } from 'react'
 import type { ChapterMeta } from '../anim/contract'
 import { ActChapter, LEVEL0_CHAPTERS, LoopChapter, MeetChapter, MoveChapter, PipeChapter, RosChapter, ScopeChapter, SenseChapter, SimpickChapter, SimwhatChapter, ThinkChapter, ToolsChapter } from '../chapters/l0'
 import { CallbackChapter, ClosestChapter, CppChapter, DecideChapter, LEVEL1_CHAPTERS, ShellChapter } from '../chapters/l1'
-import { TFLAB_META, TfLabChapter } from '../chapters/l3'
+import { TFLAB_META, TfLabChapter, WALL_META, WallChapter } from '../chapters/l3'
 import { BfsChapter, EP_CHAPTERS, LateChapter } from '../chapters/ep'
 import { ActionsChapter, DriveChapter, LEVEL2_CHAPTERS, MsgTypesChapter, NodesChapter, ParamsChapter, TopicsChapter, WsChapter } from '../chapters/l2'
 import { STRINGS, type Strings } from '../i18n'
@@ -20,7 +20,7 @@ export const LEVELS: ChapterMeta[][] = [
   LEVEL0_CHAPTERS,
   LEVEL1_CHAPTERS,
   LEVEL2_CHAPTERS,
-  [...existing(3, ['scan', 'tf']), { ...TFLAB_META }, ...existing(3, ['detect'])],
+  [...existing(3, ['scan']), { ...WALL_META }, ...existing(3, ['tf']), { ...TFLAB_META }, ...existing(3, ['detect'])],
   existing(4, ['grid', 'costmap', 'goal', 'bringup']),
   [],
 ]
@@ -29,7 +29,7 @@ export const LEVELS: ChapterMeta[][] = [
 export const LEVEL_BODY: Record<string, ComponentType<{ t: Strings }>> = {
   meet: MeetChapter, move: MoveChapter, sense: SenseChapter, think: ThinkChapter, act: ActChapter, simwhat: SimwhatChapter, simpick: SimpickChapter,
   loop: LoopChapter, pipe: PipeChapter, tools: ToolsChapter, ros: RosChapter, scope: ScopeChapter, decide: DecideChapter, closest: ClosestChapter, callback: CallbackChapter, cpp: CppChapter, shell: ShellChapter,
-  bfs: BfsChapter, late: LateChapter, tflab: TfLabChapter,
+  bfs: BfsChapter, late: LateChapter, tflab: TfLabChapter, wall: WallChapter,
   nodes: NodesChapter, topics: TopicsChapter, msgtypes: MsgTypesChapter, actions: ActionsChapter, params: ParamsChapter, ws: WsChapter, drive: DriveChapter,
 }
 
