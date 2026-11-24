@@ -1,5 +1,5 @@
 // Smoke checks on the built site in the one Chrome this laptop has (headless, --dump-dom), per language en/ja/my:
-// no sideways scroll at 320/360/390 px on every route the level map links to, the chosen language survives a reload,
+// no sideways scroll at 320/360/390/820 px on every route the level map links to, the chosen language survives a reload,
 // next/prev links and arrow keys move between chapters, Burmese loads Noto Sans Myanmar, the 'break it' button
 // changes the page, the drag handle has a keyboard path. Input here is synthetic (element.click, dispatched keydown):
 // real touch, real keys and Firefox/WebKit are in e2e/smoke/smoke.spec.ts (CI). Exit 1 = a check failed.
@@ -40,7 +40,7 @@ async function main() {
   check('map loads in ' + lang, doc().documentElement.lang === lang, 'html lang=' + doc().documentElement.lang)
   const routes = [...new Set([...doc().querySelectorAll('a[href^="#/"]')].map((a) => a.getAttribute('href')))].filter((h) => h !== '#/')
   check('map links chapters', routes.length >= 30, routes.length + ' routes')
-  for (const w of [320, 360, 390]) {
+  for (const w of [320, 360, 390, 820]) { // 820 = tablet portrait (iPad Air width)
     const wide = []
     for (const h of ['', ...routes]) { await load(h, w); const d = doc().documentElement; if (d.scrollWidth > d.clientWidth) wide.push((h || '#/') + ' ' + d.scrollWidth + '>' + d.clientWidth) }
     check('no sideways scroll at ' + w + ' px on ' + (routes.length + 1) + ' pages', !wide.length, wide.join(', '))
