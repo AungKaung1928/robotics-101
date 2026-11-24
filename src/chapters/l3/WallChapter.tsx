@@ -30,7 +30,7 @@ export default function WallChapter({ t }: { t: Strings }) {
   const pt = (k: number) => `${(X0 + xs[k] * sx).toFixed(1)},${(WALL_Y - ts[k].d * PX).toFixed(1)}`
   const path = ts.slice(0, f.k + 1).map((_, k) => pt(k)).join(' ')
   const [rx, ry] = pt(f.k).split(',').map(Number)
-  const head = -f.tick.alpha // alpha > 0 = heading down toward the wall
+  const head = f.tick.alpha // alpha > 0 = heading into the wall = down on screen (SVG rotate is clockwise)
   const st = settleS(ts), ok = challengeOk(ts)
   const reset = () => setTS(still() ? Infinity : 0)
   return (
@@ -76,7 +76,7 @@ export default function WallChapter({ t }: { t: Strings }) {
         <p className="note">{s.modelNote} ({START_D} m, {N / 20} s)</p>
         <p className="group-h">{s.words}</p>
         <Gloss items={s.glossary} />
-        <p className="src">{t.source}: <a href={`${REPO}/config/wall_following_params.yaml#L8-L31`}>wall_following_params.yaml:8-31</a>, <a href={`${CTRL}#L268-L286`}>wall_follower_controller.py:268-286</a> (two-beam estimate), <a href={`${CTRL}#L320-L357`}>:320-357</a> (PD + speed)</p>
+        <p className="src">{t.source}: <a href={`${REPO}/config/wall_following_params.yaml#L8-L31`}>wall_following_params.yaml:8-31</a>, <a href={`${CTRL}#L268-L286`}>wall_follower_controller.py:268-286</a> (two-beam estimate), <a href={`${CTRL}#L320-L357`}>:320-357</a> (PD + speed), <a href={`${CTRL}#L97`}>:97</a> (look-ahead 0.1-1.0 m)</p>
       </div>
     </>
   )
