@@ -55,7 +55,7 @@ const en = {
   scan: {
     fired: 'beams fired (one scan, 15× slower)',
     lines: [
-      '360 beams, one per degree, 5 times a second. Each beam returns the nearest wall or obstacle, if it is closer than 3.5 m.',
+      '360 beams, one per degree, 5 times a second. Each beam returns the nearest wall or obstacle if it is closer than 3.5 m. A surface almost touching the sensor gives no reading either (minimum range in the URDF).',
       'Neighbouring beams spread apart with range: anything narrower than the gap can fall between them.',
       'Drag the robot on the map to move the scan.',
     ],
@@ -168,7 +168,7 @@ const en = {
     found: 'objects found',
     noise: 'add his sensor noise (σ 1 cm, Gaussian, URDF)',
     truth: 'objects in view (ground truth)',
-    next: 'Borges & Aldon (2004) propose a threshold that grows with range and sensor noise; it is added once the formula is read from the paper itself.',
+    next: 'Borges & Aldon (2004) propose a threshold that grows with range and sensor noise; this page keeps one fixed threshold.',
   },
   costmap: {
     lines: [
@@ -239,7 +239,7 @@ const ja: typeof en = {
   scan: {
     fired: '発射済みのビーム (1 スキャン、15 倍スロー)',
     lines: [
-      '1 度につき 1 本、計 360 本のビームを毎秒 5 回。各ビームは 3.5 m 以内にある一番近い壁か障害物までの距離を返す。',
+      '1 度につき 1 本、計 360 本のビームを毎秒 5 回。各ビームは 3.5 m 以内にある一番近い壁か障害物までの距離を返す。センサにほぼ接する面も値を返さない（URDF の最小距離）。',
       '距離が遠いほど隣のビームとの間隔が広がる。間隔より細い物はビームの間をすり抜け、見えない。',
       '地図上のロボットをドラッグすると、スキャンも一緒に動く。',
     ],
@@ -352,7 +352,7 @@ const ja: typeof en = {
     found: '見つかった物体',
     noise: 'センサ雑音を加える (σ 1 cm、ガウス、URDF)',
     truth: '視野内の物体 (真値)',
-    next: 'Borges & Aldon (2004) は距離とセンサ雑音で大きくなるしきい値を提案している。式を論文本体で確認してから追加する。',
+    next: 'Borges & Aldon (2004) は距離とセンサ雑音で大きくなるしきい値を提案している。このページでは固定のしきい値を 1 つだけ使う。',
   },
   costmap: {
     lines: [
