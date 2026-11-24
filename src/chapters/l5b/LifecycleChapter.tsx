@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { stringsFor, type Strings } from '../../i18n'
-import { HORIZON, SLOW_AT, SLOW_MS, TRANSITIONS, late, processes, starts, step, ticks, worstDelay, type Exec, type State } from './lifecycle'
+import { HORIZON, SLOW_AT, SLOW_MS, TRANSITIONS, late, onError, processes, raiseError, starts, step, ticks, worstDelay, type Exec, type State } from './lifecycle'
 import { LIFECYCLE_STRINGS } from './lifecycle.strings'
 import '../l1/l1.css'
 import '../l2/l2.css'
@@ -19,15 +19,23 @@ export default function LifecycleChapter({ t }: { t: Strings }) {
   const [st, setSt] = useState<State>('unconfigured')
   const [msg, setMsg] = useState('')
   const [ex, setEx] = useState<Exec>('single')
-  const go = (tr: (typeof TRANSITIONS)[number]) => {
-    const n = step(st, tr)
-    if (n) { setSt(n); setMsg('') } else setMsg(s.rejected(tr, s.states[st]))
+  const apply = (n: State | null, label: string) => {
+    if (n) { setSt(n); setMsg('') } else setMsg(s.rejected(label, s.states[st]))
   }
+  const go = (tr: (typeof TRANSITIONS)[number]) => apply(step(st, tr), tr)
+  const EP = { x: X0 + 1.5 * 155 - 15, y: 110, w: 170 } // ErrorProcessing box, centred under inactive/active; wider: 15-char label
   const ss = starts(ex), nLate = late(ex), ok = nLate === 0
   return (
     <>
       <div className="figure">
-        <svg className="side graph" viewBox={`0 0 ${W} 90`} role="img" aria-label={s.stateH}>
+        <svg className="side graph" viewBox={`0 0 ${W} 170`} role="img" aria-label={s.stateH}>
+          <line className="floor" x1={X0 + 2 * 155 + 70} y1={64} x2={EP.x + EP.w - 40} y2={EP.y} />
+          <line className="floor" x1={EP.x + 10} y1={EP.y} x2={X0 + 70} y2={64} />
+          <line className="floor" x1={EP.x + EP.w} y1={EP.y + 22} x2={X0 + 3 * 155 + 70} y2={64} />
+          <g className={`nd still ${st === 'errorprocessing' ? 'ok' : 'off'}`} data-state="errorprocessing">
+            <rect x={EP.x} y={EP.y} width={EP.w} height={44} strokeDasharray="6 4" />
+            <text x={EP.x + EP.w / 2} y={EP.y + 28} textAnchor="middle">{s.states.errorprocessing}</text>
+          </g>
           {STATES.map((name, i) => (
             <g key={name} className={`nd still ${name === st ? 'ok' : 'off'}`} data-state={name}>
               <rect x={X0 + i * 155} y={20} width={140} height={44} />
@@ -55,6 +63,9 @@ export default function LifecycleChapter({ t }: { t: Strings }) {
         <p className="group-h">{s.stateH}</p>
         <div className="stepper" role="group" aria-label={s.stateH}>
           {TRANSITIONS.map((tr) => <button key={tr} type="button" data-tr={tr} onClick={() => go(tr)}>{tr}</button>)}
+          <button type="button" data-tr="error" onClick={() => apply(raiseError(st), s.errTr.error)}>{s.errTr.error}</button>
+          <button type="button" data-tr="onerror-ok" onClick={() => apply(onError(st, true), s.errTr.ok)}>{s.errTr.ok}</button>
+          <button type="button" data-tr="onerror-fail" onClick={() => apply(onError(st, false), s.errTr.fail)}>{s.errTr.fail}</button>
           <button type="button" onClick={() => { setSt('unconfigured'); setMsg('') }}>{s.reset}</button>
         </div>
         <dl className="readout">
@@ -63,6 +74,7 @@ export default function LifecycleChapter({ t }: { t: Strings }) {
         </dl>
         {msg && <p className="verdict no" data-k="rejected">{msg}</p>}
         <p>{s.lcNote}</p>
+        <p className="note">{s.errNote}</p>
         <p className="group-h">{s.execH}</p>
         <div className="stepper" role="group" aria-label={s.execH}>
           {(['single', 'multi_default', 'multi_groups'] as Exec[]).map((k) => <button key={k} type="button" aria-pressed={ex === k} onClick={() => setEx(k)}>{s.execs[k]}</button>)}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { late, processes, starts, step, worstDelay } from './lifecycle'
+import { late, onError, processes, raiseError, starts, step, worstDelay } from './lifecycle'
 
 describe('5.5 lifecycle', () => {
   it('happy path: configure, activate, deactivate, cleanup', () => {
@@ -15,6 +15,15 @@ describe('5.5 lifecycle', () => {
   })
   it('shutdown from any live state ends in finalized', () => {
     for (const s of ['unconfigured', 'inactive', 'active'] as const) expect(step(s, 'shutdown')).toBe('finalized')
+  })
+  it('error while active -> ErrorProcessing; onError success -> unconfigured, failure -> finalized', () => {
+    expect(raiseError('active')).toBe('errorprocessing')
+    expect(raiseError('inactive')).toBeNull()
+    expect(onError('errorprocessing', true)).toBe('unconfigured')
+    expect(onError('errorprocessing', false)).toBe('finalized')
+    expect(onError('active', true)).toBeNull()
+    for (const tr of ['configure', 'activate', 'deactivate', 'cleanup', 'shutdown'] as const) expect(step('errorprocessing', tr)).toBeNull()
+    expect(processes('errorprocessing')).toBe(false)
   })
   it('only active processes data', () => {
     expect(processes('active')).toBe(true)
@@ -42,6 +51,7 @@ describe('5.5 strings', () => {
     const { LIFECYCLE_STRINGS: S } = await import('./lifecycle.strings')
     expect(Object.keys(S.ja).sort()).toEqual(Object.keys(S.en).sort())
     expect(Object.keys(S.ja.states).sort()).toEqual(Object.keys(S.en.states).sort())
+    expect(Object.keys(S.ja.errTr).sort()).toEqual(Object.keys(S.en.errTr).sort())
     expect(Object.keys(S.ja.execs).sort()).toEqual(Object.keys(S.en.execs).sort())
     expect(S.ja.glossary).toHaveLength(S.en.glossary.length)
   })

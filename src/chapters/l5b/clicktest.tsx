@@ -47,6 +47,12 @@ for (const lang of ['en', 'ja', 'my'] as Lang[]) {
   ok(m.read('state') === 'unconfigured' && m.read('rejected') !== '', `${lang} lc reject ${m.read('state')}`)
   m.click(m.q('[data-tr="configure"]'), 'configure'); m.click(m.q('[data-tr="activate"]'), 'activate')
   ok(m.read('state') === 'active', `${lang} lc active ${m.read('state')}`)
+  m.click(m.q('[data-tr="error"]'), 'error')
+  ok(m.q('[data-state="errorprocessing"]').classList.contains('ok'), `${lang} lc errorprocessing ${m.read('state')}`)
+  m.click(m.q('[data-tr="onerror-fail"]'), 'onError fails')
+  ok(m.q('[data-state="finalized"]').classList.contains('ok'), `${lang} lc error->finalized ${m.read('state')}`)
+  m.click(m.q('[data-tr="onerror-ok"]'), 'onError ok from finalized')
+  ok(m.read('rejected') !== '', `${lang} lc onError rejected outside ErrorProcessing`)
   m.click(m.q('button.break'), 'lc break')
   ok(m.read('late') === '3', `${lang} lc multi default late ${m.read('late')}`)
   const groups = [...m.q('[aria-pressed]').parentElement!.querySelectorAll('button')]

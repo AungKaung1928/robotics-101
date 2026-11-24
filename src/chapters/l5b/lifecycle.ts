@@ -2,7 +2,7 @@
  * Chapter 5.5 model, part 1: managed (lifecycle) node states and transitions, design.ros2.org "Managed nodes".
  * 4 primary states; an external supervisor triggers each transition. Inactive = no execution time, managed topics not processed.
  */
-export type State = 'unconfigured' | 'inactive' | 'active' | 'finalized'
+export type State = 'unconfigured' | 'inactive' | 'active' | 'finalized' | 'errorprocessing'
 export type Transition = 'configure' | 'activate' | 'deactivate' | 'cleanup' | 'shutdown'
 export const TRANSITIONS: Transition[] = ['configure', 'activate', 'deactivate', 'cleanup', 'shutdown']
 
@@ -15,6 +15,13 @@ const NEXT: Record<Transition, [State[], State]> = {
 }
 /** null = the transition is not valid from this state (the node rejects it and stays put). */
 export const step = (s: State, tr: Transition): State | null => (NEXT[tr][0].includes(s) ? NEXT[tr][1] : null)
+/**
+ * ErrorProcessing is a transition state (design doc, "Transition State: ErrorProcessing"). An error the node cannot handle
+ * while Active sends it there without a supervisor; onError success -> Unconfigured, any other result -> Finalized.
+ * Errors inside the other transition callbacks (onConfigure, ...) also land here; this model only shows the Active case.
+ */
+export const raiseError = (s: State): State | null => (s === 'active' ? 'errorprocessing' : null)
+export const onError = (s: State, ok: boolean): State | null => (s === 'errorprocessing' ? (ok ? 'unconfigured' : 'finalized') : null)
 /** Only an active node processes incoming data (design doc, "Primary State: Inactive"). */
 export const processes = (s: State) => s === 'active'
 
