@@ -8,7 +8,7 @@ export const ACTIONS_STRINGS = {
     lines: [
       'A service is one request and one response, like "save the map now". The caller waits for the answer.',
       'An action is for jobs that take time, like "drive to this point". The server first accepts the goal, then sends feedback while it works, then one result. You can cancel it halfway.',
-      'ros2-patrol-project\'s patrol_controller sends each waypoint to Nav2 as a NavigateToPose action. Nav2 reports distance_remaining in its feedback; this controller\'s feedback_callback ignores it.',
+      'Names in code font are taken from the example project. ros2-patrol-project\'s node patrol_controller sends each waypoint to Nav2 as a NavigateToPose action. Nav2 reports distance_remaining in its feedback; this controller\'s feedback_callback ignores it.',
     ],
     compare: [['topic', 'a stream, nobody answers', '/scan'], ['service', 'one request → one response', '/slam_toolbox/save_map'], ['action', 'goal → feedback … → result, can cancel', 'navigate_to_pose']] as [string, string, string][],
     distance: 'goal distance (m)',
@@ -37,7 +37,7 @@ export const ACTIONS_STRINGS = {
     lines: [
       'サービスは1回の要求と1回の応答。例：「今すぐ地図を保存して」。呼んだ側は答えを待つ。',
       'アクションは時間のかかる仕事用。例：「この地点まで走って」。サーバーはまずゴールを受け付け、作業中はフィードバックを送り、最後に結果を1つ返す。途中でキャンセルもできる。',
-      'ros2-patrol-project の patrol_controller は各ウェイポイントを NavigateToPose アクションとして Nav2 に送る。Nav2 はフィードバックで distance_remaining を知らせるが、この controller の feedback_callback はそれを使わない。',
+      'コード書体の名前は例のプロジェクトから取ったもの。ros2-patrol-project のノード patrol_controller は各ウェイポイントを NavigateToPose アクションとして Nav2 に送る。Nav2 はフィードバックで distance_remaining を知らせるが、この controller の feedback_callback はそれを使わない。',
     ],
     compare: [['トピック', '流れ続ける。誰も答えない', '/scan'], ['サービス', '要求1回 → 応答1回', '/slam_toolbox/save_map'], ['アクション', 'ゴール → フィードバック … → 結果、キャンセル可', 'navigate_to_pose']] as [string, string, string][],
     distance: 'ゴールまでの距離（m）',
