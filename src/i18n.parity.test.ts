@@ -7,7 +7,7 @@ const mods = import.meta.glob('./chapters/*/*.strings.ts', { eager: true }) as R
 const sets: [string, { en: unknown; ja: unknown }][] = [['i18n.ts', STRINGS], ...Object.entries(mods).flatMap(([f, m]) => Object.values(m).map((o): [string, { en: unknown; ja: unknown }] => [f, o]))]
 
 // Checked by hand 2026-11-24: the same value written as a word in one language (二輪 = two-wheel, 10億 = billion, May = 5月).
-const WORDING = new Set(['i18n.ts.detect.lines.0', 'i18n.ts.costmap.twoMaps', './chapters/l0/ros.strings.ts.solved',
+const WORDING = new Set(['i18n.ts.detect.lines.0', 'i18n.ts.costmap.twoMaps', './chapters/l0/ros.strings.ts.solved', './chapters/l0/ros.strings.ts.install.2',
   './chapters/l1/cpp.strings.ts.glossary.3.1', './chapters/l2/drive.strings.ts.glossary.2.1', './chapters/l2/msgtypes.strings.ts.lines.2'])
 
 const W: Record<string, string> = { zero: '0', two: '2', three: '3', four: '4', five: '5', six: '6', seven: '7', eight: '8', nine: '9', ten: '10', twelve: '12', twice: '2' }

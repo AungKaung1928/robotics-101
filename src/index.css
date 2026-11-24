@@ -189,7 +189,7 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .probe-dot { fill: var(--robot); }
 
 .slider { display: block; position: relative; margin-bottom: var(--s3); font-size: var(--t-small); }
-.slider span { display: flex; justify-content: space-between; color: var(--ink-2); }
+.slider span { display: flex; justify-content: space-between; gap: var(--s2); color: var(--ink-2); } /* gap: a long Burmese label never touches its value */
 .slider output { font-family: var(--mono); color: var(--ink); }
 .slider input { width: 100%; accent-color: var(--ink); }
 /* The hint gets its own line above the label (kept after the first drag, so nothing jumps); above the box it overlapped whatever sat there (2.4 actions table). */

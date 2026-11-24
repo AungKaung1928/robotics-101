@@ -30,7 +30,7 @@ export const MY_TEMPLATES: Record<string, Record<string, Tpl>> = {
   'l0.move.MOVE_STRINGS': { caption: (s: number) => `${s} s` },
   'l0.pipe.PIPE_STRINGS': { caption: (name: string) => `scan ရောက်နေတဲ့နေရာ: ${name}` },
   'l0.ros.ROS_STRINGS': {
-    caption: (date: string, n: number) => `${date}: ${n} ခု ပံ့ပိုးထားဆဲ`,
+    caption: (date: string, n: number, total: number) => `${date}: ပြထားတဲ့ ${total} ခုထဲက ${n} ခု ပြင်ဆင်ချက် ရနေဆဲ`,
     brokenNote: (n: number) =>
       `Iron က Dec 4, 2024 မှာ ပြင်ဆင်ချက် ရပ်သွားပါပြီ။ အဲဒီပေါ်မှာ စခဲ့တဲ့ project က လုံခြုံရေး ဒါမှမဟုတ် bug ပြင်ဆင်ချက် မပါဘဲ ${n} လ ကြာသွားပါပြီ။ LTS ကို ရွေးပါ။`,
   },
