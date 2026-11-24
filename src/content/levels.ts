@@ -3,6 +3,7 @@ import type { ChapterMeta } from '../anim/contract'
 import { ActChapter, LEVEL0_CHAPTERS, LoopChapter, MeetChapter, MoveChapter, PipeChapter, RosChapter, ScopeChapter, SenseChapter, SimpickChapter, SimwhatChapter, ThinkChapter, ToolsChapter } from '../chapters/l0'
 import { CallbackChapter, ClosestChapter, CppChapter, DecideChapter, LEVEL1_CHAPTERS, ShellChapter } from '../chapters/l1'
 import { TFLAB_META, TfLabChapter, WALL_META, WallChapter } from '../chapters/l3'
+import { PATROL_META, PatrolChapter } from '../chapters/l4'
 import { BfsChapter, EP_CHAPTERS, LateChapter } from '../chapters/ep'
 import { CiChapter, DebugChapter, LEVEL5_CHAPTERS, PortChapter } from '../chapters/l5'
 import { ActionsChapter, DriveChapter, LEVEL2_CHAPTERS, MsgTypesChapter, NodesChapter, ParamsChapter, TopicsChapter, WsChapter } from '../chapters/l2'
@@ -23,7 +24,7 @@ export const LEVELS: ChapterMeta[][] = [
   LEVEL1_CHAPTERS,
   LEVEL2_CHAPTERS,
   [...existing(3, ['scan']), { ...WALL_META }, ...existing(3, ['tf']), { ...TFLAB_META }, ...existing(3, ['detect'])],
-  existing(4, ['grid', 'costmap', 'goal', 'bringup']),
+  [...existing(4, ['grid', 'costmap', 'goal']), { ...PATROL_META }, ...existing(4, ['bringup'])],
   [...LEVEL5_CHAPTERS, ...LEVEL5B_CHAPTERS],
 ]
 
@@ -31,7 +32,7 @@ export const LEVELS: ChapterMeta[][] = [
 export const LEVEL_BODY: Record<string, ComponentType<{ t: Strings }>> = {
   meet: MeetChapter, move: MoveChapter, sense: SenseChapter, think: ThinkChapter, act: ActChapter, simwhat: SimwhatChapter, simpick: SimpickChapter,
   loop: LoopChapter, pipe: PipeChapter, tools: ToolsChapter, ros: RosChapter, scope: ScopeChapter, decide: DecideChapter, closest: ClosestChapter, callback: CallbackChapter, cpp: CppChapter, shell: ShellChapter,
-  bfs: BfsChapter, late: LateChapter, tflab: TfLabChapter, wall: WallChapter,
+  bfs: BfsChapter, late: LateChapter, tflab: TfLabChapter, wall: WallChapter, patrol: PatrolChapter,
   nodes: NodesChapter, topics: TopicsChapter, msgtypes: MsgTypesChapter, actions: ActionsChapter, params: ParamsChapter, ws: WsChapter, drive: DriveChapter,
   port: PortChapter, ci: CiChapter, debug: DebugChapter,
   qos: QosChapter, lifecycle: LifecycleChapter, fieldfail: FieldfailChapter,

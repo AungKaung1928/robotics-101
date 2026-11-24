@@ -35,7 +35,7 @@ const ROUTES = [
   { hash: '#/0/meet', has: 'class="num">0.1<' },
   { hash: '#/0/think', has: ['class="pathline"', 'class="think-scene"'] },
   { hash: '#/0/pipe', has: 'class="num">0.9<' },
-  { hash: '#/0/scope', has: ['class="num">0.12<', 'class="scope"'], equals: { ros2: '20 / 23', cpp: '8 / 23' } },
+  { hash: '#/0/scope', has: ['class="num">0.12<', 'class="scope"'], equals: { ros2: '21 / 24', cpp: '8 / 24' } },
   { hash: '#/3/wall', has: ['class="num">3.2<', 'class="trail"', 'data-k="tooclose"'], equals: { closest: '0.36 m' } }, // start kp 0.5 overshoots (wall.test); settle + spun readouts are translated, so not compared here
   { hash: '#/3/tflab', has: ['class="num">3.4<', 'class="tfc"', 'class="inset tflab"', 'data-k="stalelesson"'], equals: { stale: 'OK', staleyaw: '17.2°', staleoff: '12.1 cm' } }, // tfc = the animated chain scene; tflab = the STALE scene, 0.3 s old at 1 rad/s
   { hash: '#/ep/bfs', has: 'class="num">EP1<' },
@@ -65,6 +65,7 @@ const ROUTES = [
   { hash: '#/grid?t=2.5', readouts: ['known'], equals: { scans: '3' }, moreThan: { known: ['#/grid', 'known'] } },
   { hash: '#/grid/7', readouts: ['known'], equals: { scans: '7' }, moreThan: { known: ['#/grid', 'known'] } },
   { hash: '#/costmap', readouts: ['cost', 'edge', 'smooth'], equals: { window: '3 × 3 m = 3,600', ladder: '3.5&nbsp;→ 3.0&nbsp;→ 2.5&nbsp;→ 1.5&nbsp;m' }, has: ['class="pathline"', 'data-k="grow"', 'data-k="ripple"'] }, // ladder as dumped HTML (no-break spaces serialize as &nbsp;); older chapters: dots + Level 0 link + intro line; ripple = the inflation scene's caption
+  { hash: '#/4/patrol', has: ['class="num">4.4<', 'class="side graph patrolmap"', 'data-k="skipped"', 'data-k="sleep"'] }, // counts depend on the play position; patrol.test pins them
   { hash: '#/goal', readouts: ['tick', 'drive', 'time', 'ticks', 'cmdhz'], equals: { time: '14.4 s', timeaccel: '14.5 s', yaw: '0.25 rad = 14.3°', progress: '1.9 s', planner: 'NavFn · Dijkstra', recover: 'spin · backup · wait' } },
 ]
 const JA_TEXT = /[぀-ヿ一-龯]/
