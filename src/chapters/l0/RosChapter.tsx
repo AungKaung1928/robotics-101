@@ -68,7 +68,7 @@ export default function RosChapter({ t }: { t: Strings }) {
           ) })}</tbody>
         </table>
         <p className="note">{s.winMac}</p>
-        <div className="note" data-k="project"><strong>{s.projectTitle}</strong> {s.project}</div>
+        <div className="note ros-project" data-k="project"><strong>{s.projectTitle}</strong> {s.project}</div>
         <p><strong>{s.challenge}</strong></p>
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet}</p>
         <p className="group-h">{s.words}</p>
