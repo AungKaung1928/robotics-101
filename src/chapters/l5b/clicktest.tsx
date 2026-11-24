@@ -67,6 +67,11 @@ for (const lang of ['en', 'ja', 'my'] as Lang[]) {
   ok(m.read('score') === '0/6' && m.read('fix') !== '', `${lang} ff wrong-first ${m.read('score')}`)
   for (let i = 1; i < FAILS.length; i++) { m.click(m.q('[data-k="next"]'), 'next'); pick(FAILS[i].id) }
   ok(m.read('score') === '5/6' && m.q('[data-k="challenge"]').classList.contains('no'), `${lang} ff 5/6 ${m.read('score')}`)
+  ok(m.q('[data-pick]') !== null && m.q('.choices').querySelectorAll('[data-pick]').length === 4, `${lang} ff 4 options`)
+  m.click(m.q('[data-k="reset"]'), 'reset')
+  ok(m.read('score') === '0/6' && m.q('[data-k="fix"]') === null, `${lang} ff reset ${m.read('score')}`)
+  for (let i = 0; i < FAILS.length; i++) { if (i) m.click(m.q('[data-k="next"]'), 'next'); pick(FAILS[i].id) }
+  ok(m.read('score') === '6/6' && m.q('[data-k="challenge"]').classList.contains('ok'), `${lang} ff retry solved ${m.read('score')}`)
   m.done()
   m = mount(FieldfailChapter, lang)
   for (let i = 0; i < FAILS.length; i++) { if (i) m.click(m.q('[data-k="next"]'), 'next'); m.click(m.q(`[data-pick="${FAILS[i].id}"]`), 'pick') }
