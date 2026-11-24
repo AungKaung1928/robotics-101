@@ -18,7 +18,7 @@ export const ACTIONS_STRINGS = {
     ev: { goal: 'goal', accepted: 'accepted', result: 'result', skip: 'patrol skips this waypoint' },
     attempt: 'attempt',
     status: 'final status',
-    challenge: 'Challenge: cancel the goal after the feedback says less than 1 m is left.',
+    challenge: 'Challenge: with a goal 2 m or more away, cancel it after the feedback says less than 1 m is left.',
     solved: 'Solved: canceled with', notYet: 'Not yet:', left: 'm left',
     words: 'Words',
     glossary: [
@@ -47,7 +47,7 @@ export const ACTIONS_STRINGS = {
     ev: { goal: 'ゴール', accepted: '受付', result: '結果', skip: '巡回はこのウェイポイントを飛ばす' },
     attempt: '試行',
     status: '最終ステータス',
-    challenge: 'チャレンジ：残り 1 m 未満とフィードバックが言ってから、ゴールをキャンセルしよう。',
+    challenge: 'チャレンジ：2 m 以上先のゴールで、残り 1 m 未満とフィードバックが言ってから、ゴールをキャンセルしよう。',
     solved: '成功：キャンセル時の残り', notYet: 'まだ：', left: 'm',
     words: '用語',
     glossary: [

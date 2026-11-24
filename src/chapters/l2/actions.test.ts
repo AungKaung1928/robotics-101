@@ -35,9 +35,11 @@ describe('2.4 actions', () => {
 
   it('challenge: cancel only counts after feedback under 1 m', () => {
     const late = ACCEPT_MS + ((3 - 0.8) / SPEED) * 1000 // 0.8 m left
-    expect(challengeOk(run(3, true, late))).toBe(true)
-    expect(challengeOk(run(3, true, 1500))).toBe(false)
-    expect(challengeOk(run(3, true, null))).toBe(false)
+    expect(challengeOk(run(3, true, late), 3)).toBe(true)
+    expect(challengeOk(run(3, true, 1500), 3)).toBe(false)
+    expect(challengeOk(run(3, true, null), 3)).toBe(false)
+    // 1 m goal: every feedback is already under 1 m, so it must not count
+    expect(challengeOk(run(1, true, 2000), 1)).toBe(false)
   })
 
   it('scenario: robot never moves on an unreachable goal and stops at cancel', () => {
