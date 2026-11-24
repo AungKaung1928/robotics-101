@@ -4,7 +4,7 @@ export const CPP_STRINGS = {
     title: 'C++: the same robot, compiled',
     learn: 'You will learn: in C++ every variable has a type, and a compiler turns your code into a program before it runs.',
     lines: [
-      'This is chapter 1.1 again, in C++. Python turns your file into bytecode and its interpreter runs it step by step. C++ is compiled by g++ into machine code before it runs; the robot runs that machine code directly.',
+      'This is chapter 1.1 again, in C++. Python turns your file into bytecode (simple steps for Python itself) and its interpreter (the python program) runs it step by step. C++ is compiled by g++ into machine code before it runs; the robot runs that machine code directly.',
       'You must say what each variable holds: double for a number with a fraction, int for a whole number. The type decides what is stored.',
       'Why robots use it: the same closest() over 360 readings, measured below, runs many times faster.',
     ],
@@ -12,8 +12,8 @@ export const CPP_STRINGS = {
     compiling: 'g++ compiling…', built: 'compiled → ./stopper', failed: 'compile error: no program',
     note: {
       double: 'double keeps 0.5. Same result as Python.',
-      int: 'int keeps whole numbers only: 0.5 becomes 0, with no warning even under -Wall -Wextra. stop_at = 0 is the 1.1 crash.',
-      'int{}': 'Braces forbid the silent cut: g++ refuses to build. A compile error is the cheap place to find this bug.',
+      int: 'int keeps whole numbers only: 0.5 becomes 0, with no warning even under -Wall -Wextra (the g++ options that turn on extra warnings). stop_at = 0 is the 1.1 crash.',
+      'int{}': 'Braces, as in int stop_at{0.5}, forbid the silent cut: g++ refuses to build. A compile error is the cheap place to find this bug.',
     },
     held: 'stop_at really holds', result: 'robot',
     stopped: 'stopped at', crashed: 'hit the wall', noRun: 'never ran',
@@ -33,7 +33,7 @@ export const CPP_STRINGS = {
     title: 'C++：同じロボットをコンパイルする',
     learn: '学ぶこと：C++ では変数に必ず型がある。実行する前にコンパイラがコードをプログラムに変換する。',
     lines: [
-      'これは 1.1 と同じ例を C++ で書いたもの。Python はファイルをバイトコードに変え、インタプリタが少しずつ実行する。C++ は実行前に g++ がマシンコードにコンパイルし、ロボットはそのマシンコードを直接実行する。',
+      'これは 1.1 と同じ例を C++ で書いたもの。Python はファイルをバイトコード（Python 自身のための簡単な命令）に変え、インタプリタ（python というプログラム）が少しずつ実行する。C++ は実行前に g++ がマシンコードにコンパイルし、ロボットはそのマシンコードを直接実行する。',
       '変数が何を持つかを書く必要がある：小数を持つ数は double、整数は int。型が保存される値を決める。',
       'ロボットで使われる理由：360個の読み取り値に対する同じ closest() が、下の実測では何倍も速い。',
     ],
@@ -41,8 +41,8 @@ export const CPP_STRINGS = {
     compiling: 'g++ でコンパイル中…', built: 'コンパイル完了 → ./stopper', failed: 'コンパイルエラー：プログラムなし',
     note: {
       double: 'double は 0.5 を保つ。Python と同じ結果。',
-      int: 'int は整数だけを持つ：0.5 は 0 になり、-Wall -Wextra でも警告は出ない。stop_at = 0 は 1.1 の衝突と同じ。',
-      'int{}': '波かっこは黙って切り捨てることを禁止する：g++ はビルドを拒否する。このバグを見つけるならコンパイルエラーが一番安い。',
+      int: 'int は整数だけを持つ：0.5 は 0 になり、-Wall -Wextra（追加の警告をオンにする g++ のオプション）でも警告は出ない。stop_at = 0 は 1.1 の衝突と同じ。',
+      'int{}': 'int stop_at{0.5} のような波かっこは、黙って切り捨てることを禁止する：g++ はビルドを拒否する。このバグを見つけるならコンパイルエラーが一番安い。',
     },
     held: 'stop_at の実際の値', result: 'ロボット',
     stopped: '停止位置', crashed: '壁に衝突', noRun: '実行されない',

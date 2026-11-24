@@ -23,6 +23,11 @@ export const FIELDFAIL_STRINGS = {
       ['symptom', 'what you see the robot do'],
       ['root cause', 'the one thing that, fixed, makes the symptom go away'],
       ['hysteresis', 'different thresholds for on and off, so a value near the line does not flicker'],
+      ['yaw', 'which way the robot faces, as an angle'],
+      ['launch argument', 'a named value a launch file passes on, such as which parameter file to load'],
+      ['MoveIt', 'the ROS 2 software that plans arm motions'],
+      ['AttachedCollisionObject', 'a MoveIt object fixed to the robot, so planning treats it as part of the arm'],
+      ['self-collision', 'one part of the robot touching another part of the same robot'],
     ] as [string, string][],
   },
   ja: {
@@ -48,6 +53,11 @@ export const FIELDFAIL_STRINGS = {
       ['症状', 'ロボットがしているのが見えること'],
       ['根本原因', 'それを直せば症状が消える、ただ1つのこと'],
       ['ヒステリシス', 'オンとオフで別のしきい値を使い、境界付近で値がちらつかないようにすること'],
+      ['ヨー (yaw)', 'ロボットが向いている方向を表す角度'],
+      ['launch 引数', 'launch ファイルが渡す名前付きの値。たとえば読み込むパラメータファイル'],
+      ['MoveIt', 'アームの動きを計画する ROS 2 のソフトウェア'],
+      ['AttachedCollisionObject', 'ロボットに固定した MoveIt の物体。計画ではアームの一部として扱われる'],
+      ['自己衝突', 'ロボットの一部が同じロボットの別の部分に触れること'],
     ] as [string, string][],
   },
 }
