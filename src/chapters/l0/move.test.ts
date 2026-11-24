@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { LEFT, SLIP, TOP_SPEED, VIEW, body, kind, path, turnsPerS } from './move'
+import { LEFT, SLIP, TOP_SPEED, VIEW, WHEEL_GAP_M, body, kind, path, turnsPerS } from './move'
 
 describe('move model', () => {
   it('same speed = straight line, length = speed x time', () => {
@@ -40,5 +40,18 @@ describe('move model', () => {
     }
     expect(x0).toBeGreaterThan(margin); expect(x1).toBeLessThan(VIEW.w - margin)
     expect(y0).toBeGreaterThan(margin); expect(y1).toBeLessThan(VIEW.h - margin)
+  })
+  it('slip: delivered left speed = told x SLIP, and the path bends further left at every right-wheel speed (brokenNote claim)', () => {
+    expect(LEFT * SLIP).toBeCloseTo(0.075)
+    for (let r = -TOP_SPEED; r <= TOP_SPEED + 1e-9; r += 0.01) {
+      expect(body(LEFT * SLIP, r).w - body(LEFT, r).w).toBeCloseTo((LEFT * (1 - SLIP)) / WHEEL_GAP_M)
+      expect(body(LEFT * SLIP, r).w).toBeGreaterThan(body(LEFT, r).w)
+    }
+  })
+  it('spin needs opposite speeds of the SAME size: on the 0.01 slider grid only right = -0.15 spins', () => {
+    const spins: number[] = []
+    for (let i = -22; i <= 22; i++) if (kind(LEFT, i / 100) === 'spin') spins.push(i / 100)
+    expect(spins).toEqual([-LEFT])
+    expect(kind(LEFT, -0.1)).toBe('curveRight') // opposite but smaller: the middle moves forward
   })
 })
