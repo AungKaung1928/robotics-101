@@ -11,7 +11,7 @@ export const HOME = '/root' // home folder of root, the user in the ros:humble D
 const SETUP = '/opt/ros/humble/setup.bash'
 export const JAZZY_SETUP = '/opt/ros/jazzy/setup.bash'
 /** The page names the Jazzy path; this terminal is a Humble container, so say which path works here. */
-export const HUMBLE_HINT = `(this practice terminal is a ros:humble container: here use ${SETUP})`
+export const HUMBLE_HINT = `(this practice terminal is ros:humble:\n here use ${SETUP})`
 
 export const fresh = (): Sh => ({
   cwd: HOME,
