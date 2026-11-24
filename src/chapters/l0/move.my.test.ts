@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import MY from '../../i18n/my/l0.move.MOVE_STRINGS.json'
+import TITLES from '../../i18n/my/titles.json'
 import { MOVE_STRINGS } from './move.strings'
 
 /** Lesson 0.2 in Burmese: every English text (arrays entry by entry) has a Burmese string. The app falls back to English
@@ -15,6 +16,7 @@ describe('lesson 0.2 Burmese is complete', () => {
   it('no omitted key, no null array entry, no English left', () => {
     expect(gaps(MOVE_STRINGS.en, MY, '')).toEqual([])
   })
+  it('the H1 (titles.json move) is Burmese', () => expect((TITLES as Record<string, string>).move).toMatch(/[\u1000-\u109f]/))
   it('every {slot} of the English templates is kept in the Burmese one', () => {
     for (const k of ['slipSame', 'slipDiff'] as const) {
       const slots = (s: string) => (s.match(/\{\w+\}/g) ?? []).sort()
