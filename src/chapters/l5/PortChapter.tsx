@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { stringsFor, type Strings } from '../../i18n'
 import Slider from '../../components/Slider'
 import Gloss from '../l1/Gloss'
@@ -22,11 +22,8 @@ export default function PortChapter({ t }: { t: Strings }) {
   const [seen, setSeen] = useState({ agree: false, disagree: false })
   const scan = half ? HALF : LDS
   const py = pyIndex(scan, deg), c = cppIndex(scan, deg, !broken), same = py === c.idx
-  const move = (v: number) => {
-    setDeg(v)
-    const ok = pyIndex(scan, v) === cppIndex(scan, v, !broken).idx
-    if (broken) setSeen((x) => ({ ...x, [ok ? 'agree' : 'disagree']: true }))
-  }
+  // Recorded from what is on screen, so toggling Break or the layout counts too (not only slider moves).
+  useEffect(() => { if (broken) setSeen((x) => ({ ...x, [same ? 'agree' : 'disagree']: true })) }, [broken, same])
   const [px, py2] = spoke(scan, py, 96), [cx, cy] = spoke(scan, c.idx, 80)
   const link = (base: string, p: string) => <a href={`${base}/${p}`}><CiteCode p={p} /></a>
   return (
@@ -43,7 +40,7 @@ export default function PortChapter({ t }: { t: Strings }) {
       </div>
       <div className="panel">
         <p className="learn">{s.learn}</p>
-        <Slider label={s.bearing} value={deg} min={-180} max={180} step={1} mark={-90} onChange={move} fmt={(v) => `${v}°`} />
+        <Slider label={s.bearing} value={deg} min={-180} max={180} step={1} mark={-90} onChange={setDeg} fmt={(v) => `${v}°`} />
         <p className="choices">
           {(['lds', 'half'] as const).map((k) => (
             <label key={k} className="pick"><input type="radio" name="port-layout" checked={half === (k === 'half')} onChange={() => setHalf(k === 'half')} /> {s.layoutName[k]}</label>

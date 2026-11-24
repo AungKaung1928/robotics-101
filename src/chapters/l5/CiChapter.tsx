@@ -50,7 +50,7 @@ export default function CiChapter({ t }: { t: Strings }) {
         </p>
         <h2>{s.predict}</h2>
         <p className="choices">
-          {(['none', 'build', 'test', 'figure'] as const).map((g) => <label key={g} className="pick"><input type="radio" name="ci-guess" checked={guess === g} onChange={() => setGuess(g)} /> {g === 'none' ? s.none : s.step[g]}</label>)}
+          {(['none', 'build', 'test', 'figure'] as const).map((g) => <label key={g} className="pick"><input type="radio" name="ci-guess" checked={guess === g} onChange={() => { setGuess(g); setShown(-1) }} /> {g === 'none' ? s.none : s.step[g]}</label>)}
         </p>
         <p><button type="button" data-act="run" onClick={go}>{s.runBtn}</button></p>
         {done && <>
