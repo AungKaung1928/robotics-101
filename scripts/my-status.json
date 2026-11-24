@@ -2340,6 +2340,13 @@
   "back": "Both wheels are commanded to move at {told} m/s. On the wet floor, because the left side only moves at {eff} m/s, the robot {turn}.",
   "note": "join fix 2026-11-25 r3 (no space before ပါတယ်/။; ChatGPT review 2 item 1); blind back by translate-my back, logs/2026-11-25/app/r3-my/back.json"
  },
+ "l0/move:slipStop": {
+  "status": "pass",
+  "en": "The left wheel is commanded to move forward at {told} m/s, the right wheel is stopped ({right} m/s). On the wet floor, the left side advances at {eff} m/s, so the robot {turn}.",
+  "my": "ဘယ်ဘက်ဘီးကို ရှေ့သို့ {told} m/s နဲ့ ရွေ့ဖို့ ခိုင်းထားပြီး ညာဘက်ဘီးကို ရပ်ထားပါတယ် ({right} m/s)။ စိုစွတ်နေတဲ့ ကြမ်းပြင်ပေါ်မှာ ဘယ်ဘက်က {eff} m/s ပဲ ရွေ့တာမို့ စက်ရုပ်က {turn}ပါတယ်။",
+  "back": "The left wheel is commanded to move forward at {told} m/s and the right wheel is stopped ({right} m/s). On the wet floor, because the left side only moves at {eff} m/s, the robot {turn}.",
+  "note": "join fix 2026-11-25 r3 (no space before ပါတယ်/။; ChatGPT review 2 item 1); blind back by translate-my back, logs/2026-11-25/app/r3-my/back.json"
+ },
  "l0/move:slipTrust": {
   "status": "pass",
   "en": "The commands did not change, the floor did. The robot cannot trust that it went where it was told; later it will need sensors to check.",
@@ -6432,11 +6439,22 @@
   "my": "မမှန်သေးပါဘူး။ အဲဒါကို run ကြည့်ပြီး ဘယ်အတွဲတွေက odom → base_link လိုအပ်လဲဆိုတာ ကြည့်ပါ။",
   "back": "Not correct yet. Try running that and see which pairs need odom → base_link."
  },
- "l0/move:slipStop": {
-  "status": "pass",
-  "en": "The left wheel is commanded to move forward at {told} m/s, the right wheel is stopped ({right} m/s). On the wet floor, the left side advances at {eff} m/s, so the robot {turn}.",
-  "my": "ဘယ်ဘက်ဘီးကို ရှေ့သို့ {told} m/s နဲ့ ရွေ့ဖို့ ခိုင်းထားပြီး ညာဘက်ဘီးကို ရပ်ထားပါတယ် ({right} m/s)။ စိုစွတ်နေတဲ့ ကြမ်းပြင်ပေါ်မှာ ဘယ်ဘက်က {eff} m/s ပဲ ရွေ့တာမို့ စက်ရုပ်က {turn}ပါတယ်။",
-  "back": "The left wheel is commanded to move forward at {told} m/s and the right wheel is stopped ({right} m/s). On the wet floor, because the left side only moves at {eff} m/s, the robot {turn}.",
-  "note": "join fix 2026-11-25 r3 (no space before ပါတယ်/။; ChatGPT review 2 item 1); blind back by translate-my back, logs/2026-11-25/app/r3-my/back.json"
+ "l5b/fieldfail:title": {
+  "status": "pass-alt",
+  "en": "Failures and how they were found",
+  "my": "ချို့ယွင်းချက်တွေနဲ့ ဘယ်လို ရှာတွေ့ခဲ့သလဲ",
+  "back": "The faults and how they were found"
+ },
+ "l5b/lifecycle:title": {
+  "status": "pass-alt",
+  "en": "ROS 2: lifecycle nodes and executors",
+  "my": "ROS 2: lifecycle node တွေနဲ့ executor တွေ",
+  "back": "ROS 2: lifecycle nodes and executors"
+ },
+ "l5b/qos:title": {
+  "status": "pass-alt",
+  "en": "ROS 2: QoS, when a topic stays silent",
+  "my": "ROS 2: QoS၊ topic က ဘာမှ မလာတဲ့အခါ",
+  "back": "ROS 2: QoS, when nothing comes from the topic"
  }
 }
