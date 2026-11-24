@@ -16,9 +16,9 @@ import TfChapter from './components/TfChapter'
 import { LANG_LABEL, STRINGS, initialLang, titleOf, type Lang, type Strings } from './i18n'
 import { CHAPTER_ICON, Icon } from './icons'
 import type { ChapterMeta } from './anim/contract'
-import { LEVEL_BODY, courseNeighbour, levelPage, readingIndex, type LevelPage } from './content/levels'
+import { LEVEL_BODY, courseNeighbour, keyPage, levelPage, readingIndex, type LevelPage } from './content/levels'
 import { markCompleted, markVisited } from './lib/progress'
-import { CHAPTERS, keyTarget, parseRoute, type ChapterId } from './lib/route'
+import { CHAPTERS, parseRoute, type ChapterId } from './lib/route'
 
 const BODY: Record<ChapterId, typeof ScanChapter> = { bringup: BringupChapter, tf: TfChapter, scan: ScanChapter, detect: DetectChapter, grid: GridChapter, costmap: CostmapChapter, goal: GoalChapter }
 
@@ -58,9 +58,7 @@ export default function App() {
     const on = (e: KeyboardEvent) => {
       if ((e.target as HTMLElement).tagName === 'INPUT') return // arrows move the slider there
       if (e.ctrlKey || e.metaKey || e.altKey) return // leave browser shortcuts alone
-      const dir = e.key === 'ArrowLeft' ? -1 : e.key === 'ArrowRight' ? 1 : 0
-      const step = dir && route.page === 'chapter' ? courseNeighbour(route.id, dir) : null
-      const to = step ? `${step.level}/${step.id}` : keyTarget(e.key)
+      const to = keyPage(e.key, route)
       if (to) location.hash = `#/${to}`
     }
     addEventListener('keydown', on)

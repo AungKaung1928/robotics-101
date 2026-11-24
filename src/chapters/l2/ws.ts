@@ -1,5 +1,5 @@
 import type { Scenario } from '../../anim/contract'
-import { HOME, resolve, short, type Line } from '../l1/shell'
+import { HOME, HUMBLE_HINT, JAZZY_SETUP, resolve, short, type Line } from '../l1/shell'
 
 /**
  * Chapter 2.6 model: a colcon workspace, following TF-Transform-Explorer README:27-33.
@@ -39,6 +39,7 @@ export function exec(w: Ws, cmd: string): { w: Ws; line: Line } {
       return say(`Cloning into '${rest[2]}'...`)
     case 'source': {
       if (target === ROS_SETUP) { s.ros = true; return say('') }
+      if (target === JAZZY_SETUP) return say(`bash: ${arg}: No such file or directory\n${HUMBLE_HINT}`, false)
       const base = target.replace(/\/install\/setup\.bash$/, '')
       if (base === target || s.builtIn !== base) return say(`bash: ${arg}: No such file or directory`, false)
       s.overlay = base
