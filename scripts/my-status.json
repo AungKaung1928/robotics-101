@@ -2329,14 +2329,16 @@
  "l0/move:slipDiff": {
   "status": "pass",
   "en": "The left wheel is commanded to move forward at {told} m/s, the right wheel {dir} at {right} m/s. On the wet floor, the left side advances at {eff} m/s, so the robot {turn}.",
-  "my": "ဘယ်ဘက်ဘီးကို ရှေ့သို့ {told} m/s နဲ့ ရွေ့ဖို့ ခိုင်းထားပြီး ညာဘက်ဘီးကို {dir} {right} m/s နဲ့ ခိုင်းထားပါတယ်။ စိုစွတ်နေတဲ့ ကြမ်းပြင်ပေါ်မှာ ဘယ်ဘက်က {eff} m/s ပဲ ရွေ့တာမို့ စက်ရုပ်က {turn} ပါတယ် ။",
-  "back": "The left wheel is commanded to move forward at {told} m/s and the right wheel is commanded {dir} {right} m/s. On the wet floor, the left wheel moves at only {eff} m/s, so the robot {turn} ."
+  "my": "ဘယ်ဘက်ဘီးကို ရှေ့သို့ {told} m/s နဲ့ ရွေ့ဖို့ ခိုင်းထားပြီး ညာဘက်ဘီးကို {dir} {right} m/s နဲ့ ခိုင်းထားပါတယ်။ စိုစွတ်နေတဲ့ ကြမ်းပြင်ပေါ်မှာ ဘယ်ဘက်က {eff} m/s ပဲ ရွေ့တာမို့ စက်ရုပ်က {turn}ပါတယ်။",
+  "back": "The left wheel is commanded to move forward at {told} m/s and the right wheel is commanded {dir} at {right} m/s. On the wet floor, because the left side only moves at {eff} m/s, the robot {turn}.",
+  "note": "join fix 2026-11-25 r3 (no space before ပါတယ်/။; ChatGPT review 2 item 1); blind back by translate-my back, logs/2026-11-25/app/r3-my/back.json"
  },
  "l0/move:slipSame": {
   "status": "pass",
   "en": "Both wheels are commanded to move at {told} m/s. On the wet floor, the left side advances at {eff} m/s, so the robot {turn}.",
-  "my": "ဘီးနှစ်ခုလုံးကို {told} m/s နဲ့ ရွေ့ဖို့ ခိုင်းထားပါတယ်။ စိုစွတ်နေတဲ့ ကြမ်းပြင်ပေါ်မှာ ဘယ်ဘက်က {eff} m/s ပဲ ရွေ့တာမို့ စက်ရုပ်က {turn} ပါတယ် ။",
-  "back": "Both wheels are commanded to move at {told} m/s. On the wet floor, the left wheel moves at only {eff} m/s, so the robot {turn} ."
+  "my": "ဘီးနှစ်ခုလုံးကို {told} m/s နဲ့ ရွေ့ဖို့ ခိုင်းထားပါတယ်။ စိုစွတ်နေတဲ့ ကြမ်းပြင်ပေါ်မှာ ဘယ်ဘက်က {eff} m/s ပဲ ရွေ့တာမို့ စက်ရုပ်က {turn}ပါတယ်။",
+  "back": "Both wheels are commanded to move at {told} m/s. On the wet floor, because the left side only moves at {eff} m/s, the robot {turn}.",
+  "note": "join fix 2026-11-25 r3 (no space before ပါတယ်/။; ChatGPT review 2 item 1); blind back by translate-my back, logs/2026-11-25/app/r3-my/back.json"
  },
  "l0/move:slipTrust": {
   "status": "pass",
@@ -2395,14 +2397,16 @@
  "l0/move:turn.curveLeft": {
   "status": "pass",
   "en": "turns left",
-  "my": "ဘယ်ဘက် ကွေ့",
-  "back": "curves left"
+  "my": "ဘယ်ဘက်ကို ကွေ့",
+  "back": "Turn left",
+  "note": "join fix 2026-11-25 r3 (no space before ပါတယ်/။; ChatGPT review 2 item 1); blind back by translate-my back, logs/2026-11-25/app/r3-my/back.json"
  },
  "l0/move:turn.curveRight": {
   "status": "pass",
   "en": "turns right",
-  "my": "ညာဘက် ကွေ့",
-  "back": "curves right"
+  "my": "ညာဘက်ကို ကွေ့",
+  "back": "Turn right",
+  "note": "join fix 2026-11-25 r3 (no space before ပါတယ်/။; ChatGPT review 2 item 1); blind back by translate-my back, logs/2026-11-25/app/r3-my/back.json"
  },
  "l0/move:turn.spin": {
   "status": "pass",
@@ -6427,5 +6431,12 @@
   "en": "Not quite. Run it and look which pairs need odom → base_link.",
   "my": "မမှန်သေးပါဘူး။ အဲဒါကို run ကြည့်ပြီး ဘယ်အတွဲတွေက odom → base_link လိုအပ်လဲဆိုတာ ကြည့်ပါ။",
   "back": "Not correct yet. Try running that and see which pairs need odom → base_link."
+ },
+ "l0/move:slipStop": {
+  "status": "pass",
+  "en": "The left wheel is commanded to move forward at {told} m/s, the right wheel is stopped ({right} m/s). On the wet floor, the left side advances at {eff} m/s, so the robot {turn}.",
+  "my": "ဘယ်ဘက်ဘီးကို ရှေ့သို့ {told} m/s နဲ့ ရွေ့ဖို့ ခိုင်းထားပြီး ညာဘက်ဘီးကို ရပ်ထားပါတယ် ({right} m/s)။ စိုစွတ်နေတဲ့ ကြမ်းပြင်ပေါ်မှာ ဘယ်ဘက်က {eff} m/s ပဲ ရွေ့တာမို့ စက်ရုပ်က {turn}ပါတယ်။",
+  "back": "The left wheel is commanded to move forward at {told} m/s and the right wheel is stopped ({right} m/s). On the wet floor, because the left side only moves at {eff} m/s, the robot {turn}.",
+  "note": "join fix 2026-11-25 r3 (no space before ပါတယ်/။; ChatGPT review 2 item 1); blind back by translate-my back, logs/2026-11-25/app/r3-my/back.json"
  }
 }

@@ -22,7 +22,8 @@ const ANSWERS: Kind[] = ['curveLeft', 'curveRight', 'straight']
 /** The break-it sentence from the actual slider value (move.test checks it at several values). */
 export function slipText(s: typeof MOVE_STRINGS.en, right: number) {
   const f = slipFacts(right)
-  return fill(f.same ? s.slipSame : s.slipDiff, { told: f.told, eff: f.eff, right: f.right, dir: s.dir[f.dir], turn: s.turn[f.turn] })
+  const tpl = f.dir === 'stop' ? s.slipStop : f.same ? s.slipSame : s.slipDiff
+  return fill(tpl, { told: f.told, eff: f.eff, right: f.right, dir: f.dir === 'stop' ? '' : s.dir[f.dir], turn: s.turn[f.turn] })
 }
 
 /** Level 0 "move": drag the right wheel speed, the path of the two-wheel model is drawn; break it = the left wheel slips. */

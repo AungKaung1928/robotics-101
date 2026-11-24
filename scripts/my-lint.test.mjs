@@ -68,4 +68,8 @@ describe('lint', () => {
     expect(lint('Stop the robot.', 'ရိုဘော့ကို ရပ်ပါ။').fail.join()).toMatch(/robot/)
     expect(lint('Start one node.', 'နုတ် တစ်ခု စပါ။').fail.join()).toMatch(/tier A "node"/)
   })
+  it('rejects a space before ။ / ၊ and between a {slot} and its verb ending (lesson 0.2 slip templates)', () => {
+    expect(lint('So the robot {turn}.', 'စက်ရုပ်က {turn} ပါတယ် ။', 'body').fail).toEqual(['space before ။ or ၊', 'space between {slot} and its verb ending'])
+    expect(lint('So the robot {turn}.', 'စက်ရုပ်က {turn}ပါတယ်။', 'body').fail).toEqual([])
+  })
 })
