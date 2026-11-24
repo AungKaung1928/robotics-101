@@ -25,3 +25,7 @@ dist-verify-*
 *.sw?
 verify-out
 .vitest/
+
+# Playwright (e2e/smoke, CI browsers job)
+playwright-report
+test-results
