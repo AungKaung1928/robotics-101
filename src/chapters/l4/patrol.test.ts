@@ -38,6 +38,12 @@ describe('4.4 patrol model', () => {
     expect(ev.filter((e) => e.kind === 'reached')).toHaveLength(7)
     expect(ev.at(-1)).toEqual({ kind: 'stop', i: 6, why: 'end' })
   })
+  it('loop off, last point blocked: 4 goals, skip, then the patrol ends (patrol_controller.py:236-250)', () => {
+    const last = POINTS.length - 1
+    const ev = run({ blocked: last, loop: false, retry: true })
+    expect(ev.filter((e) => e.kind === 'send' && e.i === last)).toHaveLength(1 + CONFIG.maxRetries)
+    expect(ev.slice(-2)).toEqual([{ kind: 'skip', i: last }, { kind: 'stop', i: last, why: 'end' }])
+  })
   it('EN and JA have the same keys', () => {
     expect(Object.keys(PATROL_STRINGS.ja).sort()).toEqual(Object.keys(PATROL_STRINGS.en).sort())
   })
