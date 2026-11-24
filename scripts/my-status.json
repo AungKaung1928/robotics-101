@@ -2419,6 +2419,13 @@
   "back": "Both wheels are commanded to move at {told} m/s. On the wet floor, because the left side only moves at {eff} m/s, the robot {turn}.",
   "note": "join fix 2026-11-25 r3 (no space before ပါတယ်/။; ChatGPT review 2 item 1); blind back by translate-my back, logs/2026-11-25/app/r3-my/back.json"
  },
+ "l0/move:slipStop": {
+  "status": "pass",
+  "en": "The left wheel is commanded to move forward at {told} m/s, the right wheel is stopped ({right} m/s). On the wet floor, the left side advances at {eff} m/s, so the robot {turn}.",
+  "my": "ဘယ်ဘက်ဘီးကို ရှေ့သို့ {told} m/s နဲ့ ရွေ့ဖို့ ခိုင်းထားပြီး ညာဘက်ဘီးကို ရပ်ထားပါတယ် ({right} m/s)။ စိုစွတ်နေတဲ့ ကြမ်းပြင်ပေါ်မှာ ဘယ်ဘက်က {eff} m/s ပဲ ရွေ့တာမို့ စက်ရုပ်က {turn}ပါတယ်။",
+  "back": "The left wheel is commanded to move forward at {told} m/s and the right wheel is stopped ({right} m/s). On the wet floor, because the left side only moves at {eff} m/s, the robot {turn}.",
+  "note": "join fix 2026-11-25 r3 (no space before ပါတယ်/။; ChatGPT review 2 item 1); blind back by translate-my back, logs/2026-11-25/app/r3-my/back.json"
+ },
  "l0/move:slipTrust": {
   "status": "pass",
   "en": "The commands did not change, the floor did. The robot cannot trust that it went where it was told; later it will need sensors to check.",
@@ -3155,29 +3162,35 @@
   "my": "ဟုတ်ပါတယ်- 5 m က အကန့်အသတ်ဖြစ်တဲ့ 3.5 m ထက် ကျော်လွန်နေတဲ့အတွက် ဆင်ဆာ က မမြင်နိုင်တော့ပါဘူး။",
   "back": "Correct: because 5 m is beyond the limit of 3.5 m, the sensor can no longer see it."
  },
+ "l0/simpick:alt": {
+  "status": "pass",
+  "en": "same step: pick one",
+  "my": "အဆင့်တစ်ခုတည်း- တစ်ခု ရွေးပါ",
+  "back": "Same level: pick one"
+ },
  "l0/simpick:answers.gazebo": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Gazebo",
   "my": "Gazebo",
   "back": "Gazebo"
  },
  "l0/simpick:answers.isaac": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Isaac Sim",
   "my": "Isaac Sim",
   "back": "Isaac Sim"
  },
  "l0/simpick:answers.mvsim": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "mvsim",
   "my": "mvsim",
   "back": "mvsim"
  },
  "l0/simpick:check": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Check: your laptop has no graphics card and you want a distance sensor. Where do you start?",
   "my": "စစ်ကြည့်- သင့် လက်ပ်တော့ မှာ graphics card မပါဘူး၊ ပြီးတော့ အကွာအဝေး ဆင်ဆာ ကိုလည်း သုံးချင်တယ်။ ဘယ်ကနေ စတင်မလဲ။",
-  "back": "Check: your laptop has no graphics card, and you also want to use a distance sensor. Where do you start?"
+  "back": "Check: Your laptop does not have a graphics card, and you want to use a distance sensor. Where to start?"
  },
  "l0/simpick:checked": {
   "status": "pass-alt",
@@ -3186,25 +3199,25 @@
   "back": "The facts were cross-checked against each tool's own pages on 2026-11-23."
  },
  "l0/simpick:dim.2.5D": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "2.5D",
   "my": "2.5D",
   "back": "2.5D"
  },
  "l0/simpick:dim.2D": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "2D",
   "my": "2D",
   "back": "2D"
  },
  "l0/simpick:dim.3D": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "3D",
   "my": "3D",
   "back": "3D"
  },
  "l0/simpick:dim.none": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "no world",
   "my": "ကမ္ဘာ မရှိ",
   "back": "No world"
@@ -3216,7 +3229,7 @@
   "back": "In everyday life: before getting on the highway, you learn to drive in an empty car park. Pick the level that fits today; the next level will be waiting."
  },
  "l0/simpick:glossary.0.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "graphics card",
   "my": "graphics card",
   "back": "graphics card"
@@ -3228,7 +3241,7 @@
   "back": "A chip that draws 3D images quickly; laptops without it draw 3D slowly or cannot draw it at all"
  },
  "l0/simpick:glossary.1.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "physics",
   "my": "physics",
   "back": "physics"
@@ -3240,16 +3253,16 @@
   "back": "What the simulator calculates for weight, friction, and falling"
  },
  "l0/simpick:learn": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "You will learn: there is a ladder of simulators, and you only need the first step that fits your computer.",
   "my": "သင် သင်ယူရမှာက- ဆင်မျူလေတာ တွေမှာ အဆင့်ဆင့် ရှိပြီး သင့် ကွန်ပျူတာ နဲ့ ကိုက်ညီမယ့် ပထမဆုံး အဆင့်ကိုပဲ လိုအပ်တာ ဖြစ်ပါတယ်။",
-  "back": "What you will learn: simulators come in levels, and you only need the first level that fits your computer."
+  "back": "What you will learn: Simulators have steps, and you only need the first step that matches your computer."
  },
  "l0/simpick:mascot": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "the robot",
   "my": "စက်ရုပ်",
-  "back": "robot"
+  "back": "Robot"
  },
  "l0/simpick:mentionOnly": {
   "status": "pass-alt",
@@ -3258,25 +3271,25 @@
   "back": "Name only"
  },
  "l0/simpick:no": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "no",
   "my": "မဟုတ်ပါ",
   "back": "No"
  },
  "l0/simpick:others": {
-  "status": "pass-alt",
-  "en": "Other 2D simulators: Stage has a ROS 2 bridge you build from source yourself (no ready package), and Flatland has no ROS 2 Humble or Jazzy release. That is why mvsim is the pick here.",
-  "my": "တခြား 2D ဆင်မျူလေတာတွေ- Stage မှာ ROS 2 bridge ကို source ကနေ ကိုယ်တိုင် build ရပါတယ် (အသင့်သုံး package မရှိပါဘူး)၊ Flatland မှာ ROS 2 Humble ဒါမှမဟုတ် Jazzy အတွက် release မရှိပါဘူး။ ဒါကြောင့် ဒီမှာ mvsim ကို ရွေးပါတယ်။",
-  "back": "Other 2D simulators: for Stage you have to build the ROS 2 bridge yourself from source (there is no ready-to-use package); Flatland has no release for ROS 2 Humble or Jazzy. So here mvsim is chosen."
+  "status": "pass",
+  "en": "Later, not needed here: Isaac Sim (photoreal 3D for robot learning; needs an NVIDIA RTX 4080-class graphics card with 16 GB). Not chosen: Stage (its ROS 2 bridge is built from source, no ready package) and Flatland (no ROS 2 Humble or Jazzy release).",
+  "my": "နောက်မှ လိုအပ်မှာ ဖြစ်ပြီး ဒီနေရာမှာ မလိုသေးပါ- Isaac Sim (စက်ရုပ် လေ့လာသင်ယူမှုအတွက် အပြင်အတိုင်း ရုပ်ထွက်ကောင်းတဲ့ 3D ဖြစ်ပြီး 16 GB ရှိတဲ့ NVIDIA RTX 4080 အဆင့် ဂရပ်ဖစ်ကဒ် လိုအပ်ပါတယ်)။ မရွေးချယ်ထားတာတွေကတော့- Stage (ဒါရဲ့ ROS 2 bridge ကို source ကနေ build လုပ်ရပြီး အသင့်သုံး package မရှိပါ) နဲ့ Flatland (ROS 2 Humble သို့မဟုတ် Jazzy release မရှိပါ)။",
+  "back": "Needed later and not needed here yet: Isaac Sim (photorealistic 3D for robot learning, requiring an NVIDIA RTX 4080 level graphics card with 16 GB). Unselected ones: Stage (its ROS 2 bridge must be built from source and has no ready-to-use package) and Flatland (has no ROS 2 Humble or Jazzy release)."
  },
  "l0/simpick:q.gpu": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Does your computer have an NVIDIA or other separate graphics card?",
   "my": "သင့် ကွန်ပျူတာ မှာ NVIDIA ဒါမှမဟုတ် အခြား graphics card သီးသန့် ပါသလား။",
   "back": "Does your computer have an NVIDIA or other dedicated graphics card?"
  },
  "l0/simpick:q.physics": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Do you need physics (weight, friction, falling)?",
   "my": "ရူပဗေဒ (အလေးချိန်၊ ပွတ်တိုက်မှု၊ ပြုတ်ကျမှု) တွေ လိုအပ်သလား။",
   "back": "Do you need physics (weight, friction, falling)?"
@@ -3312,22 +3325,22 @@
   "back": "TurtleBot3 with no world: it can move but has no sensors."
  },
  "l0/simpick:rows.gazebo.learn": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Physics, 3D sensors, the full robot.",
   "my": "Physics၊ 3D ဆင်ဆာ များ၊ စက်ရုပ် တစ်ခုလုံး။",
-  "back": "Physics, 3D sensors, the whole robot."
+  "back": "Physics, 3D sensors, full robot."
  },
  "l0/simpick:rows.gazebo.name": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Gazebo",
   "my": "Gazebo",
   "back": "Gazebo"
  },
  "l0/simpick:rows.gazebo.what": {
-  "status": "pass-alt",
-  "en": "The usual 3D simulator with physics and the TurtleBot3 worlds. On Humble the TurtleBot3 packages use Gazebo Classic (support ended January 2025); on Jazzy, the new Gazebo. Webots is another free 3D option with a TurtleBot3 model.",
-  "my": "physics နဲ့ TurtleBot3 ကမ္ဘာ တွေပါတဲ့ ပုံမှန်သုံးနေကျ 3D ဆင်မျူလေတာ ဖြစ်ပါတယ်။ Humble မှာတော့ TurtleBot3 package တွေက Gazebo Classic (ပံ့ပိုးမှုက 2025 ခုနှစ် ဇန်နဝါရီလမှာ ကုန်ဆုံးပါတယ်) ကို သုံးပြီး Jazzy မှာတော့ Gazebo အသစ်ကို သုံးပါတယ်။ Webots ကလည်း TurtleBot3 မော်ဒယ်ပါတဲ့ အခြား အခမဲ့ 3D ရွေးချယ်စရာ တစ်ခု ဖြစ်ပါတယ်။",
-  "back": "It is the commonly used standard 3D simulator with physics and TurtleBot3 worlds. On Humble, the TurtleBot3 packages use Gazebo Classic (support ended in January 2025), and on Jazzy they use the new Gazebo. Webots is also another free 3D option that has a TurtleBot3 model."
+  "status": "pass",
+  "en": "The usual 3D simulator with physics and the TurtleBot3 worlds: LiDAR, camera, maps, Nav2. With ROS 2 Jazzy it is Gazebo Harmonic; the Humble TurtleBot3 packages used by this course's projects use Gazebo Classic (support ended January 2025). Without a graphics card or in WSL the 3D window can be slow or black: run it without the window and watch in RViz.",
+  "my": "ရုပ်ပိုင်းဆိုင်ရာ သဘောတရားများနဲ့ TurtleBot3 ကမ္ဘာများ ပါဝင်တဲ့ ပုံမှန် သုံးနေကျ 3D ဆင်မျူလေတာ ဖြစ်ပါတယ်- LiDAR၊ ကင်မရာ၊ မြေပုံများနဲ့ Nav2 တို့ ပါဝင်ပါတယ်။ ROS 2 Jazzy မှာဆိုရင် Gazebo Harmonic ဖြစ်ပြီး ဒီသင်ခန်းစာရဲ့ ပရောဂျက်များမှာ သုံးထားတဲ့ Humble TurtleBot3 package များကတော့ Gazebo Classic ကို သုံးပါတယ် (2025 ခုနှစ် ဇန်နဝါရီလမှာ ထောက်ပံ့မှု ပြီးဆုံးခဲ့ပါတယ်)။ ဂရပ်ဖစ်ကဒ် မရှိရင် ဒါမှမဟုတ် WSL ထဲမှာဆိုရင် 3D window က နှေးတာ သို့မဟုတ် မည်းသွားတာမျိုး ဖြစ်နိုင်ပါတယ်- window မပါဘဲ ရန်းပြီး RViz ထဲမှာ ကြည့်ပါ။",
+  "back": "It is a commonly used 3D simulator containing physics concepts and TurtleBot3 worlds: including LiDAR, camera, maps, and Nav2. In ROS 2 Jazzy it is Gazebo Harmonic, while the Humble TurtleBot3 packages used in this tutorial's projects use Gazebo Classic (support ended in January 2025). If there is no graphics card or inside WSL, the 3D window may be slow or turn black—run without a window and view in RViz."
  },
  "l0/simpick:rows.isaac.learn": {
   "status": "pass-alt",
@@ -3354,7 +3367,7 @@
   "back": "Distance sensor, following along a wall, maps."
  },
  "l0/simpick:rows.mvsim.name": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "mvsim",
   "my": "mvsim",
   "back": "mvsim"
@@ -3366,40 +3379,58 @@
   "back": "A lightweight 2.5D simulator: simple physics, a flat world with walls and range sensors, a ready-to-use package for ROS 2 Humble."
  },
  "l0/simpick:rows.site.learn": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Move, sense, think, act.",
   "my": "လှုပ်ရှားခြင်း၊ အာရုံခံခြင်း၊ စဉ်းစားခြင်း၊ လုပ်ဆောင်ခြင်း။",
   "back": "Moving, sensing, thinking, acting."
  },
  "l0/simpick:rows.site.name": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "This site",
   "my": "ဒီဆိုဒ်",
   "back": "This site"
  },
  "l0/simpick:rows.site.what": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Nothing to install.",
   "my": "ဘာမှ install လုပ်ဖို့ မလိုပါဘူး။",
-  "back": "Nothing needs to be installed."
+  "back": "No need to install anything."
  },
  "l0/simpick:rows.turtlesim.learn": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Programs talking to each other, driving.",
   "my": "ပရိုဂရမ် အချင်းချင်း စကားပြောခြင်း၊ မောင်းနှင်ခြင်း။",
-  "back": "Programs talking to each other, driving."
+  "back": "Inter-program communication, driving."
  },
  "l0/simpick:rows.turtlesim.name": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "turtlesim",
   "my": "turtlesim",
   "back": "turtlesim"
  },
  "l0/simpick:rows.turtlesim.what": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "A 2D turtle used by the official ROS 2 beginner tutorials; often already installed with ROS 2.",
   "my": "ROS 2 တရားဝင် အခြေခံ သင်ခန်းစာတွေမှာ သုံးတဲ့ 2D လိပ်ကလေး ဖြစ်ပါတယ်၊ ROS 2 နဲ့အတူ install လုပ်ပြီးသား ဖြစ်နေတတ်ပါတယ်။",
-  "back": "It is the little 2D turtle used in the official ROS 2 basic tutorials; it is often already installed together with ROS 2."
+  "back": "It is a 2D little turtle used in official ROS 2 basic tutorials, usually coming pre-installed with ROS 2."
+ },
+ "l0/simpick:rows.webots.learn": {
+  "status": "pass",
+  "en": "Physics, 3D sensors, the full robot.",
+  "my": "Physics၊ 3D ဆင်ဆာ များ၊ စက်ရုပ် တစ်ခုလုံး။",
+  "back": "Physics, 3D sensors, full robot."
+ },
+ "l0/simpick:rows.webots.name": {
+  "status": "pass",
+  "en": "Webots",
+  "my": "Webots",
+  "back": "Webots"
+ },
+ "l0/simpick:rows.webots.what": {
+  "status": "pass",
+  "en": "Another free 3D simulator with physics and a TurtleBot3 model; it runs natively on Windows, macOS and Linux and talks to ROS 2 through webots_ros2.",
+  "my": "ရုပ်ပိုင်းဆိုင်ရာ သဘောတရားများနဲ့ TurtleBot3 မော်ဒယ် ပါဝင်တဲ့ နောက်ထပ် အခမဲ့ 3D ဆင်မျူလေတာ တစ်ခု ဖြစ်ပါတယ်။ Windows၊ macOS နဲ့ Linux တို့မှာ တိုက်ရိုက် အလုပ်လုပ်ပြီး webots_ros2 ကနေတစ်ဆင့် ROS 2 နဲ့ ဆက်သွယ်ပါတယ်။",
+  "back": "It is another free 3D simulator containing physics concepts and a TurtleBot3 model. It works directly on Windows, macOS, and Linux, and communicates with ROS 2 via webots_ros2."
  },
  "l0/simpick:srcGloss.rows": {
   "status": "pass-alt",
@@ -3408,7 +3439,7 @@
   "back": "Links of the rows above"
  },
  "l0/simpick:start": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Start here",
   "my": "ဒီက စပါ",
   "back": "Start here"
@@ -3432,22 +3463,23 @@
   "back": "What was found in the projects behind this lesson: when running Linux (WSL2) inside a Windows laptop without a graphics card, the 3D window of Gazebo Classic stayed black, while the 2D tools worked. So start with 2D."
  },
  "l0/simpick:steps.3": {
-  "status": "pass-alt",
-  "en": "Isaac Sim is only mentioned here: photoreal 3D for robot learning, and it needs a strong NVIDIA graphics card. This course does not need it.",
-  "my": "Isaac Sim ကိုတော့ ဒီမှာ အမည်ပဲ ဖော်ပြထားပါတယ်- အဲဒါက စက်ရုပ် လေ့လာမှုအတွက် လက်တွေ့ကျတဲ့ 3D ဖြစ်ပြီး အားကောင်းတဲ့ NVIDIA graphics card လိုအပ်ပါတယ်။ ဒီသင်တန်းအတွက်တော့ အဲဒါ မလိုပါဘူး။",
-  "back": "Isaac Sim is only mentioned by name here: it is a realistic 3D for robot learning and needs a powerful NVIDIA graphics card. It is not needed for this course."
+  "status": "pass",
+  "en": "Gazebo and Webots share one step: pick one. Webots also runs on Windows and macOS; on Windows, ROS 2 itself runs in WSL.",
+  "my": "Gazebo နဲ့ Webots က အဆင့်တစ်ခုတည်း ဖြစ်တာမို့ တစ်ခု ရွေးပါ။ Webots က Windows နဲ့ macOS မှာလည်း အလုပ်လုပ်ပါတယ်။ Windows မှာဆိုရင် ROS 2 ကို WSL ထဲမှာ ရန်းပါတယ်။",
+  "back": "Gazebo and Webots are the same level, so pick one. Webots also works on Windows and macOS. On Windows, ROS 2 is run inside WSL."
  },
  "l0/simpick:title": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Which simulator to start with",
   "my": "ဘယ် ဆင်မျူလေတာ နဲ့ စတင်မလဲ",
-  "back": "Which simulator should you start with?"
+  "back": "Which simulator to start with"
  },
  "l0/simpick:words": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Words you met",
   "my": "တွေ့ခဲ့ရတဲ့ စကားလုံးများ",
-  "back": "Words encountered"
+  "back": "Words encountered",
+  "note": "r3: same form as l0/act, meet, move, sense, simwhat, think (my-consistency)"
  },
  "l0/simpick:wrong": {
   "status": "pass-alt",
@@ -3456,7 +3488,7 @@
   "back": "Not correct yet: answer the 3 questions and see which level lights up."
  },
  "l0/simpick:yes": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "yes",
   "my": "ဟုတ်ကဲ့",
   "back": "Yes"
@@ -6510,12 +6542,5 @@
   "en": "Not quite. Run it and look which pairs need odom → base_link.",
   "my": "မမှန်သေးပါဘူး။ အဲဒါကို run ကြည့်ပြီး ဘယ်အတွဲတွေက odom → base_link လိုအပ်လဲဆိုတာ ကြည့်ပါ။",
   "back": "Not correct yet. Try running that and see which pairs need odom → base_link."
- },
- "l0/move:slipStop": {
-  "status": "pass",
-  "en": "The left wheel is commanded to move forward at {told} m/s, the right wheel is stopped ({right} m/s). On the wet floor, the left side advances at {eff} m/s, so the robot {turn}.",
-  "my": "ဘယ်ဘက်ဘီးကို ရှေ့သို့ {told} m/s နဲ့ ရွေ့ဖို့ ခိုင်းထားပြီး ညာဘက်ဘီးကို ရပ်ထားပါတယ် ({right} m/s)။ စိုစွတ်နေတဲ့ ကြမ်းပြင်ပေါ်မှာ ဘယ်ဘက်က {eff} m/s ပဲ ရွေ့တာမို့ စက်ရုပ်က {turn}ပါတယ်။",
-  "back": "The left wheel is commanded to move forward at {told} m/s and the right wheel is stopped ({right} m/s). On the wet floor, because the left side only moves at {eff} m/s, the robot {turn}.",
-  "note": "join fix 2026-11-25 r3 (no space before ပါတယ်/။; ChatGPT review 2 item 1); blind back by translate-my back, logs/2026-11-25/app/r3-my/back.json"
  }
 }

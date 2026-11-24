@@ -34,7 +34,7 @@ describe('Japanese pages have no English prose left (page-check rule)', () => {
 // The small-print source line: its own words (outside links, code and verbatim "quotes") are Japanese too; what stays
 // is names (projects, products, files) and code tokens the reader types.
 const SRC_NAMES = new Set(['ROBOTIS', 'Manual', 'Transform', 'Explorer', 'Gazebo', 'Harmonic', 'Humble', 'DiffDrive', 'package', 'xml',
-  'python', 'reference', 'rad', 'max', 'min', 'jump', 'linear', 'angular', 'scan', 'LDS', 'samples'])
+  'python', 'reference', 'rad', 'max', 'min', 'jump', 'linear', 'angular', 'scan', 'LDS', 'samples', 'turtlesim', 'Webots', 'Isaac', 'Sim'])
 describe('Japanese source lines have no English glosses left', () => {
   it.each(Object.keys(PAGES))('%s', (id) => {
     const Page = PAGES[id]
