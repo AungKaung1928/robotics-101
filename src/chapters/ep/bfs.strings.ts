@@ -20,7 +20,7 @@ export const BFS_STRINGS = {
     solved: 'Solved: shortest path =', notYet: 'Not yet: shortest path =',
     costOn: 'Costmap view: Dijkstra, +4 next to a wall',
     costOff: 'Back to plain BFS',
-    costNote: 'Each cell touching a wall now costs 5 instead of 1. Dijkstra takes out the cheapest cell first. On the starting map: 15 steps at cost 15, against the BFS path\'s 13 steps at cost 41. Longer, but never brushing a wall. After you edit walls, the readout below shows the new cost.',
+    costNote: 'Each cell touching a wall now costs 5 instead of 1. Dijkstra takes out the cheapest cell first. On the starting map: 15 steps at cost 15, against the BFS path\'s 13 steps at cost 41. Longer, but never brushing a wall. After you edit walls, the readout below shows the new cost (if a path still exists).',
     pathCost: 'path cost',
     costTitle: 'On a real robot',
     cost: [
@@ -63,7 +63,7 @@ export const BFS_STRINGS = {
     solved: '成功：最短の道 =', notYet: 'まだ：最短の道 =',
     costOn: 'コストマップ表示：Dijkstra、壁の隣は +4',
     costOff: '普通の BFS に戻す',
-    costNote: '壁に接するセルのコストは 1 ではなく 5。Dijkstra は合計コストが最も安いセルから取り出す。最初の地図では 15 歩でコスト 15。BFS の道は 13 歩でコスト 41。長いが、壁をかすめない。壁を変えたら、下の表示が新しいコストを示す。',
+    costNote: '壁に接するセルのコストは 1 ではなく 5。Dijkstra は合計コストが最も安いセルから取り出す。最初の地図では 15 歩でコスト 15。BFS の道は 13 歩でコスト 41。長いが、壁をかすめない。壁を変えたら、下の表示が新しいコストを示す (道が残っていれば)。',
     pathCost: '道のコスト',
     costTitle: '実際のロボットでは',
     cost: [
