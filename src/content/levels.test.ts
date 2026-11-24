@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { LEVEL_BODY, LEVELS, courseNeighbour, levelPage, readingIndex } from './levels'
+import { LEVEL_BODY, LEVELS, courseNeighbour, keyPage, levelPage, readingIndex } from './levels'
 import { parseRoute } from '../lib/route'
 
 describe('levelPage', () => {
@@ -67,5 +67,21 @@ describe('courseNeighbour', () => {
     expect(courseNeighbour('goal', 1)?.id).toBe('patrol')
     expect(courseNeighbour('bringup', 1)?.level).toBe(5)
     expect(courseNeighbour('nope', 1)).toBeNull()
+  })
+})
+
+describe('keyPage (keyboard in App.tsx)', () => {
+  const scan = parseRoute('#/scan')
+  it('arrows step through the course on chapter pages, same as the Next/Back links', () => {
+    const n = courseNeighbour('scan', 1)!, p = courseNeighbour('scan', -1)!
+    expect(keyPage('ArrowRight', scan)).toBe(`${n.level}/${n.id}`)
+    expect(keyPage('ArrowLeft', scan)).toBe(`${p.level}/${p.id}`)
+  })
+  it('arrows do nothing on the overview; other keys do nothing', () => {
+    expect(keyPage('ArrowRight', { page: 'overview' })).toBeNull()
+    expect(keyPage('a', scan)).toBeNull()
+  })
+  it('number keys still open a waypoint', () => {
+    expect(keyPage('5', scan)).toBe('grid')
   })
 })

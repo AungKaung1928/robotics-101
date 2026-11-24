@@ -10,7 +10,7 @@ import { ActionsChapter, DriveChapter, LEVEL2_CHAPTERS, MsgTypesChapter, NodesCh
 import { FieldfailChapter, LEVEL5B_CHAPTERS, LifecycleChapter, QosChapter } from '../chapters/l5b'
 import { STRINGS, type Strings } from '../i18n'
 import { CHAPTER_ICON } from '../icons'
-import type { ChapterId } from '../lib/route'
+import { keyTarget, type ChapterId, type Route } from '../lib/route'
 
 const existing = (level: number, ids: ChapterId[]): ChapterMeta[] =>
   ids.map((id) => ({ id, level, titleEn: STRINGS.en.chapters[id], titleJa: STRINGS.ja.chapters[id], icon: CHAPTER_ICON[id] }))
@@ -66,4 +66,11 @@ export function courseNeighbour(id: string, dir: -1 | 1): ChapterMeta | null {
 export function readingIndex(hash: string): number {
   const id = hash.replace(/^#\/?/, '').split('?')[0].split('/').find((seg) => !/^\d*$/.test(seg))
   return LEVELS.flat().findIndex((c) => c.id === id)
+}
+
+/** Page for a key press: ← / → step through the course on chapter pages, number keys open a waypoint; anything else → null. */
+export function keyPage(key: string, route: Route): string | null {
+  const dir = key === 'ArrowLeft' ? -1 : key === 'ArrowRight' ? 1 : 0
+  const step = dir && route.page === 'chapter' ? courseNeighbour(route.id, dir) : null
+  return step ? `${step.level}/${step.id}` : keyTarget(key)
 }
