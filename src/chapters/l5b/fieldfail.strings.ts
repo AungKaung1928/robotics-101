@@ -7,7 +7,7 @@ export const FIELDFAIL_STRINGS = {
     ask: 'Which cause fits this symptom?',
     symptom: 'Symptom', cause: 'Cause', fix: 'Fix', right: 'Right.', wrong: 'Not this one: try again.',
     next: 'next failure', score: 'right on the first try',
-    measured: 'The README says the last two were found by measurement, not by reading the code.',
+    measured: "The wall follower's docs/DETAILS.md says failures 4 and 5 (wedged in a corner, chattering) were found by measurement, not by reading the code.",
     fails: {
       beam: { symptom: 'A wall follower keeps saying "wall lost" every 1-2 s, then drives at the wall until collision avoidance turns it away.', cause: 'The wall distance used one side arc; when the robot yawed toward the wall the reading grew by 1/cos(yaw)', fix: 'Two beams solve the wall angle; the lost check uses a wider arc' },
       params: { symptom: 'Changing values in the YAML file has no effect: the node behaves the same every run.', cause: 'Another included launch file declared the same argument name, so the parameter file path became empty', fix: 'Pass the file to the node explicitly' },
@@ -32,7 +32,7 @@ export const FIELDFAIL_STRINGS = {
     ask: 'この症状に合う原因はどれ？',
     symptom: '症状', cause: '原因', fix: '修正', right: '正解。', wrong: 'これではない：もう一度。',
     next: '次の失敗', score: '1回目で正解',
-    measured: 'README によると、最後の2つはコードを読んでではなく、計測で見つかった。',
+    measured: '壁沿い走行の docs/DETAILS.md によると、4 と 5（角で動けない、状態がばたつく）はコードを読んでではなく、計測で見つかった。',
     fails: {
       beam: { symptom: '壁沿い走行ロボットが 1〜2 秒ごとに「壁を見失った」と言い、衝突回避が向きを変えるまで壁に向かって走る。', cause: '壁までの距離を横の扇形1つで測っていた。ロボットが壁の方へ向くと値が 1/cos(yaw) 倍に増えた', fix: '2本のビームで壁の角度を求め、見失い判定は広い扇形で行う' },
       params: { symptom: 'YAML ファイルの値を変えても効かない：ノードは毎回同じ動きをする。', cause: '別の launch ファイルが同じ名前の引数を宣言していて、パラメータファイルのパスが空になった', fix: 'ファイルをノードに直接渡す' },
