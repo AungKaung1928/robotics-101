@@ -49,3 +49,8 @@
 .distros .cursor { stroke: var(--robot); stroke-width: 2; }
 .distros .say { fill: var(--ink-2); font: 13px var(--mono); }
 .readout dd[data-k="live"] { white-space: normal; text-align: right; }
+/* 0.4 install table: 5 short columns; scrolls inside itself if a language makes it wider than a phone */
+.distro-table { display: block; overflow-x: auto; border-collapse: collapse; font-size: var(--t-small); margin-bottom: var(--s3); }
+.distro-table th, .distro-table td { text-align: left; padding: var(--s1) var(--s2) var(--s1) 0; border-bottom: 1px solid var(--rule); }
+.distro-table :is(th, td, a) { overflow-wrap: normal; } /* :lang(my) wraps anywhere on every element: no mid-word breaks here; the table scrolls inside itself instead */
+.ros-project { margin: 0 0 var(--s3); }

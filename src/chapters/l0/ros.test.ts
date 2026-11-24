@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { DISTROS, TODAY, humbleLast, label, month, scenario, supported, unsupportedFor } from './ros'
+import { DISTROS, INSTALL, TODAY, distro, humbleLast, label, month, scenario, supported, unsupportedFor } from './ros'
 import { ROS_STRINGS } from './ros.strings'
 
 describe('ros distros', () => {
@@ -25,5 +25,15 @@ describe('ros distros', () => {
   it('every LTS lasts 5 years; EN and JA have the same keys', () => {
     for (const d of DISTROS) if (d.lts) expect(d.last - d.from).toBe(60)
     expect(Object.keys(ROS_STRINGS.ja).sort()).toEqual(Object.keys(ROS_STRINGS.en).sort())
+  })
+  it('each bar names its Ubuntu (REP 2000 / REP 3 / Gazebo install page): why Humble means 22.04', () => {
+    expect(Object.fromEntries(DISTROS.map((d) => [d.id, d.ubuntu]))).toEqual({ noetic: '20.04', humble: '22.04', iron: '22.04', jazzy: '24.04', kilted: '24.04', lyrical: '26.04' })
+  })
+  it('install table: Jazzy first (the course pick), 3 LTS rows, each with a Gazebo pair and a source URL', () => {
+    expect(INSTALL.map((r) => r.id)).toEqual(['jazzy', 'lyrical', 'humble'])
+    for (const r of INSTALL) {
+      expect(distro(r.id).lts).toBe(true)
+      expect(r.src).toMatch(/^https:\/\//)
+    }
   })
 })

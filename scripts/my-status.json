@@ -2719,9 +2719,9 @@
  },
  "l0/ros:fixIt": {
   "status": "pass-alt",
-  "en": "Fix it: start on Humble",
-  "my": "ပြင်ကြည့်- Humble မှာ စတင်ပါ",
-  "back": "Fix it - start on Humble"
+  "en": "Fix it: start on Jazzy (LTS)",
+  "my": "ပြင်ကြည့်: Jazzy (LTS) နဲ့ စ",
+  "back": "Fix and see: start with Jazzy (LTS)"
  },
  "l0/ros:glossary.0.0": {
   "status": "pass-alt",
@@ -2759,6 +2759,30 @@
   "my": "သက်တမ်းကုန်ဆုံးချိန်- ပြင်ဆင်ချက်များ ထပ်မရတော့ခြင်း",
   "back": "End of life - no longer receiving fixes"
  },
+ "l0/ros:install.0": {
+  "status": "pass-alt",
+  "en": "New learners: ROS 2 Jazzy on Ubuntu 24.04, with Gazebo Harmonic. It has long support, and TurtleBot3, Nav2 and the tutorials are ready for it.",
+  "my": "စတင်လေ့လာသူများအတွက်: Ubuntu 24.04 ပေါ်က ROS 2 Jazzy နဲ့ Gazebo Harmonic ကို သုံးပါ။ ရေရှည် ပံ့ပိုးမှု ရှိပြီး TurtleBot3၊ Nav2 နဲ့ သင်ခန်းစာတွေလည်း အဆင်သင့် ရှိပါတယ်။",
+  "back": "For beginners: use ROS 2 Jazzy with Gazebo Harmonic on Ubuntu 24.04. It has long-term support, and TurtleBot3, Nav2 and tutorials are also ready."
+ },
+ "l0/ros:install.1": {
+  "status": "pass-alt",
+  "en": "Lyrical (Ubuntu 26.04) is the newest. Pick it once the packages you need exist for it (search index.ros.org).",
+  "my": "Lyrical (Ubuntu 26.04) က အသစ်ဆုံး ဖြစ်ပါတယ်။ သင် လိုအပ်တဲ့ package တွေ ရှိလာမှ ရွေးချယ်ပါ (index.ros.org မှာ ရှာပါ)။",
+  "back": "Lyrical (Ubuntu 26.04) is the newest. Choose it only once the packages you need are available (search on index.ros.org)."
+ },
+ "l0/ros:install.2": {
+  "status": "pass-alt",
+  "en": "Humble is still on many robots, so you will meet it at work. Its fixes end in May 2027.",
+  "my": "Humble ကို စက်ရုပ် အမြောက်အမြားမှာ သုံးနေတုန်း ဖြစ်လို့ အလုပ်ခွင်မှာ တွေ့ရပါမယ်။ ပြင်ဆင်ချက်ပေးတာ May 2027 မှာ ပြီးဆုံးပါမယ်။",
+  "back": "Humble is still being used on a great many robots, so you will encounter it at the workplace. Fix-providing ends in May 2027."
+ },
+ "l0/ros:installTitle": {
+  "status": "pass-alt",
+  "en": "Which one do I install?",
+  "my": "ဘယ်တစ်ခုကို install လုပ်ရမလဲ။",
+  "back": "Which one should I install?"
+ },
  "l0/ros:learn": {
   "status": "pass-alt",
   "en": "You will learn: ROS is not an operating system, why ROS 2 replaced ROS 1, and how to pick a distribution.",
@@ -2767,15 +2791,15 @@
  },
  "l0/ros:lines.0": {
   "status": "pass-alt",
-  "en": "ROS is a set of tools and libraries plus one agreed way for programs to talk. It runs on top of Linux; it does not replace it.",
-  "my": "ROS ဆိုတာ ကိရိယာတွေ၊ libraries တွေ အစုအဝေး တစ်ခုနဲ့ ပရိုဂရမ်တွေ အချင်းချင်း စကားပြောဖို့ အားလုံး သဘောတူထားတဲ့ နည်းလမ်း တစ်ခု ဖြစ်ပါတယ်။ Linux ပေါ်မှာ အလုပ်လုပ်တာ ဖြစ်ပြီး Linux ကို အစားမထိုးပါဘူး။",
-  "back": "ROS is a set of tools and libraries, plus an agreed-upon way for programs to talk to each other. It runs on Linux and does not replace Linux."
+  "en": "ROS is a set of tools and libraries plus one agreed way for programs to talk. It runs on top of an operating system and does not replace it: mostly Ubuntu Linux; Windows 10 is also a top-tier platform for Humble and Jazzy (REP 2000).",
+  "my": "ROS ဆိုတာ ပရိုဂရမ်တွေ ဆက်သွယ်ဖို့ သဘောတူထားတဲ့ နည်းလမ်းတစ်ခုနဲ့ ကိရိယာတွေ၊ library တွေ စုစည်းထားတာ ဖြစ်ပါတယ်။ Operating system ပေါ်မှာ ယှဉ်တွဲ အလုပ်လုပ်တာဖြစ်ပြီး system ကို အစားမထိုးပါဘူး။ အများအားဖြင့် Ubuntu Linux ဖြစ်ပြီး Windows 10 ဟာလည်း Humble နဲ့ Jazzy အတွက် ထိပ်တန်း platform တစ်ခု ဖြစ်ပါတယ် (REP 2000)။",
+  "back": "ROS is a collection of tools and libraries together with an agreed-upon way for programs to communicate. It works alongside the operating system and does not replace the system. Usually it is Ubuntu Linux, and Windows 10 is also a top platform for Humble and Jazzy (REP 2000)."
  },
  "l0/ros:lines.1": {
   "status": "pass-alt",
-  "en": "ROS 1 needed one central program, roscore, so the others could find each other. ROS 2 programs find each other directly (DDS), so there is no single program whose crash stops everything.",
-  "my": "ROS 1 မှာ ပရိုဂရမ်တွေ အချင်းချင်း ရှာတွေ့ဖို့ roscore ဆိုတဲ့ ဗဟို ပရိုဂရမ် တစ်ခု လိုပါတယ်။ ROS 2 ပရိုဂရမ်တွေကတော့ အချင်းချင်း တိုက်ရိုက် ရှာတွေ့ပါတယ် (DDS)၊ ဒါကြောင့် ပရိုဂရမ် တစ်ခု ပျက်ရုံနဲ့ အားလုံး ရပ်သွားတာ မရှိပါဘူး။",
-  "back": "In ROS 1, a central program called roscore is needed for programs to find each other. ROS 2 programs find each other directly (DDS), so there is no case where everything stops just because one program crashes."
+  "en": "ROS 1 has one central program, the master (started by roscore), that tells programs where to find each other; then they talk directly. If it stops, programs started later cannot find anyone. ROS 2 has no central program: each program announces itself on the network and the others answer (discovery, done by DDS).",
+  "my": "ROS 1 မှာ ပရိုဂရမ်တွေ တစ်ခုနဲ့တစ်ခု ဘယ်မှာရှိလဲဆိုတာ ပြောပြပေးတဲ့ master ဆိုတဲ့ ဗဟို ပရိုဂရမ် တစ်ခု (roscore နဲ့ စတင်ရတဲ့) ရှိပါတယ်။ အဲ့ဒီနောက်မှ သူတို့ တိုက်ရိုက် ဆက်သွယ်ကြတာပါ။ အဲ့ဒီ master ရပ်သွားရင် နောက်မှ စတင်တဲ့ ပရိုဂရမ်တွေဟာ ဘယ်သူ့ကိုမှ ရှာမတွေ့နိုင်တော့ပါဘူး။ ROS 2 မှာတော့ ဗဟို ပရိုဂရမ် မရှိပါဘူး။ ပရိုဂရမ် တစ်ခုစီဟာ ကွန်ရက်ပေါ်မှာ မိမိကိုယ်ကို ကြေညာပြီး အခြား ပရိုဂရမ်တွေက တုံ့ပြန်ကြပါတယ် (DDS က လုပ်ဆောင်ပေးတဲ့ discovery)။",
+  "back": "In ROS 1 there is a central program called the master (which must be started with roscore) that tells programs where each other are. After that they communicate directly. If that master stops, programs that start afterward can no longer find anyone. In ROS 2 there is no central program. Each program announces itself on the network and the other programs respond (discovery carried out by DDS)."
  },
  "l0/ros:lines.2": {
   "status": "pass-alt",
@@ -2801,6 +2825,12 @@
   "my": "မရသေးပါဘူး။",
   "back": "Not yet."
  },
+ "l0/ros:project": {
+  "status": "pass-alt",
+  "en": "The example repos in this course were built on Humble (Ubuntu 22.04, Gazebo Classic). The skills carry over; the main change you will meet is Gazebo Classic to the new Gazebo (ros_gz). They have not been tested on Jazzy yet.",
+  "my": "ဒီသင်ခန်းစာက နမူနာ repo တွေကို Humble (Ubuntu 22.04, Gazebo Classic) ပေါ်မှာ တည်ဆောက်ထားတာ ဖြစ်ပါတယ်။ ကျွမ်းကျင်မှုတွေကို ဆက်လက် အသုံးပြုနိုင်ပြီး အဓိက ကြုံတွေ့ရမယ့် ပြောင်းလဲမှုကတော့ Gazebo Classic ကနေ Gazebo အသစ် (ros_gz) ကို ပြောင်းတာဖြစ်ပါတယ်။ Jazzy ပေါ်မှာတော့ စမ်းသပ်ထားခြင်း မရှိသေးပါဘူး။",
+  "back": "This course's sample repos are built on Humble (Ubuntu 22.04, Gazebo Classic). The skills can still be used, and the main change you will encounter is the move from Gazebo Classic to the new Gazebo (ros_gz). It has not been tested on Jazzy yet."
+ },
  "l0/ros:ros1": {
   "status": "pass-alt",
   "en": "ROS 1",
@@ -2819,6 +2849,30 @@
   "my": "ပြင်ဆင်ချက် ရနေဆဲ",
   "back": "Still receiving corrections"
  },
+ "l0/ros:th.distro": {
+  "status": "pass-alt",
+  "en": "distribution",
+  "my": "distribution",
+  "back": "distribution"
+ },
+ "l0/ros:th.eol": {
+  "status": "pass-alt",
+  "en": "fixes until",
+  "my": "ပြင်ဆင်ချက် သက်တမ်း",
+  "back": "Fix lifetime"
+ },
+ "l0/ros:th.gazebo": {
+  "status": "pass-alt",
+  "en": "Gazebo pair",
+  "my": "Gazebo တွဲဖက်",
+  "back": "Gazebo pairing"
+ },
+ "l0/ros:th.ubuntu": {
+  "status": "pass-alt",
+  "en": "Ubuntu",
+  "my": "Ubuntu",
+  "back": "Ubuntu"
+ },
  "l0/ros:title": {
   "status": "pass-alt",
   "en": "What ROS is, and which version",
@@ -2830,6 +2884,12 @@
   "en": "today",
   "my": "ယနေ့",
   "back": "Today"
+ },
+ "l0/ros:winMac": {
+  "status": "pass-alt",
+  "en": "On Windows: Ubuntu 24.04 inside WSL2, or the Docker image osrf/ros:jazzy-desktop. On a Mac: Docker or a virtual machine running Ubuntu.",
+  "my": "Windows မှာဆိုရင်: WSL2 ထဲက Ubuntu 24.04 သို့မဟုတ် Docker image ဖြစ်တဲ့ osrf/ros:jazzy-desktop ကို သုံးပါ။ Mac မှာဆိုရင်: Docker သို့မဟုတ် Ubuntu အလုပ်လုပ်နေတဲ့ virtual machine ကို သုံးပါ။",
+  "back": "On Windows: use Ubuntu 24.04 inside WSL2, or the Docker image osrf/ros:jazzy-desktop. On Mac: use Docker or a virtual machine running Ubuntu."
  },
  "l0/ros:words": {
   "status": "pass-alt",
