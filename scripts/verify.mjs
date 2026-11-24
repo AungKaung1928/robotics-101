@@ -58,7 +58,7 @@ const ROUTES = [
   { hash: '#/grid?res=0.1', readouts: ['cells'], equals: { cells: '10,000' } },
   { hash: '#/grid?t=2.5', readouts: ['known'], equals: { scans: '3' }, moreThan: { known: ['#/grid', 'known'] } },
   { hash: '#/grid/7', readouts: ['known'], equals: { scans: '7' }, moreThan: { known: ['#/grid', 'known'] } },
-  { hash: '#/costmap', readouts: ['cost', 'edge', 'smooth'], equals: { window: '3 × 3 m = 3,600', ladder: '3.5\u00a0→ 3.0\u00a0→ 2.5\u00a0→ 1.5\u00a0m' }, has: ['class="pathline"', 'data-k="grow"', 'data-k="ripple"'] }, // older chapters: dots + Level 0 link + intro line; ripple = the inflation scene's caption
+  { hash: '#/costmap', readouts: ['cost', 'edge', 'smooth'], equals: { window: '3 × 3 m = 3,600', ladder: '3.5&nbsp;→ 3.0&nbsp;→ 2.5&nbsp;→ 1.5&nbsp;m' }, has: ['class="pathline"', 'data-k="grow"', 'data-k="ripple"'] }, // ladder as dumped HTML (no-break spaces serialize as &nbsp;); older chapters: dots + Level 0 link + intro line; ripple = the inflation scene's caption
   { hash: '#/goal', readouts: ['tick', 'drive', 'time', 'ticks', 'cmdhz'], equals: { time: '14.4 s', timeaccel: '14.5 s', yaw: '0.25 rad = 14.3°', progress: '1.9 s', planner: 'NavFn · Dijkstra', recover: 'spin · backup · wait' } },
 ]
 const JA_TEXT = /[぀-ヿ一-龯]/
