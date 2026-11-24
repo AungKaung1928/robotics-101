@@ -24,12 +24,12 @@ export type Ev =
   | { kind: 'skip'; i: number }
   | { kind: 'stop'; i: number; why: 'end' | 'noRetry' }
 
-export interface Opts { blocked: number | null; loop: boolean; retry: boolean; maxRetries?: number; maxSends?: number }
+export interface Opts { blocked: number | null; loop: boolean; retry: boolean; maxSends?: number }
 
 const next = (i: number, loop: boolean) => (!loop && i >= POINTS.length - 1 ? null : (i + 1) % POINTS.length)
 
 /** Events from start until the patrol stops or maxSends goals were sent. */
-export function run({ blocked, loop, retry, maxRetries = CONFIG.maxRetries, maxSends = 16 }: Opts): Ev[] {
+export function run({ blocked, loop, retry, maxSends = 16 }: Opts): Ev[] {
   const ev: Ev[] = []
   let i = 0, count = 0, sends = 0
   for (;;) {
@@ -44,7 +44,7 @@ export function run({ blocked, loop, retry, maxRetries = CONFIG.maxRetries, maxS
     if (!retry) { ev.push({ kind: 'failed', i, retry: 0 }, { kind: 'stop', i, why: 'noRetry' }); return ev }
     count++
     ev.push({ kind: 'failed', i, retry: count })
-    if (count <= maxRetries) continue
+    if (count <= CONFIG.maxRetries) continue
     count = 0
     ev.push({ kind: 'skip', i })
     const n = next(i, loop)
