@@ -17,7 +17,7 @@ const existing = (level: number, ids: ChapterId[]): ChapterMeta[] =>
 
 /**
  * Levels 0-5 in reading order (research curriculum, zero experience → robotics software engineer).
- * The 7 built chapters sit in Levels 3-4; empty levels show as 'coming next' on the map.
+ * A level with no chapters shows as 'coming next' on the map (Overview.tsx).
  */
 export const LEVELS: ChapterMeta[][] = [
   LEVEL0_CHAPTERS,
