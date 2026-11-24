@@ -1,0 +1,53 @@
+/** Chapter 5.6 text, EN + JA. Same keys in both (fieldfail.test checks). Every failure paraphrases the cited repo line. */
+export const FIELDFAIL_STRINGS = {
+  en: {
+    title: 'Failures and how they were found',
+    learn: 'You will learn: most robot bugs show up as strange behaviour, not as an error message. You read the symptom, guess the cause, then prove it. These six are written down in the author\'s own public repos; all happened in simulation (Gazebo, MoveIt), none on a real robot.',
+    everyday: 'Everyday: a car that pulls to one side. The symptom is the pull; the cause might be tyre pressure, alignment or brakes. A mechanic checks before replacing parts.',
+    ask: 'Which cause fits this symptom?',
+    symptom: 'Symptom', cause: 'Cause', fix: 'Fix', right: 'Right.', wrong: 'Not this one: try again.',
+    next: 'next failure', score: 'right on the first try',
+    measured: 'The README says the last two were found by measurement, not by reading the code.',
+    fails: {
+      beam: { symptom: 'A wall follower keeps saying "wall lost" every 1-2 s, then drives at the wall until collision avoidance turns it away.', cause: 'The wall distance used one side arc; when the robot yawed toward the wall the reading grew by 1/cos(yaw)', fix: 'Two beams solve the wall angle; the lost check uses a wider arc' },
+      params: { symptom: 'Changing values in the YAML file has no effect: the node behaves the same every run.', cause: 'Another included launch file declared the same argument name, so the parameter file path became empty', fix: 'Pass the file to the node explicitly' },
+      index: { symptom: 'The right-wall controller reacts to things straight ahead instead of on the right.', cause: 'Negative angles were clamped to scan index 0, which is the front beam when angle_min = 0', fix: 'Wrap the index around a full turn, so both scan layouts work' },
+      wedge: { symptom: 'Wedged into a corner, the robot spins in place: 93.6 s in one run.', cause: 'Collision avoidance could only rotate, never drive', fix: 'Back off when the turn does not clear the obstacle, only if the rear is clear' },
+      chatter: { symptom: 'The state machine flips back and forth between two states at a boundary.', cause: 'Entering and leaving a state used the same threshold', fix: 'Leave only after a 1.3x margin (hysteresis)' },
+      attach: { symptom: 'A pick-and-place arm shows a stray green sphere on the gripper and plans fail with self-collision at panda_link7.', cause: 'The ball was attached to the gripper as an AttachedCollisionObject', fix: 'Do not attach it' },
+    },
+    challenge: 'Challenge: diagnose all six right on the first try.',
+    solved: 'Solved:', notYet: 'Not yet:',
+    words: 'Words',
+    glossary: [
+      ['symptom', 'what you see the robot do'],
+      ['root cause', 'the one thing that, fixed, makes the symptom go away'],
+      ['hysteresis', 'different thresholds for on and off, so a value near the line does not flicker'],
+    ] as [string, string][],
+  },
+  ja: {
+    title: '失敗と、その見つけ方',
+    learn: '学ぶこと：ロボットのバグの多くはエラーメッセージではなく、おかしな動きとして現れる。症状を読み、原因を推測し、確かめる。ここの6つは作者自身の公開リポジトリに書かれたもので、すべてシミュレーション（Gazebo、MoveIt）で起き、実機ではない。',
+    everyday: '身近な例：片側に流れる車。症状は流れること、原因は空気圧かアライメントかブレーキかもしれない。整備士は部品を替える前に確かめる。',
+    ask: 'この症状に合う原因はどれ？',
+    symptom: '症状', cause: '原因', fix: '修正', right: '正解。', wrong: 'これではない：もう一度。',
+    next: '次の失敗', score: '1回目で正解',
+    measured: 'README によると、最後の2つはコードを読んでではなく、計測で見つかった。',
+    fails: {
+      beam: { symptom: '壁沿い走行ロボットが 1〜2 秒ごとに「壁を見失った」と言い、衝突回避が向きを変えるまで壁に向かって走る。', cause: '壁までの距離を横の扇形1つで測っていた。ロボットが壁の方へ向くと値が 1/cos(yaw) 倍に増えた', fix: '2本のビームで壁の角度を求め、見失い判定は広い扇形で行う' },
+      params: { symptom: 'YAML ファイルの値を変えても効かない：ノードは毎回同じ動きをする。', cause: '別の launch ファイルが同じ名前の引数を宣言していて、パラメータファイルのパスが空になった', fix: 'ファイルをノードに直接渡す' },
+      index: { symptom: '右壁の制御が、右ではなく正面のものに反応する。', cause: '負の角度がスキャンの番号 0 に丸められ、angle_min = 0 ではそれが正面のビームだった', fix: '番号を1周で折り返し、どちらのスキャン配置でも正しくする' },
+      wedge: { symptom: '角にはまると、その場で回り続ける：ある走行で 93.6 秒。', cause: '衝突回避は回転しかできず、前後に動けなかった', fix: '回っても障害物が消えなければ、後ろが空いているときだけ下がる' },
+      chatter: { symptom: '境界で、状態機械が2つの状態を行ったり来たりする。', cause: '状態に入るときと出るときに同じしきい値を使っていた', fix: '1.3 倍の余裕を超えたときだけ抜ける（ヒステリシス）' },
+      attach: { symptom: 'ピック＆プレースのアームで、グリッパに余計な緑の球が出て、panda_link7 の自己衝突で計画が失敗する。', cause: 'ボールを AttachedCollisionObject としてグリッパに付けていた', fix: '付けない' },
+    },
+    challenge: 'チャレンジ：6つすべてを1回目で正しく診断しよう。',
+    solved: '成功：', notYet: 'まだ：',
+    words: '用語',
+    glossary: [
+      ['症状', 'ロボットがしているのが見えること'],
+      ['根本原因', 'それを直せば症状が消える、ただ1つのこと'],
+      ['ヒステリシス', 'オンとオフで別のしきい値を使い、境界付近で値がちらつかないようにすること'],
+    ] as [string, string][],
+  },
+}
