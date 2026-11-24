@@ -48,3 +48,15 @@ export const turnsPerS = (speed: number) => speed / (2 * Math.PI * WHEEL_RADIUS_
 
 /** Figure frame: svg units per metre and the start point; move.test checks every slider path stays inside. */
 export const VIEW = { w: 600, h: 300, px: 270, ox: 250, oy: 170 }
+
+/** Break it, as one sentence from the actual values: which template, the numbers and what the path does.
+ * dir follows the shown number: a speed that reads 0.00 is 'stop', never 'forward at 0.00'. */
+export function slipFacts(right: number) {
+  const eff = LEFT * SLIP
+  const shown = Math.abs(right).toFixed(2)
+  const dir = shown === '0.00' ? 'stop' as const : right < 0 ? 'back' as const : 'fwd' as const
+  return { same: Math.abs(right - LEFT) < EPS, told: LEFT.toFixed(2), eff: eff.toFixed(3), right: shown, dir, turn: kind(eff, right) }
+}
+
+/** Fill {name} slots in a template; a slot with no value stays visible so a test catches it. */
+export const fill = (tpl: string, v: Record<string, string>) => tpl.replace(/\{(\w+)\}/g, (m, k: string) => v[k] ?? m)

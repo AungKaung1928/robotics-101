@@ -51,7 +51,7 @@ export default function ParamsChapter({ t }: { t: Strings }) {
       </div>
       <div className="panel">
         <p className="learn">{s.learn}</p>
-        {s.lines.map((l) => <p key={l}>{l}</p>)}
+        {s.lines.map((l) => <p key={l} className="params-line">{l}</p>)}
         <p className="note" data-k="everyday">{s.everyday}</p>
         <div className="stepper" role="group" aria-label={s.source}>
           {(['default', 'launch', 'cli'] as const).map((k) => <button key={k} type="button" aria-pressed={src === k} onClick={() => setSrc(k)}>{s.sources[k]}</button>)}

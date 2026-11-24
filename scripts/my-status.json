@@ -2238,28 +2238,28 @@
   "back": "Yes"
  },
  "l0/move:answers.curveLeft": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "curves left",
   "my": "ဘယ်ဘက်ကို ကွေ့",
-  "back": "Turn left"
+  "back": "Curve left"
  },
  "l0/move:answers.curveRight": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "curves right",
   "my": "ညာဘက်ကို ကွေ့",
-  "back": "Turn right"
+  "back": "Curve right"
  },
  "l0/move:answers.straight": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "straight",
   "my": "အတည့်",
   "back": "Straight"
  },
  "l0/move:breakIt": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Break it: the left wheel slips on a wet floor",
   "my": "ဖျက်ကြည့် - ဘယ်ဘက် ဘီးက ရေစိုနေတဲ့ ကြမ်းပြင်ပေါ်မှာ ချော်နေတယ်",
-  "back": "Break it - the left wheel is slipping on a wet floor"
+  "back": "Break it - left wheel slipping on wet floor"
  },
  "l0/move:brokenNote": {
   "status": "pass-alt",
@@ -2268,178 +2268,260 @@
   "back": "Both wheels are given the same speed, but the robot is turning left. Because the slipping wheel only reaches half of the set speed, you can no longer trust that the robot goes as commanded. Later you will need sensors to check this."
  },
  "l0/move:check": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Check: the left wheel turns faster than the right. Where does the robot go?",
   "my": "စစ်ကြည့် - ဘယ်ဘက် ဘီးက ညာဘက်ထက် ပိုမြန်နေရင် စက်ရုပ် ဘယ်ဘက်ကို သွားမလဲ။",
-  "back": "Check - if the left wheel is faster than the right, which way will the robot go?"
+  "back": "Check - if the left wheel is faster than the right, where will the robot go?"
+ },
+ "l0/move:delivers": {
+  "status": "pass",
+  "en": "Left wheel: effective speed along the floor (m/s)",
+  "my": "ဘယ်ဘက်ဘီး: ကြမ်းပြင်ပေါ်က အမှန်တကယ် အမြန်နှုန်း (m/s)",
+  "back": "Left wheel: actual speed on floor (m/s)"
+ },
+ "l0/move:dir.back": {
+  "status": "pass",
+  "en": "backward",
+  "my": "နောက်သို့",
+  "back": "backward"
+ },
+ "l0/move:dir.fwd": {
+  "status": "pass",
+  "en": "forward",
+  "my": "ရှေ့သို့",
+  "back": "forward"
  },
  "l0/move:fixIt": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Fix it: dry floor",
   "my": "ပြင်ကြည့် - ခြောက်သွေ့တဲ့ ကြမ်းပြင်",
   "back": "Fix it - dry floor"
  },
  "l0/move:glossary.0.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "wheel speed",
   "my": "ဘီး အမြန်နှုန်း",
   "back": "Wheel speed"
  },
  "l0/move:glossary.0.1": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "how fast a wheel moves the robot along the floor, in metres per second (m/s)",
-  "my": "ဘီးက စက်ရုပ်ကို ကြမ်းပြင်ပေါ်မှာ ဘယ်လောက် မြန်မြန် ရွေ့စေလဲ၊ တစ်စက္ကန့်ကို မီတာ (m/s) နဲ့",
-  "back": "How fast the wheels make the robot move on the floor, in metres per second (m/s)"
+  "my": "စက်ရုပ် ကြမ်းပြင်ပေါ်မှာ ရွေ့ဖို့ ဘီး ဘယ်လောက် မြန်မြန် လည်ရမလဲဆိုတဲ့ တစ်စက္ကန့်အတွင်း မီတာနှုန်း (m/s)",
+  "back": "Meters per second (m/s) speed of how fast a wheel must rotate for the robot to move on the floor"
  },
  "l0/move:glossary.1.0": {
-  "status": "pass-alt",
-  "en": "spin on the spot",
-  "my": "တစ်နေရာတည်းမှာတင် လည်",
-  "back": "Spin on the spot"
+  "status": "pass",
+  "en": "spin in place",
+  "my": "ထိုနေရာမှာတင် လည်ခြင်း",
+  "back": "Spinning in place"
  },
  "l0/move:glossary.1.1": {
-  "status": "pass-alt",
-  "en": "turn around without moving the middle",
-  "my": "အလယ်ဗဟိုကို မရွေ့ဘဲ ပတ်ချာလည် လှည့်ခြင်း",
-  "back": "Turning around in circles without the center moving"
+  "status": "pass",
+  "en": "turn around without moving the center",
+  "my": "အလယ်ဗဟိုကို မရွေ့စေဘဲ ဦးတည်ရာ ပြောင်းခြင်း",
+  "back": "Changing direction without moving the center"
  },
  "l0/move:glossary.2.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "slip",
   "my": "ချော်",
   "back": "Slip"
  },
  "l0/move:glossary.2.1": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "a wheel turns but the robot does not move as far as it should",
   "my": "ဘီး လည်နေပေမဲ့ စက်ရုပ်က ရောက်သင့်သလောက် မရောက်ခြင်း",
-  "back": "The wheel spinning but the robot not getting as far as it should"
+  "back": "The robot not reaching as far as it should reach even though the wheels are turning"
  },
  "l0/move:kind.curveLeft": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "curves left",
   "my": "ဘယ်ဘက်ကို ကွေ့",
-  "back": "Turn left"
+  "back": "Curve left"
  },
  "l0/move:kind.curveRight": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "curves right",
   "my": "ညာဘက်ကို ကွေ့",
-  "back": "Turn right"
+  "back": "Curve right"
  },
  "l0/move:kind.spin": {
-  "status": "pass-alt",
-  "en": "spins on the spot",
-  "my": "တစ်နေရာတည်းမှာတင် လည်",
-  "back": "Spin on the spot"
+  "status": "pass",
+  "en": "spins in place",
+  "my": "ထိုနေရာမှာတင် လည်",
+  "back": "Spin in place"
  },
  "l0/move:kind.still": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "stands still",
   "my": "ရပ်နေ",
-  "back": "Stopped"
+  "back": "Standing still"
  },
  "l0/move:kind.straight": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "straight",
   "my": "အတည့်",
   "back": "Straight"
  },
  "l0/move:learn": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "You will learn: a robot like ours steers with nothing but two wheel speeds.",
-  "my": "သင်ယူရမှာက- ကျွန်တော်တို့လို စက်ရုပ်က ဘီး 2 ဘီးရဲ့ အမြန်နှုန်းကိုပဲ သုံးပြီး လမ်းကြောင်း ပြောင်းပါတယ်။",
-  "back": "What you learn: a robot like ours changes direction using only the speeds of its two wheels."
+  "my": "ဒီစက်ရုပ်ဟာ ဘီး 2 ဘီးရဲ့ အမြန်နှုန်းကိုပဲ သုံးပြီး လမ်းကြောင်းပြောင်းပုံကို လေ့လာရပါမယ်။",
+  "back": "Learn how this robot changes direction using only the speed of 2 wheels."
  },
  "l0/move:left": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Left wheel",
   "my": "ဘယ်ဘက် ဘီး",
   "back": "Left wheel"
  },
  "l0/move:mascot": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "the robot",
   "my": "စက်ရုပ်",
   "back": "Robot"
  },
  "l0/move:path": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Path",
   "my": "လမ်းကြောင်း",
   "back": "Path"
  },
  "l0/move:real": {
-  "status": "pass-alt",
-  "en": "The real TurtleBot3 Burger: wheels 16 cm apart, 6.6 cm across, top speed 0.22 m/s, which is about one wheel turn per second.",
-  "my": "တကယ့် TurtleBot3 Burger - ဘီး နှစ်ဘီးကြား အကွာအဝေး 16 cm၊ အချင်း 6.6 cm နဲ့ အမြင့်ဆုံး အမြန်နှုန်း 0.22 m/s ရှိပြီး ဒါဟာ တစ်စက္ကန့်မှာ ဘီး တစ်ပတ်နီးပါး လည်တဲ့နှုန်း ဖြစ်ပါတယ်။",
-  "back": "The real TurtleBot3 Burger - distance between the two wheels 16 cm, diameter 6.6 cm, and maximum speed 0.22 m/s, which is a rate of nearly one wheel rotation per second."
+  "status": "pass",
+  "en": "The real TurtleBot3 Burger: wheels 16 cm apart, 6.6 cm across, top speed 0.22 m/s, which is about one wheel turn per second. The 0.15 m/s left wheel, the 4 s path and the half-speed slip are choices of this page, not robot settings.",
+  "my": "အမှန်တကယ် TurtleBot3 Burger မှာတော့ ဘီးတွေဟာ 16 cm ကွာဝေးပြီး အချင်း 6.6 cm ရှိကာ အမြင့်ဆုံး အမြန်နှုန်းက 0.22 m/s ဖြစ်တာမို့ 1 s မှာ ဘီး 1 ပတ်နီးပါး လည်ပါတယ်။ ဘယ်ဘက်ဘီး 0.15 m/s၊ 4 s လမ်းကြောင်းနဲ့ အမြန်နှုန်း တစ်ဝက် လျော့နည်းသွားတဲ့ ချောထွက်မှုတို့ဟာ ဒီစာမျက်နှာရဲ့ သတ်မှတ်ချက်တွေသာ ဖြစ်ပြီး စက်ရုပ်ရဲ့ ဆက်တင်တွေ မဟုတ်ပါဘူး။",
+  "back": "On the actual TurtleBot3 Burger, the wheels are 16 cm apart, have a diameter of 6.6 cm, and the maximum speed is 0.22 m/s, so the wheel rotates nearly 1 turn in 1 s. The left wheel 0.15 m/s, 4 s path, and the slipping that reduces speed by half are only settings for this page, not settings of the robot."
  },
  "l0/move:right": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Right wheel speed (m/s)",
   "my": "ညာဘက် ဘီး အမြန်နှုန်း (m/s)",
   "back": "Right wheel speed (m/s)"
  },
  "l0/move:right_": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Yes: the slower side is on the inside of the curve.",
   "my": "ဟုတ်ပါတယ်။ ပိုနှေးတဲ့ဘက်က အကွေ့ရဲ့ အတွင်းဘက်မှာ ရှိနေမှာ ဖြစ်ပါတယ်။",
   "back": "Correct. The slower side will be on the inside of the turn."
  },
+ "l0/move:slipDiff": {
+  "status": "pass",
+  "en": "The left wheel is commanded to move forward at {told} m/s, the right wheel {dir} at {right} m/s. On the wet floor, the left side advances at {eff} m/s, so the robot {turn}.",
+  "my": "ဘယ်ဘက်ဘီးကို ရှေ့သို့ {told} m/s နဲ့ ရွေ့ဖို့ ခိုင်းထားပြီး ညာဘက်ဘီးကို {dir} {right} m/s နဲ့ ခိုင်းထားပါတယ်။ စိုစွတ်နေတဲ့ ကြမ်းပြင်ပေါ်မှာ ဘယ်ဘက်က {eff} m/s ပဲ ရွေ့တာမို့ စက်ရုပ်က {turn}ပါတယ်။",
+  "back": "The left wheel is commanded to move forward at {told} m/s and the right wheel is commanded {dir} at {right} m/s. On the wet floor, because the left side only moves at {eff} m/s, the robot {turn}.",
+  "note": "join fix 2026-11-25 r3 (no space before ပါတယ်/။; ChatGPT review 2 item 1); blind back by translate-my back, logs/2026-11-25/app/r3-my/back.json"
+ },
+ "l0/move:slipSame": {
+  "status": "pass",
+  "en": "Both wheels are commanded to move at {told} m/s. On the wet floor, the left side advances at {eff} m/s, so the robot {turn}.",
+  "my": "ဘီးနှစ်ခုလုံးကို {told} m/s နဲ့ ရွေ့ဖို့ ခိုင်းထားပါတယ်။ စိုစွတ်နေတဲ့ ကြမ်းပြင်ပေါ်မှာ ဘယ်ဘက်က {eff} m/s ပဲ ရွေ့တာမို့ စက်ရုပ်က {turn}ပါတယ်။",
+  "back": "Both wheels are commanded to move at {told} m/s. On the wet floor, because the left side only moves at {eff} m/s, the robot {turn}.",
+  "note": "join fix 2026-11-25 r3 (no space before ပါတယ်/။; ChatGPT review 2 item 1); blind back by translate-my back, logs/2026-11-25/app/r3-my/back.json"
+ },
+ "l0/move:slipTrust": {
+  "status": "pass",
+  "en": "The commands did not change, the floor did. The robot cannot trust that it went where it was told; later it will need sensors to check.",
+  "my": "ခိုင်းထားတဲ့ အမိန့်တွေ ပြောင်းမသွားပါဘူး၊ ကြမ်းပြင်ပဲ ပြောင်းသွားတာပါ။ ခိုင်းတဲ့နေရာကို ရောက်သွားတယ်လို့ စက်ရုပ်က မယုံနိုင်ပါဘူး။ နောက်ပိုင်းကျရင် စစ်ကြည့်ဖို့ ဆင်ဆာတွေ လိုအပ်လာပါမယ်။",
+  "back": "The commanded orders have not changed, only the floor changed. The robot cannot trust that it reached the commanded place. Later on, sensors will be needed to check."
+ },
+ "l0/move:spinOk": {
+  "status": "pass",
+  "en": "Spin found: opposite speeds of the same size. The middle stays put.",
+  "my": "ထိုနေရာမှာတင် လည်တာကို တွေ့သွားပါပြီ: ပမာဏတူပြီး ဆန့်ကျင်ဘက် အမြန်နှုန်းတွေ ဖြစ်ပါတယ်။ အလယ်ဗဟိုက မရွေ့ပါဘူး။",
+  "back": "Found spinning in place: speeds are equal magnitude and opposite. The center does not move."
+ },
  "l0/move:srcGloss.wheels": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "wheels",
-  "my": "ဘီး",
-  "back": "Wheel"
+  "my": "ဘီးများ",
+  "back": "Wheels"
  },
  "l0/move:steps.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Our robot has two wheels, each with its own motor, and a small free-rolling ball at the back. There is no steering wheel. It can only change how fast each wheel turns.",
-  "my": "ကျွန်တော်တို့ စက်ရုပ်မှာ မော်တာ တစ်လုံးစီ ပါတဲ့ ဘီး 2 ဘီးနဲ့ နောက်ဘက်မှာ လွတ်လွတ်လပ်လပ် လိမ့်တဲ့ ဘောလုံးလေး တစ်လုံး ပါပါတယ်။ ကားလို စတီယာရင် မရှိပါဘူး။ ဘီး တစ်ဘီးချင်းစီ ဘယ်လောက် မြန်မြန် လည်မလဲ ဆိုတာကိုပဲ ပြောင်းနိုင်ပါတယ်။",
-  "back": "Our robot has two wheels, one motor each, and a small ball at the back that rolls freely. It has no car-like steering. The only thing it can change is how fast each individual wheel turns."
+  "my": "ဒီစက်ရုပ်မှာ မော်တာ တစ်ခုစီ တပ်ထားတဲ့ ဘီး 2 ဘီးနဲ့ နောက်ဘက်မှာ အလွယ်တကူ လိမ့်နိုင်တဲ့ ဘောလုံးလေး တစ်လုံး ပါပါတယ်။ လက်ကိုင်ဘီး မပါပါဘူး။ ဘီး တစ်ဖက်စီရဲ့ အမြန်နှုန်းကိုပဲ ပြောင်းလဲနိုင်ပါတယ်။",
+  "back": "This robot has 2 wheels, each fitted with a motor, and a small ball at the back that rolls easily. It has no steering wheel. You can only change the speed of each side's wheel."
  },
  "l0/move:steps.1": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Same speed on both wheels: it drives straight. One wheel faster: it curves toward the slower side. You know this from a shopping cart: push harder on the left handle and it swings right.",
   "my": "ဘီး နှစ်ဖက်လုံး အမြန်နှုန်း အတူတူဆိုရင် အတည့်သွားပါတယ်။ ဘီး တစ်ဖက်က ပိုမြန်ရင်တော့ ပိုနှေးတဲ့ဘက်ကို ကွေ့ပါတယ်။ ဒါဟာ shopping cart တွန်းတာနဲ့ တူပါတယ်။ ဘယ်ဘက် လက်ကိုင်ကို ပိုတွန်းရင် ညာဘက်ကို ကွေ့သွားမှာပါ။",
-  "back": "If both wheels have the same speed, it goes straight. If one wheel is faster, it turns toward the slower side. This is like pushing a shopping cart. If you push the left handle more, it will turn to the right."
+  "back": "If both wheels have the same speed, it goes straight. If one wheel is faster, it turns towards the slower side. This is like pushing a shopping cart. If you push the left handle more, it will turn to the right."
  },
  "l0/move:steps.2": {
-  "status": "pass-alt",
-  "en": "Opposite speeds, one forward and one backward: the robot spins on the spot. Its middle does not move at all.",
-  "my": "ဘီး တစ်ဘီးက ရှေ့ကို၊ နောက်တစ်ဘီးက နောက်ကို လည်ရင် စက်ရုပ်က နေရာမှာတင် ဝိုင်းလည်ပါတယ်။ စက်ရုပ်ရဲ့ အလယ်က လုံးဝ မရွေ့ပါဘူး။",
-  "back": "If one wheel turns forward and the other wheel turns backward, the robot spins round in place. The center of the robot does not move at all."
+  "status": "pass",
+  "en": "When the wheels move equally fast in opposite directions, the robot spins in place. If one moves faster, the center of the robot moves too.",
+  "my": "ဘီးတွေက တူညီတဲ့ အမြန်နှုန်းနဲ့ ဆန့်ကျင်ဘက်အရပ်ဆီ ရွေ့တဲ့အခါ စက်ရုပ်က ထိုနေရာမှာတင် လည်သွားပါတယ်။ တစ်ဖက်က ပိုမြန်ရင် စက်ရုပ်ရဲ့ အလယ်ဗဟိုလည်း လိုက်ရွေ့ပါတယ်။",
+  "back": "When the wheels move at equal speed in opposite directions, the robot spins right in place. If one side is faster, the robot's center moves as well."
  },
  "l0/move:steps.3": {
-  "status": "pass-alt",
-  "en": "Drag the right wheel below. The left wheel stays at 0.15 m/s. Watch the drawn path change.",
-  "my": "အောက်က ညာဘက် ဘီးကို ဆွဲကြည့်ပါ။ ဘယ်ဘက် ဘီးကိုတော့ 0.15 m/s မှာပဲ ထားထားပါတယ်။ လမ်းကြောင်း ဘယ်လို ပြောင်းလဲသွားလဲဆိုတာ ကြည့်ပါ။",
-  "back": "Drag the right wheel below. The left wheel is kept at 0.15 m/s. See how the path changes."
+  "status": "pass",
+  "en": "The left wheel stays at 0.15 m/s; the right one starts there too, so the path is straight. Guess first, then drag the right wheel: faster, slower, and finally find the speed that makes it spin in place.",
+  "my": "ဘယ်ဘက်ဘီးက 0.15 m/s မှာ ရှိနေပြီး ညာဘက်ဘီးကလည်း စစချင်း အတူတူပဲမို့ လမ်းကြောင်းက ဖြောင့်နေပါမယ်။ မဆွဲခင် အရင်ခန့်မှန်းကြည့်ပါ၊ ပြီးရင် ညာဘက်ဘီးကို ပိုမြန်အောင်၊ ပိုနှေးအောင် ဆွဲကြည့်ပြီး ထိုနေရာမှာတင် လည်သွားစေမယ့် အမြန်နှုန်းကို ရှာပါ။",
+  "back": "The left wheel is at 0.15 m/s and the right wheel is also initially the same, so the path will be straight. Try predicting before dragging, then try dragging the right wheel faster or slower to find the speed that makes it spin right in place."
  },
  "l0/move:title": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "How a robot moves: two wheels",
-  "my": "စက်ရုပ် လှုပ်ရှားပုံ - ဘီး 2 ဘီး",
-  "back": "How the robot moves - two wheels"
+  "my": "စက်ရုပ် လှုပ်ရှားပုံ: ဘီး 2 ဘီး",
+  "back": "Robot Movement: 2 Wheels"
+ },
+ "l0/move:told": {
+  "status": "pass",
+  "en": "Left wheel: commanded speed (m/s)",
+  "my": "ဘယ်ဘက်ဘီး: ခိုင်းထားတဲ့ အမြန်နှုန်း (m/s)",
+  "back": "Left wheel: commanded speed (m/s)"
+ },
+ "l0/move:turn.curveLeft": {
+  "status": "pass",
+  "en": "turns left",
+  "my": "ဘယ်ဘက်ကို ကွေ့",
+  "back": "Turn left",
+  "note": "join fix 2026-11-25 r3 (no space before ပါတယ်/။; ChatGPT review 2 item 1); blind back by translate-my back, logs/2026-11-25/app/r3-my/back.json"
+ },
+ "l0/move:turn.curveRight": {
+  "status": "pass",
+  "en": "turns right",
+  "my": "ညာဘက်ကို ကွေ့",
+  "back": "Turn right",
+  "note": "join fix 2026-11-25 r3 (no space before ပါတယ်/။; ChatGPT review 2 item 1); blind back by translate-my back, logs/2026-11-25/app/r3-my/back.json"
+ },
+ "l0/move:turn.spin": {
+  "status": "pass",
+  "en": "spins in place",
+  "my": "ထိုနေရာမှာတင် လည်",
+  "back": "spins in place"
+ },
+ "l0/move:turn.still": {
+  "status": "pass",
+  "en": "stands still",
+  "my": "ရပ်နေ",
+  "back": "stands still"
+ },
+ "l0/move:turn.straight": {
+  "status": "pass",
+  "en": "drives straight",
+  "my": "ဖြောင့်ဖြောင့် ရွေ့",
+  "back": "moves straight"
  },
  "l0/move:turns": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Right wheel turns per second",
   "my": "ညာဘက် ဘီးရဲ့ တစ်စက္ကန့်အတွင်း လည်ပတ်နှုန်း",
-  "back": "Right wheel's rotation rate within one second"
+  "back": "Right wheel rotations per second"
  },
  "l0/move:words": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Words you met",
   "my": "တွေ့ခဲ့ရတဲ့ စကားလုံးများ",
   "back": "Words encountered"
  },
  "l0/move:wrong": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Not quite: set the right wheel to 0.05 and look.",
   "my": "မမှန်သေးပါဘူး။ ညာဘက် ဘီးကို 0.05 ထားပြီး ကြည့်ကြည့်ပါ။",
-  "back": "Not right yet. Try setting the right wheel to 0.05 and look."
+  "back": "Not correct yet. Try setting the right wheel to 0.05 and see."
  },
  "l0/pipe:breakIt": {
   "status": "pass-alt",
@@ -6428,5 +6510,12 @@
   "en": "Not quite. Run it and look which pairs need odom → base_link.",
   "my": "မမှန်သေးပါဘူး။ အဲဒါကို run ကြည့်ပြီး ဘယ်အတွဲတွေက odom → base_link လိုအပ်လဲဆိုတာ ကြည့်ပါ။",
   "back": "Not correct yet. Try running that and see which pairs need odom → base_link."
+ },
+ "l0/move:slipStop": {
+  "status": "pass",
+  "en": "The left wheel is commanded to move forward at {told} m/s, the right wheel is stopped ({right} m/s). On the wet floor, the left side advances at {eff} m/s, so the robot {turn}.",
+  "my": "ဘယ်ဘက်ဘီးကို ရှေ့သို့ {told} m/s နဲ့ ရွေ့ဖို့ ခိုင်းထားပြီး ညာဘက်ဘီးကို ရပ်ထားပါတယ် ({right} m/s)။ စိုစွတ်နေတဲ့ ကြမ်းပြင်ပေါ်မှာ ဘယ်ဘက်က {eff} m/s ပဲ ရွေ့တာမို့ စက်ရုပ်က {turn}ပါတယ်။",
+  "back": "The left wheel is commanded to move forward at {told} m/s and the right wheel is stopped ({right} m/s). On the wet floor, because the left side only moves at {eff} m/s, the robot {turn}.",
+  "note": "join fix 2026-11-25 r3 (no space before ပါတယ်/။; ChatGPT review 2 item 1); blind back by translate-my back, logs/2026-11-25/app/r3-my/back.json"
  }
 }

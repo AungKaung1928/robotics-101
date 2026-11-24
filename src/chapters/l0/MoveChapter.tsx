@@ -4,7 +4,7 @@ import Player from '../../components/Player'
 import Slider from '../../components/Slider'
 import { SOURCE_REPO } from '../../content/world'
 import { stringsFor, type Strings } from '../../i18n'
-import { LEFT, SECONDS, SLIP, TOP_SPEED, WHEEL_GAP_M, kind, path, turnsPerS, VIEW, type Kind } from './move'
+import { LEFT, SECONDS, SLIP, TOP_SPEED, WHEEL_GAP_M, fill, kind, path, slipFacts, turnsPerS, VIEW, type Kind } from './move'
 import { MOVE_STRINGS } from './move.strings'
 import './l0.css'
 import './move.css'
@@ -18,6 +18,13 @@ const sx = (x: number) => OX + x * PX
 const sy = (y: number) => OY - y * PX // svg y points down, the robot's y (left) points up
 const R_BODY = 0.07 * PX, HALF_GAP = (WHEEL_GAP_M / 2) * PX
 const ANSWERS: Kind[] = ['curveLeft', 'curveRight', 'straight']
+
+/** The break-it sentence from the actual slider value (move.test checks it at several values). */
+export function slipText(s: typeof MOVE_STRINGS.en, right: number) {
+  const f = slipFacts(right)
+  const tpl = f.dir === 'stop' ? s.slipStop : f.same ? s.slipSame : s.slipDiff
+  return fill(tpl, { told: f.told, eff: f.eff, right: f.right, dir: f.dir === 'stop' ? '' : s.dir[f.dir], turn: s.turn[f.turn] })
+}
 
 /** Level 0 "move": drag the right wheel speed, the path of the two-wheel model is drawn; break it = the left wheel slips. */
 export default function MoveChapter({ t }: { t: Strings }) {
@@ -61,7 +68,7 @@ export default function MoveChapter({ t }: { t: Strings }) {
         <Slider hint={t.drag} label={s.right} value={right} min={-TOP_SPEED} max={TOP_SPEED} step={0.01} mark={LEFT} fmt={(v) => v.toFixed(2)}
           onChange={(v) => { setRight(Math.round(v * 100) / 100); restart() }} />
         <p><button type="button" className="break" onClick={() => { setSlip(!slip); if (!slip) setOops(oops + 1); restart() }}>{slip ? s.fixIt : s.breakIt}</button></p>
-        {slip && <p className="note">{s.brokenNote}</p>}
+        {slip && <p className="note" data-k="slip">{slipText(s, right)} {s.slipTrust}</p>}
         {k === 'spin' && <p className="verdict ok" data-k="spin">✓ {s.spinOk}</p>}
         <dl className="readout">
           <div><dt>{s.path}</dt><dd data-k="kind">{s.kind[k]}</dd></div>
