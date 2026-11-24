@@ -16,7 +16,7 @@ export const CLOSEST_STRINGS = {
     fixIt: 'Fix it: back to float("inf")',
     brokenNote: 'Nothing is smaller than 0, so the if is never true: the function returns 0 m, a wall that is not there.',
     result: 'closest(readings) returns', changes: 'times closest changed',
-    challenge: 'Challenge: move the box so closest changes only once during the loop.',
+    challenge: 'Challenge: move the box so closest changes only once during the loop. Hint: the first reading always replaces infinity, so that is the one change.',
     solved: 'Solved: changed', notYet: 'Not yet: changed', times: 'times',
     words: 'Words',
     glossary: [
@@ -44,7 +44,7 @@ export const CLOSEST_STRINGS = {
     fixIt: '直す：float("inf") に戻す',
     brokenNote: '0 より小さい値はないので if は一度も真にならない：関数は 0 m（存在しない壁）を返す。',
     result: 'closest(readings) の戻り値', changes: 'closest が変わった回数',
-    challenge: 'チャレンジ：ループ中に closest が1回だけ変わるように箱を動かそう。',
+    challenge: 'チャレンジ：ループ中に closest が1回だけ変わるように箱を動かそう。ヒント：最初の読み取りは必ず無限大を置き換えるので、それがその1回になる。',
     solved: '成功：変わった回数', notYet: 'まだ：変わった回数', times: '回',
     words: '用語',
     glossary: [
