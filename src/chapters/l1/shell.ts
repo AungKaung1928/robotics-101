@@ -84,7 +84,7 @@ export const COMMANDS = ['pwd', 'ls', 'cd', 'mkdir', 'cat', 'source', 'echo', 'r
 export const CHAR_MS = 45, PAUSE_MS = 700
 
 /** Challenge: in a new terminal, make `ros2 pkg list` print packages. */
-export const challengeOk = (lines: Line[]) => lines.some((l) => l.ok && l.cmd.trim().startsWith('ros2'))
+export const challengeOk = (lines: Line[]) => lines.some((l) => l.ok && /^ros2\s+pkg\s+list$/.test(l.cmd.trim()))
 
 export interface ShellScene extends Record<string, unknown> { done: number; typing: string }
 

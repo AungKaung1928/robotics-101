@@ -35,6 +35,8 @@ describe('1.5 shell model', () => {
   it('a new terminal forgets source: the challenge needs it again', () => {
     expect(challengeOk(session(['ros2 pkg list']).lines)).toBe(false)
     expect(challengeOk(session(['source /opt/ros/humble/setup.bash', 'ros2 pkg list']).lines)).toBe(true)
+    expect(challengeOk(session(['source /opt/ros/humble/setup.bash', 'ros2']).lines)).toBe(false) // bare ros2 prints help, not packages
+    expect(challengeOk(session(['source /opt/ros/humble/setup.bash', 'ros2 node list']).lines)).toBe(false)
   })
 
   it('scenario: pure, ends with every command done', () => {
