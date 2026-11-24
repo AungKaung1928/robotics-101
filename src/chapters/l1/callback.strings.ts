@@ -7,7 +7,7 @@ export const CALLBACK_STRINGS = {
     lines: [
       'You do not write "wait for the next scan". You give ROS the method self.on_scan, and ROS calls it with each new scan, 5 times a second.',
       'The class keeps what must survive between calls: stop_at and count live on self.',
-      'ROS runs one call at a time. If on_scan takes longer than 200 ms, new scans wait in a queue of 10. When the queue is full the oldest is thrown away.',
+      'rclpy.spin runs one call at a time (its default single-threaded executor). If on_scan takes longer than 200 ms, new scans wait in a queue of 10. When the queue is full the oldest is thrown away.',
     ],
     runsHere: 'Python shown; the page runs a JavaScript model of the same queue. Simplified: no network delay, fixed callback time.',
     work: 'on_scan takes (ms)',
@@ -35,7 +35,7 @@ export const CALLBACK_STRINGS = {
     lines: [
       '「次のスキャンを待つ」とは書かない。ROS にメソッド self.on_scan を渡すと、ROS が新しいスキャンごとに（1秒に5回）それを呼ぶ。',
       'クラスは呼び出しの間も残すべきものを持つ：stop_at と count は self にある。',
-      'ROS は1回に1つずつ呼ぶ。on_scan が 200 ms より長くかかると、新しいスキャンは長さ10のキューで待つ。キューが満杯になると一番古いものが捨てられる。',
+      'rclpy.spin は1回に1つずつ呼ぶ（既定のシングルスレッド executor）。on_scan が 200 ms より長くかかると、新しいスキャンは長さ10のキューで待つ。キューが満杯になると一番古いものが捨てられる。',
     ],
     runsHere: '表示は Python。このページは同じキューを JavaScript のモデルで動かしている。簡略化：通信遅延なし、処理時間は一定。',
     work: 'on_scan の処理時間（ms）',

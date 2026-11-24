@@ -4,7 +4,7 @@ export const WS_STRINGS = {
     title: 'ROS 2: workspace, packages, colcon build',
     learn: 'You will learn: your code lives in packages inside a workspace; colcon build turns them into programs; source install/setup.bash makes ROS find them.',
     lines: [
-      'A package is one folder with a package.xml (name, dependencies) and a CMakeLists.txt (what to build). tf_explorer is one package with 5 programs.',
+      'A package is one folder with a package.xml (name, dependencies). A C++ package like tf_explorer adds a CMakeLists.txt (what to build); a Python package has a setup script instead. tf_explorer is one package with 5 programs.',
       'A workspace is a folder with src/ inside. You clone packages into src/, then run colcon build from the workspace folder. It creates build/, install/ and log/ next to src/.',
       'Two sources, in order: /opt/ros/humble first (ROS itself), then install/setup.bash (your packages). Every new terminal needs both.',
     ],
@@ -29,7 +29,7 @@ export const WS_STRINGS = {
     title: 'ROS 2：ワークスペース、パッケージ、colcon build',
     learn: '学ぶこと：コードはワークスペースの中のパッケージに入る。colcon build がそれをプログラムにし、source install/setup.bash で ROS が見つけられるようになる。',
     lines: [
-      'パッケージは package.xml（名前、依存）と CMakeLists.txt（何をビルドするか）を持つ1つのフォルダ。tf_explorer は5つのプログラムを持つ1パッケージ。',
+      'パッケージは package.xml（名前、依存）を持つ1つのフォルダ。tf_explorer のような C++ パッケージは CMakeLists.txt（何をビルドするか）も持ち、Python パッケージは代わりに setup スクリプトを持つ。tf_explorer は5つのプログラムを持つ1パッケージ。',
       'ワークスペースは中に src/ を持つフォルダ。src/ にパッケージを clone し、ワークスペースのフォルダで colcon build する。src/ の隣に build/、install/、log/ ができる。',
       'source は2つ、この順番で：まず /opt/ros/humble（ROS 本体）、次に install/setup.bash（自分のパッケージ）。新しいターミナルでは毎回両方必要。',
     ],

@@ -25,7 +25,7 @@ export const CPP_STRINGS = {
     glossary: [
       ['type', 'what kind of value a variable holds: double, int, bool'],
       ['compile', 'translate the whole file to machine code before running'],
-      ['g++', 'the C++ compiler on Ubuntu'],
+      ['g++', 'the GNU C++ compiler, the usual one on Ubuntu'],
       ['ns', 'nanosecond: one billionth of a second'],
     ] as [string, string][],
   },
@@ -54,7 +54,7 @@ export const CPP_STRINGS = {
     glossary: [
       ['型', '変数が持つ値の種類：double、int、bool'],
       ['コンパイル', '実行前にファイル全体をマシンコードに変換すること'],
-      ['g++', 'Ubuntu の C++ コンパイラ'],
+      ['g++', 'GNU の C++ コンパイラ。Ubuntu で普通に使うもの'],
       ['ns', 'ナノ秒：10億分の1秒'],
     ] as [string, string][],
   },
