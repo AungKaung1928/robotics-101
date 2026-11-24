@@ -23,7 +23,7 @@ describe('move page', () => {
     expect(en.steps.length).toBeLessThanOrEqual(5)
     for (const st of en.steps) expect(words(st)).toBeLessThanOrEqual(80)
     expect(en.glossary.length).toBeLessThanOrEqual(3)
-    const all = [en.learn, ...en.steps, en.brokenNote, en.real, en.check, ...en.glossary.flat()].join(' ')
+    const all = [en.learn, ...en.steps, en.slipSame, en.slipDiff, en.slipTrust, en.real, en.check, ...en.glossary.flat()].join(' ')
     expect(all).not.toMatch(BANNED)
   })
   it('numbers in the text are the model numbers (left 0.15, gap 16 cm, wheel 6.6 cm, 0.22 m/s, ~1 turn/s)', () => {

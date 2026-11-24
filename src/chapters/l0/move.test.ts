@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { LEFT, SLIP, TOP_SPEED, VIEW, WHEEL_GAP_M, body, kind, path, turnsPerS } from './move'
+import { slipText } from './MoveChapter'
+import { MOVE_STRINGS } from './move.strings'
 
 describe('move model', () => {
   it('same speed = straight line, length = speed x time', () => {
@@ -41,7 +43,7 @@ describe('move model', () => {
     expect(x0).toBeGreaterThan(margin); expect(x1).toBeLessThan(VIEW.w - margin)
     expect(y0).toBeGreaterThan(margin); expect(y1).toBeLessThan(VIEW.h - margin)
   })
-  it('slip: delivered left speed = told x SLIP, and the path bends further left at every right-wheel speed (brokenNote claim)', () => {
+  it('slip: effective left speed = commanded x SLIP; the signed turn rate rises by the same amount at every right-wheel speed', () => {
     expect(LEFT * SLIP).toBeCloseTo(0.075)
     for (let r = -TOP_SPEED; r <= TOP_SPEED + 1e-9; r += 0.01) {
       expect(body(LEFT * SLIP, r).w - body(LEFT, r).w).toBeCloseTo((LEFT * (1 - SLIP)) / WHEEL_GAP_M)
@@ -53,5 +55,16 @@ describe('move model', () => {
     for (let i = -22; i <= 22; i++) if (kind(LEFT, i / 100) === 'spin') spins.push(i / 100)
     expect(spins).toEqual([-LEFT])
     expect(kind(LEFT, -0.1)).toBe('curveRight') // opposite but smaller: the middle moves forward
+  })
+  it('break-it sentence uses the actual values and direction (EN + JA), no slot left unfilled', () => {
+    const en = MOVE_STRINGS.en
+    expect(slipText(en, 0.15)).toBe('Both wheels are commanded to move at 0.15 m/s. On the wet floor, the left side advances at 0.075 m/s, so the robot turns left.')
+    expect(slipText(en, 0.2)).toBe('The left wheel is commanded to move forward at 0.15 m/s, the right wheel forward at 0.20 m/s. On the wet floor, the left side advances at 0.075 m/s, so the robot turns left.')
+    expect(slipText(en, 0.05)).toMatch(/right wheel forward at 0\.05 m\/s\..*so the robot turns right\.$/)
+    expect(slipText(en, 0.075)).toMatch(/so the robot drives straight\.$/)
+    expect(slipText(en, -0.15)).toBe('The left wheel is commanded to move forward at 0.15 m/s, the right wheel backward at 0.15 m/s. On the wet floor, the left side advances at 0.075 m/s, so the robot turns right.')
+    expect(slipText(en, -0.075)).toMatch(/backward at 0\.08 m\/s|backward at 0\.07 m\/s/)
+    expect(slipText(en, -0.075)).toMatch(/so the robot spins in place\.$/)
+    for (let i = -22; i <= 22; i++) for (const l of ['en', 'ja'] as const) expect(slipText(MOVE_STRINGS[l], i / 100)).not.toMatch(/[{}]/)
   })
 })
