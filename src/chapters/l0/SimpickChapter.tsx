@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Mascot from '../../anim/Mascot'
 import { stringsFor, type Strings } from '../../i18n'
-import { LADDER, SOURCES, pick, type Answers } from './simpick'
+import { SOURCES, STEPS, pick, type Answers } from './simpick'
 import { SIMPICK_STRINGS } from './simpick.strings'
 import './l0.css'
 import './simpick.css'
@@ -36,20 +36,24 @@ export default function SimpickChapter({ t }: { t: Strings }) {
           ))}
         </div>
         <ol className="sp-ladder" data-k="lit" data-lit={lit}>
-          {[...LADDER].reverse().map((r) => {
-            const row = s.rows[r.id]
-            return (
-              <li key={r.id} className={`sp-row${r.id === lit ? ' is-lit' : ''}${r.alt ? ' is-alt' : ''}`} data-row={r.id}>
-                <div className="sp-head">
-                  <strong>{r.url ? <a href={r.url}>{row.name}</a> : row.name}</strong>
-                  <span className="sp-dim">{s.dim[r.dim]}{r.alt ? ` · ${s.alt}` : ''}</span>
-                  {r.id === lit && <span className="sp-start">{s.start}</span>}
-                </div>
-                <p>{row.what}</p>
-                <p className="sp-learn">{row.learn}</p>
-              </li>
-            )
-          })}
+          {STEPS.map((cards) => (
+            <li key={cards[0].id} className={`sp-tier${cards.length > 1 ? ' has-alt' : ''}`}>
+              {cards.map((r) => {
+                const row = s.rows[r.id]
+                return (
+                  <div key={r.id} className={`sp-row${r.id === lit ? ' is-lit' : ''}${r.alt ? ' is-alt' : ''}`} data-row={r.id}>
+                    <div className="sp-head">
+                      <strong>{r.url ? <a href={r.url}>{row.name}</a> : row.name}</strong>
+                      <span className="sp-dim">{s.dim[r.dim]}{r.alt ? ` · ${s.alt}` : ''}</span>
+                      {r.id === lit && <span className="sp-start">{s.start}</span>}
+                    </div>
+                    <p>{row.what}</p>
+                    <p className="sp-learn">{row.learn}</p>
+                  </div>
+                )
+              })}
+            </li>
+          ))}
         </ol>
         <p className="note">{s.others} <a href={SOURCES.isaac}>Isaac Sim</a>, <a href={SOURCES.stage}>stage_ros2</a>, <a href={SOURCES.flatland}>Flatland (ROS index)</a></p>
       </div>

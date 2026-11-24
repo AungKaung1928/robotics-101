@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { LADDER, pick } from './simpick'
+import { LADDER, STEPS, pick } from './simpick'
 
 const all = [true, false]
 
@@ -25,5 +25,8 @@ describe('simpick helper', () => {
   })
   it('the check answer holds: no graphics card + distance sensor = mvsim', () => {
     for (const physics of all) expect(pick({ gpu: false, sensor: true, physics })).toBe('mvsim')
+  })
+  it('drawn as 4 steps, top first; Gazebo and Webots share the top step', () => {
+    expect(STEPS.map((st) => st.map((r) => r.id))).toEqual([['gazebo', 'webots'], ['mvsim'], ['turtlesim'], ['site']])
   })
 })

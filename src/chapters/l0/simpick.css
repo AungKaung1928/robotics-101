@@ -1,4 +1,4 @@
-/* Level 0 "simpick": the 3-question helper above the ladder (top row = highest step). Colours from the tokens in index.css. */
+/* Level 0 "simpick": the 3-question helper above the ladder (top step = highest; Gazebo and Webots share one step). Colours from the tokens in index.css. */
 .sp-helper { display: grid; gap: 8px; margin-bottom: 14px; }
 .sp-q { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 6px; }
 .sp-yn .pick { margin-left: 6px; min-width: 3.5em; }
@@ -8,6 +8,8 @@
 .sp-row p { margin: 4px 0 0; }
 .sp-row.is-lit { border-color: var(--free); border-width: 3px; }
 .sp-row.is-alt { border-style: dashed; } /* same step as Gazebo: pick one */
+.sp-tier { display: grid; gap: 6px; }
+@media (min-width: 600px) { .sp-tier.has-alt { grid-template-columns: 1fr 1fr; } }
 .sp-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; }
 .sp-dim { font: 12px var(--mono); color: var(--ink-2); }
 .sp-start { font: 600 12px var(--mono); color: var(--free); }

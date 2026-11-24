@@ -19,7 +19,7 @@ export const SIMPICK_STRINGS = {
     yes: 'yes',
     no: 'no',
     start: 'Start here',
-    dim: { '2D': '2D', '2.5D': '2.5D', '3D': '3D', none: 'no world' },
+    dim: { '2D': '2D', '2.5D': '2.5D', '3D': '3D' },
     alt: 'same step: pick one',
     rows: {
       site: { name: 'This site', what: 'Nothing to install.', learn: 'Move, sense, think, act.' },
@@ -33,7 +33,7 @@ export const SIMPICK_STRINGS = {
     answers: { mvsim: 'mvsim', gazebo: 'Gazebo', isaac: 'Isaac Sim' },
     right: 'Yes: a lightweight 2.5D simulator with a distance sensor; its GPU ray-tracing is only optional.',
     wrong: 'Not quite: answer the three questions and see which step lights up.',
-    checked: 'Facts checked against each tool\'s own pages on 2026-11-23.',
+    checked: 'Facts checked against each tool\'s own pages on 2026-11-23; the turtlesim, Webots and Isaac Sim links on 2026-11-25.',
     words: 'Words you met',
     glossary: [
       ['graphics card', 'a chip that draws 3D pictures fast; laptops without one draw 3D slowly or not at all'],
@@ -60,7 +60,7 @@ export const SIMPICK_STRINGS = {
     yes: 'はい',
     no: 'いいえ',
     start: 'ここから',
-    dim: { '2D': '2D', '2.5D': '2.5D', '3D': '3D', none: '世界なし' },
+    dim: { '2D': '2D', '2.5D': '2.5D', '3D': '3D' },
     alt: '同じ段：どちらか一つ',
     rows: {
       site: { name: 'このサイト', what: 'インストール不要。', learn: '動く、感じる、考える、動かす。' },
@@ -74,7 +74,7 @@ export const SIMPICK_STRINGS = {
     answers: { mvsim: 'mvsim', gazebo: 'Gazebo', isaac: 'Isaac Sim' },
     right: '正解：距離センサーのある軽い 2.5D シミュレーター。GPU を使うレイトレーシングは任意。',
     wrong: 'おしい：3つの質問に答えて、どの段が光るか見てみよう。',
-    checked: '各ツール自身のページで 2026-11-23 に確認した事実。',
+    checked: '各ツール自身のページで 2026-11-23 に確認した事実。turtlesim、Webots、Isaac Sim のリンクは 2026-11-25 に確認。',
     words: '出てきたことば',
     glossary: [
       ['グラフィックカード', '3D の絵を速く描くチップ。ないノートPC では 3D が遅いか、描けない'],

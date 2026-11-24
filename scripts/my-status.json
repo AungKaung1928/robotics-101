@@ -3114,10 +3114,10 @@
   "back": "Check: Your laptop does not have a graphics card, and you want to use a distance sensor. Where to start?"
  },
  "l0/simpick:checked": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "Facts checked against each tool's own pages on 2026-11-23.",
-  "my": "2026-11-23 မှာ tool တစ်ခုချင်းစီရဲ့ page တွေက အချက်အလက်တွေနဲ့ တိုက်ဆိုင်စစ်ဆေးထားတာ ဖြစ်ပါတယ်။",
-  "back": "Cross-checked with information from each tool's page on 2026-11-23."
+  "my": "အချက်အလက်တွေကို tool တစ်ခုချင်းစီရဲ့ ကိုယ်ပိုင် page တွေနဲ့ 2026-11-23 မှာ တိုက်စစ်ထားပါတယ်။",
+  "back": "The facts were cross-checked against each tool's own pages on 2026-11-23."
  },
  "l0/simpick:dim.2.5D": {
   "status": "pass",
@@ -3144,10 +3144,10 @@
   "back": "No world"
  },
  "l0/simpick:everyday": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "Everyday: you learn to drive in an empty car park before the motorway. Pick the step that fits today; the next one waits.",
-  "my": "နေ့စဉ်ဘဝ ဥပမာ- အဝေးပြေးလမ်းမပေါ် မမောင်းခင် အလွတ်ဖြစ်နေတဲ့ ကားပါကင်မှာ ကားမောင်း သင်ယူကြပါတယ်။ ဒီနေ့နဲ့ ကိုက်ညီတဲ့ အဆင့်ကို ရွေးပါ၊ နောက်တစ်ဆင့်ကတော့ စောင့်ဆိုင်းနေပါလိမ့်မယ်။",
-  "back": "Everyday life example: Before driving on the highway, people learn to drive in an empty parking lot. Choose the step that matches today; the next step will be waiting."
+  "my": "နေ့စဉ်ဘဝမှာ- အဝေးပြေးလမ်းမ မတက်ခင် လူရှင်းတဲ့ ကားပါကင်မှာ ကားမောင်း သင်ပါတယ်။ ဒီနေ့ ကိုက်တဲ့ အဆင့်ကို ရွေးပါ၊ နောက်အဆင့်က စောင့်နေပါလိမ့်မယ်။",
+  "back": "In everyday life: before getting on the highway, you learn to drive in an empty car park. Pick the level that fits today; the next level will be waiting."
  },
  "l0/simpick:glossary.0.0": {
   "status": "pass",
@@ -3156,10 +3156,10 @@
   "back": "graphics card"
  },
  "l0/simpick:glossary.0.1": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "a chip that draws 3D pictures fast; laptops without one draw 3D slowly or not at all",
-  "my": "3D ပုံတွေကို မြန်မြန်ဆွဲပေးတဲ့ chip၊ ဒါမပါရင် လက်ပ်တော့တွေမှာ 3D ဆွဲတာ နှေးတာ ဒါမှမဟုတ် လုံးဝဆွဲလို့မရတာ",
-  "back": "A chip that draws 3D images quickly; without this, drawing 3D on laptops is slow or completely impossible."
+  "my": "3D ပုံတွေကို မြန်မြန် ဆွဲပေးတဲ့ chip၊ မပါတဲ့ လက်ပ်တော့တွေက 3D ကို နှေးနှေး ဆွဲတယ် ဒါမှမဟုတ် လုံးဝ မဆွဲနိုင်ဘူး",
+  "back": "A chip that draws 3D images quickly; laptops without it draw 3D slowly or cannot draw it at all"
  },
  "l0/simpick:glossary.1.0": {
   "status": "pass",
@@ -3168,10 +3168,10 @@
   "back": "physics"
  },
  "l0/simpick:glossary.1.1": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "weight, friction and falling, worked out by the simulator",
-  "my": "အလေးချိန်၊ ပွတ်တိုက်မှုနဲ့ ပြုတ်ကျတာတွေကို ဆင်မျူလေတာက တွက်ချက်ပေးတာ",
-  "back": "Weight, friction, and falling calculated by the simulator"
+  "my": "အလေးချိန်၊ ပွတ်တိုက်မှုနဲ့ ပြုတ်ကျတာတွေကို ဆင်မျူလေတာက တွက်ပေးတာ",
+  "back": "What the simulator calculates for weight, friction, and falling"
  },
  "l0/simpick:learn": {
   "status": "pass",
@@ -3216,16 +3216,16 @@
   "back": "Do you need physics (weight, friction, falling)?"
  },
  "l0/simpick:q.sensor": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "Do you want to practise with a distance sensor (walls, maps)?",
-  "my": "အကွာအဝေး ဆင်ဆာ (နံရံ များ၊ မြေပုံ များ) နဲ့ လေ့ကျင့်ချင်သလား။",
-  "back": "Do you want to practice with distance sensors (walls, maps)?"
+  "my": "အကွာအဝေး ဆင်ဆာ (နံရံတွေ၊ မြေပုံတွေ) နဲ့ လေ့ကျင့်ချင်သလား။",
+  "back": "Want to practice with a distance sensor (walls, maps)?"
  },
  "l0/simpick:right": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "Yes: a lightweight 2.5D simulator with a distance sensor; its GPU ray-tracing is only optional.",
-  "my": "မှန်ပါတယ်- အကွာအဝေး ဆင်ဆာ ပါဝင်တဲ့ ပေါ့ပါးတဲ့ 2.5D ဆင်မျူလေတာ ဖြစ်ပြီး၊ သူ့ရဲ့ GPU ray-tracing ကတော့ စိတ်ကြိုက် သုံးနိုင်ပါတယ်။",
-  "back": "Correct: It is a lightweight 2.5D simulator with distance sensors, and its GPU ray-tracing is optional."
+  "my": "ဟုတ်ပါတယ်- အကွာအဝေး ဆင်ဆာ ပါတဲ့ ပေါ့ပါးတဲ့ 2.5D ဆင်မျူလေတာပါ၊ သူ့ GPU ray-tracing က မဖြစ်မနေ မလိုပါဘူး။",
+  "back": "Yes: it is a lightweight 2.5D simulator with a range sensor; its GPU ray-tracing is not strictly required."
  },
  "l0/simpick:rows.fake.learn": {
   "status": "pass-alt",
@@ -3282,10 +3282,10 @@
   "back": "Realistic 3D for robot study, it needs an NVIDIA RTX graphics card (version 6.0.1 asks for an RTX 4080 with at least 16 GB)."
  },
  "l0/simpick:rows.mvsim.learn": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "Distance sensor, wall following, maps.",
-  "my": "အကွာအဝေး ဆင်ဆာ၊ နံရံ အတိုင်း လိုက်ပါခြင်း၊ မြေပုံ များ။",
-  "back": "Distance sensor, wall following, maps."
+  "my": "အကွာအဝေး ဆင်ဆာ၊ နံရံ အတိုင်း လိုက်သွားတာ၊ မြေပုံတွေ။",
+  "back": "Distance sensor, following along a wall, maps."
  },
  "l0/simpick:rows.mvsim.name": {
   "status": "pass",
@@ -3294,10 +3294,10 @@
   "back": "mvsim"
  },
  "l0/simpick:rows.mvsim.what": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "A lightweight 2.5D simulator: a flat world with simple physics, walls and distance sensors; a ready package for ROS 2 Humble.",
-  "my": "ပေါ့ပါးတဲ့ 2.5D ဆင်မျူလေတာ- ရိုးရှင်းတဲ့ ရုပ်ပိုင်းဆိုင်ရာ သဘောတရားများ၊ နံရံများနဲ့ အကွာအဝေး ဆင်ဆာများ ပါဝင်တဲ့ ညီညာတဲ့ ကမ္ဘာဖြစ်ပြီး ROS 2 Humble အတွက် အသင့်သုံး package တစ်ခု ဖြစ်ပါတယ်။",
-  "back": "Lightweight 2.5D simulator: a flat world containing simple physics concepts, walls, and distance sensors, and a ready-to-use package for ROS 2 Humble."
+  "my": "ပေါ့ပါးတဲ့ 2.5D ဆင်မျူလေတာ- ရိုးရှင်းတဲ့ physics၊ နံရံတွေနဲ့ အကွာအဝေး ဆင်ဆာတွေ ပါတဲ့ ပြားပြား ကမ္ဘာ၊ ROS 2 Humble အတွက် အသင့်သုံး package ပါ။",
+  "back": "A lightweight 2.5D simulator: simple physics, a flat world with walls and range sensors, a ready-to-use package for ROS 2 Humble."
  },
  "l0/simpick:rows.site.learn": {
   "status": "pass",
@@ -3354,10 +3354,10 @@
   "back": "It is another free 3D simulator containing physics concepts and a TurtleBot3 model. It works directly on Windows, macOS, and Linux, and communicates with ROS 2 via webots_ros2."
  },
  "l0/simpick:srcGloss.rows": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "row links above",
-  "my": "အထက်ပါ အတန်း လင့်ခ်များ",
-  "back": "Above row links"
+  "my": "အပေါ်က အတန်းတွေရဲ့ link",
+  "back": "Links of the rows above"
  },
  "l0/simpick:start": {
   "status": "pass",
@@ -3366,22 +3366,22 @@
   "back": "Start here"
  },
  "l0/simpick:steps.0": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "Many simulators exist. Think of them as a ladder: each step adds one thing to learn and asks a little more of your computer.",
-  "my": "ဆင်မျူလေတာ တွေ အများကြီး ရှိပါတယ်။ သူတို့ကို လှေကားထစ်တွေလို စဉ်းစားကြည့်ပါ- အဆင့်တစ်ခုစီတိုင်းမှာ သင်ယူစရာ တစ်ခုစီ တိုးလာပြီး ကွန်ပျူတာ ရဲ့ လုပ်ဆောင်နိုင်စွမ်းကိုလည်း ပိုတောင်းဆိုလာပါလိမ့်မယ်။",
-  "back": "There are many simulators. Think of them as staircase steps: each level adds something new to learn and demands more performance from the computer."
+  "my": "ဆင်မျူလေတာတွေ အများကြီး ရှိပါတယ်။ လှေကားထစ်တွေလို စဉ်းစားကြည့်ပါ- အဆင့်တိုင်းမှာ သင်ယူစရာ တစ်ခု တိုးလာပြီး ကွန်ပျူတာကိုလည်း နည်းနည်း ပိုတောင်းပါတယ်။",
+  "back": "There are many simulators. Think of them like stair steps: at every level one more thing to learn is added, and it also asks a little more of the computer."
  },
  "l0/simpick:steps.1": {
-  "status": "needs-human",
+  "status": "pass-alt",
   "en": "Answer the three questions below and one step lights up. Start there; the others can wait.",
-  "my": "အောက်က မေးခွန်း 3 ခုကို ဖြေရင် အဆင့်တစ်ခု မီးလင်းလာပါမယ်။ အဲဒီကနေ စပါ၊ ကျန်တာတွေကို နောက်မှ လုပ်လို့ရပါတယ်။",
-  "note": "meaning drift (blind back-translation: \"If you answer the 3 questions below, a level will light up. Start from there; you can do the rest later.\"): drift: \"step\" changed to \"level\""
+  "my": "အောက်က မေးခွန်း 3 ခုကို ဖြေကြည့်ရင် အဆင့်တစ်ခုက လင်းလာပါလိမ့်မယ်။ အဲဒီကနေ စတင်ပါ၊ ကျန်တာတွေကို နောက်မှ လုပ်လို့ ရပါတယ်။",
+  "back": "If you answer the 3 questions below, a level will become bright. Start from there; you can do the rest later."
  },
  "l0/simpick:steps.2": {
-  "status": "pass",
+  "status": "pass-alt",
   "en": "From the projects behind this course: on a Windows laptop running Linux inside it (WSL2) with no graphics card, the 3D window of Gazebo Classic stayed black, while the 2D tools worked. So: start in 2D.",
-  "my": "ဒီသင်တန်းရဲ့ နောက်ကွယ်က ပရောဂျက်တွေအရ- graphics card မပါတဲ့ Windows လက်ပ်တော့ ပေါ်မှာ Linux (WSL2) သုံးပြီး Gazebo Classic ရဲ့ 3D window ကို ဖွင့်တဲ့အခါ ဘာမှမမြင်ရဘဲ မည်းနေခဲ့ပေမဲ့ 2D ကိရိယာတွေကတော့ အလုပ်လုပ်ပါတယ်။ ဒါကြောင့် 2D ကနေပဲ စတင်ပါ။",
-  "back": "According to the projects behind this course: when opening Gazebo Classic's 3D window using Linux (WSL2) on a Windows laptop without a graphics card, nothing was visible and it was black, but 2D tools worked. Therefore, start from 2D."
+  "my": "ဒီသင်ခန်းစာရဲ့ နောက်ကွယ်က project တွေမှာ တွေ့ခဲ့တာက- graphics card မပါတဲ့ Windows လက်ပ်တော့ ထဲမှာ Linux (WSL2) ကို run တဲ့အခါ Gazebo Classic ရဲ့ 3D window က မည်းနေခဲ့ပြီး 2D ကိရိယာတွေကတော့ အလုပ်လုပ်ပါတယ်။ ဒါကြောင့် 2D နဲ့ စပါ။",
+  "back": "What was found in the projects behind this lesson: when running Linux (WSL2) inside a Windows laptop without a graphics card, the 3D window of Gazebo Classic stayed black, while the 2D tools worked. So start with 2D."
  },
  "l0/simpick:steps.3": {
   "status": "pass",
@@ -3403,10 +3403,10 @@
   "note": "r3: same form as l0/act, meet, move, sense, simwhat, think (my-consistency)"
  },
  "l0/simpick:wrong": {
-  "status": "needs-human",
+  "status": "pass-alt",
   "en": "Not quite: answer the three questions and see which step lights up.",
-  "my": "သိပ်မမှန်သေးပါဘူး - မေးခွန်း 3 ခုကို ဖြေပြီး ဘယ်အဆင့် မီးလင်းလာမလဲ ကြည့်ပါ။",
-  "note": "meaning drift (blind back-translation: \"Not quite correct yet - answer the 3 questions and see which level lights up.\"): drift: \"step\" changed to \"level\""
+  "my": "မမှန်သေးပါဘူး- မေးခွန်း 3 ခုကို ဖြေပြီး ဘယ်အဆင့် မီးလင်းလာလဲ ကြည့်ပါ။",
+  "back": "Not correct yet: answer the 3 questions and see which level lights up."
  },
  "l0/simpick:yes": {
   "status": "pass",

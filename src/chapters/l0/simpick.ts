@@ -12,6 +12,9 @@ export const LADDER: Row[] = [
   { id: 'gazebo', dim: '3D', url: 'https://emanual.robotis.com/docs/en/platform/turtlebot3/simulation/' },
   { id: 'webots', dim: '3D', url: 'https://docs.ros.org/en/jazzy/Tutorials/Advanced/Simulators/Webots/Installation-Windows.html', alt: true },
 ]
+/** The ladder as drawn, top step first: an alt row shares the step of the row before it (Gazebo | Webots). */
+export const STEPS: Row[][] = LADDER.reduce<Row[][]>((acc, r) => (r.alt ? (acc[acc.length - 1].push(r), acc) : [...acc, [r]]), []).reverse()
+
 /** Other sources the page cites (facts file rows + the footnote). */
 export const SOURCES = {
   gazeboHumble: 'https://github.com/ROBOTIS-GIT/turtlebot3_simulations/blob/humble/turtlebot3_gazebo/package.xml',
