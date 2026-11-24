@@ -6439,11 +6439,425 @@
   "my": "မမှန်သေးပါဘူး။ အဲဒါကို run ကြည့်ပြီး ဘယ်အတွဲတွေက odom → base_link လိုအပ်လဲဆိုတာ ကြည့်ပါ။",
   "back": "Not correct yet. Try running that and see which pairs need odom → base_link."
  },
+ "l5b/fieldfail:ask": {
+  "status": "pass-alt",
+  "en": "Which cause fits this symptom?",
+  "my": "ဒီလက္ခဏာနဲ့ ဘယ်အကြောင်းရင်းက ကိုက်ညီသလဲ။",
+  "back": "Which cause matches this symptom?"
+ },
+ "l5b/fieldfail:cause": {
+  "status": "pass-alt",
+  "en": "Cause",
+  "my": "အကြောင်းရင်း",
+  "back": "Cause"
+ },
+ "l5b/fieldfail:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: diagnose all six right on the first try.",
+  "my": "စိန်ခေါ်မှု: 6 ခုလုံးကို ပထမအကြိမ်မှာပဲ မှန်အောင် ရှာဖွေပါ။",
+  "back": "Challenge: find all 6 correctly on the first try."
+ },
+ "l5b/fieldfail:everyday": {
+  "status": "pass-alt",
+  "en": "Everyday: a car that pulls to one side. The symptom is the pull; the cause might be tyre pressure, alignment or brakes. A mechanic checks before replacing parts.",
+  "my": "နေ့စဉ်ဘဝ ဥပမာ: တစ်ဖက်ကို ဆွဲသွားတဲ့ ကား။ လက္ခဏာက ဆွဲသွားတာပါ၊ အကြောင်းရင်းက ဘီးလေဖိအား၊ alignment ဒါမှမဟုတ် ဘရိတ် ဖြစ်နိုင်ပါတယ်။ ပြင်ဆိုင်သမားက အစိတ်အပိုင်း မလဲခင် အရင်စစ်ပါတယ်။",
+  "back": "Everyday example: a car pulling to one side. The symptom is the pulling; the cause could be tire pressure, alignment, or the brake. The mechanic checks first before replacing a part."
+ },
+ "l5b/fieldfail:fails.attach.cause": {
+  "status": "pass-alt",
+  "en": "The ball was attached to the gripper as an AttachedCollisionObject",
+  "my": "ဘောလုံးကို AttachedCollisionObject အဖြစ် gripper မှာ တွဲထားတယ်",
+  "back": "The ball is attached to the gripper as an AttachedCollisionObject."
+ },
+ "l5b/fieldfail:fails.attach.fix": {
+  "status": "pass-alt",
+  "en": "Do not attach it",
+  "my": "မတွဲပါနဲ့",
+  "back": "Do not attach."
+ },
+ "l5b/fieldfail:fails.attach.symptom": {
+  "status": "pass-alt",
+  "en": "A pick-and-place arm shows a stray green sphere on the gripper and plans fail with self-collision at panda_link7.",
+  "my": "ကောက်ချ လက်မောင်မှာ gripper ပေါ်က မလိုအပ်တဲ့ အစိမ်းရောင် စက်လုံးတစ်လုံး ပေါ်လာပြီး panda_link7 မှာ self-collision နဲ့ plan တွေ ကျရှုံးပါတယ်။",
+  "back": "On the pick-and-drop arm, an unnecessary green sphere appears on the gripper, and plans fail with self-collision at panda_link7."
+ },
+ "l5b/fieldfail:fails.beam.cause": {
+  "status": "pass-alt",
+  "en": "The wall distance used one side arc; when the robot yawed toward the wall the reading grew by 1/cos(yaw)",
+  "my": "နံရံအကွာအဝေးကို ဘေးဘက် ထောင့်ပိုင်း တစ်ခုတည်းနဲ့ တိုင်းထားတယ်။ စက်ရုပ်က နံရံဘက် yaw လှည့်ရင် တန်ဖိုးက 1/cos(yaw) ဆ ကြီးလာတယ်",
+  "back": "The wall distance is measured with a single side angle sector. When the robot yaws toward the wall, the value becomes 1/cos(yaw) times larger."
+ },
+ "l5b/fieldfail:fails.beam.fix": {
+  "status": "pass-alt",
+  "en": "Two beams solve the wall angle; the lost check uses a wider arc",
+  "my": "beam 2 ခုနဲ့ နံရံထောင့်ကို တွက်ပြီး၊ ပျောက်မပျောက် စစ်တာက ပိုကျယ်တဲ့ ထောင့်ပိုင်းကို သုံးတယ်",
+  "back": "Calculate the wall angle with 2 beams, and the check for whether it is lost uses the wider angle sector."
+ },
+ "l5b/fieldfail:fails.beam.symptom": {
+  "status": "pass-alt",
+  "en": "A wall follower keeps saying \"wall lost\" every 1-2 s, then drives at the wall until collision avoidance turns it away.",
+  "my": "နံရံကပ်သွားတဲ့ စက်ရုပ်က 1-2 s တိုင်း \"နံရံ ပျောက်သွားပြီ\" လို့ ပြောပြီး တိုက်မှုရှောင်တဲ့စနစ်က လှည့်ပေးတဲ့အထိ နံရံဆီ မောင်းသွားပါတယ်။",
+  "back": "The wall-following robot says \"wall lost\" every 1-2 s and drives toward the wall until the collision-avoidance system turns it."
+ },
+ "l5b/fieldfail:fails.chatter.cause": {
+  "status": "pass-alt",
+  "en": "Entering and leaving a state used the same threshold",
+  "my": "အခြေအနေထဲ ဝင်တာနဲ့ ထွက်တာ threshold တူတူ သုံးထားတယ်",
+  "back": "The same threshold is used for entering the state and leaving it."
+ },
+ "l5b/fieldfail:fails.chatter.fix": {
+  "status": "pass-alt",
+  "en": "Leave only after a 1.3x margin (hysteresis)",
+  "my": "1.3x margin ကျော်မှ ထွက်ပါ (hysteresis)",
+  "back": "Leave only after exceeding a 1.3x margin (hysteresis)."
+ },
+ "l5b/fieldfail:fails.chatter.symptom": {
+  "status": "pass-alt",
+  "en": "The state machine flips back and forth between two states at a boundary.",
+  "my": "နယ်နိမိတ်မှာ state machine က အခြေအနေ 2 ခုကြား ပြန်ပြန်ခုန်နေပါတယ်။",
+  "back": "At the boundary, the state machine keeps jumping back and forth between 2 states."
+ },
+ "l5b/fieldfail:fails.index.cause": {
+  "status": "pass-alt",
+  "en": "Negative angles were clamped to scan index 0, which is the front beam when angle_min = 0",
+  "my": "အနုတ်ထောင့်တွေကို scan index 0 ဆီ ဖိထည့်ထားပြီး၊ angle_min = 0 ဆိုရင် အဲဒါက ရှေ့ဆုံး beam ဖြစ်နေတယ်",
+  "back": "Negative angles are forced into scan index 0, and if angle_min = 0, that is the front-most beam."
+ },
+ "l5b/fieldfail:fails.index.symptom": {
+  "status": "pass-alt",
+  "en": "The right-wall controller reacts to things straight ahead instead of on the right.",
+  "my": "ညာနံရံ controller က ညာဘက်မှာ မဟုတ်ဘဲ ရှေ့တည့်တည့်က အရာတွေကို တုံ့ပြန်နေပါတယ်။",
+  "back": "The right-wall controller is reacting to things straight ahead, not on the right."
+ },
+ "l5b/fieldfail:fails.params.cause": {
+  "status": "pass-alt",
+  "en": "Another included launch file declared the same argument name, so the parameter file path became empty",
+  "my": "တခြား include လုပ်ထားတဲ့ launch file က argument နာမည်တူကို ကြေညာထားလို့ parameter file လမ်းကြောင်း ဗလာဖြစ်သွားတယ်",
+  "back": "Another included launch file declares an argument with the same name, so the parameter file path became empty."
+ },
+ "l5b/fieldfail:fails.params.fix": {
+  "status": "pass-alt",
+  "en": "Pass the file to the node explicitly",
+  "my": "file ကို node ဆီ တိုက်ရိုက် ပေးလိုက်ပါ",
+  "back": "Give the file directly to the node."
+ },
+ "l5b/fieldfail:fails.params.symptom": {
+  "status": "pass-alt",
+  "en": "Changing values in the YAML file has no effect: the node behaves the same every run.",
+  "my": "YAML file ထဲက တန်ဖိုးတွေ ပြောင်းလည်း ဘာမှ မထူးပါဘူး: node က ဖွင့်တိုင်း အတူတူပဲ လုပ်ပါတယ်။",
+  "back": "Even if the values in the YAML file are changed, it makes no difference: the node does the same thing every time it is launched."
+ },
+ "l5b/fieldfail:fails.wedge.cause": {
+  "status": "pass-alt",
+  "en": "Collision avoidance could only rotate, never drive",
+  "my": "တိုက်မှုရှောင်တဲ့စနစ်က လှည့်ရုံပဲ လုပ်နိုင်ပြီး မောင်းလို့ မရခဲ့ဘူး",
+  "back": "The collision-avoidance system could only turn and could not drive."
+ },
+ "l5b/fieldfail:fails.wedge.fix": {
+  "status": "pass-alt",
+  "en": "Back off when the turn does not clear the obstacle, only if the rear is clear",
+  "my": "လှည့်ပြီးတာနဲ့ အတားအဆီး မပျောက်ရင် နောက်ဆုတ်ပါ၊ နောက်ဘက် လွတ်မှပဲ",
+  "back": "If the obstacle does not disappear once the turn is done, back up, only when the rear is clear."
+ },
+ "l5b/fieldfail:fails.wedge.symptom": {
+  "status": "pass-alt",
+  "en": "Wedged into a corner, the robot spins in place: 93.6 s in one run.",
+  "my": "ထောင့်ထဲ ညပ်သွားရင် စက်ရုပ်က နေရာမှာပဲ လည်နေပါတယ်: တစ်ခါ ဖွင့်စမ်းတုန်းက 93.6 s ကြာခဲ့ပါတယ်။",
+  "back": "When stuck in a corner, the robot spins in place: one launch test took 93.6 s."
+ },
+ "l5b/fieldfail:fix": {
+  "status": "pass-alt",
+  "en": "Fix",
+  "my": "ပြင်နည်း",
+  "back": "Fix"
+ },
+ "l5b/fieldfail:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "symptom",
+  "my": "လက္ခဏာ",
+  "back": "Symptom"
+ },
+ "l5b/fieldfail:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "what you see the robot do",
+  "my": "စက်ရုပ် လုပ်နေတာကို မြင်ရတာ",
+  "back": "What you see the robot doing"
+ },
+ "l5b/fieldfail:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "root cause",
+  "my": "အမြစ်အကြောင်းရင်း",
+  "back": "Root cause"
+ },
+ "l5b/fieldfail:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "the one thing that, fixed, makes the symptom go away",
+  "my": "ပြင်လိုက်ရင် လက္ခဏာ ပျောက်သွားစေမယ့် အရာ တစ်ခုတည်း",
+  "back": "The one single thing that, if fixed, makes the symptom disappear"
+ },
+ "l5b/fieldfail:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "hysteresis",
+  "my": "hysteresis",
+  "back": "hysteresis"
+ },
+ "l5b/fieldfail:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "different thresholds for on and off, so a value near the line does not flicker",
+  "my": "on နဲ့ off အတွက် threshold မတူအောင် သုံးတာ၊ ဒါမှ နယ်နိမိတ်နားက တန်ဖိုး မခုန်မှာပါ",
+  "back": "Using different thresholds for on and off, so that the value near the boundary does not jump."
+ },
+ "l5b/fieldfail:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: most robot bugs show up as strange behaviour, not as an error message. You read the symptom, guess the cause, then prove it. These six are written down in the author's own public repos; all happened in simulation (Gazebo, MoveIt), none on a real robot.",
+  "my": "သင်ယူရမှာက: စက်ရုပ် bug အများစုက အမှား message အဖြစ် မပေါ်ဘဲ ထူးဆန်းတဲ့ အပြုအမူအဖြစ် ပေါ်ပါတယ်။ လက္ခဏာကို ဖတ်၊ အကြောင်းရင်းကို ခန့်မှန်းပြီး၊ ပြီးမှ သက်သေပြရပါတယ်။ ဒီ 6 ခုကို ရေးသူရဲ့ ကိုယ်ပိုင် public repo တွေမှာ မှတ်ထားပါတယ်။ အားလုံး ဆင်မျူလေတာ (Gazebo, MoveIt) ထဲမှာ ဖြစ်ခဲ့တာပါ၊ စက်ရုပ်အစစ်မှာ မဖြစ်ခဲ့ပါဘူး။",
+  "back": "What you learn: most robot bugs do not show up as an error message but as strange behavior. Read the symptom, guess the cause, and only then prove it. These 6 are recorded in the author's own public repos. All of them happened in simulators (Gazebo, MoveIt), not on a real robot."
+ },
+ "l5b/fieldfail:measured": {
+  "status": "pass-alt",
+  "en": "The wall follower's docs/DETAILS.md says failures 4 and 5 (wedged in a corner, chattering) were found by measurement, not by reading the code.",
+  "my": "နံရံကပ်သွားတဲ့ စက်ရုပ်ရဲ့ docs/DETAILS.md အရ 4 နဲ့ 5 (ထောင့်ထဲ ညပ်နေတာ၊ အခြေအနေ ခုန်နေတာ) ကို ကုဒ်ဖတ်လို့ မဟုတ်ဘဲ တိုင်းတာပြီး တွေ့ခဲ့တာပါ။",
+  "back": "According to docs/DETAILS.md of the wall-following robot, 4 and 5 (stuck in the corner, state jumping) were found by measuring, not by reading the code."
+ },
+ "l5b/fieldfail:next": {
+  "status": "pass-alt",
+  "en": "next failure",
+  "my": "နောက်ထပ် ချို့ယွင်းမှု",
+  "back": "Next fault"
+ },
+ "l5b/fieldfail:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet:",
+  "my": "မပြီးသေးပါ:",
+  "back": "Not finished yet:"
+ },
+ "l5b/fieldfail:right": {
+  "status": "pass-alt",
+  "en": "Right.",
+  "my": "မှန်ပါတယ်။",
+  "back": "Correct."
+ },
+ "l5b/fieldfail:score": {
+  "status": "pass-alt",
+  "en": "right on the first try",
+  "my": "ပထမအကြိမ်မှာ မှန်တာ",
+  "back": "Correct on the first try"
+ },
+ "l5b/fieldfail:solved": {
+  "status": "pass-alt",
+  "en": "Solved:",
+  "my": "အောင်မြင်ပါပြီ:",
+  "back": "Succeeded:"
+ },
+ "l5b/fieldfail:symptom": {
+  "status": "pass-alt",
+  "en": "Symptom",
+  "my": "လက္ခဏာ",
+  "back": "Symptom"
+ },
  "l5b/fieldfail:title": {
   "status": "pass-alt",
   "en": "Failures and how they were found",
   "my": "ချို့ယွင်းချက်တွေနဲ့ ဘယ်လို ရှာတွေ့ခဲ့သလဲ",
   "back": "The faults and how they were found"
+ },
+ "l5b/fieldfail:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "စကားလုံးများ",
+  "back": "Words"
+ },
+ "l5b/fieldfail:wrong": {
+  "status": "pass-alt",
+  "en": "Not this one: try again.",
+  "my": "ဒါ မဟုတ်ပါဘူး: ထပ်စမ်းကြည့်ပါ။",
+  "back": "This is not it: try again."
+ },
+ "l5b/lifecycle:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: just switch to multi-threaded",
+  "my": "ဖျက်ကြည့်: thread များစွာကို ပြောင်းရုံပဲ",
+  "back": "Try breaking it: just switch to multiple threads"
+ },
+ "l5b/lifecycle:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: keep every control tick on time while the map saves.",
+  "my": "စိန်ခေါ်မှု: မြေပုံ သိမ်းနေစဉ်မှာလည်း control tick တိုင်း အချိန်မှန်စေပါ။",
+  "back": "Challenge: make every control tick on time even while the map is being saved."
+ },
+ "l5b/lifecycle:everyday": {
+  "status": "pass-alt",
+  "en": "Everyday: a shop. Unlock and stock the shelves (configure), open the doors (activate), close for a break (deactivate). With one cashier, one slow customer makes the whole queue wait.",
+  "my": "နေ့စဉ်ဘဝ ဥပမာ: ဆိုင်တစ်ဆိုင်။ ဆိုင်ကို စီစဉ်ပြီး စင်ပေါ် ပစ္စည်းထည့်တယ် (configure)၊ တံခါးဖွင့်တယ် (activate)၊ အနားယူဖို့ ပိတ်တယ် (deactivate)။ ငွေကောင်တာ တစ်ခုတည်းဆိုရင် နှေးတဲ့ ဝယ်သူတစ်ယောက်ကြောင့် queue တစ်ခုလုံး စောင့်ရပါတယ်။",
+  "back": "Everyday example: a shop. You arrange the shop and put goods on the shelves (configure), open the door (activate), close to rest (deactivate). If there is only one cash counter, the whole queue has to wait because of one slow customer."
+ },
+ "l5b/lifecycle:execH": {
+  "status": "pass-alt",
+  "en": "Executor: a 100 ms control timer and a 350 ms map save in the same node",
+  "my": "Executor: node တစ်ခုတည်းမှာ 100 ms control timer နဲ့ 350 ms မြေပုံသိမ်းတာ",
+  "back": "Executor: in a single node, a 100 ms control timer and a 350 ms map save"
+ },
+ "l5b/lifecycle:execs.multi_default": {
+  "status": "pass-alt",
+  "en": "multi-threaded, default group",
+  "my": "thread များစွာ၊ default group",
+  "back": "multiple threads, default group"
+ },
+ "l5b/lifecycle:execs.multi_groups": {
+  "status": "pass-alt",
+  "en": "multi-threaded, own groups",
+  "my": "thread များစွာ၊ ကိုယ်ပိုင် group",
+  "back": "multiple threads, own group"
+ },
+ "l5b/lifecycle:execs.single": {
+  "status": "pass-alt",
+  "en": "single-threaded",
+  "my": "thread တစ်ခုတည်း",
+  "back": "single thread"
+ },
+ "l5b/lifecycle:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "lifecycle node",
+  "my": "lifecycle node",
+  "back": "lifecycle node"
+ },
+ "l5b/lifecycle:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "a node with states (unconfigured, inactive, active, finalized) driven from outside",
+  "my": "အပြင်ကနေ ထိန်းချုပ်တဲ့ state တွေ (unconfigured, inactive, active, finalized) ပါတဲ့ node",
+  "back": "A node with externally controlled states (unconfigured, inactive, active, finalized)"
+ },
+ "l5b/lifecycle:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "transition",
+  "my": "transition",
+  "back": "transition"
+ },
+ "l5b/lifecycle:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "configure, activate, deactivate, cleanup, shutdown",
+  "my": "configure, activate, deactivate, cleanup, shutdown",
+  "back": "configure, activate, deactivate, cleanup, shutdown"
+ },
+ "l5b/lifecycle:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "executor",
+  "my": "executor",
+  "back": "executor"
+ },
+ "l5b/lifecycle:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "the loop that picks which ready callback runs",
+  "my": "အဆင်သင့်ဖြစ်နေတဲ့ callback တွေထဲက ဘယ်ဟာကို အလုပ်လုပ်မလဲ ရွေးတဲ့ loop",
+  "back": "A loop that chooses which of the ready callbacks to run"
+ },
+ "l5b/lifecycle:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "callback group",
+  "my": "callback group",
+  "back": "callback group"
+ },
+ "l5b/lifecycle:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "mutually exclusive (one at a time) or reentrant (may run in parallel)",
+  "my": "mutually exclusive (တစ်ကြိမ်တစ်ခု) ဒါမှမဟုတ် reentrant (တစ်ပြိုင်နက် အလုပ်လုပ်နိုင်)",
+  "back": "mutually exclusive (one at a time) or reentrant (can run at the same time)"
+ },
+ "l5b/lifecycle:lateLbl": {
+  "status": "pass-alt",
+  "en": "control ticks late",
+  "my": "နောက်ကျတဲ့ control tick",
+  "back": "Late control tick"
+ },
+ "l5b/lifecycle:lcNote": {
+  "status": "pass-alt",
+  "en": "The node never changes state by itself: a supervisor (another node or ros2 lifecycle set) sends each transition. The exception: an error (in a transition or while active) sends it to error handling on its own. So a system can configure everything first and switch it on only when all parts are ready.",
+  "my": "node က ကိုယ့်ဘာသာ state မပြောင်းပါဘူး: supervisor (တခြား node ဒါမှမဟုတ် ros2 lifecycle set) က transition တစ်ခုချင်းစီကို ပို့ပေးပါတယ်။ ခြွင်းချက်က အမှား (transition အတွင်း ဒါမှမဟုတ် active ဖြစ်နေစဉ်) ပါ၊ အဲဒီအခါ ကိုယ့်ဘာသာ အမှားကိုင်တွယ်တဲ့ အခြေအနေကို ရောက်သွားပါတယ်။ ဒါကြောင့် စနစ်တစ်ခုက အရာအားလုံးကို အရင် configure လုပ်ပြီး အစိတ်အပိုင်းအားလုံး အဆင်သင့်ဖြစ်မှ ဖွင့်နိုင်ပါတယ်။",
+  "back": "A node does not change state by itself: a supervisor (another node or ros2 lifecycle set) sends each transition. The exception is an error (during a transition or while active); then it reaches the error-handling state on its own. So a system can configure everything first and turn on only once all the components are ready."
+ },
+ "l5b/lifecycle:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: a lifecycle (managed) node starts switched off and only works after a supervisor configures and activates it. An executor decides which callback runs when; one slow callback can hold up the others.",
+  "my": "သင်ယူရမှာက: lifecycle (managed) node က ပိတ်ထားတဲ့ အခြေအနေကနေ စပြီး၊ supervisor က configure နဲ့ activate လုပ်ပေးမှ အလုပ်လုပ်ပါတယ်။ executor က ဘယ် callback ကို ဘယ်အချိန် အလုပ်လုပ်မလဲ ဆုံးဖြတ်ပါတယ်။ callback တစ်ခု နှေးရင် တစ်ခြားတွေကို ပိတ်ထားနိုင်ပါတယ်။",
+  "back": "What you learn: a lifecycle (managed) node starts from the off state and works only after the supervisor does configure and activate. The executor decides which callback runs when. If one callback is slow, it can block the others."
+ },
+ "l5b/lifecycle:no": {
+  "status": "pass-alt",
+  "en": "no",
+  "my": "မလုပ်ဘူး",
+  "back": "Does not"
+ },
+ "l5b/lifecycle:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet:",
+  "my": "မပြီးသေးပါ:",
+  "back": "Not finished yet:"
+ },
+ "l5b/lifecycle:processing": {
+  "status": "pass-alt",
+  "en": "processes scans",
+  "my": "scan တွေ လုပ်ဆောင်တယ်",
+  "back": "Processes scans"
+ },
+ "l5b/lifecycle:real": {
+  "status": "pass-alt",
+  "en": "In a real project: Autoware-Simulation-Demo spins three nodes in one MultiThreadedExecutor (src/main.cpp:16). Each node has its own default group, so callbacks of different nodes can run in parallel; two callbacks inside one node still cannot.",
+  "my": "တကယ့် project မှာ: Autoware-Simulation-Demo က node 3 ခုကို MultiThreadedExecutor တစ်ခုထဲမှာ spin လုပ်ပါတယ် (src/main.cpp:16)။ node တစ်ခုစီမှာ ကိုယ်ပိုင် default group ရှိလို့ node မတူတဲ့ callback တွေ တစ်ပြိုင်နက် အလုပ်လုပ်နိုင်ပါတယ်။ node တစ်ခုတည်းထဲက callback 2 ခုကတော့ မလုပ်နိုင်သေးပါဘူး။",
+  "back": "In the real project: Autoware-Simulation-Demo spins 3 nodes in a single MultiThreadedExecutor (src/main.cpp:16). Each node has its own default group, so callbacks of different nodes can run at the same time. Two callbacks within a single node cannot yet."
+ },
+ "l5b/lifecycle:reset": {
+  "status": "pass-alt",
+  "en": "start again",
+  "my": "ပြန်စ",
+  "back": "Reset"
+ },
+ "l5b/lifecycle:solved": {
+  "status": "pass-alt",
+  "en": "Solved:",
+  "my": "အောင်မြင်ပါပြီ:",
+  "back": "Succeeded:"
+ },
+ "l5b/lifecycle:state": {
+  "status": "pass-alt",
+  "en": "state",
+  "my": "အခြေအနေ",
+  "back": "State"
+ },
+ "l5b/lifecycle:stateH": {
+  "status": "pass-alt",
+  "en": "Lifecycle: press the transitions",
+  "my": "Lifecycle: transition တွေကို နှိပ်ကြည့်ပါ",
+  "back": "Lifecycle: click the transitions"
+ },
+ "l5b/lifecycle:states.active": {
+  "status": "pass-alt",
+  "en": "active",
+  "my": "active",
+  "back": "active"
+ },
+ "l5b/lifecycle:states.finalized": {
+  "status": "pass-alt",
+  "en": "finalized",
+  "my": "finalized",
+  "back": "finalized"
+ },
+ "l5b/lifecycle:states.inactive": {
+  "status": "pass-alt",
+  "en": "inactive",
+  "my": "inactive",
+  "back": "inactive"
+ },
+ "l5b/lifecycle:states.unconfigured": {
+  "status": "pass-alt",
+  "en": "unconfigured",
+  "my": "unconfigured",
+  "back": "unconfigured"
+ },
+ "l5b/lifecycle:timingNote": {
+  "status": "pass-alt",
+  "en": "The 10 ms tick and 350 ms save are made-up timings to show the effect.",
+  "my": "10 ms tick နဲ့ 350 ms save က ရလဒ်ကို ပြဖို့ ဖန်တီးထားတဲ့ အချိန်တွေပါ။",
+  "back": "The 10 ms tick and the 350 ms save are times made up to show the result."
  },
  "l5b/lifecycle:title": {
   "status": "pass-alt",
@@ -6451,10 +6865,238 @@
   "my": "ROS 2: lifecycle node တွေနဲ့ executor တွေ",
   "back": "ROS 2: lifecycle nodes and executors"
  },
+ "l5b/lifecycle:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "စကားလုံးများ",
+  "back": "Words"
+ },
+ "l5b/lifecycle:worst": {
+  "status": "pass-alt",
+  "en": "worst delay (ms)",
+  "my": "အဆိုးဆုံး နောက်ကျမှု (ms)",
+  "back": "Worst delay (ms)"
+ },
+ "l5b/lifecycle:yes": {
+  "status": "pass-alt",
+  "en": "yes",
+  "my": "လုပ်တယ်",
+  "back": "Does"
+ },
+ "l5b/qos:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: publisher best effort, subscriber reliable",
+  "my": "ဖျက်ကြည့်: publisher က best effort၊ subscriber က reliable",
+  "back": "Try breaking it: publisher is best effort, subscriber is reliable"
+ },
+ "l5b/qos:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: RViz starts after the map was published. Make it still get the map.",
+  "my": "စိန်ခေါ်မှု: မြေပုံ publish လုပ်ပြီးမှ RViz စပါတယ်။ ဒါပေမယ့် မြေပုံ ရအောင် လုပ်ပါ။",
+  "back": "Challenge: RViz starts after the map is published. But make it so the map is received."
+ },
+ "l5b/qos:depth": {
+  "status": "pass-alt",
+  "en": "history depth (keep last)",
+  "my": "history depth (keep last)",
+  "back": "history depth (keep last)"
+ },
+ "l5b/qos:depthLink": {
+  "status": "pass-alt",
+  "en": "More on queues and depth: photon-to-torque",
+  "my": "queue နဲ့ depth အကြောင်း ပိုသိချင်ရင်: photon-to-torque",
+  "back": "To learn more about queue and depth: photon-to-torque"
+ },
+ "l5b/qos:dur.transient_local": {
+  "status": "pass-alt",
+  "en": "transient local",
+  "my": "transient local",
+  "back": "transient local"
+ },
+ "l5b/qos:dur.volatile": {
+  "status": "pass-alt",
+  "en": "volatile",
+  "my": "volatile",
+  "back": "volatile"
+ },
+ "l5b/qos:everyday": {
+  "status": "pass-alt",
+  "en": "Everyday: a phone call versus a radio broadcast. A call retries until it gets through; a radio just sends, and you miss what you did not catch. A listener who insists on a call cannot listen to a radio.",
+  "my": "နေ့စဉ်ဘဝ ဥပမာ: ဖုန်းခေါ်တာနဲ့ ရေဒီယို ထုတ်လွှင့်တာ။ ဖုန်းက ဆက်မိတဲ့အထိ ထပ်ခေါ်ပြီး၊ ရေဒီယိုက ပို့ရုံပဲ ပို့တာမို့ မကြားလိုက်တာတွေ ပြန်မရပါဘူး။ ဖုန်းနဲ့ပဲ နားထောင်မယ်ဆိုတဲ့သူက ရေဒီယိုကို နားမထောင်နိုင်ပါဘူး။",
+  "back": "Everyday example: a phone call and a radio broadcast. The phone call re-dials until it connects, and the radio just sends, so missed parts cannot be recovered. Someone who says they will listen only by phone cannot listen to the radio."
+ },
+ "l5b/qos:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "QoS",
+  "my": "QoS",
+  "back": "QoS"
+ },
+ "l5b/qos:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "Quality of Service: delivery settings on each publisher and subscription",
+  "my": "Quality of Service: publisher နဲ့ subscription တစ်ခုချင်းစီက ပို့ဆောင်ပုံ setting တွေ",
+  "back": "Quality of Service: the delivery settings of each publisher and subscription"
+ },
+ "l5b/qos:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "reliable",
+  "my": "reliable",
+  "back": "reliable"
+ },
+ "l5b/qos:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "resend until delivered",
+  "my": "ရောက်တဲ့အထိ ပြန်ပို့",
+  "back": "resend until it arrives"
+ },
+ "l5b/qos:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "best effort",
+  "my": "best effort",
+  "back": "best effort"
+ },
+ "l5b/qos:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "send once; losses are not resent",
+  "my": "တစ်ခါပဲ ပို့၊ ကျသွားရင် ပြန်မပို့",
+  "back": "send only once, do not resend if dropped"
+ },
+ "l5b/qos:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "transient local",
+  "my": "transient local",
+  "back": "transient local"
+ },
+ "l5b/qos:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "publisher keeps the last depth messages for late subscribers (\"latched\")",
+  "my": "နောက်မှ ဝင်တဲ့ subscriber တွေအတွက် publisher က နောက်ဆုံး depth အရေအတွက် message ကို သိမ်းထားတယ် (\"latched\")",
+  "back": "the publisher keeps the last depth number of messages for subscribers that join later (\"latched\")"
+ },
+ "l5b/qos:glossary.4.0": {
+  "status": "pass-alt",
+  "en": "depth",
+  "my": "depth",
+  "back": "depth"
+ },
+ "l5b/qos:glossary.4.1": {
+  "status": "pass-alt",
+  "en": "how many messages keep last stores",
+  "my": "keep last သိမ်းတဲ့ message အရေအတွက်",
+  "back": "number of messages kept by keep last"
+ },
+ "l5b/qos:got": {
+  "status": "pass-alt",
+  "en": "scans received",
+  "my": "လက်ခံရတဲ့ scan",
+  "back": "Scans received"
+ },
+ "l5b/qos:late": {
+  "status": "pass-alt",
+  "en": "maps RViz gets when it starts late (3 were sent)",
+  "my": "RViz နောက်မှ စတဲ့အခါ ရတဲ့ မြေပုံ (3 ခု ပို့ခဲ့တယ်)",
+  "back": "Map received when RViz starts later (3 were sent)"
+ },
+ "l5b/qos:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: every publisher and subscriber carries QoS settings (how hard to deliver, whether to keep old messages). If publisher and subscriber ask for incompatible settings, ROS 2 does not connect them, and nothing tells the code.",
+  "my": "သင်ယူရမှာက: publisher နဲ့ subscriber တိုင်းမှာ QoS setting တွေ ပါပါတယ် (ဘယ်လောက်တင်းကြပ်စွာ ပို့မလဲ၊ message အဟောင်းတွေ သိမ်းမလား)။ publisher နဲ့ subscriber တောင်းတဲ့ setting မကိုက်ရင် ROS 2 က ချိတ်မပေးပါဘူး၊ ကုဒ်ကိုလည်း ဘာမှ မပြောပါဘူး။",
+  "back": "What you learn: every publisher and subscriber has QoS settings (how strictly to send, whether to keep old messages). If the settings the publisher and subscriber ask for do not match, ROS 2 does not connect them, and it says nothing to the code either."
+ },
+ "l5b/qos:lines.0": {
+  "status": "pass-alt",
+  "en": "Reliable: a dropped message is sent again. Best effort: a dropped message is gone, but nothing waits for it. Default for both sides: reliable, volatile, keep last 10.",
+  "my": "Reliable: ကျသွားတဲ့ message ကို ပြန်ပို့ပါတယ်။ Best effort: ကျသွားရင် ပျောက်သွားပေမယ့် ဘာကိုမှ မစောင့်ပါဘူး။ နှစ်ဖက်စလုံး default: reliable, volatile, keep last 10။",
+  "back": "Reliable: resends a dropped message. Best effort: if dropped it is lost, but it waits for nothing. Default for both sides: reliable, volatile, keep last 10."
+ },
+ "l5b/qos:lines.1": {
+  "status": "pass-alt",
+  "en": "Here a scanner sends 20 scans at 10 Hz over a link that drops every 4th one (made-up, 25 % loss).",
+  "my": "ဒီမှာ scanner က 10 Hz နဲ့ scan 20 ခု ပို့ပြီး link က 4 ခုမြောက်တိုင်း ကျသွားပါတယ် (စိတ်ကူးထုတ်၊ 25 % ဆုံးရှုံး)။",
+  "back": "Here the scanner sends 20 scans at 10 Hz and the link drops every 4th one (made up, 25 % loss)."
+ },
+ "l5b/qos:lines.2": {
+  "status": "pass-alt",
+  "en": "Volatile: a subscriber that starts late sees only new messages. Transient local: the publisher keeps the last few (the depth) for late joiners, as a map server does.",
+  "my": "Volatile: နောက်မှ စတဲ့ subscriber က message အသစ်တွေကိုပဲ မြင်ပါတယ်။ Transient local: publisher က နောက်ဆုံး အနည်းငယ် (depth) ကို နောက်မှ ဝင်လာသူအတွက် သိမ်းထားပါတယ်၊ မြေပုံ server လိုမျိုးပေါ့။",
+  "back": "Volatile: a subscriber that starts later sees only the new messages. Transient local: the publisher keeps the last few (depth) for those who join later, like a map server."
+ },
+ "l5b/qos:link": {
+  "status": "pass-alt",
+  "en": "connected",
+  "my": "ချိတ်ဆက်ထား",
+  "back": "Connected"
+ },
+ "l5b/qos:no": {
+  "status": "pass-alt",
+  "en": "no: incompatible QoS",
+  "my": "မချိတ်ဘူး: QoS မကိုက်ဘူး",
+  "back": "Does not connect: QoS does not match"
+ },
+ "l5b/qos:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet:",
+  "my": "မပြီးသေးပါ:",
+  "back": "Not finished yet:"
+ },
+ "l5b/qos:pub": {
+  "status": "pass-alt",
+  "en": "publisher (scanner / map server)",
+  "my": "publisher (scanner / မြေပုံ server)",
+  "back": "publisher (scanner / map server)"
+ },
+ "l5b/qos:rel.best_effort": {
+  "status": "pass-alt",
+  "en": "best effort",
+  "my": "best effort",
+  "back": "best effort"
+ },
+ "l5b/qos:rel.reliable": {
+  "status": "pass-alt",
+  "en": "reliable",
+  "my": "reliable",
+  "back": "reliable"
+ },
+ "l5b/qos:resentNote": {
+  "status": "pass-alt",
+  "en": "Outlined dots were dropped on the wire and sent again (reliable). Empty dots are gone (best effort).",
+  "my": "ဘောင်ပဲ ရှိတဲ့ အစက်တွေက လမ်းမှာ ကျသွားပြီး ပြန်ပို့ထားတာ (reliable) ပါ။ ဗလာအစက်တွေက ပျောက်သွားတာ (best effort) ပါ။",
+  "back": "The dots with only an outline are ones that were dropped on the way and resent (reliable). The empty dots are ones that were lost (best effort)."
+ },
+ "l5b/qos:solved": {
+  "status": "pass-alt",
+  "en": "Solved:",
+  "my": "အောင်မြင်ပါပြီ:",
+  "back": "Succeeded:"
+ },
+ "l5b/qos:sub": {
+  "status": "pass-alt",
+  "en": "subscriber (your node / RViz)",
+  "my": "subscriber (သင့် node / RViz)",
+  "back": "subscriber (your node / RViz)"
+ },
  "l5b/qos:title": {
   "status": "pass-alt",
   "en": "ROS 2: QoS, when a topic stays silent",
   "my": "ROS 2: QoS၊ topic က ဘာမှ မလာတဲ့အခါ",
   "back": "ROS 2: QoS, when nothing comes from the topic"
+ },
+ "l5b/qos:trap": {
+  "status": "pass-alt",
+  "en": "Trap: an incompatible pair is not an error in your code. The subscriber callback simply never runs. Check both sides with ros2 topic info -v, which prints the QoS of every publisher and subscription.",
+  "my": "ထောင်ချောက်: မကိုက်တဲ့ စုံတွဲက ကုဒ်ထဲက အမှား မဟုတ်ပါဘူး။ subscriber callback က ဘယ်တော့မှ အလုပ်မလုပ်တာပဲ ဖြစ်ပါတယ်။ ros2 topic info -v နဲ့ နှစ်ဖက်လုံးကို စစ်ကြည့်ပါ၊ publisher နဲ့ subscription အားလုံးရဲ့ QoS ကို ပြပေးပါတယ်။",
+  "back": "Trap: a mismatched pair is not an error in the code. It is just that the subscriber callback never runs. Check both sides with ros2 topic info -v, which shows the QoS of all publishers and subscriptions."
+ },
+ "l5b/qos:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "စကားလုံးများ",
+  "back": "Words"
+ },
+ "l5b/qos:yes": {
+  "status": "pass-alt",
+  "en": "yes",
+  "my": "ချိတ်တယ်",
+  "back": "Connects"
  }
 }

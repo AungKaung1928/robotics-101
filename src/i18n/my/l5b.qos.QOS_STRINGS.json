@@ -1,3 +1,56 @@
 {
- "title": "ROS 2: QoS၊ topic က ဘာမှ မလာတဲ့အခါ"
+ "title": "ROS 2: QoS၊ topic က ဘာမှ မလာတဲ့အခါ",
+ "learn": "သင်ယူရမှာက: publisher နဲ့ subscriber တိုင်းမှာ QoS setting တွေ ပါပါတယ် (ဘယ်လောက်တင်းကြပ်စွာ ပို့မလဲ၊ message အဟောင်းတွေ သိမ်းမလား)။ publisher နဲ့ subscriber တောင်းတဲ့ setting မကိုက်ရင် ROS 2 က ချိတ်မပေးပါဘူး၊ ကုဒ်ကိုလည်း ဘာမှ မပြောပါဘူး။",
+ "everyday": "နေ့စဉ်ဘဝ ဥပမာ: ဖုန်းခေါ်တာနဲ့ ရေဒီယို ထုတ်လွှင့်တာ။ ဖုန်းက ဆက်မိတဲ့အထိ ထပ်ခေါ်ပြီး၊ ရေဒီယိုက ပို့ရုံပဲ ပို့တာမို့ မကြားလိုက်တာတွေ ပြန်မရပါဘူး။ ဖုန်းနဲ့ပဲ နားထောင်မယ်ဆိုတဲ့သူက ရေဒီယိုကို နားမထောင်နိုင်ပါဘူး။",
+ "lines": [
+  "Reliable: ကျသွားတဲ့ message ကို ပြန်ပို့ပါတယ်။ Best effort: ကျသွားရင် ပျောက်သွားပေမယ့် ဘာကိုမှ မစောင့်ပါဘူး။ နှစ်ဖက်စလုံး default: reliable, volatile, keep last 10။",
+  "ဒီမှာ scanner က 10 Hz နဲ့ scan 20 ခု ပို့ပြီး link က 4 ခုမြောက်တိုင်း ကျသွားပါတယ် (စိတ်ကူးထုတ်၊ 25 % ဆုံးရှုံး)။",
+  "Volatile: နောက်မှ စတဲ့ subscriber က message အသစ်တွေကိုပဲ မြင်ပါတယ်။ Transient local: publisher က နောက်ဆုံး အနည်းငယ် (depth) ကို နောက်မှ ဝင်လာသူအတွက် သိမ်းထားပါတယ်၊ မြေပုံ server လိုမျိုးပေါ့။"
+ ],
+ "pub": "publisher (scanner / မြေပုံ server)",
+ "sub": "subscriber (သင့် node / RViz)",
+ "rel": {
+  "reliable": "reliable",
+  "best_effort": "best effort"
+ },
+ "dur": {
+  "volatile": "volatile",
+  "transient_local": "transient local"
+ },
+ "depth": "history depth (keep last)",
+ "breakIt": "ဖျက်ကြည့်: publisher က best effort၊ subscriber က reliable",
+ "got": "လက်ခံရတဲ့ scan",
+ "link": "ချိတ်ဆက်ထား",
+ "yes": "ချိတ်တယ်",
+ "no": "မချိတ်ဘူး: QoS မကိုက်ဘူး",
+ "late": "RViz နောက်မှ စတဲ့အခါ ရတဲ့ မြေပုံ (3 ခု ပို့ခဲ့တယ်)",
+ "resentNote": "ဘောင်ပဲ ရှိတဲ့ အစက်တွေက လမ်းမှာ ကျသွားပြီး ပြန်ပို့ထားတာ (reliable) ပါ။ ဗလာအစက်တွေက ပျောက်သွားတာ (best effort) ပါ။",
+ "trap": "ထောင်ချောက်: မကိုက်တဲ့ စုံတွဲက ကုဒ်ထဲက အမှား မဟုတ်ပါဘူး။ subscriber callback က ဘယ်တော့မှ အလုပ်မလုပ်တာပဲ ဖြစ်ပါတယ်။ ros2 topic info -v နဲ့ နှစ်ဖက်လုံးကို စစ်ကြည့်ပါ၊ publisher နဲ့ subscription အားလုံးရဲ့ QoS ကို ပြပေးပါတယ်။",
+ "challenge": "စိန်ခေါ်မှု: မြေပုံ publish လုပ်ပြီးမှ RViz စပါတယ်။ ဒါပေမယ့် မြေပုံ ရအောင် လုပ်ပါ။",
+ "solved": "အောင်မြင်ပါပြီ:",
+ "notYet": "မပြီးသေးပါ:",
+ "words": "စကားလုံးများ",
+ "glossary": [
+  [
+   "QoS",
+   "Quality of Service: publisher နဲ့ subscription တစ်ခုချင်းစီက ပို့ဆောင်ပုံ setting တွေ"
+  ],
+  [
+   "reliable",
+   "ရောက်တဲ့အထိ ပြန်ပို့"
+  ],
+  [
+   "best effort",
+   "တစ်ခါပဲ ပို့၊ ကျသွားရင် ပြန်မပို့"
+  ],
+  [
+   "transient local",
+   "နောက်မှ ဝင်တဲ့ subscriber တွေအတွက် publisher က နောက်ဆုံး depth အရေအတွက် message ကို သိမ်းထားတယ် (\"latched\")"
+  ],
+  [
+   "depth",
+   "keep last သိမ်းတဲ့ message အရေအတွက်"
+  ]
+ ],
+ "depthLink": "queue နဲ့ depth အကြောင်း ပိုသိချင်ရင်: photon-to-torque"
 }
