@@ -15,7 +15,7 @@ export const WS_STRINGS = {
     newTerm: 'Open a new terminal',
     insideSrc: 'Try it: run colcon build inside src/ and watch where install/ appears.',
     challenge: 'Challenge: in a new terminal, get ros2 run tf_explorer tf_anomaly_detector to start.',
-    solved: 'Solved: the node started.', notYet: 'Not yet.',
+    solved: 'Solved: the node started.', notYet: 'Not yet. Same order as the replay: source ROS, mkdir -p the workspace and its src, cd into src, git clone <url> tf_explorer (git copies a code folder from the internet; any url works in this pretend terminal), cd back up to the workspace, colcon build, source install/setup.bash, then ros2 run.',
     runsHere: 'A pretend terminal (JavaScript): no real build. Real error and log lines are copied; lines in (parentheses) are shortened.',
     words: 'Words',
     glossary: [
@@ -40,7 +40,7 @@ export const WS_STRINGS = {
     newTerm: '新しいターミナルを開く',
     insideSrc: '試そう：src/ の中で colcon build して、install/ がどこにできるか見よう。',
     challenge: 'チャレンジ：新しいターミナルで ros2 run tf_explorer tf_anomaly_detector を起動させよう。',
-    solved: '成功：ノードが起動した。', notYet: 'まだ。',
+    solved: '成功：ノードが起動した。', notYet: 'まだ。再生と同じ順番で：ROS を source、mkdir -p でワークスペースと src を作る、src に cd、git clone <url> tf_explorer（git はネット上のコードのフォルダをコピーする。この疑似ターミナルでは url は何でもよい）、ワークスペースに cd で戻る、colcon build、source install/setup.bash、最後に ros2 run。',
     runsHere: '疑似ターミナル（JavaScript）で、本当のビルドはしない。実際のエラーとログ行はそのまま、（かっこ）内の行は短縮。',
     words: '用語',
     glossary: [
