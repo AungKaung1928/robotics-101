@@ -9,6 +9,9 @@ export interface Line { cmd: string; out: string; ok: boolean }
 
 export const HOME = '/root' // home folder of root, the user in the ros:humble Docker image (a docker exec shell: no ROS sourced yet)
 const SETUP = '/opt/ros/humble/setup.bash'
+export const JAZZY_SETUP = '/opt/ros/jazzy/setup.bash'
+/** The page names the Jazzy path; this terminal is a Humble container, so say which path works here. */
+export const HUMBLE_HINT = `(this practice terminal is a ros:humble container: here use ${SETUP})`
 
 export const fresh = (): Sh => ({
   cwd: HOME,
@@ -59,6 +62,7 @@ export function exec(sh: Sh, cmd: string): { sh: Sh; line: Line } {
       if (!(target in s.files)) return say(`cat: ${arg}: No such file or directory`, false)
       return say(s.files[target])
     case 'source':
+      if (target === JAZZY_SETUP) return say(`bash: ${arg}: No such file or directory\n${HUMBLE_HINT}`, false)
       if (!(target in s.files)) return say(`bash: ${arg}: No such file or directory`, false)
       if (target === SETUP) s.env.ROS_DISTRO = 'humble'
       return say('')

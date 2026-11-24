@@ -9,6 +9,12 @@ describe('2.6 workspace', () => {
     for (const d of ['src', 'src/tf_explorer', 'build', 'install', 'log']) expect(w.dirs).toContain(`${WS}/${d}`)
   })
 
+  it('the Jazzy path the page names fails here with a hint to the Humble path (ros:humble container)', () => {
+    const [l] = session(['source /opt/ros/jazzy/setup.bash']).lines
+    expect(l.ok).toBe(false)
+    expect(l.out).toContain('/opt/ros/humble/setup.bash')
+  })
+
   it('break it: no ROS source -> colcon cannot find ament_cmake', () => {
     const { lines } = session(SCRIPT.slice(1))
     const build = lines.find((l) => l.cmd.startsWith('colcon'))!

@@ -6,6 +6,12 @@ describe('1.5 shell model', () => {
     expect(COMMANDS.every((c) => SCRIPT.some((l) => l.split(' ')[0] === c))).toBe(true)
   })
 
+  it('the Jazzy path the page names fails here with a hint to the Humble path (ros:humble container)', () => {
+    const [l] = session(['source /opt/ros/jazzy/setup.bash']).lines
+    expect(l.ok).toBe(false)
+    expect(l.out).toContain('/opt/ros/humble/setup.bash')
+  })
+
   it('ros2 fails before source and works after; ROS_DISTRO comes from setup.bash', () => {
     const { lines } = session(SCRIPT)
     const out = Object.fromEntries(lines.map((l) => [l.cmd, l]))
