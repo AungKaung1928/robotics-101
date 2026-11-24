@@ -14,11 +14,12 @@ const ANSWERS: Answer[] = ['robot', 'notRobot']
 export default function MeetChapter({ t }: { t: Strings }) {
   const s = stringsFor(MEET_STRINGS, t, 'l0.meet.MEET_STRINGS')
   const [part, setPart] = useState<PartId | null>(null)
-  const [up, setUp] = useState(false)
+  const [sensor, setSensor] = useState(false)
+  const [rule, setRule] = useState(false)
   const [picked, setPicked] = useState<Answer | null>(null)
   const [cheer, setCheer] = useState(0)
   const [oops, setOops] = useState(0)
-  const car = rcCar(up)
+  const car = rcCar({ sensor, rule })
   const robot = isRobot(car)
   const yn = (b: boolean) => (b ? s.yes : s.no)
   const answer = (a: Answer) => { setPicked(a); if (a === 'notRobot') setCheer(cheer + 1); else setOops(oops + 1) }
@@ -44,13 +45,17 @@ export default function MeetChapter({ t }: { t: Strings }) {
         <p className="learn">{s.learn}</p>
         {s.steps.map((l) => <p key={l}>{l}</p>)}
         <p><strong>{s.car}</strong></p>
-        <p><button type="button" className="break" onClick={() => setUp(!up)}>{up ? s.downgrade : s.upgrade}</button></p>
+        <p className="meet-add">
+          <button type="button" className="add is-sensor" aria-pressed={sensor} onClick={() => setSensor(!sensor)}>{s.addSensor}</button>
+          <button type="button" className="add is-rule" aria-pressed={rule} onClick={() => setRule(!rule)}>{s.addRule}</button>
+        </p>
         <dl className="readout">
           <div><dt>{s.moves}</dt><dd>{yn(car.moves)}</dd></div>
           <div><dt>{s.senses}</dt><dd data-k="senses">{yn(car.senses)}</dd></div>
           <div><dt>{s.decides}</dt><dd data-k="decides">{car.decidesItself ? s.itself : s.person}</dd></div>
           <div><dt>{s.robot}</dt><dd data-k="robot">{yn(robot)}</dd></div>
         </dl>
+        {sensor !== rule && <p className="note" data-k="half">{sensor ? s.sensorOnly : s.ruleOnly}</p>}
         <div className="meet-check">
           <Mascot cheer={cheer} oops={oops} label={s.mascot} />
           <div>

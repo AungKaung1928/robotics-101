@@ -1,9 +1,13 @@
 import { describe, expect, it } from 'vitest'
-import { FIG, PARTS, isRobot, rcCar } from './meet'
+import { FIG, PARTS, decider, isRobot, rcCar } from './meet'
 
 describe('meet model', () => {
-  it('a remote-control car is not a robot: a person decides', () => expect(isRobot(rcCar(false))).toBe(false))
-  it('add a sensor and a rule: now it is', () => expect(isRobot(rcCar(true))).toBe(true))
+  it('who decides when the car turns: the person, until a rule reads a sensor', () => {
+    const all = [[false, false], [true, false], [false, true], [true, true]] as const
+    expect(all.map(([sensor, rule]) => decider({ sensor, rule }))).toEqual(['person', 'person', 'person', 'rule'])
+    expect(all.map(([sensor, rule]) => isRobot(rcCar({ sensor, rule })))).toEqual([false, false, false, true])
+    expect(rcCar({ sensor: true, rule: false }).senses).toBe(true) // senses, still not a robot
+  })
   it('moving alone, or sensing without moving, is not enough', () => {
     expect(isRobot({ moves: true, senses: true, decidesItself: false })).toBe(false)
     expect(isRobot({ moves: false, senses: true, decidesItself: true })).toBe(false)

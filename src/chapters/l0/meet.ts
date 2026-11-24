@@ -5,8 +5,14 @@ export interface Machine { moves: boolean; senses: boolean; decidesItself: boole
 /** A robot senses, decides by itself and moves; missing one of the three, it is not (spec APP_R101_ONRAMP.md). */
 export const isRobot = (m: Machine) => m.moves && m.senses && m.decidesItself
 
-/** A remote-control car moves, but a person sees and decides. Upgraded = a distance sensor and a stop rule added. */
-export const rcCar = (upgraded: boolean): Machine => ({ moves: true, senses: upgraded, decidesItself: upgraded })
+/** What the reader adds to the remote-control car: a distance sensor, a turn rule, or both. */
+export interface Upgrade { sensor: boolean; rule: boolean }
+
+/** Who decides when the car turns: the rule only when it has sensor data to read; otherwise the person with the remote. */
+export const decider = (u: Upgrade): 'person' | 'rule' => (u.sensor && u.rule ? 'rule' : 'person')
+
+/** A remote-control car moves; it senses with a sensor, and decides by itself only once a rule reads that sensor. */
+export const rcCar = (u: Upgrade): Machine => ({ moves: true, senses: u.sensor, decidesItself: decider(u) === 'rule' })
 
 export type PartId = 'wheels' | 'battery' | 'computer' | 'sensor'
 /**

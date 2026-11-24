@@ -12,3 +12,6 @@
 .meet-check { display: flex; gap: 12px; align-items: flex-start; }
 .meet-check .pick { margin: 0 6px 6px 0; }
 .meet-check .pick[aria-pressed="true"] { outline: 2px solid var(--free); }
+.meet-add { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.meet-add .add { font: var(--t-small) var(--font); padding: var(--s1) var(--s3); border: 1px solid var(--rule); background: var(--surface); color: var(--ink); border-radius: var(--radius); cursor: pointer; }
+.meet-add .add[aria-pressed="true"] { border-color: var(--free); outline: 2px solid var(--free); }
