@@ -16,9 +16,10 @@ export const WALL_STRINGS = {
     closest: 'closest to the wall', settle: 'settled (±5 cm) at', never: 'not in 15 s',
     tooClose: 'too-close turns', spun: 'heading past 1 rad',
     yes: 'yes', no: 'no',
-    challenge: 'Challenge: starting 1.0 m from the wall, pick a kp that settles within 10 s, never triggers a too-close turn and never turns past 1 rad.',
+    challenge: 'Challenge: starting 1.0 m from the wall, pick a kp that settles within 10 s, never triggers a too-close turn or a collision avoid and never turns past 1 rad.',
     solved: 'Solved:', notYet: 'Not yet:',
     spunNote: 'Past 1 rad the robot faces the wall too steeply for the two-beam estimate (it is clamped there), so this model stops. It shows the controller left its working range, not what the real robot then does.',
+    avoidNote: 'A beam in the front zones came closer than the node\'s limit (0.35 m within 50° of straight ahead, 0.25 m at 50-70°), so the node\'s collision check (it runs before the wall follower) took over with its avoid turn. This model does not simulate that turn, so it stops here.',
     modelNote: 'Model: one straight wall, perfect scans, the repo\'s gains and limits. A Gazebo run is the real test. "Look-ahead off" is a what-if: the real node accepts 0.1-1.0 m only.',
     words: 'Words',
     glossary: [
@@ -45,9 +46,10 @@ export const WALL_STRINGS = {
     closest: '壁に最も近づいた距離', settle: '収束（±5 cm）', never: '15 秒以内になし',
     tooClose: '近すぎ回避の回数', spun: '向きが 1 rad を超えた',
     yes: 'はい', no: 'いいえ',
-    challenge: 'チャレンジ：壁から 1.0 m で出発し、10 秒以内に収束し、近すぎ回避を一度も起こさず、向きが 1 rad を超えない kp を選ぶ。',
+    challenge: 'チャレンジ：壁から 1.0 m で出発し、10 秒以内に収束し、近すぎ回避も衝突回避も一度も起こさず、向きが 1 rad を超えない kp を選ぶ。',
     solved: '達成：', notYet: 'まだ：',
     spunNote: '1 rad を超えると壁に対して角度が急すぎて、2 本ビームの推定が上限で止まる（その値で切り捨て）ので、このモデルはそこで止まる。制御が動作範囲を外れたことを示すだけで、実機がその後どう動くかではない。',
+    avoidNote: '前方ゾーンのビームがノードの限界（正面から 50° 以内で 0.35 m、50-70° で 0.25 m）より近くなったので、ノードの衝突チェック（壁沿い制御より先に動く）が回避旋回に切り替えた。このモデルはその旋回を再現しないので、ここで止まる。',
     modelNote: 'モデル：まっすぐな壁一枚、誤差のないスキャン、リポジトリのゲインと上限。本当の確認は Gazebo での走行。「先読みオフ」は仮定の話：実際のノードは 0.1-1.0 m しか受け付けない。',
     words: '用語',
     glossary: [

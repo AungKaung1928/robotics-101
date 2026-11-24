@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react'
 import Player from '../../anim/Player'
 import Slider from '../../components/Slider'
 import { stringsFor, type Strings } from '../../i18n'
-import { KP_RANGE, N, P, START_D, challengeOk, closest, run, scenario, settleS, spun, tooCloseTicks } from './wall'
+import { KP_RANGE, N, P, START_D, avoided, challengeOk, closest, run, scenario, settleS, spun, tooCloseTicks } from './wall'
 import { WALL_STRINGS } from './wall.strings'
 import '../l1/l1.css'
 import './l3.css'
@@ -71,12 +71,13 @@ export default function WallChapter({ t }: { t: Strings }) {
           <div><dt>{s.spun}</dt><dd data-k="spun">{spun(ts) ? s.yes : s.no}</dd></div>
         </dl>
         {spun(ts) && <p className="note" data-k="spunnote">{s.spunNote}</p>}
+        {avoided(ts) && <p className="note" data-k="avoidnote">{s.avoidNote}</p>}
         <p><strong>{s.challenge}</strong></p>
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet} kp {kp.toFixed(1)}</p>
         <p className="note">{s.modelNote} ({START_D} m, {N / 20} s)</p>
         <p className="group-h">{s.words}</p>
         <Gloss items={s.glossary} />
-        <p className="src">{t.source}: <a href={`${REPO}/config/wall_following_params.yaml#L8-L31`}>wall_following_params.yaml:8-31</a>, <a href={`${CTRL}#L268-L286`}>wall_follower_controller.py:268-286</a> (two-beam estimate), <a href={`${CTRL}#L320-L357`}>:320-357</a> (PD + speed), <a href={`${CTRL}#L97`}>:97</a> (look-ahead 0.1-1.0 m)</p>
+        <p className="src">{t.source}: <a href={`${REPO}/config/wall_following_params.yaml#L8-L31`}>wall_following_params.yaml:8-31</a>, <a href={`${CTRL}#L268-L286`}>wall_follower_controller.py:268-286</a> (two-beam estimate), <a href={`${CTRL}#L320-L357`}>:320-357</a> (PD + speed), <a href={`${CTRL}#L184-L226`}>:184-226</a> (collision zones), <a href={`${CTRL}#L97`}>:97</a> (look-ahead 0.1-1.0 m)</p>
       </div>
     </>
   )
