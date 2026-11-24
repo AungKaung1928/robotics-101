@@ -5,7 +5,7 @@
 // real touch, real keys and Firefox/WebKit are in e2e/smoke/smoke.spec.ts (CI). Exit 1 = a check failed.
 // Run after a build: `node e2e/smoke/local.mjs` (SMOKE_DIST=<folder>, default dist).
 import { spawn, spawnSync } from 'node:child_process'
-import { existsSync, mkdirSync, writeFileSync } from 'node:fs'
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { createServer } from 'node:net'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -22,6 +22,7 @@ const winPath = (p) => (CHROME.endsWith('.exe') ? spawnSync('wslpath', ['-w', p]
 // Runs inside smoke.html; drives the site in a same-origin iframe and prints one line per check.
 const HARNESS = `<!doctype html><body style="margin:0"><iframe id="f" style="width:1280px;height:900px;border:0"></iframe><pre id="out"></pre><script>
 const lang = new URLSearchParams(location.search).get('lang')
+const KEEP = new Set(__KEEP__)
 const f = document.getElementById('f'), lines = [], sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 const check = (name, ok, detail = '') => lines.push((ok ? 'ok   ' : 'FAIL ') + name + (detail ? ' (' + detail + ')' : ''))
 let n = 0
@@ -45,6 +46,26 @@ async function main() {
     for (const h of ['', ...routes]) { await load(h, w); const d = doc().documentElement; if (d.scrollWidth > d.clientWidth) wide.push((h || '#/') + ' ' + d.scrollWidth + '>' + d.clientWidth) }
     check('no sideways scroll at ' + w + ' px on ' + (routes.length + 1) + ' pages', !wide.length, wide.join(', '))
   }
+  // Accessible names: every button, link, slider and figure has one; on ja/my pages a name is in that script, not English.
+  const SCRIPT = { ja: /[\u3040-\u30ff\u4e00-\u9fff]/, my: /[\u1000-\u109F]/ }[lang]
+  const noName = [], english = []
+  for (const h of ['', ...routes]) {
+    await load(h)
+    const d = doc(), byId = (ids) => ids.split(/\\s+/).map((i) => d.getElementById(i)?.textContent ?? '').join(' ')
+    // || not ??: an empty attribute or label is no name either.
+    const name = (el) => (el.getAttribute('aria-label') || byId(el.getAttribute('aria-labelledby') || '') ||
+      (el.id && d.querySelector('label[for="' + el.id + '"]')?.textContent) || el.closest('label')?.textContent ||
+      (el.tagName === 'INPUT' ? '' : el.tagName.toLowerCase() === 'svg' ? el.querySelector('title')?.textContent : el.textContent) || el.getAttribute('title') || '').trim()
+    for (const el of d.querySelectorAll('button, a[href], input, select, svg[role=img], canvas[role=img]')) {
+      if (el.closest('[aria-hidden=true]')) continue
+      const n = name(el), what = (h || '#/') + ' ' + el.tagName.toLowerCase() + (el.className?.baseVal ?? el.className ? '.' + String(el.className?.baseVal ?? el.className).split(' ')[0] : '')
+      if (!n) noName.push(what)
+      // English word = 3+ letters, not on the glossary's keep-English list (scripts/my-glossary.json tierA_keepEnglish).
+      else if (SCRIPT && el.hasAttribute('aria-label') && !SCRIPT.test(n) && (n.match(/[A-Za-z]{3,}/g) ?? []).some((w) => !KEEP.has(w.toLowerCase()))) english.push(what + " '" + n.slice(0, 40) + "'")
+    }
+  }
+  check('every control and figure has an accessible name', !noName.length, noName.length + ': ' + [...new Set(noName)].slice(0, 12).join(', '))
+  if (SCRIPT) check('aria-labels are in ' + lang, !english.length, english.length + ': ' + [...new Set(english.map((e) => e.replace(/^\\S+ /, '')))].join(', '))
   // Map -> first chapter -> next -> prev (links), then arrow keys on a patrol chapter.
   await load('')
   const first = doc().querySelector('a[href^="#/0/"]')
@@ -95,7 +116,8 @@ main().catch((e) => check('harness', false, String(e))).finally(() => { document
 const freePort = () => new Promise((ok) => { const s = createServer().listen(0, '127.0.0.1', () => { const p = s.address().port; s.close(() => ok(p)) }) })
 const PORT = await freePort()
 const BASE = `http://localhost:${PORT}/`
-writeFileSync(join(ROOT, DIST, 'smoke.html'), HARNESS)
+const KEEP = JSON.parse(readFileSync(join(ROOT, 'scripts/my-glossary.json'), 'utf8')).tierA_keepEnglish.map((t) => t.toLowerCase())
+writeFileSync(join(ROOT, DIST, 'smoke.html'), HARNESS.replace('__KEEP__', JSON.stringify(KEEP)))
 mkdirSync(OUT, { recursive: true })
 const vite = spawn(join(ROOT, 'node_modules/.bin/vite'), ['preview', '--outDir', DIST, '--port', String(PORT), '--strictPort'], { cwd: ROOT, stdio: 'ignore' })
 let failed = 0
@@ -107,8 +129,8 @@ try {
   }
   if (!up) throw new Error(`preview did not start on ${PORT}`)
   for (const lang of LANGS) {
-    const args = ['--headless=new', '--disable-gpu', '--no-first-run', '--virtual-time-budget=900000', '--window-size=1300,1000']
-    const dump = () => spawnSync(CHROME, [...args, '--dump-dom', `${BASE}smoke.html?lang=${lang}`], { encoding: 'utf8', timeout: 300_000 })
+    const args = ['--headless=new', '--disable-gpu', '--no-first-run', '--virtual-time-budget=1800000', '--window-size=1300,1000']
+    const dump = () => spawnSync(CHROME, [...args, '--dump-dom', `${BASE}smoke.html?lang=${lang}`], { encoding: 'utf8', timeout: 600_000 })
     let r = dump()
     if (!r.stdout) r = dump() // first start can return no DOM (as in scripts/verify.mjs)
     const body = r.stdout?.match(/<pre id="out">([\s\S]*?)SMOKE-END/)?.[1]
