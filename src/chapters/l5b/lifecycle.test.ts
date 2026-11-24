@@ -51,6 +51,7 @@ describe('5.5 strings', () => {
     const { LIFECYCLE_STRINGS: S } = await import('./lifecycle.strings')
     expect(Object.keys(S.ja).sort()).toEqual(Object.keys(S.en).sort())
     expect(Object.keys(S.ja.states).sort()).toEqual(Object.keys(S.en.states).sort())
+    expect(Object.keys(S.ja.errTr).sort()).toEqual(Object.keys(S.en.errTr).sort())
     expect(Object.keys(S.ja.execs).sort()).toEqual(Object.keys(S.en.execs).sort())
     expect(S.ja.glossary).toHaveLength(S.en.glossary.length)
   })
