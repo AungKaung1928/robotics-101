@@ -51,6 +51,9 @@ const ROUTES = [
   { hash: '#/2/msgtypes', has: 'class="num">2.3<' },
   { hash: '#/2/actions', has: 'class="num">2.4<' },
   { hash: '#/2/params', has: 'class="num">2.5<' },
+  { hash: '#/5/qos', has: 'data-k="challenge"', equals: { got: '20/20', late: '0/3' } },
+  { hash: '#/5/lifecycle', has: 'data-k="challenge"', equals: { state: 'unconfigured', late: '3', worst: '300' } },
+  { hash: '#/5/fieldfail', has: 'data-k="card"', equals: { score: '0/6' } },
   { hash: '#/2/ws', has: 'class="num">2.6<' },
   { hash: '#/2/drive', has: 'class="num">2.7<' },
   { hash: '#/5/port', has: ['class="num">5.1<', 'class="port-ring"'], equals: { py: '270', cpp: '270' } }, // −90° on the LDS-01 layout, wrap fix in

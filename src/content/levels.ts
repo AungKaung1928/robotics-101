@@ -6,6 +6,7 @@ import { TFLAB_META, TfLabChapter } from '../chapters/l3'
 import { BfsChapter, EP_CHAPTERS, LateChapter } from '../chapters/ep'
 import { CiChapter, DebugChapter, LEVEL5_CHAPTERS, PortChapter } from '../chapters/l5'
 import { ActionsChapter, DriveChapter, LEVEL2_CHAPTERS, MsgTypesChapter, NodesChapter, ParamsChapter, TopicsChapter, WsChapter } from '../chapters/l2'
+import { FieldfailChapter, LEVEL5B_CHAPTERS, LifecycleChapter, QosChapter } from '../chapters/l5b'
 import { STRINGS, type Strings } from '../i18n'
 import { CHAPTER_ICON } from '../icons'
 import type { ChapterId } from '../lib/route'
@@ -23,7 +24,7 @@ export const LEVELS: ChapterMeta[][] = [
   LEVEL2_CHAPTERS,
   [...existing(3, ['scan', 'tf']), { ...TFLAB_META }, ...existing(3, ['detect'])],
   existing(4, ['grid', 'costmap', 'goal', 'bringup']),
-  LEVEL5_CHAPTERS,
+  [...LEVEL5_CHAPTERS, ...LEVEL5B_CHAPTERS],
 ]
 
 /** Bodies of the new-level chapters (the 7 patrol chapters keep their own routes in App). */
@@ -33,6 +34,7 @@ export const LEVEL_BODY: Record<string, ComponentType<{ t: Strings }>> = {
   bfs: BfsChapter, late: LateChapter, tflab: TfLabChapter,
   nodes: NodesChapter, topics: TopicsChapter, msgtypes: MsgTypesChapter, actions: ActionsChapter, params: ParamsChapter, ws: WsChapter, drive: DriveChapter,
   port: PortChapter, ci: CiChapter, debug: DebugChapter,
+  qos: QosChapter, lifecycle: LifecycleChapter, fieldfail: FieldfailChapter,
 }
 
 export type LevelPage = { meta: ChapterMeta; num: string; prev: ChapterMeta | null; next: ChapterMeta | null }

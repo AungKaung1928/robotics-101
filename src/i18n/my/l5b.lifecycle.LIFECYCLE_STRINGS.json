@@ -1,0 +1,51 @@
+{
+ "title": "ROS 2: lifecycle node တွေနဲ့ executor တွေ",
+ "learn": "သင်ယူရမှာက: lifecycle (managed) node က ပိတ်ထားတဲ့ အခြေအနေကနေ စပြီး၊ supervisor က configure နဲ့ activate လုပ်ပေးမှ အလုပ်လုပ်ပါတယ်။ executor က ဘယ် callback ကို ဘယ်အချိန် အလုပ်လုပ်မလဲ ဆုံးဖြတ်ပါတယ်။ callback တစ်ခု နှေးရင် တစ်ခြားတွေကို ပိတ်ထားနိုင်ပါတယ်။",
+ "everyday": "နေ့စဉ်ဘဝ ဥပမာ: ဆိုင်တစ်ဆိုင်။ ဆိုင်ကို စီစဉ်ပြီး စင်ပေါ် ပစ္စည်းထည့်တယ် (configure)၊ တံခါးဖွင့်တယ် (activate)၊ အနားယူဖို့ ပိတ်တယ် (deactivate)။ ငွေကောင်တာ တစ်ခုတည်းဆိုရင် နှေးတဲ့ ဝယ်သူတစ်ယောက်ကြောင့် queue တစ်ခုလုံး စောင့်ရပါတယ်။",
+ "stateH": "Lifecycle: transition တွေကို နှိပ်ကြည့်ပါ",
+ "state": "အခြေအနေ",
+ "processing": "scan တွေ လုပ်ဆောင်တယ်",
+ "yes": "လုပ်တယ်",
+ "no": "မလုပ်ဘူး",
+ "states": {
+  "unconfigured": "unconfigured",
+  "inactive": "inactive",
+  "active": "active",
+  "finalized": "finalized"
+ },
+ "reset": "ပြန်စ",
+ "lcNote": "node က ကိုယ့်ဘာသာ state မပြောင်းပါဘူး: supervisor (တခြား node ဒါမှမဟုတ် ros2 lifecycle set) က transition တစ်ခုချင်းစီကို ပို့ပေးပါတယ်။ ခြွင်းချက်က အမှား (transition အတွင်း ဒါမှမဟုတ် active ဖြစ်နေစဉ်) ပါ၊ အဲဒီအခါ ကိုယ့်ဘာသာ အမှားကိုင်တွယ်တဲ့ အခြေအနေကို ရောက်သွားပါတယ်။ ဒါကြောင့် စနစ်တစ်ခုက အရာအားလုံးကို အရင် configure လုပ်ပြီး အစိတ်အပိုင်းအားလုံး အဆင်သင့်ဖြစ်မှ ဖွင့်နိုင်ပါတယ်။",
+ "execH": "Executor: node တစ်ခုတည်းမှာ 100 ms control timer နဲ့ 350 ms မြေပုံသိမ်းတာ",
+ "execs": {
+  "single": "thread တစ်ခုတည်း",
+  "multi_default": "thread များစွာ၊ default group",
+  "multi_groups": "thread များစွာ၊ ကိုယ်ပိုင် group"
+ },
+ "lateLbl": "နောက်ကျတဲ့ control tick",
+ "worst": "အဆိုးဆုံး နောက်ကျမှု (ms)",
+ "breakIt": "ဖျက်ကြည့်: thread များစွာကို ပြောင်းရုံပဲ",
+ "timingNote": "10 ms tick နဲ့ 350 ms save က ရလဒ်ကို ပြဖို့ ဖန်တီးထားတဲ့ အချိန်တွေပါ။",
+ "challenge": "စိန်ခေါ်မှု: မြေပုံ သိမ်းနေစဉ်မှာလည်း control tick တိုင်း အချိန်မှန်စေပါ။",
+ "solved": "အောင်မြင်ပြီ:",
+ "notYet": "မရသေးပါ:",
+ "real": "တကယ့် project မှာ: Autoware-Simulation-Demo က node 3 ခုကို MultiThreadedExecutor တစ်ခုထဲမှာ spin လုပ်ပါတယ် (src/main.cpp:16)။ node တစ်ခုစီမှာ ကိုယ်ပိုင် default group ရှိလို့ node မတူတဲ့ callback တွေ တစ်ပြိုင်နက် အလုပ်လုပ်နိုင်ပါတယ်။ node တစ်ခုတည်းထဲက callback 2 ခုကတော့ မလုပ်နိုင်သေးပါဘူး။",
+ "words": "ဝေါဟာရ",
+ "glossary": [
+  [
+   "lifecycle node",
+   "အပြင်ကနေ ထိန်းချုပ်တဲ့ state တွေ (unconfigured, inactive, active, finalized) ပါတဲ့ node"
+  ],
+  [
+   "transition",
+   "configure, activate, deactivate, cleanup, shutdown"
+  ],
+  [
+   "executor",
+   "အဆင်သင့်ဖြစ်နေတဲ့ callback တွေထဲက ဘယ်ဟာကို အလုပ်လုပ်မလဲ ရွေးတဲ့ loop"
+  ],
+  [
+   "callback group",
+   "mutually exclusive (တစ်ကြိမ်တစ်ခု) ဒါမှမဟုတ် reentrant (တစ်ပြိုင်နက် အလုပ်လုပ်နိုင်)"
+  ]
+ ]
+}
