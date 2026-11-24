@@ -10,6 +10,7 @@ const W = 640, H = 120, X0 = 20, PX = (W - 2 * X0) / (HORIZON + 100)
 const STATES: State[] = ['unconfigured', 'inactive', 'active', 'finalized']
 const DESIGN = 'https://design.ros2.org/articles/node_lifecycle.html'
 const EXEC = 'https://docs.ros.org/en/jazzy/Concepts/Intermediate/About-Executors.html'
+const GROUPS = 'https://docs.ros.org/en/jazzy/How-To-Guides/Using-callback-groups.html'
 const AUTOWARE = 'https://github.com/AungKaung1928/Autoware-Simulation-Demo/blob/main/src/main.cpp#L16'
 
 /** 5.5: drive a lifecycle node through its transitions; then pick an executor and watch the control ticks. */
@@ -78,7 +79,7 @@ export default function LifecycleChapter({ t }: { t: Strings }) {
         <div className="real-project"><p>{s.real}</p></div>
         <p className="group-h">{s.words}</p>
         <Gloss items={s.glossary} />
-        <p className="src">{t.source}: <a href={DESIGN}>design.ros2.org: Managed nodes</a> · <a href={EXEC}>Jazzy: Executors</a> (callback groups) · <a href={AUTOWARE}>Autoware-Simulation-Demo src/main.cpp:16</a></p>
+        <p className="src">{t.source}: <a href={DESIGN}>design.ros2.org: Managed nodes</a> · <a href={EXEC}>Jazzy: Executors</a> · <a href={GROUPS}>Jazzy: Using callback groups</a> · <a href={AUTOWARE}>Autoware-Simulation-Demo src/main.cpp:16</a></p>
       </div>
     </>
   )
