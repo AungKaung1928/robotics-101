@@ -18,10 +18,11 @@
   "back": "Early starting steps"
  },
  "core:bringup.lines.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "One launch file starts everything. Most stages wait on fixed timers chosen so their inputs should exist first. Only patrol checks: it waits up to 5 s for Nav2’s action server and retries.",
   "my": "launch file တစ်ခုတည်းနဲ့ အားလုံးကို စတင်ပါတယ်။ အဆင့်အများစုက input တွေ အရင်ရှိနေအောင် သတ်မှတ်ထားတဲ့ timer တွေနဲ့ စောင့်ပါတယ်။ patrol node တစ်ခုတည်းကပဲ စစ်ပါတယ်- Nav2 ရဲ့ action server ကို 5 s အထိ စောင့်ပြီး ပြန်ကြိုးစားပါတယ်။",
-  "back": "Everything is started with a single launch file. Most stages wait with timers that are set so that the inputs exist first. Only a single patrol node checks: it waits up to 5 s for Nav2's action server and retries."
+  "back": "Everything is started with a single launch file. Most stages wait with timers that are set so that the inputs exist first. Only a single patrol node checks: it waits up to 5 s for Nav2's action server and retries.",
+  "gemini_back": "Launches everything with a single launch file. Most steps wait with set timers so inputs exist first. Only the patrol node checks: it waits up to 5 s for Nav2's action server and retries."
  },
  "core:bringup.lines.1": {
   "status": "needs-human",
@@ -31,22 +32,24 @@
   "note": "2026-11-24 audit: Opus blind check garbled (word order of \"starts no later than its input\"); redraft garbled again"
  },
  "core:bringup.logHead.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "stage",
   "my": "အဆင့်",
-  "back": "Level"
+  "back": "Level",
+  "gemini_back": "Step"
  },
  "core:bringup.logHead.1": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "starts",
   "my": "စချိန်",
-  "back": "Start time"
+  "back": "Start time",
+  "gemini_back": "Start time"
  },
  "core:bringup.logHead.2": {
   "status": "pass-alt",
   "en": "gives",
-  "my": "ပေးတဲ့အရာ",
-  "back": "What it gives"
+  "my": "ထုတ်ပေးတဲ့အရာ",
+  "back": "What it outputs"
  },
  "core:bringup.nav2": {
   "status": "pass",
@@ -73,16 +76,18 @@
   "back": "SLAM start time (s)"
  },
  "core:bringup.waits": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "starts before",
   "my": "မတိုင်ခင် စတယ်",
-  "back": "Starts before it reaches"
+  "back": "Starts before it reaches",
+  "gemini_back": "Starts before"
  },
  "core:chapters.bringup": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Bring-up order",
   "my": "စက်နှိုးတဲ့ အစီအစဉ်",
-  "back": "The sequence for waking the machine"
+  "back": "The sequence for waking the machine",
+  "gemini_back": "Startup sequence"
  },
  "core:chapters.costmap": {
   "status": "pass",
@@ -322,16 +327,18 @@
   "note": "spelling: ရွှေ့ (move something) -> ရွေ့ (moves), audit 2026-11-24"
  },
  "core:goal.lines.1": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "The goal counts as reached once the robot is within 0.25 m and its heading within 0.25 rad: patrol can stop up to 25 cm short.",
   "my": "စက်ရုပ်က 0.25 m အတွင်း ရောက်ပြီး ဦးတည်ရာက 0.25 rad အတွင်း ရှိတာနဲ့ ပန်းတိုင် ရောက်ပြီလို့ သတ်မှတ်ပါတယ်- ဒါကြောင့် ကင်းလှည့်တာက ပန်းတိုင် မရောက်ခင် 25 cm အထိ စောပြီး ရပ်နိုင်ပါတယ်။",
-  "back": "The goal is considered reached once the robot is within 0.25 m and its heading is within 0.25 rad: so the patrol can stop up to 25 cm early before reaching the goal."
+  "back": "The goal is considered reached once the robot is within 0.25 m and its heading is within 0.25 rad: so the patrol can stop up to 25 cm early before reaching the goal.",
+  "gemini_back": "It considers the goal reached as soon as the robot is within 0.25 m and orientation within 0.25 rad—so patrolling can stop up to 25 cm early before reaching the goal."
  },
  "core:goal.lines.2": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Minimum time first ignores acceleration. Nav2’s 2.5 m/s² limit reaches full speed in 0.1 s, the simulated drive’s 1.0 m/s² in 0.26 s: either way it barely matters here.",
   "my": "အနည်းဆုံး အချိန်ကို တွက်တဲ့အခါ အရှိန်တင်ချိန်ကို အရင် ထည့်မတွက်ပါဘူး။ Nav2 ရဲ့ 2.5 m/s² ကန့်သတ်ချက်နဲ့ဆို 0.1 s မှာ အမြန်ဆုံး ရောက်ပြီး ဆင်မျူလေတာ မောင်းစနစ်ရဲ့ 1.0 m/s² နဲ့ဆို 0.26 s မှာ ရောက်ပါတယ်- ဘယ်လိုပဲဖြစ်ဖြစ် ဒီမှာ သိပ်မထူးပါဘူး။",
-  "back": "When calculating the minimum time, the acceleration ramp-up time is not counted first. With Nav2's 2.5 m/s² limit it arrives fastest at 0.1 s, and with the simulator drive system's 1.0 m/s² it arrives at 0.26 s; either way, it makes little difference here."
+  "back": "When calculating the minimum time, the acceleration ramp-up time is not counted first. With Nav2's 2.5 m/s² limit it arrives fastest at 0.1 s, and with the simulator drive system's 1.0 m/s² it arrives at 0.26 s; either way, it makes little difference here.",
+  "gemini_back": "When calculating minimum time, acceleration time is not considered first. With Nav2's 2.5 m/s² limit it reaches max speed in 0.1 s and with the simulator drive system's 1.0 m/s² it reaches in 0.26 s—either way it doesn't make much difference here."
  },
  "core:goal.lines.3": {
   "status": "pass",
@@ -430,10 +437,11 @@
   "back": "Cells that are no longer unknown"
  },
  "core:grid.lines.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "This page keeps the textbook grid: each cell holds the log-odds that it is occupied; grey is unknown. slam_toolbox instead redraws its map from stored scan poses, so a loop closure can move walls.",
   "my": "ဒီစာမျက်နှာမှာ textbook grid ကို သုံးထားပါတယ်- cell တစ်ခုစီက အဲဒီ cell မှာ တစ်ခုခု ရှိနိုင်ခြေကို log-odds အဖြစ် သိမ်းထားပြီး မီးခိုးရောင်က မသိသေးတဲ့ cell ပါ။ slam_toolbox ကတော့ သိမ်းထားတဲ့ scan pose တွေကနေ မြေပုံကို ပြန်ဆွဲတာမို့ loop closure ဖြစ်ရင် နံရံတွေ ရွေ့သွားနိုင်ပါတယ်။",
-  "back": "This page uses a textbook grid: each cell stores the likelihood of something being in that cell as log-odds, and gray is a cell not yet known. slam_toolbox, however, redraws the map from the stored scan poses, so when loop closure happens the walls may shift."
+  "back": "This page uses a textbook grid: each cell stores the likelihood of something being in that cell as log-odds, and gray is a cell not yet known. slam_toolbox, however, redraws the map from the stored scan poses, so when loop closure happens the walls may shift.",
+  "gemini_back": "This page uses a textbook grid: each cell stores the log-odds of something being in that cell, and gray is an unknown cell. slam_toolbox redraws the map from saved scan poses, so walls can shift when loop closure occurs."
  },
  "core:grid.lines.1": {
   "status": "pass",
@@ -454,10 +462,11 @@
   "back": "Model: hit p = 0.7, pass p = 0.4 (selection for this page), beams that return nothing do not change anything."
  },
  "core:grid.republish": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "map republished every",
   "my": "မြေပုံကို ပြန်ထုတ်တဲ့ ကြားချိန်",
-  "back": "The interval for re-publishing the map"
+  "back": "The interval for re-publishing the map",
+  "gemini_back": "Map re-publish interval"
  },
  "core:grid.res": {
   "status": "pass",
@@ -521,10 +530,11 @@
   "note": "spelling: ရွှေ့ (move something) -> ရွေ့ (moves), audit 2026-11-24"
  },
  "core:levels.difficulty": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Difficulty",
   "my": "ခက်ခဲမှု",
-  "back": "Difficulty"
+  "back": "Difficulty",
+  "gemini_back": "Difficulty"
  },
  "core:levels.ep": {
   "status": "pass",
@@ -539,64 +549,74 @@
   "back": "Optional, outside of the levels"
  },
  "core:levels.groups.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Meet the robot",
   "my": "စက်ရုပ်ကို တွေ့ကြမယ်",
-  "back": "Let's meet the robot"
+  "back": "Let's meet the robot",
+  "gemini_back": "Meet the robot"
  },
  "core:levels.groups.1": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "A practice world",
   "my": "လေ့ကျင့်ဖို့ ကမ္ဘာ",
-  "back": "World for training"
+  "back": "World for training",
+  "gemini_back": "World to practice in"
  },
  "core:levels.groups.2": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "The software around it",
   "my": "စက်ရုပ် ပတ်လည်က ဆော့ဖ်ဝဲ",
-  "back": "Software around the robot"
+  "back": "Software around the robot",
+  "gemini_back": "Software around the robot"
  },
  "core:levels.grows.bringup": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Level 0 showed robot software as many small programs passing data along. Bring-up starts all those programs, in the right order.",
   "my": "Level 0 က စက်ရုပ် ဆော့ဖ်ဝဲကို ဒေတာ လက်ဆင့်ကမ်းတဲ့ ပရိုဂရမ် အသေးလေးတွေ အများကြီးအဖြစ် ပြခဲ့ပါတယ်။ bring-up က အဲဒီ ပရိုဂရမ်တွေ အားလုံးကို မှန်ကန်တဲ့ အစဉ်အတိုင်း စတင်ပေးပါတယ်။",
-  "back": "Level 0 showed the robot software as many tiny programs that hand data along. Bring-up starts all those programs in the correct order."
+  "back": "Level 0 showed the robot software as many tiny programs that hand data along. Bring-up starts all those programs in the correct order.",
+  "gemini_back": "Level 0 showed the robot software as many small programs passing data along. bring-up starts all those programs in the correct order."
  },
  "core:levels.grows.costmap": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "The thinking chapter stopped the robot at a safe distance from the wall. A costmap draws that distance around every wall on the map.",
   "my": "စဉ်းစားတဲ့ အခန်းက စက်ရုပ်ကို နံရံနဲ့ ဘေးကင်းတဲ့ အကွာအဝေးမှာ ရပ်စေခဲ့ပါတယ်။ costmap က အဲဒီ အကွာအဝေးကို မြေပုံပေါ်က နံရံတိုင်းရဲ့ ပတ်လည်မှာ ဆွဲပေးပါတယ်။",
-  "back": "The thinking chapter made the robot stop at a safe distance from the wall. The costmap draws that distance around every wall on the map."
+  "back": "The thinking chapter made the robot stop at a safe distance from the wall. The costmap draws that distance around every wall on the map.",
+  "gemini_back": "The thinking chapter made the robot stop at a safe distance from walls. The costmap draws that distance around every wall on the map."
  },
  "core:levels.grows.detect": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "The sensing chapter showed a beam hitting something. Here neighbouring hits are grouped, and each group is a guess at one object.",
   "my": "အာရုံခံတဲ့ အခန်းက beam တစ်ခု တစ်ခုခုကို ထိတာ ပြခဲ့ပါတယ်။ ဒီမှာတော့ ဘေးချင်းကပ် ထိမှတ်တွေကို အုပ်စုဖွဲ့ပြီး အုပ်စုတစ်ခုစီက အရာဝတ္ထု တစ်ခုလို့ ခန့်မှန်းတာပါ။",
-  "back": "The sensing chapter showed a beam hitting something. Here, adjacent hit points are grouped, and each group is estimated to be one object."
+  "back": "The sensing chapter showed a beam hitting something. Here, adjacent hit points are grouped, and each group is estimated to be one object.",
+  "gemini_back": "The sensing chapter showed a beam hitting something. Here, adjacent hit points are grouped together and each group is estimated as an object."
  },
  "core:levels.grows.goal": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "The acting chapter sent the wheels two numbers. Here you send a place instead, and the planner decides if and how it gets there.",
   "my": "လုပ်ဆောင်တဲ့ အခန်းက ဘီးတွေကို ဂဏန်း 2 ခု ပို့ခဲ့ပါတယ်။ ဒီမှာတော့ နေရာ တစ်ခုကို ပို့ပြီး planner က ရောက်နိုင်လား၊ ဘယ်လို ရောက်မလဲ ဆုံးဖြတ်ပါတယ်။",
-  "back": "The acting chapter sent 2 numbers to the wheels. Here, a place is sent, and the planner decides whether it can be reached and how it will be reached."
+  "back": "The acting chapter sent 2 numbers to the wheels. Here, a place is sent, and the planner decides whether it can be reached and how it will be reached.",
+  "gemini_back": "The acting chapter sent 2 numbers to the wheels. Here, a location is sent, and the planner decides if it is reachable and how to get there."
  },
  "core:levels.grows.grid": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "The thinking chapter decided from one reading and then forgot it. A grid remembers readings as cells: free, wall or not seen yet.",
   "my": "စဉ်းစားတဲ့ အခန်းက ဂဏန်း တစ်ခုနဲ့ ဆုံးဖြတ်ပြီး မေ့သွားခဲ့ပါတယ်။ grid က ဂဏန်းတွေကို cell တွေအဖြစ် မှတ်ထားပါတယ်- လွတ်တာ၊ နံရံ ဒါမှမဟုတ် မမြင်ရသေးတာ။",
-  "back": "The thinking chapter decided with one number and forgot. The grid records the numbers as cells: empty, wall, or not yet seen."
+  "back": "The thinking chapter decided with one number and forgot. The grid records the numbers as cells: empty, wall, or not yet seen.",
+  "gemini_back": "The thinking chapter decided with a number and forgot it. The grid stores numbers as cells: free, wall, or unseen."
  },
  "core:levels.grows.scan": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "The sensing chapter ended on a ring of beams around the robot. A LiDAR scan is that ring sent as one message, again and again.",
   "my": "အာရုံခံတဲ့ အခန်းက စက်ရုပ် ပတ်လည်က beam စက်ဝိုင်းနဲ့ ပြီးခဲ့ပါတယ်။ LiDAR scan ဆိုတာ အဲဒီ စက်ဝိုင်းကို message တစ်ခုအဖြစ် ထပ်ခါထပ်ခါ ပို့တာပါ။",
-  "back": "The sensing chapter finished with a circle of beams around the robot. A LiDAR scan is sending that circle again and again as one message."
+  "back": "The sensing chapter finished with a circle of beams around the robot. A LiDAR scan is sending that circle again and again as one message.",
+  "gemini_back": "The sensing chapter ended with a beam circle around the robot. A LiDAR scan repeatedly sends that circle as a message."
  },
  "core:levels.grows.tf": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "The simulator chapter showed the world and the robot's own view as two pictures. TF keeps track of where one sits inside the other.",
   "my": "ဆင်မျူလေတာ အခန်းက ကမ္ဘာနဲ့ စက်ရုပ်ရဲ့ ကိုယ်ပိုင် မြင်ကွင်းကို ပုံ 2 ပုံအဖြစ် ပြခဲ့ပါတယ်။ TF က တစ်ခုထဲမှာ နောက်တစ်ခု ဘယ်နေရာမှာ ရှိလဲ ဆိုတာကို မှတ်ထားပါတယ်။",
-  "back": "The simulator chapter showed the world and the robot's own view as 2 images. TF records where one is located inside the other."
+  "back": "The simulator chapter showed the world and the robot's own view as 2 images. TF records where one is located inside the other.",
+  "gemini_back": "The simulator chapter showed the world and the robot's own view as 2 images. TF keeps track of where one is inside the other."
  },
  "core:levels.heading": {
   "status": "pass",
@@ -605,10 +625,11 @@
   "back": "Levels"
  },
  "core:levels.knows": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "You already know",
   "my": "သင် သိပြီးသား",
-  "back": "What you already know"
+  "back": "What you already know",
+  "gemini_back": "What you already know"
  },
  "core:levels.names.0": {
   "status": "pass",
@@ -653,10 +674,11 @@
   "back": "Level"
  },
  "core:levels.opened": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "opened",
   "my": "ဖွင့်ထားပြီ",
-  "back": "Already opened"
+  "back": "Already opened",
+  "gemini_back": "Enabled"
  },
  "core:levels.soon": {
   "status": "pass",
@@ -689,10 +711,11 @@
   "back": "Plan"
  },
  "core:player.label": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Scenario",
   "my": "ပြကွက်",
-  "back": "Scene"
+  "back": "Scene",
+  "gemini_back": "View"
  },
  "core:player.pause": {
   "status": "pass",
@@ -707,16 +730,18 @@
   "back": "Play"
  },
  "core:player.scrub": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Scenario time",
   "my": "ပြကွက် အချိန်",
-  "back": "Scene time"
+  "back": "Scene time",
+  "gemini_back": "Scene time"
  },
  "core:scan.beam": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "beam (hover a dot)",
   "my": "beam (အစက်ပေါ် mouse တင်ကြည့်ပါ)",
-  "back": "beam (hover the mouse over the dot)"
+  "back": "beam (hover the mouse over the dot)",
+  "gemini_back": "beam (hover mouse over point)"
  },
  "core:scan.fired": {
   "status": "pass",
@@ -731,22 +756,25 @@
   "back": "gap between beams"
  },
  "core:scan.hits": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "beams with a return",
   "my": "ပြန်လာတဲ့ beam တွေ",
-  "back": "Returning beams"
+  "back": "Returning beams",
+  "gemini_back": "Returning beams"
  },
  "core:scan.lines.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "360 beams, one per degree, 5 times a second. Each beam returns the nearest wall or obstacle, if it is closer than 3.5 m.",
   "my": "beam 360 ခု၊ ဒီဂရီ တစ်ခုကို beam တစ်ခု၊ တစ်စက္ကန့်ကို 5 ကြိမ်။ beam တစ်ခုစီက 3.5 m ထက် နီးရင် အနီးဆုံး နံရံ ဒါမှမဟုတ် အတားအဆီးကို ပြန်ပြောပါတယ်။",
-  "back": "360 beams, one beam per degree, 5 times per second. Each beam reports the nearest wall or obstacle if it is closer than 3.5 m."
+  "back": "360 beams, one beam per degree, 5 times per second. Each beam reports the nearest wall or obstacle if it is closer than 3.5 m.",
+  "gemini_back": "360 beams, one beam per degree, 5 times per second. Each beam reports back the nearest wall or obstacle if closer than 3.5 m."
  },
  "core:scan.lines.1": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Neighbouring beams spread apart with range: anything narrower than the gap can fall between them.",
   "my": "အကွာအဝေး ဝေးသွားတာနဲ့အမျှ ဘေးချင်းကပ် beam တွေ ကွာဟသွားပါတယ်၊ အဲဒီကြားထက် ပိုကျဉ်းတဲ့ ဘယ်အရာမဆို beam တွေကြား လွတ်သွားနိုင်ပါတယ်။",
-  "back": "As the distance gets farther, adjacent beams spread apart; anything narrower than that gap can slip through between the beams."
+  "back": "As the distance gets farther, adjacent beams spread apart; anything narrower than that gap can slip through between the beams.",
+  "gemini_back": "As distance increases, adjacent beams gap apart, and anything narrower than that gap can be missed between beams."
  },
  "core:scan.lines.2": {
   "status": "pass",
@@ -915,10 +943,11 @@
   "back": "/odom rate (≈ number of updates per check)"
  },
  "core:tf.point": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "hit at box1 corner",
   "my": "box1 ထောင့်မှာ ထိတဲ့ အမှတ်",
-  "back": "The point that touches at the corner of box1"
+  "back": "The point that touches at the corner of box1",
+  "gemini_back": "Hit point on box1 corner"
  },
  "core:tf.scene": {
   "status": "pass",
@@ -945,10 +974,11 @@
   "back": "STALE"
  },
  "core:tf.verdict": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "detector says",
   "my": "ထောက်လှမ်းကိရိယာရဲ့ ဆုံးဖြတ်ချက်",
-  "back": "The detection device's decision"
+  "back": "The detection device's decision",
+  "gemini_back": "Detector's decision"
  },
  "core:tf.x": {
   "status": "pass",
@@ -975,298 +1005,347 @@
   "back": "Robotics 101"
  },
  "ep/bfs:breakIt": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Break it: queue.pop() instead of queue.popleft()",
   "my": "ဖျက်ကြည့်: queue.popleft() အစား queue.pop()",
-  "back": "Break it: queue.pop() instead of queue.popleft()"
+  "back": "Break it: queue.pop() instead of queue.popleft()",
+  "gemini_back": "Try deleting: queue.pop() instead of queue.popleft()"
  },
  "ep/bfs:brokenNote": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "pop() takes the newest cell: a stack. It dives down one direction and still reaches G, but the path is longer. Nothing crashes; the answer is just worse.",
   "my": "pop() က အသစ်ဆုံး cell ကို ထုတ်ပါတယ်: stack တစ်ခုပါ။ ဦးတည်ရာ တစ်ခုတည်းကို နက်နက် ဆင်းသွားပြီး G ကို ရောက်တော့ ရောက်ပေမဲ့ လမ်းကြောင်းက ပိုရှည်ပါတယ်။ ဘာမှ crash မဖြစ်ပါဘူး၊ အဖြေ ပိုဆိုးသွားရုံပါ။",
-  "back": "pop() takes out the newest cell: it is a stack. It goes deep down a single direction and does reach G, but the path is longer. Nothing crashes, the answer just gets worse."
+  "back": "pop() takes out the newest cell: it is a stack. It goes deep down a single direction and does reach G, but the path is longer. Nothing crashes, the answer just gets worse.",
+  "gemini_back": "pop() pops the newest cell: it's a stack. It goes deep into a single direction, and although it reaches G, the path is longer. Nothing crashes, the answer just gets worse."
  },
  "ep/bfs:challenge": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Challenge: add walls so the shortest path needs at least 21 steps, and G can still be reached.",
   "my": "စိန်ခေါ်မှု: အတိုဆုံး လမ်းကြောင်းက အနည်းဆုံး 21 ဆင့် လိုအောင် နံရံတွေ ထည့်ပါ၊ ဒါပေမဲ့ G ကို ရောက်နိုင်သေးရပါမယ်။",
-  "back": "Challenge: add walls so that the shortest path needs at least 21 steps, but G must still be reachable."
+  "back": "Challenge: add walls so that the shortest path needs at least 21 steps, but G must still be reachable.",
+  "gemini_back": "Challenge: Add walls so the shortest path requires at least 21 steps, but G must still be reachable."
  },
  "ep/bfs:clickHint": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Click a cell to add or remove a wall (keyboard: Tab to the grid, arrows to move, Enter to toggle).",
   "my": "နံရံ ထည့်ဖို့ ဒါမှမဟုတ် ဖယ်ဖို့ cell ကို နှိပ်ပါ (ကီးဘုတ်: Tab နဲ့ grid ကို သွား၊ မြှားခလုတ်တွေနဲ့ ရွှေ့၊ Enter နဲ့ ပြောင်းပါ)။",
-  "back": "Click a cell to add or remove a wall (keyboard: go to the grid with Tab, move with the arrow keys, toggle with Enter)."
+  "back": "Click a cell to add or remove a wall (keyboard: go to the grid with Tab, move with the arrow keys, toggle with Enter).",
+  "gemini_back": "Click a cell to add or remove a wall (Keyboard: Go to grid with Tab, move with arrow keys, toggle with Enter)."
  },
  "ep/bfs:cost.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Nav2 stores the map as a costmap: each cell holds a number from 0 (free) to 254 (lethal obstacle), 255 means unknown, and 253 means the robot body would touch an obstacle there.",
   "my": "Nav2 က မြေပုံကို costmap အဖြစ် သိမ်းပါတယ်။ cell တစ်ခုစီမှာ 0 (လွတ်) ကနေ 254 (သေချာပေါက် တိုက်မိမယ့် အတားအဆီး) အထိ နံပါတ်တစ်ခု ရှိပါတယ်။ 255 က မသိဘူးလို့ အဓိပ္ပာယ်ရပြီး 253 က အဲဒီနေရာမှာ စက်ရုပ်ကိုယ်ထည်က အတားအဆီးကို ထိမယ်လို့ အဓိပ္ပာယ်ရပါတယ်။",
-  "back": "Nav2 stores the map as a costmap. Each cell has a number from 0 (free) to 254 (certain-collision obstacle). 255 means unknown, and 253 means the robot body would touch the obstacle at that spot."
+  "back": "Nav2 stores the map as a costmap. Each cell has a number from 0 (free) to 254 (certain-collision obstacle). 255 means unknown, and 253 means the robot body would touch the obstacle at that spot.",
+  "gemini_back": "Nav2 stores the map as a costmap. Each cell has a number from 0 (free) to 254 (definite collision obstacle). 255 means unknown, and 253 means the robot body will hit an obstacle at that location."
  },
  "ep/bfs:cost.1": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Its NavFn planner runs Dijkstra (or A*), as in the costmap view above. Nav2's inflation layer makes the cost fall off smoothly with distance from an obstacle; the page uses one step (+4) to keep it visible. With every cost equal, Dijkstra takes cells out in the same rings as BFS.",
   "my": "သူ့ရဲ့ NavFn planner က အပေါ်က costmap မြင်ကွင်းလိုပဲ Dijkstra (ဒါမှမဟုတ် A*) ကို run ပါတယ်။ Nav2 ရဲ့ inflation layer က အတားအဆီးနဲ့ အကွာအဝေး ဝေးလာတာနဲ့အမျှ cost ကို ချောချောမွေ့မွေ့ လျော့ကျစေပါတယ်။ မြင်သာအောင် ဒီစာမျက်နှာက တစ်ဆင့်တည်း (+4) ပဲ သုံးပါတယ်။ cost အားလုံး တူရင် Dijkstra က BFS လိုပဲ ကွင်းအစဉ်အတိုင်း cell တွေကို ထုတ်ပါတယ်။",
-  "back": "Its NavFn planner runs Dijkstra (or A*) just like the costmap view above. Nav2's inflation layer reduces the cost smoothly as the distance from the obstacle grows. To make it visible, this page uses only a single step (+4). When all costs are equal, Dijkstra takes out cells in ring order just like BFS."
+  "back": "Its NavFn planner runs Dijkstra (or A*) just like the costmap view above. Nav2's inflation layer reduces the cost smoothly as the distance from the obstacle grows. To make it visible, this page uses only a single step (+4). When all costs are equal, Dijkstra takes out cells in ring order just like BFS.",
+  "gemini_back": "Its NavFn planner runs Dijkstra (or A*) just like the costmap view above. Nav2's inflation layer smoothly decreases the cost as distance from the obstacle increases. For visibility, this page uses only a single step (+4). If all costs are equal, Dijkstra pops cells in ring order just like BFS."
  },
  "ep/bfs:costNote": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Each cell touching a wall now costs 5 instead of 1. Dijkstra takes out the cheapest cell first: 15 steps at cost 15, against the BFS path's 13 steps at cost 41. Longer, but never brushing a wall.",
   "my": "အခု နံရံနဲ့ ထိနေတဲ့ cell တစ်ခုစီက cost 1 အစား 5 ကျပါတယ်။ Dijkstra က အသက်သာဆုံး cell ကို အရင် ထုတ်ပါတယ်: 15 ဆင့်၊ cost 15 ပါ။ BFS လမ်းကြောင်းကတော့ 13 ဆင့်၊ cost 41 ပါ။ Dijkstra လမ်းကြောင်းက ပိုရှည်ပေမဲ့ နံရံကို ဘယ်တော့မှ မပွတ်ပါဘူး။",
-  "back": "Now each cell touching a wall drops to cost 5 instead of cost 1. Dijkstra takes out the cheapest cell first: 15 steps, cost 15. The BFS path, however, is 13 steps, cost 41. The Dijkstra path is longer, but it never brushes the wall."
+  "back": "Now each cell touching a wall drops to cost 5 instead of cost 1. Dijkstra takes out the cheapest cell first: 15 steps, cost 15. The BFS path, however, is 13 steps, cost 41. The Dijkstra path is longer, but it never brushes the wall.",
+  "gemini_back": "Now each cell touching a wall costs 5 instead of 1. Dijkstra pops the cheapest cell first: 15 steps, cost 15. The BFS path is 13 steps, cost 41. The Dijkstra path is longer, but it never grazes the wall."
  },
  "ep/bfs:costOff": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Back to plain BFS",
   "my": "ရိုးရိုး BFS ကို ပြန်သွား",
-  "back": "Go back to plain BFS"
+  "back": "Go back to plain BFS",
+  "gemini_back": "Return to simple BFS"
  },
  "ep/bfs:costOn": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Costmap view: Dijkstra, +4 next to a wall",
   "my": "costmap မြင်ကွင်း: Dijkstra၊ နံရံဘေးမှာ +4",
-  "back": "costmap view: Dijkstra, +4 next to walls"
+  "back": "costmap view: Dijkstra, +4 next to walls",
+  "gemini_back": "costmap view: Dijkstra, +4 next to walls"
  },
  "ep/bfs:costTitle": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "On a real robot",
   "my": "တကယ့် စက်ရုပ်ပေါ်မှာ",
-  "back": "On a real robot"
+  "back": "On a real robot",
+  "gemini_back": "On a real robot"
  },
  "ep/bfs:figLabel": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Grid map: S start, G goal, walls dark",
   "my": "grid မြေပုံ: S က အစ၊ G က ပန်းတိုင်၊ အရောင်ရင့်တာက နံရံ",
-  "back": "Grid map: S is the start, G is the goal, darker color is a wall"
+  "back": "Grid map: S is the start, G is the goal, darker color is a wall",
+  "gemini_back": "Grid map: S is start, G is goal, dark color is wall"
  },
  "ep/bfs:fixIt": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Fix it: back to popleft()",
   "my": "ပြင်ကြည့်: popleft() ကို ပြန်သုံး",
-  "back": "Fix it: use popleft() again"
+  "back": "Fix it: use popleft() again",
+  "gemini_back": "Try modifying: use popleft() again"
  },
  "ep/bfs:glossary.0.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "BFS",
   "my": "BFS",
-  "back": "BFS"
+  "back": "BFS",
+  "gemini_back": "BFS"
  },
  "ep/bfs:glossary.0.1": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "breadth-first search: look at everything 1 step away, then 2 steps, and so on",
   "my": "breadth-first search: 1 ဆင့်အကွာ အရာအားလုံးကို ကြည့်၊ ပြီးရင် 2 ဆင့်၊ အဲဒီလို ဆက်သွား",
-  "back": "breadth-first search: look at everything 1 step away, then 2 steps, and so on"
+  "back": "breadth-first search: look at everything 1 step away, then 2 steps, and so on",
+  "gemini_back": "breadth-first search: look at everything 1 step away, then 2 steps, keep going like that"
  },
  "ep/bfs:glossary.1.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "queue",
   "my": "queue",
-  "back": "queue"
+  "back": "queue",
+  "gemini_back": "queue"
  },
  "ep/bfs:glossary.1.1": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "first in, first out: the oldest item leaves first",
   "my": "အရင်ဝင် အရင်ထွက်: အဟောင်းဆုံးက အရင် ထွက်",
-  "back": "first in, first out: the oldest comes out first"
+  "back": "first in, first out: the oldest comes out first",
+  "gemini_back": "First in first out: oldest comes out first"
  },
  "ep/bfs:glossary.2.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "stack",
   "my": "stack",
-  "back": "stack"
+  "back": "stack",
+  "gemini_back": "stack"
  },
  "ep/bfs:glossary.2.1": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "last in, first out: the newest item leaves first",
   "my": "နောက်ဝင် အရင်ထွက်: အသစ်ဆုံးက အရင် ထွက်",
-  "back": "last in, first out: the newest comes out first"
+  "back": "last in, first out: the newest comes out first",
+  "gemini_back": "Last in first out: newest comes out first"
  },
  "ep/bfs:glossary.3.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "neighbour",
   "my": "ဘေးချင်းကပ် cell (neighbour)",
-  "back": "Adjacent cell (neighbour)"
+  "back": "Adjacent cell (neighbour)",
+  "gemini_back": "Adjacent cell (neighbour)"
  },
  "ep/bfs:glossary.3.1": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "a cell one step up, down, left or right",
   "my": "အပေါ်၊ အောက်၊ ဘယ်၊ ညာ တစ်ဆင့်အကွာက cell",
-  "back": "The cell one step away: up, down, left, or right"
+  "back": "The cell one step away: up, down, left, or right",
+  "gemini_back": "Cell one step away up, down, left, right"
  },
  "ep/bfs:glossary.4.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "parent",
   "my": "parent",
-  "back": "parent"
+  "back": "parent",
+  "gemini_back": "parent"
  },
  "ep/bfs:glossary.4.1": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "the cell that put this one into the queue",
   "my": "ဒီ cell ကို queue ထဲ ထည့်ခဲ့တဲ့ cell",
-  "back": "The cell that added this cell to the queue"
+  "back": "The cell that added this cell to the queue",
+  "gemini_back": "The cell that added this cell to the queue"
  },
  "ep/bfs:glossary.5.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "costmap",
   "my": "costmap",
-  "back": "costmap"
+  "back": "costmap",
+  "gemini_back": "costmap"
  },
  "ep/bfs:glossary.5.1": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "a grid where each cell has a cost, not only free / occupied",
   "my": "လွတ် / ပိတ် ပဲ မဟုတ်ဘဲ cell တစ်ခုစီမှာ cost ရှိတဲ့ grid",
-  "back": "A grid where each cell has a cost, not just free / blocked"
+  "back": "A grid where each cell has a cost, not just free / blocked",
+  "gemini_back": "Grid where each cell has a cost instead of just free / blocked"
  },
  "ep/bfs:glossary.6.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Nav2",
   "my": "Nav2",
-  "back": "Nav2"
+  "back": "Nav2",
+  "gemini_back": "Nav2"
  },
  "ep/bfs:glossary.6.1": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "the ROS 2 navigation software: plans a path on the map and drives the robot along it",
   "my": "ROS 2 ရဲ့ navigation ဆော့ဖ်ဝဲ: မြေပုံပေါ်မှာ လမ်းကြောင်း စီစဉ်ပြီး စက်ရုပ်ကို အဲဒီလမ်းကြောင်းအတိုင်း မောင်းပေး",
-  "back": "ROS 2's navigation software: plans a path on the map and drives the robot along that path"
+  "back": "ROS 2's navigation software: plans a path on the map and drives the robot along that path",
+  "gemini_back": "ROS 2's navigation software: plans a path on the map and drives the robot along that path"
  },
  "ep/bfs:glossary.7.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "NavFn",
   "my": "NavFn",
-  "back": "NavFn"
+  "back": "NavFn",
+  "gemini_back": "NavFn"
  },
  "ep/bfs:glossary.7.1": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "one of Nav2's path planners",
   "my": "Nav2 ရဲ့ လမ်းကြောင်း planner တွေထဲက တစ်ခု",
-  "back": "One of Nav2's path planners"
+  "back": "One of Nav2's path planners",
+  "gemini_back": "One of Nav2's path planners"
  },
  "ep/bfs:glossary.8.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Dijkstra",
   "my": "Dijkstra",
-  "back": "Dijkstra"
+  "back": "Dijkstra",
+  "gemini_back": "Dijkstra"
  },
  "ep/bfs:glossary.8.1": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "BFS for steps that cost different amounts: always takes out the cheapest total so far",
   "my": "ဆင့်တစ်ခုစီ cost မတူတဲ့အခါ သုံးတဲ့ BFS: အခုထိ စုစုပေါင်း အသက်သာဆုံးကို အမြဲ အရင် ထုတ်",
-  "back": "BFS used when each step has a different cost: always take out the one with the cheapest total so far first"
+  "back": "BFS used when each step has a different cost: always take out the one with the cheapest total so far first",
+  "gemini_back": "BFS used when each step has a different cost: always pops the lowest cumulative cost so far first"
  },
  "ep/bfs:learn": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "You will learn: breadth-first search finds the fewest-steps path on a grid, and the queue is the reason it is the fewest.",
   "my": "သင်ယူမယ့်အရာ: breadth-first search က grid ပေါ်မှာ အဆင့်အနည်းဆုံး လမ်းကြောင်းကို ရှာပေးပါတယ်။ အနည်းဆုံး ဖြစ်ရတဲ့ အကြောင်းရင်းက queue ပါ။",
-  "back": "What you will learn: breadth-first search finds the path with the fewest steps on a grid. The reason it is the fewest is the queue."
+  "back": "What you will learn: breadth-first search finds the path with the fewest steps on a grid. The reason it is the fewest is the queue.",
+  "gemini_back": "What you will learn: breadth-first search finds the path with the fewest steps on a grid. The reason it is the fewest is the queue."
  },
  "ep/bfs:legendDone": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "taken out",
   "my": "queue ထဲက ထုတ်ပြီးသား",
-  "back": "Already issued"
+  "back": "Already issued",
+  "gemini_back": "Already popped from queue"
  },
  "ep/bfs:legendNear": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "cost 5 (touches a wall)",
   "my": "cost 5 (နံရံနဲ့ ထိနေ)",
-  "back": "cost 5 (touching a wall)"
+  "back": "cost 5 (touching a wall)",
+  "gemini_back": "cost 5 (touching wall)"
  },
  "ep/bfs:legendPath": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "path",
   "my": "လမ်းကြောင်း",
-  "back": "Path"
+  "back": "Path",
+  "gemini_back": "Path"
  },
  "ep/bfs:legendQueued": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "in the queue",
   "my": "queue ထဲမှာ",
-  "back": "In queue"
+  "back": "In queue",
+  "gemini_back": "In queue"
  },
  "ep/bfs:lines.0": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "A map for a robot is often a grid: each cell is free or occupied. The robot starts at S and must reach G, one cell up, down, left or right per step.",
   "my": "စက်ရုပ်အတွက် မြေပုံက grid ဖြစ်လေ့ရှိပါတယ်။ cell တစ်ခုစီက လွတ်နေတာ ဒါမှမဟုတ် ပိတ်နေတာ ဖြစ်ပါတယ်။ စက်ရုပ်က S ကနေ စပြီး G ကို ရောက်ရပါမယ်။ တစ်ဆင့်မှာ အပေါ်၊ အောက်၊ ဘယ်၊ ညာ cell တစ်ကွက်ပဲ ရွှေ့ရပါတယ်။",
-  "back": "For a robot, the map is usually a grid. Each cell is either free or blocked. The robot starts from S and must reach G. In one step it moves only one cell up, down, left, or right."
+  "back": "For a robot, the map is usually a grid. Each cell is either free or blocked. The robot starts from S and must reach G. In one step it moves only one cell up, down, left, or right.",
+  "gemini_back": "For a robot, the map is usually a grid. Each cell is either free or blocked. The robot must start from S and reach G. In one step, it moves only one cell up, down, left, or right."
  },
  "ep/bfs:lines.1": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "BFS keeps a queue: a line of cells waiting their turn. Take the oldest cell out, put each free neighbour you have not seen yet at the back. Cells come out in rings: all 1 step away, then all 2 steps, and so on.",
   "my": "BFS က queue တစ်ခုကို သုံးပါတယ်။ queue ဆိုတာ အလှည့်စောင့်နေတဲ့ cell တွေရဲ့ တန်းစီပါ။ အဟောင်းဆုံး cell ကို ထုတ်ပြီး မမြင်ရသေးတဲ့ လွတ်နေတဲ့ ဘေးချင်းကပ် cell တစ်ခုစီကို တန်းရဲ့ နောက်ဆုံးမှာ ထည့်ပါ။ cell တွေက ကွင်းလိုက် ထွက်လာပါတယ်: 1 ဆင့်အကွာ အားလုံး၊ ပြီးရင် 2 ဆင့်အကွာ အားလုံး၊ အဲဒီလို ဆက်သွားပါတယ်။",
-  "back": "BFS uses a queue. A queue is a line of cells waiting their turn. Take out the oldest cell, and add each free, not-yet-seen neighbouring cell to the end of the line. The cells come out in rings: all those 1 step away, then all those 2 steps away, and so on."
+  "back": "BFS uses a queue. A queue is a line of cells waiting their turn. Take out the oldest cell, and add each free, not-yet-seen neighbouring cell to the end of the line. The cells come out in rings: all those 1 step away, then all those 2 steps away, and so on.",
+  "gemini_back": "BFS uses a queue. A queue is a line of cells waiting their turn. Pop the oldest cell and add each unvisited free adjacent cell to the end of the line. Cells come out in rings: all 1 step away, then all 2 steps away, and so on."
  },
  "ep/bfs:lines.2": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "So the first time G comes out, no shorter path can exist. Each cell remembers who put it in (its parent); walking parents back from G gives the path.",
   "my": "ဒါကြောင့် G ပထမဆုံး ထွက်လာတဲ့အချိန်မှာ ဒီထက် တိုတဲ့ လမ်းကြောင်း မရှိနိုင်တော့ပါဘူး။ cell တစ်ခုစီက သူ့ကို ဘယ် cell က ထည့်ခဲ့လဲ (သူ့ parent) ဆိုတာ မှတ်ထားပါတယ်။ G ကနေ parent တွေကို နောက်ပြန် လိုက်သွားရင် လမ်းကြောင်း ရပါတယ်။",
-  "back": "So when G comes out first, there can no longer be a shorter path. Each cell remembers which cell added it (its parent). If you follow the parents backwards from G, you get the path."
+  "back": "So when G comes out first, there can no longer be a shorter path. Each cell remembers which cell added it (its parent). If you follow the parents backwards from G, you get the path.",
+  "gemini_back": "Therefore, when G comes out for the first time, there can be no shorter path. Each cell remembers which cell added it (its parent). Following the parents backward from G gives the path."
  },
  "ep/bfs:maxQueue": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "largest queue",
   "my": "အကြီးဆုံး queue",
-  "back": "Largest queue"
+  "back": "Largest queue",
+  "gemini_back": "Largest queue"
  },
  "ep/bfs:none": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "no path",
   "my": "လမ်းကြောင်း မရှိ",
-  "back": "No path"
+  "back": "No path",
+  "gemini_back": "No path"
  },
  "ep/bfs:notYet": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Not yet: shortest path =",
   "my": "မရသေးဘူး: အတိုဆုံး လမ်းကြောင်း =",
-  "back": "Not yet: shortest path ="
+  "back": "Not yet: shortest path =",
+  "gemini_back": "Not yet: shortest path ="
  },
  "ep/bfs:pathCost": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "path cost",
   "my": "လမ်းကြောင်း cost",
-  "back": "Path cost"
+  "back": "Path cost",
+  "gemini_back": "Path cost"
  },
  "ep/bfs:pathLen": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "path length (steps)",
   "my": "လမ်းကြောင်း အရှည် (ဆင့်)",
-  "back": "Path length (steps)"
+  "back": "Path length (steps)",
+  "gemini_back": "Path length (steps)"
  },
  "ep/bfs:reset": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Reset the map",
   "my": "မြေပုံကို ပြန်စ",
-  "back": "Reset map"
+  "back": "Reset map",
+  "gemini_back": "Reset map"
  },
  "ep/bfs:runsHere": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Python shown; the page runs the same logic in JavaScript.",
   "my": "ဒီမှာ Python နဲ့ ပြထားပါတယ်၊ စာမျက်နှာက တူညီတဲ့ logic ကို JavaScript နဲ့ run ပါတယ်။",
-  "back": "It is shown here in Python; the page runs the same logic in JavaScript."
+  "back": "It is shown here in Python; the page runs the same logic in JavaScript.",
+  "gemini_back": "Shown here in Python, the page runs the same logic in JavaScript."
  },
  "ep/bfs:solved": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Solved: shortest path =",
   "my": "အောင်မြင်ပြီ: အတိုဆုံး လမ်းကြောင်း =",
-  "back": "Success: shortest path ="
+  "back": "Success: shortest path =",
+  "gemini_back": "Success: shortest path ="
  },
  "ep/bfs:title": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "BFS: the shortest way across a grid",
   "my": "BFS: grid ကို ဖြတ်သွားတဲ့ အတိုဆုံး လမ်း",
-  "back": "BFS: shortest path across a grid"
+  "back": "BFS: shortest path across a grid",
+  "gemini_back": "BFS: shortest path across the grid"
  },
  "ep/bfs:visited": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "cells taken out",
   "my": "ထုတ်ပြီးသား cell",
-  "back": "Cells taken out"
+  "back": "Cells taken out",
+  "gemini_back": "Popped cell"
  },
  "ep/bfs:words": {
-  "status": "pass-alt",
+  "status": "pass",
   "en": "Words",
   "my": "ဝေါဟာရ",
-  "back": "Glossary"
+  "back": "Glossary",
+  "gemini_back": "Vocabulary"
  },
  "ep/late:acted": {
   "status": "pass-alt",
