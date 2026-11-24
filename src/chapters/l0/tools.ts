@@ -2,7 +2,7 @@ import type { Scenario } from '../../anim/contract'
 
 /**
  * The tool stack under his patrol robot, bottom to top. `needs` = what a layer stops working without:
- * ROS 2 Humble targets Ubuntu 22.04 (REP 2000) and its `ros2` command is a Python program (ros2/ros2cli).
+ * ROS 2 Jazzy (the course pick) targets Ubuntu 24.04 (REP 2000) and its `ros2` command is a Python program (ros2/ros2cli).
  */
 export const LAYERS = [
   { id: 'linux', needs: [] },

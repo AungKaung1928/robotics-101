@@ -6,7 +6,7 @@ export const WS_STRINGS = {
     lines: [
       'A package is one folder with a package.xml (name, dependencies). A C++ package like tf_explorer adds a CMakeLists.txt (what to build); a Python package has a setup script instead. tf_explorer is one package with 5 programs.',
       'A workspace is a folder with src/ inside. You clone packages into src/, then run colcon build from the workspace folder. It creates build/, install/ and log/ next to src/.',
-      'Two sources, in order: /opt/ros/humble first (ROS itself), then install/setup.bash (your packages). Every new terminal needs both.',
+      'Two sources, in order: /opt/ros/humble first (ROS itself; on Jazzy /opt/ros/jazzy), then install/setup.bash (your packages). Every new terminal needs both.',
     ],
     tree: 'tf_explorer_ws/',
     yours: 'Your terminal: build and run it yourself',
@@ -31,7 +31,7 @@ export const WS_STRINGS = {
     lines: [
       'パッケージは package.xml（名前、依存）を持つ1つのフォルダ。tf_explorer のような C++ パッケージは CMakeLists.txt（何をビルドするか）も持ち、Python パッケージは代わりに setup スクリプトを持つ。tf_explorer は5つのプログラムを持つ1パッケージ。',
       'ワークスペースは中に src/ を持つフォルダ。src/ にパッケージを clone し、ワークスペースのフォルダで colcon build する。src/ の隣に build/、install/、log/ ができる。',
-      'source は2つ、この順番で：まず /opt/ros/humble（ROS 本体）、次に install/setup.bash（自分のパッケージ）。新しいターミナルでは毎回両方必要。',
+      'source は2つ、この順番で：まず /opt/ros/humble（ROS 本体。Jazzy では /opt/ros/jazzy）、次に install/setup.bash（自分のパッケージ）。新しいターミナルでは毎回両方必要。',
     ],
     tree: 'tf_explorer_ws/',
     yours: 'あなたのターミナル：自分でビルドして実行しよう',

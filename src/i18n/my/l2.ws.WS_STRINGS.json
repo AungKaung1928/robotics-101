@@ -4,7 +4,7 @@
  "lines": [
   "package ဆိုတာ package.xml (နာမည်၊ မှီခိုတဲ့ package တွေ) နဲ့ CMakeLists.txt (ဘာကို build လုပ်မလဲ) ပါတဲ့ folder တစ်ခုပါ။ tf_explorer က ပရိုဂရမ် 5 ခုပါတဲ့ package တစ်ခုပါ။",
   "workspace ဆိုတာ အထဲမှာ src/ ပါတဲ့ folder တစ်ခုပါ။ package တွေကို src/ ထဲကို clone လုပ်ပြီး workspace folder ထဲကနေ colcon build ကို run ပါ။ အဲဒါက src/ ဘေးမှာ build/၊ install/ နဲ့ log/ ကို ဖန်တီးပေးပါတယ်။",
-  "source 2 ခုကို ဒီအစဉ်အတိုင်း လုပ်ပါ: ပထမ /opt/ros/humble (ROS ကိုယ်တိုင်)၊ ပြီးရင် install/setup.bash (သင့် package တွေ)။ terminal အသစ်တိုင်းမှာ နှစ်ခုလုံး လိုပါတယ်။"
+  null
  ],
  "tree": "tf_explorer_ws/",
  "yours": "သင့် terminal: ကိုယ်တိုင် build လုပ်ပြီး run ကြည့်",

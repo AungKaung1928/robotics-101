@@ -6,9 +6,9 @@ export const TOOLS_STRINGS = {
     lines: [
       'Each tool stands on the one below it. Linux is the ground: the robot computer and the simulator both run it.',
       'Python is quick to write and try. C++ is compiled and gives you control over speed and timing. Most robot teams use both.',
-      'ROS 2 is the layer that lets many programs talk. This app uses ROS 2 Humble on Ubuntu 22.04, the pair the example repos use.',
+      'ROS 2 is the layer that lets many programs talk. This course installs ROS 2 Jazzy on Ubuntu 24.04 (next chapter). The example repos and terminal pages were made on Humble: on Jazzy, read humble as jazzy in paths like /opt/ros/humble.',
     ],
-    names: { linux: 'Linux (Ubuntu 22.04)', terminal: 'Terminal', python: 'Python', cpp: 'C++', ros: 'ROS 2 Humble' },
+    names: { linux: 'Linux (Ubuntu 24.04)', terminal: 'Terminal', python: 'Python', cpp: 'C++', ros: 'ROS 2 Jazzy' },
     why: {
       linux: 'the operating system robots run',
       terminal: 'type commands: install, build, run',
@@ -43,9 +43,9 @@ export const TOOLS_STRINGS = {
     lines: [
       'どの道具も下の道具の上に立っている。Linux が土台で、ロボットのコンピュータもシミュレータも Linux で動く。',
       'Python は書いてすぐ試せる。C++ はコンパイルして動き、速さとタイミングを細かく制御できる。多くのロボットチームは両方を使う。',
-      'ROS 2 は多くのプログラムを会話させる層。このアプリは例のリポジトリと同じ ROS 2 Humble と Ubuntu 22.04 を使う。',
+      'ROS 2 は多くのプログラムを会話させる層。このコースでは Ubuntu 24.04 に ROS 2 Jazzy を入れる（次の章）。例のリポジトリとターミナルのページは Humble で作った：Jazzy では /opt/ros/humble のようなパスの humble を jazzy と読み替える。',
     ],
-    names: { linux: 'Linux（Ubuntu 22.04）', terminal: 'ターミナル', python: 'Python', cpp: 'C++', ros: 'ROS 2 Humble' },
+    names: { linux: 'Linux（Ubuntu 24.04）', terminal: 'ターミナル', python: 'Python', cpp: 'C++', ros: 'ROS 2 Jazzy' },
     why: {
       linux: 'ロボットが動かす OS',
       terminal: 'コマンドを打つ：インストール・ビルド・実行',
