@@ -71,7 +71,7 @@ export default function CostmapChapter({ t }: { t: Strings }) {
           <div><dt>{c.smooth}</dt><dd data-k="smooth">{kForEdgeCost(10, R, RAD).toFixed(1)}</dd></div>
         </dl>
         <p className="note">{c.twoMaps}</p>
-        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L78-L144`}>nav2_params.yaml:78-144</a>, <a href="https://docs.nav2.org/configuration/packages/costmap-plugins/inflation.html">Nav2 InflationLayer</a></p>
+        <p className="src">{t.source}: <a href={`${SOURCE_REPO}/blob/main/config/nav2_params.yaml#L78-L144`}>nav2_params.yaml:78-144</a>, <a href="https://docs.nav2.org/jazzy/configuration_and_development/configuration_guide/core_servers/costmap_2d/costmap_plugins/inflation/">Nav2 InflationLayer</a></p>
       </div>
     </>
   )

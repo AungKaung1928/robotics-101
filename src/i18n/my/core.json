@@ -182,8 +182,7 @@
   "th": "Break threshold (m)",
   "found": "တွေ့ရှိတဲ့ အရာဝတ္ထုများ",
   "noise": "ဆင်ဆာ noise ထည့်ရန် (σ 1 cm, Gaussian, URDF)",
-  "truth": "မြင်ကွင်းထဲက အရာဝတ္ထုများ (ground truth)",
-  "next": "Borges & Aldon (2004) က အကွာအဝေးနဲ့ ဆင်ဆာ noise အလိုက် တိုးလာတဲ့ threshold တစ်ခုကို အဆိုပြုထားပါတယ်၊ paper ထဲက formula ကို ဖတ်ပြီးတာနဲ့ ဒါကို ထည့်ပေးပါမယ်။"
+  "truth": "မြင်ကွင်းထဲက အရာဝတ္ထုများ (ground truth)"
  },
  "costmap": {
   "lines": [
