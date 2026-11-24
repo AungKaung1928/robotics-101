@@ -17,7 +17,7 @@ import { LANG_LABEL, STRINGS, initialLang, titleOf, type Lang, type Strings } fr
 import { CHAPTER_ICON, Icon } from './icons'
 import type { ChapterMeta } from './anim/contract'
 import { LEVEL_BODY, levelPage, readingIndex, type LevelPage } from './content/levels'
-import { markDone } from './lib/progress'
+import { markCompleted, markVisited } from './lib/progress'
 import { CHAPTERS, keyTarget, neighbour, parseRoute, type ChapterId } from './lib/route'
 
 const BODY: Record<ChapterId, typeof ScanChapter> = { bringup: BringupChapter, tf: TfChapter, scan: ScanChapter, detect: DetectChapter, grid: GridChapter, costmap: CostmapChapter, goal: GoalChapter }
@@ -40,8 +40,15 @@ export default function App() {
     return () => removeEventListener('hashchange', on)
   }, [])
   useEffect(() => {
-    if (route.page === 'chapter') markDone(localStorage, route.id)
-    else if (lvl) markDone(localStorage, lvl.meta.id)
+    const id = route.page === 'chapter' ? route.id : lvl?.meta.id
+    if (!id) return
+    markVisited(localStorage, id)
+    // Completed = the chapter's own check shows a right answer (every check renders .verdict.ok then).
+    const main = document.querySelector('main.chapter')
+    if (!main) return
+    const obs = new MutationObserver(() => { if (main.querySelector('.verdict.ok')) { markCompleted(localStorage, id); obs.disconnect() } })
+    obs.observe(main, { subtree: true, childList: true, attributes: true, attributeFilter: ['class'] })
+    return () => obs.disconnect()
   }, [route, lvl])
   useEffect(() => {
     document.documentElement.lang = lang

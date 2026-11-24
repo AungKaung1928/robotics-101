@@ -7,12 +7,12 @@ import { CHAPTER_ICON, Icon } from '../icons'
 import { EP_CHAPTERS } from '../chapters/ep'
 import { LEVEL0_GROUPS } from '../chapters/l0'
 import { LEVELS } from '../content/levels'
-import { readDone } from '../lib/progress'
+import { readProgress } from '../lib/progress'
 import Arena from './Arena'
 
 export default function Overview({ t }: { t: Strings }) {
   const [peek, setPeek] = useState<ChapterId>(CHAPTERS[0])
-  const [done] = useState(() => readDone(localStorage))
+  const [done] = useState(() => readProgress(localStorage).completed)
   const VALUE = waypointValues(t.wv)
   const path = WAYPOINTS.map(({ x, y }, i) => `${i ? 'L' : 'M'}${x} ${y}`).join('') + 'Z'
   const labels = CHAPTERS.map((c, i) => {
@@ -39,7 +39,7 @@ export default function Overview({ t }: { t: Strings }) {
   const chip = (c: (typeof LEVELS)[number][number], n: number, i: number) => (
     <a key={c.id} href={`#/${n}/${c.id}`} className={done.has(c.id) ? 'is-done' : undefined}>
       <Icon name={c.icon} /> <span>{n}.{i + 1} {titleOf(c, t)}</span>
-      {done.has(c.id) && <span className="tick" aria-label={t.levels.opened}>✓</span>}
+      {done.has(c.id) && <span className="tick" aria-label={t.levels.completed}>✓</span>}
     </a>
   )
   const map = (
@@ -70,7 +70,7 @@ export default function Overview({ t }: { t: Strings }) {
             {EP_CHAPTERS.map((c, i) => (
               <a key={c.id} href={`#/ep/${c.id}`} className={done.has(c.id) ? 'is-done' : undefined}>
                 <Icon name={c.icon} /> <span>EP{i + 1} {titleOf(c, t)}</span>
-                {done.has(c.id) && <span className="tick" aria-label={t.levels.opened}>✓</span>}
+                {done.has(c.id) && <span className="tick" aria-label={t.levels.completed}>✓</span>}
               </a>
             ))}
           </span>

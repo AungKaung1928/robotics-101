@@ -26,7 +26,7 @@ const en = {
     soon: 'Coming next',
     ep: 'Engineering Practice',
     epNote: 'optional, outside the levels',
-    opened: 'opened',
+    completed: 'check solved',
     difficulty: 'Difficulty',
     knows: 'You already know',
     /** One beginner line per older Level 3-4 chapter: the Level 0 picture it grows from (path.ts GROWS_FROM links it). */
@@ -211,7 +211,7 @@ const ja: typeof en = {
     soon: '準備中',
     ep: 'エンジニアリング実践',
     epNote: '任意、レベルの外',
-    opened: '開いた',
+    completed: 'チェック正解',
     difficulty: '難しさ',
     knows: 'もう知っていること',
     grows: {
