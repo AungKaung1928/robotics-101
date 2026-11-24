@@ -1,7 +1,7 @@
 import { execFileSync, spawnSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
-import { cellOf, dijkstra, initialWalls, key, pathCost, search, type Cell } from './bfs'
+import { CHALLENGE_MIN, cellOf, dijkstra, initialWalls, key, pathCost, search, steps, type Cell } from './bfs'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { STRINGS } from '../../i18n'
 import BfsChapter from './BfsChapter'
@@ -27,7 +27,7 @@ describe.skipIf(!hasPython)('EP1-EP2 page Python == TypeScript model', () => {
     const pre = html.match(/<pre class="code" aria-label="Python">([\s\S]*?)<\/pre>/)![1]
     const code = pre.replace(/<\/span><span class="ln[^"]*">/g, '\n').replace(/<[^>]+>/g, '').replace(/&gt;/g, '>').replace(/&lt;/g, '<').replace(/&#x27;/g, "'").replace(/&amp;/g, '&')
     const harness = fileURLToPath(new URL('./on_msg_harness.py', import.meta.url))
-    // every boundary the max_age slider can cross: each distinct delay d, at d - 1 and d, with and without the stamp check
+    // every boundary of the model (the slider moves in 10 ms steps, so d - 1 is a Python edge case, not a UI value): each distinct delay d, at d - 1 and d, with and without the stamp check
     const ages = [...new Set(DELAYS_MS)].flatMap((d) => [d - 1, d]).concat(1000)
     for (const [age, keep] of ages.flatMap((a) => [[a, false], [a, true]] as const)) {
       const r = spawnSync('python3', ['-I', harness, code, keep ? '1' : '0', String(age), JSON.stringify(DELAYS_MS)], { encoding: 'utf8' })
@@ -47,6 +47,8 @@ describe.skipIf(!hasPython)('EP1-EP2 page Python == TypeScript model', () => {
     for (const clicks of [[], solved, cutOff]) {
       const walls = new Set(w)
       for (const c of clicks) walls.delete(key(c)) || walls.add(key(c))
+      if (clicks === solved) expect(steps(search(walls))).toBeGreaterThanOrEqual(CHALLENGE_MIN)
+      if (clicks === cutOff) expect(search(walls).path).toBeNull()
       for (const [flag, order] of [['0', 'queue'], ['1', 'stack']] as const) {
         const r = spawnSync('python3', ['-I', harness, code, flag, JSON.stringify(clicks)], { encoding: 'utf8' })
         expect(r.stderr, code).toBe('')

@@ -8,7 +8,8 @@ code = sys.argv[1] if sys.argv[2] == '0' else sys.argv[1].replace('popleft()', '
 MAP = ['..........', '...###....', '.....#....', '.....#....', '.....#....', '..........', '..........']
 W, H = len(MAP[0]), len(MAP)
 WALLS = {(x, y) for y, row in enumerate(MAP) for x, ch in enumerate(row) if ch == '#'}
-WALLS ^= {tuple(c) for c in json.loads(sys.argv[3])} if len(sys.argv) > 3 else set()
+for c in json.loads(sys.argv[3]) if len(sys.argv) > 3 else []:
+    WALLS ^= {tuple(c)}  # one toggle per click, as the page does
 start, goal = (0, 3), (9, 3)
 
 
