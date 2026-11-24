@@ -172,7 +172,7 @@ describe('SimPickScene takes the chapter ladder', () => {
     expect(h.match(/l6 -5v/g)?.length ?? 0).toBe(sp.LADDER.filter((r) => r.dim === '3D').length)
     expect(h.match(/l3 -2.5v/g)?.length ?? 0).toBe(sp.LADDER.filter((r) => r.dim === '2.5D').length)
     expect(h.match(/is-25d/g)?.length ?? 0).toBe(sp.LADDER.filter((r) => r.dim === '2.5D').length)
-    expect(h.match(/is-none/g)?.length ?? 0).toBe(sp.LADDER.filter((r) => r.dim === 'none').length)
+    expect(h.match(/is-none/g)?.length ?? 0).toBe(0) // no 'no world' rung since app-sim (fake node dropped)
     expect(h).toContain(`data-pick="${at}"`)
   })
 })

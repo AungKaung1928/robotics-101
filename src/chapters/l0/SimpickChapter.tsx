@@ -39,10 +39,10 @@ export default function SimpickChapter({ t }: { t: Strings }) {
           {[...LADDER].reverse().map((r) => {
             const row = s.rows[r.id]
             return (
-              <li key={r.id} className={`sp-row${r.id === lit ? ' is-lit' : ''}${r.mentionOnly ? ' is-mention' : ''}`} data-row={r.id}>
+              <li key={r.id} className={`sp-row${r.id === lit ? ' is-lit' : ''}${r.alt ? ' is-alt' : ''}`} data-row={r.id}>
                 <div className="sp-head">
                   <strong>{r.url ? <a href={r.url}>{row.name}</a> : row.name}</strong>
-                  <span className="sp-dim">{s.dim[r.dim]}{r.mentionOnly ? ` · ${s.mentionOnly}` : ''}</span>
+                  <span className="sp-dim">{s.dim[r.dim]}{r.alt ? ` · ${s.alt}` : ''}</span>
                   {r.id === lit && <span className="sp-start">{s.start}</span>}
                 </div>
                 <p>{row.what}</p>
@@ -51,7 +51,7 @@ export default function SimpickChapter({ t }: { t: Strings }) {
             )
           })}
         </ol>
-        <p className="note">{s.others} <a href={SOURCES.stage}>stage_ros2</a>, <a href={SOURCES.flatland}>Flatland (ROS index)</a></p>
+        <p className="note">{s.others} <a href={SOURCES.isaac}>Isaac Sim</a>, <a href={SOURCES.stage}>stage_ros2</a>, <a href={SOURCES.flatland}>Flatland (ROS index)</a></p>
       </div>
       <div className="panel">
         <p className="learn">{s.learn}</p>
