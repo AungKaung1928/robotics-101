@@ -1,3 +1,5 @@
 .pick { display: block; margin: var(--s1) 0; }
 .choices { display: flex; flex-wrap: wrap; gap: var(--s2); }
 .tflab-code code, .tflab-cmd { overflow-wrap: anywhere; white-space: pre-wrap; }
+/* 3.2 wall follower: the driven path (WallChapter.tsx) */
+.wallfig .trail { fill: none; stroke: var(--robot); stroke-width: 2.5; stroke-linecap: round; stroke-linejoin: round; }

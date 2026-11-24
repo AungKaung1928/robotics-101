@@ -33,8 +33,8 @@ describe('0.12 skill map', () => {
     expect([...TAGS[id]]).toEqual(SKILLS.filter((k) => EVIDENCE[k].test(text)))
   })
   it('counts, the challenge answer and the break-it list come from the tags', () => {
-    expect(ALL_IDS).toHaveLength(22)
-    expect(counts()).toEqual({ py: 10, cpp: 8, ros2: 20, shell: 6 })
+    expect(ALL_IDS).toHaveLength(23)
+    expect(counts()).toEqual({ py: 11, cpp: 8, ros2: 20, shell: 6 })
     expect(most()).toBe('ros2')
     expect(lockedBy('cpp')).toEqual(['cpp', 'shell', 'params', 'ws', 'tf', 'tflab', 'bfs', 'late'])
     expect(lockedBy(null)).toEqual([])

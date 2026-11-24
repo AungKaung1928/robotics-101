@@ -18,7 +18,7 @@ describe('path data', () => {
     for (const [id, from] of Object.entries(GROWS_FROM)) expect(order.indexOf(from), `${id} <- ${from}`).toBeLessThan(order.indexOf(id))
   })
   it('findChapter gives number and route', () => {
-    expect(findChapter('tf')).toMatchObject({ num: '3.2', href: '#/3/tf' })
+    expect(findChapter('tf')).toMatchObject({ num: '3.3', href: '#/3/tf' })
     expect(findChapter('nope')).toBeNull()
   })
 })

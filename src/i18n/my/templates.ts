@@ -4,6 +4,9 @@
 type Tpl = (...a: never[]) => string
 
 export const MY_TEMPLATES: Record<string, Record<string, Tpl>> = {
+  'l3.wall.WALL_STRINGS': {
+    caption: (s: number, d: number) => `${s.toFixed(1)} s · နံရံကနေ ${d.toFixed(2)} m`,
+  },
   core: {
     'wv.jump': (m: number) => `jump > ${m} m`,
     'wv.obstacles': (n: number) => `အတားအဆီး ${n} ခု`,
