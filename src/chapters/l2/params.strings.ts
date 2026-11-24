@@ -24,7 +24,7 @@ export const PARAMS_STRINGS = {
     glossary: [
       ['parameter', 'a named setting of one node, read with get_parameter'],
       ['default', 'the value in declare_parameter, used when nobody overrides it'],
-      ['launch file', 'a Python script that starts nodes with their parameters'],
+      ['launch file', 'a file (Python, XML or YAML) that starts nodes with their parameters'],
       ['--ros-args -p', 'set a parameter from the command line'],
     ] as [string, string][],
     caption: (n: number, w: number) => `check ${n}/20 · ${w} warning${w === 1 ? '' : 's'}`,
@@ -53,7 +53,7 @@ export const PARAMS_STRINGS = {
     glossary: [
       ['パラメータ', '1つのノードの名前付き設定。get_parameter で読む'],
       ['既定値', 'declare_parameter の値。誰も上書きしないときに使われる'],
-      ['launch ファイル', 'ノードをパラメータ付きで起動する Python スクリプト'],
+      ['launch ファイル', 'ノードをパラメータ付きで起動するファイル（Python、XML、YAML）'],
       ['--ros-args -p', 'コマンドラインからパラメータを設定する'],
     ] as [string, string][],
     caption: (n: number, w: number) => `チェック ${n}/20 · 警告 ${w}`,
