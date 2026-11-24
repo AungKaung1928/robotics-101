@@ -7262,5 +7262,23 @@
   "en": "yes",
   "my": "ချိတ်တယ်",
   "back": "Connects"
+ },
+ "l5/port:title": {
+  "status": "pass-alt",
+  "en": "Python → C++: porting one node",
+  "my": "Python → C++: node တစ်ခုကို port လုပ်ခြင်း",
+  "back": "Python → C++: porting a node"
+ },
+ "l5/ci:title": {
+  "status": "pass-alt",
+  "en": "Tests + CI in a ROS container",
+  "my": "ROS container ထဲက စမ်းသပ်မှုများ + CI",
+  "back": "Tests inside the ROS container + CI"
+ },
+ "l5/debug:title": {
+  "status": "pass-alt",
+  "en": "Debugging tools: find why the robot does not move",
+  "my": "ပြဿနာရှာဖွေရေး တူးလ်များ: စက်ရုပ် ဘာကြောင့် မလှုပ်ရှားသလဲဆိုတာ ရှာပါ",
+  "back": "Diagnostic tools: find out why the robot is not moving"
  }
 }
