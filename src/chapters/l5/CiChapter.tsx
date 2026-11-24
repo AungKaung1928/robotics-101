@@ -3,6 +3,7 @@ import { stringsFor, type Strings } from '../../i18n'
 import Gloss from '../l1/Gloss'
 import { LINES, PUSHES, REAL, RUN, SECONDS, STEPS, run, secondsToVerdict, type Push, type Step } from './ci'
 import { CI_STRINGS } from './ci.strings'
+import CiteCode from './CiteCode'
 import './l5.css'
 
 const REPO = 'https://github.com/AungKaung1928/TF-Transform-Explorer'
@@ -58,7 +59,7 @@ export default function CiChapter({ t }: { t: Strings }) {
           <p data-k="real">{real ? <a href={`${REPO}/actions/runs/${real.id}`}>{s.real}: {real.sha}</a> : s.noReal}</p>
         </>}
         <p className="note">{s.timing}</p>
-        <ul className="port-diff">{STEPS.map((st) => <li key={st}><a href={`${REPO}/blob/${RUN.sha}/${LINES[st]}`}><code>{LINES[st].replace('#L', ':').replace('-L', '-')}</code></a> {s.step[st]} ({SECONDS[st]} {s.sec})</li>)}</ul>
+        <ul className="port-diff">{STEPS.map((st) => <li key={st}><a href={`${REPO}/blob/${RUN.sha}/${LINES[st]}`}><CiteCode p={LINES[st]} /></a> {s.step[st]} ({SECONDS[st]} {s.sec})</li>)}</ul>
         <h2>{s.breakTitle}</h2>
         <p className="note">{s.breakNote}</p>
         <p>{s.challenge}</p>

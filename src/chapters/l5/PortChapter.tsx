@@ -4,6 +4,7 @@ import Slider from '../../components/Slider'
 import Gloss from '../l1/Gloss'
 import { CPP_REPO, DIFFS, HALF, LDS, PY_REPO, REFS, cppIndex, pyIndex, type Scan } from './port'
 import { PORT_STRINGS } from './port.strings'
+import CiteCode from './CiteCode'
 import './l5.css'
 
 /** Ray i of `s` drawn as a spoke from the robot (front = up, left = left, as ROS: x forward, y left). */
@@ -27,7 +28,7 @@ export default function PortChapter({ t }: { t: Strings }) {
     if (broken) setSeen((x) => ({ ...x, [ok ? 'agree' : 'disagree']: true }))
   }
   const [px, py2] = spoke(scan, py, 96), [cx, cy] = spoke(scan, c.idx, 80)
-  const link = (base: string, p: string) => <a href={`${base}/${p}`}><code>{p.replace('#L', ':').replace('-L', '-')}</code></a>
+  const link = (base: string, p: string) => <a href={`${base}/${p}`}><CiteCode p={p} /></a>
   return (
     <>
       <div className="figure">

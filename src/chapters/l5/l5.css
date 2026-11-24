@@ -8,6 +8,7 @@
 .port-ring .cpp.bad { stroke: var(--ray); stroke-width: 3; }
 @media (prefers-reduced-motion: reduce) { .port-ring line { transition: none; } }
 .port-raw, .port-diff code, .port-code { overflow-wrap: anywhere; white-space: pre-wrap; }
+.cite-ln { white-space: nowrap; }
 .pick { display: inline-block; margin: var(--s1) var(--s2) var(--s1) 0; }
 .port-diff li { margin-bottom: var(--s2); }
 .ci-pipe { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s1); max-width: 420px; }
