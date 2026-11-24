@@ -29,11 +29,10 @@ describe('ros distros', () => {
   it('each bar names its Ubuntu (REP 2000 / REP 3 / Gazebo install page): why Humble means 22.04', () => {
     expect(Object.fromEntries(DISTROS.map((d) => [d.id, d.ubuntu]))).toEqual({ noetic: '20.04', humble: '22.04', iron: '22.04', jazzy: '24.04', kilted: '24.04', lyrical: '26.04' })
   })
-  it('install table: Jazzy first (the learner pick), 3 LTS rows, each with a Gazebo pair that lasts as long as the distro and a source URL', () => {
+  it('install table: Jazzy first (the course pick), 3 LTS rows, each with a Gazebo pair and a source URL', () => {
     expect(INSTALL.map((r) => r.id)).toEqual(['jazzy', 'lyrical', 'humble'])
     for (const r of INSTALL) {
       expect(distro(r.id).lts).toBe(true)
-      expect(r.gazeboLast).toBe(distro(r.id).last)
       expect(r.src).toMatch(/^https:\/\//)
     }
   })

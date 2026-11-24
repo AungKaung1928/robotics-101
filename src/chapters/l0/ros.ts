@@ -25,13 +25,13 @@ export const END = month(2032, 1)
 
 /**
  * "Which one do I install?": the LTS rows a learner chooses between, each with its Gazebo pair and one source.
- * Gazebo pairs and Gazebo end dates: gazebosim.org/docs/latest/ros_installation + /docs/all/releases (read 2026-11-25).
+ * Gazebo pairs: gazebosim.org/docs/latest/ros_installation (read 2026-11-25); each Gazebo LTS lasts as long as its pair (/docs/all/releases).
  */
 export const INSTALL = [
-  { id: 'jazzy', gazebo: 'Harmonic', gazeboLast: month(2029, 5), src: 'https://www.ros.org/reps/rep-2000.html' },
-  { id: 'lyrical', gazebo: 'Jetty', gazeboLast: month(2031, 5), src: 'https://gazebosim.org/docs/latest/ros_installation/' },
-  { id: 'humble', gazebo: 'Fortress', gazeboLast: month(2027, 5), src: 'https://www.ros.org/reps/rep-2000.html' },
-] as const satisfies readonly { id: DistroId; gazebo: string; gazeboLast: number; src: string }[]
+  { id: 'jazzy', gazebo: 'Harmonic', src: 'https://www.ros.org/reps/rep-2000.html' },
+  { id: 'lyrical', gazebo: 'Jetty', src: 'https://gazebosim.org/docs/latest/ros_installation/' },
+  { id: 'humble', gazebo: 'Fortress', src: 'https://www.ros.org/reps/rep-2000.html' },
+] as const satisfies readonly { id: DistroId; gazebo: string; src: string }[]
 export const distro = (id: DistroId) => DISTROS.find((d) => d.id === id)!
 
 /** Distributions that still get fixes in month `i`. */

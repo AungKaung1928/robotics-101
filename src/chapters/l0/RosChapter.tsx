@@ -73,7 +73,7 @@ export default function RosChapter({ t }: { t: Strings }) {
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet}</p>
         <p className="group-h">{s.words}</p>
         <dl className="gloss">{s.glossary.map(([k, v]) => <div key={k} style={{ display: 'contents' }}><dt><code>{k}</code></dt><dd>{v}</dd></div>)}</dl>
-        <p className="src">{t.source}: <a href="https://docs.ros.org/en/rolling/Releases.html">ROS 2 Releases</a> · <a href="https://www.ros.org/reps/rep-2000.html">REP 2000</a> · <a href="https://www.ros.org/reps/rep-0003.html">REP 3</a> · <a href="https://design.ros2.org/articles/ros_on_dds.html">ROS on DDS</a> · <a href="http://wiki.ros.org/Master">ROS 1 Master</a> · <a href="https://docs.ros.org/en/jazzy/Concepts/Basic/About-Discovery.html">ROS 2 discovery</a> · <a href="https://gazebosim.org/docs/latest/ros_installation/">Gazebo + ROS pairs</a></p>
+        <p className="src">{t.source}: <a href="https://docs.ros.org/en/rolling/Releases.html">ROS 2 Releases</a> · <a href="https://www.ros.org/reps/rep-2000.html">REP 2000</a> · <a href="https://www.ros.org/reps/rep-0003.html">REP 3</a> · <a href="https://design.ros2.org/articles/ros_on_dds.html">ROS on DDS</a> · <a href="http://wiki.ros.org/Master">ROS 1 Master</a> · <a href="https://docs.ros.org/en/jazzy/Concepts/Basic/About-Discovery.html">ROS 2 discovery</a> · <a href="https://gazebosim.org/docs/latest/ros_installation/">Gazebo + ROS pairs</a> · <a href="https://github.com/ROBOTIS-GIT/turtlebot3_simulations/blob/jazzy/turtlebot3_gazebo/package.xml">turtlebot3_gazebo jazzy</a></p>
       </div>
     </>
   )

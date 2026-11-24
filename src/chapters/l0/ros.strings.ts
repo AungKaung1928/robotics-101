@@ -5,7 +5,7 @@ export const ROS_STRINGS = {
     learn: 'You will learn: ROS is not an operating system, why ROS 2 replaced ROS 1, and how to pick a distribution.',
     lines: [
       'ROS is a set of tools and libraries plus one agreed way for programs to talk. It runs on top of an operating system and does not replace it: mostly Ubuntu Linux; Windows 10 is also a top-tier platform for Humble and Jazzy (REP 2000).',
-      'ROS 1 has one central program, the master (started by roscore), that tells programs where to find each other; then they talk directly. If it stops, programs started later cannot find anyone. ROS 2 has no central program: each program announces itself on the network and the others answer (discovery, done by DDS).',
+      'ROS 1 has one central program, the master (started by roscore), that tells programs where to find each other; then they talk directly. If it stops, no new connections can be set up; programs already connected keep talking. ROS 2 has no central program: each program announces itself on the network and the others answer (discovery, done by DDS).',
       'Each release is a distribution with a name and one Ubuntu version (the number on each bar). LTS releases get fixes for 5 years, the others for about a year and a half.',
     ],
     ros1: 'ROS 1',
@@ -19,7 +19,7 @@ export const ROS_STRINGS = {
     fixIt: 'Fix it: start on Jazzy (LTS)',
     installTitle: 'Which one do I install?',
     install: [
-      'New learners: ROS 2 Jazzy on Ubuntu 24.04, with Gazebo Harmonic. It has long support, and TurtleBot3, Nav2 and the tutorials are ready for it.',
+      'This course picks ROS 2 Jazzy on Ubuntu 24.04, with Gazebo Harmonic: it gets fixes until May 2029, and the TurtleBot3 simulation has a Jazzy version on the new Gazebo. Gazebo\'s own install page recommends the newer Lyrical with Gazebo Jetty for new users.',
       'Lyrical (Ubuntu 26.04) is the newest. Pick it once the packages you need exist for it (search index.ros.org).',
       'Humble is still on many robots, so you will meet it at work. Its fixes end in May 2027.',
     ],
@@ -43,7 +43,7 @@ export const ROS_STRINGS = {
     learn: '学ぶこと：ROS は OS ではないこと、ROS 2 が ROS 1 に代わった理由、ディストリビューションの選び方。',
     lines: [
       'ROS はツールとライブラリの集まりと、プログラム同士が話すための決まった方法。OS の上で動き、OS の代わりにはならない。主に Ubuntu Linux で使われ、Humble と Jazzy では Windows 10 も最上位のプラットフォーム（REP 2000）。',
-      'ROS 1 には中心のプログラム master（roscore で起動）が1つあり、プログラム同士の居場所を教える。その後は直接話す。master が止まると、あとから起動したプログラムは相手を見つけられない。ROS 2 には中心のプログラムがない：各プログラムがネットワークに自分の存在を知らせ、ほかが応える（ディスカバリー、DDS が行う）。',
+      'ROS 1 には中心のプログラム master（roscore で起動）が1つあり、プログラム同士の居場所を教える。その後は直接話す。master が止まると新しい接続は作れない。すでにつながったプログラムは話し続ける。ROS 2 には中心のプログラムがない：各プログラムがネットワークに自分の存在を知らせ、ほかが応える（ディスカバリー、DDS が行う）。',
       'リリースごとに名前の付いたディストリビューションがあり、それぞれ1つの Ubuntu バージョンに対応する（各バーの数字）。LTS は5年間、それ以外は約1年半修正が出る。',
     ],
     ros1: 'ROS 1',
@@ -57,7 +57,7 @@ export const ROS_STRINGS = {
     fixIt: '直す：Jazzy（LTS）で始める',
     installTitle: 'どれをインストールする？',
     install: [
-      'これから学ぶ人：Ubuntu 24.04 の ROS 2 Jazzy と Gazebo Harmonic。サポートが長く、TurtleBot3、Nav2、チュートリアルがそろっている。',
+      'このコースは Ubuntu 24.04 の ROS 2 Jazzy と Gazebo Harmonic を選ぶ：修正は 2029年5月まで出て、TurtleBot3 のシミュレーションには新しい Gazebo 用の Jazzy 版がある。Gazebo 自身のインストールページは、新しく始める人に、より新しい Lyrical と Gazebo Jetty を勧めている。',
       'Lyrical（Ubuntu 26.04）が最新。必要なパッケージがそろったら選ぶ（index.ros.org で探す）。',
       'Humble はまだ多くのロボットで動いていて、仕事で出会う。修正は 2027年5月で終わる。',
     ],
