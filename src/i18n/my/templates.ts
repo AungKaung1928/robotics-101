@@ -69,7 +69,7 @@ export const MY_TEMPLATES: Record<string, Record<string, Tpl>> = {
   },
   'l1.cpp.CPP_STRINGS': {
     benchNote: (py: string, c: string) =>
-      `လက်ပ်တော့ တစ်လုံးပေါ်မှာ တိုင်းထားတာ၊ 3 ကြိမ် run ထဲက အကောင်းဆုံး: Python ${py}၊ ${c}။ ပြန် run ဖို့: src/chapters/l1/bench/run.sh။`,
+      `လက်ပ်တော့ တစ်လုံးပေါ်မှာ တိုင်းထားတာ၊ 3 ကြိမ် run ထဲက အကောင်းဆုံး: Python ${py}၊ ${c}။ ပြန် run ဖို့: robotics-101 repo ထဲက src/chapters/l1/bench/run.sh။`,
   },
   'l1.decide.DECIDE_STRINGS': { caption: (k: number, d: number, dec: string) => `scan ${k} · အကွာအဝေး = ${d} m → ${dec}` },
   'l1.intro.INTRO1_STRINGS': { caption: (k: number) => `အဆင့် 5 ခုထဲက ${k}` },
