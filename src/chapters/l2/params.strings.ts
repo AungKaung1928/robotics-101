@@ -6,7 +6,7 @@ export const PARAMS_STRINGS = {
     learn: 'You will learn: a parameter is a setting a node reads by name, so you can change its behaviour without changing its code. A launch file starts nodes and passes them settings.',
     everyday: 'Everyday: a thermostat. The heater\'s program stays the same; you only change the set temperature.',
     lines: [
-      'tf_anomaly_detector checks the robot\'s position every 0.5 s and warns when it moved more than max_position_jump since the last check.',
+      'tf_anomaly_detector (a node in the example project TF-Transform-Explorer) checks the robot\'s position every 0.5 s and warns when it moved more than max_position_jump since the last check.',
       'The code says declare_parameter("max_position_jump", 0.5): 0.5 m unless someone overrides it from a launch file or the command line.',
       'Driving at 0.26 m/s, the robot moves 0.13 m between checks. Set the limit below that and every normal check is a warning.',
     ],
@@ -35,7 +35,7 @@ export const PARAMS_STRINGS = {
     learn: '学ぶこと：パラメータはノードが名前で読む設定で、コードを変えずに動きを変えられる。launch ファイルはノードを起動し、設定を渡す。',
     everyday: '身近な例：サーモスタット。ヒーターのプログラムはそのままで、設定温度だけを変える。',
     lines: [
-      'tf_anomaly_detector は 0.5 秒ごとにロボットの位置を確かめ、前回から max_position_jump より大きく動いていたら警告する。',
+      'tf_anomaly_detector（例のプロジェクト TF-Transform-Explorer のノード）は 0.5 秒ごとにロボットの位置を確かめ、前回から max_position_jump より大きく動いていたら警告する。',
       'コードには declare_parameter("max_position_jump", 0.5) とある：launch ファイルやコマンドラインで上書きしない限り 0.5 m。',
       '0.26 m/s で走ると、チェックの間に 0.13 m 動く。それより小さい値にすると、普通のチェックがすべて警告になる。',
     ],

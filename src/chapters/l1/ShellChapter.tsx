@@ -47,7 +47,7 @@ export default function ShellChapter({ t }: { t: Strings }) {
             aria-label={s.yours} placeholder="pwd" autoCapitalize="off" autoCorrect="off" spellCheck={false} />
         </form>
         <p className="runs">{s.runsHere}</p>
-        <p><button type="button" className="break" onClick={() => { setMine([]); setInput('') }}>{s.newTerm}</button></p>
+        <p><button type="button" className="break" disabled={!mine.length} onClick={() => { setMine([]); setInput('') }}>{s.newTerm}</button></p>
         <p><strong>{s.challenge}</strong></p>
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet}</p>
         <p className="group-h">{s.words}</p>

@@ -59,7 +59,7 @@ export default function WsChapter({ t }: { t: Strings }) {
             aria-label={s.yours} placeholder={SCRIPT[0]} autoCapitalize="off" autoCorrect="off" spellCheck={false} />
         </form>
         <p className="runs">{s.runsHere}</p>
-        <p><button type="button" className="break" onClick={() => { setMine([]); setInput('') }}>{s.newTerm}</button></p>
+        <p><button type="button" className="break" disabled={!mine.length} onClick={() => { setMine([]); setInput('') }}>{s.newTerm}</button></p>
         <p className="note">{s.insideSrc}</p>
         <p><strong>{s.challenge}</strong></p>
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet}</p>

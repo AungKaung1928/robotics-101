@@ -47,8 +47,9 @@ export function run(distance: number, reachable: boolean, cancelAtMs: number | n
 /** distance_remaining at t (ms) for a straight drive starting at ACCEPT_MS. */
 export const remainingAt = (distance: number, tMs: number) => Math.max(0, distance - (Math.max(0, tMs - ACCEPT_MS) / 1000) * SPEED)
 
-/** Challenge: cancel while the last feedback said less than 1 m was left. */
-export function challengeOk(evs: Ev[]): boolean {
+/** Challenge: on a goal 2 m or more away, cancel once the feedback says less than 1 m is left. */
+export function challengeOk(evs: Ev[], distance: number): boolean {
+  if (distance < 2) return false
   const res = evs.find((e) => e.kind === 'result')
   if (!res || res.kind !== 'result' || res.status !== 'CANCELED') return false
   const fb = evs.filter((e) => e.kind === 'feedback').at(-1)

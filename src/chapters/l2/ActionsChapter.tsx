@@ -29,7 +29,7 @@ export default function ActionsChapter({ t }: { t: Strings }) {
       : e.kind === 'result' ? `${s.ev.result}: ${e.status} (${STATUS[e.status]})` : s.ev[e.kind]
   const shown = f.seen.slice(-ROWS)
   const res = evs.filter((e) => e.kind === 'result').at(-1)
-  const ok = challengeOk(evs)
+  const ok = challengeOk(evs, distance)
   const lastFb = evs.filter((e) => e.kind === 'feedback').at(-1)
   const restart = (fn: () => void) => { fn(); setCancelAt(null); setTS(0) }
   return (
