@@ -41,6 +41,7 @@ export default function ScopeChapter({ t }: { t: Strings }) {
             </g>
           ))}
         </svg>
+        <p className="note">{s.epNote}</p>
         <Player t={now} setT={setTS} end={sc.durationMs / 1000} events={sc.eventsMs.map((e) => e / 1000)} speed={1} autoplay={!still()} s={t} caption={s.caption(shown, ROWS.length)} />
       </div>
       <div className="panel">
