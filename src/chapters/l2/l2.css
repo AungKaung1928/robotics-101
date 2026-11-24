@@ -31,3 +31,5 @@
 /* "From a real project" box (RealProject.tsx) */
 .real-project { border-left: 4px solid var(--free); padding: 4px 0 4px 12px; margin: 16px 0; }
 .real-project p { margin: 4px 0; }
+/* declare_parameter("max_position_jump", 0.5) has no break point: 28 px past a 320 px screen in EN/JA (Burmese already wraps anywhere). */
+.params-line { overflow-wrap: anywhere; }
