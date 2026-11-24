@@ -6628,8 +6628,8 @@
  "l5b/fieldfail:notYet": {
   "status": "pass-alt",
   "en": "Not yet:",
-  "my": "မပြီးသေးပါ:",
-  "back": "Not finished yet:"
+  "my": "မရသေးပါ:",
+  "back": "Not yet:"
  },
  "l5b/fieldfail:right": {
   "status": "pass-alt",
@@ -6646,8 +6646,8 @@
  "l5b/fieldfail:solved": {
   "status": "pass-alt",
   "en": "Solved:",
-  "my": "အောင်မြင်ပါပြီ:",
-  "back": "Succeeded:"
+  "my": "အောင်မြင်ပြီ:",
+  "back": "Success:"
  },
  "l5b/fieldfail:symptom": {
   "status": "pass-alt",
@@ -6664,8 +6664,8 @@
  "l5b/fieldfail:words": {
   "status": "pass-alt",
   "en": "Words",
-  "my": "စကားလုံးများ",
-  "back": "Words"
+  "my": "ဝေါဟာရ",
+  "back": "Glossary"
  },
  "l5b/fieldfail:wrong": {
   "status": "pass-alt",
@@ -6790,8 +6790,8 @@
  "l5b/lifecycle:notYet": {
   "status": "pass-alt",
   "en": "Not yet:",
-  "my": "မပြီးသေးပါ:",
-  "back": "Not finished yet:"
+  "my": "မရသေးပါ:",
+  "back": "Not yet:"
  },
  "l5b/lifecycle:processing": {
   "status": "pass-alt",
@@ -6814,8 +6814,8 @@
  "l5b/lifecycle:solved": {
   "status": "pass-alt",
   "en": "Solved:",
-  "my": "အောင်မြင်ပါပြီ:",
-  "back": "Succeeded:"
+  "my": "အောင်မြင်ပြီ:",
+  "back": "Success:"
  },
  "l5b/lifecycle:state": {
   "status": "pass-alt",
@@ -6868,8 +6868,8 @@
  "l5b/lifecycle:words": {
   "status": "pass-alt",
   "en": "Words",
-  "my": "စကားလုံးများ",
-  "back": "Words"
+  "my": "ဝေါဟာရ",
+  "back": "Glossary"
  },
  "l5b/lifecycle:worst": {
   "status": "pass-alt",
@@ -7036,8 +7036,8 @@
  "l5b/qos:notYet": {
   "status": "pass-alt",
   "en": "Not yet:",
-  "my": "မပြီးသေးပါ:",
-  "back": "Not finished yet:"
+  "my": "မရသေးပါ:",
+  "back": "Not yet:"
  },
  "l5b/qos:pub": {
   "status": "pass-alt",
@@ -7066,8 +7066,8 @@
  "l5b/qos:solved": {
   "status": "pass-alt",
   "en": "Solved:",
-  "my": "အောင်မြင်ပါပြီ:",
-  "back": "Succeeded:"
+  "my": "အောင်မြင်ပြီ:",
+  "back": "Success:"
  },
  "l5b/qos:sub": {
   "status": "pass-alt",
@@ -7090,8 +7090,8 @@
  "l5b/qos:words": {
   "status": "pass-alt",
   "en": "Words",
-  "my": "စကားလုံးများ",
-  "back": "Words"
+  "my": "ဝေါဟာရ",
+  "back": "Glossary"
  },
  "l5b/qos:yes": {
   "status": "pass-alt",

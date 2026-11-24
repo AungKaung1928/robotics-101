@@ -26,10 +26,10 @@
  "breakIt": "ဖျက်ကြည့်: thread များစွာကို ပြောင်းရုံပဲ",
  "timingNote": "10 ms tick နဲ့ 350 ms save က ရလဒ်ကို ပြဖို့ ဖန်တီးထားတဲ့ အချိန်တွေပါ။",
  "challenge": "စိန်ခေါ်မှု: မြေပုံ သိမ်းနေစဉ်မှာလည်း control tick တိုင်း အချိန်မှန်စေပါ။",
- "solved": "အောင်မြင်ပါပြီ:",
- "notYet": "မပြီးသေးပါ:",
+ "solved": "အောင်မြင်ပြီ:",
+ "notYet": "မရသေးပါ:",
  "real": "တကယ့် project မှာ: Autoware-Simulation-Demo က node 3 ခုကို MultiThreadedExecutor တစ်ခုထဲမှာ spin လုပ်ပါတယ် (src/main.cpp:16)။ node တစ်ခုစီမှာ ကိုယ်ပိုင် default group ရှိလို့ node မတူတဲ့ callback တွေ တစ်ပြိုင်နက် အလုပ်လုပ်နိုင်ပါတယ်။ node တစ်ခုတည်းထဲက callback 2 ခုကတော့ မလုပ်နိုင်သေးပါဘူး။",
- "words": "စကားလုံးများ",
+ "words": "ဝေါဟာရ",
  "glossary": [
   [
    "lifecycle node",
