@@ -2,7 +2,7 @@
 export const TOOLS_STRINGS = {
   en: {
     title: 'The tools and why',
-    learn: 'You will learn: the four tools under a robot program, and which job each one is for.',
+    learn: 'You will learn: the five layers under a robot program (Linux, terminal, Python, C++, ROS 2), and which job each one is for.',
     lines: [
       'Each tool stands on the one below it. Linux is the ground: the robot computer and the simulator both run it.',
       'Python is quick to write and try. C++ is compiled and gives you control over speed and timing. Most robot teams use both.',
@@ -39,7 +39,7 @@ export const TOOLS_STRINGS = {
   },
   ja: {
     title: '道具とその理由',
-    learn: '学ぶこと：ロボットのプログラムを支える4つの道具と、それぞれが何の仕事に向いているか。',
+    learn: '学ぶこと：ロボットのプログラムを支える5つの層（Linux、ターミナル、Python、C++、ROS 2）と、それぞれが何の仕事に向いているか。',
     lines: [
       'どの道具も下の道具の上に立っている。Linux が土台で、ロボットのコンピュータもシミュレータも Linux で動く。',
       'Python は書いてすぐ試せる。C++ はコンパイルして動き、速さとタイミングを細かく制御できる。多くのロボットチームは両方を使う。',
