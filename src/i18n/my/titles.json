@@ -15,5 +15,15 @@
  "closest": "Python: loop နဲ့ function",
  "callback": "Python: class နဲ့ callback",
  "cpp": "C++: စက်ရုပ် အတူတူ၊ compile လုပ်ထားတဲ့ ပုံစံ",
- "tflab": "TF အမှားရှာလက်တွေ့စမ်းသပ်ခန်း - ပျောက်နေတဲ့ link တစ်ခု"
+ "tflab": "TF အမှားရှာလက်တွေ့စမ်းသပ်ခန်း - ပျောက်နေတဲ့ link တစ်ခု",
+ "shell": "terminal: command 8 ခု",
+ "move": "စက်ရုပ် လှုပ်ရှားပုံ - ဘီး 2 ဘီး",
+ "act": "စက်ရုပ် ဘယ်လို အလုပ်လုပ်သလဲ- ဘီးတွေအတွက် ကိန်းဂဏန်း 2 ခု",
+ "nodes": "ROS 2: node များ",
+ "topics": "ROS 2: topic များ",
+ "msgtypes": "ROS 2: message type များ",
+ "actions": "ROS 2: service နဲ့ action",
+ "params": "ROS 2: parameter နဲ့ launch file များ",
+ "ws": "ROS 2: workspace၊ package များ၊ colcon build",
+ "drive": "ROS 2: ပထမဆုံး မောင်းနှင်ခြင်း"
 }

@@ -48,7 +48,7 @@ function walk(file, out, chapter, en, ja, path) {
 
 const core = await load('src/i18n.ts')
 walk('src/i18n.ts', 'core', 'core', core.STRINGS.en, core.STRINGS.ja, [])
-// Only chapters listed in src/chapters/*/index.ts have a titles.json entry (src/i18n.parity.test.ts TITLE_IDS).
+// Only chapters listed in src/chapters/*/index.ts have a titles.json entry (src/i18n.parity.test.ts METAS).
 const titles = {}
 const exportOf = {}
 for (const lvl of readdirSync(join(root, 'src/chapters')).sort()) {
@@ -66,9 +66,9 @@ for (const lvl of readdirSync(join(root, 'src/chapters')).sort()) {
 // read as text, not imported.
 for (const lvl of readdirSync(join(root, 'src/chapters'))) {
   const src = readFileSync(join(root, 'src/chapters', lvl, 'index.ts'), 'utf8')
-  // Chapter titles the parity test's TITLE_IDS accepts: inline array entries (`  { id: ...`) and named metas an array lists.
+  // Chapter titles the parity test's METAS accepts: inline array entries (`  { id: ...`) and named metas an array lists.
   for (const m of src.matchAll(/^\s+\{ id: '([\w-]+)'[^}]*?titleEn: (\w+)\.en\.title/gm)) titles[m[1]] = `${exportOf[m[2]]}:title`
-  // A named meta (`X_META = { id: ... }`) counts only when an array in the same file lists it (`[X_META]`), as TITLE_IDS sees it.
+  // A named meta (`X_META = { id: ... }`) counts only when an array in the same file lists it (`[X_META]`), as the parity test METAS sees it.
   for (const m of src.matchAll(/^export const (\w+) = \{ id: '([\w-]+)'[^}]*?titleEn: (\w+)\.en\.title/gm)) {
     if (new RegExp(`\\[[^\\]]*\\b${m[1]}\\b[^\\]]*\\]`).test(src)) titles[m[2]] = `${exportOf[m[3]]}:title`
   }

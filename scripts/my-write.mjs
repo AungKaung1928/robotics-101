@@ -33,9 +33,7 @@ for (const i of items) {
   })
 }
 const byId = Object.fromEntries(items.map((i) => [i.id, i]))
-// The parity test checks titles.json against the placeholder English 'title' (no digits), so a title with a digit is left
-// out here until the test compares against the real chapter titles; the chapter page itself still shows it in Burmese.
-files.titles = Object.fromEntries(Object.entries(titles).map(([ch, id]) => [ch, live(byId[id])]).filter(([, v]) => v && !/\d/.test(v)))
+files.titles = Object.fromEntries(Object.entries(titles).map(([ch, id]) => [ch, live(byId[id])]).filter(([, v]) => v))
 
 mkdirSync(outDir, { recursive: true })
 for (const f of readdirSync(outDir)) if (f.endsWith('.json')) rmSync(join(outDir, f))

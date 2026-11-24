@@ -33,11 +33,11 @@ describe('numbers and code survive translation', () => {
 
 // Burmese overlays (src/i18n/my/*.json): each key must exist in its English source; a missing key is fine (English fallback).
 const myFiles = import.meta.glob('./i18n/my/*.json', { eager: true, import: 'default' }) as Record<string, unknown>
-const TITLE_IDS = new Set(Object.values(import.meta.glob('./chapters/*/index.ts', { eager: true }) as Record<string, Record<string, unknown>>)
-  .flatMap((m) => Object.values(m).filter(Array.isArray).flat() as { id?: string }[]).map((c) => c.id))
+const METAS = Object.values(import.meta.glob('./chapters/*/index.ts', { eager: true }) as Record<string, Record<string, unknown>>)
+  .flatMap((m) => Object.values(m).filter(Array.isArray).flat() as { id?: string; titleEn?: string }[]).filter((c) => typeof c?.id === 'string' && typeof c.titleEn === 'string')
 function englishFor(id: string): unknown {
   if (id === 'core') return STRINGS.en
-  if (id === 'titles') return Object.fromEntries([...TITLE_IDS].map((k) => [k, 'title']))
+  if (id === 'titles') return Object.fromEntries(METAS.map((c) => [c.id, c.titleEn])) // real titles: number checks see '0.2 ... two' etc.
   const [dir, base, exp] = id.split('.')
   return (mods[`./chapters/${dir}/${base}.strings.ts`]?.[exp] as { en?: unknown } | undefined)?.en
 }
@@ -62,5 +62,12 @@ describe('Burmese overlays', () => {
     const bad = leaves(my).filter(([p, s]) => enMap.has(p) && !WORDING.has(`${id}${p}`) && tokens(s) !== tokens(enMap.get(p)!)).map(([p]) => p)
     expect(bad).toEqual([])
     expect(leaves(my).filter(([, s]) => /[၀-၉]/.test(s)).map(([p]) => p), 'Myanmar digits: use 0-9').toEqual([])
+  })
+})
+
+describe('Burmese chapter titles (course map, H1, previous/next)', () => {
+  it('every chapter in a meta array has a Burmese title in titles.json', () => {
+    const t = (myFiles['./i18n/my/titles.json'] ?? {}) as Record<string, string>
+    expect(METAS.filter((c) => !/[က-႟]/.test(t[c.id!] ?? '')).map((c) => c.id)).toEqual([])
   })
 })
