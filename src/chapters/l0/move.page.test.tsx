@@ -33,6 +33,7 @@ describe('move page', () => {
       expect(m.real).toContain(`${WHEEL_GAP_M * 100} cm`)
       expect(m.real).toContain(`${(WHEEL_RADIUS_M * 200).toFixed(1)} cm`)
       expect(m.real).toContain(`${TOP_SPEED} m/s`)
+      expect(m.real).toContain(`${LEFT} m/s`) // the page-choice line names the held left speed
     }
     expect(Math.round(turnsPerS(TOP_SPEED))).toBe(1)
   })
@@ -42,7 +43,10 @@ describe('move page', () => {
   it.each(['en', 'ja'] as const)('%s renders: path, readouts, check question, both sources', (l) => {
     const html = renderToStaticMarkup(<MoveChapter t={STRINGS[l]} />)
     expect(html).toContain('class="move-path"')
-    expect(html).toContain(`data-k="kind">${MOVE_STRINGS[l].kind.curveLeft}<`) // opens at right 0.22 > left 0.15
+    expect(html).toContain(`data-k="kind">${MOVE_STRINGS[l].kind.straight}<`) // opens with equal wheels: predict first
+    expect(html).toContain('data-k="told">0.150<')
+    expect(html).toContain('data-k="delivers">0.150<') // no slip until break it
+    expect(html).not.toContain('data-k="spin"')
     expect(html).toContain(MOVE_STRINGS[l].check)
     expect(html).toContain('turtlebot3_burger.urdf.xacro#L146-L147')
     expect(html).toContain('emanual.robotis.com/docs/en/platform/turtlebot3/features/')

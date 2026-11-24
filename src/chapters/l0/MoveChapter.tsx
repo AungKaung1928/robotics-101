@@ -22,7 +22,7 @@ const ANSWERS: Kind[] = ['curveLeft', 'curveRight', 'straight']
 /** Level 0 "move": drag the right wheel speed, the path of the two-wheel model is drawn; break it = the left wheel slips. */
 export default function MoveChapter({ t }: { t: Strings }) {
   const s = stringsFor(MOVE_STRINGS, t, 'l0.move.MOVE_STRINGS')
-  const [right, setRight] = useState(0.22)
+  const [right, setRight] = useState(LEFT)
   const [slip, setSlip] = useState(false)
   const [picked, setPicked] = useState<Kind | null>(null)
   const [cheer, setCheer] = useState(0)
@@ -62,8 +62,11 @@ export default function MoveChapter({ t }: { t: Strings }) {
           onChange={(v) => { setRight(Math.round(v * 100) / 100); restart() }} />
         <p><button type="button" className="break" onClick={() => { setSlip(!slip); if (!slip) setOops(oops + 1); restart() }}>{slip ? s.fixIt : s.breakIt}</button></p>
         {slip && <p className="note">{s.brokenNote}</p>}
+        {k === 'spin' && <p className="verdict ok" data-k="spin">✓ {s.spinOk}</p>}
         <dl className="readout">
           <div><dt>{s.path}</dt><dd data-k="kind">{s.kind[k]}</dd></div>
+          <div><dt>{s.told}</dt><dd data-k="told">{LEFT.toFixed(3)}</dd></div>
+          <div><dt>{s.delivers}</dt><dd data-k="delivers">{(slip ? LEFT * SLIP : LEFT).toFixed(3)}</dd></div>
           <div><dt>{s.turns}</dt><dd data-k="turns">{turnsPerS(Math.abs(right)).toFixed(2)}</dd></div>
         </dl>
         <p className="note">{s.real}</p>
