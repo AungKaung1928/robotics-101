@@ -43,7 +43,7 @@
   ],
   [
    "transient local",
-   "နောက်မှ ဝင်တဲ့ subscriber တွေအတွက် publisher က နောက်ဆုံး depth အရေအတွက် message ကို သိမ်းထားတယ် (\"latched\")"
+   "နောက်မှ ဝင်တဲ့ subscriber တွေအတွက် publisher က နောက်ဆုံး depth အရေအတွက် message ကို သိမ်းထားတယ်"
   ],
   [
    "depth",
