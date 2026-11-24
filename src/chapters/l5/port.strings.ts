@@ -53,7 +53,7 @@ export const PORT_STRINGS = {
     differ: '違う光線：C++ はスキャンの間違った場所を読んでいる。',
     diffTitle: '移植で変わること',
     diff: {
-      types: ['型', 'Python は型を実行中に決める。C++ は書く：角度は double、番号は std::size_t。'],
+      types: ['型', 'Python は型を実行中に決める。C++ は型を書く：角度は double、番号は std::size_t。'],
       wrap: ['折り返し', 'Python の % は負の数を返さない。C++ の std::fmod はマイナスを残すので、C++ は 2π を手で足し戻す。'],
       owner: ['スキャンの持ち主', 'Python は参照を持つだけ。C++ は共有ハンドルの ConstSharedPtr を持つ：360 個の数はコピーされない。std::move() は参照カウントの増減 1 組を省くだけ。'],
       qos: ['QoS', 'QoS = トピックの配送設定 (5.4 で学ぶ)。Python は best effort のプロファイルを項目ごとに作る。C++ は既製の rclcpp::SensorDataQoS() を使う。'],
