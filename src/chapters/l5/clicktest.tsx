@@ -29,18 +29,32 @@ const CASES: Case[] = [
   { name: 'port −90° agrees', Body: PortChapter, run: async (h) => want(k(h, 'py') + '|' + k(h, 'cpp'), `${pyIndex(LDS, -90)}|${pyIndex(LDS, -90)}`) },
   { name: 'port break: −90° reads ray 286', Body: PortChapter, run: async (h, t) => {
     click(h, '.break'); await tick()
-    return want(k(h, 'cpp'), String(cppIndex(LDS, -90, false).idx)) ?? want(k(h, 'same'), stringsFor(PORT_STRINGS, t, 'l5.port.PORT_STRINGS').differ)
+    const hidden = want(k(h, 'cpp'), '?')
+    click(h, '[data-act="say-differ"]'); await tick()
+    return hidden ?? want(k(h, 'cpp'), String(cppIndex(LDS, -90, false).idx)) ?? want(k(h, 'same'), stringsFor(PORT_STRINGS, t, 'l5.port.PORT_STRINGS').differ)
   } },
-  { name: 'port challenge: one agree + one disagree', Body: PortChapter, run: async (h, t) => {
-    click(h, '.break'); await tick(); slide(h, 45); await tick(); slide(h, -45); await tick()
+  { name: 'port challenge: predict one agree + one disagree', Body: PortChapter, run: async (h, t) => {
+    click(h, '.break'); await tick(); slide(h, 45); await tick(); click(h, '[data-act="say-agree"]'); await tick()
+    slide(h, -45); await tick(); click(h, '[data-act="say-differ"]'); await tick()
     return want(k(h, 'challenge'), stringsFor(PORT_STRINGS, t, 'l5.port.PORT_STRINGS').solved)
   } },
+  { name: 'port challenge: clicking through without predicting does not solve it', Body: PortChapter, run: async (h, t) => {
+    click(h, '.break'); await tick(); slide(h, 45); await tick(); slide(h, -45); await tick()
+    return want(k(h, 'challenge'), stringsFor(PORT_STRINGS, t, 'l5.port.PORT_STRINGS').notYet)
+  } },
+  { name: 'port challenge: a wrong prediction starts the count again', Body: PortChapter, run: async (h, t) => {
+    click(h, '.break'); await tick(); slide(h, 45); await tick(); click(h, '[data-act="say-agree"]'); await tick()
+    slide(h, -45); await tick(); click(h, '[data-act="say-agree"]'); await tick()
+    slide(h, -30); await tick(); click(h, '[data-act="say-differ"]'); await tick()
+    return want(k(h, 'challenge'), stringsFor(PORT_STRINGS, t, 'l5.port.PORT_STRINGS').notYet)
+  } },
   { name: 'port challenge without the slider: break, then −π layout', Body: PortChapter, run: async (h, t) => {
-    click(h, '.break'); await tick(); radio(h, 'port-layout', 1); await tick()
+    click(h, '.break'); await tick(); click(h, '[data-act="say-differ"]'); await tick()
+    radio(h, 'port-layout', 1); await tick(); click(h, '[data-act="say-agree"]'); await tick()
     return want(k(h, 'challenge'), stringsFor(PORT_STRINGS, t, 'l5.port.PORT_STRINGS').solved)
   } },
   { name: 'port −π layout hides the bug', Body: PortChapter, run: async (h) => {
-    click(h, '.break'); radio(h, 'port-layout', 1); await tick()
+    click(h, '.break'); radio(h, 'port-layout', 1); await tick(); click(h, '[data-act="say-agree"]'); await tick()
     return want(k(h, 'py') + '|' + k(h, 'cpp'), '90|90')
   } },
   { name: 'ci clean push green', Body: CiChapter, run: async (h, t) => {

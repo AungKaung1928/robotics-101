@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { stringsFor, type Strings } from '../../i18n'
 import Slider from '../../components/Slider'
 import Gloss from '../l1/Gloss'
@@ -20,10 +20,16 @@ export default function PortChapter({ t }: { t: Strings }) {
   const [half, setHalf] = useState(false)
   const [broken, setBroken] = useState(false)
   const [seen, setSeen] = useState({ agree: false, disagree: false })
+  const [said, setSaid] = useState<{ at: string; agree: boolean } | null>(null)
   const scan = half ? HALF : LDS
   const py = pyIndex(scan, deg), c = cppIndex(scan, deg, !broken), same = py === c.idx
-  // Recorded from what is on screen, so toggling Break or the layout counts too (not only slider moves).
-  useEffect(() => { if (broken) setSeen((x) => ({ ...x, [same ? 'agree' : 'disagree']: true })) }, [broken, same])
+  // Broken: the C++ answer stays hidden until the learner predicts it for this bearing + layout (predict first, then look).
+  const at = `${deg}|${half}`, shown = !broken || said?.at === at
+  const predict = (agree: boolean) => {
+    setSaid({ at, agree })
+    // A wrong prediction clears progress, so trying both buttons on one bearing never solves it.
+    setSeen((x) => (agree === same ? { ...x, [same ? 'agree' : 'disagree']: true } : { agree: false, disagree: false }))
+  }
   const [px, py2] = spoke(scan, py, 96), [cx, cy] = spoke(scan, c.idx, 80)
   const link = (base: string, p: string) => <a href={`${base}/${p}`}><CiteCode p={p} /></a>
   return (
@@ -34,7 +40,7 @@ export default function PortChapter({ t }: { t: Strings }) {
           <circle className="body" cx="120" cy="120" r="16" />
           <line className="front" x1="120" y1="120" x2="120" y2="98" />
           <line className="py" x1="120" y1="120" x2={px} y2={py2} />
-          <line className={`cpp ${same ? '' : 'bad'}`} x1="120" y1="120" x2={cx} y2={cy} />
+          {shown && <line className={`cpp ${same ? '' : 'bad'}`} x1="120" y1="120" x2={cx} y2={cy} />}
         </svg>
         <p className="note">{s.setup}</p>
       </div>
@@ -48,11 +54,15 @@ export default function PortChapter({ t }: { t: Strings }) {
         </p>
         <dl className="readout">
           <div><dt>{s.py}</dt><dd data-k="py">{py}</dd></div>
-          <div><dt>{s.cpp}</dt><dd data-k="cpp">{c.idx}</dd></div>
-          <div><dt>{s.readout.offset}</dt><dd data-k="offset">{c.offset.toFixed(3)}</dd></div>
-          <div><dt>{s.readout.raw}</dt><dd data-k="raw" className="port-raw">{c.raw.toString()}</dd></div>
+          <div><dt>{s.cpp}</dt><dd data-k="cpp">{shown ? c.idx : '?'}</dd></div>
+          <div><dt>{s.readout.offset}</dt><dd data-k="offset">{shown ? c.offset.toFixed(3) : '?'}</dd></div>
+          <div><dt>{s.readout.raw}</dt><dd data-k="raw" className="port-raw">{shown ? c.raw.toString() : '?'}</dd></div>
         </dl>
-        <p className={`verdict ${same ? 'ok' : 'no'}`} data-k="same">{same ? '✓ ' + s.same : s.differ}</p>
+        {shown ? <p className={`verdict ${same ? 'ok' : 'no'}`} data-k="same">{same ? '✓ ' + s.same : s.differ}</p>
+          : <p className="verdict" data-k="same">{s.predictAsk}{' '}
+            <button type="button" data-act="say-agree" onClick={() => predict(true)}>{s.agreeFound}</button>{' '}
+            <button type="button" data-act="say-differ" onClick={() => predict(false)}>{s.disagreeFound}</button></p>}
+        {broken && said?.at === at && <p className={`verdict ${said.agree === same ? 'ok' : 'no'}`} data-k="guess">{said.agree === same ? '✓ ' + s.guessRight : s.guessWrong}</p>}
         <p className="note">{s.valid}</p>
         <h2>{s.diffTitle}</h2>
         <ul className="port-diff">
@@ -62,7 +72,7 @@ export default function PortChapter({ t }: { t: Strings }) {
           ))}
         </ul>
         <h2>{s.breakTitle}</h2>
-        <p><button type="button" className="break" data-act="break" onClick={() => { setBroken(!broken); setSeen({ agree: false, disagree: false }) }}>{broken ? s.fixBtn : s.breakBtn}</button></p>
+        <p><button type="button" className="break" data-act="break" onClick={() => { setBroken(!broken); setSeen({ agree: false, disagree: false }); setSaid(null) }}>{broken ? s.fixBtn : s.breakBtn}</button></p>
         <pre className="code port-code" aria-label="C++"><span className="ln">{'double offset = std::fmod(angle_deg * M_PI / 180.0 - scan.angle_min, kTwoPi);'}</span>
 {broken ? <span className="ln bad">{'// (deleted) if (offset < 0.0) { offset += kTwoPi; }'}</span> : <span className="ln on">{'if (offset < 0.0) {\n  offset += kTwoPi;\n}'}</span>}
 <span className="ln">{'const auto idx = static_cast<std::size_t>(std::lround(offset / scan.angle_increment));'}</span></pre>
