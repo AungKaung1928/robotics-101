@@ -2,16 +2,16 @@ import { describe, expect, it } from 'vitest'
 import { FAILS, challengeOk, correct, options, url } from './fieldfail'
 
 describe('5.6 failures', () => {
-  it('each card offers 3 different causes, one of them right', () => {
+  it('each card offers 4 different causes, one of them right', () => {
     FAILS.forEach((f, i) => {
       const o = options(i)
-      expect(new Set(o).size).toBe(3)
+      expect(new Set(o).size).toBe(4)
       expect(o.filter((p) => correct(i, p))).toEqual([f.id])
     })
   })
   it('the right answer moves between positions', () => {
     const pos = FAILS.map((f, i) => options(i).indexOf(f.id))
-    expect(new Set(pos).size).toBe(3)
+    expect(new Set(pos).size).toBe(4)
   })
   it('links point at the cited line', () => expect(url(FAILS[5])).toBe('https://github.com/AungKaung1928/moveit_pickplace_demo/blob/main/README.md#L42'))
   it('challenge needs every card right on the first try', () => {

@@ -46,7 +46,7 @@ export default function FieldfailChapter({ t }: { t: Strings }) {
           ))}
         </div>
         {pick && <p className={`verdict ${solved ? 'ok' : 'no'}`} data-k="verdict">{solved ? '✓ ' + s.right : s.wrong}</p>}
-        <p><button type="button" data-k="next" onClick={() => { setI((i + 1) % FAILS.length); setPick(null) }}>{s.next} →</button></p>
+        <p><button type="button" data-k="next" onClick={() => { setI((i + 1) % FAILS.length); setPick(null) }}>{s.next} →</button>{' '}<button type="button" data-k="reset" disabled={Object.keys(first).length === 0} onClick={() => { setI(0); setPick(null); setFirst({}) }}>{s.reset}</button></p>
         <dl className="readout">
           <div><dt>{s.score}</dt><dd data-k="score">{nRight}/{FAILS.length}</dd></div>
         </dl>

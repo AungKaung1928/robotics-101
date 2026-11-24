@@ -7,7 +7,7 @@ export const WALL_STRINGS = {
     lines: [
       'The robot wants to stay 0.5 m from the wall on its right. Error = distance - 0.5 m.',
       'Turn rate = kp × error + kd × (how fast the error changes), capped at 1.0 rad/s.',
-      'The trick: the error uses the distance the robot will have 0.3 m ahead at its current heading, not the distance now.',
+      'The trick: the error uses the distance the robot will have 0.3 m ahead at its current heading (the direction it faces), not the distance now.',
     ],
     kp: 'kp (proportional gain)',
     lookahead: 'look-ahead 0.3 m',

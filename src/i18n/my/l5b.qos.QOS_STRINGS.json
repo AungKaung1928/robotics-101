@@ -6,8 +6,6 @@
   "ဒီမှာ scanner က 10 Hz နဲ့ scan 20 ခု ပို့ပြီး link က 4 ခုမြောက်တိုင်း ကျသွားပါတယ် (စိတ်ကူးထုတ်၊ 25 % ဆုံးရှုံး)။",
   "Volatile: နောက်မှ စတဲ့ subscriber က message အသစ်တွေကိုပဲ မြင်ပါတယ်။ Transient local: publisher က နောက်ဆုံး အနည်းငယ် (depth) ကို နောက်မှ ဝင်လာသူအတွက် သိမ်းထားပါတယ်၊ မြေပုံ server လိုမျိုးပေါ့။"
  ],
- "pub": "publisher (scanner / မြေပုံ server)",
- "sub": "subscriber (သင့် node / RViz)",
  "rel": {
   "reliable": "reliable",
   "best_effort": "best effort"
@@ -43,7 +41,7 @@
   ],
   [
    "transient local",
-   "နောက်မှ ဝင်တဲ့ subscriber တွေအတွက် publisher က နောက်ဆုံး depth အရေအတွက် message ကို သိမ်းထားတယ် (\"latched\")"
+   "နောက်မှ ဝင်တဲ့ subscriber တွေအတွက် publisher က နောက်ဆုံး depth အရေအတွက် message ကို သိမ်းထားတယ်"
   ],
   [
    "depth",
