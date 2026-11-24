@@ -24,7 +24,7 @@ export const SIMPICK_STRINGS = {
     rows: {
       site: { name: 'This site', what: 'Nothing to install.', learn: 'Move, sense, think, act.' },
       turtlesim: { name: 'turtlesim', what: 'A 2D turtle used by the official ROS 2 beginner tutorials; often already installed with ROS 2.', learn: 'Programs talking to each other, driving.' },
-      mvsim: { name: 'mvsim', what: 'A lightweight 2.5D simulator: a flat world with simple physics, walls and distance sensors; a ready package for ROS 2 Humble.', learn: 'Distance sensor, wall following, maps.' },
+      mvsim: { name: 'mvsim', what: 'A lightweight 2.5D simulator: a flat world with simple physics, walls and distance sensors; a ready package for ROS 2 Humble and Jazzy.', learn: 'Distance sensor, wall following, maps.' },
       gazebo: { name: 'Gazebo', what: 'The usual 3D simulator with physics and the TurtleBot3 worlds: LiDAR, camera, maps, Nav2 (the ROS 2 software that drives a robot to a goal). With ROS 2 Jazzy it is Gazebo Harmonic; the Humble TurtleBot3 packages used by this course\'s projects use Gazebo Classic (support ended January 2025). Without a graphics card or in WSL the 3D window can be slow or black: run it without the window and watch in RViz (the ROS 2 viewer for robot data).', learn: 'Physics, 3D sensors, the full robot.' },
       webots: { name: 'Webots', what: 'Another free 3D simulator with physics and a TurtleBot3 model; it runs natively on Windows, macOS and Linux and talks to ROS 2 through webots_ros2.', learn: 'Physics, 3D sensors, the full robot.' },
     },
@@ -65,7 +65,7 @@ export const SIMPICK_STRINGS = {
     rows: {
       site: { name: 'このサイト', what: 'インストール不要。', learn: '動く、感じる、考える、動かす。' },
       turtlesim: { name: 'turtlesim', what: 'ROS 2 公式の入門チュートリアルで使う 2D のカメ。ROS 2 と一緒にすでに入っていることが多い。', learn: 'プログラム同士の会話、運転。' },
-      mvsim: { name: 'mvsim', what: '軽い 2.5D シミュレーター：簡単な物理のある平らな世界に、壁と距離センサー。ROS 2 Humble 用のパッケージがすぐ使える。', learn: '距離センサー、壁にそって走る、地図。' },
+      mvsim: { name: 'mvsim', what: '軽い 2.5D シミュレーター：簡単な物理のある平らな世界に、壁と距離センサー。ROS 2 Humble と Jazzy 用のパッケージがすぐ使える。', learn: '距離センサー、壁にそって走る、地図。' },
       gazebo: { name: 'Gazebo', what: '物理と TurtleBot3 の世界がある定番の 3D シミュレーター：LiDAR、カメラ、地図、Nav2（ロボットを目的地まで走らせる ROS 2 のソフト）。ROS 2 Jazzy では Gazebo Harmonic。このコースのプロジェクトが使う Humble の TurtleBot3 パッケージは Gazebo Classic（サポートは 2025 年 1 月に終了）。グラフィックカードがない、または WSL では 3D 画面が遅いか真っ黒になることがある：画面なしで動かし、RViz（ロボットのデータを見る ROS 2 のビューア）で見る。', learn: '物理、3D センサー、ロボット全体。' },
       webots: { name: 'Webots', what: '物理と TurtleBot3 のモデルがある、もう一つの無料 3D シミュレーター。Windows、macOS、Linux でそのまま動き、webots_ros2 で ROS 2 とつながる。', learn: '物理、3D センサー、ロボット全体。' },
     },
