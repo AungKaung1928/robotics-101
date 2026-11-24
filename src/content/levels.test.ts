@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import { LEVEL_BODY, LEVELS, levelPage, readingIndex } from './levels'
+import { LEVEL_BODY, LEVELS, courseNeighbour, levelPage, readingIndex } from './levels'
+import { parseRoute } from '../lib/route'
 
 describe('levelPage', () => {
   it('opens a Level 1 chapter with its number and neighbours', () => {
@@ -41,5 +42,30 @@ describe('Engineering Practice track', () => {
   it('stays outside the numbered levels (never a prerequisite in reading order)', () => {
     expect(LEVELS.flat().some((c) => c.id === 'bfs' || c.id === 'late')).toBe(false)
     expect(readingIndex('#/ep/bfs')).toBe(-1)
+  })
+})
+
+describe('courseNeighbour', () => {
+  /** The page App renders for a Next link: a level chapter, or one of the 7 patrol chapters. */
+  const opens = (hash: string) => levelPage(hash)?.meta.id ?? (parseRoute(hash) as { id?: string }).id
+
+  it('Next from 0.1 visits every chapter once in course order, reaches Level 5, and Back walks it home', () => {
+    const all = LEVELS.flat()
+    const seen = [all[0].id]
+    for (let c = courseNeighbour(all[0].id, 1); c; c = courseNeighbour(c.id, 1)) {
+      expect(opens(`#/${c.level}/${c.id}`)).toBe(c.id)
+      seen.push(c.id)
+    }
+    expect(seen).toEqual(all.map((c) => c.id))
+    expect(all[all.length - 1].level).toBe(5)
+    const back = [all[all.length - 1].id]
+    for (let c = courseNeighbour(back[0], -1); c; c = courseNeighbour(c.id, -1)) back.push(c.id)
+    expect(back.reverse()).toEqual(seen)
+  })
+  it('patrol chapters follow the course, not the old waypoint order', () => {
+    expect(courseNeighbour('scan', 1)?.id).toBe('wall')
+    expect(courseNeighbour('goal', 1)?.id).toBe('patrol')
+    expect(courseNeighbour('bringup', 1)?.level).toBe(5)
+    expect(courseNeighbour('nope', 1)).toBeNull()
   })
 })

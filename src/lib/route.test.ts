@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { keyTarget, neighbour, parseRoute, routeParam, routeStep } from './route'
+import { keyTarget, parseRoute, routeParam, routeStep } from './route'
 
 describe('parseRoute', () => {
   it('opens built chapters, with or without a step suffix', () => {
@@ -31,30 +31,12 @@ describe('routeParam', () => {
     expect(routeParam('#/tf', 'jump', 0.1, 0, 1)).toBe(0.1)
   })
 })
-describe('neighbour', () => {
-  it('walks built chapters only and stops at the ends', () => {
-    expect(neighbour('scan', 1)).toBe('detect')
-    expect(neighbour('detect', 1)).toBe('grid')
-    expect(neighbour('grid', 1)).toBe('costmap')
-    expect(neighbour('scan', -1)).toBe('tf')
-    expect(neighbour('tf', -1)).toBe('bringup')
-    expect(neighbour('bringup', -1)).toBeNull()
-    expect(neighbour('costmap', 1)).toBe('goal')
-    expect(neighbour('goal', 1)).toBeNull()
-  })
-})
-
 describe('keyTarget', () => {
-  const scan = parseRoute('#/scan')
-  it('number keys jump to that waypoint, also from the overview', () => {
-    expect(keyTarget('5', scan)).toBe('grid')
-    expect(keyTarget('1', { page: 'overview' })).toBe('bringup')
-    expect(keyTarget('8', scan)).toBeNull()
-    expect(keyTarget('0', scan)).toBeNull()
-  })
-  it('arrows step only on chapter pages', () => {
-    expect(keyTarget('ArrowRight', scan)).toBe('detect')
-    expect(keyTarget('ArrowRight', { page: 'overview' })).toBeNull()
-    expect(keyTarget('a', scan)).toBeNull()
+  it('number keys jump to that waypoint; other keys do nothing', () => {
+    expect(keyTarget('5')).toBe('grid')
+    expect(keyTarget('1')).toBe('bringup')
+    expect(keyTarget('8')).toBeNull()
+    expect(keyTarget('0')).toBeNull()
+    expect(keyTarget('ArrowRight')).toBeNull()
   })
 })

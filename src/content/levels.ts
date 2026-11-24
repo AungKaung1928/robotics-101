@@ -57,6 +57,12 @@ export function levelPage(hash: string): LevelPage | null {
   return { meta: chs[i], num: `${lv}.${i + 1}`, prev: all[k - 1] ?? null, next: all[k + 1] ?? null }
 }
 
+/** The chapter before (-1) or after (+1) `id` in course reading order (LEVELS.flat()), or null at either end. */
+export function courseNeighbour(id: string, dir: -1 | 1): ChapterMeta | null {
+  const all = LEVELS.flat(), k = all.findIndex((c) => c.id === id)
+  return k < 0 ? null : all[k + dir] ?? null
+}
+
 /** Reading position of the page at `hash` across all levels (0, 1, ...); overview or unknown → -1. */
 export function readingIndex(hash: string): number {
   const id = hash.replace(/^#\/?/, '').split('?')[0].split('/').find((seg) => !/^\d*$/.test(seg))

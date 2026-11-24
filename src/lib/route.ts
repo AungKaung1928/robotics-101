@@ -30,16 +30,8 @@ export function routeParam(hash: string, name: string, fallback: number, min: nu
   return Number.isFinite(v) ? Math.min(max, Math.max(min, v)) : fallback
 }
 
-/** The chapter before (-1) or after (+1) `id`, or null at either end. */
-export function neighbour(id: ChapterId, dir: -1 | 1): ChapterId | null {
-  return CHAPTERS[CHAPTERS.indexOf(id) + dir] ?? null
-}
-
-/** Where a key press goes: 1–7 open that waypoint from any page; ← → step between chapters; anything else stays. */
-export function keyTarget(key: string, route: Route): ChapterId | null {
+/** Waypoint for a number key: 1–7 open that waypoint from any page; any other key → null. */
+export function keyTarget(key: string): ChapterId | null {
   const n = Number(key)
-  if (Number.isInteger(n) && n >= 1 && n <= CHAPTERS.length) return CHAPTERS[n - 1]
-  if (route.page !== 'chapter') return null
-  const dir = key === 'ArrowLeft' ? -1 : key === 'ArrowRight' ? 1 : 0
-  return dir ? neighbour(route.id, dir) : null
+  return Number.isInteger(n) && n >= 1 && n <= CHAPTERS.length ? CHAPTERS[n - 1] : null
 }

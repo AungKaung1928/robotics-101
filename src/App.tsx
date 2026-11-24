@@ -16,9 +16,9 @@ import TfChapter from './components/TfChapter'
 import { LANG_LABEL, STRINGS, initialLang, titleOf, type Lang, type Strings } from './i18n'
 import { CHAPTER_ICON, Icon } from './icons'
 import type { ChapterMeta } from './anim/contract'
-import { LEVEL_BODY, levelPage, readingIndex, type LevelPage } from './content/levels'
+import { LEVEL_BODY, courseNeighbour, levelPage, readingIndex, type LevelPage } from './content/levels'
 import { markCompleted, markVisited } from './lib/progress'
-import { CHAPTERS, keyTarget, neighbour, parseRoute, type ChapterId } from './lib/route'
+import { CHAPTERS, keyTarget, parseRoute, type ChapterId } from './lib/route'
 
 const BODY: Record<ChapterId, typeof ScanChapter> = { bringup: BringupChapter, tf: TfChapter, scan: ScanChapter, detect: DetectChapter, grid: GridChapter, costmap: CostmapChapter, goal: GoalChapter }
 
@@ -58,7 +58,9 @@ export default function App() {
     const on = (e: KeyboardEvent) => {
       if ((e.target as HTMLElement).tagName === 'INPUT') return // arrows move the slider there
       if (e.ctrlKey || e.metaKey || e.altKey) return // leave browser shortcuts alone
-      const to = keyTarget(e.key, route)
+      const dir = e.key === 'ArrowLeft' ? -1 : e.key === 'ArrowRight' ? 1 : 0
+      const step = dir && route.page === 'chapter' ? courseNeighbour(route.id, dir) : null
+      const to = step ? `${step.level}/${step.id}` : keyTarget(e.key)
       if (to) location.hash = `#/${to}`
     }
     addEventListener('keydown', on)
@@ -68,8 +70,8 @@ export default function App() {
   const idx = route.page === 'chapter' ? CHAPTERS.indexOf(route.id) : -1
   const spot = route.page === 'chapter' ? waypointValues(t.wv)[route.id] : null
   const Body = route.page === 'chapter' ? BODY[route.id] : null
-  const prev = route.page === 'chapter' ? neighbour(route.id, -1) : null
-  const next = route.page === 'chapter' ? neighbour(route.id, 1) : null
+  const prev = route.page === 'chapter' ? courseNeighbour(route.id, -1) : null
+  const next = route.page === 'chapter' ? courseNeighbour(route.id, 1) : null
   return (
     <>
       <header className="console">
@@ -95,8 +97,8 @@ export default function App() {
           </div>
           <Body t={t} />
           <nav className="steps" aria-label={t.plan}>
-            {prev ? <a href={`#/${prev}`}>← {t.back}: {t.chapters[prev]}</a> : <a href="#/">← {t.plan}</a>}
-            {next ? <a href={`#/${next}`}>{t.next}: {t.chapters[next]} →</a> : <a href="#/">{t.plan} →</a>}
+            {prev ? <a href={`#/${prev.level}/${prev.id}`}>← {t.back}: {titleOf(prev, t)}</a> : <a href="#/">← {t.plan}</a>}
+            {next ? <a href={`#/${next.level}/${next.id}`}>{t.next}: {titleOf(next, t)} →</a> : <a href="#/">{t.plan} →</a>}
           </nav>
         </main>
       )}
