@@ -53,6 +53,9 @@ const ROUTES = [
   { hash: '#/2/params', has: 'class="num">2.5<' },
   { hash: '#/2/ws', has: 'class="num">2.6<' },
   { hash: '#/2/drive', has: 'class="num">2.7<' },
+  { hash: '#/5/port', has: ['class="num">5.1<', 'class="port-ring"'], equals: { py: '270', cpp: '270' } }, // −90° on the LDS-01 layout, wrap fix in
+  { hash: '#/5/ci', has: ['class="num">5.2<', 'class="ci-pipe"', 'data-k="step-build"'] },
+  { hash: '#/5/debug', has: ['class="num">5.3<', 'class="dbg-left"', 'data-act="tool-graph"'] },
   { hash: '#/4/grid', readouts: ['cells'], equals: { cells: '40,000' } }, // level route opens the same chapter
   { hash: '#/grid?res=0.1', readouts: ['cells'], equals: { cells: '10,000' } },
   { hash: '#/grid?t=2.5', readouts: ['known'], equals: { scans: '3' }, moreThan: { known: ['#/grid', 'known'] } },

@@ -1,0 +1,27 @@
+/* Level 5 styles; code card, glossary and verdict come from ../l1/l1.css. */
+.port-ring { max-width: 320px; width: 100%; }
+.port-ring .ring { fill: none; stroke: var(--rule); stroke-width: 2; }
+.port-ring .body { fill: var(--surface); stroke: var(--ink-2); stroke-width: 2; }
+.port-ring .front { stroke: var(--ink-2); stroke-width: 3; }
+.port-ring .py { stroke: var(--free); stroke-width: 4; transition: all 0.3s; }
+.port-ring .cpp { stroke: var(--robot); stroke-width: 2; stroke-dasharray: 5 4; transition: all 0.3s; }
+.port-ring .cpp.bad { stroke: var(--ray); stroke-width: 3; }
+@media (prefers-reduced-motion: reduce) { .port-ring line { transition: none; } }
+.port-raw, .port-diff code, .port-code { overflow-wrap: anywhere; white-space: pre-wrap; }
+.pick { display: inline-block; margin: var(--s1) var(--s2) var(--s1) 0; }
+.port-diff li { margin-bottom: var(--s2); }
+.ci-pipe { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s1); max-width: 420px; }
+.ci-step { display: flex; justify-content: space-between; gap: var(--s2); padding: var(--s1) var(--s2); border: 2px solid var(--rule); border-radius: 4px; transition: border-color 0.2s; }
+.ci-step.success { border-color: var(--free); }
+.ci-step.failure { border-color: var(--ray); }
+.ci-step.skipped { opacity: 0.45; border-style: dashed; }
+@media (prefers-reduced-motion: reduce) { .ci-step { transition: none; } }
+.dbg-left { list-style: none; padding: 0; margin: 0; display: grid; gap: var(--s1); max-width: 420px; }
+.dbg-left li { padding: var(--s1) var(--s2); border: 2px solid var(--ray); border-radius: 4px; transition: opacity 0.2s; }
+.dbg-left li.out { opacity: 0.35; text-decoration: line-through; border-color: var(--rule); }
+@media (prefers-reduced-motion: reduce) { .dbg-left li { transition: none; } }
+.ci-bar { width: 100%; max-width: 420px; margin-bottom: var(--s2); }
+.ci-bar rect { fill: none; stroke: var(--rule); stroke-width: 2; }
+.ci-bar rect.success { fill: var(--free); stroke: var(--free); }
+.ci-bar rect.failure { fill: var(--ray); stroke: var(--ray); }
+.ci-bar rect.skipped { stroke-dasharray: 4 3; }

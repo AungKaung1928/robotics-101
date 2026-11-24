@@ -4,6 +4,7 @@ import { ActChapter, LEVEL0_CHAPTERS, LoopChapter, MeetChapter, MoveChapter, Pip
 import { CallbackChapter, ClosestChapter, CppChapter, DecideChapter, LEVEL1_CHAPTERS, ShellChapter } from '../chapters/l1'
 import { TFLAB_META, TfLabChapter } from '../chapters/l3'
 import { BfsChapter, EP_CHAPTERS, LateChapter } from '../chapters/ep'
+import { CiChapter, DebugChapter, LEVEL5_CHAPTERS, PortChapter } from '../chapters/l5'
 import { ActionsChapter, DriveChapter, LEVEL2_CHAPTERS, MsgTypesChapter, NodesChapter, ParamsChapter, TopicsChapter, WsChapter } from '../chapters/l2'
 import { STRINGS, type Strings } from '../i18n'
 import { CHAPTER_ICON } from '../icons'
@@ -22,7 +23,7 @@ export const LEVELS: ChapterMeta[][] = [
   LEVEL2_CHAPTERS,
   [...existing(3, ['scan', 'tf']), { ...TFLAB_META }, ...existing(3, ['detect'])],
   existing(4, ['grid', 'costmap', 'goal', 'bringup']),
-  [],
+  LEVEL5_CHAPTERS,
 ]
 
 /** Bodies of the new-level chapters (the 7 patrol chapters keep their own routes in App). */
@@ -31,6 +32,7 @@ export const LEVEL_BODY: Record<string, ComponentType<{ t: Strings }>> = {
   loop: LoopChapter, pipe: PipeChapter, tools: ToolsChapter, ros: RosChapter, scope: ScopeChapter, decide: DecideChapter, closest: ClosestChapter, callback: CallbackChapter, cpp: CppChapter, shell: ShellChapter,
   bfs: BfsChapter, late: LateChapter, tflab: TfLabChapter,
   nodes: NodesChapter, topics: TopicsChapter, msgtypes: MsgTypesChapter, actions: ActionsChapter, params: ParamsChapter, ws: WsChapter, drive: DriveChapter,
+  port: PortChapter, ci: CiChapter, debug: DebugChapter,
 }
 
 export type LevelPage = { meta: ChapterMeta; num: string; prev: ChapterMeta | null; next: ChapterMeta | null }
