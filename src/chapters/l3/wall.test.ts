@@ -26,6 +26,11 @@ describe('3.2 wall follower model', () => {
     expect(spun(run(2.0, 0))).toBe(true)
     expect(ok(2.0, 0)).toBe(false)
   })
+  it('look-ahead off at low kp reaches the too-close branch (controller.py:320-323)', () => {
+    const ts = run(0.5, 0)
+    expect(tooCloseTicks(ts)).toBe(30)
+    expect(closest(ts)).toBeLessThan(P.wallMin)
+  })
   it('the start value kp 0.5 overshoots and does not settle; the passing band is 1.6-2.0', () => {
     expect(ok(0.5)).toBe(false)
     expect(closest(run(0.5))).toBeLessThan(0.4)

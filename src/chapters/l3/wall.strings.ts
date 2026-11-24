@@ -19,7 +19,7 @@ export const WALL_STRINGS = {
     challenge: 'Challenge: starting 1.0 m from the wall, pick a kp that settles within 10 s, never triggers a too-close turn and never turns past 1 rad.',
     solved: 'Solved:', notYet: 'Not yet:',
     spunNote: 'Past 1 rad the robot faces the wall too steeply for the two-beam estimate (it is clamped there), so this model stops. It shows the controller left its working range, not what the real robot then does.',
-    modelNote: 'Model: one straight wall, perfect scans, the repo\'s gains and limits. A Gazebo run is the real test.',
+    modelNote: 'Model: one straight wall, perfect scans, the repo\'s gains and limits. A Gazebo run is the real test. "Look-ahead off" is a what-if: the real node accepts 0.1-1.0 m only.',
     words: 'Words',
     glossary: [
       ['reactive', 'acts on the current sensor reading only, no map or plan'],
@@ -48,7 +48,7 @@ export const WALL_STRINGS = {
     challenge: 'チャレンジ：壁から 1.0 m で出発し、10 秒以内に収束し、近すぎ回避を一度も起こさず、向きが 1 rad を超えない kp を選ぶ。',
     solved: '達成：', notYet: 'まだ：',
     spunNote: '1 rad を超えると壁に対して角度が急すぎて、2 本ビームの推定が上限で止まる（その値で切り捨て）ので、このモデルはそこで止まる。制御が動作範囲を外れたことを示すだけで、実機がその後どう動くかではない。',
-    modelNote: 'モデル：まっすぐな壁一枚、誤差のないスキャン、リポジトリのゲインと上限。本当の確認は Gazebo での走行。',
+    modelNote: 'モデル：まっすぐな壁一枚、誤差のないスキャン、リポジトリのゲインと上限。本当の確認は Gazebo での走行。「先読みオフ」は仮定の話：実際のノードは 0.1-1.0 m しか受け付けない。',
     words: '用語',
     glossary: [
       ['reactive', '今のセンサ値だけで動く。地図も計画もない'],
