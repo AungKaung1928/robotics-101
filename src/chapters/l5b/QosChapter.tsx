@@ -68,7 +68,7 @@ export default function QosChapter({ t }: { t: Strings }) {
         <p className="note">{s.trap}</p>
         <p className="group-h">{s.words}</p>
         <Gloss items={s.glossary} />
-        <p className="src">{t.source}: <a href={DOCS}>Jazzy: Quality of Service settings</a> (compatibility tables, defaults) · <a href="https://github.com/AungKaung1928/photon-to-torque">{s.depthLink}</a></p>
+        <p className="src">{t.source}: <a href={DOCS}>Jazzy: Quality of Service settings</a> (compatibility tables, defaults, QoS events) · <a href="https://docs.ros.org/en/jazzy/Tutorials/Beginner-CLI-Tools/Understanding-ROS2-Topics/Understanding-ROS2-Topics.html">Jazzy: ros2 topic info --verbose</a> · <a href="https://github.com/ros-navigation/navigation2/blob/jazzy/nav2_map_server/src/map_server/map_server.cpp#L116-L118">Nav2 map_server.cpp:118 (transient local)</a> · <a href="https://github.com/AungKaung1928/photon-to-torque">{s.depthLink}</a></p>
       </div>
     </>
   )
