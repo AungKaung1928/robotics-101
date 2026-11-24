@@ -7,7 +7,7 @@ export const CALLBACK_STRINGS = {
     lines: [
       'You do not write "wait for the next scan". You give ROS the method self.on_scan, and ROS calls it with each new scan, 5 times a second.',
       'The class keeps what must survive between calls: stop_at and count live on self.',
-      'rclpy.spin runs one call at a time (its default single-threaded executor). If on_scan takes longer than 200 ms, new scans wait in a queue of 10. When the queue is full the oldest is thrown away.',
+      'rclpy.spin runs one call at a time (it uses a single-threaded executor unless you pass it another one). If on_scan takes longer than 200 ms, new scans wait in a queue of 10. When the queue is full the oldest is thrown away.',
     ],
     runsHere: 'Python shown; the page runs a JavaScript model of the same queue. Simplified: no network delay, fixed callback time.',
     work: 'on_scan takes (ms)',
