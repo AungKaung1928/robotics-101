@@ -1,0 +1,11 @@
+/* 4.4 patrol map (PatrolChapter.tsx) */
+.patrolmap { max-width: 420px; }
+.patrolmap .arena { fill: none; stroke: var(--rule); }
+.patrolmap .route { fill: none; stroke: var(--ink-2); stroke-width: 1; stroke-dasharray: 3 4; }
+.patrolmap .wp circle { fill: var(--surface); stroke: var(--ink); stroke-width: 2; }
+.patrolmap .wp.target circle { stroke: var(--robot); stroke-width: 3; }
+.patrolmap .wp.blocked circle { stroke: var(--ray); }
+.patrolmap .wp.blocked path { stroke: var(--ray); stroke-width: 2.5; stroke-linecap: round; }
+.patrolmap .bot { fill: var(--robot); transition: cx 400ms cubic-bezier(.34,1.56,.64,1), cy 400ms cubic-bezier(.34,1.56,.64,1); }
+@media (prefers-reduced-motion: reduce) { .patrolmap .bot { transition: none; } }
+.patrolmap .legend { font-size: 11px; }

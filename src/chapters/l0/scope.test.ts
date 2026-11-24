@@ -14,7 +14,7 @@ const EVIDENCE: Record<Skill, RegExp> = {
 }
 const SRC = join(__dirname, '../..')
 const OLD: Record<string, string> = { scan: 'Scan', tf: 'Tf', detect: 'Detect', grid: 'Grid', costmap: 'Costmap', goal: 'Goal', bringup: 'Bringup' }
-const DIR: Record<string, string> = { '1': 'l1', '2': 'l2', '3': 'l3', EP: 'ep' }
+const DIR: Record<string, string> = { '1': 'l1', '2': 'l2', '3': 'l3', '4': 'l4', EP: 'ep' }
 function filesOf(row: string, id: string): string[] {
   if (OLD[id]) return [join(SRC, 'components', `${OLD[id]}Chapter.tsx`)]
   const d = join(SRC, 'chapters', DIR[row])
@@ -33,8 +33,8 @@ describe('0.12 skill map', () => {
     expect([...TAGS[id]]).toEqual(SKILLS.filter((k) => EVIDENCE[k].test(text)))
   })
   it('counts, the challenge answer and the break-it list come from the tags', () => {
-    expect(ALL_IDS).toHaveLength(22)
-    expect(counts()).toEqual({ py: 10, cpp: 8, ros2: 20, shell: 6 })
+    expect(ALL_IDS).toHaveLength(23)
+    expect(counts()).toEqual({ py: 11, cpp: 8, ros2: 21, shell: 6 })
     expect(most()).toBe('ros2')
     expect(lockedBy('cpp')).toEqual(['cpp', 'shell', 'params', 'ws', 'tf', 'tflab', 'bfs', 'late'])
     expect(lockedBy(null)).toEqual([])

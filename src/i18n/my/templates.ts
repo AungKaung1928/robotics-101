@@ -4,6 +4,9 @@
 type Tpl = (...a: never[]) => string
 
 export const MY_TEMPLATES: Record<string, Record<string, Tpl>> = {
+  'l4.patrol.PATROL_STRINGS': {
+    caption: (k: number, n: number, text: string) => `အဆင့် ${k}/${n} · ${text}`,
+  },
   core: {
     'wv.jump': (m: number) => `jump > ${m} m`,
     'wv.obstacles': (n: number) => `အတားအဆီး ${n} ခု`,
