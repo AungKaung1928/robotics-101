@@ -1,5 +1,8 @@
 // The same reader paths as e2e/smoke/local.mjs, with real input (mouse, keyboard, touch) and view transitions on.
+import { readFileSync } from 'node:fs'
 import { expect, test } from '@playwright/test'
+
+const KEEP = JSON.parse(readFileSync(new URL('../../scripts/my-glossary.json', import.meta.url), 'utf8')).tierA_keepEnglish.map((t) => t.toLowerCase())
 
 const atLang = async (page, lang, hash = '') => {
   await page.addInitScript((l) => { if (!sessionStorage.getItem('smoke')) { localStorage.setItem('r101-lang', l); sessionStorage.setItem('smoke', '1') } }, lang)
@@ -37,12 +40,12 @@ for (const lang of ['en', 'ja', 'my']) {
       await expect.poll(() => page.locator('main').innerText()).not.toBe(before)
     })
 
-    test('no sideways scroll at 320/360/390 px', async ({ page }) => {
+    test('no sideways scroll at 320/360/390/820 px', async ({ page }) => {
       await atLang(page, lang)
       const routes = [...new Set(await page.locator('a[href^="#/"]').evaluateAll((as) => as.map((a) => a.getAttribute('href'))))]
       expect(routes.length).toBeGreaterThan(30)
       const wide = []
-      for (const w of [320, 360, 390]) {
+      for (const w of [320, 360, 390, 820]) {
         await page.setViewportSize({ width: w, height: 800 })
         for (const [i, h] of routes.entries()) {
           await page.goto(`/?n=${w}-${i}${h}`) // query = a full load, not a same-document hash change
@@ -52,6 +55,29 @@ for (const lang of ['en', 'ja', 'my']) {
         }
       }
       expect(wide).toEqual([])
+    })
+
+    test('controls and figures are named; ja/my labels not English beyond the glossary', async ({ page }) => {
+      await atLang(page, lang)
+      const routes = [...new Set(await page.locator('a[href^="#/"]').evaluateAll((as) => as.map((a) => a.getAttribute('href'))))]
+      const bad = []
+      for (const [i, h] of ['', ...routes].entries()) {
+        await page.goto(`/?a=${i}${h}`)
+        await page.locator('h1').first().waitFor()
+        bad.push(...(await page.evaluate(([lang, keep]) => {
+          const SCRIPT = { ja: /[\u3040-\u30ff\u4e00-\u9fff]/, my: /[\u1000-\u109F]/ }[lang], out = []
+          for (const el of document.querySelectorAll('button, a[href], input, select, svg[role=img], canvas[role=img]')) {
+            if (el.closest('[aria-hidden=true]')) continue
+            const lb = (el.getAttribute('aria-labelledby') || '').split(/\s+/).map((id) => document.getElementById(id)?.textContent ?? '').join(' ')
+            const n = (el.getAttribute('aria-label') || lb || (el.id && document.querySelector(`label[for="${el.id}"]`)?.textContent) || el.closest('label')?.textContent ||
+              (el.tagName === 'INPUT' ? '' : el.tagName.toLowerCase() === 'svg' ? el.querySelector('title')?.textContent : el.textContent) || el.getAttribute('title') || '').trim()
+            if (!n) out.push(`${location.hash} ${el.tagName} no name`)
+            else if (SCRIPT && el.hasAttribute('aria-label') && !SCRIPT.test(n) && (n.match(/[A-Za-z]{3,}/g) ?? []).some((w) => !keep.includes(w.toLowerCase()))) out.push(`'${n}' English`)
+          }
+          return out
+        }, [lang, KEEP])))
+      }
+      expect([...new Set(bad)]).toEqual([])
     })
   })
 }
