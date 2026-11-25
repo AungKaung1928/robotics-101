@@ -1,5 +1,5 @@
-import { useState, type CSSProperties } from 'react'
-import { spokeDeg } from '../../scenarios/portspoke'
+import { useRef, useState, type CSSProperties } from 'react'
+import { nearestTurn, spokeDeg } from '../../scenarios/portspoke'
 import { portReaction } from '../../scenarios/portmood'
 import Mascot from '../../anim/Mascot'
 import '../../scenarios/portspoke.css'
@@ -37,6 +37,10 @@ export default function PortChapter({ t }: { t: Strings }) {
     setSeen((x) => (agree === same ? { ...x, [same ? 'agree' : 'disagree']: true } : { agree: false, disagree: false }))
   }
   const [px, py2] = spoke(scan, py, 96)
+  // the C++ spoke's last drawn angle: the next one is taken the short way round, also across the scan's seam
+  const rot = useRef<number | null>(null)
+  const cppDeg = rot.current === null ? spokeDeg(scan, c.idx) : nearestTurn(rot.current, spokeDeg(scan, c.idx))
+  rot.current = cppDeg
   const link = (base: string, p: string) => <a href={`${base}/${p}`}><CiteCode p={p} /></a>
   return (
     <>
@@ -47,7 +51,7 @@ export default function PortChapter({ t }: { t: Strings }) {
           <line className="front" x1="120" y1="120" x2="120" y2="98" />
           <line className="py" x1="120" y1="120" x2={px} y2={py2} />
           {shown && <line className={`cpp cpp-rot ${same ? '' : 'bad'}`} x1="120" y1="120" x2="120" y2="40"
-            style={{ '--from': `${spokeDeg(scan, py)}deg`, transform: `rotate(${spokeDeg(scan, c.idx)}deg)` } as CSSProperties} />}
+            style={{ '--from': `${nearestTurn(cppDeg, spokeDeg(scan, py))}deg`, transform: `rotate(${cppDeg}deg)` } as CSSProperties} />}
         </svg>
         <p className="note">{s.setup}</p>
       </div>
