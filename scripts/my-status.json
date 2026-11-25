@@ -8609,5 +8609,12 @@
   "en": "GoogleTest, the C++ test framework colcon test runs",
   "my": "GoogleTest၊ colcon test က run တဲ့ C++ test framework",
   "back": "GoogleTest, the C++ test framework that colcon test runs"
+ },
+ "l5b/fieldfail:anim.mascot": {
+  "status": "pass-alt",
+  "en": "Debug buddy robot: happy at a right cause, wobbly at a wrong one",
+  "my": "အမှားရှာ အဖော် စက်ရုပ်- အကြောင်းရင်း မှန်ရင် ပျော်တယ်၊ မှားရင် ယိမ်းယိုင်တယ်",
+  "back": "Error-finding companion robot: if the cause is correct, it is happy; if wrong, it sways unsteadily.",
+  "note": "pre-translated from anim 752dc28 before it reached rc; ships when the English is in the tree"
  }
 }
