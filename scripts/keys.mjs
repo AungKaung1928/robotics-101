@@ -148,7 +148,7 @@ try {
   await sleep(1300)
   const mid = parseFloat((await js(caption)).slice(4))
   await sleep(7000)
-  const end = await js(`[${caption}, document.querySelectorAll('.stepper button')[2].disabled].join(' | ')`)
+  const end = await js(`[${caption}, document.querySelectorAll('.stepper button')[2].getAttribute('aria-disabled') === 'true'].join(' | ')`)
   report('bring-up Play: playhead moves past spawn (3 s) within 1.3 s, stops on patrol', [
     ...(start.startsWith('t = 0 s') ? [] : [`start ${start}`]),
     ...(mid >= 3 && mid < 24 ? [] : [`after 1.3 s t = ${mid}, expected 3 ≤ t < 24`]),
