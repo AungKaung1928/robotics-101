@@ -5,3 +5,7 @@
 .ci-live.failure { animation: ci-stop 0.4s ease-out; }
 @keyframes ci-stop { 25% { transform: translateX(-4px); } 60% { transform: translateX(3px); } }
 @media (prefers-reduced-motion: reduce) { .ci-live.failure { animation: none; } }
+/* the pushed commit rides the running step's front; it stops on the red step's edge (ci.run()) */
+.ci-token { fill: var(--surface); stroke: var(--ink); stroke-width: 2; }
+.ci-token.success { stroke: var(--free); }
+.ci-token.failure { stroke: var(--axis-x); fill: var(--axis-x); }

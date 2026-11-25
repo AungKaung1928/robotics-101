@@ -6,7 +6,7 @@ import Gloss from '../l1/Gloss'
 import { LINES, PUSHES, REAL, RUN, SECONDS, STEPS, run, secondsToVerdict, type Push, type Step } from './ci'
 import { CI_STRINGS } from './ci.strings'
 import CiteCode from './CiteCode'
-import { ciAt, total } from '../../scenarios/cirun'
+import { ciAt, ciToken, total } from '../../scenarios/cirun'
 import '../../scenarios/cirun.css'
 import './l5.css'
 
@@ -46,6 +46,7 @@ export default function CiChapter({ t }: { t: Strings }) {
             <rect x={i * 70 + 2} y="2" width="64" height="20" rx="3" className={`ci-run ${look(st)}`} />
             {look(st) === 'running' && <rect className="ci-fill" x={i * 70 + 2} y="2" width={64 * at[st].frac} height="20" rx="3" />}
           </g>)}
+          {tA >= 0 && (() => { const k = ciToken(push, tA); return <circle className={`ci-token ${k.look}`} cx={Math.min(STEPS.length * 70 - 5, Math.max(5, k.pos * 70))} cy="12" r="4.5" /> })()}
         </svg>
         <ol className="ci-pipe" aria-live="polite">
           {STEPS.map((st) => {

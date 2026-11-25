@@ -23,3 +23,15 @@ export function ciAt(push: Push, t: number): Record<Step, StepAt> {
   }
   return out
 }
+
+/** Where the pushed commit is on the bar at time t, in step units (step i spans i..i+1), from ciAt(): the front of the
+ *  running step; once the run ends, the far edge of the last step that ran, with the run's verdict (red stops it there). */
+export function ciToken(push: Push, t: number): { pos: number; look: 'running' | 'success' | 'failure' } {
+  const at = ciAt(push, t)
+  const i = STEPS.findIndex((st) => at[st].look === 'running')
+  if (i >= 0) return { pos: i + at[STEPS[i]].frac, look: 'running' }
+  const ran = STEPS.filter((st) => at[st].look === 'success' || at[st].look === 'failure')
+  if (!ran.length) return { pos: 0, look: 'running' }
+  const last = ran[ran.length - 1]
+  return { pos: STEPS.indexOf(last) + 1, look: ran.some((st) => at[st].look === 'failure') ? 'failure' : 'success' }
+}
