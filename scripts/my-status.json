@@ -8623,5 +8623,12 @@
   "my": "အမှားရှာ အဖော် စက်ရုပ်- သဲလွန်စ တစ်ခုစီကို စဉ်းစားပါတယ်၊ ချို့ယွင်းချက် တစ်ခုပဲ ကျန်ရင် ပျော်ပါတယ်၊ tool တစ်ခုက ဘာအသစ်မှ မပြောရင် ယိမ်းယိုင်ပါတယ်",
   "back": "Debug buddy robot: it considers each clue, is happy if only one fault is left, wobbles if a tool says nothing new.",
   "note": "pre-translated from anim d9d6df7 (cg/r101-anim5) before it reached rc; goes into l5.debug.DEBUG_STRINGS.json anim.mascot when the English is in the tree"
+ },
+ "l5/port:anim.mascot": {
+  "status": "pass-alt",
+  "en": "Port buddy robot: happy when you predicted right whether Python and C++ agree, wobbly when you missed",
+  "my": "Port အဖော် စက်ရုပ်- Python နဲ့ C++ တူမတူ ခန့်မှန်းတာ မှန်ရင် ပျော်ပါတယ်၊ မှားရင် ယိမ်းယိုင်ပါတယ်",
+  "back": "Port companion robot: if your guess whether Python and C++ match is right, it is happy; if wrong, it wobbles.",
+  "note": "pre-translated from cg/r101-anim5 before it reached rc; goes into l5.port.PORT_STRINGS.json anim.mascot when the English is in the tree"
  }
 }
