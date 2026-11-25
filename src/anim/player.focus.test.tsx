@@ -15,8 +15,8 @@ describe('Player Back/Next keep keyboard focus at the ends', () => {
   })
   it('end frame (reduced motion): Next is aria-disabled, not disabled', () => {
     vi.stubGlobal('matchMedia', (q: string) => ({ matches: q.includes('reduce'), media: q, addEventListener() {}, removeEventListener() {} }))
-    const next = stepperButtons(renderToStaticMarkup(<QosChapter t={STRINGS.en} />)).find((b) => b.includes('aria-disabled'))
-    expect(stepperButtons(renderToStaticMarkup(<QosChapter t={STRINGS.en} />)).filter((b) => b.includes('aria-disabled="true"'))).toHaveLength(1)
-    expect(next).not.toMatch(/\sdisabled=""/)
+    const off = stepperButtons(renderToStaticMarkup(<QosChapter t={STRINGS.en} />)).filter((b) => b.includes('aria-disabled="true"'))
+    expect(off).toHaveLength(1) // only Next: Back is live on the end frame
+    expect(off[0]).not.toMatch(/\sdisabled=""/)
   })
 })
