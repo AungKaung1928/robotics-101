@@ -24,6 +24,7 @@ export const FIELDFAIL_STRINGS = {
       ['root cause', 'the one thing that, fixed, makes the symptom go away'],
       ['hysteresis', 'different thresholds for on and off, so a value near the line does not flicker'],
     ] as [string, string][],
+    anim: { mascot: 'Debug buddy robot: happy at a right cause, wobbly at a wrong one' },
   },
   ja: {
     title: '失敗と、その見つけ方',
@@ -49,5 +50,6 @@ export const FIELDFAIL_STRINGS = {
       ['根本原因', 'それを直せば症状が消える、ただ1つのこと'],
       ['ヒステリシス', 'オンとオフで別のしきい値を使い、境界付近で値がちらつかないようにすること'],
     ] as [string, string][],
+    anim: { mascot: '診断の相棒ロボット：正解で喜び、間違いでふらつく' },
   },
 }

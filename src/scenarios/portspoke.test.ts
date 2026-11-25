@@ -20,6 +20,6 @@ describe('port spoke', () => {
   })
   it('chapter renders the rotated C++ spoke with its start angle; reduced motion turns the turn off', () => {
     expect(renderToStaticMarkup(createElement(PortChapter, { t: STRINGS.en }))).toMatch(/class="cpp cpp-rot[^"]*"[^>]*style="--from:[-\d.]+deg;transform:rotate\([-\d.]+deg\)"/)
-    expect(readFileSync(new URL('./portspoke.css', import.meta.url), 'utf8')).toMatch(/prefers-reduced-motion: reduce\) { \.port-ring \.cpp-rot { transition: none; } }/)
+    expect(readFileSync(new URL('./portspoke.css', import.meta.url), 'utf8')).toMatch(/prefers-reduced-motion: reduce\) { \.cpp-rot { transition: none; } }/)
   })
 })

@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react'
 import Player from '../../anim/Player'
+import { wallErr } from '../../scenarios/wallerr'
 import Slider from '../../components/Slider'
 import { stringsFor, type Strings } from '../../i18n'
 import { KP_RANGE, N, P, START_D, avoided, challengeOk, closest, run, scenario, settleS, spun, tooCloseTicks } from './wall'
@@ -30,6 +31,7 @@ export default function WallChapter({ t }: { t: Strings }) {
   const pt = (k: number) => `${(X0 + xs[k] * sx).toFixed(1)},${(WALL_Y - ts[k].d * PX).toFixed(1)}`
   const path = ts.slice(0, f.k + 1).map((_, k) => pt(k)).join(' ')
   const [rx, ry] = pt(f.k).split(',').map(Number)
+  const we = wallErr(f.tick.d, f.tick.alpha, la ? P.lookahead : 0), ax = rx + we.ahead * sx, ay = WALL_Y - we.dAhead * PX
   const head = f.tick.alpha // alpha > 0 = heading into the wall = down on screen (SVG rotate is clockwise)
   const st = settleS(ts), ok = challengeOk(ts)
   const reset = () => setTS(still() ? Infinity : 0)
@@ -42,6 +44,9 @@ export default function WallChapter({ t }: { t: Strings }) {
           <line className="stopline" x1={X0} x2={W - X0} y1={WALL_Y - P.wallMin * PX} y2={WALL_Y - P.wallMin * PX} strokeDasharray="4 4" />
           <text className="legend" x={X0} y={WALL_Y - P.wallMin * PX - 6}>0.28 m</text>
           <polyline className="trail" points={path} />
+          {/* what the PD law sees this tick: the look-ahead point and its error to the 0.5 m line */}
+          <line className="wall-err" x1={ax} x2={ax} y1={ay} y2={WALL_Y - P.desired * PX} stroke="var(--ray)" strokeWidth={3} strokeLinecap="round" />
+          {la && <circle className="wall-ahead" cx={ax} cy={ay} r={4} fill="none" stroke="var(--ray)" strokeWidth={2} />}
           <g transform={`translate(${rx} ${ry}) rotate(${(head * 180) / Math.PI})`}>
             <circle className="body" r={9} />
             <line className="stopline" x1={0} y1={0} x2={16} y2={0} />

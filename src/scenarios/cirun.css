@@ -1,7 +1,7 @@
 /* 5.2: the running step fills left to right (width from cirun.ts), its list row pulses its border once per stage */
-.ci-bar rect.running { stroke: var(--robot); }
-.ci-bar rect.ci-fill { fill: var(--robot); stroke: none; opacity: 0.35; }
-.ci-step.running { border-color: var(--robot); }
-.ci-step.failure { animation: ci-stop 0.4s ease-out; }
+.ci-run.running { stroke: var(--robot); }
+.ci-fill { fill: var(--robot); stroke: none; opacity: 0.35; }
+.ci-live.running { border-color: var(--robot); }
+.ci-live.failure { animation: ci-stop 0.4s ease-out; }
 @keyframes ci-stop { 25% { transform: translateX(-4px); } 60% { transform: translateX(3px); } }
-@media (prefers-reduced-motion: reduce) { .ci-step.failure { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .ci-live.failure { animation: none; } }
