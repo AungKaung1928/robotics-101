@@ -16,3 +16,17 @@ describe('5.2 commit token', () => {
     }
   })
 })
+
+describe('5.2 token x on the bar', () => {
+  it('sits on the fill front while running and on the red step right edge at the end', async () => {
+    const { ciAt, tokenX } = await import('./cirun')
+    for (const p of PUSHES) {
+      for (let t = 0; t < total(p) - 1e-6; t += 0.05) {
+        const i = STEPS.findIndex((st) => ciAt(p, t)[st].look === 'running'), f = ciAt(p, t)[STEPS[i]].frac
+        expect(tokenX(ciToken(p, t))).toBeCloseTo(i * 70 + 2 + 64 * f, 6) // same front as the ci-fill rect
+      }
+      const red = STEPS.findIndex((st) => run(p)[st] === 'failure'), last = red >= 0 ? red : STEPS.length - 1
+      expect(tokenX(ciToken(p, total(p)))).toBe(last * 70 + 66)
+    }
+  })
+})

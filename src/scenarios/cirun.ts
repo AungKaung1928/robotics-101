@@ -35,3 +35,8 @@ export function ciToken(push: Push, t: number): { pos: number; look: 'running' |
   const last = ran[ran.length - 1]
   return { pos: STEPS.indexOf(last) + 1, look: ran.some((st) => at[st].look === 'failure') ? 'failure' : 'success' }
 }
+
+/** Bar x (CiChapter: step i's rect spans i*70+2 .. i*70+66) of the token: on the running fill's front edge, and at
+ *  the end on the right edge of the last step that ran, never into the next (skipped) step's rect. */
+export const tokenX = ({ pos, look }: ReturnType<typeof ciToken>) =>
+  look === 'running' ? Math.floor(pos) * 70 + 2 + 64 * (pos % 1) : (pos - 1) * 70 + 66
