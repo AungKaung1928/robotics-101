@@ -5,7 +5,7 @@ export const QOS_STRINGS = {
     learn: 'You will learn: every publisher and subscriber carries QoS settings (how hard to deliver, whether to keep old messages). If publisher and subscriber ask for incompatible settings, ROS 2 does not connect them: no exception, only a warning line in the log (rclcpp default).',
     everyday: 'Everyday: a phone call versus a radio broadcast. A call retries until it gets through; a radio just sends, and you miss what you did not catch. A listener who insists on a call cannot listen to a radio.',
     lines: [
-      'Reliable: a dropped message is sent again. Best effort: a dropped message is gone, but nothing waits for it. Default for both sides: reliable, volatile, keep last 10.',
+      'Reliable: a dropped message is sent again. Best effort: a dropped message is gone, but nothing waits for it. Default for both sides: reliable, volatile, keep last 10 (volatile and keep last are explained below).',
       'Here a scanner sends 20 scans at 10 Hz over a link that drops every 4th one (made-up, 25 % loss).',
       'Volatile: a subscriber that starts late sees only new messages. Transient local: the publisher keeps the last few (the depth) for late joiners, as a map server does.',
     ],
@@ -17,7 +17,7 @@ export const QOS_STRINGS = {
     got: 'scans received', link: 'connected', yes: 'yes', no: 'no: incompatible QoS', late: 'maps RViz gets when it starts late (3 were sent)',
     resentNote: 'Outlined dots were dropped on the wire and sent again (reliable). Empty dots are gone (best effort).',
     trap: 'Trap: an incompatible pair does not throw. The subscriber callback simply never runs; the signs are a WARN line in the log and the Requested / Offered incompatible QoS event. Check both sides with ros2 topic info -v, which prints the QoS of every publisher and subscription.',
-    challenge: 'Challenge: RViz starts after the map was published. Make it still get the map.',
+    challenge: 'Challenge: RViz starts after the map was published. Make it still get the map, but only the newest one: older maps are wasted data.',
     solved: 'Solved:', notYet: 'Not yet:',
     words: 'Words',
     glossary: [
@@ -35,7 +35,7 @@ export const QOS_STRINGS = {
     learn: '学ぶこと：パブリッシャとサブスクライバはそれぞれ QoS 設定（どこまで確実に届けるか、古いメッセージを残すか）を持つ。両側の設定が両立しないと ROS 2 は接続しない：例外はなく、ログに警告行（rclcpp の既定）が出るだけ。',
     everyday: '身近な例：電話とラジオ放送。電話はつながるまで再送し、ラジオは送るだけで、聞き逃した分は戻らない。電話しか受けない人はラジオを聞けない。',
     lines: [
-      'reliable：落ちたメッセージを再送する。best effort：落ちたら消えるが、待つこともない。両側の既定値：reliable、volatile、keep last 10。',
+      'reliable：落ちたメッセージを再送する。best effort：落ちたら消えるが、待つこともない。両側の既定値：reliable、volatile、keep last 10（volatile と keep last は下で説明）。',
       'ここではスキャナが 10 Hz で 20 本のスキャンを送り、リンクは4本に1本を落とす（架空、損失 25 %）。',
       'volatile：後から起動したサブスクライバは新しいメッセージだけを見る。transient local：パブリッシャが最後の数本（depth）を遅れて来た相手のために残す。地図サーバがこれを使う。',
     ],
@@ -47,7 +47,7 @@ export const QOS_STRINGS = {
     got: '受信したスキャン', link: '接続', yes: 'した', no: 'しない：QoS が両立しない', late: 'RViz が遅れて起動したときに受け取る地図（3枚送信済み）',
     resentNote: '枠だけの点は途中で落ちて再送されたもの（reliable）。空の点は失われたもの（best effort）。',
     trap: '落とし穴：両立しない組み合わせは例外を投げない。サブスクライバのコールバックが一度も呼ばれないだけで、手がかりはログの WARN 行と Requested / Offered incompatible QoS イベント。ros2 topic info -v で両側を確かめよう。全パブリッシャとサブスクリプションの QoS が表示される。',
-    challenge: 'チャレンジ：RViz は地図が送られた後に起動する。それでも地図を受け取れるようにしよう。',
+    challenge: 'チャレンジ：RViz は地図が送られた後に起動する。それでも地図を受け取れるようにしよう。ただし最新の 1 枚だけ：古い地図は無駄なデータ。',
     solved: '成功：', notYet: 'まだ：',
     words: '用語',
     glossary: [

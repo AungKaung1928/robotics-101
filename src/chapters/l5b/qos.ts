@@ -35,5 +35,5 @@ export const received = (pub: Qos, sub: Qos) => fates(pub, sub).filter((f) => f 
 export const MAPS = 3
 export const lateJoinerGets = (pub: Qos, sub: Qos, depth: number) =>
   connected(pub, sub) && pub.dur === 'transient_local' && sub.dur === 'transient_local' ? Math.min(depth, MAPS) : 0
-/** Challenge: the map reaches the late RViz (at least one). */
-export const challengeOk = (pub: Qos, sub: Qos, depth: number) => lateJoinerGets(pub, sub, depth) > 0
+/** Challenge: the late RViz gets the newest map and only that one (Nav2 map_server: KeepLast(1), transient local). */
+export const challengeOk = (pub: Qos, sub: Qos, depth: number) => lateJoinerGets(pub, sub, depth) === 1
