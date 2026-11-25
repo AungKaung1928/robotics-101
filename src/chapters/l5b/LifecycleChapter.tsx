@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { EP, tokenAt } from '../../scenarios/lctoken'
+import '../../scenarios/lifecycle.css'
 import { stringsFor, type Strings } from '../../i18n'
 import { HORIZON, SLOW_AT, SLOW_MS, TRANSITIONS, late, onError, processes, raiseError, starts, step, ticks, worstDelay, type Exec, type State } from './lifecycle'
 import { LIFECYCLE_STRINGS } from './lifecycle.strings'
@@ -19,11 +21,11 @@ export default function LifecycleChapter({ t }: { t: Strings }) {
   const [st, setSt] = useState<State>('unconfigured')
   const [msg, setMsg] = useState('')
   const [ex, setEx] = useState<Exec>('single')
+  const [wob, setWob] = useState(0) // rejected transitions so far: a new key replays the wobble
   const apply = (n: State | null, label: string) => {
-    if (n) { setSt(n); setMsg('') } else setMsg(s.rejected(label, s.states[st]))
+    if (n) { setSt(n); setMsg('') } else { setMsg(s.rejected(label, s.states[st])); setWob((w) => w + 1) }
   }
   const go = (tr: (typeof TRANSITIONS)[number]) => apply(step(st, tr), tr)
-  const EP = { x: X0 + 1.5 * 155 - 15, y: 110, w: 170 } // ErrorProcessing box, centred under inactive/active; wider: 15-char label
   const ss = starts(ex), nLate = late(ex), ok = nLate === 0
   return (
     <>
@@ -32,16 +34,17 @@ export default function LifecycleChapter({ t }: { t: Strings }) {
           <line className="floor" x1={X0 + 2 * 155 + 70} y1={64} x2={EP.x + EP.w - 40} y2={EP.y} />
           <line className="floor" x1={EP.x + 10} y1={EP.y} x2={X0 + 70} y2={64} />
           <line className="floor" x1={EP.x + EP.w} y1={EP.y + 22} x2={X0 + 3 * 155 + 70} y2={64} />
-          <g className={`nd still ${st === 'errorprocessing' ? 'ok' : 'off'}`} data-state="errorprocessing">
+          <g key={st === 'errorprocessing' ? wob : 'ep'} className={`nd still ${st === 'errorprocessing' ? 'ok' : 'off'}${st === 'errorprocessing' && wob ? ' lc-wobble' : ''}`} data-state="errorprocessing">
             <rect x={EP.x} y={EP.y} width={EP.w} height={44} strokeDasharray="6 4" />
             <text x={EP.x + EP.w / 2} y={EP.y + 28} textAnchor="middle">{s.states.errorprocessing}</text>
           </g>
           {STATES.map((name, i) => (
-            <g key={name} className={`nd still ${name === st ? 'ok' : 'off'}`} data-state={name}>
+            <g key={name === st ? `${name}-${wob}` : name} className={`nd still ${name === st ? 'ok' : 'off'}${name === st && wob ? ' lc-wobble' : ''}`} data-state={name}>
               <rect x={X0 + i * 155} y={20} width={140} height={44} />
               <text x={X0 + i * 155 + 70} y={48} textAnchor="middle">{s.states[name]}</text>
             </g>
           ))}
+          <g className="lc-token" data-at={st} aria-hidden="true" style={{ transform: `translate(${tokenAt(st).x}px, ${tokenAt(st).y}px)` }}><circle r={8} /></g>
         </svg>
         <svg className="side graph" viewBox={`0 0 ${W} ${H}`} role="img" aria-label={s.execH}>
           <rect className="qfull" x={X0 + SLOW_AT * PX} y={70} width={SLOW_MS * PX} height={24} rx={3} />

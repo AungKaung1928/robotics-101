@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { marks } from '../../scenarios/dbgsuspects'
+import '../../scenarios/dbg.css'
 import { stringsFor, type Strings } from '../../i18n'
 import Gloss from '../l1/Gloss'
 import { CMD, DOC, DOCS, FAULTS, TOOLS, look, remaining, type Fault, type Tool } from './debug'
@@ -12,7 +14,7 @@ export default function DebugChapter({ t }: { t: Strings }) {
   const [used, setUsed] = useState<Tool[]>([])
   const [solo, setSolo] = useState<Record<Fault, Tool[]>>({ sensor: [], remap: [], tf: [] }) // tools that named a fault alone
   const seen = used.map((tool) => ({ tool, clue: look(fault, tool) }))
-  const left = remaining(seen)
+  const left = remaining(seen), mk = marks(seen)
   const runTool = (tool: Tool) => {
     setUsed((u) => (u.includes(tool) ? u : [...u, tool])) // functional: two quick clicks must both count
     if (remaining([{ tool, clue: look(fault, tool) }]).length === 1) setSolo((x) => ({ ...x, [fault]: [...new Set([...x[fault], tool])] }))
@@ -22,7 +24,7 @@ export default function DebugChapter({ t }: { t: Strings }) {
     <>
       <div className="figure">
         <ul className="dbg-left" aria-live="polite" data-k="left">
-          {FAULTS.map((f) => <li key={f} className={left.includes(f) ? 'in' : 'out'}>{s.faults[f]}</li>)}
+          {FAULTS.map((f) => <li key={`${f}-${used.length}`} className={left.includes(f) ? 'in' : 'out'} data-mark={mk[f]}>{s.faults[f]}</li>)}
         </ul>
         <p className="note">{s.setup}</p>
       </div>

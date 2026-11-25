@@ -1,0 +1,5 @@
+.lc-token { transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); } /* overshoot ease: a small spring past the box */
+.lc-token circle { fill: var(--robot); stroke: var(--bg); stroke-width: 3; }
+.lc-wobble { animation: lc-wobble 0.36s ease-in-out; transform-box: fill-box; transform-origin: center; }
+@keyframes lc-wobble { 20% { transform: translateX(-5px); } 45% { transform: translateX(4px); } 70% { transform: translateX(-2px); } }
+@media (prefers-reduced-motion: reduce) { .lc-token { transition: none; } .lc-wobble { animation: none; } }
