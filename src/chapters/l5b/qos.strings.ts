@@ -29,6 +29,7 @@ export const QOS_STRINGS = {
     ] as [string, string][],
     caption: (got: number) => `${got}/20 scans received`,
     depthLink: 'More on queues and depth: photon-to-torque',
+    anim: { caption: (got: number, sent: number) => `sent ${sent}/20 · received ${got}`, steps: ['scans leave', 'one drops on the wire', 'result'] },
   },
   ja: {
     title: 'ROS 2：QoS、トピックが黙るとき',
@@ -59,5 +60,6 @@ export const QOS_STRINGS = {
     ] as [string, string][],
     caption: (got: number) => `受信 ${got}/20`,
     depthLink: 'キューと depth の詳しい話：photon-to-torque',
+    anim: { caption: (got: number, sent: number) => `送信 ${sent}/20 · 受信 ${got}`, steps: ['送信開始', '途中で1本落ちる', '結果'] },
   },
 }
