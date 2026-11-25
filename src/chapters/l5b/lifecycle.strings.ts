@@ -28,6 +28,7 @@ export const LIFECYCLE_STRINGS = {
       ['callback group', 'mutually exclusive (one at a time) or reentrant (may run in parallel)'],
     ] as [string, string][],
     caption: (n: number) => `${n} of 10 control ticks late`,
+    anim: { errBtn: 'a transition callback fails', more: 'more' },
   },
   ja: {
     title: 'ROS 2：ライフサイクルノードとエグゼキュータ',
@@ -57,5 +58,6 @@ export const LIFECYCLE_STRINGS = {
       ['コールバックグループ', 'mutually exclusive（1つずつ）か reentrant（並列可）'],
     ] as [string, string][],
     caption: (n: number) => `制御ティック 10 回中 ${n} 回遅れ`,
+    anim: { errBtn: '遷移コールバックが失敗', more: 'くわしく' },
   },
 }

@@ -66,7 +66,7 @@ export default function LifecycleChapter({ t }: { t: Strings }) {
         <p className="group-h">{s.stateH}</p>
         <div className="stepper" role="group" aria-label={s.stateH}>
           {TRANSITIONS.map((tr) => <button key={tr} type="button" data-tr={tr} onClick={() => go(tr)}>{tr}</button>)}
-          <button type="button" data-tr="error" onClick={() => apply(raiseError(st), s.errTr.error)}>{s.errTr.error}</button>
+          <button type="button" data-tr="error" onClick={() => apply(raiseError(st), s.anim.errBtn)}>{s.anim.errBtn}</button>
           <button type="button" data-tr="onerror-ok" onClick={() => apply(onError(st, true), s.errTr.ok)}>{s.errTr.ok}</button>
           <button type="button" data-tr="onerror-fail" onClick={() => apply(onError(st, false), s.errTr.fail)}>{s.errTr.fail}</button>
           <button type="button" onClick={() => { setSt('unconfigured'); setMsg('') }}>{s.reset}</button>
@@ -77,7 +77,7 @@ export default function LifecycleChapter({ t }: { t: Strings }) {
         </dl>
         {msg && <p className="verdict no" data-k="rejected">{msg}</p>}
         <p>{s.lcNote}</p>
-        <p className="note">{s.errNote}</p>
+        <details className="note"><summary>{s.anim.more}</summary><p>{s.errNote}</p></details>
         <p className="group-h">{s.execH}</p>
         <div className="stepper" role="group" aria-label={s.execH}>
           {(['single', 'multi_default', 'multi_groups'] as Exec[]).map((k) => <button key={k} type="button" aria-pressed={ex === k} onClick={() => setEx(k)}>{s.execs[k]}</button>)}
