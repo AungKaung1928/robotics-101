@@ -8622,49 +8622,49 @@
   "en": "Debug buddy robot: thinks over each clue, happy when one fault is left, wobbly when a tool told nothing new",
   "my": "အမှားရှာ အဖော် စက်ရုပ်- သဲလွန်စ တစ်ခုစီကို စဉ်းစားပါတယ်၊ ချို့ယွင်းချက် တစ်ခုပဲ ကျန်ရင် ပျော်ပါတယ်၊ tool တစ်ခုက ဘာအသစ်မှ မပြောရင် ယိမ်းယိုင်ပါတယ်",
   "back": "Debug buddy robot: it considers each clue, is happy if only one fault is left, wobbles if a tool says nothing new.",
-  "note": "pre-translated from anim d9d6df7 (cg/r101-anim5) before it reached rc; goes into l5.debug.DEBUG_STRINGS.json anim.mascot when the English is in the tree"
+  "note": "live since anim5 a789f30 merged into cg/r101-my2"
  },
  "l5/port:anim.mascot": {
   "status": "pass-alt",
   "en": "Port buddy robot: happy when you predicted right whether Python and C++ agree, wobbly when you missed",
   "my": "Port အဖော် စက်ရုပ်- Python နဲ့ C++ တူမတူ ခန့်မှန်းတာ မှန်ရင် ပျော်ပါတယ်၊ မှားရင် ယိမ်းယိုင်ပါတယ်",
   "back": "Port companion robot: if your guess whether Python and C++ match is right, it is happy; if wrong, it wobbles.",
-  "note": "pre-translated from cg/r101-anim5 before it reached rc; goes into l5.port.PORT_STRINGS.json anim.mascot when the English is in the tree"
+  "note": "live since anim5 a789f30 merged into cg/r101-my2"
  },
  "l5/ci:anim.mascot": {
   "status": "pass-alt",
   "en": "CI buddy robot: happy when you guessed the first red step, wobbly when you missed",
   "my": "CI အဖော် စက်ရုပ်- ပထမဆုံး နီသွားမယ့် အဆင့်ကို ခန့်မှန်းတာ မှန်ရင် ပျော်ပါတယ်၊ မှားရင် ယိမ်းယိုင်ပါတယ်",
   "back": "CI companion robot: happy if its guess of which stage will go red first is right, wobbles if wrong",
-  "note": "pre-translated from cg/r101-anim5 before it reached rc; goes into the chapter overlay when the English is in the tree"
+  "note": "live since anim5 a789f30 merged into cg/r101-my2"
  },
  "l5b/lifecycle:anim.errBtn": {
   "status": "pass-alt",
   "en": "a transition callback fails",
   "my": "transition callback တစ်ခု မအောင်မြင်ပါဘူး",
   "back": "One transition callback did not succeed",
-  "note": "pre-translated from cg/r101-anim5 before it reached rc; goes into the chapter overlay when the English is in the tree"
+  "note": "live since anim5 a789f30 merged into cg/r101-my2"
  },
  "l5b/lifecycle:anim.more": {
   "status": "pass-alt",
   "en": "more",
   "my": "နောက်ထပ်",
   "back": "More",
-  "note": "pre-translated from cg/r101-anim5 before it reached rc; goes into the chapter overlay when the English is in the tree"
+  "note": "live since anim5 a789f30 merged into cg/r101-my2"
  },
  "l5b/lifecycle:anim.mascot": {
   "status": "pass-alt",
   "en": "Lifecycle buddy robot: happy when the node reaches active, wobbly at a transition that is not allowed",
   "my": "Lifecycle အဖော် စက်ရုပ်- node က active ရောက်ရင် ပျော်ပါတယ်၊ ခွင့်မပြုတဲ့ transition မှာ ယိမ်းယိုင်ပါတယ်",
   "back": "Lifecycle companion robot: happy when the node reaches active, wobbles on a disallowed transition",
-  "note": "pre-translated from cg/r101-anim5 before it reached rc; goes into the chapter overlay when the English is in the tree"
+  "note": "live since anim5 a789f30 merged into cg/r101-my2"
  },
  "l5b/qos:anim.mascot": {
   "status": "pass-alt",
   "en": "QoS buddy robot: happy when the late map arrives, wobbly when the link silently breaks",
   "my": "QoS အဖော် စက်ရုပ်- နောက်ကျမှ စတဲ့ RViz ဆီ မြေပုံ ရောက်ရင် ပျော်ပါတယ်၊ ချိတ်ဆက်မှု တိတ်တဆိတ် ပြတ်သွားရင် ယိမ်းယိုင်ပါတယ်",
   "back": "QoS companion robot: happy when the map reaches an RViz that started late, wobbles if the connection silently drops",
-  "note": "pre-translated from cg/r101-anim5 before it reached rc; goes into the chapter overlay when the English is in the tree"
+  "note": "live since anim5 a789f30 merged into cg/r101-my2"
  },
  "core:stackOf": {
   "status": "pass-alt",

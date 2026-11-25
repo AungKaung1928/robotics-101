@@ -55,5 +55,10 @@
    "callback group",
    "mutually exclusive (တစ်ကြိမ်တစ်ခု) ဒါမှမဟုတ် reentrant (တစ်ပြိုင်နက် အလုပ်လုပ်နိုင်)"
   ]
- ]
+ ],
+ "anim": {
+  "mascot": "Lifecycle အဖော် စက်ရုပ်- node က active ရောက်ရင် ပျော်ပါတယ်၊ ခွင့်မပြုတဲ့ transition မှာ ယိမ်းယိုင်ပါတယ်",
+  "errBtn": "transition callback တစ်ခု မအောင်မြင်ပါဘူး",
+  "more": "နောက်ထပ်"
+ }
 }
