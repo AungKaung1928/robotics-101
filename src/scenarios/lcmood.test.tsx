@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
-import { lcReaction } from './lcmood'
-import { raiseError, step } from '../chapters/l5b/lifecycle'
+import { exReaction, lcReaction } from './lcmood'
+import { late, raiseError, step } from '../chapters/l5b/lifecycle'
 import { STRINGS } from '../i18n'
 import LifecycleChapter from '../chapters/l5b/LifecycleChapter'
 
@@ -22,5 +22,12 @@ describe('5.5 mascot reaction from the lifecycle model', () => {
   it('a failing transition callback (active -> ErrorProcessing, model raiseError) wobbles', () => {
     expect(raiseError('active')).toBe('errorprocessing')
     expect(lcReaction('active', raiseError('active'))).toBe('oops')
+  })
+  it('executor: the model has a pick with 0 late ticks and the default has some; switching to it cheers', () => {
+    expect(late('single')).toBeGreaterThan(0)
+    expect(late('multi_groups')).toBe(0)
+    expect(exReaction(late('single'), late('multi_groups'))).toBe('cheer')
+    expect(exReaction(late('multi_groups'), late('multi_groups'))).toBeNull()
+    expect(exReaction(late('multi_groups'), late('single'))).toBe('oops')
   })
 })

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import Mascot from '../../anim/Mascot'
-import { lcReaction } from '../../scenarios/lcmood'
+import { exReaction, lcReaction } from '../../scenarios/lcmood'
 import { EP, tokenAt } from '../../scenarios/lctoken'
 import '../../scenarios/lifecycle.css'
 import { stringsFor, type Strings } from '../../i18n'
@@ -22,7 +22,7 @@ export default function LifecycleChapter({ t }: { t: Strings }) {
   const s = stringsFor(LIFECYCLE_STRINGS, t, 'l5b.lifecycle.LIFECYCLE_STRINGS')
   const [st, setSt] = useState<State>('unconfigured')
   const [msg, setMsg] = useState('')
-  const [ex, setEx] = useState<Exec>('single')
+  const [ex, setEx0] = useState<Exec>('single')
   const [cheer, setCheer] = useState(0), [oops, setOops] = useState(0)
   const [wob, setWob] = useState(0) // rejected transitions so far: a new key replays the wobble
   const apply = (n: State | null, label: string) => {
@@ -33,6 +33,11 @@ export default function LifecycleChapter({ t }: { t: Strings }) {
   }
   const go = (tr: (typeof TRANSITIONS)[number]) => apply(step(st, tr), tr)
   const ss = starts(ex), nLate = late(ex), ok = nLate === 0
+  const setEx = (k: Exec) => {
+    const r = exReaction(nLate, late(k))
+    if (r === 'cheer') setCheer((c) => c + 1); else if (r === 'oops') setOops((c) => c + 1)
+    setEx0(k)
+  }
   return (
     <>
       <div className="figure">
