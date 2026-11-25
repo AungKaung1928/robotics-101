@@ -96,7 +96,7 @@ export default function QosChapter({ t }: { t: Strings }) {
         </dl>
         <p className="runs">{s.resentNote}</p>
         <p><strong>{s.challenge}</strong></p>
-        <Mascot cheer={cheer} oops={oops} size={48} label={s.anim.mascot} />
+        <Mascot cheer={cheer} oops={oops} size={56} label={s.anim.mascot} />
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet} {s.dur[pub.dur]} → {s.dur[sub.dur]} · {s.depth} {depth}</p>
         <p className="note">{s.trap}</p>
         <p className="group-h">{s.words}</p>
