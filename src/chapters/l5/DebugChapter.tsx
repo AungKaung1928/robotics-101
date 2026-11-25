@@ -46,7 +46,7 @@ export default function DebugChapter({ t }: { t: Strings }) {
         <p className="note">{s.simplified}</p>
         <pre role="log" className="code port-code" data-k="clues">{seen.map(({ tool, clue }) => `$ ${CMD[tool]}\n  ${clue.ok ? '✓' : '✗'} ${s.clues[clue.key as keyof typeof s.clues]}`).join('\n')}</pre>
         <p data-k="used">{s.used}: {used.length}</p>
-        <Mascot cheer={cheer} oops={oops} thinking={used.length > 0 && left.length > 1} size={48} label={s.anim.mascot} />
+        <Mascot cheer={cheer} oops={oops} thinking={used.length > 0 && left.length > 1} size={56} label={s.anim.mascot} />
         <p className={`verdict ${left.length === 1 ? 'ok' : 'no'}`} data-k="named">{left.length === 1 ? '✓ ' + s.named : `${s.left}: ${left.length}`}</p>
         <p><button type="button" data-act="reset" onClick={() => setUsed([])}>{s.reset}</button></p>
         <h2>{s.breakTitle}</h2>

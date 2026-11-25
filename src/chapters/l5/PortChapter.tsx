@@ -65,7 +65,7 @@ export default function PortChapter({ t }: { t: Strings }) {
           <div><dt>{s.readout.offset}</dt><dd data-k="offset">{shown ? c.offset.toFixed(3) : '?'}</dd></div>
           <div><dt>{s.readout.raw}</dt><dd data-k="raw" className="port-raw">{shown ? c.raw.toString() : '?'}</dd></div>
         </dl>
-        <Mascot cheer={cheer} oops={oops} size={48} label={s.anim.mascot} />
+        <Mascot cheer={cheer} oops={oops} size={56} label={s.anim.mascot} />
         {shown ? <p className={`verdict ${same ? 'ok' : 'no'}`} data-k="same">{same ? '✓ ' + s.same : s.differ}</p>
           : <p className="verdict" data-k="same">{s.predictAsk}{' '}
             <button type="button" data-act="say-agree" onClick={() => predict(true)}>{s.agreeFound}</button>{' '}

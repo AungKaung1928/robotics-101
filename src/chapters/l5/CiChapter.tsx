@@ -65,7 +65,7 @@ export default function CiChapter({ t }: { t: Strings }) {
         <p className="choices">
           {(['none', 'build', 'test', 'figure'] as const).map((g) => <label key={g} className="pick"><input type="radio" name="ci-guess" checked={guess === g} onChange={() => { setGuess(g); setTA(-1) }} /> {g === 'none' ? s.none : s.step[g]}</label>)}
         </p>
-        <Mascot cheer={cheer} oops={oops} size={48} label={s.anim.mascot} />
+        <Mascot cheer={cheer} oops={oops} size={56} label={s.anim.mascot} />
         <p><button type="button" data-act="run" onClick={go}>{s.runBtn}</button></p>
         {done && <>
           <p className={`verdict ${guess === firstRed ? 'ok' : 'no'}`} data-k="predict">{guess === firstRed ? '✓ ' + s.right : s.wrong}</p>

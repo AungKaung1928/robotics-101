@@ -67,7 +67,7 @@ export default function LifecycleChapter({ t }: { t: Strings }) {
       <div className="panel">
         <p className="learn">{s.learn}</p>
         <p className="note" data-k="everyday">{s.everyday}</p>
-        <Mascot cheer={cheer} oops={wob} size={48} label={s.anim.mascot} />
+        <Mascot cheer={cheer} oops={wob} size={56} label={s.anim.mascot} />
         <p className="group-h">{s.stateH}</p>
         <div className="stepper" role="group" aria-label={s.stateH}>
           {TRANSITIONS.map((tr) => <button key={tr} type="button" data-tr={tr} onClick={() => go(tr)}>{tr}</button>)}
