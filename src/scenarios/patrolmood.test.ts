@@ -23,4 +23,11 @@ describe('4.4 patrol mood from the model', () => {
       expect(b.cheer).toBeGreaterThanOrEqual(a.cheer); expect(b.oops).toBeGreaterThanOrEqual(a.oops)
     }
   })
+  it('with the chapter\'s k (events shown), a failure counts on the same step it appears', () => {
+    const ev = run({ blocked: 1, loop: false, retry: true }), end = ev.length
+    const k = (tS: number) => Math.max(1, Math.min(end, Math.floor(Math.min(tS, end)) + 1)) // PatrolChapter.tsx:29
+    const j = ev.findIndex((e) => e.kind === 'failed')
+    expect(j).toBeGreaterThan(0)
+    expect(patrolMood(ev, k(j)).oops - patrolMood(ev, k(j - 1)).oops).toBe(1) // the step that shows ev[j]
+  })
 })
