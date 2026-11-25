@@ -25,8 +25,8 @@ export default function CiChapter({ t }: { t: Strings }) {
   const firstRed = STEPS.find((st) => res[st] === 'failure') ?? 'none'
   const end = total(push), done = tA >= end, at = ciAt(push, Math.max(tA, 0))
   const [cheer, setCheer] = useState(0), [oops, setOops] = useState(0)
-  useEffect(() => { // a finished run judges the reader's guess once
-    if (tA >= 0 && done) (ciReaction(guess, firstRed) === 'cheer' ? setCheer : setOops)((n) => n + 1)
+  useEffect(() => { // a finished run judges the reader's guess once; first solving the challenge always cheers
+    if (tA >= 0 && done) (ciReaction(guess, firstRed, !zeroTests && res.build === 'failure' && res.test === 'skipped') === 'cheer' ? setCheer : setOops)((n) => n + 1)
   }, [done]) // eslint-disable-line react-hooks/exhaustive-deps
   const look = (st: Step) => (tA < 0 ? 'wait' : at[st].look)
   useEffect(() => {

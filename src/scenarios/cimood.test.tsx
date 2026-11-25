@@ -12,4 +12,7 @@ describe('5.2 mascot reaction from the CI run', () => {
   it('mascot is on the page before any run, named in the page language', () => {
     expect(renderToStaticMarkup(<CiChapter t={STRINGS.en} />)).toMatch(/CI buddy robot[\s\S]*data-act="run"/)
   })
+  it('a run that first solves the challenge cheers even with a wrong guess', () => {
+    expect(ciReaction('none', 'build', true)).toBe('cheer')
+  })
 })
