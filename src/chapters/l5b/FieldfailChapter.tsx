@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import Mascot from '../../anim/Mascot'
+import { TILE_W, markerX, reaction, tileLook } from '../../scenarios/fieldtrack'
+import '../../scenarios/fieldtrack.css'
 import { stringsFor, type Strings } from '../../i18n'
 import { FAILS, challengeOk, correct, options, url, type FailId } from './fieldfail'
 import { FIELDFAIL_STRINGS } from './fieldfail.strings'
@@ -13,8 +16,10 @@ export default function FieldfailChapter({ t }: { t: Strings }) {
   const [pick, setPick] = useState<FailId | null>(null)
   const [first, setFirst] = useState<Record<string, boolean>>({})
   const f = FAILS[i], txt = s.fails[f.id], solved = pick !== null && correct(i, pick)
+  const [cheer, setCheer] = useState(0), [oops, setOops] = useState(0)
   const choose = (p: FailId) => {
     setPick(p)
+    if (reaction(i, p) === 'cheer') setCheer((n) => n + 1); else setOops((n) => n + 1)
     if (!(f.id in first)) setFirst({ ...first, [f.id]: correct(i, p) })
   }
   const nRight = Object.values(first).filter(Boolean).length, ok = challengeOk(first)
@@ -23,10 +28,12 @@ export default function FieldfailChapter({ t }: { t: Strings }) {
       <div className="figure">
         <svg className="side graph" viewBox="0 0 640 60" role="img" aria-label={`${s.score}: ${nRight}/${FAILS.length}`}>
           {FAILS.map((x, k) => (
-            <rect key={x.id} className={first[x.id] === true ? 'body' : first[x.id] === false ? 'qfull' : 'qslot'} x={10 + k * 105} y={10} width={95} height={40} rx={4}
-              stroke={k === i ? 'var(--robot)' : 'none'} strokeWidth={3} />
+            <rect key={`${x.id}-${x.id in first}`} className={`${tileLook(first, x.id)}${x.id in first ? ' ff-pop' : ''}`} x={markerX(k)} y={10} width={TILE_W} height={40} rx={4} data-case={k} />
           ))}
+          <rect className="ff-marker" x={0} y={10} width={TILE_W} height={40} rx={4} style={{ transform: `translateX(${markerX(i)}px)` }} aria-hidden="true" />
         </svg>
+        <div className="ff-row">
+        <Mascot cheer={cheer} oops={oops} size={56} label={s.anim.mascot} />
         <div className="real-project" data-k="card">
           <p><strong>{i + 1}/{FAILS.length} · {s.symptom}:</strong> {txt.symptom}</p>
           {solved && <>
@@ -34,6 +41,7 @@ export default function FieldfailChapter({ t }: { t: Strings }) {
             <p data-k="fix"><strong>{s.fix}:</strong> {txt.fix}</p>
             <p className="src"><a href={url(f)}>{f.repo} {f.path}:{f.line}</a></p>
           </>}
+        </div>
         </div>
       </div>
       <div className="panel">
