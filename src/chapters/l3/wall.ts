@@ -7,7 +7,7 @@ import type { Scenario } from '../../anim/contract'
  * On a straight wall the two-beam estimate (:268-286) returns the true distance d and heading alpha, so the
  * model uses them directly. Kinematics: d' = -v sin(alpha), alpha' = omega (alpha > 0 = heading into the wall).
  * Every tick first runs the node's collision zones (:184-226, checked before follow_wall at :417-431); a trip hands
- * over to avoid_collision, which this model does not simulate, so it stops there. Front slow-down: :340-349.
+ * over to avoid_collision (zones: wall_follower_controller.py:184-202), which this model does not simulate, so it stops there. Front slow-down: :340-349.
  */
 export const P = {
   desired: 0.5, forward: 0.18, maxW: 1.0, kp: 2.0, kd: 0.6, lookahead: 0.3,
