@@ -7413,5 +7413,198 @@
   "en": "result",
   "my": "ရလဒ်",
   "back": "Result"
+ },
+ "l3/wall:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: a reactive controller looks at the latest scan, computes one error and turns it into a turn rate, 20 times a second. No map, no plan.",
+  "my": "သင်ယူရမှာက- reactive controller က နောက်ဆုံး scan ကို ကြည့်ပြီး error တစ်ခု တွက်ကာ အဲဒါကို လှည့်နှုန်း အဖြစ် ပြောင်းပါတယ်၊ တစ်စက္ကန့်ကို 20 ကြိမ်ပါ။ မြေပုံ မလို၊ plan မလိုပါဘူး။",
+  "back": "What you learn: a reactive controller looks at the latest scan, computes an error, and converts that into a turning rate, 20 times per second. No map needed, no plan needed."
+ },
+ "l3/wall:everyday": {
+  "status": "pass-alt",
+  "en": "Everyday: walking along a corridor with one hand near the wall. Too far, lean in; too close, lean out.",
+  "my": "နေ့စဉ်ဘဝမှာ- စင်္ကြံ တစ်လျှောက် လက်တစ်ဖက်ကို နံရံနားမှာ ထားပြီး လျှောက်တာမျိုးပါ။ ဝေးလွန်းရင် နံရံဘက် ကပ်၊ နီးလွန်းရင် ခွာပါ။",
+  "back": "In daily life: it's like walking along a corridor with one hand kept near the wall. If too far, move toward the wall; if too near, move away."
+ },
+ "l3/wall:lines.0": {
+  "status": "pass-alt",
+  "en": "The robot wants to stay 0.5 m from the wall on its right. Error = distance - 0.5 m.",
+  "my": "စက်ရုပ်က သူ့ညာဘက် နံရံနဲ့ 0.5 m အကွာမှာ နေချင်ပါတယ်။ Error = အကွာအဝေး - 0.5 m ပါ။",
+  "back": "The robot wants to stay 0.5 m away from its right-hand wall. Error = distance - 0.5 m."
+ },
+ "l3/wall:lines.1": {
+  "status": "pass-alt",
+  "en": "Turn rate = kp × error + kd × (how fast the error changes), capped at 1.0 rad/s.",
+  "my": "လှည့်နှုန်း = kp × error + kd × (error ဘယ်လောက် မြန်မြန် ပြောင်းလဲလဲ) ဖြစ်ပြီး 1.0 rad/s ထက် မကျော်အောင် ကန့်သတ်ထားပါတယ်။",
+  "back": "Turning rate = kp × error + kd × (how fast the error changes, however fast), and it is limited so it does not exceed 1.0 rad/s."
+ },
+ "l3/wall:lines.2": {
+  "status": "pass-alt",
+  "en": "The trick: the error uses the distance the robot will have 0.3 m ahead at its current heading (the direction it faces), not the distance now.",
+  "my": "လှည့်ကွက်က- error မှာ အခု အကွာအဝေးကို မသုံးဘဲ စက်ရုပ်က လက်ရှိ heading (မျက်နှာမူထားတဲ့ ဦးတည်ရာ) အတိုင်း 0.3 m ရှေ့ရောက်ရင် ရှိမယ့် အကွာအဝေးကို သုံးပါတယ်။",
+  "back": "The trick: for the error, instead of using the current distance, use the distance that would exist if the robot moved 0.3 m ahead along its current heading (the direction it is facing)."
+ },
+ "l3/wall:kp": {
+  "status": "pass-alt",
+  "en": "kp (proportional gain)",
+  "my": "kp (proportional gain)",
+  "back": "kp (proportional gain)"
+ },
+ "l3/wall:lookahead": {
+  "status": "pass-alt",
+  "en": "look-ahead 0.3 m",
+  "my": "ရှေ့ကြည့် 0.3 m",
+  "back": "Look ahead 0.3 m"
+ },
+ "l3/wall:on": {
+  "status": "pass-alt",
+  "en": "on",
+  "my": "ဖွင့်",
+  "back": "On"
+ },
+ "l3/wall:off": {
+  "status": "pass-alt",
+  "en": "off",
+  "my": "ပိတ်",
+  "back": "Off"
+ },
+ "l3/wall:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: turn the look-ahead off",
+  "my": "ဖျက်ကြည့်- ရှေ့ကြည့်ကို ပိတ်",
+  "back": "Break it and see: turn look-ahead off"
+ },
+ "l3/wall:closest": {
+  "status": "pass-alt",
+  "en": "closest to the wall",
+  "my": "နံရံနဲ့ အနီးဆုံး",
+  "back": "Closest to the wall"
+ },
+ "l3/wall:settle": {
+  "status": "pass-alt",
+  "en": "settled (±5 cm) at",
+  "my": "(±5 cm) အတွင်း ငြိမ်သွားတဲ့ အချိန်",
+  "back": "Time to settle within (±5 cm)"
+ },
+ "l3/wall:never": {
+  "status": "pass-alt",
+  "en": "not in 15 s",
+  "my": "15 s အတွင်း မငြိမ်",
+  "back": "Does not settle within 15 s"
+ },
+ "l3/wall:tooClose": {
+  "status": "pass-alt",
+  "en": "too-close turns",
+  "my": "နီးလွန်းလို့ လှည့်ရတဲ့ အကြိမ်",
+  "back": "Number of turns made because too close"
+ },
+ "l3/wall:spun": {
+  "status": "pass-alt",
+  "en": "heading past 1 rad",
+  "my": "heading 1 rad ကျော်",
+  "back": "Heading beyond 1 rad"
+ },
+ "l3/wall:yes": {
+  "status": "pass-alt",
+  "en": "yes",
+  "my": "ဟုတ်",
+  "back": "Yes"
+ },
+ "l3/wall:no": {
+  "status": "pass-alt",
+  "en": "no",
+  "my": "မဟုတ်",
+  "back": "No"
+ },
+ "l3/wall:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: starting 1.0 m from the wall, pick a kp that settles within 10 s, never triggers a too-close turn or a collision avoid and never turns past 1 rad.",
+  "my": "စိန်ခေါ်မှု- နံရံနဲ့ 1.0 m အကွာကနေ စပြီး 10 s အတွင်း ငြိမ်သွားတဲ့ kp ကို ရွေးပါ၊ နီးလွန်းလို့ လှည့်တာ ဒါမှမဟုတ် တိုက်မိမှု ရှောင်တာ တစ်ခါမှ မဖြစ်ရပါဘူး၊ 1 rad ထက်လည်း ဘယ်တော့မှ မလှည့်ရပါဘူး။",
+  "back": "Challenge: starting from 1.0 m away from the wall, choose a kp that settles within 10 s, with no turning because of being too close or any collision avoidance even once, and never turning more than 1 rad."
+ },
+ "l3/wall:solved": {
+  "status": "pass-alt",
+  "en": "Solved:",
+  "my": "အောင်မြင်ပြီ:",
+  "back": "Succeeded:"
+ },
+ "l3/wall:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet:",
+  "my": "မရသေးပါ:",
+  "back": "Not yet achieved:"
+ },
+ "l3/wall:spunNote": {
+  "status": "pass-alt",
+  "en": "Past 1 rad the robot faces the wall too steeply for the two-beam estimate (it is clamped there), so this model stops. It shows the controller left its working range, not what the real robot then does.",
+  "my": "1 rad ကျော်သွားရင် စက်ရုပ်က နံရံကို စောင်းလွန်းစွာ မျက်နှာမူနေလို့ beam 2 ခုနဲ့ ခန့်မှန်းတာ မမှန်တော့ပါဘူး (အဲဒီမှာ ကန့်သတ်ထားပါတယ်)၊ ဒါကြောင့် ဒီ model က ရပ်သွားပါတယ်။ ဒါက controller က သူ အလုပ်လုပ်နိုင်တဲ့ အပိုင်းအခြားကနေ ထွက်သွားတာကို ပြတာပါ၊ တကယ့် စက်ရုပ် နောက်မှာ ဘာလုပ်မလဲဆိုတာ မဟုတ်ပါဘူး။",
+  "back": "If it goes beyond 1 rad, the robot faces the wall too obliquely, so the estimate made with 2 beams is no longer correct (it is limited there), therefore this model stops. This shows the controller going out of the range in which it can work; it is not what a real robot would do afterwards."
+ },
+ "l3/wall:avoidNote": {
+  "status": "pass-alt",
+  "en": "A beam in the front zones came closer than the node's limit (0.35 m within 50° of straight ahead, 0.25 m at 50-70°), so the node's collision check (it runs before the wall follower) took over with its avoid turn. This model does not simulate that turn, so it stops here.",
+  "my": "ရှေ့ဘက် zone တွေထဲက beam တစ်ခုက node ရဲ့ ကန့်သတ်ချက်ထက် ပိုနီးလာလို့ (တည့်တည့်ရှေ့ကနေ 50° အတွင်း 0.35 m၊ 50-70° မှာ 0.25 m) node ရဲ့ တိုက်မိမှု စစ်ဆေးချက် (wall follower မတိုင်ခင် run ပါတယ်) က ရှောင်လှည့်မှုနဲ့ ထိန်းချုပ်မှုကို ယူသွားပါတယ်။ ဒီ model က အဲဒီ လှည့်မှုကို simulate မလုပ်လို့ ဒီမှာ ရပ်ပါတယ်။",
+  "back": "Because one beam in the front zones came closer than the node's limit (0.35 m within 50° of straight ahead, 0.25 m at 50-70°), the node's collision check (which runs before the wall follower) takes over control with an avoidance turn. This model does not simulate that turn, so it stops here."
+ },
+ "l3/wall:modelNote": {
+  "status": "pass-alt",
+  "en": "Model: one straight wall, perfect scans, the repo's gains and limits. A Gazebo run is the real test. \"Look-ahead off\" is a what-if: the real node accepts 0.1-1.0 m only.",
+  "my": "Model- ဖြောင့်တဲ့ နံရံ တစ်ခု၊ အမှားမရှိတဲ့ scan တွေ၊ repo ရဲ့ gain တွေနဲ့ ကန့်သတ်ချက်တွေပါ။ တကယ့် စမ်းသပ်မှုက Gazebo run ပါ။ \"Look-ahead off\" က ဒီလိုဆိုရင် ဘာဖြစ်မလဲ ဆိုတာပဲ ပြတာပါ- တကယ့် node က 0.1-1.0 m ကိုပဲ လက်ခံပါတယ်။",
+  "back": "Model: one straight wall, error-free scans, the repo's gains and limits. The real test is the Gazebo run. \"Look-ahead off\" only shows what would happen if it were like this: the real node accepts only 0.1-1.0 m."
+ },
+ "l3/wall:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရ",
+  "back": "Glossary"
+ },
+ "l3/wall:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "reactive",
+  "my": "reactive",
+  "back": "reactive"
+ },
+ "l3/wall:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "acts on the current sensor reading only, no map or plan",
+  "my": "လက်ရှိ ဆင်ဆာ ဖတ်ချက်ကိုပဲ ကြည့်ပြီး လုပ်တယ်၊ မြေပုံ ဒါမှမဟုတ် plan မရှိ",
+  "back": "Acts looking only at the current sensor reading; no map or plan"
+ },
+ "l3/wall:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "error",
+  "my": "error",
+  "back": "error"
+ },
+ "l3/wall:glossary.1.1": {
+  "status": "needs-human",
+  "en": "what you have minus what you want: here distance - 0.5 m",
+  "my": "ရှိတာ နှုတ် လိုချင်တာ- ဒီမှာ အကွာအဝေး - 0.5 m",
+  "back": "Subtract what is there from what is wanted: here distance - 0.5 m",
+  "note": "blind back-translation reversed the subtraction; redraft next run"
+ },
+ "l3/wall:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "kp, kd",
+  "my": "kp, kd",
+  "back": "kp, kd"
+ },
+ "l3/wall:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "how strongly the turn reacts to the error and to its rate of change",
+  "my": "error နဲ့ သူ့ ပြောင်းလဲနှုန်းကို လှည့်မှုက ဘယ်လောက် ပြင်းပြင်း တုံ့ပြန်လဲ",
+  "back": "How strongly the turning responds to the error and to its rate of change"
+ },
+ "l3/wall:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "look-ahead",
+  "my": "look-ahead",
+  "back": "look-ahead"
+ },
+ "l3/wall:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "steer on where the robot will be, so it brakes before it arrives",
+  "my": "စက်ရုပ် ရောက်မယ့် နေရာကို ကြည့်ပြီး ထိန်းတာ၊ ဒါမှ မရောက်ခင် အရှိန်လျှော့နိုင်တယ်",
+  "back": "Control by looking at where the robot will arrive, so that it can slow down before arriving"
  }
 }
