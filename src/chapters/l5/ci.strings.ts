@@ -2,8 +2,8 @@
 export const CI_STRINGS = {
   en: {
     title: 'Tests + CI in a ROS container',
-    learn: 'You will: follow one push through the CI of TF-Transform-Explorer (the example ROS 2 repo), predict which step turns red for each kind of mistake, and see why a red build hides the tests.',
-    setup: 'Every push to main and every pull request starts a fresh ros:humble container on a GitHub server. It installs the dependencies, builds, runs every test, then checks the repo\'s TF tree figure still matches the code.',
+    learn: 'You will: follow one push through the CI of TF-Transform-Explorer (the example ROS 2 repo), predict which step turns red for each kind of mistake, and see why a red build hides the tests. Sense, think and act stay the same; CI checks that the think code still builds and passes before it reaches a robot.',
+    setup: 'CI (continuous integration) is a robot that checks your code: every push to main (the shared, finished version) and every pull request (a request to merge your change into main) starts a fresh ros:humble container on a GitHub server. It installs the dependencies, builds, runs every test, then checks the repo\'s TF tree figure still matches the code.',
     pick: 'What does your push do?',
     push: { clean: 'Nothing wrong', syntax: 'A C++ typo', test: 'A test now fails', figure: 'Changed the TF tree, forgot the figure' },
     predict: 'Predict: which step turns red first?',
@@ -23,7 +23,7 @@ export const CI_STRINGS = {
     challenge: 'Challenge: find the push where the run is red but zero tests ran.',
     solved: 'Solved: a build failure skips colcon test. When you read a red run, check which step failed before you look for a bad test.',
     notYet: 'Not yet: run a push and look at the colcon test row.',
-    local: 'Same steps on your laptop: in a ROS 2 Humble shell, first source /opt/ros/humble/setup.bash, then from the workspace root (the folder that holds src/):',
+    local: 'Same steps on your laptop: in a ROS 2 Humble shell, first source /opt/ros/humble/setup.bash (this loads the ROS 2 commands into the terminal), then from the workspace root (the folder that holds src/):',
     glossary: [
       ['CI', 'continuous integration: a server builds and tests every push automatically'],
       ['container', 'a packaged set of files and programs (Ubuntu + ROS) that runs the same on any machine; it shares the host\'s kernel'],
@@ -35,8 +35,8 @@ export const CI_STRINGS = {
   },
   ja: {
     title: 'ROS コンテナでのテスト + CI',
-    learn: '1 回のプッシュが TF-Transform-Explorer（例として使う ROS 2 リポジトリ）の CI を通る様子を追い、ミスの種類ごとにどのステップが赤くなるかを予想し、ビルドが赤いとテストが隠れる理由を見る。',
-    setup: 'main へのプッシュとプルリクエストのたびに、GitHub のサーバー上で新しい ros:humble コンテナが起動する。依存を入れ、ビルドし、すべてのテストを走らせ、最後に TF の図がコードと一致するかを確かめる。',
+    learn: '1 回のプッシュが TF-Transform-Explorer（例として使う ROS 2 リポジトリ）の CI を通る様子を追い、ミスの種類ごとにどのステップが赤くなるかを予想し、ビルドが赤いとテストが隠れる理由を見る。sense、think、act は同じまま：CI は think のコードがロボットに届く前に、ビルドとテストを通るかを確かめる。',
+    setup: 'CI（継続的インテグレーション）はコードを確かめるロボット：main（共有の完成版）へのプッシュとプルリクエスト（自分の変更を main に取り込む依頼）のたびに、GitHub のサーバー上で新しい ros:humble コンテナが起動する。依存を入れ、ビルドし、すべてのテストを走らせ、最後に TF の図がコードと一致するかを確かめる。',
     pick: 'あなたのプッシュは何をする？',
     push: { clean: '問題なし', syntax: 'C++ の打ち間違い', test: 'テストが 1 つ失敗する', figure: 'TF ツリーを変えたが図を忘れた' },
     predict: '予想：最初に赤くなるステップは？',
@@ -56,7 +56,7 @@ export const CI_STRINGS = {
     challenge: 'チャレンジ：実行は赤いのに走ったテストが 0 のプッシュを見つけよう。',
     solved: '正解：ビルドが失敗すると colcon test はスキップされる。赤い実行を読むときは、悪いテストを探す前にどのステップが失敗したかを見よう。',
     notYet: 'まだ：プッシュを実行して colcon test の行を見よう。',
-    local: '手元で同じステップ：ROS 2 Humble のシェルで、まず /opt/ros/humble/setup.bash を source し、ワークスペースのルート（src/ を含むフォルダ）で：',
+    local: '手元で同じステップ：ROS 2 Humble のシェルで、まず /opt/ros/humble/setup.bash を source し（ROS 2 のコマンドをこのターミナルに読み込む）、ワークスペースのルート（src/ を含むフォルダ）で：',
     glossary: [
       ['CI', '継続的インテグレーション：サーバーがプッシュごとに自動でビルドとテストをする'],
       ['container', 'ファイルとプログラム (Ubuntu + ROS) をまとめた包み。どのマシンでも同じに動く。カーネルはホストのものを共有'],

@@ -2,7 +2,7 @@
 export const PATROL_STRINGS = {
   en: {
     title: 'Waypoints and patrol',
-    learn: 'You will learn: a patrol is a small program on top of Nav2. It sends one goal at a time, waits for the result, and decides what to do next.',
+    learn: 'You will learn: a patrol is a small program on top of Nav2 (ROS 2\'s ready-made driving stack: give it a target pose, it plans a path and drives there). The patrol is the think step of sense / think / act, one level up: it sends one goal at a time, waits for the result, and decides what to do next.',
     everyday: 'Everyday: a security guard\'s round. A locked door does not end the round: try a few times, note it, go on.',
     lines: [
       'Seven named points from a YAML file, visited in order, then back to the first (loop on).',
@@ -14,8 +14,8 @@ export const PATROL_STRINGS = {
     breakIt: 'Break it: block point_3, retry off',
     sent: 'goals sent', reached: 'points reached', skipped: 'points skipped', sleep: 'retry sleeps', state: 'patrol',
     running: 'still patrolling', stopped: 'stopped',
-    sleepNote: 'Each retry (and each 2.0 s wait at a reached point) calls time.sleep inside a callback. With rclpy\'s default single-threaded executor, no other callback of this node runs during that time.',
-    challenge: 'Challenge: point_3 is blocked, retry and loop on. How many goals are sent from the first try at point_3 until the robot reaches point_5?',
+    sleepNote: 'While the patrol waits, it cannot react to anything else. Each retry (and each 2.0 s wait at a reached point) calls time.sleep (a pause) inside a callback (the function ROS runs when a message or timer arrives). With rclpy\'s default single-threaded executor (one callback at a time), no other callback of this node runs during that time.',
+    challenge: 'Challenge: point_3 is blocked, retry and loop on. How many goals are sent from the first try at point_3 until the robot reaches point_5? (The file has no point_4, so point_5 comes next. Count the goal that reaches point_5.)',
     solved: 'Solved:', notYet: 'Not yet:',
     modelNote: 'Model: the code\'s decisions only. Driving time between points is not modelled; each step is one event.',
     words: 'Words',
@@ -30,7 +30,7 @@ export const PATROL_STRINGS = {
   },
   ja: {
     title: 'ウェイポイントと巡回',
-    learn: '学ぶこと：巡回は Nav2 の上で動く小さなプログラム。ゴールを一つずつ送り、結果を待ち、次に何をするか決める。',
+    learn: '学ぶこと：巡回は Nav2（ROS 2 の既製の走行スタック：目標の姿勢を渡すと経路を計画してそこへ走る）の上で動く小さなプログラム。巡回は sense / think / act の think を一段上でやるもの：ゴールを一つずつ送り、結果を待ち、次に何をするか決める。',
     everyday: '身近な例：警備員の見回り。鍵のかかったドアがあっても見回りは終わらない。何度か試し、記録し、先へ進む。',
     lines: [
       'YAML ファイルにある名前付きの 7 地点を順に回り、最初に戻る（loop on）。',
@@ -42,8 +42,8 @@ export const PATROL_STRINGS = {
     breakIt: '壊してみる：point_3 をふさぎ、retry をオフ',
     sent: '送ったゴール', reached: '到達した地点', skipped: '飛ばした地点', sleep: '再試行の待ち', state: '巡回',
     running: '巡回中', stopped: '停止',
-    sleepNote: '再試行のたび（と到達地点での 2.0 秒の待ち）に、コールバックの中で time.sleep を呼ぶ。rclpy の標準のシングルスレッド executor では、その間このノードの他のコールバックは動かない。',
-    challenge: 'チャレンジ：point_3 がふさがっていて、retry と loop はオン。point_3 への最初の送信から point_5 に着くまでに、ゴールは何回送られる？',
+    sleepNote: '巡回が待っている間、他のことには反応できない。再試行のたび（と到達地点での 2.0 秒の待ち）に、コールバック（メッセージやタイマーが来たときに ROS が呼ぶ関数）の中で time.sleep（一時停止）を呼ぶ。rclpy の標準のシングルスレッド executor（一度に 1 つのコールバック）では、その間このノードの他のコールバックは動かない。',
+    challenge: 'チャレンジ：point_3 がふさがっていて、retry と loop はオン。point_3 への最初の送信から point_5 に着くまでに、ゴールは何回送られる？（ファイルに point_4 はないので次は point_5。point_5 に着くゴールも数える。）',
     solved: '達成：', notYet: 'まだ：',
     modelNote: 'モデル：コードの判断だけ。地点間の走行時間はモデルにない。1 ステップ = 1 イベント。',
     words: '用語',

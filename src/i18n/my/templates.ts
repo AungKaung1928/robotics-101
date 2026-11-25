@@ -1,6 +1,6 @@
 // Burmese for the function-valued strings (templates with numbers), keyed like the JSON overlays: '<dir>.<base>.<EXPORT>'
-// (or 'core') -> dotted key -> function with the same arguments as the English one. Until the overlay reads this file,
-// these strings stay English on the page. templates.test.ts checks each one against its English twin.
+// (or 'core') -> dotted key -> function with the same arguments as the English one. `withTemplates` in src/i18n.ts
+// reads this file. templates.test.ts checks each one against its English twin.
 type Tpl = (...a: never[]) => string
 
 export const MY_TEMPLATES: Record<string, Record<string, Tpl>> = {

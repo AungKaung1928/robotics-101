@@ -12,10 +12,15 @@ export const FAILS = [
 ] as const
 export type FailId = (typeof FAILS)[number]['id']
 
-/** Four candidate causes for failure i: its own and the next three, rotated so the right one moves through every position. */
-export function options(i: number): FailId[] {
+/**
+ * Four candidate causes for failure i: its own and the next three, rotated by a hash of (i, seed), so the right
+ * answer's position has no visible cycle. The chapter can pass a per-visit seed; 0 keeps tests deterministic.
+ */
+export function options(i: number, seed = 0): FailId[] {
   const n = FAILS.length, ids = [0, 1, 2, 3].map((d) => FAILS[(i + d) % n].id)
-  const r = i % 4
+  let h = Math.imul(i + 1 + Math.imul(seed, 0x9e3779b1), 0x85ebca6b) // murmur3 finalizer: every input bit moves the low bits
+  h = Math.imul(h ^ (h >>> 13), 0xc2b2ae35)
+  const r = (h ^ (h >>> 16)) & 3
   return [...ids.slice(4 - r), ...ids.slice(0, 4 - r)] as FailId[]
 }
 export const correct = (i: number, pick: FailId) => FAILS[i].id === pick

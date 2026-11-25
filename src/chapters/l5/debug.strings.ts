@@ -3,7 +3,7 @@ export const DEBUG_STRINGS = {
   en: {
     title: 'Debugging tools: find why the robot does not move',
     learn: 'You will: use five ROS 2 tools on one robot that will not move, read the one clue each gives, and name the fault with as few tools as possible.',
-    setup: 'Your node listens to /scan, needs the transform odom → base_link, and publishes /cmd_vel. The robot stands still. One thing is broken; the symptom looks the same for all three.',
+    setup: 'Sense, think, act: /scan is sense, your node thinks, /cmd_vel is act. The node also needs the transform odom → base_link (where the robot body is now, measured from where it started; a broadcaster node sends it). The TurtleBot3 stands still. One link is broken; the symptom looks the same for all three, like a TV with no picture: check the plug, the cable and the input before the screen.',
     fault: 'Hidden fault (pick one, then pretend you do not know it)',
     faults: { sensor: 'the laser driver crashed', remap: 'node subscribes /scan_raw, not /scan', tf: 'no odom → base_link broadcaster' },
     tools: 'Run a tool',
@@ -42,7 +42,7 @@ export const DEBUG_STRINGS = {
   ja: {
     title: 'デバッグツール：ロボットが動かない理由を探す',
     learn: '動かないロボット 1 台に ROS 2 の 5 つのツールを使い、それぞれが出す手がかりを 1 つずつ読み、できるだけ少ないツールで故障を特定する。',
-    setup: 'あなたのノードは /scan を聞き、変換 odom → base_link を必要とし、/cmd_vel を出す。ロボットは止まったまま。壊れているのは 1 つだけ。症状は 3 つとも同じに見える。',
+    setup: 'sense、think、act：/scan が sense、あなたのノードが think、/cmd_vel が act。ノードは変換 odom → base_link（出発点から見た今のロボット本体の位置。broadcaster ノードが送る）も必要とする。TurtleBot3 は止まったまま。壊れているつなぎ目は 1 つだけ。症状は 3 つとも同じに見える。映らないテレビと同じ：画面の前に、プラグ、ケーブル、入力切替を確かめる。',
     fault: '隠れた故障 (1 つ選び、知らないふりをする)',
     faults: { sensor: 'レーザーのドライバが落ちた', remap: 'ノードが /scan でなく /scan_raw を聞いている', tf: 'odom → base_link のブロードキャスタがない' },
     tools: 'ツールを実行',

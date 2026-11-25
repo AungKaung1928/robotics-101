@@ -1,3 +1,63 @@
 {
- "title": "ROS container ထဲက စမ်းသပ်မှုများ + CI"
+ "title": "ROS container ထဲက စမ်းသပ်မှုများ + CI",
+ "learn": "လုပ်ရမှာက- TF-Transform-Explorer (နမူနာ ROS 2 repo) ရဲ့ CI ထဲမှာ push တစ်ခုကို အစအဆုံး လိုက်ကြည့်ပြီး အမှား အမျိုးအစား တစ်ခုစီအတွက် ဘယ်အဆင့် နီသွားမလဲ ခန့်မှန်းပြီး build နီသွားရင် test တွေ ဘာကြောင့် မ run ရတော့လဲ ကြည့်ပါ။ Sense, think, act တွေက အတူတူပဲ ရှိပါတယ်- CI က think code ကို စက်ရုပ်ဆီ မရောက်ခင် build ဖြစ်သေးလား၊ test အောင်သေးလား စစ်ပေးတာပါ။",
+ "setup": "CI (continuous integration) ဆိုတာ သင့် code ကို စစ်ပေးတဲ့ စက်ရုပ်တစ်ခုလိုပါပဲ- main (အားလုံး မျှသုံးတဲ့ ပြီးပြည့်စုံ version) ကို push တိုင်းနဲ့ pull request (သင့်ပြောင်းလဲမှုကို main ထဲ ပေါင်းထည့်ဖို့ တောင်းဆိုချက်) တိုင်းက GitHub server ပေါ်မှာ ros:humble container အသစ်တစ်ခုကို စတင်ပါတယ်။ အဲဒါက dependency တွေကို install လုပ်၊ build လုပ်၊ test အားလုံးကို run ပြီး repo ရဲ့ TF tree ပုံက code နဲ့ ကိုက်နေသေးလား စစ်ပါတယ်။",
+ "pick": "သင့် push က ဘာလုပ်လဲ။",
+ "push": {
+  "clean": "ဘာမှ မမှားဘူး",
+  "syntax": "C++ စာလုံးပေါင်း အမှား",
+  "test": "test တစ်ခု အခု ကျသွားတယ်",
+  "figure": "TF tree ကို ပြောင်းပြီး ပုံကို မေ့သွားတယ်"
+ },
+ "predict": "ခန့်မှန်းပါ- ဘယ်အဆင့်က အရင်ဆုံး နီသွားမလဲ။",
+ "none": "မရှိ (စိမ်း)",
+ "runBtn": "Push လုပ်ပြီး run",
+ "step": {
+  "container": "ros:humble စတင်",
+  "checkout": "checkout",
+  "rosdep": "rosdep install",
+  "build": "colcon build",
+  "test": "colcon test",
+  "figure": "ပုံက ကုဒ်နဲ့ ကိုက်"
+ },
+ "result": {
+  "success": "အောင်",
+  "failure": "FAILED",
+  "skipped": "ကျော်ခဲ့"
+ },
+ "verdictIn": "ရလဒ် ထွက်ချိန်",
+ "sec": "s",
+ "right": "မှန်ပါတယ်။",
+ "wrong": "ဒါ မဟုတ်ပါဘူး။ ဘယ်အဆင့်က အမှားကို အရင်ဆုံး မြင်လဲ ကြည့်ပါ။",
+ "real": "GitHub ပေါ်က တကယ့် run",
+ "noReal": "repo ရဲ့ မှတ်တမ်းထဲမှာ ဒီအမျိုးအစား နီတဲ့ run မရှိသေးပါဘူး။",
+ "timing": "အဆင့် တစ်ခုစီရဲ့ စက္ကန့်တွေက c3c3cf2 ပေါ်က စိမ်းတဲ့ run တစ်ခုကနေ ယူထားတာပါ။ ပေါင်းလိုက်ရင် 117 s ရပြီး run တစ်ခုလုံးက 125 s ကြာပါတယ် (ကျန်တဲ့ 8 s က ဒီအဆင့်တွေ အပြင်ဘက်မှာပါ)။ သင့် လက်ပ်တော့ မပါဝင်ပါဘူး- container အတူတူက လူတိုင်းအတွက် run ပါတယ်။",
+ "breakTitle": "ဖျက်ကြည့်",
+ "breakNote": "ဖျက်ကြည့်- push တွေကို ရွေးပြီး ဘယ်အဆင့် နီသွားလဲ ကြည့်ပါ။ run နီတာက test ကျတယ်လို့ အမြဲ မဆိုလိုပါဘူး။ repo ရဲ့ မှတ်တမ်းထဲမှာ test တစ်ခုမှ မ run ခဲ့တဲ့ နီတဲ့ run 2 ခု ရှိပါတယ် (2ed2bd9, 884cc5b)။",
+ "challenge": "စိန်ခေါ်မှု- run နီပေမဲ့ test 0 ခုပဲ run ခဲ့တဲ့ push ကို ရှာပါ။",
+ "solved": "အောင်မြင်ပြီ- build ကျရင် colcon test ကို ကျော်သွားပါတယ်။ နီတဲ့ run ကို ဖတ်တဲ့အခါ မှားတဲ့ test ကို မရှာခင် ဘယ်အဆင့် ကျလဲ အရင် စစ်ပါ။",
+ "notYet": "မရသေးပါ- push တစ်ခု run ပြီး colcon test အတန်းကို ကြည့်ပါ။",
+ "local": "သင့် လက်ပ်တော့ ပေါ်မှာ အဆင့်တွေ အတူတူပါပဲ- ROS 2 Humble shell ထဲမှာ ပထမ source /opt/ros/humble/setup.bash လုပ်ပါ (ဒါက ROS 2 command တွေကို terminal ထဲ ထည့်ပေးပါတယ်)၊ ပြီးရင် workspace root (src/ ပါတဲ့ folder) ကနေ-",
+ "glossary": [
+  [
+   "CI",
+   "continuous integration- server က push တိုင်းကို အလိုအလျောက် build လုပ်ပြီး test လုပ်တယ်"
+  ],
+  [
+   "container",
+   "ဘယ်စက်ပေါ်မှာမဆို အတူတူ run တဲ့ ဖိုင်နဲ့ ပရိုဂရမ် အစုံ (Ubuntu + ROS)၊ host ရဲ့ kernel ကို မျှသုံးတယ်"
+  ],
+  [
+   "ros:humble",
+   "Ubuntu 22.04 ပေါ်က ROS 2 Humble ပါတဲ့ တရားဝင် Docker image"
+  ],
+  [
+   "rosdep",
+   "package.xml ထဲမှာ စာရင်းပါတဲ့ system package တွေကို install လုပ်တယ်"
+  ],
+  [
+   "colcon test-result",
+   "test ရလဒ်တွေကို ပြပြီး test တစ်ခုခု ကျရင် fail ဖြစ်တယ်"
+  ]
+ ]
 }

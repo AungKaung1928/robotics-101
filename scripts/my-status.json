@@ -1526,11 +1526,11 @@
   "back": "Discarded: older than the newest"
  },
  "ep/late:rDelay": {
-  "status": "needs-human",
+  "status": "pass-alt",
   "en": "every reading used later by",
-  "my": "ဒေတာတိုင်းကို နောက်ကျပြီး သုံးရတဲ့ အချိန်",
-  "back": "Time during which every piece of data has to be used late",
-  "note": "blind back-translation drifted (time vs readings delayed by)"
+  "my": "ဖတ်ချက်တိုင်းကို ဒီလောက် နောက်ကျပြီးမှ သုံးပါတယ်-",
+  "back": "Every reading is used only after being delayed by this much:",
+  "note": "redraft 2026-11-26 after one drift; fresh Sonnet blind check matched"
  },
  "ep/late:rDropped": {
   "status": "pass-alt",
@@ -7724,8 +7724,7 @@
   "status": "pass-alt",
   "en": "Each retry (and each 2.0 s wait at a reached point) calls time.sleep inside a callback. With rclpy's default single-threaded executor, no other callback of this node runs during that time.",
   "my": "retry တစ်ခါစီမှာ (ရောက်ပြီးတဲ့ နေရာမှာ 2.0 s စောင့်တိုင်းမှာလည်း) callback ထဲမှာ time.sleep ကို ခေါ်ပါတယ်။ rclpy ရဲ့ default single-threaded executor နဲ့ဆိုရင် အဲဒီအချိန်အတွင်း ဒီ node ရဲ့ တခြား callback တစ်ခုမှ မ run ပါဘူး။",
-  "back": "Each retry (and with every 2.0 s wait at an already-reached place) calls time.sleep inside the callback. With rclpy's default single-threaded executor, during that time not a single other callback of this node runs.",
-  "note": "grammar fix after blind check (meaning matched); re-check in next blind batch"
+  "back": "At each retry (and also each time it waits 2.0 s at the place where it has arrived), time.sleep is called inside the callback. With rclpy's default single-threaded executor, during that time not one other callback of this node runs."
  },
  "l4/patrol:challenge": {
   "status": "pass-alt",
@@ -7840,5 +7839,789 @@
   "en": "failed, retry off: patrol stops",
   "my": "မအောင်မြင်၊ retry ပိတ်ထားလို့ patrol ရပ်",
   "back": "Failed, retry is off so patrol stopped"
+ },
+ "l5/debug:learn": {
+  "status": "pass-alt",
+  "en": "You will: use five ROS 2 tools on one robot that will not move, read the one clue each gives, and name the fault with as few tools as possible.",
+  "my": "လုပ်ရမှာက- မရွေ့တဲ့ စက်ရုပ် တစ်စီးပေါ်မှာ ROS 2 tool 5 ခုကို သုံးပြီး tool တစ်ခုစီ ပေးတဲ့ သဲလွန်စ တစ်ခုကို ဖတ်ကာ tool အနည်းဆုံးနဲ့ ချို့ယွင်းချက်ကို အမည်တပ်ပါ။",
+  "back": "What to do: On one stationary robot, use 5 ROS 2 tools, read one clue that each tool gives, and name the fault with the fewest tools."
+ },
+ "l5/debug:setup": {
+  "status": "pass-alt",
+  "en": "Your node listens to /scan, needs the transform odom → base_link, and publishes /cmd_vel. The robot stands still. One thing is broken; the symptom looks the same for all three.",
+  "my": "သင့် node က /scan ကို နားထောင်ပြီး odom → base_link transform လိုအပ်ကာ /cmd_vel ကို publish လုပ်ပါတယ်။ စက်ရုပ်က ငြိမ်နေပါတယ်။ တစ်ခုခု ပျက်နေပါတယ်- ချို့ယွင်းချက် 3 ခုလုံးအတွက် လက္ခဏာက အတူတူပါပဲ။",
+  "back": "Your node listens to /scan, needs an odom → base_link transform, and publishes /cmd_vel. The robot is still. Something is broken: the symptom is the same for all 3 faults."
+ },
+ "l5/debug:fault": {
+  "status": "pass-alt",
+  "en": "Hidden fault (pick one, then pretend you do not know it)",
+  "my": "ဝှက်ထားတဲ့ ချို့ယွင်းချက် (တစ်ခု ရွေးပြီး မသိသလို ဟန်ဆောင်ပါ)",
+  "back": "Hidden fault (pick one and pretend not to know)"
+ },
+ "l5/debug:faults.sensor": {
+  "status": "pass-alt",
+  "en": "the laser driver crashed",
+  "my": "laser driver ပျက်ကျသွားတယ်",
+  "back": "The laser driver has crashed"
+ },
+ "l5/debug:faults.remap": {
+  "status": "pass-alt",
+  "en": "node subscribes /scan_raw, not /scan",
+  "my": "node က /scan မဟုတ်ဘဲ /scan_raw ကို subscribe လုပ်နေတယ်",
+  "back": "The node is subscribing to /scan_raw, not /scan"
+ },
+ "l5/debug:faults.tf": {
+  "status": "pass-alt",
+  "en": "no odom → base_link broadcaster",
+  "my": "odom → base_link broadcaster မရှိဘူး",
+  "back": "There is no odom → base_link broadcaster"
+ },
+ "l5/debug:tools": {
+  "status": "pass-alt",
+  "en": "Run a tool",
+  "my": "tool တစ်ခု run ကြည့်",
+  "back": "Try running a tool"
+ },
+ "l5/debug:clues.hzRate": {
+  "status": "pass-alt",
+  "en": "average rate printed every second: /scan is arriving.",
+  "my": "စက္ကန့်တိုင်း ပျမ်းမျှနှုန်းကို ပြပါတယ်- /scan ရောက်နေပါတယ်။",
+  "back": "It shows the average rate per second: /scan is arriving."
+ },
+ "l5/debug:clues.hzNone": {
+  "status": "pass-alt",
+  "en": "nothing printed: no /scan messages at all.",
+  "my": "ဘာမှ မပြပါဘူး- /scan message လုံးဝ မရှိပါဘူး။",
+  "back": "It shows nothing: there are no /scan messages at all."
+ },
+ "l5/debug:clues.echoNone": {
+  "status": "pass-alt",
+  "en": "nothing printed: your node sends no /cmd_vel. This is the symptom, not the cause.",
+  "my": "ဘာမှ မပြပါဘူး- သင့် node က /cmd_vel မပို့ပါဘူး။ ဒါက လက္ခဏာပါ၊ အကြောင်းရင်း မဟုတ်ပါဘူး။",
+  "back": "It shows nothing: your node does not send /cmd_vel. This is the symptom, not the cause."
+ },
+ "l5/debug:clues.graphOk": {
+  "status": "pass-alt",
+  "en": "driver → /scan → your node → /cmd_vel: every topic connected.",
+  "my": "driver → /scan → သင့် node → /cmd_vel- topic အားလုံး ချိတ်ဆက်ထားပါတယ်။",
+  "back": "driver → /scan → your node → /cmd_vel: all topics are connected."
+ },
+ "l5/debug:clues.graphNoDriver": {
+  "status": "pass-alt",
+  "en": "no laser driver node in the graph: nobody publishes /scan.",
+  "my": "graph ထဲမှာ laser driver node မရှိပါဘူး- /scan ကို ဘယ်သူမှ publish မလုပ်ပါဘူး။",
+  "back": "There is no laser driver node in the graph: nobody publishes /scan."
+ },
+ "l5/debug:clues.graphSplit": {
+  "status": "pass-alt",
+  "en": "the driver and your node are not connected. on first start rqt_graph hides topics with one end: pick Nodes/Topics (all) and untick Hide: Dead sinks and Leaf topics to see /scan and /scan_raw as two separate topics.",
+  "my": "driver နဲ့ သင့် node မချိတ်ဆက်ထားပါဘူး။ ပထမဆုံး စဖွင့်တဲ့အခါ rqt_graph က တစ်ဖက်ပဲ ချိတ်ထားတဲ့ topic တွေကို ဖျောက်ထားပါတယ်- /scan နဲ့ /scan_raw ကို သီးခြား topic 2 ခုအဖြစ် မြင်ရဖို့ Nodes/Topics (all) ကို ရွေးပြီး Hide: Dead sinks နဲ့ Leaf topics ကို အမှန်ခြစ် ဖြုတ်ပါ။",
+  "back": "The driver and your node are not connected. When first opened, rqt_graph hides topics connected on only one side: to see /scan and /scan_raw as 2 separate topics, choose Nodes/Topics (all) and uncheck Hide: Dead sinks and Leaf topics."
+ },
+ "l5/debug:clues.tfOk": {
+  "status": "pass-alt",
+  "en": "prints the transform: odom → base_link is there.",
+  "my": "transform ကို ပြပါတယ်- odom → base_link ရှိပါတယ်။",
+  "back": "It shows the transform: odom → base_link exists."
+ },
+ "l5/debug:clues.tfMissing": {
+  "status": "pass-alt",
+  "en": "waits and reports that frame odom does not exist: the transform is missing.",
+  "my": "စောင့်ပြီး frame odom မရှိဘူးလို့ ပြောပါတယ်- transform ပျောက်နေပါတယ်။",
+  "back": "It waits and says frame odom does not exist: the transform is missing."
+ },
+ "l5/debug:clues.bagEmpty": {
+  "status": "pass-alt",
+  "en": "the bag has no /scan messages to play: the problem is on the robot side.",
+  "my": "bag ထဲမှာ ပြန်ဖွင့်စရာ /scan message မရှိပါဘူး- ပြဿနာက စက်ရုပ်ဘက်မှာပါ။",
+  "back": "There are no /scan messages in the bag to replay: the problem is on the robot side."
+ },
+ "l5/debug:clues.bagStill": {
+  "status": "pass-alt",
+  "en": "replayed on your laptop, with no robot: your node still does nothing. The laser data is not the problem.",
+  "my": "စက်ရုပ် မပါဘဲ သင့် လက်ပ်တော့ ပေါ်မှာ ပြန်ဖွင့်ကြည့်တာ- သင့် node က ဘာမှ မလုပ်သေးပါဘူး။ laser ဒေတာက ပြဿနာ မဟုတ်ပါဘူး။",
+  "back": "Replayed on your laptop without the robot: your node does nothing yet. The laser data is not the problem."
+ },
+ "l5/debug:left": {
+  "status": "pass-alt",
+  "en": "Faults still possible",
+  "my": "ဖြစ်နိုင်သေးတဲ့ ချို့ယွင်းချက်",
+  "back": "Faults that are still possible"
+ },
+ "l5/debug:named": {
+  "status": "pass-alt",
+  "en": "Only one fault fits: you found it.",
+  "my": "ချို့ယွင်းချက် တစ်ခုပဲ ကိုက်ပါတယ်- ရှာတွေ့ပါပြီ။",
+  "back": "Only one fault matches: found it."
+ },
+ "l5/debug:reset": {
+  "status": "pass-alt",
+  "en": "Clear the clues",
+  "my": "သဲလွန်စတွေ ရှင်း",
+  "back": "Clues clear"
+ },
+ "l5/debug:simplified": {
+  "status": "pass-alt",
+  "en": "Tool outputs are simplified pictures of what each tool shows, not real terminal output.",
+  "my": "tool output တွေက tool တစ်ခုစီ ပြတာကို ရိုးရှင်းအောင် ပုံဖော်ထားတာပါ၊ တကယ့် terminal output မဟုတ်ပါဘူး။",
+  "back": "The tool outputs are simplified depictions of what each tool shows; they are not real terminal output."
+ },
+ "l5/debug:breakTitle": {
+  "status": "pass-alt",
+  "en": "Break it",
+  "my": "ဖျက်ကြည့်",
+  "back": "Delete and see"
+ },
+ "l5/debug:breakNote": {
+  "status": "pass-alt",
+  "en": "Run only ros2 topic echo /cmd_vel. It looks the same for every fault: it tells you the robot is broken, not why. Watching the output of a node is the symptom; the tools that show its inputs find the cause.",
+  "my": "ros2 topic echo /cmd_vel ကိုပဲ run ကြည့်ပါ။ ချို့ယွင်းချက် တိုင်းအတွက် အတူတူပဲ မြင်ရပါတယ်- စက်ရုပ် ပျက်နေတယ်လို့ ပြောပေမဲ့ ဘာကြောင့်လဲ မပြောပါဘူး။ node တစ်ခုရဲ့ output ကို ကြည့်တာက လက္ခဏာကို ကြည့်တာပါ၊ သူ့ input တွေကို ပြတဲ့ tool တွေက အကြောင်းရင်းကို ရှာတွေ့ပါတယ်။",
+  "back": "Just run ros2 topic echo /cmd_vel. You see the same thing for every fault: it says the robot is broken but not why. Looking at one node's output is looking at the symptom; tools that show its inputs find the cause."
+ },
+ "l5/debug:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: switch faults and find the one tool that names every fault on its own.",
+  "my": "စိန်ခေါ်မှု- ချို့ယွင်းချက်တွေကို ပြောင်းကြည့်ပြီး ချို့ယွင်းချက် တိုင်းကို သူ့ဘာသာ အမည်တပ်နိုင်တဲ့ tool တစ်ခုကို ရှာပါ။",
+  "back": "Challenge: change the faults around and find a tool that can name each fault by itself."
+ },
+ "l5/debug:solved": {
+  "status": "pass-alt",
+  "en": "Solved: rqt_graph shows who is connected to whom. Two faults show as a missing or split link; a clean graph leaves only TF, which tf2_echo confirms. Start there, then confirm with the specific tool.",
+  "my": "အောင်မြင်ပြီ- rqt_graph က ဘယ်သူ ဘယ်သူနဲ့ ချိတ်ထားလဲ ပြပါတယ်။ ချို့ယွင်းချက် 2 ခုက ချိတ်ဆက်မှု ပျောက်နေတာ ဒါမှမဟုတ် ကွဲနေတာအဖြစ် ပေါ်ပါတယ်၊ graph သန့်နေရင် TF ပဲ ကျန်ပြီး tf2_echo က အဲဒါကို အတည်ပြုပါတယ်။ အဲဒီကနေ စပြီး သက်ဆိုင်ရာ tool နဲ့ အတည်ပြုပါ။",
+  "back": "Success: rqt_graph shows who is connected to whom. 2 faults appear as a missing or broken connection; if the graph is clean only TF remains, and tf2_echo confirms that. Starting from there, confirm with the relevant tool."
+ },
+ "l5/debug:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet: try one tool per fault and see which one always tells them apart.",
+  "my": "မရသေးပါ- ချို့ယွင်းချက် တစ်ခုကို tool တစ်ခုစီ စမ်းပြီး ဘယ် tool က သူတို့ကို အမြဲ ခွဲခြားပေးလဲ ကြည့်ပါ။",
+  "back": "Not yet: try one fault with each tool and see which tool always tells them apart."
+ },
+ "l5/debug:used": {
+  "status": "pass-alt",
+  "en": "tools used",
+  "my": "သုံးခဲ့တဲ့ tool",
+  "back": "Tools used"
+ },
+ "l5/debug:docs": {
+  "status": "pass-alt",
+  "en": "ROS 2 docs (Jazzy)",
+  "my": "ROS 2 docs (Jazzy)",
+  "back": "ROS 2 docs (Jazzy)"
+ },
+ "l5/debug:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "ros2 topic hz",
+  "my": "ros2 topic hz",
+  "back": "ros2 topic hz"
+ },
+ "l5/debug:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "prints how often messages arrive on a topic",
+  "my": "topic တစ်ခုပေါ်ကို message တွေ ဘယ်လောက် မကြာခဏ ရောက်လဲ ပြတယ်",
+  "back": "Shows how often messages arrive on a topic"
+ },
+ "l5/debug:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "ros2 topic echo",
+  "my": "ros2 topic echo",
+  "back": "ros2 topic echo"
+ },
+ "l5/debug:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "prints each message on a topic",
+  "my": "topic တစ်ခုပေါ်က message တစ်ခုချင်းစီကို ပြတယ်",
+  "back": "Shows each individual message on a topic"
+ },
+ "l5/debug:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "rqt_graph",
+  "my": "rqt_graph",
+  "back": "rqt_graph"
+ },
+ "l5/debug:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "a window that draws nodes and the topics between them",
+  "my": "node တွေနဲ့ သူတို့ကြားက topic တွေကို ပုံဆွဲပြတဲ့ window",
+  "back": "A window that draws the nodes and the topics between them"
+ },
+ "l5/debug:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "tf2_echo",
+  "my": "tf2_echo",
+  "back": "tf2_echo"
+ },
+ "l5/debug:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "prints the transform between two frames, or says why it cannot",
+  "my": "frame 2 ခုကြားက transform ကို ပြတယ်၊ ဒါမှမဟုတ် ဘာကြောင့် မပြနိုင်လဲ ပြောတယ်",
+  "back": "Shows the transform between 2 frames, or says why it cannot show it"
+ },
+ "l5/debug:glossary.4.0": {
+  "status": "pass-alt",
+  "en": "ros2 bag",
+  "my": "ros2 bag",
+  "back": "ros2 bag"
+ },
+ "l5/debug:glossary.4.1": {
+  "status": "pass-alt",
+  "en": "records topics to a file and plays them back later",
+  "my": "topic တွေကို ဖိုင်ထဲ မှတ်တမ်းတင်ပြီး နောက်မှ ပြန်ဖွင့်ပေးတယ်",
+  "back": "Records topics into a file and plays them back later"
+ },
+ "l5/ci:learn": {
+  "status": "pass-alt",
+  "en": "You will: follow one push through the CI of TF-Transform-Explorer (the example ROS 2 repo), predict which step turns red for each kind of mistake, and see why a red build hides the tests.",
+  "my": "လုပ်ရမှာက- TF-Transform-Explorer (နမူနာ ROS 2 repo) ရဲ့ CI ထဲမှာ push တစ်ခုကို အစအဆုံး လိုက်ကြည့်ပြီး အမှား အမျိုးအစား တစ်ခုစီအတွက် ဘယ်အဆင့် နီသွားမလဲ ခန့်မှန်းကာ build နီသွားရင် test တွေကို ဘာကြောင့် ဖုံးကွယ်သွားလဲ ကြည့်ပါ။",
+  "back": "What to do: follow one push from start to finish in the CI of TF-Transform-Explorer (a sample ROS 2 repo), predict which stage goes red for each error type, and see why, when the build goes red, the tests are hidden."
+ },
+ "l5/ci:setup": {
+  "status": "pass-alt",
+  "en": "Every push to main and every pull request starts a fresh ros:humble container on a GitHub server. It installs the dependencies, builds, runs every test, then checks the repo's TF tree figure still matches the code.",
+  "my": "main ကို push တိုင်းနဲ့ pull request တိုင်းက GitHub server ပေါ်မှာ ros:humble container အသစ်တစ်ခုကို စတင်ပါတယ်။ အဲဒါက dependency တွေကို install လုပ်၊ build လုပ်၊ test အားလုံးကို run ပြီး repo ရဲ့ TF tree ပုံက ကုဒ်နဲ့ ကိုက်နေသေးလား စစ်ပါတယ်။",
+  "back": "Every push to main and every pull request starts a fresh ros:humble container on a GitHub server. It installs the dependencies, builds, runs all the tests, and checks whether the repo's TF tree diagram still matches the code."
+ },
+ "l5/ci:pick": {
+  "status": "pass-alt",
+  "en": "What does your push do?",
+  "my": "သင့် push က ဘာလုပ်လဲ။",
+  "back": "What does your push do?"
+ },
+ "l5/ci:push.clean": {
+  "status": "pass-alt",
+  "en": "Nothing wrong",
+  "my": "ဘာမှ မမှားဘူး",
+  "back": "Nothing is wrong"
+ },
+ "l5/ci:push.syntax": {
+  "status": "pass-alt",
+  "en": "A C++ typo",
+  "my": "C++ စာလုံးပေါင်း အမှား",
+  "back": "C++ spelling mistake"
+ },
+ "l5/ci:push.test": {
+  "status": "pass-alt",
+  "en": "A test now fails",
+  "my": "test တစ်ခု အခု ကျသွားတယ်",
+  "back": "One test fails now"
+ },
+ "l5/ci:push.figure": {
+  "status": "pass-alt",
+  "en": "Changed the TF tree, forgot the figure",
+  "my": "TF tree ကို ပြောင်းပြီး ပုံကို မေ့သွားတယ်",
+  "back": "Changed the TF tree and forgot the diagram"
+ },
+ "l5/ci:predict": {
+  "status": "pass-alt",
+  "en": "Predict: which step turns red first?",
+  "my": "ခန့်မှန်းပါ- ဘယ်အဆင့်က အရင်ဆုံး နီသွားမလဲ။",
+  "back": "Predict: which stage goes red first?"
+ },
+ "l5/ci:none": {
+  "status": "pass-alt",
+  "en": "none (green)",
+  "my": "မရှိ (စိမ်း)",
+  "back": "None (green)"
+ },
+ "l5/ci:runBtn": {
+  "status": "pass-alt",
+  "en": "Push and run",
+  "my": "Push လုပ်ပြီး run",
+  "back": "Push and run"
+ },
+ "l5/ci:step.container": {
+  "status": "pass-alt",
+  "en": "start ros:humble",
+  "my": "ros:humble စတင်",
+  "back": "start ros:humble"
+ },
+ "l5/ci:step.checkout": {
+  "status": "pass-alt",
+  "en": "checkout",
+  "my": "checkout",
+  "back": "checkout"
+ },
+ "l5/ci:step.rosdep": {
+  "status": "pass-alt",
+  "en": "rosdep install",
+  "my": "rosdep install",
+  "back": "rosdep install"
+ },
+ "l5/ci:step.build": {
+  "status": "pass-alt",
+  "en": "colcon build",
+  "my": "colcon build",
+  "back": "colcon build"
+ },
+ "l5/ci:step.test": {
+  "status": "pass-alt",
+  "en": "colcon test",
+  "my": "colcon test",
+  "back": "colcon test"
+ },
+ "l5/ci:step.figure": {
+  "status": "pass-alt",
+  "en": "figure matches code",
+  "my": "ပုံက ကုဒ်နဲ့ ကိုက်",
+  "back": "diagram matches code"
+ },
+ "l5/ci:result.success": {
+  "status": "pass-alt",
+  "en": "passed",
+  "my": "အောင်",
+  "back": "pass"
+ },
+ "l5/ci:result.failure": {
+  "status": "pass-alt",
+  "en": "FAILED",
+  "my": "FAILED",
+  "back": "FAILED"
+ },
+ "l5/ci:result.skipped": {
+  "status": "pass-alt",
+  "en": "skipped",
+  "my": "ကျော်ခဲ့",
+  "back": "skipped"
+ },
+ "l5/ci:verdictIn": {
+  "status": "pass-alt",
+  "en": "Verdict after",
+  "my": "ရလဒ် ထွက်ချိန်",
+  "back": "time when result comes out"
+ },
+ "l5/ci:sec": {
+  "status": "pass-alt",
+  "en": "s",
+  "my": "s",
+  "back": "s"
+ },
+ "l5/ci:right": {
+  "status": "pass-alt",
+  "en": "Right.",
+  "my": "မှန်ပါတယ်။",
+  "back": "Correct."
+ },
+ "l5/ci:wrong": {
+  "status": "pass-alt",
+  "en": "Not this one. Look at which step first sees the mistake.",
+  "my": "ဒါ မဟုတ်ပါဘူး။ ဘယ်အဆင့်က အမှားကို အရင်ဆုံး မြင်လဲ ကြည့်ပါ။",
+  "back": "This is not it. Look at which stage sees the error first."
+ },
+ "l5/ci:real": {
+  "status": "pass-alt",
+  "en": "Real run on GitHub",
+  "my": "GitHub ပေါ်က တကယ့် run",
+  "back": "A real run on GitHub"
+ },
+ "l5/ci:noReal": {
+  "status": "pass-alt",
+  "en": "No red run of this kind in the repo's history yet.",
+  "my": "repo ရဲ့ မှတ်တမ်းထဲမှာ ဒီအမျိုးအစား နီတဲ့ run မရှိသေးပါဘူး။",
+  "back": "There is no red run of this kind in the repo's history yet."
+ },
+ "l5/ci:timing": {
+  "status": "pass-alt",
+  "en": "Seconds per step are from a green run on c3c3cf2. They add up to 117 s; the whole run took 125 s (the other 8 s are outside these steps). Your laptop is not involved: the same container runs for everyone.",
+  "my": "အဆင့် တစ်ခုစီရဲ့ စက္ကန့်တွေက c3c3cf2 ပေါ်က စိမ်းတဲ့ run တစ်ခုကနေ ယူထားတာပါ။ ပေါင်းလိုက်ရင် 117 s ရပြီး run တစ်ခုလုံးက 125 s ကြာပါတယ် (ကျန်တဲ့ 8 s က ဒီအဆင့်တွေ အပြင်ဘက်မှာပါ)။ သင့် လက်ပ်တော့ မပါဝင်ပါဘူး- container အတူတူက လူတိုင်းအတွက် run ပါတယ်။",
+  "back": "The seconds for each stage are taken from one green run on c3c3cf2. Added up they come to 117 s and the whole run takes 125 s (the remaining 8 s is outside these stages). Your laptop is not involved: the same container runs for everyone."
+ },
+ "l5/ci:breakTitle": {
+  "status": "pass-alt",
+  "en": "Break it",
+  "my": "ဖျက်ကြည့်",
+  "back": "Try breaking it"
+ },
+ "l5/ci:breakNote": {
+  "status": "pass-alt",
+  "en": "Break it: pick pushes and watch which step turns red. A red run does not always mean a test failed. The repo's history has two red runs where no test ran at all (2ed2bd9, 884cc5b).",
+  "my": "ဖျက်ကြည့်- push တွေကို ရွေးပြီး ဘယ်အဆင့် နီသွားလဲ ကြည့်ပါ။ run နီတာက test ကျတယ်လို့ အမြဲ မဆိုလိုပါဘူး။ repo ရဲ့ မှတ်တမ်းထဲမှာ test တစ်ခုမှ မ run ခဲ့တဲ့ နီတဲ့ run 2 ခု ရှိပါတယ် (2ed2bd9, 884cc5b)။",
+  "back": "Try breaking it: pick pushes and see which stage goes red. A red run does not always mean a test failed. In the repo's history there are 2 red runs where not a single test ran (2ed2bd9, 884cc5b)."
+ },
+ "l5/ci:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: find the push where the run is red but zero tests ran.",
+  "my": "စိန်ခေါ်မှု- run နီပေမဲ့ test 0 ခုပဲ run ခဲ့တဲ့ push ကို ရှာပါ။",
+  "back": "Challenge: find a push where the run is red but 0 tests ran."
+ },
+ "l5/ci:solved": {
+  "status": "pass-alt",
+  "en": "Solved: a build failure skips colcon test. When you read a red run, check which step failed before you look for a bad test.",
+  "my": "အောင်မြင်ပြီ- build ကျရင် colcon test ကို ကျော်သွားပါတယ်။ နီတဲ့ run ကို ဖတ်တဲ့အခါ မှားတဲ့ test ကို မရှာခင် ဘယ်အဆင့် ကျလဲ အရင် စစ်ပါ။",
+  "back": "Success: when the build fails, colcon test is skipped. When reading a red run, first check which stage failed before looking for the failing test."
+ },
+ "l5/ci:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet: run a push and look at the colcon test row.",
+  "my": "မရသေးပါ- push တစ်ခု run ပြီး colcon test အတန်းကို ကြည့်ပါ။",
+  "back": "Not yet: run one push and look at the colcon test row."
+ },
+ "l5/ci:local": {
+  "status": "pass-alt",
+  "en": "Same steps on your laptop: in a ROS 2 Humble shell, first source /opt/ros/humble/setup.bash, then from the workspace root (the folder that holds src/):",
+  "my": "သင့် လက်ပ်တော့ ပေါ်မှာ အဆင့်တွေ အတူတူပါပဲ- ROS 2 Humble shell ထဲမှာ ပထမ source /opt/ros/humble/setup.bash လုပ်ပြီး workspace root (src/ ပါတဲ့ folder) ကနေ-",
+  "back": "On your laptop the steps are the same: in a ROS 2 Humble shell first do source /opt/ros/humble/setup.bash, then from the workspace root (the folder containing src/)-"
+ },
+ "l5/ci:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "CI",
+  "my": "CI",
+  "back": "CI"
+ },
+ "l5/ci:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "continuous integration: a server builds and tests every push automatically",
+  "my": "continuous integration- server က push တိုင်းကို အလိုအလျောက် build လုပ်ပြီး test လုပ်တယ်",
+  "back": "continuous integration: the server automatically builds and tests every push"
+ },
+ "l5/ci:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "container",
+  "my": "container",
+  "back": "container"
+ },
+ "l5/ci:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "a packaged set of files and programs (Ubuntu + ROS) that runs the same on any machine; it shares the host's kernel",
+  "my": "ဘယ်စက်ပေါ်မှာမဆို အတူတူ run တဲ့ ဖိုင်နဲ့ ပရိုဂရမ် အစုံ (Ubuntu + ROS)၊ host ရဲ့ kernel ကို မျှသုံးတယ်",
+  "back": "a set of files and programs that runs the same on any machine (Ubuntu + ROS), sharing the host's kernel"
+ },
+ "l5/ci:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "ros:humble",
+  "my": "ros:humble",
+  "back": "ros:humble"
+ },
+ "l5/ci:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "the official Docker image with ROS 2 Humble on Ubuntu 22.04",
+  "my": "Ubuntu 22.04 ပေါ်က ROS 2 Humble ပါတဲ့ တရားဝင် Docker image",
+  "back": "The official Docker image with ROS 2 Humble on Ubuntu 22.04"
+ },
+ "l5/ci:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "rosdep",
+  "my": "rosdep",
+  "back": "rosdep"
+ },
+ "l5/ci:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "installs the system packages listed in package.xml",
+  "my": "package.xml ထဲမှာ စာရင်းပါတဲ့ system package တွေကို install လုပ်တယ်",
+  "back": "installs the system packages listed in package.xml"
+ },
+ "l5/ci:glossary.4.0": {
+  "status": "pass-alt",
+  "en": "colcon test-result",
+  "my": "colcon test-result",
+  "back": "colcon test-result"
+ },
+ "l5/ci:glossary.4.1": {
+  "status": "pass-alt",
+  "en": "prints the test results and fails if any test failed",
+  "my": "test ရလဒ်တွေကို ပြပြီး test တစ်ခုခု ကျရင် fail ဖြစ်တယ်",
+  "back": "shows the test results and fails if any test failed"
+ },
+ "l5/port:learn": {
+  "status": "pass-alt",
+  "en": "You will: read the same wall-follower code in Python and in C++, see the five things a port changes, and find the one line that breaks if you copy Python too literally.",
+  "my": "လုပ်ရမှာက- wall-follower ကုဒ် တစ်ခုတည်းကို Python နဲ့ရော C++ နဲ့ပါ ဖတ်ပြီး port တစ်ခုက ပြောင်းလဲတဲ့ အချက် 5 ချက်ကို ကြည့်ကာ Python ကို စာသားအတိုင်း တိုက်ရိုက် ကူးရင် ပျက်သွားမယ့် စာကြောင်း တစ်ကြောင်းကို ရှာပါ။",
+  "back": "What to do: read one single wall-follower code in both Python and C++, look at the 5 things that change in a port, and find the one line that would break if Python were copied literally/excessively word for word.",
+  "note": "one-phrase wording fix after blind check (meaning matched)"
+ },
+ "l5/port:setup": {
+  "status": "pass-alt",
+  "en": "The wall follower from 3.2 exists twice, in Python and in C++. A bearing is a direction around the robot; a ray is one laser reading; angle_min is the direction of ray 0. Both ask the laser one question: \"which ray points at this bearing?\" Pick a bearing and compare the ray each version reads.",
+  "my": "3.2 က wall follower က Python နဲ့ C++ 2 မျိုး ရှိပါတယ်။ bearing ဆိုတာ စက်ရုပ်ပတ်လည်က ဦးတည်ရာ တစ်ခုပါ၊ ray ဆိုတာ laser ဖတ်ချက် တစ်ခုပါ၊ angle_min က ray 0 ရဲ့ ဦးတည်ရာပါ။ အဲဒီ version တွေက laser ကို မေးခွန်း တစ်ခုတည်း မေးပါတယ်- \"ဒီ bearing ကို ဘယ် ray က ညွှန်နေလဲ။\" bearing တစ်ခု ရွေးပြီး version တစ်ခုစီ ဖတ်တဲ့ ray ကို နှိုင်းယှဉ်ပါ။",
+  "back": "The wall follower in 3.2 exists in both Python and C++. A bearing is one direction around the robot, a ray is one laser reading, angle_min is the direction of ray 0. Both ask the laser one single question: \"Which ray points at this bearing?\" Pick a bearing and compare the ray each version reads.",
+  "note": "one-phrase wording fix after blind check (meaning matched)"
+ },
+ "l5/port:bearing": {
+  "status": "pass-alt",
+  "en": "Bearing (°, 0 = front, −90 = right)",
+  "my": "Bearing (°, 0 = ရှေ့၊ −90 = ညာ)",
+  "back": "Bearing (°, 0 = front, −90 = right)"
+ },
+ "l5/port:layout": {
+  "status": "pass-alt",
+  "en": "Scan layout",
+  "my": "Scan layout",
+  "back": "Scan layout"
+ },
+ "l5/port:layoutName.lds": {
+  "status": "pass-alt",
+  "en": "angle_min = 0 (LDS-01)",
+  "my": "angle_min = 0 (LDS-01)",
+  "back": "angle_min = 0 (LDS-01)"
+ },
+ "l5/port:layoutName.half": {
+  "status": "pass-alt",
+  "en": "angle_min = −π",
+  "my": "angle_min = −π",
+  "back": "angle_min = −π"
+ },
+ "l5/port:py": {
+  "status": "pass-alt",
+  "en": "Python reads ray",
+  "my": "Python ဖတ်တဲ့ ray",
+  "back": "Ray Python reads"
+ },
+ "l5/port:cpp": {
+  "status": "pass-alt",
+  "en": "C++ reads ray",
+  "my": "C++ ဖတ်တဲ့ ray",
+  "back": "Ray C++ reads"
+ },
+ "l5/port:same": {
+  "status": "pass-alt",
+  "en": "Same ray: the port behaves like the original.",
+  "my": "ray တူတယ်- port က မူရင်းလိုပဲ အလုပ်လုပ်ပါတယ်။",
+  "back": "Rays are the same: the port works just like the original."
+ },
+ "l5/port:differ": {
+  "status": "pass-alt",
+  "en": "Different rays: the C++ reads the wrong part of the scan.",
+  "my": "ray မတူဘူး- C++ က scan ရဲ့ မှားတဲ့ အပိုင်းကို ဖတ်နေပါတယ်။",
+  "back": "Rays differ: C++ is reading the wrong part of the scan."
+ },
+ "l5/port:diffTitle": {
+  "status": "pass-alt",
+  "en": "What the port changes",
+  "my": "port က ဘာတွေ ပြောင်းလဲလဲ",
+  "back": "What changes in the port"
+ },
+ "l5/port:diff.types.0": {
+  "status": "pass-alt",
+  "en": "Types",
+  "my": "Type",
+  "back": "Type"
+ },
+ "l5/port:diff.types.1": {
+  "status": "pass-alt",
+  "en": "Python decides types while running. C++ writes them: double for angles, std::size_t for an index.",
+  "my": "Python က run နေစဉ်မှာ type တွေကို ဆုံးဖြတ်ပါတယ်။ C++ မှာတော့ ရေးထားရပါတယ်- ထောင့်အတွက် double၊ index အတွက် std::size_t ပါ။",
+  "back": "Python decides types while running. In C++ they must be written out: double for angles, std::size_t for indexes."
+ },
+ "l5/port:diff.wrap.0": {
+  "status": "pass-alt",
+  "en": "The wrap",
+  "my": "ပတ်ပြန်လည်တာ",
+  "back": "Wrapping around"
+ },
+ "l5/port:diff.wrap.1": {
+  "status": "pass-alt",
+  "en": "Python % never gives a negative number. C++ std::fmod keeps the minus sign, so the C++ adds 2π back by hand.",
+  "my": "Python ရဲ့ % က အနုတ်ကိန်း ဘယ်တော့မှ မပေးပါဘူး။ C++ ရဲ့ std::fmod က အနုတ်လက္ခဏာကို ထိန်းထားလို့ C++ က 2π ကို လက်နဲ့ ပြန်ပေါင်းပေးရပါတယ်။",
+  "back": "Python's % never gives a negative number. C++'s std::fmod keeps the negative sign, so C++ must add 2π back by hand."
+ },
+ "l5/port:diff.owner.0": {
+  "status": "pass-alt",
+  "en": "Who owns the scan",
+  "my": "scan ကို ဘယ်သူ ပိုင်လဲ",
+  "back": "Who owns the scan"
+ },
+ "l5/port:diff.owner.1": {
+  "status": "pass-alt",
+  "en": "Python keeps a reference. C++ keeps a ConstSharedPtr, a shared handle: the 360 numbers are never copied. std::move() only skips one reference-count increment and its decrement.",
+  "my": "Python က reference တစ်ခု ကိုင်ထားပါတယ်။ C++ က ConstSharedPtr ဆိုတဲ့ မျှသုံးတဲ့ handle တစ်ခု ကိုင်ထားပါတယ်- ကိန်းဂဏန်း 360 ခုကို ဘယ်တော့မှ မကူးပါဘူး။ std::move() က reference-count တစ်ကြိမ် တိုးတာနဲ့ သူ့ လျှော့တာကိုပဲ ကျော်ပေးပါတယ်။",
+  "back": "Python holds one reference. C++ holds a shared handle called ConstSharedPtr: the 360 numbers are never copied. std::move() skips just one reference-count increment and its decrement."
+ },
+ "l5/port:diff.qos.0": {
+  "status": "pass-alt",
+  "en": "QoS",
+  "my": "QoS",
+  "back": "QoS"
+ },
+ "l5/port:diff.qos.1": {
+  "status": "pass-alt",
+  "en": "QoS = delivery settings for a topic (taught in 5.4). Python builds a best-effort profile field by field. C++ uses the ready-made rclcpp::SensorDataQoS().",
+  "my": "QoS = topic တစ်ခုအတွက် ပို့ဆောင်မှု setting တွေပါ (5.4 မှာ သင်ပါမယ်)။ Python က best-effort profile ကို field တစ်ခုချင်း တည်ဆောက်ပါတယ်။ C++ က အသင့်လုပ်ထားတဲ့ rclcpp::SensorDataQoS() ကို သုံးပါတယ်။",
+  "back": "QoS = delivery settings for one topic (taught in 5.4). Python builds the best-effort profile field by field. C++ uses the ready-made rclcpp::SensorDataQoS()."
+ },
+ "l5/port:diff.build.0": {
+  "status": "pass-alt",
+  "en": "Build step",
+  "my": "Build အဆင့်",
+  "back": "Build step"
+ },
+ "l5/port:diff.build.1": {
+  "status": "pass-alt",
+  "en": "Python: an entry point in setup.py, no compile. C++: add_executable in CMakeLists.txt, compiled by colcon build.",
+  "my": "Python- setup.py ထဲမှာ entry point တစ်ခု၊ compile မလုပ်ပါဘူး။ C++- CMakeLists.txt ထဲမှာ add_executable၊ colcon build က compile လုပ်ပါတယ်။",
+  "back": "Python: one entry point in setup.py, no compiling. C++: add_executable in CMakeLists.txt, colcon build compiles."
+ },
+ "l5/port:breakTitle": {
+  "status": "pass-alt",
+  "en": "Break it",
+  "my": "ဖျက်ကြည့်",
+  "back": "Delete it"
+ },
+ "l5/port:breakBtn": {
+  "status": "pass-alt",
+  "en": "Delete the 3 lines that add 2π back (C++)",
+  "my": "2π ပြန်ပေါင်းတဲ့ စာကြောင်း 3 ကြောင်းကို ဖျက် (C++)",
+  "back": "Delete the 3 lines that add 2π back (C++)"
+ },
+ "l5/port:fixBtn": {
+  "status": "pass-alt",
+  "en": "Put them back",
+  "my": "ပြန်ထည့်",
+  "back": "Put back"
+ },
+ "l5/port:breakNote": {
+  "status": "pass-alt",
+  "en": "Now try a bearing on the right side (below 0°) with angle_min = 0. A negative offset turned into std::size_t wraps around 2^64, so the C++ reads a ray 16 away (16°) from the one you asked for: 2^64 is 16 more than a multiple of 360. With angle_min = −π the bug hides: the offset is never negative. That is why the repo's gtest runs both layouts.",
+  "my": "အခု angle_min = 0 နဲ့ ညာဘက်ခြမ်း (0° အောက်) က bearing တစ်ခုကို စမ်းကြည့်ပါ။ std::size_t အဖြစ် ပြောင်းလိုက်တဲ့ အနုတ် offset က 2^64 ပတ်ပတ်လည် ပြန်လှည့်သွားလို့ C++ က သင်တောင်းတဲ့ ray ကနေ 16 ခု (16°) ကွာတဲ့ ray ကို ဖတ်ပါတယ်- 2^64 က 360 ရဲ့ ဆတိုးကိန်း တစ်ခုထက် 16 ပိုလို့ပါ။ angle_min = −π နဲ့ဆိုရင် bug က ပုန်းနေပါတယ်- offset က ဘယ်တော့မှ အနုတ် မဖြစ်ပါဘူး။ ဒါကြောင့် repo ရဲ့ gtest က layout နှစ်မျိုးလုံးကို run ပါတယ်။",
+  "back": "Now try a bearing on the right side (below 0°) with angle_min = 0. The negative offset converted to std::size_t wraps around 2^64, so C++ reads a ray 16 rays (16°) away from the ray you asked for: because 2^64 is 16 more than a multiple of 360. With angle_min = −π the bug is hidden: the offset is never negative. That is why the repo's gtest runs both layouts."
+ },
+ "l5/port:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: with the 3 lines deleted, predict before you look: name one bearing where Python and C++ still agree, and one where they do not. A wrong guess starts the count again.",
+  "my": "စိန်ခေါ်မှု- စာကြောင်း 3 ကြောင်း ဖျက်ထားတုန်း မကြည့်ခင် ခန့်မှန်းပါ- Python နဲ့ C++ တူနေသေးတဲ့ bearing တစ်ခုနဲ့ မတူတဲ့ bearing တစ်ခုကို ပြောပါ။ မှားခန့်မှန်းရင် အရေအတွက်က အစက ပြန်စပါတယ်။",
+  "back": "Challenge: with the 3 lines deleted, before looking, predict: name one bearing where Python and C++ still match and one where they differ. If you guess wrong the count restarts from the beginning."
+ },
+ "l5/port:predictAsk": {
+  "status": "pass-alt",
+  "en": "Predict first: at this bearing, do they",
+  "my": "အရင် ခန့်မှန်းပါ- ဒီ bearing မှာ သူတို့",
+  "back": "Predict first: at this bearing they"
+ },
+ "l5/port:guessRight": {
+  "status": "pass-alt",
+  "en": "Your prediction was right.",
+  "my": "သင့် ခန့်မှန်းချက် မှန်ပါတယ်။",
+  "back": "Your prediction is correct."
+ },
+ "l5/port:guessWrong": {
+  "status": "pass-alt",
+  "en": "Wrong prediction: the count starts again. Check the sign of the offset.",
+  "my": "ခန့်မှန်းချက် မှားပါတယ်- အရေအတွက်က အစက ပြန်စပါတယ်။ offset ရဲ့ အပေါင်း/အနုတ် လက္ခဏာကို စစ်ပါ။",
+  "back": "Prediction wrong: the count restarts from the beginning. Check the positive/negative sign of the offset."
+ },
+ "l5/port:agreeFound": {
+  "status": "pass-alt",
+  "en": "agree",
+  "my": "တူတယ်",
+  "back": "match"
+ },
+ "l5/port:disagreeFound": {
+  "status": "pass-alt",
+  "en": "disagree",
+  "my": "မတူဘူး",
+  "back": "differ"
+ },
+ "l5/port:solved": {
+  "status": "pass-alt",
+  "en": "Solved: the bug only shows for some inputs, so one passing example proves nothing. Test both sides of zero.",
+  "my": "အောင်မြင်ပြီ- bug က input တချို့မှာပဲ ပေါ်လို့ အောင်တဲ့ ဥပမာ တစ်ခုက ဘာမှ မသက်သေပြပါဘူး။ 0 ရဲ့ ဘက်နှစ်ဖက်လုံးကို test လုပ်ပါ။",
+  "back": "Passed: the bug shows up only on some inputs, so one passing example proves nothing. Test both sides of 0."
+ },
+ "l5/port:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet: you need one bearing of each kind.",
+  "my": "မရသေးပါ- အမျိုးအစား တစ်ခုစီက bearing တစ်ခုစီ လိုပါတယ်။",
+  "back": "Not yet: each type needs one bearing each."
+ },
+ "l5/port:valid": {
+  "status": "pass-alt",
+  "en": "Both versions also throw away bad readings the same way: NaN, inf, or outside range_min–range_max from the scan message (0.12–3.5 m on the LDS-01) becomes inf.",
+  "my": "version နှစ်ခုလုံးက မကောင်းတဲ့ ဖတ်ချက်တွေကို နည်းတူ လွှင့်ပစ်ပါတယ်- NaN၊ inf၊ ဒါမှမဟုတ် scan message ရဲ့ range_min–range_max (LDS-01 မှာ 0.12–3.5 m) အပြင်ဘက်က တန်ဖိုးက inf ဖြစ်သွားပါတယ်။",
+  "back": "Both versions throw away bad readings the same way: NaN, inf, or a value outside the scan message's range_min–range_max (0.12–3.5 m for LDS-01) becomes inf."
+ },
+ "l5/port:readout.offset": {
+  "status": "pass-alt",
+  "en": "C++ offset (rad)",
+  "my": "C++ offset (rad)",
+  "back": "C++ offset (rad)"
+ },
+ "l5/port:readout.raw": {
+  "status": "pass-alt",
+  "en": "index before % 360",
+  "my": "% 360 မလုပ်ခင် index",
+  "back": "Index before % 360"
+ },
+ "l5/port:repoPy": {
+  "status": "pass-alt",
+  "en": "Python",
+  "my": "Python",
+  "back": "Python"
+ },
+ "l5/port:repoCpp": {
+  "status": "pass-alt",
+  "en": "C++",
+  "my": "C++",
+  "back": "C++"
+ },
+ "l5/port:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "port",
+  "my": "port",
+  "back": "port"
+ },
+ "l5/port:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "rewrite the same program in another language, keeping its behaviour",
+  "my": "ပရိုဂရမ် တစ်ခုတည်းကို သူ့အပြုအမူ မပြောင်းဘဲ တခြား ဘာသာစကားနဲ့ ပြန်ရေးတာ",
+  "back": "Rewriting a single program in another language without changing its behavior"
+ },
+ "l5/port:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "std::fmod",
+  "my": "std::fmod",
+  "back": "std::fmod"
+ },
+ "l5/port:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "C++ remainder of a division; keeps the sign of the first number",
+  "my": "C++ ရဲ့ စားလို့ ကျန်တဲ့ အကြွင်း၊ ပထမ ကိန်းရဲ့ လက္ခဏာကို ထိန်းထားတယ်",
+  "back": "C++'s division remainder, keeps the sign of the first number"
+ },
+ "l5/port:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "std::size_t",
+  "my": "std::size_t",
+  "back": "std::size_t"
+ },
+ "l5/port:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "C++ whole number that cannot be negative; −1 becomes a huge number",
+  "my": "အနုတ် မဖြစ်နိုင်တဲ့ C++ ကိန်းပြည့်၊ −1 က အလွန်ကြီးတဲ့ ကိန်း ဖြစ်သွားတယ်",
+  "back": "A C++ integer that cannot be negative; −1 becomes a very large number"
+ },
+ "l5/port:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "ConstSharedPtr",
+  "my": "ConstSharedPtr",
+  "back": "ConstSharedPtr"
+ },
+ "l5/port:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "a shared, read-only handle to a message; the message is freed when the last handle goes",
+  "my": "message တစ်ခုကို မျှသုံးပြီး ဖတ်လို့ပဲ ရတဲ့ handle၊ နောက်ဆုံး handle ပျောက်သွားရင် message ကို ရှင်းထုတ်တယ်",
+  "back": "A handle that shares one message and is read-only; when the last handle goes away the message is cleaned up"
+ },
+ "l5/port:glossary.4.0": {
+  "status": "pass-alt",
+  "en": "gtest",
+  "my": "gtest",
+  "back": "gtest"
+ },
+ "l5/port:glossary.4.1": {
+  "status": "pass-alt",
+  "en": "GoogleTest, the C++ test framework colcon test runs",
+  "my": "GoogleTest၊ colcon test က run တဲ့ C++ test framework",
+  "back": "GoogleTest, the C++ test framework that colcon test runs"
+ },
+ "l5b/fieldfail:anim.mascot": {
+  "status": "pass-alt",
+  "en": "Debug buddy robot: happy at a right cause, wobbly at a wrong one",
+  "my": "အမှားရှာ အဖော် စက်ရုပ်- အကြောင်းရင်း မှန်ရင် ပျော်တယ်၊ မှားရင် ယိမ်းယိုင်တယ်",
+  "back": "Error-finding companion robot: if the cause is correct, it is happy; if wrong, it sways unsteadily.",
+  "note": "pre-translated from anim 752dc28 before it reached rc; ships when the English is in the tree"
+ },
+ "l5/debug:anim.mascot": {
+  "status": "pass-alt",
+  "en": "Debug buddy robot: thinks over each clue, happy when one fault is left, wobbly when a tool told nothing new",
+  "my": "အမှားရှာ အဖော် စက်ရုပ်- သဲလွန်စ တစ်ခုစီကို စဉ်းစားပါတယ်၊ ချို့ယွင်းချက် တစ်ခုပဲ ကျန်ရင် ပျော်ပါတယ်၊ tool တစ်ခုက ဘာအသစ်မှ မပြောရင် ယိမ်းယိုင်ပါတယ်",
+  "back": "Debug buddy robot: it considers each clue, is happy if only one fault is left, wobbles if a tool says nothing new.",
+  "note": "pre-translated from anim d9d6df7 (cg/r101-anim5) before it reached rc; goes into l5.debug.DEBUG_STRINGS.json anim.mascot when the English is in the tree"
  }
 }
