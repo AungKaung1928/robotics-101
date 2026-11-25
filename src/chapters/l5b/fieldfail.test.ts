@@ -13,6 +13,12 @@ describe('5.6 failures', () => {
     const pos = FAILS.map((f, i) => options(i).indexOf(f.id))
     expect(new Set(pos).size).toBe(4)
   })
+  it('no fixed cycle a reader can learn, and a new seed gives a new layout', () => {
+    const pos = (seed: number) => FAILS.map((f, i) => options(i, seed).indexOf(f.id)).join(',')
+    expect(pos(0)).not.toBe(FAILS.map((_, i) => i % 4).join(','))
+    expect(new Set([0, 1, 2, 3, 4, 5].map(pos)).size).toBeGreaterThan(1)
+    FAILS.forEach((f, i) => expect(new Set(options(i, 3))).toEqual(new Set(options(i))))
+  })
   it('links point at the cited line', () => expect(url(FAILS[5])).toBe('https://github.com/AungKaung1928/moveit_pickplace_demo/blob/main/README.md#L42'))
   it('challenge needs every card right on the first try', () => {
     const all = Object.fromEntries(FAILS.map((f) => [f.id, true]))
