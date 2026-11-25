@@ -82,7 +82,7 @@ export default function Overview({ t }: { t: Strings }) {
     <>
     <main className="overview">
       <div className="ov-text">
-        <p className="eyebrow"><a href={SOURCE_REPO}>{STACK.join(' · ')}</a></p>
+        <p className="eyebrow">{t.stackOf} <a href={SOURCE_REPO}>{STACK.join(' · ')}</a></p>
         <h1>{t.title}</h1>
         <p className="lede">{t.lede}</p>
         <p className="cta"><a className="btn" href={`#/0/${LEVELS[0][0].id}`}>{t.startR101} →</a> <a className="btn btn-2" href={`#/ep/${EP_CHAPTERS[0].id}`}>{t.levels.ep} →</a></p>
