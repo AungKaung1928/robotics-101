@@ -2,7 +2,7 @@
 export const FIELDFAIL_STRINGS = {
   en: {
     title: 'Failures and how they were found',
-    learn: 'You will learn: most robot bugs show up as strange behaviour, not as an error message. You read the symptom, guess the cause, then prove it: the symptom is what the world sees, the cause is inside the robot\'s view. These six are written down in the author\'s own public repos; all happened in simulation (Gazebo, MoveIt), none on a real robot.',
+    learn: 'You will learn: most robot bugs show up as strange behaviour, not as an error message. You read the symptom, guess the cause, then prove it: the symptom is what you see the robot do; the cause is in the code or data behind it. These six are written down in the author\'s own public repos; all happened in simulation (Gazebo, MoveIt), none on a real robot.',
     everyday: 'Everyday: a car that pulls to one side. The symptom is the pull; the cause might be tyre pressure, alignment or brakes. A mechanic checks before replacing parts.',
     ask: 'Which cause fits this symptom?',
     symptom: 'Symptom', cause: 'Cause', fix: 'Fix', right: 'Right.', wrong: 'Not this one: try again.',
@@ -27,7 +27,7 @@ export const FIELDFAIL_STRINGS = {
   },
   ja: {
     title: '失敗と、その見つけ方',
-    learn: '学ぶこと：ロボットのバグの多くはエラーメッセージではなく、おかしな動きとして現れる。症状を読み、原因を推測し、確かめる：症状は世界から見えるもの、原因はロボットの見方の中にある。ここの6つは作者自身の公開リポジトリに書かれたもので、すべてシミュレーション（Gazebo、MoveIt）で起き、実機ではない。',
+    learn: '学ぶこと：ロボットのバグの多くはエラーメッセージではなく、おかしな動きとして現れる。症状を読み、原因を推測し、確かめる：症状はロボットがすることとして見えるもの、原因はその裏のコードやデータにある。ここの6つは作者自身の公開リポジトリに書かれたもので、すべてシミュレーション（Gazebo、MoveIt）で起き、実機ではない。',
     everyday: '身近な例：片側に流れる車。症状は流れること、原因は空気圧かアライメントかブレーキかもしれない。整備士は部品を替える前に確かめる。',
     ask: 'この症状に合う原因はどれ？',
     symptom: '症状', cause: '原因', fix: '修正', right: '正解。', wrong: 'これではない：もう一度。',
