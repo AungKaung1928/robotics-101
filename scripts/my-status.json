@@ -8671,6 +8671,6 @@
   "en": "Example project, its own setup:",
   "my": "နမူနာ project၊ သူ့ကိုယ်ပိုင် setup-",
   "back": "Example project, its own setup:",
-  "note": "pre-translated from the lead's uncommitted cg/r101-tpl worktree (src/i18n.ts:18); goes into core.json when the English is committed and in the tree"
+  "note": "live in core.json since cg/r101-tpl 29b2529"
  }
 }
