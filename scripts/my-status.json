@@ -8665,5 +8665,12 @@
   "my": "QoS အဖော် စက်ရုပ်- နောက်ကျမှ စတဲ့ RViz ဆီ မြေပုံ ရောက်ရင် ပျော်ပါတယ်၊ ချိတ်ဆက်မှု တိတ်တဆိတ် ပြတ်သွားရင် ယိမ်းယိုင်ပါတယ်",
   "back": "QoS companion robot: happy when the map reaches an RViz that started late, wobbles if the connection silently drops",
   "note": "pre-translated from cg/r101-anim5 before it reached rc; goes into the chapter overlay when the English is in the tree"
+ },
+ "core:stackOf": {
+  "status": "pass-alt",
+  "en": "Example project, its own setup:",
+  "my": "နမူနာ project၊ သူ့ကိုယ်ပိုင် setup-",
+  "back": "Example project, its own setup:",
+  "note": "pre-translated from the lead's uncommitted cg/r101-tpl worktree (src/i18n.ts:18); goes into core.json when the English is committed and in the tree"
  }
 }
