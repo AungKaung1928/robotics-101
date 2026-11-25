@@ -1,0 +1,4 @@
+/* 5.4: a kept map lands in RViz's box when the run ends: a short pop from 0.92 (as the other Level-5 marks), staggered left to right. */
+.qos-map-in { transform-box: fill-box; transform-origin: center; animation: qos-map-in 0.35s cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+@keyframes qos-map-in { from { transform: scale(0.92); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .qos-map-in { animation: none; } }
