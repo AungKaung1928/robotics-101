@@ -7,6 +7,7 @@ import Slider from '../../components/Slider'
 import { stringsFor, type Strings } from '../../i18n'
 import { DEFAULT_DEPTH, DEFAULT_QOS, MAPS, N, challengeOk, connected, fates, lateJoinerGets, received, type Dur, type Qos, type Rel } from './qos'
 import { QOS_STRINGS } from './qos.strings'
+import '../../scenarios/qoslate.css'
 import '../l1/l1.css'
 import '../l2/l2.css'
 import Gloss from '../l1/Gloss'
@@ -74,7 +75,7 @@ export default function QosChapter({ t }: { t: Strings }) {
           <text className="legend" x={X0 - 10} y={28}>RViz</text>
           {[...Array(MAPS).keys()].map((i) => {
             const x = X0 + 60 + i * 36, kept = now >= END && i >= MAPS - lateNow // keep last N = the newest N maps
-            return <rect key={i} x={x} y={10} width={24} height={24} rx={5} className={kept ? 'dot' : undefined} fill={kept ? undefined : 'none'} stroke="var(--rule)" strokeWidth={2} strokeDasharray={kept ? undefined : '4 3'} opacity={kept && i < MAPS - 1 ? 0.4 : undefined} data-kept={kept} />
+            return <rect key={i} x={x} y={10} width={24} height={24} rx={5} className={kept ? 'dot qos-map-in' : undefined} style={kept ? { animationDelay: `${(i - (MAPS - lateNow)) * 0.12}s` } : undefined} fill={kept ? undefined : 'none'} stroke="var(--rule)" strokeWidth={2} strokeDasharray={kept ? undefined : '4 3'} opacity={kept && i < MAPS - 1 ? 0.4 : undefined} data-kept={kept} />
           })}
         </svg>
         <Player t={now} setT={setTS} end={END} events={EVENTS} labels={s.anim.steps} speed={1} autoplay={!still()} s={t}
