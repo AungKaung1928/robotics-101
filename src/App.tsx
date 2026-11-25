@@ -58,7 +58,7 @@ export default function App() {
     const on = (e: KeyboardEvent) => {
       if ((e.target as HTMLElement).tagName === 'INPUT') return // arrows move the slider there
       if (e.ctrlKey || e.metaKey || e.altKey) return // leave browser shortcuts alone
-      const to = keyPage(e.key, route)
+      const to = keyPage(e.key, location.hash)
       if (to) location.hash = `#/${to}`
     }
     addEventListener('keydown', on)
