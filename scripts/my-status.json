@@ -7577,11 +7577,10 @@
   "back": "error"
  },
  "l3/wall:glossary.1.1": {
-  "status": "needs-human",
+  "status": "pass-alt",
   "en": "what you have minus what you want: here distance - 0.5 m",
-  "my": "ရှိတာ နှုတ် လိုချင်တာ- ဒီမှာ အကွာအဝေး - 0.5 m",
-  "back": "Subtract what is there from what is wanted: here distance - 0.5 m",
-  "note": "blind back-translation reversed the subtraction; redraft next run"
+  "my": "လက်ရှိ တန်ဖိုးထဲက လိုချင်တဲ့ တန်ဖိုးကို နှုတ်တာ- ဒီမှာ အကွာအဝေး - 0.5 m",
+  "back": "Subtracting the wanted value from the current value: here distance - 0.5 m"
  },
  "l3/wall:glossary.2.0": {
   "status": "pass-alt",
@@ -7606,5 +7605,240 @@
   "en": "steer on where the robot will be, so it brakes before it arrives",
   "my": "စက်ရုပ် ရောက်မယ့် နေရာကို ကြည့်ပြီး ထိန်းတာ၊ ဒါမှ မရောက်ခင် အရှိန်လျှော့နိုင်တယ်",
   "back": "Control by looking at where the robot will arrive, so that it can slow down before arriving"
+ },
+ "l4/patrol:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: a patrol is a small program on top of Nav2. It sends one goal at a time, waits for the result, and decides what to do next.",
+  "my": "သင်ယူရမှာက- patrol ဆိုတာ Nav2 အပေါ်မှာ run တဲ့ ပရိုဂရမ် အသေးလေး တစ်ခုပါ။ တစ်ကြိမ်မှာ goal တစ်ခုပဲ ပို့ပြီး ရလဒ်ကို စောင့်ကာ နောက်ဘာလုပ်မလဲ ဆုံးဖြတ်ပါတယ်။",
+  "back": "What you learn: a patrol is a small program that runs on top of Nav2. It sends just one goal at a time, waits for the result, and decides what to do next."
+ },
+ "l4/patrol:everyday": {
+  "status": "pass-alt",
+  "en": "Everyday: a security guard's round. A locked door does not end the round: try a few times, note it, go on.",
+  "my": "နေ့စဉ်ဘဝမှာ- လုံခြုံရေး အစောင့်တစ်ယောက် ကင်းလှည့်တာမျိုးပါ။ ဖွင့်လို့မရတဲ့ တံခါး တစ်ချပ်ကြောင့် ကင်းလှည့်တာ မရပ်ပါဘူး- အကြိမ်အနည်းငယ် ကြိုးစား၊ မှတ်ထား၊ ဆက်သွားပါ။",
+  "back": "In daily life: it is like a security guard doing a patrol. One door that cannot be opened does not stop the patrol: try a few times, make a note, keep going."
+ },
+ "l4/patrol:lines.0": {
+  "status": "pass-alt",
+  "en": "Seven named points from a YAML file, visited in order, then back to the first (loop on).",
+  "my": "YAML ဖိုင်ထဲက နာမည်ပါတဲ့ နေရာ 7 ခုကို အစဉ်လိုက် သွားပြီး ပထမ နေရာကို ပြန်သွားပါတယ် (loop ဖွင့်ထားရင်)။",
+  "back": "It goes through the 7 named places from the YAML file in order and goes back to the first place (if loop is enabled)."
+ },
+ "l4/patrol:lines.1": {
+  "status": "pass-alt",
+  "en": "Goal reached: wait 2.0 s, send the next one. Goal failed: try the same point again, at most 3 more times, then skip it.",
+  "my": "Goal ရောက်ရင်- 2.0 s စောင့်ပြီး နောက်တစ်ခု ပို့ပါတယ်။ Goal မအောင်မြင်ရင်- အဲဒီ နေရာကိုပဲ အများဆုံး 3 ကြိမ် ထပ်ကြိုးစားပြီး ပြီးရင် ကျော်သွားပါတယ်။",
+  "back": "When the goal is reached: wait 2.0 s and send the next one. When the goal fails: try that same place again at most 3 times, and after that skip it."
+ },
+ "l4/patrol:lines.2": {
+  "status": "pass-alt",
+  "en": "Retry off: the first failure ends the whole patrol.",
+  "my": "Retry ပိတ်ထားရင်- ပထမဆုံး မအောင်မြင်မှုက patrol တစ်ခုလုံးကို ရပ်စေပါတယ်။",
+  "back": "If retry is off: the first failure stops the whole patrol."
+ },
+ "l4/patrol:blocked": {
+  "status": "pass-alt",
+  "en": "blocked point",
+  "my": "ပိတ်ဆို့ထားတဲ့ နေရာ",
+  "back": "Blocked place"
+ },
+ "l4/patrol:none": {
+  "status": "pass-alt",
+  "en": "none",
+  "my": "မရှိပါ",
+  "back": "None"
+ },
+ "l4/patrol:retry": {
+  "status": "pass-alt",
+  "en": "retry_on_failure",
+  "my": "retry_on_failure",
+  "back": "retry_on_failure"
+ },
+ "l4/patrol:loop": {
+  "status": "pass-alt",
+  "en": "loop_enabled",
+  "my": "loop_enabled",
+  "back": "loop_enabled"
+ },
+ "l4/patrol:on": {
+  "status": "pass-alt",
+  "en": "on",
+  "my": "ဖွင့်",
+  "back": "On (open)"
+ },
+ "l4/patrol:off": {
+  "status": "pass-alt",
+  "en": "off",
+  "my": "ပိတ်",
+  "back": "Off (closed)"
+ },
+ "l4/patrol:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: block point_3, retry off",
+  "my": "ဖျက်ကြည့်- point_3 ကို ပိတ်ဆို့၊ retry ပိတ်",
+  "back": "Try destroying/deleting it: block point_3, retry off"
+ },
+ "l4/patrol:sent": {
+  "status": "pass-alt",
+  "en": "goals sent",
+  "my": "ပို့ခဲ့တဲ့ goal",
+  "back": "Goals sent"
+ },
+ "l4/patrol:reached": {
+  "status": "pass-alt",
+  "en": "points reached",
+  "my": "ရောက်ခဲ့တဲ့ နေရာ",
+  "back": "Places reached"
+ },
+ "l4/patrol:skipped": {
+  "status": "pass-alt",
+  "en": "points skipped",
+  "my": "ကျော်ခဲ့တဲ့ နေရာ",
+  "back": "Places skipped"
+ },
+ "l4/patrol:sleep": {
+  "status": "pass-alt",
+  "en": "retry sleeps",
+  "my": "retry စောင့်ချိန်",
+  "back": "retry wait time"
+ },
+ "l4/patrol:state": {
+  "status": "pass-alt",
+  "en": "patrol",
+  "my": "patrol",
+  "back": "patrol"
+ },
+ "l4/patrol:running": {
+  "status": "pass-alt",
+  "en": "still patrolling",
+  "my": "ကင်းလှည့်နေဆဲ",
+  "back": "Still patrolling"
+ },
+ "l4/patrol:stopped": {
+  "status": "pass-alt",
+  "en": "stopped",
+  "my": "ရပ်သွားပြီ",
+  "back": "Has stopped"
+ },
+ "l4/patrol:sleepNote": {
+  "status": "pass-alt",
+  "en": "Each retry (and each 2.0 s wait at a reached point) calls time.sleep inside a callback. With rclpy's default single-threaded executor, no other callback of this node runs during that time.",
+  "my": "retry တစ်ခါစီမှာ (ရောက်ပြီးတဲ့ နေရာမှာ 2.0 s စောင့်တိုင်းမှာလည်း) callback ထဲမှာ time.sleep ကို ခေါ်ပါတယ်။ rclpy ရဲ့ default single-threaded executor နဲ့ဆိုရင် အဲဒီအချိန်အတွင်း ဒီ node ရဲ့ တခြား callback တစ်ခုမှ မ run ပါဘူး။",
+  "back": "Each retry (and with every 2.0 s wait at an already-reached place) calls time.sleep inside the callback. With rclpy's default single-threaded executor, during that time not a single other callback of this node runs.",
+  "note": "grammar fix after blind check (meaning matched); re-check in next blind batch"
+ },
+ "l4/patrol:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: point_3 is blocked, retry and loop on. How many goals are sent from the first try at point_3 until the robot reaches point_5?",
+  "my": "စိန်ခေါ်မှု- point_3 ကို ပိတ်ဆို့ထားပြီး retry နဲ့ loop ဖွင့်ထားပါတယ်။ point_3 ကို ပထမဆုံး ကြိုးစားတဲ့ အချိန်ကနေ စက်ရုပ် point_5 ရောက်တဲ့အထိ goal ဘယ်နှစ်ခု ပို့လဲ။",
+  "back": "Challenge: point_3 is blocked, and retry and loop are enabled. From the first attempt at point_3 until the robot reaches point_5, how many goals are sent?"
+ },
+ "l4/patrol:solved": {
+  "status": "pass-alt",
+  "en": "Solved:",
+  "my": "အောင်မြင်ပြီ:",
+  "back": "Succeeded:"
+ },
+ "l4/patrol:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet:",
+  "my": "မရသေးပါ:",
+  "back": "Not yet:"
+ },
+ "l4/patrol:modelNote": {
+  "status": "pass-alt",
+  "en": "Model: the code's decisions only. Driving time between points is not modelled; each step is one event.",
+  "my": "Model- ကုဒ်ရဲ့ ဆုံးဖြတ်ချက်တွေကိုပဲ ပြပါတယ်။ နေရာတွေကြား မောင်းရတဲ့ အချိန်ကို model မလုပ်ထားပါဘူး၊ အဆင့် တစ်ခုစီက event တစ်ခုပါ။",
+  "back": "Model: shows only the code's decisions. The model does not simulate the time driving between places; each step is one event."
+ },
+ "l4/patrol:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရ",
+  "back": "Terminology"
+ },
+ "l4/patrol:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "waypoint",
+  "my": "waypoint",
+  "back": "waypoint"
+ },
+ "l4/patrol:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "a named position the robot should visit",
+  "my": "စက်ရုပ် သွားရမယ့် နာမည်ပါတဲ့ နေရာ",
+  "back": "A named place the robot must go to"
+ },
+ "l4/patrol:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "goal",
+  "my": "ပန်းတိုင်",
+  "back": "goal"
+ },
+ "l4/patrol:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "one NavigateToPose request to Nav2",
+  "my": "Nav2 ဆီ ပို့တဲ့ NavigateToPose တောင်းဆိုမှု တစ်ခု",
+  "back": "One NavigateToPose request sent to Nav2"
+ },
+ "l4/patrol:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "aborted",
+  "my": "aborted",
+  "back": "aborted"
+ },
+ "l4/patrol:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "Nav2 tried and gave up on the goal",
+  "my": "Nav2 က goal ကို ကြိုးစားပြီး လက်လျှော့လိုက်တာ",
+  "back": "Nav2 tried the goal and gave up"
+ },
+ "l4/patrol:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "retry",
+  "my": "ပြန်ကြိုးစား",
+  "back": "retry"
+ },
+ "l4/patrol:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "send the same goal again after a failure",
+  "my": "မအောင်မြင်ပြီးနောက် goal အတူတူကို ထပ်ပို့တာ",
+  "back": "Sending the same goal again after failure"
+ },
+ "l4/patrol:ev.send": {
+  "status": "pass-alt",
+  "en": "goal ->",
+  "my": "goal ->",
+  "back": "goal ->"
+ },
+ "l4/patrol:ev.reached": {
+  "status": "pass-alt",
+  "en": "reached",
+  "my": "ရောက်ပြီ",
+  "back": "Arrived"
+ },
+ "l4/patrol:ev.failed": {
+  "status": "pass-alt",
+  "en": "failed, retry",
+  "my": "မအောင်မြင်၊ ထပ်ကြိုးစား",
+  "back": "Failed, try again"
+ },
+ "l4/patrol:ev.skip": {
+  "status": "pass-alt",
+  "en": "skip",
+  "my": "ကျော်",
+  "back": "Skip"
+ },
+ "l4/patrol:ev.stopEnd": {
+  "status": "pass-alt",
+  "en": "patrol complete",
+  "my": "patrol ပြီးဆုံး",
+  "back": "Patrol finished"
+ },
+ "l4/patrol:ev.stopNoRetry": {
+  "status": "pass-alt",
+  "en": "failed, retry off: patrol stops",
+  "my": "မအောင်မြင်၊ retry ပိတ်ထားလို့ patrol ရပ်",
+  "back": "Failed, retry is off so patrol stopped"
  }
 }
