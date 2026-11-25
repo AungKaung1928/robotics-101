@@ -60,7 +60,7 @@ export default function QosChapter({ t }: { t: Strings }) {
           })}
         </svg>
         <Player t={now} setT={setTS} end={END} events={EVENTS} labels={s.anim.steps} speed={1} autoplay={!still()} s={t}
-          caption={<span data-k="anim-caption">{s.anim.sent} {sentBy(now)}/{N} · {s.anim.received} {arrivedBy(fs, now)}</span>} />
+          caption={<span data-k="anim-caption">{s.anim.caption(arrivedBy(fs, now), sentBy(now))}</span>} />
         <p className="runs" data-k="caption">{s.caption(got)}</p>
       </div>
       <div className="panel">
