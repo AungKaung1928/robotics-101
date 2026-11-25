@@ -2,7 +2,7 @@
 export const QOS_STRINGS = {
   en: {
     title: 'ROS 2: QoS, when a topic stays silent',
-    learn: 'You will learn: every publisher and subscriber carries QoS settings (how hard to deliver, whether to keep old messages). If publisher and subscriber ask for incompatible settings, ROS 2 does not connect them: no exception, only a warning line in the log (rclcpp default).',
+    learn: 'You will learn: every publisher and subscriber carries QoS settings (how hard to deliver, whether to keep old messages). They are the wire between sense and think: if the settings do not fit, the scan never reaches the node. If publisher and subscriber ask for incompatible settings, ROS 2 does not connect them: no exception, only a warning line in the log (rclcpp default).',
     everyday: 'Everyday: a phone call versus a radio broadcast. A call retries until it gets through; a radio just sends, and you miss what you did not catch. A listener who insists on a call cannot listen to a radio.',
     lines: [
       'Reliable: a dropped message is sent again. Best effort: a dropped message is gone, but nothing waits for it. Default for both sides: reliable, volatile, keep last 10 (volatile and keep last are explained below).',
@@ -32,7 +32,7 @@ export const QOS_STRINGS = {
   },
   ja: {
     title: 'ROS 2：QoS、トピックが黙るとき',
-    learn: '学ぶこと：パブリッシャとサブスクライバはそれぞれ QoS 設定（どこまで確実に届けるか、古いメッセージを残すか）を持つ。両側の設定が両立しないと ROS 2 は接続しない：例外はなく、ログに警告行（rclcpp の既定）が出るだけ。',
+    learn: '学ぶこと：パブリッシャとサブスクライバはそれぞれ QoS 設定（どこまで確実に届けるか、古いメッセージを残すか）を持つ。QoS は sense と think をつなぐ線：設定が合わないとスキャンはノードに届かない。両側の設定が両立しないと ROS 2 は接続しない：例外はなく、ログに警告行（rclcpp の既定）が出るだけ。',
     everyday: '身近な例：電話とラジオ放送。電話はつながるまで再送し、ラジオは送るだけで、聞き逃した分は戻らない。電話しか受けない人はラジオを聞けない。',
     lines: [
       'reliable：落ちたメッセージを再送する。best effort：落ちたら消えるが、待つこともない。両側の既定値：reliable、volatile、keep last 10（volatile と keep last は下で説明）。',
