@@ -31,6 +31,7 @@ export const CI_STRINGS = {
       ['rosdep', 'installs the system packages listed in package.xml'],
       ['colcon test-result', 'prints the test results and fails if any test failed'],
     ] as [string, string][],
+    anim: { mascot: 'CI buddy robot: happy when you guessed the first red step, wobbly when you missed' },
   },
   ja: {
     title: 'ROS コンテナでのテスト + CI',
@@ -63,5 +64,6 @@ export const CI_STRINGS = {
       ['rosdep', 'package.xml に書かれたシステムパッケージを入れる'],
       ['colcon test-result', 'テスト結果を表示し、1 つでも失敗していれば失敗する'],
     ] as [string, string][],
+    anim: { mascot: 'CI の相棒ロボット：最初に赤くなるステップを当てると喜び、外すとふらつく' },
   },
 }
