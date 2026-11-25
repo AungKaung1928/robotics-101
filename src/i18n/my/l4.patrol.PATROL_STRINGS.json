@@ -21,7 +21,7 @@
  "state": "patrol",
  "running": "ကင်းလှည့်နေဆဲ",
  "stopped": "ရပ်သွားပြီ",
- "sleepNote": "retry တစ်ခါစီမှာ (ရောက်ပြီးတဲ့ နေရာမှာ 2.0 s စောင့်တိုင်းမှာလည်း) callback ထဲမှာ time.sleep ကို ခေါ်ပါတယ်။ rclpy ရဲ့ default single-threaded executor နဲ့ဆိုရင် အဲဒီအချိန်အတွင်း ဒီ node ရဲ့ တခြား callback တစ်ခုမှ မ run ပါဘူး။",
+ "sleepNote": "patrol စောင့်နေစဉ် တခြား ဘာကိုမှ တုံ့ပြန်လို့ မရပါဘူး။ retry တစ်ခါစီမှာ (ရောက်ပြီးတဲ့ နေရာမှာ 2.0 s စောင့်တိုင်းမှာလည်း) callback (message ဒါမှမဟုတ် timer ရောက်လာရင် ROS က run တဲ့ function) ထဲမှာ time.sleep (ခဏရပ်တာ) ကို ခေါ်ပါတယ်။ rclpy ရဲ့ default single-threaded executor (တစ်ကြိမ်မှာ callback တစ်ခုပဲ) နဲ့ဆိုရင် အဲဒီအချိန်အတွင်း ဒီ node ရဲ့ တခြား callback တစ်ခုမှ မ run ပါဘူး။",
  "challenge": "စိန်ခေါ်မှု- point_3 ကို ပိတ်ဆို့ထားပြီး retry နဲ့ loop ဖွင့်ထားပါတယ်။ point_3 ကို ပထမဆုံး ကြိုးစားတဲ့ အချိန်ကနေ စက်ရုပ် point_5 ရောက်တဲ့အထိ goal ဘယ်နှစ်ခု ပို့လဲ။ (ဖိုင်ထဲမှာ point_4 မရှိလို့ နောက်တစ်ခုက point_5 ပါ။ point_5 ကို ရောက်တဲ့ goal ကိုပါ ရေတွက်ပါ။)",
  "solved": "အောင်မြင်ပြီ:",
  "notYet": "မရသေးပါ:",

@@ -22,7 +22,7 @@
 /* Press: 0.97 at once, back on the UI spring (linear() easing set inline by Player); subtle, it is pressed often. */
 .stepper button { transition: transform 160ms ease-out; }
 @supports (transition-timing-function: linear(0, 1)) { .stepper button { transition: transform var(--spring-ms) var(--spring); } }
-.stepper button:active:not(:disabled) { transform: scale(0.97); transition-duration: 60ms; }
+.stepper button:active:not(:disabled):not([aria-disabled="true"]) { transform: scale(0.97); transition-duration: 60ms; }
 /* Scrubber at least 24 px tall: WCAG 2.2 2.5.8 pointer target (measured 16 px with the browser default). */
 .stepper .scrub { min-height: 24px; }
 /* Play icon: triangle morphs into pause bars (same command list, CSS d transition; browsers without it swap at once). */
@@ -49,4 +49,4 @@
 /* Keyboard-driven (data-kbd): the same state changes, no pops or morphs; a pointer press brings them back. */
 .stepper[data-kbd] .rail [aria-current] .dot, .stepper[data-kbd] .rate span { animation: none; }
 .stepper[data-kbd] .pp path, .stepper[data-kbd] .rail li + li::before { transition: none; }
-@media (prefers-reduced-motion: reduce) { .stepper .rail .dot, .stepper button, .stepper .rail li + li::before, .stepper .pp path { transition: none; } .stepper .rail [aria-current] .dot, .stepper .scrub-tip, .stepper .rate span { animation: none; } .stepper button:active:not(:disabled) { transform: none; } }
+@media (prefers-reduced-motion: reduce) { .stepper .rail .dot, .stepper button, .stepper .rail li + li::before, .stepper .pp path { transition: none; } .stepper .rail [aria-current] .dot, .stepper .scrub-tip, .stepper .rate span { animation: none; } .stepper button:active:not(:disabled):not([aria-disabled="true"]) { transform: none; } }

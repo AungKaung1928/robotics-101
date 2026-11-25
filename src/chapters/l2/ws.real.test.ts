@@ -23,11 +23,11 @@ describe.skipIf(!has('cmake') || !existsSync(HUMBLE))('2.6 terminal lines == rea
       const sourced = spawnSync('bash', ['-c', `source ${HUMBLE} && cmake -S ${dir} -B ${join(dir, 'b2')}`], { encoding: 'utf8', env: CLEAN })
       expect(sourced.status).toBe(0)
     } finally { rmSync(dir, { recursive: true, force: true }) }
-  })
+  }, 60000) // two real cmake configures: 2.9 s alone, past vitest's 5 s default under load
 
   it("ros2 run before the workspace is sourced: Package 'tf_explorer' not found", () => {
     const r = spawnSync('bash', ['-c', `source ${HUMBLE} && ros2 run tf_explorer tf_anomaly_detector`], { encoding: 'utf8', env: CLEAN, timeout: 30000 })
     expect(r.status).not.toBe(0)
     expect(r.stderr + r.stdout).toContain("Package 'tf_explorer' not found")
-  })
+  }, 60000) // ros2 run spawn may take up to its own 30 s timeout
 })
