@@ -6933,9 +6933,9 @@
  },
  "l5b/lifecycle:lcNote": {
   "status": "pass-alt",
-  "en": "The node never changes state by itself: a supervisor (another node or ros2 lifecycle set) sends each transition. The exception: a transition callback that fails sends it to error handling on its own. So a system can configure everything first and switch it on only when all parts are ready.",
-  "my": "node က ကိုယ့်ဘာသာ state မပြောင်းပါဘူး- supervisor (တခြား node ဒါမှမဟုတ် ros2 lifecycle set) က transition တစ်ခုချင်းစီကို ပို့ပေးပါတယ်။ ခြွင်းချက်ကတော့ မအောင်မြင်တဲ့ transition callback ပါ၊ အဲဒါက node ကို ကိုယ့်ဘာသာ အမှား ကိုင်တွယ်တဲ့ အဆင့်ဆီ ပို့ပါတယ်။ ဒါကြောင့် စနစ်တစ်ခုက အရာအားလုံးကို အရင် configure လုပ်ထားပြီး အစိတ်အပိုင်း အားလုံး အဆင်သင့် ဖြစ်မှ ဖွင့်နိုင်ပါတယ်။",
-  "back": "A node does not change state by itself: a supervisor (another node or ros2 lifecycle set) sends each transition. The exception is a failed transition callback, which sends the node to the self-handled error step. So a system can configure everything first and activate only when all parts are ready."
+  "en": "The node never changes state by itself: a supervisor (another node or ros2 lifecycle set) sends each transition. The exception is an error: the design allows one raised while active, and in rclcpp a failing transition callback sends it to error handling on its own. So a system can configure everything first and switch it on only when all parts are ready.",
+  "my": "node က ကိုယ့်ဘာသာ state မပြောင်းပါဘူး- supervisor (တခြား node ဒါမှမဟုတ် ros2 lifecycle set) က transition တစ်ခုချင်းစီကို ပို့ပေးပါတယ်။ ခြွင်းချက်ကတော့ error ပါ- design က active ဖြစ်နေစဉ် error တက်တာကို ခွင့်ပြုထားပြီး rclcpp မှာတော့ မအောင်မြင်တဲ့ transition callback က node ကို ကိုယ့်ဘာသာ အမှား ကိုင်တွယ်တဲ့ အဆင့်ဆီ ပို့ပါတယ်။ ဒါကြောင့် စနစ်တစ်ခုက အရာအားလုံးကို အရင် configure လုပ်ထားပြီး အစိတ်အပိုင်း အားလုံး အဆင်သင့် ဖြစ်မှ ဖွင့်နိုင်ပါတယ်။",
+  "back": "A node does not change state by itself: a supervisor (another node, or ros2 lifecycle set) sends each transition. The exception is error: the design allows an error while active, and in rclcpp a failed transition callback sends the node to error handling by itself. Therefore a system can configure everything first and switch it on only when all parts are ready."
  },
  "l5b/lifecycle:learn": {
   "status": "pass-alt",
