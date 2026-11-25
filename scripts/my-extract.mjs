@@ -1,8 +1,8 @@
 // Every English UI/lesson string with context, for the Burmese drafts: node scripts/my-extract.mjs <out.json>
 // Item = { id, file, out, key, role, chapter, en, ja }; out = the src/i18n/my/<out>.json file it belongs to (README there).
 // titles = { chapter id: item id of its English title } for src/i18n/my/titles.json. Sources: src/i18n.ts STRINGS and every src/chapters/*/*.strings.ts.
-// Function-valued strings (templates with numbers) are listed under "fn" with their English and Japanese source; they stay
-// English until the lead's overlay accepts Burmese templates (scripts/my-templates.json).
+// Function-valued strings (templates with numbers) are listed under "fn" with their English and Japanese source; their
+// Burmese lives in src/i18n/my/templates.ts (read by withTemplates in src/i18n.ts).
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { basename, dirname, join } from 'node:path'
@@ -18,7 +18,11 @@ async function load(rel) {
   const r = transformSync(rel, src, { lang: 'ts' })
   if (r.errors?.length) throw new Error(`${rel}: ${r.errors[0].message}`)
   // Vite's import.meta.glob (the Burmese overlays) does not exist in plain Node: the extractor only needs the English.
-  const js = r.code.replace(/import\.meta\.glob\(/g, '((..._) => ({}))(')
+  // The Burmese templates (src/i18n/my/*) are not English: stub each imported name as an empty object.
+  const js = r.code
+    .replace(/import\.meta\.glob\(/g, '((..._) => ({}))(')
+    .replace(/^import \{([^}]*)\} from ['"]\.\/i18n\/my\/[^'"]*['"];?$/gm, (_, names) =>
+      names.split(',').map((n) => n.trim()).filter(Boolean).map((n) => `const ${n} = {};`).join(' '))
   if (/^import (?!type)/m.test(js)) throw new Error(`${rel}: runtime import, extractor cannot load it`)
   const out = join(tmp, rel.replace(/[/.]/g, '_') + '.mjs')
   writeFileSync(out, js)
@@ -78,4 +82,4 @@ if (!outFile) { console.error('usage: my-extract.mjs <out.json>'); process.exit(
 writeFileSync(outFile, JSON.stringify({ items, fn, titles }, null, 1) + '\n')
 const by = {}
 for (const i of items) by[i.chapter] = (by[i.chapter] ?? 0) + 1
-console.log(`${items.length} strings, ${fn.length} templates (English for now)`, JSON.stringify(by))
+console.log(`${items.length} strings, ${fn.length} templates (Burmese in src/i18n/my/templates.ts)`, JSON.stringify(by))

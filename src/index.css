@@ -172,7 +172,8 @@ a:focus-visible .wp circle { stroke: var(--robot); stroke-width: 0.1; }
 .break { font: var(--t-small) var(--mono); padding: var(--s1) var(--s3); border: 1px dashed var(--ray); background: none; color: var(--ray); border-radius: var(--radius); cursor: pointer; }
 .stepper { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); margin-top: var(--s2); font: var(--t-small) var(--mono); }
 .stepper button { font: inherit; padding: var(--s1) var(--s3); border: 1px solid var(--rule); background: var(--surface); color: var(--ink); border-radius: var(--radius); cursor: pointer; }
-.stepper button:disabled { color: var(--ink-2); cursor: default; }
+.stepper button:disabled, .stepper button[aria-disabled="true"] { color: var(--ink-2); cursor: default; }
+.stepper button[aria-pressed='true'] { border-color: var(--robot); box-shadow: inset 0 0 0 1px var(--robot); font-weight: 600; }
 .stepper .caption { color: var(--ink-2); }
 .v-stale, .v-jump, .early { color: var(--ray); }
 .chart { width: 100%; height: auto; background: var(--surface); border: 1px solid var(--rule); }

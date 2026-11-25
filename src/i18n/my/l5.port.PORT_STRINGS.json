@@ -75,5 +75,8 @@
    "gtest",
    "GoogleTest၊ colcon test က run တဲ့ C++ test framework"
   ]
- ]
+ ],
+ "anim": {
+  "mascot": "Port အဖော် စက်ရုပ်- Python နဲ့ C++ တူမတူ ခန့်မှန်းတာ မှန်ရင် ပျော်ပါတယ်၊ မှားရင် ယိမ်းယိုင်ပါတယ်"
+ }
 }

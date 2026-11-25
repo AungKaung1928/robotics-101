@@ -1,4 +1,5 @@
 import type { ChapterId } from './lib/route'
+import { MY_TEMPLATES } from './i18n/my/templates'
 
 export type Lang = 'en' | 'ja' | 'my'
 
@@ -14,6 +15,7 @@ const en = {
   // Words inside the headline values (content/waypoints.ts); the numbers come from the tracked constants.
   wv: { jump: (m: number) => `jump > ${m} m`, obstacles: (n: number) => `${n} obstacles`, cells: (m: number) => `${m} m cells` },
   keys: 'Keys: 1–7 jump to a waypoint, ← → step.',
+  stackOf: 'Example project, its own setup:',
   pathNote: 'Patrol path drawn for this page; obstacles and walls from the Gazebo world file.',
   kind: { config: 'config', formula: 'formula', measured: 'measured' },
   back: 'Back',
@@ -199,6 +201,7 @@ const ja: typeof en = {
   drag: '← ドラッグ →',
   wv: { jump: (m: number) => `ジャンプ > ${m} m`, obstacles: (n: number) => `障害物 ${n} 個`, cells: (m: number) => `${m} m のセル` },
   keys: 'キー: 1–7 でウェイポイントへ、← → で移動。',
+  stackOf: '例のプロジェクト（その環境）：',
   pathNote: '巡回経路はこのページ用の図。障害物と壁は Gazebo のワールドファイルから。',
   kind: { config: '設定値', formula: '式', measured: '実測' },
   back: '戻る',
@@ -387,7 +390,20 @@ export function overlay<T>(base: T, o: unknown): T {
   return Object.fromEntries(Object.entries(base).map(([k, b]) => [k, overlay(b, (o as Record<string, unknown>)[k])])) as T
 }
 
-export const STRINGS = { en, ja, my: overlay(en, myOverlay('core')) }
+/** `obj` with `fn` at the dotted `path`, copying only along that path; kept only where English has a function with the same arity. */
+function setTemplate<T>(obj: T, path: string[], fn: (...a: never[]) => string): T {
+  const [k, ...rest] = path
+  const cur = (obj as Record<string, unknown>)?.[k]
+  if (rest.length === 0) return typeof cur === 'function' && cur.length === fn.length ? ({ ...obj, [k]: fn } as T) : obj
+  if (!cur || typeof cur !== 'object' || Array.isArray(cur)) return obj
+  return { ...obj, [k]: setTemplate(cur, rest, fn) } as T
+}
+/** Burmese templates (src/i18n/my/templates.ts) for the function-valued strings of `id`; English stays where none fits. */
+export function withTemplates<T>(base: T, id: string): T {
+  return Object.entries(MY_TEMPLATES[id] ?? {}).reduce((acc, [path, fn]) => setTemplate(acc, path.split('.'), fn), base)
+}
+
+export const STRINGS = { en, ja, my: withTemplates(overlay(en, myOverlay('core')), 'core') }
 export type Strings = typeof en
 
 export const langOf = (t: Strings): Lang => (t === STRINGS.ja ? 'ja' : t === STRINGS.my ? 'my' : 'en')
@@ -397,7 +413,7 @@ const built = new WeakMap<object, unknown>()
 export function stringsFor<T>(table: { en: T; ja: T }, t: Strings, id: string): T {
   const l = langOf(t)
   if (l !== 'my') return table[l]
-  if (!built.has(table)) built.set(table, overlay(table.en, myOverlay(id)))
+  if (!built.has(table)) built.set(table, withTemplates(overlay(table.en, myOverlay(id)), id))
   return built.get(table) as T
 }
 

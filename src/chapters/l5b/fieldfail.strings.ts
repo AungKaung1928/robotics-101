@@ -9,7 +9,7 @@ export const FIELDFAIL_STRINGS = {
     next: 'next failure', reset: 'start over', score: 'right on the first try',
     measured: "The wall follower's docs/DETAILS.md says failures 4 and 5 (wedged in a corner, chattering) were found by measurement, not by reading the code.",
     fails: {
-      beam: { symptom: 'A wall follower keeps saying "wall lost" every 1-2 s, then drives at the wall until collision avoidance turns it away.', cause: 'The wall distance used one side arc (a group of laser beams on one side); when the robot turned toward the wall (yaw = heading angle) the reading grew the more it turned, by 1/cos(yaw)', fix: 'Two beams solve the wall angle; the lost check uses a wider arc' },
+      beam: { symptom: 'The TurtleBot3 wall follower (3.2) keeps saying "wall lost" every 1-2 s, then drives at the wall until collision avoidance turns it away.', cause: 'The wall distance used one side arc (a group of laser beams on one side); when the robot turned toward the wall (yaw = heading angle) the reading grew the more it turned, by 1/cos(yaw)', fix: 'Two beams solve the wall angle; the lost check uses a wider arc' },
       params: { symptom: 'Changing values in the YAML file has no effect: the node behaves the same every run.', cause: 'Another included launch file declared the same launch argument name (a setting passed in when starting), so the parameter file path became empty', fix: 'Pass the file to the node explicitly' },
       index: { symptom: 'The right-wall controller reacts to things straight ahead instead of on the right.', cause: 'Negative angles were clamped (forced) to scan index 0 (the scan index says which laser ray, counted from the first), which is the front beam when angle_min = 0', fix: 'Wrap the index around a full turn, so both scan layouts work' },
       wedge: { symptom: 'Wedged into a corner, the robot spins in place: 93.6 s in one run.', cause: 'Collision avoidance could only rotate, never drive', fix: 'Back off when the turn does not clear the obstacle, only if the rear is clear' },
@@ -35,7 +35,7 @@ export const FIELDFAIL_STRINGS = {
     next: '次の失敗', reset: 'やり直す', score: '1回目で正解',
     measured: '壁沿い走行の docs/DETAILS.md によると、4 と 5（角で動けない、状態がばたつく）はコードを読んでではなく、計測で見つかった。',
     fails: {
-      beam: { symptom: '壁沿い走行ロボットが 1〜2 秒ごとに「壁を見失った」と言い、衝突回避が向きを変えるまで壁に向かって走る。', cause: '壁までの距離を横の扇形1つ（片側のレーザービームの束）で測っていた。ロボットが壁の方へ向く (yaw = 向きの角度) と、向くほど値が 1/cos(yaw) 倍に増えた', fix: '2本のビームで壁の角度を求め、見失い判定は広い扇形で行う' },
+      beam: { symptom: 'TurtleBot3 の壁沿い走行（3.2）が 1〜2 秒ごとに「壁を見失った」と言い、衝突回避が向きを変えるまで壁に向かって走る。', cause: '壁までの距離を横の扇形1つ（片側のレーザービームの束）で測っていた。ロボットが壁の方へ向く (yaw = 向きの角度) と、向くほど値が 1/cos(yaw) 倍に増えた', fix: '2本のビームで壁の角度を求め、見失い判定は広い扇形で行う' },
       params: { symptom: 'YAML ファイルの値を変えても効かない：ノードは毎回同じ動きをする。', cause: '別の launch ファイルが同じ名前の launch 引数 (起動時に渡す設定) を宣言していて、パラメータファイルのパスが空になった', fix: 'ファイルをノードに直接渡す' },
       index: { symptom: '右壁の制御が、右ではなく正面のものに反応する。', cause: '負の角度がスキャンの番号 0（最初から数えて何本目のレーザー光線か）に丸められ（押し込まれ）、angle_min = 0 ではそれが正面のビームだった', fix: '番号を1周で折り返し、どちらのスキャン配置でも正しくする' },
       wedge: { symptom: '角にはまると、その場で回り続ける：ある走行で 93.6 秒。', cause: '衝突回避は回転しかできず、前後に動けなかった', fix: '回っても障害物が消えなければ、後ろが空いているときだけ下がる' },

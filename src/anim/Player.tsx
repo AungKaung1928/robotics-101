@@ -92,9 +92,11 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
     else if (k === 'slower' || k === 'faster') { if (speedLabel) setRate((r) => shiftRate(r, k === 'faster' ? 1 : -1)) }
     else go(k === 'start' ? 0 : end, true)
   }
+  // aria-disabled, not disabled: a disabled button drops keyboard focus to <body> and the Player keys stop.
+  const atFirst = from <= Math.min(...events) + 1e-9, atLast = from >= Math.max(...events) - 1e-9
   return (
     <div className="stepper" role="group" aria-label={s.player.label} onKeyDown={onKey} onPointerDown={() => setKbd(false)} data-kbd={kbd || undefined} style={UI_STYLE}>
-      <button type="button" onClick={(e) => step(-1, still || fromKeyboard(e))} disabled={from <= Math.min(...events) + 1e-9}>← {s.back}</button>
+      <button type="button" onClick={(e) => { if (!atFirst) step(-1, still || fromKeyboard(e)) }} aria-disabled={atFirst}>← {s.back}</button>
       <button type="button" disabled={still} aria-pressed={playing} onClick={toggle}>
         {atEnd && !playing && !still
           ? <svg className="pp is-replay" viewBox="0 0 10 10" aria-hidden="true"><path d={REPLAY_D} /></svg>
@@ -106,7 +108,7 @@ export default function Player({ t, setT, end, events, speed, autoplay = false, 
           <span key={rate}>{rate}×</span>
         </button>
       )}
-      <button type="button" onClick={(e) => step(1, still || fromKeyboard(e))} disabled={from >= Math.max(...events) - 1e-9}>
+      <button type="button" onClick={(e) => { if (!atLast) step(1, still || fromKeyboard(e)) }} aria-disabled={atLast}>
         {s.next}{nextLabel && <span className="wide">: {nextLabel}</span>} →
       </button>
       <span className="scrub-wrap">

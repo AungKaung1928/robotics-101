@@ -95,19 +95,19 @@ try {
   await send('Page.enable')
   await send('Runtime.enable')
 
-  // Arrow keys walk the waypoints in patrol order and stop at the first one.
+  // Arrow keys walk the course in reading order (LEVELS.flat(), same as Next/Back), also on the newer chapters, and stop at the first one.
   await open('#/scan')
   const seen = []
   for (const k of ['ArrowRight', 'ArrowLeft', 'ArrowLeft']) {
     await press(k)
     seen.push(await js('location.hash'))
   }
-  const want = ['#/detect', '#/scan', '#/tf']
+  const want = ['#/3/wall', '#/3/scan', '#/2/drive']
   report('arrow keys: right, left, left from #/scan', seen.join() === want.join() ? [] : [`went ${seen.join(' → ')}, expected ${want.join(' → ')}`])
-  await open('#/bringup')
+  await open('#/0/meet')
   await press('ArrowLeft')
   const first = await js('location.hash')
-  report('arrow left on waypoint 1 stays there', first === '#/bringup' ? [] : [`went to ${first}`])
+  report('arrow left on the first chapter stays there', first === '#/0/meet' ? [] : [`went to ${first}`])
   await open('#/')
   await press('5')
   const jumped = await js('location.hash')
@@ -148,7 +148,7 @@ try {
   await sleep(1300)
   const mid = parseFloat((await js(caption)).slice(4))
   await sleep(7000)
-  const end = await js(`[${caption}, document.querySelectorAll('.stepper button')[2].disabled].join(' | ')`)
+  const end = await js(`[${caption}, document.querySelectorAll('.stepper button')[2].getAttribute('aria-disabled') === 'true'].join(' | ')`)
   report('bring-up Play: playhead moves past spawn (3 s) within 1.3 s, stops on patrol', [
     ...(start.startsWith('t = 0 s') ? [] : [`start ${start}`]),
     ...(mid >= 3 && mid < 24 ? [] : [`after 1.3 s t = ${mid}, expected 3 ≤ t < 24`]),
@@ -227,8 +227,12 @@ try {
     if (links !== 3) bad.push(`3 inspect: ${links} of 3 code links with a line of text`)
     await step(`document.querySelectorAll('.choices button')[0].click()`)
     if ((await js(`${q('[data-k="diag"]')}.textContent.includes('MISSING') && !${q('[data-k="challenge"]')}.textContent.startsWith('✓')`)) !== true) bad.push('4 fix: restart should leave MISSING')
+    // Only the first pick counts (be860af): the right fix as a second pick heals the chain but gives no ✓.
     await step(`document.querySelectorAll('.choices button')[2].click()`)
-    if ((await js(`!${q('[data-k="diag"]')}.textContent.includes('MISSING') && ${q('[data-k="challenge"]')}.textContent.startsWith('✓') && ${q('.tflab-cmd')}.textContent.includes('test_tf_lab_missing_link')`)) !== true) bad.push('5 verify: odom broadcaster should give all OK, ✓ and the colcon test line')
+    if ((await js(`!${q('[data-k="diag"]')}.textContent.includes('MISSING') && !${q('[data-k="challenge"]')}.textContent.startsWith('✓') && !!${q('[data-k="notfirst"]')}`)) !== true) bad.push('5 verify: right fix as second pick should heal the chain with no ✓ and the not-first note')
+    await step(`${q('[data-act="reset"]')}.click()`)
+    await step(`document.querySelectorAll('.choices button')[2].click()`)
+    if ((await js(`!${q('[data-k="diag"]')}.textContent.includes('MISSING') && ${q('[data-k="challenge"]')}.textContent.startsWith('✓') && ${q('.tflab-cmd')}.textContent.includes('test_tf_lab_missing_link')`)) !== true) bad.push('5 verify: odom broadcaster as first pick should give all OK, ✓ and the colcon test line')
     await step(`${q('[data-act="reset"]')}.click()`)
     if ((await js(`!${q('[data-k="challenge"]')}.textContent.startsWith('✓') && !${q('[data-k="diag"]')}`)) !== true) bad.push('reset: back to the broken chain')
     // STALE: 0.3 s old reads OK but 12.1 cm off; a fresh transform springs the hits back onto the wall.
