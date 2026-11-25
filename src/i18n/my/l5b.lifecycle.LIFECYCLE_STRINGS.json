@@ -19,7 +19,7 @@
   "ok": "onError အောင်မြင်",
   "fail": "onError မအောင်မြင်"
  },
- "errNote": "ErrorProcessing (အစက်ချ မျဉ်း) က transition state တစ်ခုပါ၊ အဓိက state 4 ခုထဲက တစ်ခု မဟုတ်ပါဘူး။ ERROR ပြန်ပေးတဲ့ ဒါမှမဟုတ် exception ပစ်တဲ့ transition callback က node ကို အဲဒီကို ပို့ပါတယ်။ onError က ရှင်းလင်းပေးပါတယ်- အောင်မြင်ရင် unconfigured ကို ပြန်ရောက်ပြီး မအောင်မြင်ရင် finalized မှာ ဆုံးပါတယ်။",
+ "errNote": "ErrorProcessing (အစက်ချ မျဉ်း) က transition state တစ်ခုပါ၊ အဓိက state 4 ခုထဲက တစ်ခု မဟုတ်ပါဘူး။ ERROR ပြန်ပေးတဲ့ ဒါမှမဟုတ် exception ပစ်တဲ့ transition callback က node ကို အဲဒီကို ပို့ပါတယ်။ ဒီစာမျက်နှာက error ခလုတ်က အဲဒါကို ကိုယ်စားပြုပါတယ်။ onError က ရှင်းလင်းပေးပါတယ်- အောင်မြင်ရင် unconfigured ကို ပြန်ရောက်ပြီး မအောင်မြင်ရင် finalized မှာ ဆုံးပါတယ်။",
  "reset": "ပြန်စ",
  "lcNote": "node က ကိုယ့်ဘာသာ state မပြောင်းပါဘူး- supervisor (တခြား node ဒါမှမဟုတ် ros2 lifecycle set) က transition တစ်ခုချင်းစီကို ပို့ပေးပါတယ်။ ခြွင်းချက်ကတော့ မအောင်မြင်တဲ့ transition callback ပါ၊ အဲဒါက node ကို ကိုယ့်ဘာသာ အမှား ကိုင်တွယ်တဲ့ အဆင့်ဆီ ပို့ပါတယ်။ ဒါကြောင့် စနစ်တစ်ခုက အရာအားလုံးကို အရင် configure လုပ်ထားပြီး အစိတ်အပိုင်း အားလုံး အဆင်သင့် ဖြစ်မှ ဖွင့်နိုင်ပါတယ်။",
  "execH": "Executor: node တစ်ခုတည်းမှာ 100 ms control timer နဲ့ 350 ms မြေပုံသိမ်းတာ",
