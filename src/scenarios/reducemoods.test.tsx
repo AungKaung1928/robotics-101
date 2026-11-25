@@ -3,18 +3,20 @@ import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
 import { MascotFigure } from '../anim/Mascot'
 import { REST, STILL_DIZZY, STILL_SPARK } from '../anim/mascot'
+import { ciReaction } from './cimood'
 import { exReaction, lcReaction } from './lcmood'
 
-// Reduced motion for the 5.5 lifecycle / executor moods: the model's mood STATE must still reach the face,
+// Reduced motion for the 5.2 CI and 5.5 lifecycle / executor moods: the model's mood STATE must still reach the face,
 // drawn as one still frame at the rest pose (no bounce, no wobble), then back to idle.
 const still = (mood: 'happy' | 'oops') =>
   renderToStaticMarkup(<MascotFigure pose={REST} mood={mood} label="" spark={mood === 'happy' ? STILL_SPARK : 0} dizzy={mood === 'oops' ? STILL_DIZZY : 0} />)
 
-describe('reduced motion: new 5.5 moods', () => {
+describe('reduced motion: new 5.2 / 5.5 moods', () => {
   it('lifecycle error = oops, executor fix = cheer, executor worse = oops (model state, not CSS)', () => {
     expect(lcReaction('active', 'errorprocessing')).toBe('oops')
     expect(exReaction(3, 0)).toBe('cheer')
     expect(exReaction(0, 3)).toBe('oops')
+    expect(ciReaction('none', 'build', true)).toBe('cheer') // 5.2: solving the challenge cheers even with a wrong guess
   })
   it('each mood shows as a still cue: oops = mouth + 3 stars, cheer = arcs + sparks, at rest', () => {
     const o = still('oops'), h = still('happy'), rest = renderToStaticMarkup(<MascotFigure pose={REST} mood="idle" label="" />)
