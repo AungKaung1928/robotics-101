@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { LEVEL_BODY, LEVELS, courseNeighbour, keyPage, levelPage, readingIndex } from './levels'
-import { parseRoute, type Route } from '../lib/route'
+import { parseRoute } from '../lib/route'
 
 describe('levelPage', () => {
   it('opens a Level 1 chapter with its number and neighbours', () => {
@@ -71,22 +71,30 @@ describe('courseNeighbour', () => {
 })
 
 describe('keyPage (keyboard in App.tsx)', () => {
-  const scan = parseRoute('#/scan')
   it('arrows step through the course on chapter pages, same as the Next/Back links', () => {
     const n = courseNeighbour('scan', 1)!, p = courseNeighbour('scan', -1)!
-    expect(keyPage('ArrowRight', scan)).toBe(`${n.level}/${n.id}`)
-    expect(keyPage('ArrowLeft', scan)).toBe(`${p.level}/${p.id}`)
+    expect(keyPage('ArrowRight', '#/scan')).toBe(`${n.level}/${n.id}`)
+    expect(keyPage('ArrowLeft', '#/3/scan')).toBe(`${p.level}/${p.id}`)
+  })
+  it('arrows also work on chapters outside the 7 patrol routes (wall, patrol, Level 5)', () => {
+    for (const c of LEVELS.flat().slice(1, -1)) {
+      const n = courseNeighbour(c.id, 1)!, p = courseNeighbour(c.id, -1)!
+      expect(keyPage('ArrowRight', `#/${c.level}/${c.id}`)).toBe(`${n.level}/${n.id}`)
+      expect(keyPage('ArrowLeft', `#/${c.level}/${c.id}`)).toBe(`${p.level}/${p.id}`)
+    }
+    expect(parseRoute('#/3/wall').page).toBe('overview') // why the old Route-based version did nothing there
   })
   it('arrows do nothing on the overview; other keys do nothing', () => {
-    expect(keyPage('ArrowRight', { page: 'overview' })).toBeNull()
-    expect(keyPage('a', scan)).toBeNull()
+    expect(keyPage('ArrowRight', '#/')).toBeNull()
+    expect(keyPage('ArrowRight', '')).toBeNull()
+    expect(keyPage('a', '#/scan')).toBeNull()
   })
   it('arrows do nothing past either end of the course', () => {
-    const all = LEVELS.flat()
-    expect(keyPage('ArrowLeft', { page: 'chapter', id: all[0].id } as Route)).toBeNull()
-    expect(keyPage('ArrowRight', { page: 'chapter', id: all[all.length - 1].id } as Route)).toBeNull()
+    const all = LEVELS.flat(), a = all[0], z = all[all.length - 1]
+    expect(keyPage('ArrowLeft', `#/${a.level}/${a.id}`)).toBeNull()
+    expect(keyPage('ArrowRight', `#/${z.level}/${z.id}`)).toBeNull()
   })
   it('number keys still open a waypoint', () => {
-    expect(keyPage('5', scan)).toBe('grid')
+    expect(keyPage('5', '#/scan')).toBe('grid')
   })
 })
