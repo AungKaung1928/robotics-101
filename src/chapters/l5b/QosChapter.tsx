@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import Player from '../../anim/Player'
+import Mascot from '../../anim/Mascot'
+import { qosReaction } from '../../scenarios/qosmood'
 import { END, EVENTS, GAP, arrivedBy, flight, sentBy } from '../../scenarios/qosflight'
 import Slider from '../../components/Slider'
 import { stringsFor, type Strings } from '../../i18n'
@@ -21,9 +23,16 @@ export default function QosChapter({ t }: { t: Strings }) {
   const [tS, setTS] = useState(() => (still() ? END : 0))
   const now = Math.min(tS, END)
   // a changed setting shows its end frame at once; Play replays the scans under it
-  const setPub = (q: Qos) => { setPub0(q); setTS(END) }
-  const setSub = (q: Qos) => { setSub0(q); setTS(END) }
-  const [depth, setDepth] = useState(DEFAULT_DEPTH)
+  const [depth, setDepth0] = useState(DEFAULT_DEPTH)
+  const [cheer, setCheer] = useState(0), [oops, setOops] = useState(0)
+  const view = (p: Qos, q: Qos, d: number) => ({ ok: challengeOk(p, q, d), linked: connected(p, q) })
+  const react = (p: Qos, q: Qos, d: number) => {
+    const r = qosReaction(view(pub, sub, depth), view(p, q, d))
+    if (r === 'cheer') setCheer((n) => n + 1); else if (r === 'oops') setOops((n) => n + 1)
+  }
+  const setPub = (q: Qos) => { react(q, sub, depth); setPub0(q); setTS(END) }
+  const setSub = (q: Qos) => { react(pub, q, depth); setSub0(q); setTS(END) }
+  const setDepth = (d: number) => { react(pub, sub, d); setDepth0(d) }
   const fs = fates(pub, sub), got = received(pub, sub), ok = challengeOk(pub, sub, depth)
   const side = (q: Qos, set: (q: Qos) => void, label: string, k: string) => (
     <div className="stepper-block" data-k={k}>
@@ -78,6 +87,7 @@ export default function QosChapter({ t }: { t: Strings }) {
         </dl>
         <p className="runs">{s.resentNote}</p>
         <p><strong>{s.challenge}</strong></p>
+        <Mascot cheer={cheer} oops={oops} size={48} label={s.anim.mascot} />
         <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet} {s.dur[pub.dur]} → {s.dur[sub.dur]} · {s.depth} {depth}</p>
         <p className="note">{s.trap}</p>
         <p className="group-h">{s.words}</p>

@@ -22,4 +22,7 @@ describe('5.4 QoS chapter scene', () => {
   it('verdict shows the depth that decides the challenge', () => {
     expect(renderToStaticMarkup(<QosChapter t={STRINGS.en} />)).toMatch(/data-k="challenge">[^<]*· history depth \(keep last\) 10<\/p>/)
   })
+  it('mascot sits next to the verdict, named in the chapter language', () => {
+    expect(renderToStaticMarkup(<QosChapter t={STRINGS.ja} />)).toMatch(/QoS の相棒ロボット[\s\S]*data-k="challenge"/)
+  })
 })
