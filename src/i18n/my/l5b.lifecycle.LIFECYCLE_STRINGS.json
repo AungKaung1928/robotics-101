@@ -11,9 +11,17 @@
   "unconfigured": "unconfigured",
   "inactive": "inactive",
   "active": "active",
-  "finalized": "finalized"
+  "finalized": "finalized",
+  "errorprocessing": "ErrorProcessing"
  },
+ "errTr": {
+  "error": "active ဖြစ်နေတုန်း အမှား",
+  "ok": "onError အောင်မြင်",
+  "fail": "onError မအောင်မြင်"
+ },
+ "errNote": "ErrorProcessing (အစက်ချ မျဉ်း) က transition state တစ်ခုပါ၊ အဓိက state 4 ခုထဲက တစ်ခု မဟုတ်ပါဘူး။ ERROR ပြန်ပေးတဲ့ ဒါမှမဟုတ် exception ပစ်တဲ့ transition callback က node ကို အဲဒီကို ပို့ပါတယ်။ onError က ရှင်းလင်းပေးပါတယ်- အောင်မြင်ရင် unconfigured ကို ပြန်ရောက်ပြီး မအောင်မြင်ရင် finalized မှာ ဆုံးပါတယ်။",
  "reset": "ပြန်စ",
+ "lcNote": "node က ကိုယ့်ဘာသာ state မပြောင်းပါဘူး- supervisor (တခြား node ဒါမှမဟုတ် ros2 lifecycle set) က transition တစ်ခုချင်းစီကို ပို့ပေးပါတယ်။ ခြွင်းချက်ကတော့ မအောင်မြင်တဲ့ transition callback ပါ၊ အဲဒါက node ကို ကိုယ့်ဘာသာ အမှား ကိုင်တွယ်တဲ့ အဆင့်ဆီ ပို့ပါတယ်။ ဒါကြောင့် စနစ်တစ်ခုက အရာအားလုံးကို အရင် configure လုပ်ထားပြီး အစိတ်အပိုင်း အားလုံး အဆင်သင့် ဖြစ်မှ ဖွင့်နိုင်ပါတယ်။",
  "execH": "Executor: node တစ်ခုတည်းမှာ 100 ms control timer နဲ့ 350 ms မြေပုံသိမ်းတာ",
  "execs": {
   "single": "thread တစ်ခုတည်း",
@@ -23,6 +31,8 @@
  "lateLbl": "နောက်ကျတဲ့ control tick",
  "worst": "အဆိုးဆုံး နောက်ကျမှု (ms)",
  "breakIt": "ဖျက်ကြည့်: thread များစွာကို ပြောင်းရုံပဲ",
+ "trap": "ထောင်ချောက်- multi-threaded executor တစ်ခုတည်းနဲ့ မကူညီနိုင်ပါဘူး။ callback group မပါဘဲ ဖန်တီးထားတဲ့ callback တွေက node ရဲ့ default group ကို မျှသုံးကြပြီး အဲဒီ group က တစ်ခုပြီးမှ တစ်ခု run တဲ့ group ပါ- သူတို့ ဘယ်တော့မှ အပြိုင် မ run ပါဘူး။ နှေးတဲ့ callback ကို သူ့ကိုယ်ပိုင် group ထဲ ထည့်ပါ။",
+ "timingNote": "100 ms tick တစ်ခုစီက 10 ms စာ အလုပ်လုပ်ပါတယ်၊ save က 350 ms ကြာပါတယ်။ ဒါတွေက ရလဒ်ကို ပြဖို့ ဖန်တီးထားတဲ့ အချိန်တွေပါ။",
  "challenge": "စိန်ခေါ်မှု: မြေပုံ သိမ်းနေစဉ်မှာလည်း control tick တိုင်း အချိန်မှန်စေပါ။",
  "solved": "အောင်မြင်ပြီ:",
  "notYet": "မရသေးပါ:",

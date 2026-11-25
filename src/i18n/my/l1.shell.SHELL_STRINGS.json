@@ -3,7 +3,8 @@
  "learn": "သင်ယူရမယ့်အရာ: ROS 2 နဲ့ နေ့တိုင်း သုံးတဲ့ terminal command 8 ခုနဲ့ terminal အသစ်မှာ ros2 က ဘာကြောင့် \"not found\" ဖြစ်ရလဲဆိုတာပါ။",
  "lines": [
   "terminal ဆိုတာ command တစ်ခု ရိုက်ထည့်၊ Enter နှိပ်ပြီး အဖြေကို ဖတ်ရတဲ့ စာသား window တစ်ခုပါ။ စက်ရုပ်တွေကို ဒီနည်းနဲ့ run ကြပါတယ်။",
-  "သင်ဟာ folder တစ်ခုထဲမှာ အမြဲ ရှိနေပါတယ်။ pwd က အဲဒီ folder ကို ပြပါတယ်၊ ls က အထဲက အရာတွေကို စာရင်းပြပါတယ်၊ cd က သင့်ကို ရွှေ့ပေးပါတယ်။"
+  "သင်ဟာ folder တစ်ခုထဲမှာ အမြဲ ရှိနေပါတယ်။ pwd က အဲဒီ folder ကို ပြပါတယ်၊ ls က အထဲက အရာတွေကို စာရင်းပြပါတယ်၊ cd က သင့်ကို ရွှေ့ပေးပါတယ်။",
+  "ros2 က source /opt/ros/humble/setup.bash လုပ်ပြီးမှသာ ရှိပါတယ် (Jazzy မှာ- /opt/ros/jazzy/setup.bash)။ ~/.bashrc က အဲဒါကို source မလုပ်ထားရင် terminal အသစ်က အဲဒါ မပါဘဲ စပါတယ်။"
  ],
  "runsHere": "ဒါက သင့်ကွန်ပျူတာ မဟုတ်ပါဘူး၊ စာမျက်နှာထဲက အတု terminal (JavaScript) ပါ: folder tree တစ်ခုနဲ့ command 8 ခု ပါပါတယ်။",
  "yours": "သင့် terminal: command တစ်ခု ရိုက်ပြီး Enter နှိပ်",
