@@ -6657,9 +6657,9 @@
  },
  "l5b/fieldfail:fails.beam.symptom": {
   "status": "pass-alt",
-  "en": "A wall follower keeps saying \"wall lost\" every 1-2 s, then drives at the wall until collision avoidance turns it away.",
-  "my": "နံရံကပ်သွားတဲ့ စက်ရုပ်က 1-2 s တိုင်း \"နံရံ ပျောက်သွားပြီ\" လို့ ပြောပြီး တိုက်မှုရှောင်တဲ့စနစ်က လှည့်ပေးတဲ့အထိ နံရံဆီ မောင်းသွားပါတယ်။",
-  "back": "The wall-following robot says \"wall lost\" every 1-2 s and drives toward the wall until the collision-avoidance system turns it."
+  "en": "The TurtleBot3 wall follower (3.2) keeps saying \"wall lost\" every 1-2 s, then drives at the wall until collision avoidance turns it away.",
+  "my": "TurtleBot3 wall follower (3.2) က 1-2 s တိုင်း \"နံရံ ပျောက်သွားပြီ\" လို့ ပြောပြီး တိုက်မှုရှောင်တဲ့စနစ်က လှည့်ပေးတဲ့အထိ နံရံဆီ မောင်းသွားပါတယ်။",
+  "back": "only the subject changed to the English name 'TurtleBot3 wall follower (3.2)' (same term as wall chapter); rest unchanged from the blind-checked r5 string"
  },
  "l5b/fieldfail:fails.chatter.cause": {
   "status": "pass-alt",
