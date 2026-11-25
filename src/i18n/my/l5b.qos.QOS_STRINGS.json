@@ -40,12 +40,10 @@
    "တစ်ခါပဲ ပို့၊ ကျသွားရင် ပြန်မပို့"
   ],
   [
-   "transient local",
-   "နောက်မှ ဝင်တဲ့ subscriber တွေအတွက် publisher က နောက်ဆုံး depth အရေအတွက် message ကို သိမ်းထားတယ်"
+   "transient local"
   ],
   [
-   "depth",
-   "keep last သိမ်းတဲ့ message အရေအတွက်"
+   "depth"
   ]
  ],
  "depthLink": "queue နဲ့ depth အကြောင်း ပိုသိချင်ရင်: photon-to-torque"

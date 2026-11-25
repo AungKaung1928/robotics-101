@@ -39,8 +39,7 @@
    "ဘယ်သူမှ အစားထိုး မသတ်မှတ်တဲ့အခါ သုံးတဲ့ declare_parameter ထဲက တန်ဖိုး"
   ],
   [
-   "launch file",
-   "node တွေကို သူတို့ရဲ့ parameter တွေနဲ့ စတင်ပေးတဲ့ Python script"
+   "launch file"
   ],
   [
    "--ros-args -p",

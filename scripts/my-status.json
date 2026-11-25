@@ -25,11 +25,10 @@
   "gemini_back": "Launches everything with a single launch file. Most steps wait with set timers so inputs exist first. Only the patrol node checks: it waits up to 5 s for Nav2's action server and retries."
  },
  "core:bringup.lines.1": {
-  "status": "needs-human",
+  "status": "pass-alt",
   "en": "Drag SLAM or Nav2 earlier: a stage that starts no later than its input waits on a frame or topic that is not there yet.",
-  "my": "SLAM ဒါမှမဟုတ် Nav2 ကို စောပြီး ဆွဲထားရင်- input ထက် မနောက်ကျဘဲ စတင်တဲ့ အဆင့်က မရှိသေးတဲ့ frame ဒါမှမဟုတ် topic ကို စောင့်နေပါလိမ့်မယ်။",
-  "back": "If SLAM or Nav2 are dragged early: the step starting without lagging behind the input will wait for missing frames or topics.",
-  "note": "2026-11-24 audit: Opus blind check garbled (word order of \"starts no later than its input\"); redraft garbled again"
+  "my": "SLAM ဒါမှမဟုတ် Nav2 ကို စောစော ဆွဲထားကြည့်ပါ- သူ့ input ထက် မနောက်ကျဘဲ စတဲ့ အဆင့်က မရှိသေးတဲ့ frame ဒါမှမဟုတ် topic ကို စောင့်နေရပါတယ်။",
+  "back": "Try pulling up SLAM or Nav2 early: a stage that starts no later than its input is waiting for a frame or topic that does not exist yet."
  },
  "core:bringup.logHead.0": {
   "status": "pass",
@@ -241,10 +240,10 @@
   "back": "Try dragging the robot on the map: you will see that the same object breaks at one location but does not break at another location."
  },
  "core:detect.next": {
-  "status": "pass",
-  "en": "Borges & Aldon (2004) propose a threshold that grows with range and sensor noise; it is added once the formula is read from the paper itself.",
-  "my": "Borges & Aldon (2004) က အကွာအဝေးနဲ့ ဆင်ဆာ noise အလိုက် တိုးလာတဲ့ threshold တစ်ခုကို အဆိုပြုထားပါတယ်၊ paper ထဲက formula ကို ဖတ်ပြီးတာနဲ့ ဒါကို ထည့်ပေးပါမယ်။",
-  "back": "Borges & Aldon (2004) proposed a threshold that increases according to distance and sensor noise; once the formula in the paper is read, this will be added."
+  "status": "pass-alt",
+  "en": "Borges & Aldon (2004) propose a threshold that grows with range and sensor noise; this page keeps one fixed threshold.",
+  "my": "Borges & Aldon (2004) က အကွာအဝေးနဲ့ ဆင်ဆာ noise အလိုက် ကြီးလာတဲ့ threshold တစ်ခုကို အဆိုပြုထားပါတယ်၊ ဒီစာမျက်နှာကတော့ ပုံသေ threshold တစ်ခုတည်းကိုပဲ သုံးပါတယ်။",
+  "back": "Borges & Aldon (2004) proposed a threshold that grows with distance and sensor noise; this page uses only a single fixed threshold."
  },
  "core:detect.noise": {
   "status": "pass",
@@ -763,11 +762,10 @@
   "gemini_back": "Returning beams"
  },
  "core:scan.lines.0": {
-  "status": "pass",
-  "en": "360 beams, one per degree, 5 times a second. Each beam returns the nearest wall or obstacle, if it is closer than 3.5 m.",
-  "my": "beam 360 ခု၊ ဒီဂရီ တစ်ခုကို beam တစ်ခု၊ တစ်စက္ကန့်ကို 5 ကြိမ်။ beam တစ်ခုစီက 3.5 m ထက် နီးရင် အနီးဆုံး နံရံ ဒါမှမဟုတ် အတားအဆီးကို ပြန်ပြောပါတယ်။",
-  "back": "360 beams, one beam per degree, 5 times per second. Each beam reports the nearest wall or obstacle if it is closer than 3.5 m.",
-  "gemini_back": "360 beams, one beam per degree, 5 times per second. Each beam reports back the nearest wall or obstacle if closer than 3.5 m."
+  "status": "pass-alt",
+  "en": "360 beams, one per degree, 5 times a second. Each beam returns the nearest wall or obstacle if it is closer than 3.5 m. A surface almost touching the sensor gives no reading either (minimum range in the URDF).",
+  "my": "beam 360 ခု၊ ဒီဂရီ တစ်ခုကို beam တစ်ခု၊ တစ်စက္ကန့်ကို 5 ကြိမ်ပါ။ beam တစ်ခုစီက 3.5 m ထက် နီးရင် အနီးဆုံး နံရံ ဒါမှမဟုတ် အတားအဆီးကို ပြန်ပြောပါတယ်။ ဆင်ဆာနဲ့ ကပ်လုနီးပါး ဖြစ်နေတဲ့ မျက်နှာပြင်ကလည်း တန်ဖိုး မပေးပါဘူး (URDF ထဲက အနည်းဆုံး အကွာအဝေး)။",
+  "back": "360 beams, one beam per degree, 5 times per second. Each beam reports back the nearest wall or obstacle if it is closer than 3.5 m. A surface that is almost stuck to the sensor also gives no value (the minimum distance in the URDF)."
  },
  "core:scan.lines.1": {
   "status": "pass",
@@ -1047,11 +1045,10 @@
   "gemini_back": "Its NavFn planner runs Dijkstra (or A*) just like the costmap view above. Nav2's inflation layer smoothly decreases the cost as distance from the obstacle increases. For visibility, this page uses only a single step (+4). If all costs are equal, Dijkstra pops cells in ring order just like BFS."
  },
  "ep/bfs:costNote": {
-  "status": "pass",
-  "en": "Each cell touching a wall now costs 5 instead of 1. Dijkstra takes out the cheapest cell first: 15 steps at cost 15, against the BFS path's 13 steps at cost 41. Longer, but never brushing a wall.",
-  "my": "အခု နံရံနဲ့ ထိနေတဲ့ cell တစ်ခုစီက cost 1 အစား 5 ကျပါတယ်။ Dijkstra က အသက်သာဆုံး cell ကို အရင် ထုတ်ပါတယ်: 15 ဆင့်၊ cost 15 ပါ။ BFS လမ်းကြောင်းကတော့ 13 ဆင့်၊ cost 41 ပါ။ Dijkstra လမ်းကြောင်းက ပိုရှည်ပေမဲ့ နံရံကို ဘယ်တော့မှ မပွတ်ပါဘူး။",
-  "back": "Now each cell touching a wall drops to cost 5 instead of cost 1. Dijkstra takes out the cheapest cell first: 15 steps, cost 15. The BFS path, however, is 13 steps, cost 41. The Dijkstra path is longer, but it never brushes the wall.",
-  "gemini_back": "Now each cell touching a wall costs 5 instead of 1. Dijkstra pops the cheapest cell first: 15 steps, cost 15. The BFS path is 13 steps, cost 41. The Dijkstra path is longer, but it never grazes the wall."
+  "status": "pass-alt",
+  "en": "Each cell touching a wall now costs 5 instead of 1. Dijkstra takes out the cheapest cell first. On the starting map: 15 steps at cost 15, against the BFS path's 13 steps at cost 41. Longer, but never brushing a wall. After you edit walls, the readout below shows the new cost (if a path still exists).",
+  "my": "အခု နံရံနဲ့ ထိနေတဲ့ cell တစ်ခုစီက cost 1 အစား 5 ကျပါတယ်။ Dijkstra က အသက်သာဆုံး cell ကို အရင် ထုတ်ပါတယ်။ စစချင်း မြေပုံမှာ 15 ဆင့်၊ cost 15 ပါ၊ BFS လမ်းကြောင်းကတော့ 13 ဆင့်၊ cost 41 ပါ။ ပိုရှည်ပေမဲ့ နံရံကို ဘယ်တော့မှ မပွတ်ပါဘူး။ နံရံတွေကို ပြင်ပြီးရင် အောက်က ဖတ်ကွက်မှာ cost အသစ်ကို ပြပါတယ် (လမ်းကြောင်း ရှိနေသေးရင်)။",
+  "back": "Now each cell touching a wall drops from cost 1 to cost 5 (as written, 'instead of 1, 5 falls'). Dijkstra takes out the cheapest cell first. At the very start, on the map, there is 15 steps, cost 15; the BFS route is 13 steps, cost 41. Although longer, it never rubs against the wall. After you edit the walls, the reading slot below shows the new cost (if a route still exists)."
  },
  "ep/bfs:costOff": {
   "status": "pass",
@@ -1531,8 +1528,9 @@
  "ep/late:rDelay": {
   "status": "needs-human",
   "en": "every reading used later by",
-  "my": "ဒေတာတိုင်း နောက်ကျပြီး သုံးရတဲ့ အချိန်",
-  "note": "garbled in 2 blind checks (2026-11-24)"
+  "my": "ဒေတာတိုင်းကို နောက်ကျပြီး သုံးရတဲ့ အချိန်",
+  "back": "Time during which every piece of data has to be used late",
+  "note": "blind back-translation drifted (time vs readings delayed by)"
  },
  "ep/late:rDropped": {
   "status": "pass-alt",
@@ -1794,9 +1792,9 @@
  },
  "l0/act:turn": {
   "status": "pass-alt",
-  "en": "Turn speed (rad/s, + = left)",
-  "my": "လှည့်နှုန်း (rad/s, + = ဘယ်)",
-  "back": "Turn rate (rad/s, + = left)"
+  "en": "Turn speed (rad/s, + = left; 1 rad/s ≈ 57° a second)",
+  "my": "လှည့်နှုန်း (rad/s, + = ဘယ်၊ 1 rad/s ≈ တစ်စက္ကန့်ကို 57°)",
+  "back": "Turn rate (rad/s, + = left, 1 rad/s is about 57 per second)"
  },
  "l0/act:words": {
   "status": "pass-alt",
@@ -2026,10 +2024,9 @@
  },
  "l0/meet:car": {
   "status": "pass-alt",
-  "en": "Remote-control car",
-  "my": "ရီမုတ်ထိန်းကား",
-  "back": "Remote-controlled car",
-  "note": "spelling: ရီမု -> ရီမုတ် (blind checker, 2026-11-24)"
+  "en": "Who decides when the car turns?",
+  "my": "ကား ဘယ်အချိန် ကွေ့မလဲဆိုတာ ဘယ်သူ ဆုံးဖြတ်လဲ။",
+  "back": "Who decides when the car turns?"
  },
  "l0/meet:check": {
   "status": "pass-alt",
@@ -2040,9 +2037,9 @@
  },
  "l0/meet:decides": {
   "status": "pass-alt",
-  "en": "Decides",
-  "my": "ဆုံးဖြတ်နိုင်မှု",
-  "back": "Deciding ability"
+  "en": "Decides when it turns",
+  "my": "ဘယ်အချိန် ကွေ့မလဲ ဆုံးဖြတ်သူ",
+  "back": "Who decides when to turn"
  },
  "l0/meet:downgrade": {
   "status": "pass-alt",
@@ -2094,9 +2091,9 @@
  },
  "l0/meet:itself": {
   "status": "pass-alt",
-  "en": "by itself",
-  "my": "သူ့အလိုလို",
-  "back": "By itself"
+  "en": "the rule, from sensor data",
+  "my": "ဆင်ဆာ ဒေတာကို ကြည့်ပြီး စည်းကမ်းချက်က",
+  "back": "The rule, looking at the sensor data"
  },
  "l0/meet:learn": {
   "status": "pass-alt",
@@ -2148,9 +2145,9 @@
  },
  "l0/meet:person": {
   "status": "pass-alt",
-  "en": "a person",
-  "my": "လူတစ်ယောက်",
-  "back": "A person"
+  "en": "you, with the remote",
+  "my": "သင်၊ ရီမုတ်နဲ့",
+  "back": "You, with the remote"
  },
  "l0/meet:right": {
   "status": "pass-alt",
@@ -2196,10 +2193,9 @@
  },
  "l0/meet:steps.2": {
   "status": "pass-alt",
-  "en": "Is a remote-control car a robot? It moves, but a person watches and decides. Give it a sensor and a rule, and it decides by itself: now it is a robot. Try the button.",
-  "my": "ရီမုတ်နဲ့ ထိန်းတဲ့ကားက စက်ရုပ် လား။ အဲဒါက လှုပ်ရှားနိုင်ပေမဲ့ လူက ကြည့်ပြီး ဆုံးဖြတ်ပေးရတာပါ။ ဆင်ဆာ နဲ့ စည်းကမ်းချက်တစ်ခု ပေးလိုက်ရင်တော့ သူ့အလိုလို ဆုံးဖြတ်နိုင်သွားပါပြီ- အဲဒီအခါမှာတော့ စက်ရုပ် ဖြစ်သွားပါပြီ။ ခလုတ်ကို စမ်းကြည့်ပါ။",
-  "back": "Is a remo-controlled car a robot? It can move, but a person has to watch and decide. If you give it a sensor and a rule, it becomes able to decide on its own - at that point it has become a robot. Try the button.",
-  "note": "spelling: ရီမု -> ရီမုတ် (blind checker, 2026-11-24)"
+  "en": "Who decides when a remote-control car turns? You do: you watch and steer. Add a sensor alone, then a rule alone, then both, and watch the answer below change. Only a rule that reads the sensor takes the decision from you.",
+  "my": "ရီမုတ်ထိန်းကား ဘယ်အချိန် ကွေ့မလဲဆိုတာ ဘယ်သူ ဆုံးဖြတ်လဲ။ သင်ပါ- သင်က ကြည့်ပြီး ထိန်းပါတယ်။ ဆင်ဆာ တစ်ခုတည်း ထည့်ကြည့်ပါ၊ ပြီးရင် စည်းကမ်းချက် တစ်ခုတည်း၊ ပြီးရင် နှစ်ခုလုံး ထည့်ပြီး အောက်က အဖြေ ပြောင်းသွားတာကို ကြည့်ပါ။ ဆင်ဆာကို ဖတ်တဲ့ စည်းကမ်းချက် ရှိမှသာ ဆုံးဖြတ်ခွင့်က သင့်ဆီကနေ ထွက်သွားပါတယ်။",
+  "back": "Who decides when the remote-controlled car turns? You: you watch and steer. Try adding just one sensor, then just one rule, then both, and watch the answer below change. Only when there is a rule that reads the sensor does the decision leave your hands."
  },
  "l0/meet:tapHint": {
   "status": "pass-alt",
@@ -2761,9 +2757,9 @@
  },
  "l0/ros:install.0": {
   "status": "pass-alt",
-  "en": "New learners: ROS 2 Jazzy on Ubuntu 24.04, with Gazebo Harmonic. It has long support, and TurtleBot3, Nav2 and the tutorials are ready for it.",
-  "my": "စတင်လေ့လာသူများအတွက်: Ubuntu 24.04 ပေါ်က ROS 2 Jazzy နဲ့ Gazebo Harmonic ကို သုံးပါ။ ရေရှည် ပံ့ပိုးမှု ရှိပြီး TurtleBot3၊ Nav2 နဲ့ သင်ခန်းစာတွေလည်း အဆင်သင့် ရှိပါတယ်။",
-  "back": "For beginners: use ROS 2 Jazzy with Gazebo Harmonic on Ubuntu 24.04. It has long-term support, and TurtleBot3, Nav2 and tutorials are also ready."
+  "en": "This course picks ROS 2 Jazzy on Ubuntu 24.04, with Gazebo Harmonic: it gets fixes until May 2029, and the TurtleBot3 simulation has a Jazzy version on the new Gazebo. Gazebo's ROS install page recommends the newer Lyrical with Gazebo Jetty for new users.",
+  "my": "ဒီသင်ခန်းစာက Ubuntu 24.04 ပေါ်က ROS 2 Jazzy ကို Gazebo Harmonic နဲ့ ရွေးထားပါတယ်- May 2029 အထိ ပြင်ဆင်ချက်တွေ ရပြီး TurtleBot3 simulation မှာလည်း Gazebo အသစ်ပေါ်မှာ Jazzy ဗားရှင်း ရှိပါတယ်။ Gazebo ရဲ့ ROS install စာမျက်နှာကတော့ အသုံးပြုသူ အသစ်တွေကို ပိုသစ်တဲ့ Lyrical နဲ့ Gazebo Jetty ကို အကြံပြုပါတယ်။",
+  "back": "This course chose ROS 2 Jazzy on Ubuntu 24.04 with Gazebo Harmonic: it gets fixes until May 2029, and the TurtleBot3 simulation also has a Jazzy version on the new Gazebo. Gazebo's ROS install page, however, recommends the newer Lyrical with Gazebo Jetty for new users."
  },
  "l0/ros:install.1": {
   "status": "pass-alt",
@@ -2797,15 +2793,15 @@
  },
  "l0/ros:lines.1": {
   "status": "pass-alt",
-  "en": "ROS 1 has one central program, the master (started by roscore), that tells programs where to find each other; then they talk directly. If it stops, programs started later cannot find anyone. ROS 2 has no central program: each program announces itself on the network and the others answer (discovery, done by DDS).",
-  "my": "ROS 1 မှာ ပရိုဂရမ်တွေ တစ်ခုနဲ့တစ်ခု ဘယ်မှာရှိလဲဆိုတာ ပြောပြပေးတဲ့ master ဆိုတဲ့ ဗဟို ပရိုဂရမ် တစ်ခု (roscore နဲ့ စတင်ရတဲ့) ရှိပါတယ်။ အဲ့ဒီနောက်မှ သူတို့ တိုက်ရိုက် ဆက်သွယ်ကြတာပါ။ အဲ့ဒီ master ရပ်သွားရင် နောက်မှ စတင်တဲ့ ပရိုဂရမ်တွေဟာ ဘယ်သူ့ကိုမှ ရှာမတွေ့နိုင်တော့ပါဘူး။ ROS 2 မှာတော့ ဗဟို ပရိုဂရမ် မရှိပါဘူး။ ပရိုဂရမ် တစ်ခုစီဟာ ကွန်ရက်ပေါ်မှာ မိမိကိုယ်ကို ကြေညာပြီး အခြား ပရိုဂရမ်တွေက တုံ့ပြန်ကြပါတယ် (DDS က လုပ်ဆောင်ပေးတဲ့ discovery)။",
-  "back": "In ROS 1 there is a central program called the master (which must be started with roscore) that tells programs where each other are. After that they communicate directly. If that master stops, programs that start afterward can no longer find anyone. In ROS 2 there is no central program. Each program announces itself on the network and the other programs respond (discovery carried out by DDS)."
+  "en": "ROS 1 has one central program, the master (started by the command roscore), that tells programs where to find each other; then they talk directly. If it stops, no new connections can be set up; programs already connected keep talking. ROS 2 has no central program: each program announces itself on the network and the others answer (this is called discovery; DDS, the network layer under ROS 2, does it).",
+  "my": "ROS 1 မှာ master ဆိုတဲ့ ဗဟို ပရိုဂရမ် တစ်ခု ရှိပါတယ် (roscore command နဲ့ စရပါတယ်)။ ပရိုဂရမ်တွေ တစ်ခုနဲ့တစ်ခု ဘယ်မှာ ရှာရမလဲဆိုတာ သူက ပြောပေးပြီး အဲဒီနောက် သူတို့ တိုက်ရိုက် ဆက်သွယ်ကြပါတယ်။ master ရပ်သွားရင် ချိတ်ဆက်မှု အသစ် မလုပ်နိုင်တော့ပါဘူး၊ ချိတ်ပြီးသား ပရိုဂရမ်တွေကတော့ ဆက်ပြောနေကြပါတယ်။ ROS 2 မှာ ဗဟို ပရိုဂရမ် မရှိပါဘူး- ပရိုဂရမ် တစ်ခုစီက ကွန်ရက်ပေါ်မှာ ကိုယ့်ကိုယ်ကို ကြေညာပြီး တခြားဟာတွေက ပြန်ဖြေကြပါတယ် (ဒါကို discovery လို့ ခေါ်ပြီး ROS 2 အောက်က ကွန်ရက် layer ဖြစ်တဲ့ DDS က လုပ်ပေးပါတယ်)။",
+  "back": "In ROS 1 there is a central program called the master (started with the roscore command). It tells programs where to find each other, and after that they communicate directly. If the master stops, no new connections can be made, but already-connected programs keep talking. In ROS 2 there is no central program: each program announces itself on the network and the others reply (this is called discovery, and DDS, the network layer under ROS 2, does it)."
  },
  "l0/ros:lines.2": {
   "status": "pass-alt",
-  "en": "Each release is a distribution with a name. LTS releases get fixes for 5 years, the others for about a year and a half. This app uses Humble, the version the example repos use; the ideas are the same on Jazzy.",
-  "my": "ထွက်ရှိတဲ့ ဗားရှင်း တစ်ခုစီဟာ နာမည်ပါတဲ့ distribution တစ်ခု ဖြစ်ပါတယ်။ LTS ဗားရှင်းတွေက 5 နှစ်အထိ ပြင်ဆင်ချက်တွေ ရပြီး တခြား ဗားရှင်းတွေကတော့ တစ်နှစ်ခွဲလောက်ပဲ ရပါတယ်။ ဒီ app မှာ နမူနာ repo တွေ သုံးတဲ့ ဗားရှင်း Humble ကို သုံးထားပါတယ်။ Jazzy မှာလည်း အယူအဆတွေက အတူတူပါပဲ။",
-  "back": "Each release is a distribution that has a name. LTS versions get fixes for up to 5 years, while the other versions get them for only about a year and a half. This app uses the version Humble, which the example repos use. In Jazzy, the ideas are the same."
+  "en": "Each release is a distribution with a name and one Ubuntu version (the number on each bar). LTS releases get fixes for 5 years, the others for about a year and a half.",
+  "my": "ထွက်ရှိတဲ့ ဗားရှင်း တစ်ခုစီဟာ နာမည်တစ်ခုနဲ့ Ubuntu ဗားရှင်း တစ်ခု ပါတဲ့ distribution တစ်ခု ဖြစ်ပါတယ် (ဘား တစ်ခုစီပေါ်က နံပါတ်)။ LTS ဗားရှင်းတွေက 5 နှစ်အထိ ပြင်ဆင်ချက်တွေ ရပြီး တခြားဟာတွေကတော့ တစ်နှစ်ခွဲလောက်ပဲ ရပါတယ်။",
+  "back": "Each released version is a distribution that comes with a name and an Ubuntu version (the number on each bar). LTS versions get fixes for up to 5 years and the others get only about a year and a half."
  },
  "l0/ros:lts": {
   "status": "pass-alt",
@@ -2827,9 +2823,9 @@
  },
  "l0/ros:project": {
   "status": "pass-alt",
-  "en": "The example repos in this course were built on Humble (Ubuntu 22.04, Gazebo Classic). The skills carry over; the main change you will meet is Gazebo Classic to the new Gazebo (ros_gz). They have not been tested on Jazzy yet.",
-  "my": "ဒီသင်ခန်းစာက နမူနာ repo တွေကို Humble (Ubuntu 22.04, Gazebo Classic) ပေါ်မှာ တည်ဆောက်ထားတာ ဖြစ်ပါတယ်။ ကျွမ်းကျင်မှုတွေကို ဆက်လက် အသုံးပြုနိုင်ပြီး အဓိက ကြုံတွေ့ရမယ့် ပြောင်းလဲမှုကတော့ Gazebo Classic ကနေ Gazebo အသစ် (ros_gz) ကို ပြောင်းတာဖြစ်ပါတယ်။ Jazzy ပေါ်မှာတော့ စမ်းသပ်ထားခြင်း မရှိသေးပါဘူး။",
-  "back": "This course's sample repos are built on Humble (Ubuntu 22.04, Gazebo Classic). The skills can still be used, and the main change you will encounter is the move from Gazebo Classic to the new Gazebo (ros_gz). It has not been tested on Jazzy yet."
+  "en": "The example repos in this course were built on Humble (Ubuntu 22.04, Gazebo Classic). The skills carry over; the main change you will meet is Gazebo Classic to the new Gazebo (ros_gz: the packages that connect ROS 2 to it). They have not been tested on Jazzy yet. The table pairs Humble with Fortress because Gazebo recommends that pair; the TurtleBot3 Humble simulation still uses Gazebo Classic (its package depends on gazebo_ros_pkgs).",
+  "my": "ဒီသင်ခန်းစာက နမူနာ repo တွေကို Humble (Ubuntu 22.04, Gazebo Classic) ပေါ်မှာ တည်ဆောက်ထားတာပါ။ ကျွမ်းကျင်မှုတွေက ဆက်သုံးလို့ ရပါတယ်၊ အဓိက ကြုံရမယ့် ပြောင်းလဲမှုကတော့ Gazebo Classic ကနေ Gazebo အသစ်ကို ပြောင်းတာပါ (ros_gz- ROS 2 ကို အဲဒါနဲ့ ချိတ်ပေးတဲ့ package တွေ)။ Jazzy ပေါ်မှာ မစမ်းရသေးပါဘူး။ Gazebo က Humble ကို Fortress နဲ့ တွဲသုံးဖို့ အကြံပြုလို့ ဇယားမှာ အဲဒီလို တွဲထားပါတယ်၊ TurtleBot3 Humble simulation ကတော့ Gazebo Classic ကို သုံးနေဆဲပါ (သူ့ package က gazebo_ros_pkgs ကို မှီခိုလို့ပါ)။",
+  "back": "This course's example repos are built on Humble (Ubuntu 22.04, Gazebo Classic). The skills can keep being used; the main change you will meet is the move from Gazebo Classic to the new Gazebo (ros_gz: the packages that connect ROS 2 to it). It has not been tried on Jazzy yet. Because Gazebo recommends pairing Humble with Fortress, the table pairs them that way, but the TurtleBot3 Humble simulation still uses Gazebo Classic (because its package depends on gazebo_ros_pkgs)."
  },
  "l0/ros:ros1": {
   "status": "pass-alt",
@@ -2887,9 +2883,9 @@
  },
  "l0/ros:winMac": {
   "status": "pass-alt",
-  "en": "On Windows: Ubuntu 24.04 inside WSL2, or the Docker image osrf/ros:jazzy-desktop. On a Mac: Docker or a virtual machine running Ubuntu.",
-  "my": "Windows မှာဆိုရင်: WSL2 ထဲက Ubuntu 24.04 သို့မဟုတ် Docker image ဖြစ်တဲ့ osrf/ros:jazzy-desktop ကို သုံးပါ။ Mac မှာဆိုရင်: Docker သို့မဟုတ် Ubuntu အလုပ်လုပ်နေတဲ့ virtual machine ကို သုံးပါ။",
-  "back": "On Windows: use Ubuntu 24.04 inside WSL2, or the Docker image osrf/ros:jazzy-desktop. On Mac: use Docker or a virtual machine running Ubuntu."
+  "en": "On Windows: Ubuntu 24.04 inside WSL2 (the Linux that Windows can run inside itself), or the Docker image osrf/ros:jazzy-desktop (Docker runs a ready-made Linux setup in a sealed box). On a Mac: Docker or a virtual machine running Ubuntu.",
+  "my": "Windows မှာဆိုရင်- WSL2 ထဲက Ubuntu 24.04 (Windows က သူ့ထဲမှာ run နိုင်တဲ့ Linux) ဒါမှမဟုတ် Docker image osrf/ros:jazzy-desktop (Docker က အသင့်လုပ်ထားတဲ့ Linux setup ကို ပိတ်ထားတဲ့ သေတ္တာ တစ်ခုထဲမှာ run ပေးပါတယ်) ကို သုံးပါ။ Mac မှာဆိုရင်- Docker ဒါမှမဟုတ် Ubuntu run ထားတဲ့ virtual machine ကို သုံးပါ။",
+  "back": "On Windows: use Ubuntu 24.04 inside WSL2 (a Linux that Windows can run inside itself) or the Docker image osrf/ros:jazzy-desktop (Docker runs a ready-made Linux setup inside a closed box). On Mac: use Docker or a virtual machine running Ubuntu."
  },
  "l0/ros:words": {
   "status": "pass-alt",
@@ -3254,9 +3250,9 @@
  },
  "l0/simpick:checked": {
   "status": "pass-alt",
-  "en": "Facts checked against each tool's own pages on 2026-11-23.",
-  "my": "အချက်အလက်တွေကို tool တစ်ခုချင်းစီရဲ့ ကိုယ်ပိုင် page တွေနဲ့ 2026-11-23 မှာ တိုက်စစ်ထားပါတယ်။",
-  "back": "The facts were cross-checked against each tool's own pages on 2026-11-23."
+  "en": "Facts checked against each tool's own pages on 2026-11-23; the turtlesim, Webots and Isaac Sim links on 2026-11-25.",
+  "my": "အချက်အလက်တွေကို tool တစ်ခုချင်းစီရဲ့ ကိုယ်ပိုင် စာမျက်နှာတွေနဲ့ 2026-11-23 မှာ တိုက်စစ်ထားပါတယ်၊ turtlesim၊ Webots နဲ့ Isaac Sim link တွေကိုတော့ 2026-11-25 မှာ စစ်ထားပါတယ်။",
+  "back": "The facts were cross-checked on 2026-11-23 against each tool's own pages; the turtlesim, Webots and Isaac Sim links were checked on 2026-11-25."
  },
  "l0/simpick:dim.2.5D": {
   "status": "pass",
@@ -3397,10 +3393,10 @@
   "back": "Gazebo"
  },
  "l0/simpick:rows.gazebo.what": {
-  "status": "pass",
-  "en": "The usual 3D simulator with physics and the TurtleBot3 worlds: LiDAR, camera, maps, Nav2. With ROS 2 Jazzy it is Gazebo Harmonic; the Humble TurtleBot3 packages used by this course's projects use Gazebo Classic (support ended January 2025). Without a graphics card or in WSL the 3D window can be slow or black: run it without the window and watch in RViz.",
-  "my": "ရုပ်ပိုင်းဆိုင်ရာ သဘောတရားများနဲ့ TurtleBot3 ကမ္ဘာများ ပါဝင်တဲ့ ပုံမှန် သုံးနေကျ 3D ဆင်မျူလေတာ ဖြစ်ပါတယ်- LiDAR၊ ကင်မရာ၊ မြေပုံများနဲ့ Nav2 တို့ ပါဝင်ပါတယ်။ ROS 2 Jazzy မှာဆိုရင် Gazebo Harmonic ဖြစ်ပြီး ဒီသင်ခန်းစာရဲ့ ပရောဂျက်များမှာ သုံးထားတဲ့ Humble TurtleBot3 package များကတော့ Gazebo Classic ကို သုံးပါတယ် (2025 ခုနှစ် ဇန်နဝါရီလမှာ ထောက်ပံ့မှု ပြီးဆုံးခဲ့ပါတယ်)။ ဂရပ်ဖစ်ကဒ် မရှိရင် ဒါမှမဟုတ် WSL ထဲမှာဆိုရင် 3D window က နှေးတာ သို့မဟုတ် မည်းသွားတာမျိုး ဖြစ်နိုင်ပါတယ်- window မပါဘဲ ရန်းပြီး RViz ထဲမှာ ကြည့်ပါ။",
-  "back": "It is a commonly used 3D simulator containing physics concepts and TurtleBot3 worlds: including LiDAR, camera, maps, and Nav2. In ROS 2 Jazzy it is Gazebo Harmonic, while the Humble TurtleBot3 packages used in this tutorial's projects use Gazebo Classic (support ended in January 2025). If there is no graphics card or inside WSL, the 3D window may be slow or turn black—run without a window and view in RViz."
+  "status": "pass-alt",
+  "en": "The usual 3D simulator with physics and the TurtleBot3 worlds: LiDAR, camera, maps, Nav2 (the ROS 2 software that drives a robot to a goal). With ROS 2 Jazzy it is Gazebo Harmonic; the Humble TurtleBot3 packages used by this course's projects use Gazebo Classic (support ended January 2025). Without a graphics card or in WSL the 3D window can be slow or black: run it without the window and watch in RViz (the ROS 2 viewer for robot data).",
+  "my": "physics နဲ့ TurtleBot3 ကမ္ဘာတွေ ပါတဲ့ ပုံမှန်သုံးနေကျ 3D ဆင်မျူလေတာပါ- LiDAR၊ ကင်မရာ၊ မြေပုံ၊ Nav2 (စက်ရုပ်ကို ပန်းတိုင်ဆီ မောင်းပေးတဲ့ ROS 2 ဆော့ဖ်ဝဲ)။ ROS 2 Jazzy နဲ့ဆိုရင် Gazebo Harmonic ဖြစ်ပြီး ဒီသင်ခန်းစာရဲ့ project တွေ သုံးတဲ့ Humble TurtleBot3 package တွေကတော့ Gazebo Classic ကို သုံးပါတယ် (January 2025 မှာ ပံ့ပိုးမှု ရပ်သွားပါပြီ)။ ဂရပ်ဖစ်ကတ် မရှိရင် ဒါမှမဟုတ် WSL ထဲမှာဆိုရင် 3D window က နှေးတာ ဒါမှမဟုတ် မည်းနေတာ ဖြစ်နိုင်ပါတယ်- window မပါဘဲ run ပြီး RViz (စက်ရုပ် ဒေတာ ကြည့်ဖို့ ROS 2 viewer) ထဲမှာ ကြည့်ပါ။",
+  "back": "The usual, commonly used 3D simulator with physics and TurtleBot3 worlds: LiDAR, camera, map, Nav2 (ROS 2 software that drives a robot to a goal). With ROS 2 Jazzy it is Gazebo Harmonic, while the Humble TurtleBot3 packages used by this course's projects use Gazebo Classic (support ended in January 2025). Without a graphics card, or inside WSL, the 3D window may be slow or black: run without a window and view in RViz (a ROS 2 viewer for robot data)."
  },
  "l0/simpick:rows.isaac.learn": {
   "status": "pass-alt",
@@ -3434,9 +3430,9 @@
  },
  "l0/simpick:rows.mvsim.what": {
   "status": "pass-alt",
-  "en": "A lightweight 2.5D simulator: a flat world with simple physics, walls and distance sensors; a ready package for ROS 2 Humble.",
-  "my": "ပေါ့ပါးတဲ့ 2.5D ဆင်မျူလေတာ- ရိုးရှင်းတဲ့ physics၊ နံရံတွေနဲ့ အကွာအဝေး ဆင်ဆာတွေ ပါတဲ့ ပြားပြား ကမ္ဘာ၊ ROS 2 Humble အတွက် အသင့်သုံး package ပါ။",
-  "back": "A lightweight 2.5D simulator: simple physics, a flat world with walls and range sensors, a ready-to-use package for ROS 2 Humble."
+  "en": "A lightweight 2.5D simulator: a flat world with simple physics, walls and distance sensors; a ready package for ROS 2 Humble and Jazzy.",
+  "my": "ပေါ့ပါးတဲ့ 2.5D ဆင်မျူလေတာ- ရိုးရှင်းတဲ့ physics၊ နံရံတွေနဲ့ အကွာအဝေး ဆင်ဆာတွေ ပါတဲ့ ပြားပြား ကမ္ဘာ၊ ROS 2 Humble နဲ့ Jazzy အတွက် အသင့်သုံး package ပါ။",
+  "back": "A lightweight 2.5D simulator: simple physics, a flat world with walls and distance sensors, a ready-to-use package for ROS 2 Humble and Jazzy."
  },
  "l0/simpick:rows.site.learn": {
   "status": "pass",
@@ -3987,9 +3983,9 @@
  },
  "l0/tools:learn": {
   "status": "pass-alt",
-  "en": "You will learn: the four tools under a robot program, and which job each one is for.",
-  "my": "သင်ယူရမှာက- စက်ရုပ် ပရိုဂရမ် တစ်ခုရဲ့ အောက်က tool 4 ခုနဲ့ တစ်ခုချင်းစီ ဘာအလုပ်အတွက်လဲ ဆိုတာပါ။",
-  "back": "What you learn: the 4 tools under a robot program, and what job each one is for."
+  "en": "You will learn: the five layers under a robot program (Linux, terminal, Python, C++, ROS 2), and which job each one is for.",
+  "my": "သင်ယူရမှာက- စက်ရုပ် ပရိုဂရမ် တစ်ခုရဲ့ အောက်က layer 5 ခု (Linux, terminal, Python, C++, ROS 2) နဲ့ တစ်ခုချင်းစီ ဘာအလုပ်အတွက်လဲ ဆိုတာပါ။",
+  "back": "What you will learn: the 5 layers under a robot program (Linux, terminal, Python, C++, ROS 2) and what job each one is for."
  },
  "l0/tools:lines.0": {
   "status": "pass-alt",
@@ -4005,9 +4001,9 @@
  },
  "l0/tools:lines.2": {
   "status": "pass-alt",
-  "en": "ROS 2 is the layer that lets many programs talk. This app uses ROS 2 Humble on Ubuntu 22.04, the pair the example repos use.",
-  "my": "ROS 2 ဆိုတာ ပရိုဂရမ် အများအပြားကို အချင်းချင်း စကားပြောခွင့်ပေးတဲ့ layer ဖြစ်ပါတယ်။ ဒီ app မှာတော့ နမူနာ repository တွေမှာ သုံးတဲ့အတိုင်း Ubuntu 22.04 ပေါ်မှာ ROS 2 Humble ကို သုံးထားပါတယ်။",
-  "back": "ROS 2 is a layer that lets many programs talk to each other. In this app, ROS 2 Humble is used on Ubuntu 22.04, as used in the example repositories."
+  "en": "ROS 2 is the layer that lets many programs talk. This course installs ROS 2 Jazzy on Ubuntu 24.04 (next chapter). The example repos and terminal pages were made on Humble: on Jazzy, read humble as jazzy in paths like /opt/ros/humble.",
+  "my": "ROS 2 ဆိုတာ ပရိုဂရမ် အများကြီးကို အချင်းချင်း စကားပြောနိုင်အောင် လုပ်ပေးတဲ့ layer ပါ။ ဒီသင်ခန်းစာက Ubuntu 24.04 ပေါ်မှာ ROS 2 Jazzy ကို install လုပ်ပါတယ် (နောက်အခန်း)။ နမူနာ repo တွေနဲ့ terminal စာမျက်နှာတွေကို Humble ပေါ်မှာ လုပ်ထားတာပါ- Jazzy မှာဆိုရင် /opt/ros/humble လို လမ်းကြောင်းတွေထဲက humble ကို jazzy လို့ ဖတ်ပါ။",
+  "back": "ROS 2 is the layer that lets many programs talk to each other. This course installs ROS 2 Jazzy on Ubuntu 24.04 (next chapter). The example repos and terminal pages were done on Humble: on Jazzy, read humble as jazzy in paths such as /opt/ros/humble."
  },
  "l0/tools:names.cpp": {
   "status": "pass-alt",
@@ -4017,9 +4013,9 @@
  },
  "l0/tools:names.linux": {
   "status": "pass-alt",
-  "en": "Linux (Ubuntu 22.04)",
-  "my": "Linux (Ubuntu 22.04)",
-  "back": "Linux (Ubuntu 22.04)"
+  "en": "Linux (Ubuntu 24.04)",
+  "my": "Linux (Ubuntu 24.04)",
+  "back": "Linux (Ubuntu 24.04)"
  },
  "l0/tools:names.python": {
   "status": "pass-alt",
@@ -4029,9 +4025,9 @@
  },
  "l0/tools:names.ros": {
   "status": "pass-alt",
-  "en": "ROS 2 Humble",
-  "my": "ROS 2 Humble",
-  "back": "ROS 2 Humble"
+  "en": "ROS 2 Jazzy",
+  "my": "ROS 2 Jazzy",
+  "back": "ROS 2 Jazzy"
  },
  "l0/tools:names.terminal": {
   "status": "pass-alt",
@@ -7280,5 +7276,59 @@
   "en": "Debugging tools: find why the robot does not move",
   "my": "ပြဿနာရှာဖွေရေး တူးလ်များ: စက်ရုပ် ဘာကြောင့် မလှုပ်ရှားသလဲဆိုတာ ရှာပါ",
   "back": "Diagnostic tools: find out why the robot is not moving"
+ },
+ "core:levels.completed": {
+  "status": "pass-alt",
+  "en": "check solved",
+  "my": "ဖြေရှင်းပြီး",
+  "back": "Solved"
+ },
+ "l0/meet:addSensor": {
+  "status": "pass-alt",
+  "en": "Add a sensor",
+  "my": "ဆင်ဆာ ထည့်",
+  "back": "Add sensor"
+ },
+ "l0/meet:addRule": {
+  "status": "pass-alt",
+  "en": "Add a rule: turn away when something is close",
+  "my": "စည်းကမ်းချက် ထည့်- တစ်ခုခု နီးလာရင် ရှောင်လှည့်",
+  "back": "Add rule: if something gets near, turn away"
+ },
+ "l0/meet:sensorOnly": {
+  "status": "pass-alt",
+  "en": "It measures, but nothing reads the numbers: you still steer.",
+  "my": "တိုင်းတော့ တိုင်းပါတယ်၊ ဒါပေမဲ့ အဲဒီ ကိန်းဂဏန်းတွေကို ဘာကမှ မဖတ်ပါဘူး- သင်ပဲ ထိန်းနေရဆဲပါ။",
+  "back": "It does measure, but nothing reads those numbers: you are still the one steering."
+ },
+ "l0/meet:ruleOnly": {
+  "status": "pass-alt",
+  "en": "A rule with nothing to read cannot fire: you still steer.",
+  "my": "ဖတ်စရာ မရှိတဲ့ စည်းကမ်းချက်က အလုပ် မလုပ်နိုင်ပါဘူး- သင်ပဲ ထိန်းနေရဆဲပါ။",
+  "back": "A rule with nothing to read cannot work: you are still the one steering."
+ },
+ "l0/ros:projectTitle": {
+  "status": "pass-alt",
+  "en": "From a real project",
+  "my": "တကယ့် project တစ်ခုကနေ",
+  "back": "From a real project"
+ },
+ "l0/scope:epNote": {
+  "status": "pass-alt",
+  "en": "EP = Engineering Practice: an optional track outside the numbered levels.",
+  "my": "EP = Engineering Practice- နံပါတ်တပ်ထားတဲ့ level တွေ အပြင်ဘက်က မဖြစ်မနေ မဟုတ်တဲ့ လမ်းကြောင်း တစ်ခုပါ။",
+  "back": "EP = Engineering Practice: an optional path outside the numbered levels."
+ },
+ "l3/wall:title": {
+  "status": "pass-alt",
+  "en": "Reactive control: follow a wall",
+  "my": "Reactive control: နံရံတစ်လျှောက် လိုက်မောင်းခြင်း",
+  "note": "2026-11-25 carried unchanged from titles.json at 997ba25 (already live); my-write drops titles without a status row"
+ },
+ "l4/patrol:title": {
+  "status": "pass-alt",
+  "en": "Waypoints and patrol",
+  "my": "Waypoint များနှင့် ကင်းလှည့်ခြင်း",
+  "note": "2026-11-25 carried unchanged from titles.json at 997ba25 (already live); my-write drops titles without a status row"
  }
 }
