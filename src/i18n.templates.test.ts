@@ -22,7 +22,7 @@ describe('Burmese templates reach the page', () => {
     }
   })
   it('English and Japanese keep their own functions', () => {
-    expect(STRINGS.en).not.toBe(STRINGS.my)
+    expect(at(STRINGS.en, 'wv.obstacles')).not.toBe(MY_TEMPLATES.core['wv.obstacles'])
     expect(String((at(STRINGS.en, 'wv.obstacles') as (n: number) => string)(3))).not.toMatch(/[က-႟]/)
   })
 })
