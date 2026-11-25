@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { renderToStaticMarkup } from 'react-dom/server'
 import { lcReaction } from './lcmood'
-import { step } from '../chapters/l5b/lifecycle'
+import { raiseError, step } from '../chapters/l5b/lifecycle'
 import { STRINGS } from '../i18n'
 import LifecycleChapter from '../chapters/l5b/LifecycleChapter'
 
@@ -18,5 +18,9 @@ describe('5.5 mascot reaction from the lifecycle model', () => {
   })
   it('mascot is on the page, named in the page language', () => {
     expect(renderToStaticMarkup(<LifecycleChapter t={STRINGS.en} />)).toContain('Lifecycle buddy robot')
+  })
+  it('a failing transition callback (active -> ErrorProcessing, model raiseError) wobbles', () => {
+    expect(raiseError('active')).toBe('errorprocessing')
+    expect(lcReaction('active', raiseError('active'))).toBe('oops')
   })
 })
