@@ -25,4 +25,11 @@ describe('5.4 QoS chapter scene', () => {
   it('mascot sits next to the verdict, named in the chapter language', () => {
     expect(renderToStaticMarkup(<QosChapter t={STRINGS.ja} />)).toMatch(/QoS の相棒ロボット[\s\S]*data-k="challenge"/)
   })
+  it('late-joiner row: empty while scans fly, at the end shows the maps the model keeps for RViz (default volatile = 0)', () => {
+    expect(renderToStaticMarkup(<QosChapter t={STRINGS.en} />)).toMatch(/data-k="late-row" data-got="-1"/)
+    vi.stubGlobal('matchMedia', (q: string) => ({ matches: q.includes('reduce'), media: q, addEventListener() {}, removeEventListener() {} }))
+    const html = renderToStaticMarkup(<QosChapter t={STRINGS.en} />)
+    expect(html).toMatch(/data-k="late-row" data-got="0"/)
+    expect(html.match(/data-kept="false"/g)).toHaveLength(3)
+  })
 })

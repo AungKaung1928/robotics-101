@@ -33,6 +33,7 @@ export default function QosChapter({ t }: { t: Strings }) {
   const setPub = (q: Qos) => { react(q, sub, depth); setPub0(q); setTS(END) }
   const setSub = (q: Qos) => { react(pub, q, depth); setSub0(q); setTS(END) }
   const setDepth = (d: number) => { react(pub, sub, d); setDepth0(d) }
+  const lateNow = lateJoinerGets(pub, sub, depth)
   const fs = fates(pub, sub), got = received(pub, sub), ok = challengeOk(pub, sub, depth)
   const side = (q: Qos, set: (q: Qos) => void, label: string, k: string) => (
     <div className="stepper-block" data-k={k}>
@@ -66,6 +67,14 @@ export default function QosChapter({ t }: { t: Strings }) {
                 )}
               </g>
             )
+          })}
+        </svg>
+        {/* the late joiner: after the last scan RViz starts and gets the kept maps (model lateJoinerGets), shown once the run is over */}
+        <svg className="side graph" viewBox={`0 0 ${W} 44`} aria-hidden="true" data-k="late-row" data-got={now >= END ? lateNow : -1}>
+          <text className="legend" x={X0 - 10} y={28}>RViz</text>
+          {[...Array(MAPS).keys()].map((i) => {
+            const x = X0 + 60 + i * 36, kept = now >= END && i < lateNow
+            return <rect key={i} x={x} y={10} width={24} height={24} rx={5} className={kept ? 'dot' : undefined} fill={kept ? undefined : 'none'} stroke="var(--rule)" strokeWidth={2} strokeDasharray={kept ? undefined : '4 3'} data-kept={kept} />
           })}
         </svg>
         <Player t={now} setT={setTS} end={END} events={EVENTS} labels={s.anim.steps} speed={1} autoplay={!still()} s={t}
