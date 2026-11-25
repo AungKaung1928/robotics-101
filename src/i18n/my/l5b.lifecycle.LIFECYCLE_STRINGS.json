@@ -1,6 +1,6 @@
 {
  "title": "ROS 2: lifecycle node တွေနဲ့ executor တွေ",
- "learn": "သင်ယူရမှာက: lifecycle (managed) node က ပိတ်ထားတဲ့ အခြေအနေကနေ စပြီး၊ supervisor က configure နဲ့ activate လုပ်ပေးမှ အလုပ်လုပ်ပါတယ်။ node မည်သည့်ဟာမဆို (sensor၊ planner၊ controller) ကို manage လုပ်နိုင်လို့ အစိတ်အပိုင်း အားလုံး အဆင်သင့် ဖြစ်မှသာ sense / think / act ကွင်းဆက် တစ်ခုလုံး ပွင့်လာပါတယ်။ callback ဆိုတာ message ဒါမှမဟုတ် timer ရောက်လာရင် ROS က run တဲ့ function ပါ။ executor က ဘယ် callback ကို ဘယ်အချိန် အလုပ်လုပ်မလဲ ဆုံးဖြတ်ပါတယ်။ callback တစ်ခု နှေးရင် တစ်ခြားတွေကို ပိတ်ထားနိုင်ပါတယ်။",
+ "learn": "သင်ယူရမှာက: lifecycle (managed) node က ပိတ်ထားတဲ့ အခြေအနေကနေ စပြီး၊ supervisor က configure နဲ့ activate လုပ်ပေးမှ အလုပ်လုပ်ပါတယ်။ node ဘာမဆို (sensor၊ planner၊ controller) ကို manage လုပ်နိုင်လို့ အစိတ်အပိုင်း အားလုံး အဆင်သင့် ဖြစ်မှသာ sense / think / act ကွင်းဆက် တစ်ခုလုံး စတင် အလုပ်လုပ်ပါတယ်။ callback ဆိုတာ message ဒါမှမဟုတ် timer ရောက်လာရင် ROS က run တဲ့ function ပါ။ executor က ဘယ် callback ကို ဘယ်အချိန် အလုပ်လုပ်မလဲ ဆုံးဖြတ်ပါတယ်။ callback တစ်ခု နှေးရင် တစ်ခြားတွေကို ပိတ်ထားနိုင်ပါတယ်။",
  "everyday": "နေ့စဉ်ဘဝ ဥပမာ: ဆိုင်တစ်ဆိုင်။ ဆိုင်ကို စီစဉ်ပြီး စင်ပေါ် ပစ္စည်းထည့်တယ် (configure)၊ တံခါးဖွင့်တယ် (activate)၊ အနားယူဖို့ ပိတ်တယ် (deactivate)။ ငွေကောင်တာ တစ်ခုတည်းဆိုရင် နှေးတဲ့ ဝယ်သူတစ်ယောက်ကြောင့် queue တစ်ခုလုံး စောင့်ရပါတယ်။",
  "stateH": "Lifecycle: transition တွေကို နှိပ်ကြည့်ပါ",
  "state": "အခြေအနေ",
@@ -19,7 +19,7 @@
   "ok": "onError အောင်မြင်",
   "fail": "onError မအောင်မြင်"
  },
- "errNote": "ErrorProcessing (အစက်ချ မျဉ်း) က transition state တစ်ခုပါ၊ အဓိက state 4 ခုထဲက တစ်ခု မဟုတ်ပါဘူး။ ERROR ပြန်ပေးတဲ့ ဒါမှမဟုတ် exception ပစ်တဲ့ transition callback က node ကို အဲဒီကို ပို့ပါတယ်။ ဒီစာမျက်နှာက error ခလုတ်က အဲဒါကို ကိုယ်စားပြုပါတယ်။ onError က ရှင်းလင်းပေးပါတယ်- အောင်မြင်ရင် unconfigured ကို ပြန်ရောက်ပြီး မအောင်မြင်ရင် finalized မှာ ဆုံးပါတယ်။",
+ "errNote": "ErrorProcessing (အစက်ချ မျဉ်း) က transition state တစ်ခုပါ၊ အဓိက state 4 ခုထဲက တစ်ခု မဟုတ်ပါဘူး။ ERROR ပြန်ပေးတဲ့ ဒါမှမဟုတ် exception ပစ်တဲ့ transition callback က node ကို အဲဒီကို ပို့ပါတယ်။ ဒီစာမျက်နှာက error ခလုတ်က အဲဒါကို ကိုယ်စားပြုပါတယ်။ onError က ရှင်းပေး (clean up လုပ်ပေး) ပါတယ်- အောင်မြင်ရင် unconfigured ကို ပြန်ရောက်ပြီး မအောင်မြင်ရင် finalized မှာ ဆုံးပါတယ်။",
  "reset": "ပြန်စ",
  "lcNote": "node က ကိုယ့်ဘာသာ state မပြောင်းပါဘူး- supervisor (တခြား node ဒါမှမဟုတ် ros2 lifecycle set) က transition တစ်ခုချင်းစီကို ပို့ပေးပါတယ်။ ခြွင်းချက်ကတော့ မအောင်မြင်တဲ့ transition callback ပါ၊ အဲဒါက node ကို ကိုယ့်ဘာသာ အမှား ကိုင်တွယ်တဲ့ အဆင့်ဆီ ပို့ပါတယ်။ ဒါကြောင့် စနစ်တစ်ခုက အရာအားလုံးကို အရင် configure လုပ်ထားပြီး အစိတ်အပိုင်း အားလုံး အဆင်သင့် ဖြစ်မှ ဖွင့်နိုင်ပါတယ်။",
  "execH": "Executor: node တစ်ခုတည်းမှာ 100 ms control timer နဲ့ 350 ms မြေပုံသိမ်းတာ",
