@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import Mascot from '../../anim/Mascot'
+import { lcReaction } from '../../scenarios/lcmood'
 import { EP, tokenAt } from '../../scenarios/lctoken'
 import '../../scenarios/lifecycle.css'
 import { stringsFor, type Strings } from '../../i18n'
@@ -21,8 +23,10 @@ export default function LifecycleChapter({ t }: { t: Strings }) {
   const [st, setSt] = useState<State>('unconfigured')
   const [msg, setMsg] = useState('')
   const [ex, setEx] = useState<Exec>('single')
+  const [cheer, setCheer] = useState(0)
   const [wob, setWob] = useState(0) // rejected transitions so far: a new key replays the wobble
   const apply = (n: State | null, label: string) => {
+    if (lcReaction(st, n) === 'cheer') setCheer((c) => c + 1)
     if (n) { setSt(n); setMsg('') } else { setMsg(s.rejected(label, s.states[st])); setWob((w) => w + 1) }
   }
   const go = (tr: (typeof TRANSITIONS)[number]) => apply(step(st, tr), tr)
@@ -63,6 +67,7 @@ export default function LifecycleChapter({ t }: { t: Strings }) {
       <div className="panel">
         <p className="learn">{s.learn}</p>
         <p className="note" data-k="everyday">{s.everyday}</p>
+        <Mascot cheer={cheer} oops={wob} size={48} label={s.anim.mascot} />
         <p className="group-h">{s.stateH}</p>
         <div className="stepper" role="group" aria-label={s.stateH}>
           {TRANSITIONS.map((tr) => <button key={tr} type="button" data-tr={tr} onClick={() => go(tr)}>{tr}</button>)}
