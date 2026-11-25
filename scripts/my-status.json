@@ -7724,8 +7724,7 @@
   "status": "pass-alt",
   "en": "Each retry (and each 2.0 s wait at a reached point) calls time.sleep inside a callback. With rclpy's default single-threaded executor, no other callback of this node runs during that time.",
   "my": "retry တစ်ခါစီမှာ (ရောက်ပြီးတဲ့ နေရာမှာ 2.0 s စောင့်တိုင်းမှာလည်း) callback ထဲမှာ time.sleep ကို ခေါ်ပါတယ်။ rclpy ရဲ့ default single-threaded executor နဲ့ဆိုရင် အဲဒီအချိန်အတွင်း ဒီ node ရဲ့ တခြား callback တစ်ခုမှ မ run ပါဘူး။",
-  "back": "Each retry (and with every 2.0 s wait at an already-reached place) calls time.sleep inside the callback. With rclpy's default single-threaded executor, during that time not a single other callback of this node runs.",
-  "note": "grammar fix after blind check (meaning matched); re-check in next blind batch"
+  "back": "At each retry (and also each time it waits 2.0 s at the place where it has arrived), time.sleep is called inside the callback. With rclpy's default single-threaded executor, during that time not one other callback of this node runs."
  },
  "l4/patrol:challenge": {
   "status": "pass-alt",
@@ -7840,5 +7839,233 @@
   "en": "failed, retry off: patrol stops",
   "my": "မအောင်မြင်၊ retry ပိတ်ထားလို့ patrol ရပ်",
   "back": "Failed, retry is off so patrol stopped"
+ },
+ "l5/debug:learn": {
+  "status": "pass-alt",
+  "en": "You will: use five ROS 2 tools on one robot that will not move, read the one clue each gives, and name the fault with as few tools as possible.",
+  "my": "လုပ်ရမှာက- မရွေ့တဲ့ စက်ရုပ် တစ်စီးပေါ်မှာ ROS 2 tool 5 ခုကို သုံးပြီး tool တစ်ခုစီ ပေးတဲ့ သဲလွန်စ တစ်ခုကို ဖတ်ကာ tool အနည်းဆုံးနဲ့ ချို့ယွင်းချက်ကို အမည်တပ်ပါ။",
+  "back": "What to do: On one stationary robot, use 5 ROS 2 tools, read one clue that each tool gives, and name the fault with the fewest tools."
+ },
+ "l5/debug:setup": {
+  "status": "pass-alt",
+  "en": "Your node listens to /scan, needs the transform odom → base_link, and publishes /cmd_vel. The robot stands still. One thing is broken; the symptom looks the same for all three.",
+  "my": "သင့် node က /scan ကို နားထောင်ပြီး odom → base_link transform လိုအပ်ကာ /cmd_vel ကို publish လုပ်ပါတယ်။ စက်ရုပ်က ငြိမ်နေပါတယ်။ တစ်ခုခု ပျက်နေပါတယ်- ချို့ယွင်းချက် 3 ခုလုံးအတွက် လက္ခဏာက အတူတူပါပဲ။",
+  "back": "Your node listens to /scan, needs an odom → base_link transform, and publishes /cmd_vel. The robot is still. Something is broken: the symptom is the same for all 3 faults."
+ },
+ "l5/debug:fault": {
+  "status": "pass-alt",
+  "en": "Hidden fault (pick one, then pretend you do not know it)",
+  "my": "ဝှက်ထားတဲ့ ချို့ယွင်းချက် (တစ်ခု ရွေးပြီး မသိသလို ဟန်ဆောင်ပါ)",
+  "back": "Hidden fault (pick one and pretend not to know)"
+ },
+ "l5/debug:faults.sensor": {
+  "status": "pass-alt",
+  "en": "the laser driver crashed",
+  "my": "laser driver ပျက်ကျသွားတယ်",
+  "back": "The laser driver has crashed"
+ },
+ "l5/debug:faults.remap": {
+  "status": "pass-alt",
+  "en": "node subscribes /scan_raw, not /scan",
+  "my": "node က /scan မဟုတ်ဘဲ /scan_raw ကို subscribe လုပ်နေတယ်",
+  "back": "The node is subscribing to /scan_raw, not /scan"
+ },
+ "l5/debug:faults.tf": {
+  "status": "pass-alt",
+  "en": "no odom → base_link broadcaster",
+  "my": "odom → base_link broadcaster မရှိဘူး",
+  "back": "There is no odom → base_link broadcaster"
+ },
+ "l5/debug:tools": {
+  "status": "pass-alt",
+  "en": "Run a tool",
+  "my": "tool တစ်ခု run ကြည့်",
+  "back": "Try running a tool"
+ },
+ "l5/debug:clues.hzRate": {
+  "status": "pass-alt",
+  "en": "average rate printed every second: /scan is arriving.",
+  "my": "စက္ကန့်တိုင်း ပျမ်းမျှနှုန်းကို ပြပါတယ်- /scan ရောက်နေပါတယ်။",
+  "back": "It shows the average rate per second: /scan is arriving."
+ },
+ "l5/debug:clues.hzNone": {
+  "status": "pass-alt",
+  "en": "nothing printed: no /scan messages at all.",
+  "my": "ဘာမှ မပြပါဘူး- /scan message လုံးဝ မရှိပါဘူး။",
+  "back": "It shows nothing: there are no /scan messages at all."
+ },
+ "l5/debug:clues.echoNone": {
+  "status": "pass-alt",
+  "en": "nothing printed: your node sends no /cmd_vel. This is the symptom, not the cause.",
+  "my": "ဘာမှ မပြပါဘူး- သင့် node က /cmd_vel မပို့ပါဘူး။ ဒါက လက္ခဏာပါ၊ အကြောင်းရင်း မဟုတ်ပါဘူး။",
+  "back": "It shows nothing: your node does not send /cmd_vel. This is the symptom, not the cause."
+ },
+ "l5/debug:clues.graphOk": {
+  "status": "pass-alt",
+  "en": "driver → /scan → your node → /cmd_vel: every topic connected.",
+  "my": "driver → /scan → သင့် node → /cmd_vel- topic အားလုံး ချိတ်ဆက်ထားပါတယ်။",
+  "back": "driver → /scan → your node → /cmd_vel: all topics are connected."
+ },
+ "l5/debug:clues.graphNoDriver": {
+  "status": "pass-alt",
+  "en": "no laser driver node in the graph: nobody publishes /scan.",
+  "my": "graph ထဲမှာ laser driver node မရှိပါဘူး- /scan ကို ဘယ်သူမှ publish မလုပ်ပါဘူး။",
+  "back": "There is no laser driver node in the graph: nobody publishes /scan."
+ },
+ "l5/debug:clues.graphSplit": {
+  "status": "pass-alt",
+  "en": "the driver and your node are not connected. on first start rqt_graph hides topics with one end: pick Nodes/Topics (all) and untick Hide: Dead sinks and Leaf topics to see /scan and /scan_raw as two separate topics.",
+  "my": "driver နဲ့ သင့် node မချိတ်ဆက်ထားပါဘူး။ ပထမဆုံး စဖွင့်တဲ့အခါ rqt_graph က တစ်ဖက်ပဲ ချိတ်ထားတဲ့ topic တွေကို ဖျောက်ထားပါတယ်- /scan နဲ့ /scan_raw ကို သီးခြား topic 2 ခုအဖြစ် မြင်ရဖို့ Nodes/Topics (all) ကို ရွေးပြီး Hide: Dead sinks နဲ့ Leaf topics ကို အမှန်ခြစ် ဖြုတ်ပါ။",
+  "back": "The driver and your node are not connected. When first opened, rqt_graph hides topics connected on only one side: to see /scan and /scan_raw as 2 separate topics, choose Nodes/Topics (all) and uncheck Hide: Dead sinks and Leaf topics."
+ },
+ "l5/debug:clues.tfOk": {
+  "status": "pass-alt",
+  "en": "prints the transform: odom → base_link is there.",
+  "my": "transform ကို ပြပါတယ်- odom → base_link ရှိပါတယ်။",
+  "back": "It shows the transform: odom → base_link exists."
+ },
+ "l5/debug:clues.tfMissing": {
+  "status": "pass-alt",
+  "en": "waits and reports that frame odom does not exist: the transform is missing.",
+  "my": "စောင့်ပြီး frame odom မရှိဘူးလို့ ပြောပါတယ်- transform ပျောက်နေပါတယ်။",
+  "back": "It waits and says frame odom does not exist: the transform is missing."
+ },
+ "l5/debug:clues.bagEmpty": {
+  "status": "pass-alt",
+  "en": "the bag has no /scan messages to play: the problem is on the robot side.",
+  "my": "bag ထဲမှာ ပြန်ဖွင့်စရာ /scan message မရှိပါဘူး- ပြဿနာက စက်ရုပ်ဘက်မှာပါ။",
+  "back": "There are no /scan messages in the bag to replay: the problem is on the robot side."
+ },
+ "l5/debug:clues.bagStill": {
+  "status": "pass-alt",
+  "en": "replayed on your laptop, with no robot: your node still does nothing. The laser data is not the problem.",
+  "my": "စက်ရုပ် မပါဘဲ သင့် လက်ပ်တော့ ပေါ်မှာ ပြန်ဖွင့်ကြည့်တာ- သင့် node က ဘာမှ မလုပ်သေးပါဘူး။ laser ဒေတာက ပြဿနာ မဟုတ်ပါဘူး။",
+  "back": "Replayed on your laptop without the robot: your node does nothing yet. The laser data is not the problem."
+ },
+ "l5/debug:left": {
+  "status": "pass-alt",
+  "en": "Faults still possible",
+  "my": "ဖြစ်နိုင်သေးတဲ့ ချို့ယွင်းချက်",
+  "back": "Faults that are still possible"
+ },
+ "l5/debug:named": {
+  "status": "pass-alt",
+  "en": "Only one fault fits: you found it.",
+  "my": "ချို့ယွင်းချက် တစ်ခုပဲ ကိုက်ပါတယ်- ရှာတွေ့ပါပြီ။",
+  "back": "Only one fault matches: found it."
+ },
+ "l5/debug:reset": {
+  "status": "pass-alt",
+  "en": "Clear the clues",
+  "my": "သဲလွန်စတွေ ရှင်း",
+  "back": "Clues clear"
+ },
+ "l5/debug:simplified": {
+  "status": "pass-alt",
+  "en": "Tool outputs are simplified pictures of what each tool shows, not real terminal output.",
+  "my": "tool output တွေက tool တစ်ခုစီ ပြတာကို ရိုးရှင်းအောင် ပုံဖော်ထားတာပါ၊ တကယ့် terminal output မဟုတ်ပါဘူး။",
+  "back": "The tool outputs are simplified depictions of what each tool shows; they are not real terminal output."
+ },
+ "l5/debug:breakTitle": {
+  "status": "pass-alt",
+  "en": "Break it",
+  "my": "ဖျက်ကြည့်",
+  "back": "Delete and see"
+ },
+ "l5/debug:breakNote": {
+  "status": "pass-alt",
+  "en": "Run only ros2 topic echo /cmd_vel. It looks the same for every fault: it tells you the robot is broken, not why. Watching the output of a node is the symptom; the tools that show its inputs find the cause.",
+  "my": "ros2 topic echo /cmd_vel ကိုပဲ run ကြည့်ပါ။ ချို့ယွင်းချက် တိုင်းအတွက် အတူတူပဲ မြင်ရပါတယ်- စက်ရုပ် ပျက်နေတယ်လို့ ပြောပေမဲ့ ဘာကြောင့်လဲ မပြောပါဘူး။ node တစ်ခုရဲ့ output ကို ကြည့်တာက လက္ခဏာကို ကြည့်တာပါ၊ သူ့ input တွေကို ပြတဲ့ tool တွေက အကြောင်းရင်းကို ရှာတွေ့ပါတယ်။",
+  "back": "Just run ros2 topic echo /cmd_vel. You see the same thing for every fault: it says the robot is broken but not why. Looking at one node's output is looking at the symptom; tools that show its inputs find the cause."
+ },
+ "l5/debug:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: switch faults and find the one tool that names every fault on its own.",
+  "my": "စိန်ခေါ်မှု- ချို့ယွင်းချက်တွေကို ပြောင်းကြည့်ပြီး ချို့ယွင်းချက် တိုင်းကို သူ့ဘာသာ အမည်တပ်နိုင်တဲ့ tool တစ်ခုကို ရှာပါ။",
+  "back": "Challenge: change the faults around and find a tool that can name each fault by itself."
+ },
+ "l5/debug:solved": {
+  "status": "pass-alt",
+  "en": "Solved: rqt_graph shows who is connected to whom. Two faults show as a missing or split link; a clean graph leaves only TF, which tf2_echo confirms. Start there, then confirm with the specific tool.",
+  "my": "အောင်မြင်ပြီ- rqt_graph က ဘယ်သူ ဘယ်သူနဲ့ ချိတ်ထားလဲ ပြပါတယ်။ ချို့ယွင်းချက် 2 ခုက ချိတ်ဆက်မှု ပျောက်နေတာ ဒါမှမဟုတ် ကွဲနေတာအဖြစ် ပေါ်ပါတယ်၊ graph သန့်နေရင် TF ပဲ ကျန်ပြီး tf2_echo က အဲဒါကို အတည်ပြုပါတယ်။ အဲဒီကနေ စပြီး သက်ဆိုင်ရာ tool နဲ့ အတည်ပြုပါ။",
+  "back": "Success: rqt_graph shows who is connected to whom. 2 faults appear as a missing or broken connection; if the graph is clean only TF remains, and tf2_echo confirms that. Starting from there, confirm with the relevant tool."
+ },
+ "l5/debug:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet: try one tool per fault and see which one always tells them apart.",
+  "my": "မရသေးပါ- ချို့ယွင်းချက် တစ်ခုကို tool တစ်ခုစီ စမ်းပြီး ဘယ် tool က သူတို့ကို အမြဲ ခွဲခြားပေးလဲ ကြည့်ပါ။",
+  "back": "Not yet: try one fault with each tool and see which tool always tells them apart."
+ },
+ "l5/debug:used": {
+  "status": "pass-alt",
+  "en": "tools used",
+  "my": "သုံးခဲ့တဲ့ tool",
+  "back": "Tools used"
+ },
+ "l5/debug:docs": {
+  "status": "pass-alt",
+  "en": "ROS 2 docs (Jazzy)",
+  "my": "ROS 2 docs (Jazzy)",
+  "back": "ROS 2 docs (Jazzy)"
+ },
+ "l5/debug:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "ros2 topic hz",
+  "my": "ros2 topic hz",
+  "back": "ros2 topic hz"
+ },
+ "l5/debug:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "prints how often messages arrive on a topic",
+  "my": "topic တစ်ခုပေါ်ကို message တွေ ဘယ်လောက် မကြာခဏ ရောက်လဲ ပြတယ်",
+  "back": "Shows how often messages arrive on a topic"
+ },
+ "l5/debug:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "ros2 topic echo",
+  "my": "ros2 topic echo",
+  "back": "ros2 topic echo"
+ },
+ "l5/debug:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "prints each message on a topic",
+  "my": "topic တစ်ခုပေါ်က message တစ်ခုချင်းစီကို ပြတယ်",
+  "back": "Shows each individual message on a topic"
+ },
+ "l5/debug:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "rqt_graph",
+  "my": "rqt_graph",
+  "back": "rqt_graph"
+ },
+ "l5/debug:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "a window that draws nodes and the topics between them",
+  "my": "node တွေနဲ့ သူတို့ကြားက topic တွေကို ပုံဆွဲပြတဲ့ window",
+  "back": "A window that draws the nodes and the topics between them"
+ },
+ "l5/debug:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "tf2_echo",
+  "my": "tf2_echo",
+  "back": "tf2_echo"
+ },
+ "l5/debug:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "prints the transform between two frames, or says why it cannot",
+  "my": "frame 2 ခုကြားက transform ကို ပြတယ်၊ ဒါမှမဟုတ် ဘာကြောင့် မပြနိုင်လဲ ပြောတယ်",
+  "back": "Shows the transform between 2 frames, or says why it cannot show it"
+ },
+ "l5/debug:glossary.4.0": {
+  "status": "pass-alt",
+  "en": "ros2 bag",
+  "my": "ros2 bag",
+  "back": "ros2 bag"
+ },
+ "l5/debug:glossary.4.1": {
+  "status": "pass-alt",
+  "en": "records topics to a file and plays them back later",
+  "my": "topic တွေကို ဖိုင်ထဲ မှတ်တမ်းတင်ပြီး နောက်မှ ပြန်ဖွင့်ပေးတယ်",
+  "back": "Records topics into a file and plays them back later"
  }
 }
