@@ -8616,5 +8616,12 @@
   "my": "အမှားရှာ အဖော် စက်ရုပ်- အကြောင်းရင်း မှန်ရင် ပျော်တယ်၊ မှားရင် ယိမ်းယိုင်တယ်",
   "back": "Error-finding companion robot: if the cause is correct, it is happy; if wrong, it sways unsteadily.",
   "note": "pre-translated from anim 752dc28 before it reached rc; ships when the English is in the tree"
+ },
+ "l5/debug:anim.mascot": {
+  "status": "pass-alt",
+  "en": "Debug buddy robot: thinks over each clue, happy when one fault is left, wobbly when a tool told nothing new",
+  "my": "အမှားရှာ အဖော် စက်ရုပ်- သဲလွန်စ တစ်ခုစီကို စဉ်းစားပါတယ်၊ ချို့ယွင်းချက် တစ်ခုပဲ ကျန်ရင် ပျော်ပါတယ်၊ tool တစ်ခုက ဘာအသစ်မှ မပြောရင် ယိမ်းယိုင်ပါတယ်",
+  "back": "Debug buddy robot: it considers each clue, is happy if only one fault is left, wobbles if a tool says nothing new.",
+  "note": "pre-translated from anim d9d6df7 (cg/r101-anim5) before it reached rc; goes into l5.debug.DEBUG_STRINGS.json anim.mascot when the English is in the tree"
  }
 }
