@@ -19,4 +19,7 @@ describe('5.4 QoS chapter scene', () => {
     expect(html).toContain('送信 20/20 · 受信 20')
     expect(phases(html).filter((p) => p === 'arrived')).toHaveLength(20)
   })
+  it('verdict shows the depth that decides the challenge', () => {
+    expect(renderToStaticMarkup(<QosChapter t={STRINGS.en} />)).toMatch(/data-k="challenge">[^<]*· history depth \(keep last\) 10<\/p>/)
+  })
 })
