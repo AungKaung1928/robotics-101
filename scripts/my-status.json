@@ -6645,9 +6645,9 @@
  },
  "l5b/fieldfail:fails.beam.cause": {
   "status": "pass-alt",
-  "en": "The wall distance used one side arc; when the robot turned toward the wall (yaw = heading angle) the reading grew by 1/cos(yaw)",
-  "my": "နံရံ အကွာအဝေးကို ဘေးဘက် ထောင့်ပိုင်း တစ်ခုတည်းနဲ့ တိုင်းထားတယ်၊ စက်ရုပ်က နံရံဘက် လှည့်သွားရင် (yaw = ဦးတည်ရာ ထောင့်) တန်ဖိုးက 1/cos(yaw) ဆ ကြီးလာတယ်",
-  "back": "The wall distance is measured with just one side angle; if the robot turns toward the wall (yaw = heading angle) the value becomes 1/cos(yaw) times larger."
+  "en": "The wall distance used one side arc (a group of laser beams on one side); when the robot turned toward the wall (yaw = heading angle) the reading grew the more it turned, by 1/cos(yaw)",
+  "my": "နံရံ အကွာအဝေးကို ဘေးဘက် arc တစ်ခုတည်း (တစ်ဘက်က laser beam အုပ်စု) နဲ့ တိုင်းထားတယ်၊ စက်ရုပ်က နံရံဘက် လှည့်သွားရင် (yaw = ဦးတည်ရာ ထောင့်) လှည့်လေ ဖတ်ချက် ကြီးလေ ဖြစ်ပြီး 1/cos(yaw) ဆ ကြီးလာတယ်",
+  "back": "blind check round 6 (logs/my-r6-blind2.txt in nightshift)"
  },
  "l5b/fieldfail:fails.beam.fix": {
   "status": "pass-alt",
@@ -6681,9 +6681,9 @@
  },
  "l5b/fieldfail:fails.index.cause": {
   "status": "pass-alt",
-  "en": "Negative angles were clamped to scan index 0, which is the front beam when angle_min = 0",
-  "my": "အနုတ်ထောင့်တွေကို scan index 0 ဆီ ဖိထည့်ထားပြီး၊ angle_min = 0 ဆိုရင် အဲဒါက ရှေ့ဆုံး beam ဖြစ်နေတယ်",
-  "back": "Negative angles are forced into scan index 0, and if angle_min = 0, that is the front-most beam."
+  "en": "Negative angles were clamped (forced) to scan index 0 (the scan index says which laser ray, counted from the first), which is the front beam when angle_min = 0",
+  "my": "အနုတ်ထောင့်တွေကို scan index 0 အဖြစ် ကန့်သတ်ထားပါတယ် (clamp) (scan index ဆိုတာ ပထမဆုံးကနေ ရေတွက်ပြီး ဘယ် laser ray လဲ ပြောတာပါ)၊ angle_min = 0 ဆိုရင် index 0 က ရှေ့တည့်တည့် beam ဖြစ်ပါတယ်",
+  "back": "blind check round 6 (logs/my-r6-blind2.txt in nightshift)"
  },
  "l5b/fieldfail:fails.index.symptom": {
   "status": "pass-alt",
@@ -6771,9 +6771,9 @@
  },
  "l5b/fieldfail:learn": {
   "status": "pass-alt",
-  "en": "You will learn: most robot bugs show up as strange behaviour, not as an error message. You read the symptom, guess the cause, then prove it. These six are written down in the author's own public repos; all happened in simulation (Gazebo, MoveIt), none on a real robot.",
-  "my": "သင်ယူရမှာက: စက်ရုပ် bug အများစုက အမှား message အဖြစ် မပေါ်ဘဲ ထူးဆန်းတဲ့ အပြုအမူအဖြစ် ပေါ်ပါတယ်။ လက္ခဏာကို ဖတ်၊ အကြောင်းရင်းကို ခန့်မှန်းပြီး၊ ပြီးမှ သက်သေပြရပါတယ်။ ဒီ 6 ခုကို ရေးသူရဲ့ ကိုယ်ပိုင် public repo တွေမှာ မှတ်ထားပါတယ်။ အားလုံး ဆင်မျူလေတာ (Gazebo, MoveIt) ထဲမှာ ဖြစ်ခဲ့တာပါ၊ စက်ရုပ်အစစ်မှာ မဖြစ်ခဲ့ပါဘူး။",
-  "back": "What you learn: most robot bugs do not show up as an error message but as strange behavior. Read the symptom, guess the cause, and only then prove it. These 6 are recorded in the author's own public repos. All of them happened in simulators (Gazebo, MoveIt), not on a real robot."
+  "en": "You will learn: most robot bugs show up as strange behaviour, not as an error message. You read the symptom, guess the cause, then prove it: the symptom is what you see the robot do; the cause is in the code or data behind it. These six are written down in the author's own public repos; all happened in simulation (Gazebo, MoveIt), none on a real robot.",
+  "my": "သင်ယူရမှာက: စက်ရုပ် bug အများစုက အမှား message အဖြစ် မပေါ်ဘဲ ထူးဆန်းတဲ့ အပြုအမူအဖြစ် ပေါ်ပါတယ်။ လက္ခဏာကို ဖတ်၊ အကြောင်းရင်းကို ခန့်မှန်းပြီး၊ ပြီးမှ သက်သေပြရပါတယ်- လက္ခဏာက စက်ရုပ် လုပ်တာကို သင် မြင်ရတာပါ၊ အကြောင်းရင်းက အဲဒီနောက်ကွယ်က ကုဒ် ဒါမှမဟုတ် data ထဲမှာ ရှိပါတယ်။ ဒီ bug 6 ခုကို ရေးသူရဲ့ ကိုယ်ပိုင် public repo တွေမှာ မှတ်ထားပါတယ်။ အားလုံး simulation (Gazebo, MoveIt) ထဲမှာ ဖြစ်ခဲ့တာပါ၊ စက်ရုပ်အစစ်မှာ မဖြစ်ခဲ့ပါဘူး။",
+  "back": "re-translated round 6 (blind check of r6 strings: logs/my-r6-blind.txt in nightshift)"
  },
  "l5b/fieldfail:measured": {
   "status": "pass-alt",
@@ -6939,9 +6939,9 @@
  },
  "l5b/lifecycle:learn": {
   "status": "pass-alt",
-  "en": "You will learn: a lifecycle (managed) node starts switched off and only works after a supervisor configures and activates it. An executor decides which callback runs when; one slow callback can hold up the others.",
-  "my": "သင်ယူရမှာက: lifecycle (managed) node က ပိတ်ထားတဲ့ အခြေအနေကနေ စပြီး၊ supervisor က configure နဲ့ activate လုပ်ပေးမှ အလုပ်လုပ်ပါတယ်။ executor က ဘယ် callback ကို ဘယ်အချိန် အလုပ်လုပ်မလဲ ဆုံးဖြတ်ပါတယ်။ callback တစ်ခု နှေးရင် တစ်ခြားတွေကို ပိတ်ထားနိုင်ပါတယ်။",
-  "back": "What you learn: a lifecycle (managed) node starts from the off state and works only after the supervisor does configure and activate. The executor decides which callback runs when. If one callback is slow, it can block the others."
+  "en": "You will learn: a lifecycle (managed) node starts switched off and only works after a supervisor configures and activates it. Any node (sensor, planner, controller) can be managed, so the whole sense / think / act chain switches on only when every part is ready. A callback is a function ROS runs when a message or timer arrives; an executor decides which callback runs when; one slow callback can hold up the others.",
+  "my": "သင်ယူရမှာက: lifecycle (managed) node က ပိတ်ထားတဲ့ အခြေအနေကနေ စပြီး၊ supervisor က configure နဲ့ activate လုပ်ပေးမှ အလုပ်လုပ်ပါတယ်။ node ဘာမဆို (ဆင်ဆာ၊ planner၊ controller) ကို manage လုပ်နိုင်လို့ အစိတ်အပိုင်း အားလုံး အဆင်သင့် ဖြစ်မှသာ sense / think / act ကွင်းဆက် တစ်ခုလုံး စတင် အလုပ်လုပ်ပါတယ်။ callback ဆိုတာ message ဒါမှမဟုတ် timer ရောက်လာရင် ROS က run တဲ့ function ပါ။ executor က ဘယ် callback ကို ဘယ်အချိန် အလုပ်လုပ်မလဲ ဆုံးဖြတ်ပါတယ်။ callback တစ်ခု နှေးရင် တစ်ခြားတွေကို ပိတ်ထားနိုင်ပါတယ်။",
+  "back": "re-translated round 6 (blind check of r6 strings: logs/my-r6-blind.txt in nightshift)"
  },
  "l5b/lifecycle:no": {
   "status": "pass-alt",
@@ -7053,9 +7053,9 @@
  },
  "l5b/qos:challenge": {
   "status": "pass-alt",
-  "en": "Challenge: RViz starts after the map was published. Make it still get the map.",
-  "my": "စိန်ခေါ်မှု: မြေပုံ publish လုပ်ပြီးမှ RViz စပါတယ်။ ဒါပေမယ့် မြေပုံ ရအောင် လုပ်ပါ။",
-  "back": "Challenge: RViz starts after the map is published. But make it so the map is received."
+  "en": "Challenge: RViz starts after the map was published. Make it still get the map, but only the newest one: older maps are wasted data.",
+  "my": "စိန်ခေါ်မှု: မြေပုံကို publish လုပ်ပြီးမှ RViz စတင်ပါတယ်။ ဒါပေမယ့် RViz က မြေပုံကို ရရမယ်၊ အသစ်ဆုံး တစ်ခုတည်းကိုပဲ ရရမယ်- အဟောင်းတွေက data ကို အလဟသ ဖြုန်းတီးတာပါ။",
+  "back": "re-translated round 6 (blind check of r6 strings: logs/my-r6-blind.txt in nightshift)"
  },
  "l5b/qos:depth": {
   "status": "pass-alt",
@@ -7161,15 +7161,15 @@
  },
  "l5b/qos:learn": {
   "status": "pass-alt",
-  "en": "You will learn: every publisher and subscriber carries QoS settings (how hard to deliver, whether to keep old messages). If publisher and subscriber ask for incompatible settings, ROS 2 does not connect them: no exception, only a warning line in the log (rclcpp default).",
-  "my": "သင်ယူရမှာက- publisher နဲ့ subscriber တိုင်းမှာ QoS setting တွေ ပါပါတယ် (ဘယ်လောက် သေချာအောင် ပို့မလဲ၊ message အဟောင်းတွေ သိမ်းထားမလား)။ publisher နဲ့ subscriber က မကိုက်တဲ့ setting တွေ တောင်းရင် ROS 2 က သူတို့ကို မချိတ်ပေးပါဘူး- exception မရှိပါဘူး၊ log ထဲမှာ သတိပေးချက် တစ်ကြောင်းပဲ ပေါ်ပါတယ် (rclcpp default)။",
-  "back": "What you learn: every publisher and subscriber has QoS settings (how reliably to send, whether to keep old messages). If publisher and subscriber ask for mismatched settings, ROS 2 does not connect them: no exception, only one warning line appears in the log (rclcpp default)."
+  "en": "You will learn: every publisher and subscriber carries QoS settings (how hard to deliver, whether to keep old messages). They are the wire between sense and think: if the settings do not fit, the scan never reaches the node. If publisher and subscriber ask for incompatible settings, ROS 2 does not connect them: no exception, only a warning line in the log (rclcpp default).",
+  "my": "သင်ယူရမှာက- publisher နဲ့ subscriber တိုင်းမှာ QoS setting တွေ ပါပါတယ် (ဘယ်လောက် သေချာအောင် ပို့မလဲ၊ message အဟောင်းတွေ သိမ်းထားမလား)။ အဲဒါတွေက sense နဲ့ think ကြားက ကြိုးပါ- setting တွေ မကိုက်ရင် scan က node ဆီ ဘယ်တော့မှ မရောက်ပါဘူး။ publisher နဲ့ subscriber က မကိုက်တဲ့ setting တွေ တောင်းရင် ROS 2 က သူတို့ကို မချိတ်ပေးပါဘူး- exception မရှိပါဘူး၊ log ထဲမှာ သတိပေးချက် တစ်ကြောင်းပဲ ပေါ်ပါတယ် (rclcpp default)။",
+  "back": "re-translated round 6 (blind check of r6 strings: logs/my-r6-blind.txt in nightshift)"
  },
  "l5b/qos:lines.0": {
   "status": "pass-alt",
-  "en": "Reliable: a dropped message is sent again. Best effort: a dropped message is gone, but nothing waits for it. Default for both sides: reliable, volatile, keep last 10.",
-  "my": "Reliable: ကျသွားတဲ့ message ကို ပြန်ပို့ပါတယ်။ Best effort: ကျသွားရင် ပျောက်သွားပေမယ့် ဘာကိုမှ မစောင့်ပါဘူး။ နှစ်ဖက်စလုံး default: reliable, volatile, keep last 10။",
-  "back": "Reliable: resends a dropped message. Best effort: if dropped it is lost, but it waits for nothing. Default for both sides: reliable, volatile, keep last 10."
+  "en": "Reliable: a dropped message is sent again. Best effort: a dropped message is gone, but nothing waits for it. Default for both sides: reliable, volatile, keep last 10 (volatile and keep last are explained below).",
+  "my": "Reliable: ကျသွားတဲ့ message ကို ပြန်ပို့ပါတယ်။ Best effort: ကျသွားရင် ပျောက်သွားပေမယ့် ဘာကိုမှ မစောင့်ပါဘူး။ နှစ်ဖက်စလုံး default: reliable, volatile, keep last 10 (volatile နဲ့ keep last ကို အောက်မှာ ရှင်းပြထားပါတယ်)။",
+  "back": "blind check round 6 (logs/my-r6-blind2.txt in nightshift)"
  },
  "l5b/qos:lines.1": {
   "status": "pass-alt",
@@ -7386,9 +7386,9 @@
  },
  "l5b/lifecycle:errNote": {
   "status": "pass-alt",
-  "en": "ErrorProcessing (dashed) is a transition state, not one of the 4 primary states. A transition callback that returns ERROR or throws sends it there. onError cleans up: success returns to unconfigured, failure ends in finalized.",
-  "my": "ErrorProcessing (အစက်ချ မျဉ်း) က transition state တစ်ခုပါ၊ အဓိက state 4 ခုထဲက တစ်ခု မဟုတ်ပါဘူး။ ERROR ပြန်ပေးတဲ့ ဒါမှမဟုတ် exception ပစ်တဲ့ transition callback က node ကို အဲဒီကို ပို့ပါတယ်။ onError က ရှင်းလင်းပေးပါတယ်- အောင်မြင်ရင် unconfigured ကို ပြန်ရောက်ပြီး မအောင်မြင်ရင် finalized မှာ ဆုံးပါတယ်။",
-  "back": "ErrorProcessing (dotted line) is a transition state; it is not one of the 4 main states. A transition callback that returns ERROR or throws an exception sends the node there. onError cleans up: on success it returns to unconfigured, and on failure it ends in finalized."
+  "en": "ErrorProcessing (dashed) is a transition state, not one of the 4 primary states. A transition callback that returns ERROR or throws sends it there; the error button on this page stands for that. onError cleans up: success returns to unconfigured, failure ends in finalized.",
+  "my": "ErrorProcessing (အစက်ချ မျဉ်း) က transition state တစ်ခုပါ၊ အဓိက state 4 ခုထဲက တစ်ခု မဟုတ်ပါဘူး။ ERROR ပြန်ပေးတဲ့ ဒါမှမဟုတ် exception ပစ်တဲ့ transition callback က node ကို အဲဒီကို ပို့ပါတယ်။ ဒီစာမျက်နှာက error ခလုတ်က အဲဒါကို ကိုယ်စားပြုပါတယ်။ onError က ရှင်းပေး (clean up လုပ်ပေး) ပါတယ်- အောင်မြင်ရင် unconfigured ကို ပြန်ရောက်ပြီး မအောင်မြင်ရင် finalized မှာ ဆုံးပါတယ်။",
+  "back": "re-translated round 6 (blind check of r6 strings: logs/my-r6-blind.txt in nightshift)"
  },
  "l5b/lifecycle:trap": {
   "status": "pass-alt",
@@ -7416,9 +7416,9 @@
  },
  "l3/wall:learn": {
   "status": "pass-alt",
-  "en": "You will learn: a reactive controller looks at the latest scan, computes one error and turns it into a turn rate, 20 times a second. No map, no plan.",
-  "my": "သင်ယူရမှာက- reactive controller က နောက်ဆုံး scan ကို ကြည့်ပြီး error တစ်ခု တွက်ကာ အဲဒါကို လှည့်နှုန်း အဖြစ် ပြောင်းပါတယ်၊ တစ်စက္ကန့်ကို 20 ကြိမ်ပါ။ မြေပုံ မလို၊ plan မလိုပါဘူး။",
-  "back": "What you learn: a reactive controller looks at the latest scan, computes an error, and converts that into a turning rate, 20 times per second. No map needed, no plan needed."
+  "en": "You will learn: the think step of sense / think / act, with no map. TurtleBot3's laser gives a ring of distances (a scan); a reactive controller looks at the latest scan and turns it into a turn rate, 20 times a second. No map, no plan.",
+  "my": "သင်ယူရမှာက- sense / think / act ထဲက think အဆင့်ကို မြေပုံ မပါဘဲ လုပ်တာပါ။ TurtleBot3 ရဲ့ laser က အကွာအဝေး အဝိုင်း တစ်ခု (scan တစ်ခု) ပေးပါတယ်၊ reactive controller က နောက်ဆုံး scan ကို ကြည့်ပြီး လှည့်နှုန်း အဖြစ် ပြောင်းပါတယ်၊ တစ်စက္ကန့်ကို 20 ကြိမ်ပါ။ မြေပုံ မလို၊ plan မလိုပါဘူး။",
+  "back": "re-translated round 6 (blind check of r6 strings: logs/my-r6-blind.txt in nightshift)"
  },
  "l3/wall:everyday": {
   "status": "pass-alt",
@@ -7434,9 +7434,9 @@
  },
  "l3/wall:lines.1": {
   "status": "pass-alt",
-  "en": "Turn rate = kp × error + kd × (how fast the error changes), capped at 1.0 rad/s.",
-  "my": "လှည့်နှုန်း = kp × error + kd × (error ဘယ်လောက် မြန်မြန် ပြောင်းလဲလဲ) ဖြစ်ပြီး 1.0 rad/s ထက် မကျော်အောင် ကန့်သတ်ထားပါတယ်။",
-  "back": "Turning rate = kp × error + kd × (how fast the error changes, however fast), and it is limited so it does not exceed 1.0 rad/s."
+  "en": "Turn rate = kp × error + kd × (how fast the error changes), capped at 1.0 rad/s (1 rad ≈ 57°).",
+  "my": "လှည့်နှုန်း = kp × error + kd × (error ပြောင်းလဲနေတဲ့ အမြန်နှုန်း) ဖြစ်ပြီး 1.0 rad/s ထက် မကျော်အောင် ကန့်သတ်ထားပါတယ် (1 rad ≈ 57°)။",
+  "back": "re-translated round 6 (blind check of r6 strings: logs/my-r6-blind.txt in nightshift)"
  },
  "l3/wall:lines.2": {
   "status": "pass-alt",
@@ -7518,9 +7518,9 @@
  },
  "l3/wall:challenge": {
   "status": "pass-alt",
-  "en": "Challenge: starting 1.0 m from the wall, pick a kp that settles within 10 s, never triggers a too-close turn or a collision avoid and never turns past 1 rad.",
-  "my": "စိန်ခေါ်မှု- နံရံနဲ့ 1.0 m အကွာကနေ စပြီး 10 s အတွင်း ငြိမ်သွားတဲ့ kp ကို ရွေးပါ၊ နီးလွန်းလို့ လှည့်တာ ဒါမှမဟုတ် တိုက်မိမှု ရှောင်တာ တစ်ခါမှ မဖြစ်ရပါဘူး၊ 1 rad ထက်လည်း ဘယ်တော့မှ မလှည့်ရပါဘူး။",
-  "back": "Challenge: starting from 1.0 m away from the wall, choose a kp that settles within 10 s, with no turning because of being too close or any collision avoidance even once, and never turning more than 1 rad."
+  "en": "Challenge: starting 1.0 m from the wall, pick a kp that settles within 10 s, never triggers a too-close turn or a collision-avoid turn (both explained if they happen) and never turns past 1 rad.",
+  "my": "စိန်ခေါ်မှု- နံရံနဲ့ 1.0 m အကွာကနေ စပြီး 10 s အတွင်း ငြိမ်သွားတဲ့ kp ကို ရွေးပါ၊ နီးလွန်းလို့ လှည့်တာ ဒါမှမဟုတ် တိုက်မိမှု ရှောင်ပြီး လှည့်တာ တစ်ခါမှ မဖြစ်ရပါဘူး (ဖြစ်ရင် နှစ်ခုလုံးကို ရှင်းပြပါမယ်)၊ 1 rad ထက်လည်း ဘယ်တော့မှ မလှည့်ရပါဘူး။",
+  "back": "blind check round 6 (logs/my-r6-blind2.txt in nightshift)"
  },
  "l3/wall:solved": {
   "status": "pass-alt",
@@ -7536,9 +7536,9 @@
  },
  "l3/wall:spunNote": {
   "status": "pass-alt",
-  "en": "Past 1 rad the robot faces the wall too steeply for the two-beam estimate (it is clamped there), so this model stops. It shows the controller left its working range, not what the real robot then does.",
-  "my": "1 rad ကျော်သွားရင် စက်ရုပ်က နံရံကို စောင်းလွန်းစွာ မျက်နှာမူနေလို့ beam 2 ခုနဲ့ ခန့်မှန်းတာ မမှန်တော့ပါဘူး (အဲဒီမှာ ကန့်သတ်ထားပါတယ်)၊ ဒါကြောင့် ဒီ model က ရပ်သွားပါတယ်။ ဒါက controller က သူ အလုပ်လုပ်နိုင်တဲ့ အပိုင်းအခြားကနေ ထွက်သွားတာကို ပြတာပါ၊ တကယ့် စက်ရုပ် နောက်မှာ ဘာလုပ်မလဲဆိုတာ မဟုတ်ပါဘူး။",
-  "back": "If it goes beyond 1 rad, the robot faces the wall too obliquely, so the estimate made with 2 beams is no longer correct (it is limited there), therefore this model stops. This shows the controller going out of the range in which it can work; it is not what a real robot would do afterwards."
+  "en": "Past 1 rad the robot faces the wall too steeply for the two-beam estimate (the wall is measured with two right-side laser beams; past 1 rad it is clamped), so this model stops. It shows the controller left its working range, not what the real robot then does.",
+  "my": "1 rad ကျော်သွားရင် စက်ရုပ်က နံရံကို စောင်းလွန်းစွာ မျက်နှာမူနေလို့ beam 2 ခုနဲ့ ခန့်မှန်းတာ မမှန်တော့ပါဘူး (နံရံကို ညာဘက် laser beam 2 ခုနဲ့ တိုင်းပါတယ်၊ 1 rad ကျော်ရင် ကန့်သတ်ထားပါတယ်)၊ ဒါကြောင့် ဒီ model က ရပ်သွားပါတယ်။ ဒါက controller က သူ အလုပ်လုပ်နိုင်တဲ့ အပိုင်းအခြားကနေ ထွက်သွားတာကို ပြတာပါ၊ တကယ့် စက်ရုပ် နောက်မှာ ဘာလုပ်မလဲဆိုတာ မဟုတ်ပါဘူး။",
+  "back": "re-translated round 6 (blind check of r6 strings: logs/my-r6-blind.txt in nightshift)"
  },
  "l3/wall:avoidNote": {
   "status": "pass-alt",
@@ -7608,9 +7608,9 @@
  },
  "l4/patrol:learn": {
   "status": "pass-alt",
-  "en": "You will learn: a patrol is a small program on top of Nav2. It sends one goal at a time, waits for the result, and decides what to do next.",
-  "my": "သင်ယူရမှာက- patrol ဆိုတာ Nav2 အပေါ်မှာ run တဲ့ ပရိုဂရမ် အသေးလေး တစ်ခုပါ။ တစ်ကြိမ်မှာ goal တစ်ခုပဲ ပို့ပြီး ရလဒ်ကို စောင့်ကာ နောက်ဘာလုပ်မလဲ ဆုံးဖြတ်ပါတယ်။",
-  "back": "What you learn: a patrol is a small program that runs on top of Nav2. It sends just one goal at a time, waits for the result, and decides what to do next."
+  "en": "You will learn: a patrol is a small program on top of Nav2 (ROS 2's ready-made driving stack: give it a target pose, it plans a path and drives there). The patrol is the think step of sense / think / act, one level up: it sends one goal at a time, waits for the result, and decides what to do next.",
+  "my": "သင်ယူရမှာက- patrol ဆိုတာ Nav2 (ROS 2 ရဲ့ အသင့်သုံး မောင်းနှင်စနစ်- target pose တစ်ခု ပေးရင် လမ်းကြောင်း စီစဉ်ပြီး အဲဒီနေရာကို မောင်းသွားပါတယ်) အပေါ်မှာ run တဲ့ ပရိုဂရမ် အသေးလေး တစ်ခုပါ။ patrol က sense / think / act ထဲက think အဆင့်ပါ၊ တစ်ဆင့် အမြင့်မှာပါ- တစ်ကြိမ်မှာ goal တစ်ခုပဲ ပို့ပြီး ရလဒ်ကို စောင့်ပြီး နောက်ဘာလုပ်မလဲ ဆုံးဖြတ်ပါတယ်။",
+  "back": "re-translated round 6 (blind check of r6 strings: logs/my-r6-blind.txt in nightshift)"
  },
  "l4/patrol:everyday": {
   "status": "pass-alt",
@@ -7722,15 +7722,15 @@
  },
  "l4/patrol:sleepNote": {
   "status": "pass-alt",
-  "en": "Each retry (and each 2.0 s wait at a reached point) calls time.sleep inside a callback. With rclpy's default single-threaded executor, no other callback of this node runs during that time.",
-  "my": "retry တစ်ခါစီမှာ (ရောက်ပြီးတဲ့ နေရာမှာ 2.0 s စောင့်တိုင်းမှာလည်း) callback ထဲမှာ time.sleep ကို ခေါ်ပါတယ်။ rclpy ရဲ့ default single-threaded executor နဲ့ဆိုရင် အဲဒီအချိန်အတွင်း ဒီ node ရဲ့ တခြား callback တစ်ခုမှ မ run ပါဘူး။",
-  "back": "At each retry (and also each time it waits 2.0 s at the place where it has arrived), time.sleep is called inside the callback. With rclpy's default single-threaded executor, during that time not one other callback of this node runs."
+  "en": "While the patrol waits, it cannot react to anything else. Each retry (and each 2.0 s wait at a reached point) calls time.sleep (a pause) inside a callback (the function ROS runs when a message or timer arrives). With rclpy's default single-threaded executor (one callback at a time), no other callback of this node runs during that time.",
+  "my": "patrol စောင့်နေစဉ် တခြား ဘာကိုမှ တုံ့ပြန်လို့ မရပါဘူး။ retry တစ်ခါစီမှာ (ရောက်ပြီးတဲ့ နေရာမှာ 2.0 s စောင့်တိုင်းမှာလည်း) callback (message ဒါမှမဟုတ် timer ရောက်လာရင် ROS က run တဲ့ function) ထဲမှာ time.sleep (ခဏရပ်တာ) ကို ခေါ်ပါတယ်။ rclpy ရဲ့ default single-threaded executor (တစ်ကြိမ်မှာ callback တစ်ခုပဲ) နဲ့ဆိုရင် အဲဒီအချိန်အတွင်း ဒီ node ရဲ့ တခြား callback တစ်ခုမှ မ run ပါဘူး။",
+  "back": "blind check round 6 (logs/my-r6-blind2.txt in nightshift)"
  },
  "l4/patrol:challenge": {
   "status": "pass-alt",
-  "en": "Challenge: point_3 is blocked, retry and loop on. How many goals are sent from the first try at point_3 until the robot reaches point_5?",
-  "my": "စိန်ခေါ်မှု- point_3 ကို ပိတ်ဆို့ထားပြီး retry နဲ့ loop ဖွင့်ထားပါတယ်။ point_3 ကို ပထမဆုံး ကြိုးစားတဲ့ အချိန်ကနေ စက်ရုပ် point_5 ရောက်တဲ့အထိ goal ဘယ်နှစ်ခု ပို့လဲ။",
-  "back": "Challenge: point_3 is blocked, and retry and loop are enabled. From the first attempt at point_3 until the robot reaches point_5, how many goals are sent?"
+  "en": "Challenge: point_3 is blocked, retry and loop on. How many goals are sent from the first try at point_3 until the robot reaches point_5? (The file has no point_4, so point_5 comes next. Count the goal that reaches point_5.)",
+  "my": "စိန်ခေါ်မှု- point_3 ကို ပိတ်ဆို့ထားပြီး retry နဲ့ loop ဖွင့်ထားပါတယ်။ point_3 ကို ပထမဆုံး ကြိုးစားတဲ့ အချိန်ကနေ စက်ရုပ် point_5 ရောက်တဲ့အထိ goal ဘယ်နှစ်ခု ပို့လဲ။ (ဖိုင်ထဲမှာ point_4 မရှိလို့ နောက်တစ်ခုက point_5 ပါ။ point_5 ကို ရောက်တဲ့ goal ကိုပါ ရေတွက်ပါ။)",
+  "back": "re-translated round 6 (blind check of r6 strings: logs/my-r6-blind.txt in nightshift)"
  },
  "l4/patrol:solved": {
   "status": "pass-alt",
@@ -7848,9 +7848,9 @@
  },
  "l5/debug:setup": {
   "status": "pass-alt",
-  "en": "Your node listens to /scan, needs the transform odom → base_link, and publishes /cmd_vel. The robot stands still. One thing is broken; the symptom looks the same for all three.",
-  "my": "သင့် node က /scan ကို နားထောင်ပြီး odom → base_link transform လိုအပ်ကာ /cmd_vel ကို publish လုပ်ပါတယ်။ စက်ရုပ်က ငြိမ်နေပါတယ်။ တစ်ခုခု ပျက်နေပါတယ်- ချို့ယွင်းချက် 3 ခုလုံးအတွက် လက္ခဏာက အတူတူပါပဲ။",
-  "back": "Your node listens to /scan, needs an odom → base_link transform, and publishes /cmd_vel. The robot is still. Something is broken: the symptom is the same for all 3 faults."
+  "en": "Sense, think, act: /scan is sense, your node thinks, /cmd_vel is act. The node also needs the transform odom → base_link (where the robot body is now, measured from where it started; a broadcaster node sends it). The TurtleBot3 stands still. One link is broken; the symptom looks the same for all three, like a TV with no picture: check the plug, the cable and the input before the screen.",
+  "my": "Sense, think, act- /scan က sense ပါ၊ သင့် node က စဉ်းစားပါတယ်၊ /cmd_vel က act ပါ။ node က odom → base_link transform လည်း လိုပါတယ် (စတဲ့နေရာကနေ တိုင်းထားတဲ့ စက်ရုပ်ကိုယ်ထည် အခုရှိတဲ့ နေရာ- broadcaster node တစ်ခုက ပို့ပေးပါတယ်)။ TurtleBot3 က ငြိမ်နေပါတယ်။ ချိတ်ဆက်မှု တစ်ခု ပျက်နေပါတယ်၊ 3 ခုလုံးမှာ လက္ခဏာက အတူတူပါပဲ- ပုံမပေါ်တဲ့ TV လိုပါပဲ၊ screen ကို မစစ်ခင် plug၊ ကြိုး နဲ့ input ကို အရင် စစ်ပါ။",
+  "back": "re-translated round 6 (blind check of r6 strings: logs/my-r6-blind.txt in nightshift)"
  },
  "l5/debug:fault": {
   "status": "pass-alt",
@@ -8070,15 +8070,15 @@
  },
  "l5/ci:learn": {
   "status": "pass-alt",
-  "en": "You will: follow one push through the CI of TF-Transform-Explorer (the example ROS 2 repo), predict which step turns red for each kind of mistake, and see why a red build hides the tests.",
-  "my": "လုပ်ရမှာက- TF-Transform-Explorer (နမူနာ ROS 2 repo) ရဲ့ CI ထဲမှာ push တစ်ခုကို အစအဆုံး လိုက်ကြည့်ပြီး အမှား အမျိုးအစား တစ်ခုစီအတွက် ဘယ်အဆင့် နီသွားမလဲ ခန့်မှန်းကာ build နီသွားရင် test တွေကို ဘာကြောင့် ဖုံးကွယ်သွားလဲ ကြည့်ပါ။",
-  "back": "What to do: follow one push from start to finish in the CI of TF-Transform-Explorer (a sample ROS 2 repo), predict which stage goes red for each error type, and see why, when the build goes red, the tests are hidden."
+  "en": "You will: follow one push through the CI of TF-Transform-Explorer (the example ROS 2 repo), predict which step turns red for each kind of mistake, and see why a red build hides the tests. Sense, think and act stay the same; CI checks that the think code still builds and passes before it reaches a robot.",
+  "my": "လုပ်ရမှာက- TF-Transform-Explorer (နမူနာ ROS 2 repo) ရဲ့ CI ထဲမှာ push တစ်ခုကို အစအဆုံး လိုက်ကြည့်ပြီး အမှား အမျိုးအစား တစ်ခုစီအတွက် ဘယ်အဆင့် နီသွားမလဲ ခန့်မှန်းပြီး build နီသွားရင် test တွေ ဘာကြောင့် မ run ရတော့လဲ ကြည့်ပါ။ Sense, think, act တွေက အတူတူပဲ ရှိပါတယ်- CI က think ကုဒ် ကို စက်ရုပ်ဆီ မရောက်ခင် build ဖြစ်သေးလား၊ test အောင်သေးလား စစ်ပေးတာပါ။",
+  "back": "re-translated round 6 (blind check of r6 strings: logs/my-r6-blind.txt in nightshift)"
  },
  "l5/ci:setup": {
   "status": "pass-alt",
-  "en": "Every push to main and every pull request starts a fresh ros:humble container on a GitHub server. It installs the dependencies, builds, runs every test, then checks the repo's TF tree figure still matches the code.",
-  "my": "main ကို push တိုင်းနဲ့ pull request တိုင်းက GitHub server ပေါ်မှာ ros:humble container အသစ်တစ်ခုကို စတင်ပါတယ်။ အဲဒါက dependency တွေကို install လုပ်၊ build လုပ်၊ test အားလုံးကို run ပြီး repo ရဲ့ TF tree ပုံက ကုဒ်နဲ့ ကိုက်နေသေးလား စစ်ပါတယ်။",
-  "back": "Every push to main and every pull request starts a fresh ros:humble container on a GitHub server. It installs the dependencies, builds, runs all the tests, and checks whether the repo's TF tree diagram still matches the code."
+  "en": "CI (continuous integration) is a robot that checks your code: every push to main (the shared, finished version) and every pull request (a request to merge your change into main) starts a fresh ros:humble container on a GitHub server. It installs the dependencies, builds, runs every test, then checks the repo's TF tree figure still matches the code.",
+  "my": "CI (continuous integration) ဆိုတာ သင့် ကုဒ်ကို စစ်ပေးတဲ့ စက်ရုပ်တစ်ခုလိုပါပဲ- main (အားလုံး မျှသုံးတဲ့ ပြီးပြည့်စုံ version) ကို push တိုင်းနဲ့ pull request (သင့်ပြောင်းလဲမှုကို main ထဲ ပေါင်းထည့်ဖို့ တောင်းဆိုချက်) တိုင်းက GitHub server ပေါ်မှာ ros:humble container အသစ်တစ်ခုကို စတင်ပါတယ်။ အဲဒါက dependency တွေကို install လုပ်၊ build လုပ်၊ test အားလုံးကို run ပြီး repo ရဲ့ TF tree ပုံက ကုဒ်နဲ့ ကိုက်နေသေးလား စစ်ပါတယ်။",
+  "back": "re-translated round 6 (blind check of r6 strings: logs/my-r6-blind.txt in nightshift)"
  },
  "l5/ci:pick": {
   "status": "pass-alt",
@@ -8256,9 +8256,9 @@
  },
  "l5/ci:local": {
   "status": "pass-alt",
-  "en": "Same steps on your laptop: in a ROS 2 Humble shell, first source /opt/ros/humble/setup.bash, then from the workspace root (the folder that holds src/):",
-  "my": "သင့် လက်ပ်တော့ ပေါ်မှာ အဆင့်တွေ အတူတူပါပဲ- ROS 2 Humble shell ထဲမှာ ပထမ source /opt/ros/humble/setup.bash လုပ်ပြီး workspace root (src/ ပါတဲ့ folder) ကနေ-",
-  "back": "On your laptop the steps are the same: in a ROS 2 Humble shell first do source /opt/ros/humble/setup.bash, then from the workspace root (the folder containing src/)-"
+  "en": "Same steps on your laptop: in a ROS 2 Humble shell, first source /opt/ros/humble/setup.bash (this loads the ROS 2 commands into the terminal), then from the workspace root (the folder that holds src/):",
+  "my": "သင့် လက်ပ်တော့ ပေါ်မှာ အဆင့်တွေ အတူတူပါပဲ- ROS 2 Humble shell ထဲမှာ ပထမ source /opt/ros/humble/setup.bash လုပ်ပါ (ဒါက ROS 2 command တွေကို terminal ထဲ ထည့်ပေးပါတယ်)၊ ပြီးရင် workspace root (src/ ပါတဲ့ folder) ကနေ-",
+  "back": "re-translated round 6 (blind check of r6 strings: logs/my-r6-blind.txt in nightshift)"
  },
  "l5/ci:glossary.0.0": {
   "status": "pass-alt",
@@ -8329,9 +8329,9 @@
  },
  "l5/port:setup": {
   "status": "pass-alt",
-  "en": "The wall follower from 3.2 exists twice, in Python and in C++. A bearing is a direction around the robot; a ray is one laser reading; angle_min is the direction of ray 0. Both ask the laser one question: \"which ray points at this bearing?\" Pick a bearing and compare the ray each version reads.",
-  "my": "3.2 က wall follower က Python နဲ့ C++ 2 မျိုး ရှိပါတယ်။ bearing ဆိုတာ စက်ရုပ်ပတ်လည်က ဦးတည်ရာ တစ်ခုပါ၊ ray ဆိုတာ laser ဖတ်ချက် တစ်ခုပါ၊ angle_min က ray 0 ရဲ့ ဦးတည်ရာပါ။ အဲဒီ version တွေက laser ကို မေးခွန်း တစ်ခုတည်း မေးပါတယ်- \"ဒီ bearing ကို ဘယ် ray က ညွှန်နေလဲ။\" bearing တစ်ခု ရွေးပြီး version တစ်ခုစီ ဖတ်တဲ့ ray ကို နှိုင်းယှဉ်ပါ။",
-  "back": "The wall follower in 3.2 exists in both Python and C++. A bearing is one direction around the robot, a ray is one laser reading, angle_min is the direction of ray 0. Both ask the laser one single question: \"Which ray points at this bearing?\" Pick a bearing and compare the ray each version reads.",
+  "en": "Same think step as in 3.2: the wall follower from 3.2 exists twice, in Python and in C++. A bearing is a direction around the robot; a ray is one laser reading; angle_min is the direction of ray 0. Both ask the laser one question: \"which ray points at this bearing?\" Pick a bearing and compare the ray each version reads.",
+  "my": "3.2 နဲ့ think အဆင့် အတူတူပါပဲ- 3.2 မှာ wall follower က Python နဲ့ C++ 2 မျိုး ရှိပါတယ်။ bearing ဆိုတာ စက်ရုပ်ပတ်လည်က ဦးတည်ရာ တစ်ခုပါ၊ ray ဆိုတာ laser ဖတ်ချက် တစ်ခုပါ၊ angle_min က ray 0 ရဲ့ ဦးတည်ရာပါ။ version နှစ်ခုလုံးက laser ကို မေးခွန်း တစ်ခုတည်း မေးပါတယ်- \"ဒီ bearing ကို ဘယ် ray က ညွှန်နေလဲ။\" bearing တစ်ခု ရွေးပြီး version တစ်ခုစီ ဖတ်တဲ့ ray ကို နှိုင်းယှဉ်ပါ။",
+  "back": "re-translated round 6 (blind check of r6 strings: logs/my-r6-blind.txt in nightshift)",
   "note": "one-phrase wording fix after blind check (meaning matched)"
  },
  "l5/port:bearing": {
@@ -8396,9 +8396,9 @@
  },
  "l5/port:diff.types.1": {
   "status": "pass-alt",
-  "en": "Python decides types while running. C++ writes them: double for angles, std::size_t for an index.",
-  "my": "Python က run နေစဉ်မှာ type တွေကို ဆုံးဖြတ်ပါတယ်။ C++ မှာတော့ ရေးထားရပါတယ်- ထောင့်အတွက် double၊ index အတွက် std::size_t ပါ။",
-  "back": "Python decides types while running. In C++ they must be written out: double for angles, std::size_t for indexes."
+  "en": "Python decides types while running. C++ writes them: double (a decimal number) for angles, std::size_t (a whole number that cannot be negative) for an index.",
+  "my": "Python က run နေစဉ်မှာ type တွေကို ဆုံးဖြတ်ပါတယ်။ C++ မှာတော့ ရေးထားရပါတယ်- ထောင့်အတွက် double (ဒဿမ ကိန်း)၊ index အတွက် std::size_t (အနုတ် မဖြစ်နိုင်တဲ့ ကိန်းပြည့်) ပါ။",
+  "back": "re-translated round 6 (blind check of r6 strings: logs/my-r6-blind.txt in nightshift)"
  },
  "l5/port:diff.wrap.0": {
   "status": "pass-alt",
@@ -8420,9 +8420,9 @@
  },
  "l5/port:diff.owner.1": {
   "status": "pass-alt",
-  "en": "Python keeps a reference. C++ keeps a ConstSharedPtr, a shared handle: the 360 numbers are never copied. std::move() only skips one reference-count increment and its decrement.",
-  "my": "Python က reference တစ်ခု ကိုင်ထားပါတယ်။ C++ က ConstSharedPtr ဆိုတဲ့ မျှသုံးတဲ့ handle တစ်ခု ကိုင်ထားပါတယ်- ကိန်းဂဏန်း 360 ခုကို ဘယ်တော့မှ မကူးပါဘူး။ std::move() က reference-count တစ်ကြိမ် တိုးတာနဲ့ သူ့ လျှော့တာကိုပဲ ကျော်ပေးပါတယ်။",
-  "back": "Python holds one reference. C++ holds a shared handle called ConstSharedPtr: the 360 numbers are never copied. std::move() skips just one reference-count increment and its decrement."
+  "en": "Python keeps a reference. C++ keeps a ConstSharedPtr, a shared handle: the 360 numbers are never copied. (A shared handle counts how many copies of it exist; the data is freed when the count reaches 0.)",
+  "my": "Python က reference တစ်ခု ကိုင်ထားပါတယ်။ C++ က ConstSharedPtr ဆိုတဲ့ မျှသုံးတဲ့ handle တစ်ခု ကိုင်ထားပါတယ်- ကိန်းဂဏန်း 360 ခုကို ဘယ်တော့မှ မကူးပါဘူး။ (မျှသုံးတဲ့ handle က သူ့ကော်ပီ ဘယ်နှစ်ခု ရှိလဲ ရေတွက်ထားပြီး အရေအတွက် 0 ရောက်ရင် data ကို ဖျက်ပါတယ်။)",
+  "back": "re-translated round 6 (blind check of r6 strings: logs/my-r6-blind.txt in nightshift)"
  },
  "l5/port:diff.qos.0": {
   "status": "pass-alt",
@@ -8432,9 +8432,9 @@
  },
  "l5/port:diff.qos.1": {
   "status": "pass-alt",
-  "en": "QoS = delivery settings for a topic (taught in 5.4). Python builds a best-effort profile field by field. C++ uses the ready-made rclcpp::SensorDataQoS().",
-  "my": "QoS = topic တစ်ခုအတွက် ပို့ဆောင်မှု setting တွေပါ (5.4 မှာ သင်ပါမယ်)။ Python က best-effort profile ကို field တစ်ခုချင်း တည်ဆောက်ပါတယ်။ C++ က အသင့်လုပ်ထားတဲ့ rclcpp::SensorDataQoS() ကို သုံးပါတယ်။",
-  "back": "QoS = delivery settings for one topic (taught in 5.4). Python builds the best-effort profile field by field. C++ uses the ready-made rclcpp::SensorDataQoS()."
+  "en": "QoS = delivery settings for a topic (taught in 5.4). Python builds a best-effort profile (a scan lost on the way is not sent again) field by field. C++ uses the ready-made rclcpp::SensorDataQoS().",
+  "my": "QoS = topic တစ်ခုအတွက် ပို့ဆောင်မှု setting တွေပါ (5.4 မှာ သင်ပါမယ်)။ Python က best-effort profile (လမ်းမှာ ပျောက်သွားတဲ့ scan ကို ပြန်မပို့ပါ) ကို field တစ်ခုချင်း တည်ဆောက်ပါတယ်။ C++ က အသင့်လုပ်ထားတဲ့ rclcpp::SensorDataQoS() ကို သုံးပါတယ်။",
+  "back": "re-translated round 6 (blind check of r6 strings: logs/my-r6-blind.txt in nightshift)"
  },
  "l5/port:diff.build.0": {
   "status": "pass-alt",
@@ -8468,9 +8468,9 @@
  },
  "l5/port:breakNote": {
   "status": "pass-alt",
-  "en": "Now try a bearing on the right side (below 0°) with angle_min = 0. A negative offset turned into std::size_t wraps around 2^64, so the C++ reads a ray 16 away (16°) from the one you asked for: 2^64 is 16 more than a multiple of 360. With angle_min = −π the bug hides: the offset is never negative. That is why the repo's gtest runs both layouts.",
-  "my": "အခု angle_min = 0 နဲ့ ညာဘက်ခြမ်း (0° အောက်) က bearing တစ်ခုကို စမ်းကြည့်ပါ။ std::size_t အဖြစ် ပြောင်းလိုက်တဲ့ အနုတ် offset က 2^64 ပတ်ပတ်လည် ပြန်လှည့်သွားလို့ C++ က သင်တောင်းတဲ့ ray ကနေ 16 ခု (16°) ကွာတဲ့ ray ကို ဖတ်ပါတယ်- 2^64 က 360 ရဲ့ ဆတိုးကိန်း တစ်ခုထက် 16 ပိုလို့ပါ။ angle_min = −π နဲ့ဆိုရင် bug က ပုန်းနေပါတယ်- offset က ဘယ်တော့မှ အနုတ် မဖြစ်ပါဘူး။ ဒါကြောင့် repo ရဲ့ gtest က layout နှစ်မျိုးလုံးကို run ပါတယ်။",
-  "back": "Now try a bearing on the right side (below 0°) with angle_min = 0. The negative offset converted to std::size_t wraps around 2^64, so C++ reads a ray 16 rays (16°) away from the ray you asked for: because 2^64 is 16 more than a multiple of 360. With angle_min = −π the bug is hidden: the offset is never negative. That is why the repo's gtest runs both layouts."
+  "en": "Now compare bearings on both sides of 0°, with angle_min = 0 and with angle_min = −π. Somewhere Python and C++ disagree: find where before the reason is shown.",
+  "my": "အခု 0° ရဲ့ ဘက်နှစ်ဖက်လုံးက bearing တွေကို angle_min = 0 နဲ့ရော angle_min = −π နဲ့ရော နှိုင်းယှဉ်ကြည့်ပါ။ တစ်နေရာမှာ Python နဲ့ C++ မတူကြပါဘူး- အကြောင်းရင်း မပြခင် ဘယ်နေရာလဲ ရှာပါ။",
+  "back": "re-translated round 6 (blind check of r6 strings: logs/my-r6-blind.txt in nightshift)"
  },
  "l5/port:challenge": {
   "status": "pass-alt",
@@ -8510,9 +8510,9 @@
  },
  "l5/port:solved": {
   "status": "pass-alt",
-  "en": "Solved: the bug only shows for some inputs, so one passing example proves nothing. Test both sides of zero.",
-  "my": "အောင်မြင်ပြီ- bug က input တချို့မှာပဲ ပေါ်လို့ အောင်တဲ့ ဥပမာ တစ်ခုက ဘာမှ မသက်သေပြပါဘူး။ 0 ရဲ့ ဘက်နှစ်ဖက်လုံးကို test လုပ်ပါ။",
-  "back": "Passed: the bug shows up only on some inputs, so one passing example proves nothing. Test both sides of 0."
+  "en": "Solved: below 0° with angle_min = 0, the negative offset turned into std::size_t wraps around 2^64, so the C++ reads a ray 16 away (16°): 2^64 is 16 more than a multiple of 360. With angle_min = −π the offset is never negative, so the bug hides. One passing example proves nothing: test both sides of zero. That is why the repo's gtest runs both layouts.",
+  "my": "အောင်မြင်ပြီ- angle_min = 0 မှာ 0° အောက်ဆိုရင် std::size_t အဖြစ် ပြောင်းလိုက်တဲ့ အနုတ် offset က 2^64 ပတ်ပတ်လည် ပြန်လှည့်သွားလို့ C++ က 16 ခု (16°) ကွာတဲ့ ray ကို ဖတ်ပါတယ်- 2^64 က 360 ရဲ့ ဆတိုးကိန်း တစ်ခုထက် 16 ပိုလို့ပါ။ angle_min = −π နဲ့ဆိုရင် offset က ဘယ်တော့မှ အနုတ် မဖြစ်လို့ bug က ပုန်းနေပါတယ်။ အောင်တဲ့ ဥပမာ တစ်ခုက ဘာမှ မသက်သေပြပါဘူး- သုည (0) ရဲ့ ဘက်နှစ်ဖက်လုံးကို test လုပ်ပါ။ ဒါကြောင့် repo ရဲ့ gtest က layout နှစ်မျိုးလုံးကို run ပါတယ်။",
+  "back": "re-translated round 6 (blind check of r6 strings: logs/my-r6-blind.txt in nightshift)"
  },
  "l5/port:notYet": {
   "status": "pass-alt",
