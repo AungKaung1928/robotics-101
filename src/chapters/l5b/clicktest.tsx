@@ -27,7 +27,7 @@ function mount(C: ComponentType<{ t: Strings }>, lang: Lang) {
 }
 
 for (const lang of ['en', 'ja', 'my'] as Lang[]) {
-  // 5.4 QoS: defaults 20/20; break it = 0/20 and not connected; both transient local = challenge solved.
+  // 5.4 QoS: defaults 20/20; break it = 0/20 and not connected; both transient local + depth 1 = challenge solved.
   let m = mount(QosChapter, lang)
   ok(m.read('got') === '20/20', `${lang} qos default got ${m.read('got')}`)
   m.click(m.q('button.break'), 'qos break')
@@ -38,6 +38,13 @@ for (const lang of ['en', 'ja', 'my'] as Lang[]) {
   const rel = [...m.q('[data-k="pub"]').querySelectorAll('button')][0] as HTMLElement
   m.click(rel, 'qos pub reliable'); m.click(tl, 'qos pub TL'); m.click(tl2, 'qos sub TL')
   ok(m.read('late') === '3/3', `${lang} qos late ${m.read('late')}`)
+  ok(m.q('[data-k="challenge"]').classList.contains('no'), `${lang} qos challenge at depth 10 (3 old maps)`)
+  const depth = m.q('input[type=range]') as HTMLInputElement
+  flushSync(() => {
+    Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value')!.set!.call(depth, '1')
+    depth.dispatchEvent(new Event('input', { bubbles: true }))
+  })
+  ok(m.read('late') === '1/3', `${lang} qos late depth 1 ${m.read('late')}`)
   ok(m.q('[data-k="challenge"]').classList.contains('ok'), `${lang} qos challenge`)
   m.done()
 

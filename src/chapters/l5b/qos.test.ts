@@ -31,6 +31,8 @@ describe('5.4 QoS', () => {
     expect(lateJoinerGets(TL, TL, 1)).toBe(1)
     expect(lateJoinerGets(TL, TL, 10)).toBe(3)
     expect(challengeOk(TL, TL, 1)).toBe(true)
+    expect(challengeOk(TL, TL, 10)).toBe(false) // gets all 3 old maps: only the newest is wanted (Nav2 map_server keeps 1)
+    expect(challengeOk(DEFAULT_QOS, DEFAULT_QOS, 1)).toBe(false)
   })
 })
 
