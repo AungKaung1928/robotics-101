@@ -82,4 +82,4 @@ if (!outFile) { console.error('usage: my-extract.mjs <out.json>'); process.exit(
 writeFileSync(outFile, JSON.stringify({ items, fn, titles }, null, 1) + '\n')
 const by = {}
 for (const i of items) by[i.chapter] = (by[i.chapter] ?? 0) + 1
-console.log(`${items.length} strings, ${fn.length} templates (English for now)`, JSON.stringify(by))
+console.log(`${items.length} strings, ${fn.length} templates (Burmese in src/i18n/my/templates.ts)`, JSON.stringify(by))
