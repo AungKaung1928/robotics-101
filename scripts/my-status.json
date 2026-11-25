@@ -8319,5 +8319,295 @@
   "en": "prints the test results and fails if any test failed",
   "my": "test ရလဒ်တွေကို ပြပြီး test တစ်ခုခု ကျရင် fail ဖြစ်တယ်",
   "back": "shows the test results and fails if any test failed"
+ },
+ "l5/port:learn": {
+  "status": "pass-alt",
+  "en": "You will: read the same wall-follower code in Python and in C++, see the five things a port changes, and find the one line that breaks if you copy Python too literally.",
+  "my": "လုပ်ရမှာက- wall-follower ကုဒ် တစ်ခုတည်းကို Python နဲ့ရော C++ နဲ့ပါ ဖတ်ပြီး port တစ်ခုက ပြောင်းလဲတဲ့ အချက် 5 ချက်ကို ကြည့်ကာ Python ကို စာသားအတိုင်း တိုက်ရိုက် ကူးရင် ပျက်သွားမယ့် စာကြောင်း တစ်ကြောင်းကို ရှာပါ။",
+  "back": "What to do: read one single wall-follower code in both Python and C++, look at the 5 things that change in a port, and find the one line that would break if Python were copied literally/excessively word for word.",
+  "note": "one-phrase wording fix after blind check (meaning matched)"
+ },
+ "l5/port:setup": {
+  "status": "pass-alt",
+  "en": "The wall follower from 3.2 exists twice, in Python and in C++. A bearing is a direction around the robot; a ray is one laser reading; angle_min is the direction of ray 0. Both ask the laser one question: \"which ray points at this bearing?\" Pick a bearing and compare the ray each version reads.",
+  "my": "3.2 က wall follower က Python နဲ့ C++ 2 မျိုး ရှိပါတယ်။ bearing ဆိုတာ စက်ရုပ်ပတ်လည်က ဦးတည်ရာ တစ်ခုပါ၊ ray ဆိုတာ laser ဖတ်ချက် တစ်ခုပါ၊ angle_min က ray 0 ရဲ့ ဦးတည်ရာပါ။ အဲဒီ version တွေက laser ကို မေးခွန်း တစ်ခုတည်း မေးပါတယ်- \"ဒီ bearing ကို ဘယ် ray က ညွှန်နေလဲ။\" bearing တစ်ခု ရွေးပြီး version တစ်ခုစီ ဖတ်တဲ့ ray ကို နှိုင်းယှဉ်ပါ။",
+  "back": "The wall follower in 3.2 exists in both Python and C++. A bearing is one direction around the robot, a ray is one laser reading, angle_min is the direction of ray 0. Both ask the laser one single question: \"Which ray points at this bearing?\" Pick a bearing and compare the ray each version reads.",
+  "note": "one-phrase wording fix after blind check (meaning matched)"
+ },
+ "l5/port:bearing": {
+  "status": "pass-alt",
+  "en": "Bearing (°, 0 = front, −90 = right)",
+  "my": "Bearing (°, 0 = ရှေ့၊ −90 = ညာ)",
+  "back": "Bearing (°, 0 = front, −90 = right)"
+ },
+ "l5/port:layout": {
+  "status": "pass-alt",
+  "en": "Scan layout",
+  "my": "Scan layout",
+  "back": "Scan layout"
+ },
+ "l5/port:layoutName.lds": {
+  "status": "pass-alt",
+  "en": "angle_min = 0 (LDS-01)",
+  "my": "angle_min = 0 (LDS-01)",
+  "back": "angle_min = 0 (LDS-01)"
+ },
+ "l5/port:layoutName.half": {
+  "status": "pass-alt",
+  "en": "angle_min = −π",
+  "my": "angle_min = −π",
+  "back": "angle_min = −π"
+ },
+ "l5/port:py": {
+  "status": "pass-alt",
+  "en": "Python reads ray",
+  "my": "Python ဖတ်တဲ့ ray",
+  "back": "Ray Python reads"
+ },
+ "l5/port:cpp": {
+  "status": "pass-alt",
+  "en": "C++ reads ray",
+  "my": "C++ ဖတ်တဲ့ ray",
+  "back": "Ray C++ reads"
+ },
+ "l5/port:same": {
+  "status": "pass-alt",
+  "en": "Same ray: the port behaves like the original.",
+  "my": "ray တူတယ်- port က မူရင်းလိုပဲ အလုပ်လုပ်ပါတယ်။",
+  "back": "Rays are the same: the port works just like the original."
+ },
+ "l5/port:differ": {
+  "status": "pass-alt",
+  "en": "Different rays: the C++ reads the wrong part of the scan.",
+  "my": "ray မတူဘူး- C++ က scan ရဲ့ မှားတဲ့ အပိုင်းကို ဖတ်နေပါတယ်။",
+  "back": "Rays differ: C++ is reading the wrong part of the scan."
+ },
+ "l5/port:diffTitle": {
+  "status": "pass-alt",
+  "en": "What the port changes",
+  "my": "port က ဘာတွေ ပြောင်းလဲလဲ",
+  "back": "What changes in the port"
+ },
+ "l5/port:diff.types.0": {
+  "status": "pass-alt",
+  "en": "Types",
+  "my": "Type",
+  "back": "Type"
+ },
+ "l5/port:diff.types.1": {
+  "status": "pass-alt",
+  "en": "Python decides types while running. C++ writes them: double for angles, std::size_t for an index.",
+  "my": "Python က run နေစဉ်မှာ type တွေကို ဆုံးဖြတ်ပါတယ်။ C++ မှာတော့ ရေးထားရပါတယ်- ထောင့်အတွက် double၊ index အတွက် std::size_t ပါ။",
+  "back": "Python decides types while running. In C++ they must be written out: double for angles, std::size_t for indexes."
+ },
+ "l5/port:diff.wrap.0": {
+  "status": "pass-alt",
+  "en": "The wrap",
+  "my": "ပတ်ပြန်လည်တာ",
+  "back": "Wrapping around"
+ },
+ "l5/port:diff.wrap.1": {
+  "status": "pass-alt",
+  "en": "Python % never gives a negative number. C++ std::fmod keeps the minus sign, so the C++ adds 2π back by hand.",
+  "my": "Python ရဲ့ % က အနုတ်ကိန်း ဘယ်တော့မှ မပေးပါဘူး။ C++ ရဲ့ std::fmod က အနုတ်လက္ခဏာကို ထိန်းထားလို့ C++ က 2π ကို လက်နဲ့ ပြန်ပေါင်းပေးရပါတယ်။",
+  "back": "Python's % never gives a negative number. C++'s std::fmod keeps the negative sign, so C++ must add 2π back by hand."
+ },
+ "l5/port:diff.owner.0": {
+  "status": "pass-alt",
+  "en": "Who owns the scan",
+  "my": "scan ကို ဘယ်သူ ပိုင်လဲ",
+  "back": "Who owns the scan"
+ },
+ "l5/port:diff.owner.1": {
+  "status": "pass-alt",
+  "en": "Python keeps a reference. C++ keeps a ConstSharedPtr, a shared handle: the 360 numbers are never copied. std::move() only skips one reference-count increment and its decrement.",
+  "my": "Python က reference တစ်ခု ကိုင်ထားပါတယ်။ C++ က ConstSharedPtr ဆိုတဲ့ မျှသုံးတဲ့ handle တစ်ခု ကိုင်ထားပါတယ်- ကိန်းဂဏန်း 360 ခုကို ဘယ်တော့မှ မကူးပါဘူး။ std::move() က reference-count တစ်ကြိမ် တိုးတာနဲ့ သူ့ လျှော့တာကိုပဲ ကျော်ပေးပါတယ်။",
+  "back": "Python holds one reference. C++ holds a shared handle called ConstSharedPtr: the 360 numbers are never copied. std::move() skips just one reference-count increment and its decrement."
+ },
+ "l5/port:diff.qos.0": {
+  "status": "pass-alt",
+  "en": "QoS",
+  "my": "QoS",
+  "back": "QoS"
+ },
+ "l5/port:diff.qos.1": {
+  "status": "pass-alt",
+  "en": "QoS = delivery settings for a topic (taught in 5.4). Python builds a best-effort profile field by field. C++ uses the ready-made rclcpp::SensorDataQoS().",
+  "my": "QoS = topic တစ်ခုအတွက် ပို့ဆောင်မှု setting တွေပါ (5.4 မှာ သင်ပါမယ်)။ Python က best-effort profile ကို field တစ်ခုချင်း တည်ဆောက်ပါတယ်။ C++ က အသင့်လုပ်ထားတဲ့ rclcpp::SensorDataQoS() ကို သုံးပါတယ်။",
+  "back": "QoS = delivery settings for one topic (taught in 5.4). Python builds the best-effort profile field by field. C++ uses the ready-made rclcpp::SensorDataQoS()."
+ },
+ "l5/port:diff.build.0": {
+  "status": "pass-alt",
+  "en": "Build step",
+  "my": "Build အဆင့်",
+  "back": "Build step"
+ },
+ "l5/port:diff.build.1": {
+  "status": "pass-alt",
+  "en": "Python: an entry point in setup.py, no compile. C++: add_executable in CMakeLists.txt, compiled by colcon build.",
+  "my": "Python- setup.py ထဲမှာ entry point တစ်ခု၊ compile မလုပ်ပါဘူး။ C++- CMakeLists.txt ထဲမှာ add_executable၊ colcon build က compile လုပ်ပါတယ်။",
+  "back": "Python: one entry point in setup.py, no compiling. C++: add_executable in CMakeLists.txt, colcon build compiles."
+ },
+ "l5/port:breakTitle": {
+  "status": "pass-alt",
+  "en": "Break it",
+  "my": "ဖျက်ကြည့်",
+  "back": "Delete it"
+ },
+ "l5/port:breakBtn": {
+  "status": "pass-alt",
+  "en": "Delete the 3 lines that add 2π back (C++)",
+  "my": "2π ပြန်ပေါင်းတဲ့ စာကြောင်း 3 ကြောင်းကို ဖျက် (C++)",
+  "back": "Delete the 3 lines that add 2π back (C++)"
+ },
+ "l5/port:fixBtn": {
+  "status": "pass-alt",
+  "en": "Put them back",
+  "my": "ပြန်ထည့်",
+  "back": "Put back"
+ },
+ "l5/port:breakNote": {
+  "status": "pass-alt",
+  "en": "Now try a bearing on the right side (below 0°) with angle_min = 0. A negative offset turned into std::size_t wraps around 2^64, so the C++ reads a ray 16 away (16°) from the one you asked for: 2^64 is 16 more than a multiple of 360. With angle_min = −π the bug hides: the offset is never negative. That is why the repo's gtest runs both layouts.",
+  "my": "အခု angle_min = 0 နဲ့ ညာဘက်ခြမ်း (0° အောက်) က bearing တစ်ခုကို စမ်းကြည့်ပါ။ std::size_t အဖြစ် ပြောင်းလိုက်တဲ့ အနုတ် offset က 2^64 ပတ်ပတ်လည် ပြန်လှည့်သွားလို့ C++ က သင်တောင်းတဲ့ ray ကနေ 16 ခု (16°) ကွာတဲ့ ray ကို ဖတ်ပါတယ်- 2^64 က 360 ရဲ့ ဆတိုးကိန်း တစ်ခုထက် 16 ပိုလို့ပါ။ angle_min = −π နဲ့ဆိုရင် bug က ပုန်းနေပါတယ်- offset က ဘယ်တော့မှ အနုတ် မဖြစ်ပါဘူး။ ဒါကြောင့် repo ရဲ့ gtest က layout နှစ်မျိုးလုံးကို run ပါတယ်။",
+  "back": "Now try a bearing on the right side (below 0°) with angle_min = 0. The negative offset converted to std::size_t wraps around 2^64, so C++ reads a ray 16 rays (16°) away from the ray you asked for: because 2^64 is 16 more than a multiple of 360. With angle_min = −π the bug is hidden: the offset is never negative. That is why the repo's gtest runs both layouts."
+ },
+ "l5/port:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: with the 3 lines deleted, predict before you look: name one bearing where Python and C++ still agree, and one where they do not. A wrong guess starts the count again.",
+  "my": "စိန်ခေါ်မှု- စာကြောင်း 3 ကြောင်း ဖျက်ထားတုန်း မကြည့်ခင် ခန့်မှန်းပါ- Python နဲ့ C++ တူနေသေးတဲ့ bearing တစ်ခုနဲ့ မတူတဲ့ bearing တစ်ခုကို ပြောပါ။ မှားခန့်မှန်းရင် အရေအတွက်က အစက ပြန်စပါတယ်။",
+  "back": "Challenge: with the 3 lines deleted, before looking, predict: name one bearing where Python and C++ still match and one where they differ. If you guess wrong the count restarts from the beginning."
+ },
+ "l5/port:predictAsk": {
+  "status": "pass-alt",
+  "en": "Predict first: at this bearing, do they",
+  "my": "အရင် ခန့်မှန်းပါ- ဒီ bearing မှာ သူတို့",
+  "back": "Predict first: at this bearing they"
+ },
+ "l5/port:guessRight": {
+  "status": "pass-alt",
+  "en": "Your prediction was right.",
+  "my": "သင့် ခန့်မှန်းချက် မှန်ပါတယ်။",
+  "back": "Your prediction is correct."
+ },
+ "l5/port:guessWrong": {
+  "status": "pass-alt",
+  "en": "Wrong prediction: the count starts again. Check the sign of the offset.",
+  "my": "ခန့်မှန်းချက် မှားပါတယ်- အရေအတွက်က အစက ပြန်စပါတယ်။ offset ရဲ့ အပေါင်း/အနုတ် လက္ခဏာကို စစ်ပါ။",
+  "back": "Prediction wrong: the count restarts from the beginning. Check the positive/negative sign of the offset."
+ },
+ "l5/port:agreeFound": {
+  "status": "pass-alt",
+  "en": "agree",
+  "my": "တူတယ်",
+  "back": "match"
+ },
+ "l5/port:disagreeFound": {
+  "status": "pass-alt",
+  "en": "disagree",
+  "my": "မတူဘူး",
+  "back": "differ"
+ },
+ "l5/port:solved": {
+  "status": "pass-alt",
+  "en": "Solved: the bug only shows for some inputs, so one passing example proves nothing. Test both sides of zero.",
+  "my": "အောင်မြင်ပြီ- bug က input တချို့မှာပဲ ပေါ်လို့ အောင်တဲ့ ဥပမာ တစ်ခုက ဘာမှ မသက်သေပြပါဘူး။ 0 ရဲ့ ဘက်နှစ်ဖက်လုံးကို test လုပ်ပါ။",
+  "back": "Passed: the bug shows up only on some inputs, so one passing example proves nothing. Test both sides of 0."
+ },
+ "l5/port:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet: you need one bearing of each kind.",
+  "my": "မရသေးပါ- အမျိုးအစား တစ်ခုစီက bearing တစ်ခုစီ လိုပါတယ်။",
+  "back": "Not yet: each type needs one bearing each."
+ },
+ "l5/port:valid": {
+  "status": "pass-alt",
+  "en": "Both versions also throw away bad readings the same way: NaN, inf, or outside range_min–range_max from the scan message (0.12–3.5 m on the LDS-01) becomes inf.",
+  "my": "version နှစ်ခုလုံးက မကောင်းတဲ့ ဖတ်ချက်တွေကို နည်းတူ လွှင့်ပစ်ပါတယ်- NaN၊ inf၊ ဒါမှမဟုတ် scan message ရဲ့ range_min–range_max (LDS-01 မှာ 0.12–3.5 m) အပြင်ဘက်က တန်ဖိုးက inf ဖြစ်သွားပါတယ်။",
+  "back": "Both versions throw away bad readings the same way: NaN, inf, or a value outside the scan message's range_min–range_max (0.12–3.5 m for LDS-01) becomes inf."
+ },
+ "l5/port:readout.offset": {
+  "status": "pass-alt",
+  "en": "C++ offset (rad)",
+  "my": "C++ offset (rad)",
+  "back": "C++ offset (rad)"
+ },
+ "l5/port:readout.raw": {
+  "status": "pass-alt",
+  "en": "index before % 360",
+  "my": "% 360 မလုပ်ခင် index",
+  "back": "Index before % 360"
+ },
+ "l5/port:repoPy": {
+  "status": "pass-alt",
+  "en": "Python",
+  "my": "Python",
+  "back": "Python"
+ },
+ "l5/port:repoCpp": {
+  "status": "pass-alt",
+  "en": "C++",
+  "my": "C++",
+  "back": "C++"
+ },
+ "l5/port:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "port",
+  "my": "port",
+  "back": "port"
+ },
+ "l5/port:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "rewrite the same program in another language, keeping its behaviour",
+  "my": "ပရိုဂရမ် တစ်ခုတည်းကို သူ့အပြုအမူ မပြောင်းဘဲ တခြား ဘာသာစကားနဲ့ ပြန်ရေးတာ",
+  "back": "Rewriting a single program in another language without changing its behavior"
+ },
+ "l5/port:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "std::fmod",
+  "my": "std::fmod",
+  "back": "std::fmod"
+ },
+ "l5/port:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "C++ remainder of a division; keeps the sign of the first number",
+  "my": "C++ ရဲ့ စားလို့ ကျန်တဲ့ အကြွင်း၊ ပထမ ကိန်းရဲ့ လက္ခဏာကို ထိန်းထားတယ်",
+  "back": "C++'s division remainder, keeps the sign of the first number"
+ },
+ "l5/port:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "std::size_t",
+  "my": "std::size_t",
+  "back": "std::size_t"
+ },
+ "l5/port:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "C++ whole number that cannot be negative; −1 becomes a huge number",
+  "my": "အနုတ် မဖြစ်နိုင်တဲ့ C++ ကိန်းပြည့်၊ −1 က အလွန်ကြီးတဲ့ ကိန်း ဖြစ်သွားတယ်",
+  "back": "A C++ integer that cannot be negative; −1 becomes a very large number"
+ },
+ "l5/port:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "ConstSharedPtr",
+  "my": "ConstSharedPtr",
+  "back": "ConstSharedPtr"
+ },
+ "l5/port:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "a shared, read-only handle to a message; the message is freed when the last handle goes",
+  "my": "message တစ်ခုကို မျှသုံးပြီး ဖတ်လို့ပဲ ရတဲ့ handle၊ နောက်ဆုံး handle ပျောက်သွားရင် message ကို ရှင်းထုတ်တယ်",
+  "back": "A handle that shares one message and is read-only; when the last handle goes away the message is cleaned up"
+ },
+ "l5/port:glossary.4.0": {
+  "status": "pass-alt",
+  "en": "gtest",
+  "my": "gtest",
+  "back": "gtest"
+ },
+ "l5/port:glossary.4.1": {
+  "status": "pass-alt",
+  "en": "GoogleTest, the C++ test framework colcon test runs",
+  "my": "GoogleTest၊ colcon test က run တဲ့ C++ test framework",
+  "back": "GoogleTest, the C++ test framework that colcon test runs"
  }
 }
