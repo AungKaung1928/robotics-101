@@ -37,7 +37,7 @@
  "challenge": "စိန်ခေါ်မှု- run နီပေမဲ့ test 0 ခုပဲ run ခဲ့တဲ့ push ကို ရှာပါ။",
  "solved": "အောင်မြင်ပြီ- build ကျရင် colcon test ကို ကျော်သွားပါတယ်။ နီတဲ့ run ကို ဖတ်တဲ့အခါ မှားတဲ့ test ကို မရှာခင် ဘယ်အဆင့် ကျလဲ အရင် စစ်ပါ။",
  "notYet": "မရသေးပါ- push တစ်ခု run ပြီး colcon test အတန်းကို ကြည့်ပါ။",
- "local": "သင့် လက်ပ်တော့ ပေါ်မှာ အဆင့်တွေ အတူတူပါပဲ- ROS 2 Humble shell ထဲမှာ ပထမ source /opt/ros/humble/setup.bash လုပ်ပြီး workspace root (src/ ပါတဲ့ folder) ကနေ-",
+ "local": "သင့် လက်ပ်တော့ ပေါ်မှာ အဆင့်တွေ အတူတူပါပဲ- ROS 2 Humble shell ထဲမှာ ပထမ source /opt/ros/humble/setup.bash လုပ်ပါ (ဒါက ROS 2 command တွေကို terminal ထဲ ထည့်ပေးပါတယ်)၊ ပြီးရင် workspace root (src/ ပါတဲ့ folder) ကနေ-",
  "glossary": [
   [
    "CI",
