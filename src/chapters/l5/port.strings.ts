@@ -42,6 +42,7 @@ export const PORT_STRINGS = {
       ['ConstSharedPtr', 'a shared, read-only handle to a message; the message is freed when the last handle goes'],
       ['gtest', 'GoogleTest, the C++ test framework colcon test runs'],
     ] as [string, string][],
+    anim: { mascot: 'Port buddy robot: happy when you predicted right whether Python and C++ agree, wobbly when you missed' },
   },
   ja: {
     title: 'Python → C++：ノードを 1 つ移植する',
@@ -85,5 +86,6 @@ export const PORT_STRINGS = {
       ['ConstSharedPtr', 'メッセージを読むだけの共有ハンドル。最後のハンドルが消えると解放される'],
       ['gtest', 'GoogleTest。colcon test が走らせる C++ のテスト枠組み'],
     ] as [string, string][],
+    anim: { mascot: '移植の相棒ロボット：Python と C++ が一致するかの予想が当たると喜び、外すとふらつく' },
   },
 }
