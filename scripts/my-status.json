@@ -25,11 +25,10 @@
   "gemini_back": "Launches everything with a single launch file. Most steps wait with set timers so inputs exist first. Only the patrol node checks: it waits up to 5 s for Nav2's action server and retries."
  },
  "core:bringup.lines.1": {
-  "status": "needs-human",
+  "status": "pass-alt",
   "en": "Drag SLAM or Nav2 earlier: a stage that starts no later than its input waits on a frame or topic that is not there yet.",
-  "my": "SLAM ဒါမှမဟုတ် Nav2 ကို စောပြီး ဆွဲထားရင်- input ထက် မနောက်ကျဘဲ စတင်တဲ့ အဆင့်က မရှိသေးတဲ့ frame ဒါမှမဟုတ် topic ကို စောင့်နေပါလိမ့်မယ်။",
-  "back": "If SLAM or Nav2 are dragged early: the step starting without lagging behind the input will wait for missing frames or topics.",
-  "note": "2026-11-24 audit: Opus blind check garbled (word order of \"starts no later than its input\"); redraft garbled again"
+  "my": "SLAM ဒါမှမဟုတ် Nav2 ကို စောစော ဆွဲထားကြည့်ပါ- သူ့ input ထက် မနောက်ကျဘဲ စတဲ့ အဆင့်က မရှိသေးတဲ့ frame ဒါမှမဟုတ် topic ကို စောင့်နေရပါတယ်။",
+  "back": "Try pulling up SLAM or Nav2 early: a stage that starts no later than its input is waiting for a frame or topic that does not exist yet."
  },
  "core:bringup.logHead.0": {
   "status": "pass",
@@ -241,10 +240,10 @@
   "back": "Try dragging the robot on the map: you will see that the same object breaks at one location but does not break at another location."
  },
  "core:detect.next": {
-  "status": "pass",
-  "en": "Borges & Aldon (2004) propose a threshold that grows with range and sensor noise; it is added once the formula is read from the paper itself.",
-  "my": "Borges & Aldon (2004) က အကွာအဝေးနဲ့ ဆင်ဆာ noise အလိုက် တိုးလာတဲ့ threshold တစ်ခုကို အဆိုပြုထားပါတယ်၊ paper ထဲက formula ကို ဖတ်ပြီးတာနဲ့ ဒါကို ထည့်ပေးပါမယ်။",
-  "back": "Borges & Aldon (2004) proposed a threshold that increases according to distance and sensor noise; once the formula in the paper is read, this will be added."
+  "status": "pass-alt",
+  "en": "Borges & Aldon (2004) propose a threshold that grows with range and sensor noise; this page keeps one fixed threshold.",
+  "my": "Borges & Aldon (2004) က အကွာအဝေးနဲ့ ဆင်ဆာ noise အလိုက် ကြီးလာတဲ့ threshold တစ်ခုကို အဆိုပြုထားပါတယ်၊ ဒီစာမျက်နှာကတော့ ပုံသေ threshold တစ်ခုတည်းကိုပဲ သုံးပါတယ်။",
+  "back": "Borges & Aldon (2004) proposed a threshold that grows with distance and sensor noise; this page uses only a single fixed threshold."
  },
  "core:detect.noise": {
   "status": "pass",
@@ -763,11 +762,10 @@
   "gemini_back": "Returning beams"
  },
  "core:scan.lines.0": {
-  "status": "pass",
-  "en": "360 beams, one per degree, 5 times a second. Each beam returns the nearest wall or obstacle, if it is closer than 3.5 m.",
-  "my": "beam 360 ခု၊ ဒီဂရီ တစ်ခုကို beam တစ်ခု၊ တစ်စက္ကန့်ကို 5 ကြိမ်။ beam တစ်ခုစီက 3.5 m ထက် နီးရင် အနီးဆုံး နံရံ ဒါမှမဟုတ် အတားအဆီးကို ပြန်ပြောပါတယ်။",
-  "back": "360 beams, one beam per degree, 5 times per second. Each beam reports the nearest wall or obstacle if it is closer than 3.5 m.",
-  "gemini_back": "360 beams, one beam per degree, 5 times per second. Each beam reports back the nearest wall or obstacle if closer than 3.5 m."
+  "status": "pass-alt",
+  "en": "360 beams, one per degree, 5 times a second. Each beam returns the nearest wall or obstacle if it is closer than 3.5 m. A surface almost touching the sensor gives no reading either (minimum range in the URDF).",
+  "my": "beam 360 ခု၊ ဒီဂရီ တစ်ခုကို beam တစ်ခု၊ တစ်စက္ကန့်ကို 5 ကြိမ်ပါ။ beam တစ်ခုစီက 3.5 m ထက် နီးရင် အနီးဆုံး နံရံ ဒါမှမဟုတ် အတားအဆီးကို ပြန်ပြောပါတယ်။ ဆင်ဆာနဲ့ ကပ်လုနီးပါး ဖြစ်နေတဲ့ မျက်နှာပြင်ကလည်း တန်ဖိုး မပေးပါဘူး (URDF ထဲက အနည်းဆုံး အကွာအဝေး)။",
+  "back": "360 beams, one beam per degree, 5 times per second. Each beam reports back the nearest wall or obstacle if it is closer than 3.5 m. A surface that is almost stuck to the sensor also gives no value (the minimum distance in the URDF)."
  },
  "core:scan.lines.1": {
   "status": "pass",
@@ -1047,11 +1045,10 @@
   "gemini_back": "Its NavFn planner runs Dijkstra (or A*) just like the costmap view above. Nav2's inflation layer smoothly decreases the cost as distance from the obstacle increases. For visibility, this page uses only a single step (+4). If all costs are equal, Dijkstra pops cells in ring order just like BFS."
  },
  "ep/bfs:costNote": {
-  "status": "pass",
-  "en": "Each cell touching a wall now costs 5 instead of 1. Dijkstra takes out the cheapest cell first: 15 steps at cost 15, against the BFS path's 13 steps at cost 41. Longer, but never brushing a wall.",
-  "my": "အခု နံရံနဲ့ ထိနေတဲ့ cell တစ်ခုစီက cost 1 အစား 5 ကျပါတယ်။ Dijkstra က အသက်သာဆုံး cell ကို အရင် ထုတ်ပါတယ်: 15 ဆင့်၊ cost 15 ပါ။ BFS လမ်းကြောင်းကတော့ 13 ဆင့်၊ cost 41 ပါ။ Dijkstra လမ်းကြောင်းက ပိုရှည်ပေမဲ့ နံရံကို ဘယ်တော့မှ မပွတ်ပါဘူး။",
-  "back": "Now each cell touching a wall drops to cost 5 instead of cost 1. Dijkstra takes out the cheapest cell first: 15 steps, cost 15. The BFS path, however, is 13 steps, cost 41. The Dijkstra path is longer, but it never brushes the wall.",
-  "gemini_back": "Now each cell touching a wall costs 5 instead of 1. Dijkstra pops the cheapest cell first: 15 steps, cost 15. The BFS path is 13 steps, cost 41. The Dijkstra path is longer, but it never grazes the wall."
+  "status": "pass-alt",
+  "en": "Each cell touching a wall now costs 5 instead of 1. Dijkstra takes out the cheapest cell first. On the starting map: 15 steps at cost 15, against the BFS path's 13 steps at cost 41. Longer, but never brushing a wall. After you edit walls, the readout below shows the new cost (if a path still exists).",
+  "my": "အခု နံရံနဲ့ ထိနေတဲ့ cell တစ်ခုစီက cost 1 အစား 5 ကျပါတယ်။ Dijkstra က အသက်သာဆုံး cell ကို အရင် ထုတ်ပါတယ်။ စစချင်း မြေပုံမှာ 15 ဆင့်၊ cost 15 ပါ၊ BFS လမ်းကြောင်းကတော့ 13 ဆင့်၊ cost 41 ပါ။ ပိုရှည်ပေမဲ့ နံရံကို ဘယ်တော့မှ မပွတ်ပါဘူး။ နံရံတွေကို ပြင်ပြီးရင် အောက်က ဖတ်ကွက်မှာ cost အသစ်ကို ပြပါတယ် (လမ်းကြောင်း ရှိနေသေးရင်)။",
+  "back": "Now each cell touching a wall drops from cost 1 to cost 5 (as written, 'instead of 1, 5 falls'). Dijkstra takes out the cheapest cell first. At the very start, on the map, there is 15 steps, cost 15; the BFS route is 13 steps, cost 41. Although longer, it never rubs against the wall. After you edit the walls, the reading slot below shows the new cost (if a route still exists)."
  },
  "ep/bfs:costOff": {
   "status": "pass",
@@ -1531,8 +1528,9 @@
  "ep/late:rDelay": {
   "status": "needs-human",
   "en": "every reading used later by",
-  "my": "ဒေတာတိုင်း နောက်ကျပြီး သုံးရတဲ့ အချိန်",
-  "note": "garbled in 2 blind checks (2026-11-24)"
+  "my": "ဒေတာတိုင်းကို နောက်ကျပြီး သုံးရတဲ့ အချိန်",
+  "back": "Time during which every piece of data has to be used late",
+  "note": "blind back-translation drifted (time vs readings delayed by)"
  },
  "ep/late:rDropped": {
   "status": "pass-alt",
@@ -1794,9 +1792,9 @@
  },
  "l0/act:turn": {
   "status": "pass-alt",
-  "en": "Turn speed (rad/s, + = left)",
-  "my": "လှည့်နှုန်း (rad/s, + = ဘယ်)",
-  "back": "Turn rate (rad/s, + = left)"
+  "en": "Turn speed (rad/s, + = left; 1 rad/s ≈ 57° a second)",
+  "my": "လှည့်နှုန်း (rad/s, + = ဘယ်၊ 1 rad/s ≈ တစ်စက္ကန့်ကို 57°)",
+  "back": "Turn rate (rad/s, + = left, 1 rad/s is about 57 per second)"
  },
  "l0/act:words": {
   "status": "pass-alt",
@@ -2026,10 +2024,9 @@
  },
  "l0/meet:car": {
   "status": "pass-alt",
-  "en": "Remote-control car",
-  "my": "ရီမုတ်ထိန်းကား",
-  "back": "Remote-controlled car",
-  "note": "spelling: ရီမု -> ရီမုတ် (blind checker, 2026-11-24)"
+  "en": "Who decides when the car turns?",
+  "my": "ကား ဘယ်အချိန် ကွေ့မလဲဆိုတာ ဘယ်သူ ဆုံးဖြတ်လဲ။",
+  "back": "Who decides when the car turns?"
  },
  "l0/meet:check": {
   "status": "pass-alt",
@@ -2040,9 +2037,9 @@
  },
  "l0/meet:decides": {
   "status": "pass-alt",
-  "en": "Decides",
-  "my": "ဆုံးဖြတ်နိုင်မှု",
-  "back": "Deciding ability"
+  "en": "Decides when it turns",
+  "my": "ဘယ်အချိန် ကွေ့မလဲ ဆုံးဖြတ်သူ",
+  "back": "Who decides when to turn"
  },
  "l0/meet:downgrade": {
   "status": "pass-alt",
@@ -2094,9 +2091,9 @@
  },
  "l0/meet:itself": {
   "status": "pass-alt",
-  "en": "by itself",
-  "my": "သူ့အလိုလို",
-  "back": "By itself"
+  "en": "the rule, from sensor data",
+  "my": "ဆင်ဆာ ဒေတာကို ကြည့်ပြီး စည်းကမ်းချက်က",
+  "back": "The rule, looking at the sensor data"
  },
  "l0/meet:learn": {
   "status": "pass-alt",
@@ -2148,9 +2145,9 @@
  },
  "l0/meet:person": {
   "status": "pass-alt",
-  "en": "a person",
-  "my": "လူတစ်ယောက်",
-  "back": "A person"
+  "en": "you, with the remote",
+  "my": "သင်၊ ရီမုတ်နဲ့",
+  "back": "You, with the remote"
  },
  "l0/meet:right": {
   "status": "pass-alt",
@@ -2196,10 +2193,9 @@
  },
  "l0/meet:steps.2": {
   "status": "pass-alt",
-  "en": "Is a remote-control car a robot? It moves, but a person watches and decides. Give it a sensor and a rule, and it decides by itself: now it is a robot. Try the button.",
-  "my": "ရီမုတ်နဲ့ ထိန်းတဲ့ကားက စက်ရုပ် လား။ အဲဒါက လှုပ်ရှားနိုင်ပေမဲ့ လူက ကြည့်ပြီး ဆုံးဖြတ်ပေးရတာပါ။ ဆင်ဆာ နဲ့ စည်းကမ်းချက်တစ်ခု ပေးလိုက်ရင်တော့ သူ့အလိုလို ဆုံးဖြတ်နိုင်သွားပါပြီ- အဲဒီအခါမှာတော့ စက်ရုပ် ဖြစ်သွားပါပြီ။ ခလုတ်ကို စမ်းကြည့်ပါ။",
-  "back": "Is a remo-controlled car a robot? It can move, but a person has to watch and decide. If you give it a sensor and a rule, it becomes able to decide on its own - at that point it has become a robot. Try the button.",
-  "note": "spelling: ရီမု -> ရီမုတ် (blind checker, 2026-11-24)"
+  "en": "Who decides when a remote-control car turns? You do: you watch and steer. Add a sensor alone, then a rule alone, then both, and watch the answer below change. Only a rule that reads the sensor takes the decision from you.",
+  "my": "ရီမုတ်ထိန်းကား ဘယ်အချိန် ကွေ့မလဲဆိုတာ ဘယ်သူ ဆုံးဖြတ်လဲ။ သင်ပါ- သင်က ကြည့်ပြီး ထိန်းပါတယ်။ ဆင်ဆာ တစ်ခုတည်း ထည့်ကြည့်ပါ၊ ပြီးရင် စည်းကမ်းချက် တစ်ခုတည်း၊ ပြီးရင် နှစ်ခုလုံး ထည့်ပြီး အောက်က အဖြေ ပြောင်းသွားတာကို ကြည့်ပါ။ ဆင်ဆာကို ဖတ်တဲ့ စည်းကမ်းချက် ရှိမှသာ ဆုံးဖြတ်ခွင့်က သင့်ဆီကနေ ထွက်သွားပါတယ်။",
+  "back": "Who decides when the remote-controlled car turns? You: you watch and steer. Try adding just one sensor, then just one rule, then both, and watch the answer below change. Only when there is a rule that reads the sensor does the decision leave your hands."
  },
  "l0/meet:tapHint": {
   "status": "pass-alt",
@@ -2761,9 +2757,9 @@
  },
  "l0/ros:install.0": {
   "status": "pass-alt",
-  "en": "New learners: ROS 2 Jazzy on Ubuntu 24.04, with Gazebo Harmonic. It has long support, and TurtleBot3, Nav2 and the tutorials are ready for it.",
-  "my": "စတင်လေ့လာသူများအတွက်: Ubuntu 24.04 ပေါ်က ROS 2 Jazzy နဲ့ Gazebo Harmonic ကို သုံးပါ။ ရေရှည် ပံ့ပိုးမှု ရှိပြီး TurtleBot3၊ Nav2 နဲ့ သင်ခန်းစာတွေလည်း အဆင်သင့် ရှိပါတယ်။",
-  "back": "For beginners: use ROS 2 Jazzy with Gazebo Harmonic on Ubuntu 24.04. It has long-term support, and TurtleBot3, Nav2 and tutorials are also ready."
+  "en": "This course picks ROS 2 Jazzy on Ubuntu 24.04, with Gazebo Harmonic: it gets fixes until May 2029, and the TurtleBot3 simulation has a Jazzy version on the new Gazebo. Gazebo's ROS install page recommends the newer Lyrical with Gazebo Jetty for new users.",
+  "my": "ဒီသင်ခန်းစာက Ubuntu 24.04 ပေါ်က ROS 2 Jazzy ကို Gazebo Harmonic နဲ့ ရွေးထားပါတယ်- May 2029 အထိ ပြင်ဆင်ချက်တွေ ရပြီး TurtleBot3 simulation မှာလည်း Gazebo အသစ်ပေါ်မှာ Jazzy ဗားရှင်း ရှိပါတယ်။ Gazebo ရဲ့ ROS install စာမျက်နှာကတော့ အသုံးပြုသူ အသစ်တွေကို ပိုသစ်တဲ့ Lyrical နဲ့ Gazebo Jetty ကို အကြံပြုပါတယ်။",
+  "back": "This course chose ROS 2 Jazzy on Ubuntu 24.04 with Gazebo Harmonic: it gets fixes until May 2029, and the TurtleBot3 simulation also has a Jazzy version on the new Gazebo. Gazebo's ROS install page, however, recommends the newer Lyrical with Gazebo Jetty for new users."
  },
  "l0/ros:install.1": {
   "status": "pass-alt",
@@ -2797,15 +2793,15 @@
  },
  "l0/ros:lines.1": {
   "status": "pass-alt",
-  "en": "ROS 1 has one central program, the master (started by roscore), that tells programs where to find each other; then they talk directly. If it stops, programs started later cannot find anyone. ROS 2 has no central program: each program announces itself on the network and the others answer (discovery, done by DDS).",
-  "my": "ROS 1 မှာ ပရိုဂရမ်တွေ တစ်ခုနဲ့တစ်ခု ဘယ်မှာရှိလဲဆိုတာ ပြောပြပေးတဲ့ master ဆိုတဲ့ ဗဟို ပရိုဂရမ် တစ်ခု (roscore နဲ့ စတင်ရတဲ့) ရှိပါတယ်။ အဲ့ဒီနောက်မှ သူတို့ တိုက်ရိုက် ဆက်သွယ်ကြတာပါ။ အဲ့ဒီ master ရပ်သွားရင် နောက်မှ စတင်တဲ့ ပရိုဂရမ်တွေဟာ ဘယ်သူ့ကိုမှ ရှာမတွေ့နိုင်တော့ပါဘူး။ ROS 2 မှာတော့ ဗဟို ပရိုဂရမ် မရှိပါဘူး။ ပရိုဂရမ် တစ်ခုစီဟာ ကွန်ရက်ပေါ်မှာ မိမိကိုယ်ကို ကြေညာပြီး အခြား ပရိုဂရမ်တွေက တုံ့ပြန်ကြပါတယ် (DDS က လုပ်ဆောင်ပေးတဲ့ discovery)။",
-  "back": "In ROS 1 there is a central program called the master (which must be started with roscore) that tells programs where each other are. After that they communicate directly. If that master stops, programs that start afterward can no longer find anyone. In ROS 2 there is no central program. Each program announces itself on the network and the other programs respond (discovery carried out by DDS)."
+  "en": "ROS 1 has one central program, the master (started by the command roscore), that tells programs where to find each other; then they talk directly. If it stops, no new connections can be set up; programs already connected keep talking. ROS 2 has no central program: each program announces itself on the network and the others answer (this is called discovery; DDS, the network layer under ROS 2, does it).",
+  "my": "ROS 1 မှာ master ဆိုတဲ့ ဗဟို ပရိုဂရမ် တစ်ခု ရှိပါတယ် (roscore command နဲ့ စရပါတယ်)။ ပရိုဂရမ်တွေ တစ်ခုနဲ့တစ်ခု ဘယ်မှာ ရှာရမလဲဆိုတာ သူက ပြောပေးပြီး အဲဒီနောက် သူတို့ တိုက်ရိုက် ဆက်သွယ်ကြပါတယ်။ master ရပ်သွားရင် ချိတ်ဆက်မှု အသစ် မလုပ်နိုင်တော့ပါဘူး၊ ချိတ်ပြီးသား ပရိုဂရမ်တွေကတော့ ဆက်ပြောနေကြပါတယ်။ ROS 2 မှာ ဗဟို ပရိုဂရမ် မရှိပါဘူး- ပရိုဂရမ် တစ်ခုစီက ကွန်ရက်ပေါ်မှာ ကိုယ့်ကိုယ်ကို ကြေညာပြီး တခြားဟာတွေက ပြန်ဖြေကြပါတယ် (ဒါကို discovery လို့ ခေါ်ပြီး ROS 2 အောက်က ကွန်ရက် layer ဖြစ်တဲ့ DDS က လုပ်ပေးပါတယ်)။",
+  "back": "In ROS 1 there is a central program called the master (started with the roscore command). It tells programs where to find each other, and after that they communicate directly. If the master stops, no new connections can be made, but already-connected programs keep talking. In ROS 2 there is no central program: each program announces itself on the network and the others reply (this is called discovery, and DDS, the network layer under ROS 2, does it)."
  },
  "l0/ros:lines.2": {
   "status": "pass-alt",
-  "en": "Each release is a distribution with a name. LTS releases get fixes for 5 years, the others for about a year and a half. This app uses Humble, the version the example repos use; the ideas are the same on Jazzy.",
-  "my": "ထွက်ရှိတဲ့ ဗားရှင်း တစ်ခုစီဟာ နာမည်ပါတဲ့ distribution တစ်ခု ဖြစ်ပါတယ်။ LTS ဗားရှင်းတွေက 5 နှစ်အထိ ပြင်ဆင်ချက်တွေ ရပြီး တခြား ဗားရှင်းတွေကတော့ တစ်နှစ်ခွဲလောက်ပဲ ရပါတယ်။ ဒီ app မှာ နမူနာ repo တွေ သုံးတဲ့ ဗားရှင်း Humble ကို သုံးထားပါတယ်။ Jazzy မှာလည်း အယူအဆတွေက အတူတူပါပဲ။",
-  "back": "Each release is a distribution that has a name. LTS versions get fixes for up to 5 years, while the other versions get them for only about a year and a half. This app uses the version Humble, which the example repos use. In Jazzy, the ideas are the same."
+  "en": "Each release is a distribution with a name and one Ubuntu version (the number on each bar). LTS releases get fixes for 5 years, the others for about a year and a half.",
+  "my": "ထွက်ရှိတဲ့ ဗားရှင်း တစ်ခုစီဟာ နာမည်တစ်ခုနဲ့ Ubuntu ဗားရှင်း တစ်ခု ပါတဲ့ distribution တစ်ခု ဖြစ်ပါတယ် (ဘား တစ်ခုစီပေါ်က နံပါတ်)။ LTS ဗားရှင်းတွေက 5 နှစ်အထိ ပြင်ဆင်ချက်တွေ ရပြီး တခြားဟာတွေကတော့ တစ်နှစ်ခွဲလောက်ပဲ ရပါတယ်။",
+  "back": "Each released version is a distribution that comes with a name and an Ubuntu version (the number on each bar). LTS versions get fixes for up to 5 years and the others get only about a year and a half."
  },
  "l0/ros:lts": {
   "status": "pass-alt",
@@ -2827,9 +2823,9 @@
  },
  "l0/ros:project": {
   "status": "pass-alt",
-  "en": "The example repos in this course were built on Humble (Ubuntu 22.04, Gazebo Classic). The skills carry over; the main change you will meet is Gazebo Classic to the new Gazebo (ros_gz). They have not been tested on Jazzy yet.",
-  "my": "ဒီသင်ခန်းစာက နမူနာ repo တွေကို Humble (Ubuntu 22.04, Gazebo Classic) ပေါ်မှာ တည်ဆောက်ထားတာ ဖြစ်ပါတယ်။ ကျွမ်းကျင်မှုတွေကို ဆက်လက် အသုံးပြုနိုင်ပြီး အဓိက ကြုံတွေ့ရမယ့် ပြောင်းလဲမှုကတော့ Gazebo Classic ကနေ Gazebo အသစ် (ros_gz) ကို ပြောင်းတာဖြစ်ပါတယ်။ Jazzy ပေါ်မှာတော့ စမ်းသပ်ထားခြင်း မရှိသေးပါဘူး။",
-  "back": "This course's sample repos are built on Humble (Ubuntu 22.04, Gazebo Classic). The skills can still be used, and the main change you will encounter is the move from Gazebo Classic to the new Gazebo (ros_gz). It has not been tested on Jazzy yet."
+  "en": "The example repos in this course were built on Humble (Ubuntu 22.04, Gazebo Classic). The skills carry over; the main change you will meet is Gazebo Classic to the new Gazebo (ros_gz: the packages that connect ROS 2 to it). They have not been tested on Jazzy yet. The table pairs Humble with Fortress because Gazebo recommends that pair; the TurtleBot3 Humble simulation still uses Gazebo Classic (its package depends on gazebo_ros_pkgs).",
+  "my": "ဒီသင်ခန်းစာက နမူနာ repo တွေကို Humble (Ubuntu 22.04, Gazebo Classic) ပေါ်မှာ တည်ဆောက်ထားတာပါ။ ကျွမ်းကျင်မှုတွေက ဆက်သုံးလို့ ရပါတယ်၊ အဓိက ကြုံရမယ့် ပြောင်းလဲမှုကတော့ Gazebo Classic ကနေ Gazebo အသစ်ကို ပြောင်းတာပါ (ros_gz- ROS 2 ကို အဲဒါနဲ့ ချိတ်ပေးတဲ့ package တွေ)။ Jazzy ပေါ်မှာ မစမ်းရသေးပါဘူး။ Gazebo က Humble ကို Fortress နဲ့ တွဲသုံးဖို့ အကြံပြုလို့ ဇယားမှာ အဲဒီလို တွဲထားပါတယ်၊ TurtleBot3 Humble simulation ကတော့ Gazebo Classic ကို သုံးနေဆဲပါ (သူ့ package က gazebo_ros_pkgs ကို မှီခိုလို့ပါ)။",
+  "back": "This course's example repos are built on Humble (Ubuntu 22.04, Gazebo Classic). The skills can keep being used; the main change you will meet is the move from Gazebo Classic to the new Gazebo (ros_gz: the packages that connect ROS 2 to it). It has not been tried on Jazzy yet. Because Gazebo recommends pairing Humble with Fortress, the table pairs them that way, but the TurtleBot3 Humble simulation still uses Gazebo Classic (because its package depends on gazebo_ros_pkgs)."
  },
  "l0/ros:ros1": {
   "status": "pass-alt",
@@ -2887,9 +2883,9 @@
  },
  "l0/ros:winMac": {
   "status": "pass-alt",
-  "en": "On Windows: Ubuntu 24.04 inside WSL2, or the Docker image osrf/ros:jazzy-desktop. On a Mac: Docker or a virtual machine running Ubuntu.",
-  "my": "Windows မှာဆိုရင်: WSL2 ထဲက Ubuntu 24.04 သို့မဟုတ် Docker image ဖြစ်တဲ့ osrf/ros:jazzy-desktop ကို သုံးပါ။ Mac မှာဆိုရင်: Docker သို့မဟုတ် Ubuntu အလုပ်လုပ်နေတဲ့ virtual machine ကို သုံးပါ။",
-  "back": "On Windows: use Ubuntu 24.04 inside WSL2, or the Docker image osrf/ros:jazzy-desktop. On Mac: use Docker or a virtual machine running Ubuntu."
+  "en": "On Windows: Ubuntu 24.04 inside WSL2 (the Linux that Windows can run inside itself), or the Docker image osrf/ros:jazzy-desktop (Docker runs a ready-made Linux setup in a sealed box). On a Mac: Docker or a virtual machine running Ubuntu.",
+  "my": "Windows မှာဆိုရင်- WSL2 ထဲက Ubuntu 24.04 (Windows က သူ့ထဲမှာ run နိုင်တဲ့ Linux) ဒါမှမဟုတ် Docker image osrf/ros:jazzy-desktop (Docker က အသင့်လုပ်ထားတဲ့ Linux setup ကို ပိတ်ထားတဲ့ သေတ္တာ တစ်ခုထဲမှာ run ပေးပါတယ်) ကို သုံးပါ။ Mac မှာဆိုရင်- Docker ဒါမှမဟုတ် Ubuntu run ထားတဲ့ virtual machine ကို သုံးပါ။",
+  "back": "On Windows: use Ubuntu 24.04 inside WSL2 (a Linux that Windows can run inside itself) or the Docker image osrf/ros:jazzy-desktop (Docker runs a ready-made Linux setup inside a closed box). On Mac: use Docker or a virtual machine running Ubuntu."
  },
  "l0/ros:words": {
   "status": "pass-alt",
@@ -3254,9 +3250,9 @@
  },
  "l0/simpick:checked": {
   "status": "pass-alt",
-  "en": "Facts checked against each tool's own pages on 2026-11-23.",
-  "my": "အချက်အလက်တွေကို tool တစ်ခုချင်းစီရဲ့ ကိုယ်ပိုင် page တွေနဲ့ 2026-11-23 မှာ တိုက်စစ်ထားပါတယ်။",
-  "back": "The facts were cross-checked against each tool's own pages on 2026-11-23."
+  "en": "Facts checked against each tool's own pages on 2026-11-23; the turtlesim, Webots and Isaac Sim links on 2026-11-25.",
+  "my": "အချက်အလက်တွေကို tool တစ်ခုချင်းစီရဲ့ ကိုယ်ပိုင် စာမျက်နှာတွေနဲ့ 2026-11-23 မှာ တိုက်စစ်ထားပါတယ်၊ turtlesim၊ Webots နဲ့ Isaac Sim link တွေကိုတော့ 2026-11-25 မှာ စစ်ထားပါတယ်။",
+  "back": "The facts were cross-checked on 2026-11-23 against each tool's own pages; the turtlesim, Webots and Isaac Sim links were checked on 2026-11-25."
  },
  "l0/simpick:dim.2.5D": {
   "status": "pass",
@@ -3397,10 +3393,10 @@
   "back": "Gazebo"
  },
  "l0/simpick:rows.gazebo.what": {
-  "status": "pass",
-  "en": "The usual 3D simulator with physics and the TurtleBot3 worlds: LiDAR, camera, maps, Nav2. With ROS 2 Jazzy it is Gazebo Harmonic; the Humble TurtleBot3 packages used by this course's projects use Gazebo Classic (support ended January 2025). Without a graphics card or in WSL the 3D window can be slow or black: run it without the window and watch in RViz.",
-  "my": "ရုပ်ပိုင်းဆိုင်ရာ သဘောတရားများနဲ့ TurtleBot3 ကမ္ဘာများ ပါဝင်တဲ့ ပုံမှန် သုံးနေကျ 3D ဆင်မျူလေတာ ဖြစ်ပါတယ်- LiDAR၊ ကင်မရာ၊ မြေပုံများနဲ့ Nav2 တို့ ပါဝင်ပါတယ်။ ROS 2 Jazzy မှာဆိုရင် Gazebo Harmonic ဖြစ်ပြီး ဒီသင်ခန်းစာရဲ့ ပရောဂျက်များမှာ သုံးထားတဲ့ Humble TurtleBot3 package များကတော့ Gazebo Classic ကို သုံးပါတယ် (2025 ခုနှစ် ဇန်နဝါရီလမှာ ထောက်ပံ့မှု ပြီးဆုံးခဲ့ပါတယ်)။ ဂရပ်ဖစ်ကဒ် မရှိရင် ဒါမှမဟုတ် WSL ထဲမှာဆိုရင် 3D window က နှေးတာ သို့မဟုတ် မည်းသွားတာမျိုး ဖြစ်နိုင်ပါတယ်- window မပါဘဲ ရန်းပြီး RViz ထဲမှာ ကြည့်ပါ။",
-  "back": "It is a commonly used 3D simulator containing physics concepts and TurtleBot3 worlds: including LiDAR, camera, maps, and Nav2. In ROS 2 Jazzy it is Gazebo Harmonic, while the Humble TurtleBot3 packages used in this tutorial's projects use Gazebo Classic (support ended in January 2025). If there is no graphics card or inside WSL, the 3D window may be slow or turn black—run without a window and view in RViz."
+  "status": "pass-alt",
+  "en": "The usual 3D simulator with physics and the TurtleBot3 worlds: LiDAR, camera, maps, Nav2 (the ROS 2 software that drives a robot to a goal). With ROS 2 Jazzy it is Gazebo Harmonic; the Humble TurtleBot3 packages used by this course's projects use Gazebo Classic (support ended January 2025). Without a graphics card or in WSL the 3D window can be slow or black: run it without the window and watch in RViz (the ROS 2 viewer for robot data).",
+  "my": "physics နဲ့ TurtleBot3 ကမ္ဘာတွေ ပါတဲ့ ပုံမှန်သုံးနေကျ 3D ဆင်မျူလေတာပါ- LiDAR၊ ကင်မရာ၊ မြေပုံ၊ Nav2 (စက်ရုပ်ကို ပန်းတိုင်ဆီ မောင်းပေးတဲ့ ROS 2 ဆော့ဖ်ဝဲ)။ ROS 2 Jazzy နဲ့ဆိုရင် Gazebo Harmonic ဖြစ်ပြီး ဒီသင်ခန်းစာရဲ့ project တွေ သုံးတဲ့ Humble TurtleBot3 package တွေကတော့ Gazebo Classic ကို သုံးပါတယ် (January 2025 မှာ ပံ့ပိုးမှု ရပ်သွားပါပြီ)။ ဂရပ်ဖစ်ကတ် မရှိရင် ဒါမှမဟုတ် WSL ထဲမှာဆိုရင် 3D window က နှေးတာ ဒါမှမဟုတ် မည်းနေတာ ဖြစ်နိုင်ပါတယ်- window မပါဘဲ run ပြီး RViz (စက်ရုပ် ဒေတာ ကြည့်ဖို့ ROS 2 viewer) ထဲမှာ ကြည့်ပါ။",
+  "back": "The usual, commonly used 3D simulator with physics and TurtleBot3 worlds: LiDAR, camera, map, Nav2 (ROS 2 software that drives a robot to a goal). With ROS 2 Jazzy it is Gazebo Harmonic, while the Humble TurtleBot3 packages used by this course's projects use Gazebo Classic (support ended in January 2025). Without a graphics card, or inside WSL, the 3D window may be slow or black: run without a window and view in RViz (a ROS 2 viewer for robot data)."
  },
  "l0/simpick:rows.isaac.learn": {
   "status": "pass-alt",
@@ -3434,9 +3430,9 @@
  },
  "l0/simpick:rows.mvsim.what": {
   "status": "pass-alt",
-  "en": "A lightweight 2.5D simulator: a flat world with simple physics, walls and distance sensors; a ready package for ROS 2 Humble.",
-  "my": "ပေါ့ပါးတဲ့ 2.5D ဆင်မျူလေတာ- ရိုးရှင်းတဲ့ physics၊ နံရံတွေနဲ့ အကွာအဝေး ဆင်ဆာတွေ ပါတဲ့ ပြားပြား ကမ္ဘာ၊ ROS 2 Humble အတွက် အသင့်သုံး package ပါ။",
-  "back": "A lightweight 2.5D simulator: simple physics, a flat world with walls and range sensors, a ready-to-use package for ROS 2 Humble."
+  "en": "A lightweight 2.5D simulator: a flat world with simple physics, walls and distance sensors; a ready package for ROS 2 Humble and Jazzy.",
+  "my": "ပေါ့ပါးတဲ့ 2.5D ဆင်မျူလေတာ- ရိုးရှင်းတဲ့ physics၊ နံရံတွေနဲ့ အကွာအဝေး ဆင်ဆာတွေ ပါတဲ့ ပြားပြား ကမ္ဘာ၊ ROS 2 Humble နဲ့ Jazzy အတွက် အသင့်သုံး package ပါ။",
+  "back": "A lightweight 2.5D simulator: simple physics, a flat world with walls and distance sensors, a ready-to-use package for ROS 2 Humble and Jazzy."
  },
  "l0/simpick:rows.site.learn": {
   "status": "pass",
@@ -3987,9 +3983,9 @@
  },
  "l0/tools:learn": {
   "status": "pass-alt",
-  "en": "You will learn: the four tools under a robot program, and which job each one is for.",
-  "my": "သင်ယူရမှာက- စက်ရုပ် ပရိုဂရမ် တစ်ခုရဲ့ အောက်က tool 4 ခုနဲ့ တစ်ခုချင်းစီ ဘာအလုပ်အတွက်လဲ ဆိုတာပါ။",
-  "back": "What you learn: the 4 tools under a robot program, and what job each one is for."
+  "en": "You will learn: the five layers under a robot program (Linux, terminal, Python, C++, ROS 2), and which job each one is for.",
+  "my": "သင်ယူရမှာက- စက်ရုပ် ပရိုဂရမ် တစ်ခုရဲ့ အောက်က layer 5 ခု (Linux, terminal, Python, C++, ROS 2) နဲ့ တစ်ခုချင်းစီ ဘာအလုပ်အတွက်လဲ ဆိုတာပါ။",
+  "back": "What you will learn: the 5 layers under a robot program (Linux, terminal, Python, C++, ROS 2) and what job each one is for."
  },
  "l0/tools:lines.0": {
   "status": "pass-alt",
@@ -4005,9 +4001,9 @@
  },
  "l0/tools:lines.2": {
   "status": "pass-alt",
-  "en": "ROS 2 is the layer that lets many programs talk. This app uses ROS 2 Humble on Ubuntu 22.04, the pair the example repos use.",
-  "my": "ROS 2 ဆိုတာ ပရိုဂရမ် အများအပြားကို အချင်းချင်း စကားပြောခွင့်ပေးတဲ့ layer ဖြစ်ပါတယ်။ ဒီ app မှာတော့ နမူနာ repository တွေမှာ သုံးတဲ့အတိုင်း Ubuntu 22.04 ပေါ်မှာ ROS 2 Humble ကို သုံးထားပါတယ်။",
-  "back": "ROS 2 is a layer that lets many programs talk to each other. In this app, ROS 2 Humble is used on Ubuntu 22.04, as used in the example repositories."
+  "en": "ROS 2 is the layer that lets many programs talk. This course installs ROS 2 Jazzy on Ubuntu 24.04 (next chapter). The example repos and terminal pages were made on Humble: on Jazzy, read humble as jazzy in paths like /opt/ros/humble.",
+  "my": "ROS 2 ဆိုတာ ပရိုဂရမ် အများကြီးကို အချင်းချင်း စကားပြောနိုင်အောင် လုပ်ပေးတဲ့ layer ပါ။ ဒီသင်ခန်းစာက Ubuntu 24.04 ပေါ်မှာ ROS 2 Jazzy ကို install လုပ်ပါတယ် (နောက်အခန်း)။ နမူနာ repo တွေနဲ့ terminal စာမျက်နှာတွေကို Humble ပေါ်မှာ လုပ်ထားတာပါ- Jazzy မှာဆိုရင် /opt/ros/humble လို လမ်းကြောင်းတွေထဲက humble ကို jazzy လို့ ဖတ်ပါ။",
+  "back": "ROS 2 is the layer that lets many programs talk to each other. This course installs ROS 2 Jazzy on Ubuntu 24.04 (next chapter). The example repos and terminal pages were done on Humble: on Jazzy, read humble as jazzy in paths such as /opt/ros/humble."
  },
  "l0/tools:names.cpp": {
   "status": "pass-alt",
@@ -4017,9 +4013,9 @@
  },
  "l0/tools:names.linux": {
   "status": "pass-alt",
-  "en": "Linux (Ubuntu 22.04)",
-  "my": "Linux (Ubuntu 22.04)",
-  "back": "Linux (Ubuntu 22.04)"
+  "en": "Linux (Ubuntu 24.04)",
+  "my": "Linux (Ubuntu 24.04)",
+  "back": "Linux (Ubuntu 24.04)"
  },
  "l0/tools:names.python": {
   "status": "pass-alt",
@@ -4029,9 +4025,9 @@
  },
  "l0/tools:names.ros": {
   "status": "pass-alt",
-  "en": "ROS 2 Humble",
-  "my": "ROS 2 Humble",
-  "back": "ROS 2 Humble"
+  "en": "ROS 2 Jazzy",
+  "my": "ROS 2 Jazzy",
+  "back": "ROS 2 Jazzy"
  },
  "l0/tools:names.terminal": {
   "status": "pass-alt",
@@ -4194,9 +4190,9 @@
  },
  "l1/callback:learn": {
   "status": "pass-alt",
-  "en": "You will learn: a class keeps data and functions together; a callback is a function you hand to ROS, and ROS calls it when a message arrives.",
-  "my": "သင်ယူရမှာ: class က data နဲ့ function တွေကို အတူတူ စုထားပါတယ်။ callback ဆိုတာ ROS ကို လွှဲပေးထားတဲ့ function ဖြစ်ပြီး message တစ်ခု ရောက်လာတဲ့အခါ ROS က အဲဒါကို ခေါ်ပါတယ်။",
-  "back": "What you will learn: a class keeps data and functions together. A callback is a function handed over to ROS, and when a message arrives, ROS calls it."
+  "en": "You will learn: a class keeps data and functions together; a callback is a function you hand to ROS, and ROS calls it when a message (one packet of data, such as one LiDAR scan) arrives.",
+  "my": "သင်ယူရမှာ- class က data နဲ့ function တွေကို အတူတူ စုထားပါတယ်။ callback ဆိုတာ ROS ကို လွှဲပေးထားတဲ့ function ဖြစ်ပြီး message တစ်ခု (LiDAR scan တစ်ခုလို ဒေတာ အထုပ် တစ်ထုပ်) ရောက်လာတဲ့အခါ ROS က အဲဒါကို ခေါ်ပါတယ်။",
+  "back": "What you learn: a class keeps data and functions together. A callback is a function handed over to ROS; when a message (a packet of data, like one LiDAR scan) arrives, ROS calls it."
  },
  "l1/callback:lines.0": {
   "status": "pass-alt",
@@ -4212,9 +4208,9 @@
  },
  "l1/callback:lines.2": {
   "status": "pass-alt",
-  "en": "ROS runs one call at a time. If on_scan takes longer than 200 ms, new scans wait in a queue of 10. When the queue is full the oldest is thrown away.",
-  "my": "ROS က တစ်ကြိမ်မှာ တစ်ခုပဲ ခေါ်ပါတယ်။ on_scan က 200 ms ထက် ပိုကြာရင် scan အသစ်တွေက 10 ခုဆံ့တဲ့ queue ထဲမှာ စောင့်ရပါတယ်။ queue ပြည့်သွားရင် အဟောင်းဆုံးကို လွှင့်ပစ်ပါတယ်။",
-  "back": "ROS calls only one at a time. If on_scan takes longer than 200 ms, new scans wait in a queue that holds 10. When the queue is full, the oldest is thrown away."
+  "en": "rclpy.spin runs one call at a time (it uses a single-threaded executor unless you pass it another one). If on_scan takes longer than 200 ms, new scans wait in a queue of 10. When the queue is full the oldest is thrown away.",
+  "my": "rclpy.spin က တစ်ကြိမ်မှာ ခေါ်ဆိုမှု တစ်ခုပဲ run ပါတယ် (တခြား executor မပေးရင် single-threaded executor ကို သုံးလို့ပါ)။ on_scan က 200 ms ထက် ပိုကြာရင် scan အသစ်တွေက 10 ခုဆံ့တဲ့ queue ထဲမှာ စောင့်ရပါတယ်။ queue ပြည့်သွားရင် အဟောင်းဆုံးကို လွှင့်ပစ်ပါတယ်။",
+  "back": "rclpy.spin runs only one call at a time (because it uses the single-threaded executor unless you give another executor). If on_scan takes longer than 200 ms, new scans wait in a queue that holds 10. When the queue is full, the oldest is thrown away."
  },
  "l1/callback:lost": {
   "status": "pass-alt",
@@ -4302,9 +4298,9 @@
  },
  "l1/closest:challenge": {
   "status": "pass-alt",
-  "en": "Challenge: move the box so closest changes only once during the loop.",
-  "my": "စိန်ခေါ်မှု: loop အတွင်းမှာ closest တစ်ကြိမ်ပဲ ပြောင်းအောင် သေတ္တာကို ရွှေ့ပါ။",
-  "back": "Challenge: move the box so that closest changes only once inside the loop."
+  "en": "Challenge: move the box so closest changes only once during the loop. Hint: the first reading always replaces infinity, so that is the one change.",
+  "my": "စိန်ခေါ်မှု- loop အတွင်းမှာ closest တစ်ကြိမ်ပဲ ပြောင်းအောင် သေတ္တာကို ရွှေ့ပါ။ အရိပ်အမြွက်- ပထမ ဖတ်ချက်က infinity ကို အမြဲ အစားထိုးလို့ အဲဒါက ပြောင်းလဲမှု တစ်ခု ဖြစ်ပါတယ်။",
+  "back": "Challenge: move the box so that closest changes only once inside the loop. Hint: the first reading always replaces infinity, so that counts as one change."
  },
  "l1/closest:changes": {
   "status": "pass-alt",
@@ -4518,9 +4514,9 @@
  },
  "l1/cpp:glossary.2.1": {
   "status": "pass-alt",
-  "en": "the C++ compiler on Ubuntu",
-  "my": "Ubuntu ပေါ်က C++ compiler",
-  "back": "The C++ compiler on Ubuntu"
+  "en": "the GNU C++ compiler, the usual one on Ubuntu",
+  "my": "GNU C++ compiler၊ Ubuntu ပေါ်မှာ ပုံမှန်သုံးတဲ့ compiler",
+  "back": "GNU C++ compiler, the compiler normally used on Ubuntu"
  },
  "l1/cpp:glossary.3.0": {
   "status": "pass-alt",
@@ -4548,9 +4544,9 @@
  },
  "l1/cpp:lines.0": {
   "status": "pass-alt",
-  "en": "This is chapter 1.1 again, in C++. Python turns your file into bytecode and its interpreter runs it step by step. C++ is compiled by g++ into machine code before it runs; the robot runs that machine code directly.",
-  "my": "ဒါက အခန်း 1.1 ကိုပဲ C++ နဲ့ ပြန်ရေးထားတာပါ။ Python က သင့်ဖိုင်ကို bytecode အဖြစ် ပြောင်းပြီး သူ့ interpreter က တစ်ဆင့်ချင်း run ပါတယ်။ C++ ကိုတော့ run မလုပ်ခင် g++ က စက်ကုဒ် အဖြစ် compile လုပ်ပါတယ်၊ စက်ရုပ်က အဲဒီ စက်ကုဒ် ကို တိုက်ရိုက် run ပါတယ်။",
-  "back": "This is just chapter 1.1 rewritten in C++. Python turns your file into bytecode and its interpreter runs it step by step. C++ is compiled by g++ into machine code before running, and the robot runs that machine code directly."
+  "en": "This is chapter 1.1 again, in C++. Python turns your file into bytecode (simple steps for Python itself) and its interpreter (the python program) runs it step by step. C++ is compiled by g++ into machine code before it runs; the robot runs that machine code directly.",
+  "my": "ဒါက အခန်း 1.1 ကိုပဲ C++ နဲ့ ပြန်ရေးထားတာပါ။ Python က သင့်ဖိုင်ကို bytecode (Python ကိုယ်တိုင်အတွက် ရိုးရှင်းတဲ့ အဆင့်တွေ) အဖြစ် ပြောင်းပြီး သူ့ interpreter (python ပရိုဂရမ်) က တစ်ဆင့်ချင်း run ပါတယ်။ C++ ကိုတော့ run မလုပ်ခင် g++ က စက်ကုဒ် အဖြစ် compile လုပ်ပါတယ်၊ စက်ရုပ်က အဲဒီ စက်ကုဒ်ကို တိုက်ရိုက် run ပါတယ်။",
+  "back": "This is just section 1.1 rewritten in C++. Python converts your file into bytecode (simple steps for Python itself) and its interpreter (the python program) runs it step by step. C++ is compiled into machine code by g++ before running, and the robot runs that machine code directly."
  },
  "l1/cpp:lines.1": {
   "status": "pass-alt",
@@ -4578,15 +4574,15 @@
  },
  "l1/cpp:note.int": {
   "status": "pass-alt",
-  "en": "int keeps whole numbers only: 0.5 becomes 0, with no warning even under -Wall -Wextra. stop_at = 0 is the 1.1 crash.",
-  "my": "int က ကိန်းပြည့်ကိုပဲ သိမ်းပါတယ်: 0.5 က 0 ဖြစ်သွားပြီး -Wall -Wextra သုံးရင်တောင် သတိပေးချက် မပေါ်ပါဘူး။ stop_at = 0 က 1.1 မှာ နံရံကို တိုက်မိခဲ့တဲ့ ပြဿနာပါပဲ။",
-  "back": "int stores only whole numbers: 0.5 becomes 0, and even with -Wall -Wextra no warning appears. stop_at = 0 is the same problem as hitting the wall in 1.1."
+  "en": "int keeps whole numbers only: 0.5 becomes 0, with no warning even under -Wall -Wextra (the g++ options that turn on extra warnings). stop_at = 0 is the 1.1 crash.",
+  "my": "int က ကိန်းပြည့်ကိုပဲ သိမ်းပါတယ်- 0.5 က 0 ဖြစ်သွားပြီး -Wall -Wextra (သတိပေးချက် အပိုတွေ ဖွင့်ပေးတဲ့ g++ option တွေ) သုံးရင်တောင် သတိပေးချက် မပေါ်ပါဘူး။ stop_at = 0 က 1.1 မှာ တိုက်မိခဲ့တဲ့ ပြဿနာပါပဲ။",
+  "back": "int stores only whole numbers: 0.5 becomes 0, and even with -Wall -Wextra (g++ options that turn on extra warnings) no warning appears. stop_at = 0 is the same problem that was hit in 1.1."
  },
  "l1/cpp:note.int{}": {
   "status": "pass-alt",
-  "en": "Braces forbid the silent cut: g++ refuses to build. A compile error is the cheap place to find this bug.",
-  "my": "တွန့်ကွင်းက တိတ်တိတ်လေး ဖြတ်ချတာကို တားပါတယ်: g++ က build မလုပ်ပေးပါဘူး။ ဒီ bug ကို တွေ့ဖို့ ကုန်ကျစရိတ် အနည်းဆုံး နေရာက compile အမှားပါပဲ။",
-  "back": "The curly braces prevent silent truncation: g++ will not build it. The place that costs the least to find this bug is the compile error."
+  "en": "Braces, as in int stop_at{0.5}, forbid the silent cut: g++ refuses to build. A compile error is the cheap place to find this bug.",
+  "my": "int stop_at{0.5} လို တွန့်ကွင်း သုံးရင် တိတ်တိတ်လေး ဖြတ်ချတာကို တားပါတယ်- g++ က build မလုပ်ပေးပါဘူး။ ဒီ bug ကို တွေ့ဖို့ ကုန်ကျစရိတ် အနည်းဆုံး နေရာက compile အမှားပါပဲ။",
+  "back": "Using curly braces like int stop_at{0.5} stops silent truncation: g++ will not build it. The place where this bug is cheapest to find is the compile error."
  },
  "l1/cpp:notYet": {
   "status": "pass-alt",
@@ -4765,9 +4761,9 @@
  },
  "l1/decide:realSensor": {
   "status": "pass-alt",
-  "en": "On a real sensor, a wall closer to the sensor than its 12 cm minimum is a special case: the ROS rule REP 117 says to report -inf, meaning \"too close\", and the simulator here does. In Python -inf < stop_at is True, so the simulated robot stops 2.4 cm from the wall even with stop_at = 0.",
-  "my": "တကယ့် ဆင်ဆာမှာ နံရံက ဆင်ဆာ တိုင်းနိုင်တဲ့ အနည်းဆုံး 12 cm ထက် ပိုနီးနေရင် အထူးကိစ္စ ဖြစ်ပါတယ်: ROS စည်းမျဉ်း REP 117 က \"နီးလွန်းတယ်\" လို့ အဓိပ္ပာယ်ရတဲ့ -inf ကို ပြန်ပို့ဖို့ ပြောထားပြီး ဒီက ဆင်မျူလေတာကလည်း အဲဒီအတိုင်း လုပ်ပါတယ်။ Python မှာ -inf < stop_at က True ဖြစ်လို့ stop_at = 0 ဖြစ်နေရင်တောင် ဆင်မျူလေတာထဲက စက်ရုပ်က နံရံနဲ့ 2.4 cm အကွာမှာ ရပ်ပါတယ်။",
-  "back": "On a real sensor, if the wall is nearer than the minimum 12 cm that the sensor can measure, it is a special case: the ROS rule REP 117 says to return -inf, which means \"too close\", and the simulator here also does the same. In Python, -inf < stop_at is True, so even if stop_at = 0, the robot in the simulator stops at 2.4 cm distance from the wall."
+  "en": "On a real sensor, a wall closer to the sensor than its 12 cm minimum is a special case: the ROS rule REP 117 says to report -inf, meaning \"too close\", and the full simulator does. In Python -inf < stop_at is True, so there the robot stops 2.4 cm from the wall even with stop_at = 0. This page's simple model has no -inf: at stop_at = 0 it drives into the wall.",
+  "my": "တကယ့် ဆင်ဆာမှာ နံရံက ဆင်ဆာရဲ့ အနည်းဆုံး 12 cm ထက် ပိုနီးနေရင် အထူးကိစ္စ ဖြစ်ပါတယ်- ROS စည်းကမ်းချက် REP 117 က \"နီးလွန်းတယ်\" လို့ အဓိပ္ပာယ်ရတဲ့ -inf ကို ပြန်ပို့ဖို့ ပြောထားပြီး အပြည့်အစုံ ဆင်မျူလေတာကလည်း အဲဒီအတိုင်း လုပ်ပါတယ်။ Python မှာ -inf < stop_at က True ဖြစ်လို့ အဲဒီမှာ stop_at = 0 ဖြစ်နေရင်တောင် စက်ရုပ်က နံရံနဲ့ 2.4 cm အကွာမှာ ရပ်ပါတယ်။ ဒီစာမျက်နှာရဲ့ ရိုးရှင်းတဲ့ model မှာ -inf မရှိပါဘူး- stop_at = 0 ဆိုရင် နံရံထဲ မောင်းဝင်သွားပါတယ်။",
+  "back": "On a real sensor, if the wall is closer than the sensor's minimum 12 cm it is a special case: the ROS convention REP 117 says to return -inf, which means 'too close', and the full simulator does exactly that. In Python, -inf < stop_at is True, so even if stop_at = 0 there, the robot stops 2.4 cm from the wall. The simple model on this page has no -inf: if stop_at = 0 it drives into the wall."
  },
  "l1/decide:runsHere": {
   "status": "pass-alt",
@@ -4946,9 +4942,9 @@
  },
  "l1/shell:lines.2": {
   "status": "pass-alt",
-  "en": "ros2 only exists after source /opt/ros/humble/setup.bash. A new terminal starts without it, unless ~/.bashrc sources it.",
-  "my": "ros2 က source /opt/ros/humble/setup.bash လုပ်ပြီးမှသာ ရှိပါတယ်။ ~/.bashrc က အဲဒါကို source မလုပ်ထားရင် terminal အသစ်က အဲဒါ မပါဘဲ စပါတယ်။",
-  "back": "ros2 exists only after you do source /opt/ros/humble/setup.bash. If ~/.bashrc does not source it, a new terminal starts without it."
+  "en": "ros2 only exists after source /opt/ros/humble/setup.bash (on Jazzy: /opt/ros/jazzy/setup.bash). A new terminal starts without it, unless ~/.bashrc sources it.",
+  "my": "ros2 က source /opt/ros/humble/setup.bash လုပ်ပြီးမှသာ ရှိပါတယ် (Jazzy မှာ- /opt/ros/jazzy/setup.bash)။ ~/.bashrc က အဲဒါကို source မလုပ်ထားရင် terminal အသစ်က အဲဒါ မပါဘဲ စပါတယ်။",
+  "back": "ros2 exists only after you do source /opt/ros/humble/setup.bash (on Jazzy: /opt/ros/jazzy/setup.bash). If ~/.bashrc does not source it, a new terminal starts without it."
  },
  "l1/shell:newTerm": {
   "status": "pass-alt",
@@ -5018,9 +5014,9 @@
  },
  "l2/actions:challenge": {
   "status": "pass-alt",
-  "en": "Challenge: cancel the goal after the feedback says less than 1 m is left.",
-  "my": "စိန်ခေါ်မှု: 1 m ထက်နည်းတာပဲ ကျန်တော့တယ်လို့ feedback က ပြောပြီးမှ ပန်းတိုင်ကို ပယ်ဖျက်ပါ။",
-  "back": "Challenge: cancel the goal only after the feedback says less than 1 m remains."
+  "en": "Challenge: with a goal 2 m or more away, cancel it after the feedback says less than 1 m is left.",
+  "my": "စိန်ခေါ်မှု- 2 m ဒါမှမဟုတ် ပိုဝေးတဲ့ ပန်းတိုင်နဲ့ စပြီး 1 m ထက်နည်းတာပဲ ကျန်တော့တယ်လို့ feedback က ပြောပြီးမှ အဲဒီ ပန်းတိုင်ကို ပယ်ဖျက်ပါ။",
+  "back": "Challenge: starting with a goal that is 2 m or farther, cancel that goal only after the feedback says less than 1 m remains."
  },
  "l2/actions:compare.0.0": {
   "status": "pass-alt",
@@ -5192,9 +5188,9 @@
  },
  "l2/actions:lines.2": {
   "status": "pass-alt",
-  "en": "ros2-patrol-project's patrol_controller sends each waypoint to Nav2 as a NavigateToPose action. Nav2 reports distance_remaining in its feedback; this controller's feedback_callback ignores it.",
-  "my": "ros2-patrol-project ရဲ့ patrol_controller က waypoint တစ်ခုစီကို NavigateToPose action အဖြစ် Nav2 ဆီ ပို့ပါတယ်။ Nav2 က သူ့ feedback ထဲမှာ distance_remaining ကို ပြောပါတယ်၊ ဒါပေမဲ့ ဒီ controller ရဲ့ feedback_callback က အဲဒါကို လျစ်လျူရှုပါတယ်။",
-  "back": "The patrol_controller of ros2-patrol-project sends each waypoint to Nav2 as a NavigateToPose action. Nav2 reports distance_remaining in its feedback, but this controller's feedback_callback ignores it."
+  "en": "Names in code font are taken from the example project. ros2-patrol-project's node patrol_controller sends each waypoint to Nav2 as a NavigateToPose action. Nav2 reports distance_remaining in its feedback; this controller's feedback_callback ignores it.",
+  "my": "ကုဒ် font နဲ့ ရေးထားတဲ့ နာမည်တွေက နမူနာ project ထဲက ယူထားတာပါ။ ros2-patrol-project ရဲ့ node patrol_controller က waypoint တစ်ခုစီကို NavigateToPose action အဖြစ် Nav2 ဆီ ပို့ပါတယ်။ Nav2 က သူ့ feedback ထဲမှာ distance_remaining ကို ပြောပါတယ်၊ ဒီ controller ရဲ့ feedback_callback ကတော့ အဲဒါကို လျစ်လျူရှုပါတယ်။",
+  "back": "The names written in code font are taken from the sample project. In ros2-patrol-project, the node patrol_controller sends each waypoint to Nav2 as a NavigateToPose action. Nav2 reports distance_remaining in its feedback; this controller's feedback_callback ignores it."
  },
  "l2/actions:notYet": {
   "status": "pass-alt",
@@ -5691,15 +5687,15 @@
  },
  "l2/nodes:jobs.bridge": {
   "status": "pass-alt",
-  "en": "connects to the simulated robot: LiDAR scans and wheel odometry in, speed commands out",
-  "my": "ဆင်မျူလေတာထဲက စက်ရုပ်နဲ့ ချိတ်ဆက်: LiDAR scan တွေနဲ့ ဘီး odometry ဝင်လာ၊ အမြန်နှုန်း command တွေ ထွက်သွား",
-  "back": "Connect with the robot in the simulator: LiDAR scans and wheel odometry come in, speed commands go out"
+  "en": "connects to the simulated robot: LiDAR scans and wheel odometry (how far the wheels say the robot moved) in, speed commands out",
+  "my": "ဆင်မျူလေတာထဲက စက်ရုပ်နဲ့ ချိတ်ဆက်- LiDAR scan တွေနဲ့ ဘီး odometry (ဘီးတွေအရ စက်ရုပ် ဘယ်လောက် ရွေ့သွားလဲ) ဝင်လာ၊ အမြန်နှုန်း command တွေ ထွက်သွား",
+  "back": "Connect with the robot in the simulator: LiDAR scans and wheel odometry (how far the robot has moved according to the wheels) come in, speed commands go out."
  },
  "l2/nodes:jobs.nav2": {
   "status": "pass-alt",
-  "en": "plans a path and drives to a goal",
-  "my": "လမ်းကြောင်း စီစဉ်ပြီး ပန်းတိုင်ဆီ မောင်း",
-  "back": "Plan a path and drive to the goal"
+  "en": "Nav2, the ROS 2 navigation software: plans a path and drives to a goal",
+  "my": "Nav2၊ ROS 2 လမ်းညွှန် ဆော့ဖ်ဝဲ- လမ်းကြောင်း စီစဉ်ပြီး ပန်းတိုင်ဆီ မောင်း",
+  "back": "Nav2, ROS 2 navigation software: plans a path and drives to the goal."
  },
  "l2/nodes:jobs.patrol": {
   "status": "pass-alt",
@@ -5739,9 +5735,9 @@
  },
  "l2/nodes:lines.0": {
   "status": "pass-alt",
-  "en": "One launch file starts the patrol robot from Level 1 as separate programs. Each box is one node.",
-  "my": "launch file တစ်ခုက Level 1 က ကင်းလှည့် စက်ရုပ်ကို သီးခြား ပရိုဂရမ်တွေအဖြစ် စတင်ပါတယ်။ အကွက် တစ်ခုစီဟာ node တစ်ခု ဖြစ်ပါတယ်။",
-  "back": "One launch file starts the Level 1 patrol robot as separate programs. Each box is one node."
+  "en": "One launch file starts a whole robot that patrols on its own, as separate programs. Each box is one node.",
+  "my": "launch file တစ်ခုက ကိုယ့်ဘာသာ ကင်းလှည့်တဲ့ စက်ရုပ် တစ်စီးလုံးကို သီးခြား ပရိုဂရမ်တွေအဖြစ် စတင်ပါတယ်။ အကွက် တစ်ခုစီဟာ node တစ်ခု ဖြစ်ပါတယ်။",
+  "back": "One launch file starts a whole self-patrolling robot as separate programs. Each box is one node."
  },
  "l2/nodes:lines.1": {
   "status": "pass-alt",
@@ -5903,9 +5899,9 @@
  },
  "l2/params:glossary.2.1": {
   "status": "pass-alt",
-  "en": "a Python script that starts nodes with their parameters",
-  "my": "node တွေကို သူတို့ရဲ့ parameter တွေနဲ့ စတင်ပေးတဲ့ Python script",
-  "back": "A Python script that starts nodes with their parameters"
+  "en": "a file (Python, XML or YAML) that starts nodes with their parameters",
+  "my": "node တွေကို သူတို့ရဲ့ parameter တွေနဲ့ စတင်ပေးတဲ့ ဖိုင် (Python, XML ဒါမှမဟုတ် YAML)",
+  "back": "A file that starts nodes with their parameters (Python, XML or YAML)"
  },
  "l2/params:glossary.3.0": {
   "status": "pass-alt",
@@ -5939,9 +5935,9 @@
  },
  "l2/params:lines.0": {
   "status": "pass-alt",
-  "en": "tf_anomaly_detector checks the robot's position every 0.5 s and warns when it moved more than max_position_jump since the last check.",
-  "my": "tf_anomaly_detector က စက်ရုပ်ရဲ့ တည်နေရာကို 0.5 s တိုင်း စစ်ပြီး နောက်ဆုံး စစ်ချိန်ကနေ max_position_jump ထက် ပိုရွေ့သွားရင် သတိပေးပါတယ်။",
-  "back": "tf_anomaly_detector checks the robot's position every 0.5 s and warns if it has moved more than max_position_jump since the last check."
+  "en": "tf_anomaly_detector (a node in the example project TF-Transform-Explorer) checks the robot's position every 0.5 s and warns when it moved more than max_position_jump since the last check.",
+  "my": "tf_anomaly_detector (နမူနာ project TF-Transform-Explorer ထဲက node တစ်ခု) က စက်ရုပ်ရဲ့ တည်နေရာကို 0.5 s တိုင်း စစ်ပြီး နောက်ဆုံး စစ်ချိန်ကနေ max_position_jump ထက် ပိုရွေ့သွားရင် သတိပေးပါတယ်။",
+  "back": "tf_anomaly_detector (a node from the sample project TF-Transform-Explorer) checks the robot's position every 0.5 s and warns if it has moved more than max_position_jump since the last check."
  },
  "l2/params:lines.1": {
   "status": "pass-alt",
@@ -6363,9 +6359,9 @@
  },
  "l2/ws:lines.0": {
   "status": "pass-alt",
-  "en": "A package is one folder with a package.xml (name, dependencies) and a CMakeLists.txt (what to build). tf_explorer is one package with 5 programs.",
-  "my": "package ဆိုတာ package.xml (နာမည်၊ မှီခိုတဲ့ package တွေ) နဲ့ CMakeLists.txt (ဘာကို build လုပ်မလဲ) ပါတဲ့ folder တစ်ခုပါ။ tf_explorer က ပရိုဂရမ် 5 ခုပါတဲ့ package တစ်ခုပါ။",
-  "back": "A package is a folder containing package.xml (name, dependent packages) and CMakeLists.txt (what to build). tf_explorer is a package with 5 programs."
+  "en": "A package is one folder with a package.xml (name, dependencies). A C++ package like tf_explorer adds a CMakeLists.txt (what to build); a Python package has a setup script instead. tf_explorer is one package with 5 programs.",
+  "my": "package ဆိုတာ package.xml (နာမည်၊ မှီခိုတဲ့ package တွေ) ပါတဲ့ folder တစ်ခုပါ။ tf_explorer လို C++ package က CMakeLists.txt (ဘာကို build လုပ်မလဲ) ထပ်ပါပြီး Python package မှာတော့ အဲဒီအစား setup script ပါပါတယ်။ tf_explorer က ပရိုဂရမ် 5 ခုပါတဲ့ package တစ်ခုပါ။",
+  "back": "A package is a folder containing package.xml (name, packages it depends on). A C++ package like tf_explorer additionally has CMakeLists.txt (what to build), while a Python package has a setup script instead. tf_explorer is a package containing 5 programs."
  },
  "l2/ws:lines.1": {
   "status": "pass-alt",
@@ -6375,9 +6371,9 @@
  },
  "l2/ws:lines.2": {
   "status": "pass-alt",
-  "en": "Two sources, in order: /opt/ros/humble first (ROS itself), then install/setup.bash (your packages). Every new terminal needs both.",
-  "my": "source 2 ခုကို ဒီအစဉ်အတိုင်း လုပ်ပါ: ပထမ /opt/ros/humble (ROS ကိုယ်တိုင်)၊ ပြီးရင် install/setup.bash (သင့် package တွေ)။ terminal အသစ်တိုင်းမှာ နှစ်ခုလုံး လိုပါတယ်။",
-  "back": "Source 2 sources in this order: first /opt/ros/humble (ROS itself), then install/setup.bash (your packages). Both are needed in every new terminal."
+  "en": "Two sources, in order: /opt/ros/humble first (ROS itself; on Jazzy /opt/ros/jazzy), then install/setup.bash (your packages). Every new terminal needs both.",
+  "my": "source 2 ခုကို ဒီအစဉ်အတိုင်း လုပ်ပါ- ပထမ /opt/ros/humble (ROS ကိုယ်တိုင်၊ Jazzy မှာ /opt/ros/jazzy)၊ ပြီးရင် install/setup.bash (သင့် package တွေ)။ terminal အသစ်တိုင်းမှာ နှစ်ခုလုံး လိုပါတယ်။",
+  "back": "Do 2 sources in this order: first /opt/ros/humble (ROS itself; /opt/ros/jazzy on Jazzy), then install/setup.bash (your packages). Both are needed in every new terminal."
  },
  "l2/ws:newTerm": {
   "status": "pass-alt",
@@ -6387,9 +6383,9 @@
  },
  "l2/ws:notYet": {
   "status": "pass-alt",
-  "en": "Not yet.",
-  "my": "မရသေးပါဘူး။",
-  "back": "Not yet."
+  "en": "Not yet. Same order as the replay: source ROS, mkdir -p the workspace and its src, cd into src, git clone <url> tf_explorer (git copies a code folder from the internet; any url works in this pretend terminal), cd back up to the workspace, colcon build, source install/setup.bash, then ros2 run.",
+  "my": "မရသေးပါဘူး။ replay နဲ့ အစဉ်အတိုင်း လုပ်ပါ- ROS ကို source လုပ်၊ workspace နဲ့ သူ့ src ကို mkdir -p နဲ့ ဆောက်၊ src ထဲ cd နဲ့ ဝင်၊ git clone <url> tf_explorer (git က အင်တာနက်ပေါ်က ကုဒ် folder ကို ကူးယူပေးပါတယ်၊ ဒီ အတု terminal မှာ url ဘာမဆို ရပါတယ်)၊ workspace ဆီ cd နဲ့ ပြန်တက်၊ colcon build၊ source install/setup.bash၊ ပြီးမှ ros2 run။",
+  "back": "Not yet. Do it in order with replay: source ROS, create the workspace and its src with mkdir -p, go into src with cd, git clone <url> tf_explorer (git copies a code folder from the internet; in this fake terminal any url works), cd back up to the workspace, colcon build, source install/setup.bash, and only then ros2 run."
  },
  "l2/ws:runsHere": {
   "status": "pass-alt",
@@ -6490,10 +6486,11 @@
   "back": "All 3 pairs are OK. The repo checks the same way as this experiment."
  },
  "l3/tflab:reset": {
-  "status": "needs-human",
+  "status": "pass-alt",
   "en": "Break it again",
-  "my": "နောက်တစ်ခါ ဖျက်ကြည့်",
-  "note": "meaning drift (blind back-translation: \"Try clearing again\"): drift: 'Break it again' is an imperative to cause failure, 'clearing' is neutral. | second blind check: \"Next time, try deleting\" (drift twice). Candidate: ထပ်ဖျက်ကြည့်"
+  "my": "ထပ်ဖျက်ကြည့်",
+  "back": "Try breaking again",
+  "note": "redrafted after first blind drift, re-checked blind"
  },
  "l3/tflab:right": {
   "status": "pass",
@@ -6526,10 +6523,11 @@
   "back": "3. Inspect the code"
  },
  "l3/tflab:s4": {
-  "status": "pass",
-  "en": "4. Fix it: what do you change?",
-  "my": "4. ပြင်ကြည့်မယ် - ဘာကို ပြောင်းလဲမလဲ။",
-  "back": "4. Try to fix - what will you change?"
+  "status": "pass-alt",
+  "en": "4. Fix it: what do you change? Only your first pick counts.",
+  "my": "4. ပြင်ကြည့်ပါ- ဘာကို ပြောင်းမလဲ။ ပထမဆုံး ရွေးတာကိုပဲ တွက်ပါတယ်။",
+  "back": "4. Try fixing: what to change? Only the first selected one is counted.",
+  "note": "redrafted after first blind drift, re-checked blind"
  },
  "l3/tflab:s5": {
   "status": "pass",
@@ -6629,9 +6627,9 @@
  },
  "l5b/fieldfail:fails.attach.cause": {
   "status": "pass-alt",
-  "en": "The ball was attached to the gripper as an AttachedCollisionObject",
-  "my": "ဘောလုံးကို AttachedCollisionObject အဖြစ် gripper မှာ တွဲထားတယ်",
-  "back": "The ball is attached to the gripper as an AttachedCollisionObject."
+  "en": "The ball was attached to the gripper as an AttachedCollisionObject (MoveIt, the arm planner, then treats it as part of the arm)",
+  "my": "ဘောလုံးကို AttachedCollisionObject အဖြစ် gripper မှာ တွဲထားတယ် (အဲဒီအခါ လက်မောင်း planner ဖြစ်တဲ့ MoveIt က အဲဒါကို လက်မောင်းရဲ့ အစိတ်အပိုင်းလို့ သဘောထားတယ်)",
+  "back": "The ball is attached to the gripper as an AttachedCollisionObject (then MoveIt, the arm planner, treats it as a part of the arm)."
  },
  "l5b/fieldfail:fails.attach.fix": {
   "status": "pass-alt",
@@ -6641,15 +6639,15 @@
  },
  "l5b/fieldfail:fails.attach.symptom": {
   "status": "pass-alt",
-  "en": "A pick-and-place arm shows a stray green sphere on the gripper and plans fail with self-collision at panda_link7.",
-  "my": "ကောက်ချ လက်မောင်မှာ gripper ပေါ်က မလိုအပ်တဲ့ အစိမ်းရောင် စက်လုံးတစ်လုံး ပေါ်လာပြီး panda_link7 မှာ self-collision နဲ့ plan တွေ ကျရှုံးပါတယ်။",
-  "back": "On the pick-and-drop arm, an unnecessary green sphere appears on the gripper, and plans fail with self-collision at panda_link7."
+  "en": "A pick-and-place arm shows a stray green sphere on the gripper and plans fail with self-collision (the arm hitting itself) at panda_link7.",
+  "my": "ကောက်ပြီး ချပေးတဲ့ လက်မောင်းမှာ gripper ပေါ်က မလိုအပ်တဲ့ အစိမ်းရောင် စက်လုံး တစ်လုံး ပေါ်နေပြီး panda_link7 မှာ self-collision (လက်မောင်းက ကိုယ့်ကိုယ်ကို တိုက်မိတာ) နဲ့ plan တွေ ကျရှုံးပါတယ်။",
+  "back": "On the pick-and-place arm, one unnecessary green sphere appears on the gripper, and plans fail with self-collision at panda_link7 (the arm hitting itself)."
  },
  "l5b/fieldfail:fails.beam.cause": {
   "status": "pass-alt",
-  "en": "The wall distance used one side arc; when the robot yawed toward the wall the reading grew by 1/cos(yaw)",
-  "my": "နံရံအကွာအဝေးကို ဘေးဘက် ထောင့်ပိုင်း တစ်ခုတည်းနဲ့ တိုင်းထားတယ်။ စက်ရုပ်က နံရံဘက် yaw လှည့်ရင် တန်ဖိုးက 1/cos(yaw) ဆ ကြီးလာတယ်",
-  "back": "The wall distance is measured with a single side angle sector. When the robot yaws toward the wall, the value becomes 1/cos(yaw) times larger."
+  "en": "The wall distance used one side arc; when the robot turned toward the wall (yaw = heading angle) the reading grew by 1/cos(yaw)",
+  "my": "နံရံ အကွာအဝေးကို ဘေးဘက် ထောင့်ပိုင်း တစ်ခုတည်းနဲ့ တိုင်းထားတယ်၊ စက်ရုပ်က နံရံဘက် လှည့်သွားရင် (yaw = ဦးတည်ရာ ထောင့်) တန်ဖိုးက 1/cos(yaw) ဆ ကြီးလာတယ်",
+  "back": "The wall distance is measured with just one side angle; if the robot turns toward the wall (yaw = heading angle) the value becomes 1/cos(yaw) times larger."
  },
  "l5b/fieldfail:fails.beam.fix": {
   "status": "pass-alt",
@@ -6695,9 +6693,9 @@
  },
  "l5b/fieldfail:fails.params.cause": {
   "status": "pass-alt",
-  "en": "Another included launch file declared the same argument name, so the parameter file path became empty",
-  "my": "တခြား include လုပ်ထားတဲ့ launch file က argument နာမည်တူကို ကြေညာထားလို့ parameter file လမ်းကြောင်း ဗလာဖြစ်သွားတယ်",
-  "back": "Another included launch file declares an argument with the same name, so the parameter file path became empty."
+  "en": "Another included launch file declared the same launch argument name (a setting passed in when starting), so the parameter file path became empty",
+  "my": "include လုပ်ထားတဲ့ တခြား launch file က launch argument နာမည်တူ (စတင်တဲ့အခါ ထည့်ပေးတဲ့ setting) ကို ကြေညာထားလို့ parameter file လမ်းကြောင်း ဗလာ ဖြစ်သွားတယ်",
+  "back": "Another included launch file declares a launch argument with the same name (a setting passed in at start-up), so the parameter file path becomes empty."
  },
  "l5b/fieldfail:fails.params.fix": {
   "status": "pass-alt",
@@ -6935,9 +6933,9 @@
  },
  "l5b/lifecycle:lcNote": {
   "status": "pass-alt",
-  "en": "The node never changes state by itself: a supervisor (another node or ros2 lifecycle set) sends each transition. The exception: an error (in a transition or while active) sends it to error handling on its own. So a system can configure everything first and switch it on only when all parts are ready.",
-  "my": "node က ကိုယ့်ဘာသာ state မပြောင်းပါဘူး: supervisor (တခြား node ဒါမှမဟုတ် ros2 lifecycle set) က transition တစ်ခုချင်းစီကို ပို့ပေးပါတယ်။ ခြွင်းချက်က အမှား (transition အတွင်း ဒါမှမဟုတ် active ဖြစ်နေစဉ်) ပါ၊ အဲဒီအခါ ကိုယ့်ဘာသာ အမှားကိုင်တွယ်တဲ့ အခြေအနေကို ရောက်သွားပါတယ်။ ဒါကြောင့် စနစ်တစ်ခုက အရာအားလုံးကို အရင် configure လုပ်ပြီး အစိတ်အပိုင်းအားလုံး အဆင်သင့်ဖြစ်မှ ဖွင့်နိုင်ပါတယ်။",
-  "back": "A node does not change state by itself: a supervisor (another node or ros2 lifecycle set) sends each transition. The exception is an error (during a transition or while active); then it reaches the error-handling state on its own. So a system can configure everything first and turn on only once all the components are ready."
+  "en": "The node never changes state by itself: a supervisor (another node or ros2 lifecycle set) sends each transition. The exception: a transition callback that fails sends it to error handling on its own. So a system can configure everything first and switch it on only when all parts are ready.",
+  "my": "node က ကိုယ့်ဘာသာ state မပြောင်းပါဘူး- supervisor (တခြား node ဒါမှမဟုတ် ros2 lifecycle set) က transition တစ်ခုချင်းစီကို ပို့ပေးပါတယ်။ ခြွင်းချက်ကတော့ မအောင်မြင်တဲ့ transition callback ပါ၊ အဲဒါက node ကို ကိုယ့်ဘာသာ အမှား ကိုင်တွယ်တဲ့ အဆင့်ဆီ ပို့ပါတယ်။ ဒါကြောင့် စနစ်တစ်ခုက အရာအားလုံးကို အရင် configure လုပ်ထားပြီး အစိတ်အပိုင်း အားလုံး အဆင်သင့် ဖြစ်မှ ဖွင့်နိုင်ပါတယ်။",
+  "back": "A node does not change state by itself: a supervisor (another node or ros2 lifecycle set) sends each transition. The exception is a failed transition callback, which sends the node to the self-handled error step. So a system can configure everything first and activate only when all parts are ready."
  },
  "l5b/lifecycle:learn": {
   "status": "pass-alt",
@@ -7019,9 +7017,9 @@
  },
  "l5b/lifecycle:timingNote": {
   "status": "pass-alt",
-  "en": "The 10 ms tick and 350 ms save are made-up timings to show the effect.",
-  "my": "10 ms tick နဲ့ 350 ms save က ရလဒ်ကို ပြဖို့ ဖန်တီးထားတဲ့ အချိန်တွေပါ။",
-  "back": "The 10 ms tick and the 350 ms save are times made up to show the result."
+  "en": "Each 100 ms tick does 10 ms of work; the save takes 350 ms. These are made-up timings to show the effect.",
+  "my": "100 ms tick တစ်ခုစီက 10 ms စာ အလုပ်လုပ်ပါတယ်၊ save က 350 ms ကြာပါတယ်။ ဒါတွေက ရလဒ်ကို ပြဖို့ ဖန်တီးထားတဲ့ အချိန်တွေပါ။",
+  "back": "Each 100 ms tick does 10 ms of work, and the save takes 350 ms. These are times made up to show the result."
  },
  "l5b/lifecycle:title": {
   "status": "pass-alt",
@@ -7133,9 +7131,9 @@
  },
  "l5b/qos:glossary.3.1": {
   "status": "pass-alt",
-  "en": "publisher keeps the last depth messages for late subscribers (\"latched\")",
-  "my": "နောက်မှ ဝင်တဲ့ subscriber တွေအတွက် publisher က နောက်ဆုံး depth အရေအတွက် message ကို သိမ်းထားတယ် (\"latched\")",
-  "back": "the publisher keeps the last depth number of messages for subscribers that join later (\"latched\")"
+  "en": "publisher keeps the last depth messages for late subscribers",
+  "my": "နောက်မှ ဝင်လာတဲ့ subscriber တွေအတွက် publisher က နောက်ဆုံး depth အရေအတွက် message တွေကို သိမ်းထားတယ်",
+  "back": "For subscribers that join later, the publisher keeps the last depth-count of messages."
  },
  "l5b/qos:glossary.4.0": {
   "status": "pass-alt",
@@ -7145,9 +7143,9 @@
  },
  "l5b/qos:glossary.4.1": {
   "status": "pass-alt",
-  "en": "how many messages keep last stores",
-  "my": "keep last သိမ်းတဲ့ message အရေအတွက်",
-  "back": "number of messages kept by keep last"
+  "en": "how many recent messages the queue holds",
+  "my": "queue က မကြာသေးခင်က message ဘယ်နှစ်ခု သိမ်းထားလဲ",
+  "back": "How many recent messages the queue keeps"
  },
  "l5b/qos:got": {
   "status": "pass-alt",
@@ -7163,9 +7161,9 @@
  },
  "l5b/qos:learn": {
   "status": "pass-alt",
-  "en": "You will learn: every publisher and subscriber carries QoS settings (how hard to deliver, whether to keep old messages). If publisher and subscriber ask for incompatible settings, ROS 2 does not connect them, and nothing tells the code.",
-  "my": "သင်ယူရမှာက: publisher နဲ့ subscriber တိုင်းမှာ QoS setting တွေ ပါပါတယ် (ဘယ်လောက်တင်းကြပ်စွာ ပို့မလဲ၊ message အဟောင်းတွေ သိမ်းမလား)။ publisher နဲ့ subscriber တောင်းတဲ့ setting မကိုက်ရင် ROS 2 က ချိတ်မပေးပါဘူး၊ ကုဒ်ကိုလည်း ဘာမှ မပြောပါဘူး။",
-  "back": "What you learn: every publisher and subscriber has QoS settings (how strictly to send, whether to keep old messages). If the settings the publisher and subscriber ask for do not match, ROS 2 does not connect them, and it says nothing to the code either."
+  "en": "You will learn: every publisher and subscriber carries QoS settings (how hard to deliver, whether to keep old messages). If publisher and subscriber ask for incompatible settings, ROS 2 does not connect them: no exception, only a warning line in the log (rclcpp default).",
+  "my": "သင်ယူရမှာက- publisher နဲ့ subscriber တိုင်းမှာ QoS setting တွေ ပါပါတယ် (ဘယ်လောက် သေချာအောင် ပို့မလဲ၊ message အဟောင်းတွေ သိမ်းထားမလား)။ publisher နဲ့ subscriber က မကိုက်တဲ့ setting တွေ တောင်းရင် ROS 2 က သူတို့ကို မချိတ်ပေးပါဘူး- exception မရှိပါဘူး၊ log ထဲမှာ သတိပေးချက် တစ်ကြောင်းပဲ ပေါ်ပါတယ် (rclcpp default)။",
+  "back": "What you learn: every publisher and subscriber has QoS settings (how reliably to send, whether to keep old messages). If publisher and subscriber ask for mismatched settings, ROS 2 does not connect them: no exception, only one warning line appears in the log (rclcpp default)."
  },
  "l5b/qos:lines.0": {
   "status": "pass-alt",
@@ -7205,9 +7203,9 @@
  },
  "l5b/qos:pub": {
   "status": "pass-alt",
-  "en": "publisher (scanner / map server)",
-  "my": "publisher (scanner / မြေပုံ server)",
-  "back": "publisher (scanner / map server)"
+  "en": "publisher (scanner / map server: the node that sends a saved map)",
+  "my": "publisher (scanner / map server- သိမ်းထားတဲ့ မြေပုံကို ပို့ပေးတဲ့ node)",
+  "back": "publisher (scanner / map server: a node that sends a saved map)"
  },
  "l5b/qos:rel.best_effort": {
   "status": "pass-alt",
@@ -7235,9 +7233,9 @@
  },
  "l5b/qos:sub": {
   "status": "pass-alt",
-  "en": "subscriber (your node / RViz)",
-  "my": "subscriber (သင့် node / RViz)",
-  "back": "subscriber (your node / RViz)"
+  "en": "subscriber (your node / RViz: the ROS 3D viewer)",
+  "my": "subscriber (သင့် node / RViz- ROS ရဲ့ 3D viewer)",
+  "back": "subscriber (your node / RViz: ROS's 3D viewer)"
  },
  "l5b/qos:title": {
   "status": "pass-alt",
@@ -7247,9 +7245,9 @@
  },
  "l5b/qos:trap": {
   "status": "pass-alt",
-  "en": "Trap: an incompatible pair is not an error in your code. The subscriber callback simply never runs. Check both sides with ros2 topic info -v, which prints the QoS of every publisher and subscription.",
-  "my": "ထောင်ချောက်: မကိုက်တဲ့ စုံတွဲက ကုဒ်ထဲက အမှား မဟုတ်ပါဘူး။ subscriber callback က ဘယ်တော့မှ အလုပ်မလုပ်တာပဲ ဖြစ်ပါတယ်။ ros2 topic info -v နဲ့ နှစ်ဖက်လုံးကို စစ်ကြည့်ပါ၊ publisher နဲ့ subscription အားလုံးရဲ့ QoS ကို ပြပေးပါတယ်။",
-  "back": "Trap: a mismatched pair is not an error in the code. It is just that the subscriber callback never runs. Check both sides with ros2 topic info -v, which shows the QoS of all publishers and subscriptions."
+  "en": "Trap: an incompatible pair does not throw. The subscriber callback simply never runs; the signs are a WARN line in the log and the Requested / Offered incompatible QoS event. Check both sides with ros2 topic info -v, which prints the QoS of every publisher and subscription.",
+  "my": "ထောင်ချောက်- မကိုက်တဲ့ အတွဲက exception မပစ်ပါဘူး။ subscriber callback က ဘယ်တော့မှ မ run တာပဲ ဖြစ်ပါတယ်၊ လက္ခဏာတွေကတော့ log ထဲက WARN တစ်ကြောင်းနဲ့ Requested / Offered incompatible QoS event ပါ။ ros2 topic info -v နဲ့ နှစ်ဖက်လုံးကို စစ်ပါ၊ အဲဒါက publisher နဲ့ subscription တိုင်းရဲ့ QoS ကို ပြပါတယ်။",
+  "back": "Trap: a mismatched pair throws no exception. It is just that the subscriber callback never runs; the symptoms are one WARN line in the log and a Requested / Offered incompatible QoS event. Check both sides with ros2 topic info -v; it shows the QoS of every publisher and subscription."
  },
  "l5b/qos:words": {
   "status": "pass-alt",
@@ -7280,5 +7278,567 @@
   "en": "Debugging tools: find why the robot does not move",
   "my": "ပြဿနာရှာဖွေရေး တူးလ်များ: စက်ရုပ် ဘာကြောင့် မလှုပ်ရှားသလဲဆိုတာ ရှာပါ",
   "back": "Diagnostic tools: find out why the robot is not moving"
+ },
+ "core:levels.completed": {
+  "status": "pass-alt",
+  "en": "check solved",
+  "my": "ဖြေရှင်းပြီး",
+  "back": "Solved"
+ },
+ "l0/meet:addSensor": {
+  "status": "pass-alt",
+  "en": "Add a sensor",
+  "my": "ဆင်ဆာ ထည့်",
+  "back": "Add sensor"
+ },
+ "l0/meet:addRule": {
+  "status": "pass-alt",
+  "en": "Add a rule: turn away when something is close",
+  "my": "စည်းကမ်းချက် ထည့်- တစ်ခုခု နီးလာရင် ရှောင်လှည့်",
+  "back": "Add rule: if something gets near, turn away"
+ },
+ "l0/meet:sensorOnly": {
+  "status": "pass-alt",
+  "en": "It measures, but nothing reads the numbers: you still steer.",
+  "my": "တိုင်းတော့ တိုင်းပါတယ်၊ ဒါပေမဲ့ အဲဒီ ကိန်းဂဏန်းတွေကို ဘာကမှ မဖတ်ပါဘူး- သင်ပဲ ထိန်းနေရဆဲပါ။",
+  "back": "It does measure, but nothing reads those numbers: you are still the one steering."
+ },
+ "l0/meet:ruleOnly": {
+  "status": "pass-alt",
+  "en": "A rule with nothing to read cannot fire: you still steer.",
+  "my": "ဖတ်စရာ မရှိတဲ့ စည်းကမ်းချက်က အလုပ် မလုပ်နိုင်ပါဘူး- သင်ပဲ ထိန်းနေရဆဲပါ။",
+  "back": "A rule with nothing to read cannot work: you are still the one steering."
+ },
+ "l0/ros:projectTitle": {
+  "status": "pass-alt",
+  "en": "From a real project",
+  "my": "တကယ့် project တစ်ခုကနေ",
+  "back": "From a real project"
+ },
+ "l0/scope:epNote": {
+  "status": "pass-alt",
+  "en": "EP = Engineering Practice: an optional track outside the numbered levels.",
+  "my": "EP = Engineering Practice- နံပါတ်တပ်ထားတဲ့ level တွေ အပြင်ဘက်က မဖြစ်မနေ မဟုတ်တဲ့ လမ်းကြောင်း တစ်ခုပါ။",
+  "back": "EP = Engineering Practice: an optional path outside the numbered levels."
+ },
+ "l3/wall:title": {
+  "status": "pass-alt",
+  "en": "Reactive control: follow a wall",
+  "my": "Reactive control: နံရံတစ်လျှောက် လိုက်မောင်းခြင်း",
+  "note": "2026-11-25 carried unchanged from titles.json at 997ba25 (already live); my-write drops titles without a status row"
+ },
+ "l4/patrol:title": {
+  "status": "pass-alt",
+  "en": "Waypoints and patrol",
+  "my": "Waypoint များနှင့် ကင်းလှည့်ခြင်း",
+  "note": "2026-11-25 carried unchanged from titles.json at 997ba25 (already live); my-write drops titles without a status row"
+ },
+ "l2/msgtypes:srcGloss.to": {
+  "status": "needs-human",
+  "en": "to",
+  "my": "ဆီ",
+  "back": "oil",
+  "note": "one-word label: drifted twice (to/toward, then oil without context)"
+ },
+ "l3/tflab:notFirst": {
+  "status": "pass-alt",
+  "en": "Fixed, but not on the first pick. Break it again, read the diagnostics from step 2, and choose once.",
+  "my": "ပြင်ပြီးပါပြီ၊ ဒါပေမဲ့ ပထမဆုံး ရွေးချယ်မှုမှာ မဟုတ်ပါဘူး။ ထပ်ဖျက်ကြည့်ပါ၊ အဆင့် 2 က diagnostics ကို ဖတ်ပြီးမှ တစ်ကြိမ်တည်း ရွေးပါ။",
+  "back": "It is fixed, but not at the first choice. Try breaking again; after reading diagnostics in step 2, choose only once.",
+  "note": "redrafted after first blind drift, re-checked blind"
+ },
+ "l5b/fieldfail:reset": {
+  "status": "pass-alt",
+  "en": "start over",
+  "my": "အစက ပြန်စ",
+  "back": "Start over from the beginning"
+ },
+ "l5b/fieldfail:fails.index.fix": {
+  "status": "pass-alt",
+  "en": "Wrap the index around a full turn, so both scan layouts work",
+  "my": "index ကို တစ်ပတ်ပြည့် ပတ်ပြီး ပြန်လှည့်ပေး၊ ဒါမှ scan layout နှစ်မျိုးလုံး အလုပ်လုပ်မယ်",
+  "back": "Wrap the index around a full circle and return it, so that both scan layouts work."
+ },
+ "l5b/lifecycle:states.errorprocessing": {
+  "status": "pass-alt",
+  "en": "ErrorProcessing",
+  "my": "ErrorProcessing",
+  "back": "ErrorProcessing"
+ },
+ "l5b/lifecycle:errTr.error": {
+  "status": "pass-alt",
+  "en": "error while active",
+  "my": "active ဖြစ်နေတုန်း အမှား",
+  "back": "Error while active",
+  "note": "redrafted after first blind drift, re-checked blind"
+ },
+ "l5b/lifecycle:errTr.ok": {
+  "status": "pass-alt",
+  "en": "onError succeeds",
+  "my": "onError အောင်မြင်",
+  "back": "onError succeeds"
+ },
+ "l5b/lifecycle:errTr.fail": {
+  "status": "pass-alt",
+  "en": "onError fails",
+  "my": "onError မအောင်မြင်",
+  "back": "onError fails"
+ },
+ "l5b/lifecycle:errNote": {
+  "status": "pass-alt",
+  "en": "ErrorProcessing (dashed) is a transition state, not one of the 4 primary states. A transition callback that returns ERROR or throws sends it there. onError cleans up: success returns to unconfigured, failure ends in finalized.",
+  "my": "ErrorProcessing (အစက်ချ မျဉ်း) က transition state တစ်ခုပါ၊ အဓိက state 4 ခုထဲက တစ်ခု မဟုတ်ပါဘူး။ ERROR ပြန်ပေးတဲ့ ဒါမှမဟုတ် exception ပစ်တဲ့ transition callback က node ကို အဲဒီကို ပို့ပါတယ်။ onError က ရှင်းလင်းပေးပါတယ်- အောင်မြင်ရင် unconfigured ကို ပြန်ရောက်ပြီး မအောင်မြင်ရင် finalized မှာ ဆုံးပါတယ်။",
+  "back": "ErrorProcessing (dotted line) is a transition state; it is not one of the 4 main states. A transition callback that returns ERROR or throws an exception sends the node there. onError cleans up: on success it returns to unconfigured, and on failure it ends in finalized."
+ },
+ "l5b/lifecycle:trap": {
+  "status": "pass-alt",
+  "en": "Trap: a multi-threaded executor alone does not help. Callbacks created without a callback group share the node's default group, which is mutually exclusive: they never run in parallel. Put the slow callback in its own group.",
+  "my": "ထောင်ချောက်- multi-threaded executor တစ်ခုတည်းနဲ့ မကူညီနိုင်ပါဘူး။ callback group မပါဘဲ ဖန်တီးထားတဲ့ callback တွေက node ရဲ့ default group ကို မျှသုံးကြပြီး အဲဒီ group က တစ်ခုပြီးမှ တစ်ခု run တဲ့ group ပါ- သူတို့ ဘယ်တော့မှ အပြိုင် မ run ပါဘူး။ နှေးတဲ့ callback ကို သူ့ကိုယ်ပိုင် group ထဲ ထည့်ပါ။",
+  "back": "Trap: a multi-threaded executor alone does not help. Callbacks created without a callback group share the node's default group, and that group is one that runs one after another; they never run in parallel. Put the slow callback in its own group."
+ },
+ "l5b/qos:anim.steps.0": {
+  "status": "pass-alt",
+  "en": "scans leave",
+  "my": "scan တွေ ထွက်သွား",
+  "back": "scans go out"
+ },
+ "l5b/qos:anim.steps.1": {
+  "status": "pass-alt",
+  "en": "one drops on the wire",
+  "my": "လမ်းမှာ တစ်ခု ပျောက်",
+  "back": "one lost on the way"
+ },
+ "l5b/qos:anim.steps.2": {
+  "status": "pass-alt",
+  "en": "result",
+  "my": "ရလဒ်",
+  "back": "Result"
+ },
+ "l3/wall:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: a reactive controller looks at the latest scan, computes one error and turns it into a turn rate, 20 times a second. No map, no plan.",
+  "my": "သင်ယူရမှာက- reactive controller က နောက်ဆုံး scan ကို ကြည့်ပြီး error တစ်ခု တွက်ကာ အဲဒါကို လှည့်နှုန်း အဖြစ် ပြောင်းပါတယ်၊ တစ်စက္ကန့်ကို 20 ကြိမ်ပါ။ မြေပုံ မလို၊ plan မလိုပါဘူး။",
+  "back": "What you learn: a reactive controller looks at the latest scan, computes an error, and converts that into a turning rate, 20 times per second. No map needed, no plan needed."
+ },
+ "l3/wall:everyday": {
+  "status": "pass-alt",
+  "en": "Everyday: walking along a corridor with one hand near the wall. Too far, lean in; too close, lean out.",
+  "my": "နေ့စဉ်ဘဝမှာ- စင်္ကြံ တစ်လျှောက် လက်တစ်ဖက်ကို နံရံနားမှာ ထားပြီး လျှောက်တာမျိုးပါ။ ဝေးလွန်းရင် နံရံဘက် ကပ်၊ နီးလွန်းရင် ခွာပါ။",
+  "back": "In daily life: it's like walking along a corridor with one hand kept near the wall. If too far, move toward the wall; if too near, move away."
+ },
+ "l3/wall:lines.0": {
+  "status": "pass-alt",
+  "en": "The robot wants to stay 0.5 m from the wall on its right. Error = distance - 0.5 m.",
+  "my": "စက်ရုပ်က သူ့ညာဘက် နံရံနဲ့ 0.5 m အကွာမှာ နေချင်ပါတယ်။ Error = အကွာအဝေး - 0.5 m ပါ။",
+  "back": "The robot wants to stay 0.5 m away from its right-hand wall. Error = distance - 0.5 m."
+ },
+ "l3/wall:lines.1": {
+  "status": "pass-alt",
+  "en": "Turn rate = kp × error + kd × (how fast the error changes), capped at 1.0 rad/s.",
+  "my": "လှည့်နှုန်း = kp × error + kd × (error ဘယ်လောက် မြန်မြန် ပြောင်းလဲလဲ) ဖြစ်ပြီး 1.0 rad/s ထက် မကျော်အောင် ကန့်သတ်ထားပါတယ်။",
+  "back": "Turning rate = kp × error + kd × (how fast the error changes, however fast), and it is limited so it does not exceed 1.0 rad/s."
+ },
+ "l3/wall:lines.2": {
+  "status": "pass-alt",
+  "en": "The trick: the error uses the distance the robot will have 0.3 m ahead at its current heading (the direction it faces), not the distance now.",
+  "my": "လှည့်ကွက်က- error မှာ အခု အကွာအဝေးကို မသုံးဘဲ စက်ရုပ်က လက်ရှိ heading (မျက်နှာမူထားတဲ့ ဦးတည်ရာ) အတိုင်း 0.3 m ရှေ့ရောက်ရင် ရှိမယ့် အကွာအဝေးကို သုံးပါတယ်။",
+  "back": "The trick: for the error, instead of using the current distance, use the distance that would exist if the robot moved 0.3 m ahead along its current heading (the direction it is facing)."
+ },
+ "l3/wall:kp": {
+  "status": "pass-alt",
+  "en": "kp (proportional gain)",
+  "my": "kp (proportional gain)",
+  "back": "kp (proportional gain)"
+ },
+ "l3/wall:lookahead": {
+  "status": "pass-alt",
+  "en": "look-ahead 0.3 m",
+  "my": "ရှေ့ကြည့် 0.3 m",
+  "back": "Look ahead 0.3 m"
+ },
+ "l3/wall:on": {
+  "status": "pass-alt",
+  "en": "on",
+  "my": "ဖွင့်",
+  "back": "On"
+ },
+ "l3/wall:off": {
+  "status": "pass-alt",
+  "en": "off",
+  "my": "ပိတ်",
+  "back": "Off"
+ },
+ "l3/wall:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: turn the look-ahead off",
+  "my": "ဖျက်ကြည့်- ရှေ့ကြည့်ကို ပိတ်",
+  "back": "Break it and see: turn look-ahead off"
+ },
+ "l3/wall:closest": {
+  "status": "pass-alt",
+  "en": "closest to the wall",
+  "my": "နံရံနဲ့ အနီးဆုံး",
+  "back": "Closest to the wall"
+ },
+ "l3/wall:settle": {
+  "status": "pass-alt",
+  "en": "settled (±5 cm) at",
+  "my": "(±5 cm) အတွင်း ငြိမ်သွားတဲ့ အချိန်",
+  "back": "Time to settle within (±5 cm)"
+ },
+ "l3/wall:never": {
+  "status": "pass-alt",
+  "en": "not in 15 s",
+  "my": "15 s အတွင်း မငြိမ်",
+  "back": "Does not settle within 15 s"
+ },
+ "l3/wall:tooClose": {
+  "status": "pass-alt",
+  "en": "too-close turns",
+  "my": "နီးလွန်းလို့ လှည့်ရတဲ့ အကြိမ်",
+  "back": "Number of turns made because too close"
+ },
+ "l3/wall:spun": {
+  "status": "pass-alt",
+  "en": "heading past 1 rad",
+  "my": "heading 1 rad ကျော်",
+  "back": "Heading beyond 1 rad"
+ },
+ "l3/wall:yes": {
+  "status": "pass-alt",
+  "en": "yes",
+  "my": "ဟုတ်",
+  "back": "Yes"
+ },
+ "l3/wall:no": {
+  "status": "pass-alt",
+  "en": "no",
+  "my": "မဟုတ်",
+  "back": "No"
+ },
+ "l3/wall:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: starting 1.0 m from the wall, pick a kp that settles within 10 s, never triggers a too-close turn or a collision avoid and never turns past 1 rad.",
+  "my": "စိန်ခေါ်မှု- နံရံနဲ့ 1.0 m အကွာကနေ စပြီး 10 s အတွင်း ငြိမ်သွားတဲ့ kp ကို ရွေးပါ၊ နီးလွန်းလို့ လှည့်တာ ဒါမှမဟုတ် တိုက်မိမှု ရှောင်တာ တစ်ခါမှ မဖြစ်ရပါဘူး၊ 1 rad ထက်လည်း ဘယ်တော့မှ မလှည့်ရပါဘူး။",
+  "back": "Challenge: starting from 1.0 m away from the wall, choose a kp that settles within 10 s, with no turning because of being too close or any collision avoidance even once, and never turning more than 1 rad."
+ },
+ "l3/wall:solved": {
+  "status": "pass-alt",
+  "en": "Solved:",
+  "my": "အောင်မြင်ပြီ:",
+  "back": "Succeeded:"
+ },
+ "l3/wall:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet:",
+  "my": "မရသေးပါ:",
+  "back": "Not yet achieved:"
+ },
+ "l3/wall:spunNote": {
+  "status": "pass-alt",
+  "en": "Past 1 rad the robot faces the wall too steeply for the two-beam estimate (it is clamped there), so this model stops. It shows the controller left its working range, not what the real robot then does.",
+  "my": "1 rad ကျော်သွားရင် စက်ရုပ်က နံရံကို စောင်းလွန်းစွာ မျက်နှာမူနေလို့ beam 2 ခုနဲ့ ခန့်မှန်းတာ မမှန်တော့ပါဘူး (အဲဒီမှာ ကန့်သတ်ထားပါတယ်)၊ ဒါကြောင့် ဒီ model က ရပ်သွားပါတယ်။ ဒါက controller က သူ အလုပ်လုပ်နိုင်တဲ့ အပိုင်းအခြားကနေ ထွက်သွားတာကို ပြတာပါ၊ တကယ့် စက်ရုပ် နောက်မှာ ဘာလုပ်မလဲဆိုတာ မဟုတ်ပါဘူး။",
+  "back": "If it goes beyond 1 rad, the robot faces the wall too obliquely, so the estimate made with 2 beams is no longer correct (it is limited there), therefore this model stops. This shows the controller going out of the range in which it can work; it is not what a real robot would do afterwards."
+ },
+ "l3/wall:avoidNote": {
+  "status": "pass-alt",
+  "en": "A beam in the front zones came closer than the node's limit (0.35 m within 50° of straight ahead, 0.25 m at 50-70°), so the node's collision check (it runs before the wall follower) took over with its avoid turn. This model does not simulate that turn, so it stops here.",
+  "my": "ရှေ့ဘက် zone တွေထဲက beam တစ်ခုက node ရဲ့ ကန့်သတ်ချက်ထက် ပိုနီးလာလို့ (တည့်တည့်ရှေ့ကနေ 50° အတွင်း 0.35 m၊ 50-70° မှာ 0.25 m) node ရဲ့ တိုက်မိမှု စစ်ဆေးချက် (wall follower မတိုင်ခင် run ပါတယ်) က ရှောင်လှည့်မှုနဲ့ ထိန်းချုပ်မှုကို ယူသွားပါတယ်။ ဒီ model က အဲဒီ လှည့်မှုကို simulate မလုပ်လို့ ဒီမှာ ရပ်ပါတယ်။",
+  "back": "Because one beam in the front zones came closer than the node's limit (0.35 m within 50° of straight ahead, 0.25 m at 50-70°), the node's collision check (which runs before the wall follower) takes over control with an avoidance turn. This model does not simulate that turn, so it stops here."
+ },
+ "l3/wall:modelNote": {
+  "status": "pass-alt",
+  "en": "Model: one straight wall, perfect scans, the repo's gains and limits. A Gazebo run is the real test. \"Look-ahead off\" is a what-if: the real node accepts 0.1-1.0 m only.",
+  "my": "Model- ဖြောင့်တဲ့ နံရံ တစ်ခု၊ အမှားမရှိတဲ့ scan တွေ၊ repo ရဲ့ gain တွေနဲ့ ကန့်သတ်ချက်တွေပါ။ တကယ့် စမ်းသပ်မှုက Gazebo run ပါ။ \"Look-ahead off\" က ဒီလိုဆိုရင် ဘာဖြစ်မလဲ ဆိုတာပဲ ပြတာပါ- တကယ့် node က 0.1-1.0 m ကိုပဲ လက်ခံပါတယ်။",
+  "back": "Model: one straight wall, error-free scans, the repo's gains and limits. The real test is the Gazebo run. \"Look-ahead off\" only shows what would happen if it were like this: the real node accepts only 0.1-1.0 m."
+ },
+ "l3/wall:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရ",
+  "back": "Glossary"
+ },
+ "l3/wall:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "reactive",
+  "my": "reactive",
+  "back": "reactive"
+ },
+ "l3/wall:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "acts on the current sensor reading only, no map or plan",
+  "my": "လက်ရှိ ဆင်ဆာ ဖတ်ချက်ကိုပဲ ကြည့်ပြီး လုပ်တယ်၊ မြေပုံ ဒါမှမဟုတ် plan မရှိ",
+  "back": "Acts looking only at the current sensor reading; no map or plan"
+ },
+ "l3/wall:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "error",
+  "my": "error",
+  "back": "error"
+ },
+ "l3/wall:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "what you have minus what you want: here distance - 0.5 m",
+  "my": "လက်ရှိ တန်ဖိုးထဲက လိုချင်တဲ့ တန်ဖိုးကို နှုတ်တာ- ဒီမှာ အကွာအဝေး - 0.5 m",
+  "back": "Subtracting the wanted value from the current value: here distance - 0.5 m"
+ },
+ "l3/wall:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "kp, kd",
+  "my": "kp, kd",
+  "back": "kp, kd"
+ },
+ "l3/wall:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "how strongly the turn reacts to the error and to its rate of change",
+  "my": "error နဲ့ သူ့ ပြောင်းလဲနှုန်းကို လှည့်မှုက ဘယ်လောက် ပြင်းပြင်း တုံ့ပြန်လဲ",
+  "back": "How strongly the turning responds to the error and to its rate of change"
+ },
+ "l3/wall:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "look-ahead",
+  "my": "look-ahead",
+  "back": "look-ahead"
+ },
+ "l3/wall:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "steer on where the robot will be, so it brakes before it arrives",
+  "my": "စက်ရုပ် ရောက်မယ့် နေရာကို ကြည့်ပြီး ထိန်းတာ၊ ဒါမှ မရောက်ခင် အရှိန်လျှော့နိုင်တယ်",
+  "back": "Control by looking at where the robot will arrive, so that it can slow down before arriving"
+ },
+ "l4/patrol:learn": {
+  "status": "pass-alt",
+  "en": "You will learn: a patrol is a small program on top of Nav2. It sends one goal at a time, waits for the result, and decides what to do next.",
+  "my": "သင်ယူရမှာက- patrol ဆိုတာ Nav2 အပေါ်မှာ run တဲ့ ပရိုဂရမ် အသေးလေး တစ်ခုပါ။ တစ်ကြိမ်မှာ goal တစ်ခုပဲ ပို့ပြီး ရလဒ်ကို စောင့်ကာ နောက်ဘာလုပ်မလဲ ဆုံးဖြတ်ပါတယ်။",
+  "back": "What you learn: a patrol is a small program that runs on top of Nav2. It sends just one goal at a time, waits for the result, and decides what to do next."
+ },
+ "l4/patrol:everyday": {
+  "status": "pass-alt",
+  "en": "Everyday: a security guard's round. A locked door does not end the round: try a few times, note it, go on.",
+  "my": "နေ့စဉ်ဘဝမှာ- လုံခြုံရေး အစောင့်တစ်ယောက် ကင်းလှည့်တာမျိုးပါ။ ဖွင့်လို့မရတဲ့ တံခါး တစ်ချပ်ကြောင့် ကင်းလှည့်တာ မရပ်ပါဘူး- အကြိမ်အနည်းငယ် ကြိုးစား၊ မှတ်ထား၊ ဆက်သွားပါ။",
+  "back": "In daily life: it is like a security guard doing a patrol. One door that cannot be opened does not stop the patrol: try a few times, make a note, keep going."
+ },
+ "l4/patrol:lines.0": {
+  "status": "pass-alt",
+  "en": "Seven named points from a YAML file, visited in order, then back to the first (loop on).",
+  "my": "YAML ဖိုင်ထဲက နာမည်ပါတဲ့ နေရာ 7 ခုကို အစဉ်လိုက် သွားပြီး ပထမ နေရာကို ပြန်သွားပါတယ် (loop ဖွင့်ထားရင်)။",
+  "back": "It goes through the 7 named places from the YAML file in order and goes back to the first place (if loop is enabled)."
+ },
+ "l4/patrol:lines.1": {
+  "status": "pass-alt",
+  "en": "Goal reached: wait 2.0 s, send the next one. Goal failed: try the same point again, at most 3 more times, then skip it.",
+  "my": "Goal ရောက်ရင်- 2.0 s စောင့်ပြီး နောက်တစ်ခု ပို့ပါတယ်။ Goal မအောင်မြင်ရင်- အဲဒီ နေရာကိုပဲ အများဆုံး 3 ကြိမ် ထပ်ကြိုးစားပြီး ပြီးရင် ကျော်သွားပါတယ်။",
+  "back": "When the goal is reached: wait 2.0 s and send the next one. When the goal fails: try that same place again at most 3 times, and after that skip it."
+ },
+ "l4/patrol:lines.2": {
+  "status": "pass-alt",
+  "en": "Retry off: the first failure ends the whole patrol.",
+  "my": "Retry ပိတ်ထားရင်- ပထမဆုံး မအောင်မြင်မှုက patrol တစ်ခုလုံးကို ရပ်စေပါတယ်။",
+  "back": "If retry is off: the first failure stops the whole patrol."
+ },
+ "l4/patrol:blocked": {
+  "status": "pass-alt",
+  "en": "blocked point",
+  "my": "ပိတ်ဆို့ထားတဲ့ နေရာ",
+  "back": "Blocked place"
+ },
+ "l4/patrol:none": {
+  "status": "pass-alt",
+  "en": "none",
+  "my": "မရှိပါ",
+  "back": "None"
+ },
+ "l4/patrol:retry": {
+  "status": "pass-alt",
+  "en": "retry_on_failure",
+  "my": "retry_on_failure",
+  "back": "retry_on_failure"
+ },
+ "l4/patrol:loop": {
+  "status": "pass-alt",
+  "en": "loop_enabled",
+  "my": "loop_enabled",
+  "back": "loop_enabled"
+ },
+ "l4/patrol:on": {
+  "status": "pass-alt",
+  "en": "on",
+  "my": "ဖွင့်",
+  "back": "On (open)"
+ },
+ "l4/patrol:off": {
+  "status": "pass-alt",
+  "en": "off",
+  "my": "ပိတ်",
+  "back": "Off (closed)"
+ },
+ "l4/patrol:breakIt": {
+  "status": "pass-alt",
+  "en": "Break it: block point_3, retry off",
+  "my": "ဖျက်ကြည့်- point_3 ကို ပိတ်ဆို့၊ retry ပိတ်",
+  "back": "Try destroying/deleting it: block point_3, retry off"
+ },
+ "l4/patrol:sent": {
+  "status": "pass-alt",
+  "en": "goals sent",
+  "my": "ပို့ခဲ့တဲ့ goal",
+  "back": "Goals sent"
+ },
+ "l4/patrol:reached": {
+  "status": "pass-alt",
+  "en": "points reached",
+  "my": "ရောက်ခဲ့တဲ့ နေရာ",
+  "back": "Places reached"
+ },
+ "l4/patrol:skipped": {
+  "status": "pass-alt",
+  "en": "points skipped",
+  "my": "ကျော်ခဲ့တဲ့ နေရာ",
+  "back": "Places skipped"
+ },
+ "l4/patrol:sleep": {
+  "status": "pass-alt",
+  "en": "retry sleeps",
+  "my": "retry စောင့်ချိန်",
+  "back": "retry wait time"
+ },
+ "l4/patrol:state": {
+  "status": "pass-alt",
+  "en": "patrol",
+  "my": "patrol",
+  "back": "patrol"
+ },
+ "l4/patrol:running": {
+  "status": "pass-alt",
+  "en": "still patrolling",
+  "my": "ကင်းလှည့်နေဆဲ",
+  "back": "Still patrolling"
+ },
+ "l4/patrol:stopped": {
+  "status": "pass-alt",
+  "en": "stopped",
+  "my": "ရပ်သွားပြီ",
+  "back": "Has stopped"
+ },
+ "l4/patrol:sleepNote": {
+  "status": "pass-alt",
+  "en": "Each retry (and each 2.0 s wait at a reached point) calls time.sleep inside a callback. With rclpy's default single-threaded executor, no other callback of this node runs during that time.",
+  "my": "retry တစ်ခါစီမှာ (ရောက်ပြီးတဲ့ နေရာမှာ 2.0 s စောင့်တိုင်းမှာလည်း) callback ထဲမှာ time.sleep ကို ခေါ်ပါတယ်။ rclpy ရဲ့ default single-threaded executor နဲ့ဆိုရင် အဲဒီအချိန်အတွင်း ဒီ node ရဲ့ တခြား callback တစ်ခုမှ မ run ပါဘူး။",
+  "back": "Each retry (and with every 2.0 s wait at an already-reached place) calls time.sleep inside the callback. With rclpy's default single-threaded executor, during that time not a single other callback of this node runs.",
+  "note": "grammar fix after blind check (meaning matched); re-check in next blind batch"
+ },
+ "l4/patrol:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: point_3 is blocked, retry and loop on. How many goals are sent from the first try at point_3 until the robot reaches point_5?",
+  "my": "စိန်ခေါ်မှု- point_3 ကို ပိတ်ဆို့ထားပြီး retry နဲ့ loop ဖွင့်ထားပါတယ်။ point_3 ကို ပထမဆုံး ကြိုးစားတဲ့ အချိန်ကနေ စက်ရုပ် point_5 ရောက်တဲ့အထိ goal ဘယ်နှစ်ခု ပို့လဲ။",
+  "back": "Challenge: point_3 is blocked, and retry and loop are enabled. From the first attempt at point_3 until the robot reaches point_5, how many goals are sent?"
+ },
+ "l4/patrol:solved": {
+  "status": "pass-alt",
+  "en": "Solved:",
+  "my": "အောင်မြင်ပြီ:",
+  "back": "Succeeded:"
+ },
+ "l4/patrol:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet:",
+  "my": "မရသေးပါ:",
+  "back": "Not yet:"
+ },
+ "l4/patrol:modelNote": {
+  "status": "pass-alt",
+  "en": "Model: the code's decisions only. Driving time between points is not modelled; each step is one event.",
+  "my": "Model- ကုဒ်ရဲ့ ဆုံးဖြတ်ချက်တွေကိုပဲ ပြပါတယ်။ နေရာတွေကြား မောင်းရတဲ့ အချိန်ကို model မလုပ်ထားပါဘူး၊ အဆင့် တစ်ခုစီက event တစ်ခုပါ။",
+  "back": "Model: shows only the code's decisions. The model does not simulate the time driving between places; each step is one event."
+ },
+ "l4/patrol:words": {
+  "status": "pass-alt",
+  "en": "Words",
+  "my": "ဝေါဟာရ",
+  "back": "Terminology"
+ },
+ "l4/patrol:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "waypoint",
+  "my": "waypoint",
+  "back": "waypoint"
+ },
+ "l4/patrol:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "a named position the robot should visit",
+  "my": "စက်ရုပ် သွားရမယ့် နာမည်ပါတဲ့ နေရာ",
+  "back": "A named place the robot must go to"
+ },
+ "l4/patrol:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "goal",
+  "my": "ပန်းတိုင်",
+  "back": "goal"
+ },
+ "l4/patrol:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "one NavigateToPose request to Nav2",
+  "my": "Nav2 ဆီ ပို့တဲ့ NavigateToPose တောင်းဆိုမှု တစ်ခု",
+  "back": "One NavigateToPose request sent to Nav2"
+ },
+ "l4/patrol:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "aborted",
+  "my": "aborted",
+  "back": "aborted"
+ },
+ "l4/patrol:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "Nav2 tried and gave up on the goal",
+  "my": "Nav2 က goal ကို ကြိုးစားပြီး လက်လျှော့လိုက်တာ",
+  "back": "Nav2 tried the goal and gave up"
+ },
+ "l4/patrol:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "retry",
+  "my": "ပြန်ကြိုးစား",
+  "back": "retry"
+ },
+ "l4/patrol:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "send the same goal again after a failure",
+  "my": "မအောင်မြင်ပြီးနောက် goal အတူတူကို ထပ်ပို့တာ",
+  "back": "Sending the same goal again after failure"
+ },
+ "l4/patrol:ev.send": {
+  "status": "pass-alt",
+  "en": "goal ->",
+  "my": "goal ->",
+  "back": "goal ->"
+ },
+ "l4/patrol:ev.reached": {
+  "status": "pass-alt",
+  "en": "reached",
+  "my": "ရောက်ပြီ",
+  "back": "Arrived"
+ },
+ "l4/patrol:ev.failed": {
+  "status": "pass-alt",
+  "en": "failed, retry",
+  "my": "မအောင်မြင်၊ ထပ်ကြိုးစား",
+  "back": "Failed, try again"
+ },
+ "l4/patrol:ev.skip": {
+  "status": "pass-alt",
+  "en": "skip",
+  "my": "ကျော်",
+  "back": "Skip"
+ },
+ "l4/patrol:ev.stopEnd": {
+  "status": "pass-alt",
+  "en": "patrol complete",
+  "my": "patrol ပြီးဆုံး",
+  "back": "Patrol finished"
+ },
+ "l4/patrol:ev.stopNoRetry": {
+  "status": "pass-alt",
+  "en": "failed, retry off: patrol stops",
+  "my": "မအောင်မြင်၊ retry ပိတ်ထားလို့ patrol ရပ်",
+  "back": "Failed, retry is off so patrol stopped"
  }
 }

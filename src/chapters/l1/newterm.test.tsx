@@ -1,10 +1,10 @@
 import { renderToStaticMarkup } from 'react-dom/server'
 import { describe, expect, it } from 'vitest'
-import { STRINGS } from '../i18n'
-import { SHELL_STRINGS } from './l1/shell.strings'
-import { WS_STRINGS } from './l2/ws.strings'
-import ShellChapter from './l1/ShellChapter'
-import WsChapter from './l2/WsChapter'
+import { STRINGS } from '../../i18n'
+import { SHELL_STRINGS } from './shell.strings'
+import { WS_STRINGS } from '../l2/ws.strings'
+import ShellChapter from './ShellChapter'
+import WsChapter from '../l2/WsChapter'
 
 // The enabled-after-typing half needs a click: covered by logs newterm.mjs on the built page (verify r101-fixread-newterm-click).
 const newTermButton = (html: string, label: string) => html.match(new RegExp(`<button[^>]*>${label}</button>`))?.[0] ?? ''

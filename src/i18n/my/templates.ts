@@ -86,7 +86,7 @@ export const MY_TEMPLATES: Record<string, Record<string, Tpl>> = {
     cliNote: (m: number) => `ဒီ repo ကိုယ်တိုင် run တဲ့အခါ ros2 topic hz /scan က ${m} Hz တိုင်းမိပါတယ်၊ config မှာ 5 Hz ထားပါတယ်။`,
     caption: (t: string, n: number) => `t = ${t} s · ကြိုးတွေပေါ်မှာ message ${n} ခု`,
   },
-  'l5b.qos.QOS_STRINGS': { caption: (got: number) => `scan ${got}/20 ရောက်` },
+  'l5b.qos.QOS_STRINGS': { caption: (got: number) => `scan ${got}/20 ရောက်`, 'anim.caption': (got: number, sent: number) => `ပို့ ${sent}/20 · ရောက် ${got}` },
   'l5b.lifecycle.LIFECYCLE_STRINGS': {
     rejected: (tr: string, st: string) => `${st} ကနေ ${tr} လုပ်ခွင့်မရှိပါ- node က ရှိနေတဲ့ state မှာပဲ ဆက်နေပါတယ်။`,
     caption: (n: number) => `control tick 10 ခုထဲက ${n} ခု နောက်ကျ`,
