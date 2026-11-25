@@ -37,6 +37,7 @@ export const DEBUG_STRINGS = {
       ['tf2_echo', 'prints the transform between two frames, or says why it cannot'],
       ['ros2 bag', 'records topics to a file and plays them back later'],
     ] as [string, string][],
+    anim: { mascot: 'Debug buddy robot: thinks over each clue, happy when one fault is left, wobbly when a tool told nothing new' },
   },
   ja: {
     title: 'デバッグツール：ロボットが動かない理由を探す',
@@ -75,5 +76,6 @@ export const DEBUG_STRINGS = {
       ['tf2_echo', '2 つのフレーム間の変換を表示する。できなければ理由を言う'],
       ['ros2 bag', 'トピックをファイルに記録し、あとで再生する'],
     ] as [string, string][],
+    anim: { mascot: '診断の相棒ロボット：ツールの結果を考え、故障が1つに絞れると喜び、何も分からなかったツールでふらつく' },
   },
 }

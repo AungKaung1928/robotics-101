@@ -1,5 +1,7 @@
 import { useState, type CSSProperties } from 'react'
 import { spokeDeg } from '../../scenarios/portspoke'
+import { portReaction } from '../../scenarios/portmood'
+import Mascot from '../../anim/Mascot'
 import '../../scenarios/portspoke.css'
 import { stringsFor, type Strings } from '../../i18n'
 import Slider from '../../components/Slider'
@@ -22,6 +24,7 @@ export default function PortChapter({ t }: { t: Strings }) {
   const [half, setHalf] = useState(false)
   const [broken, setBroken] = useState(false)
   const [seen, setSeen] = useState({ agree: false, disagree: false })
+  const [cheer, setCheer] = useState(0), [oops, setOops] = useState(0)
   const [said, setSaid] = useState<{ at: string; agree: boolean } | null>(null)
   const scan = half ? HALF : LDS
   const py = pyIndex(scan, deg), c = cppIndex(scan, deg, !broken), same = py === c.idx
@@ -29,6 +32,7 @@ export default function PortChapter({ t }: { t: Strings }) {
   const at = `${deg}|${half}`, shown = !broken || said?.at === at
   const predict = (agree: boolean) => {
     setSaid({ at, agree })
+    if (portReaction(agree, same) === 'cheer') setCheer((n) => n + 1); else setOops((n) => n + 1)
     // A wrong prediction clears progress, so trying both buttons on one bearing never solves it.
     setSeen((x) => (agree === same ? { ...x, [same ? 'agree' : 'disagree']: true } : { agree: false, disagree: false }))
   }
@@ -61,6 +65,7 @@ export default function PortChapter({ t }: { t: Strings }) {
           <div><dt>{s.readout.offset}</dt><dd data-k="offset">{shown ? c.offset.toFixed(3) : '?'}</dd></div>
           <div><dt>{s.readout.raw}</dt><dd data-k="raw" className="port-raw">{shown ? c.raw.toString() : '?'}</dd></div>
         </dl>
+        <Mascot cheer={cheer} oops={oops} size={48} label={s.anim.mascot} />
         {shown ? <p className={`verdict ${same ? 'ok' : 'no'}`} data-k="same">{same ? '✓ ' + s.same : s.differ}</p>
           : <p className="verdict" data-k="same">{s.predictAsk}{' '}
             <button type="button" data-act="say-agree" onClick={() => predict(true)}>{s.agreeFound}</button>{' '}

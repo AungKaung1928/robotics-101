@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import Mascot from '../../anim/Mascot'
+import { ciReaction } from '../../scenarios/cimood'
 import { stringsFor, type Strings } from '../../i18n'
 import Gloss from '../l1/Gloss'
 import { LINES, PUSHES, REAL, RUN, SECONDS, STEPS, run, secondsToVerdict, type Push, type Step } from './ci'
@@ -22,6 +24,10 @@ export default function CiChapter({ t }: { t: Strings }) {
   const res = run(push)
   const firstRed = STEPS.find((st) => res[st] === 'failure') ?? 'none'
   const end = total(push), done = tA >= end, at = ciAt(push, Math.max(tA, 0))
+  const [cheer, setCheer] = useState(0), [oops, setOops] = useState(0)
+  useEffect(() => { // a finished run judges the reader's guess once
+    if (tA >= 0 && done) (ciReaction(guess, firstRed) === 'cheer' ? setCheer : setOops)((n) => n + 1)
+  }, [done]) // eslint-disable-line react-hooks/exhaustive-deps
   const look = (st: Step) => (tA < 0 ? 'wait' : at[st].look)
   useEffect(() => {
     if (tA < 0 || done) return
@@ -59,6 +65,7 @@ export default function CiChapter({ t }: { t: Strings }) {
         <p className="choices">
           {(['none', 'build', 'test', 'figure'] as const).map((g) => <label key={g} className="pick"><input type="radio" name="ci-guess" checked={guess === g} onChange={() => { setGuess(g); setTA(-1) }} /> {g === 'none' ? s.none : s.step[g]}</label>)}
         </p>
+        <Mascot cheer={cheer} oops={oops} size={48} label={s.anim.mascot} />
         <p><button type="button" data-act="run" onClick={go}>{s.runBtn}</button></p>
         {done && <>
           <p className={`verdict ${guess === firstRed ? 'ok' : 'no'}`} data-k="predict">{guess === firstRed ? '✓ ' + s.right : s.wrong}</p>

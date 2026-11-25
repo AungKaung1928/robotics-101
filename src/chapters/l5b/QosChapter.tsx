@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import Player from '../../anim/Player'
+import Mascot from '../../anim/Mascot'
+import { qosReaction } from '../../scenarios/qosmood'
 import { END, EVENTS, GAP, arrivedBy, flight, sentBy } from '../../scenarios/qosflight'
 import Slider from '../../components/Slider'
 import { stringsFor, type Strings } from '../../i18n'
@@ -21,9 +23,17 @@ export default function QosChapter({ t }: { t: Strings }) {
   const [tS, setTS] = useState(() => (still() ? END : 0))
   const now = Math.min(tS, END)
   // a changed setting shows its end frame at once; Play replays the scans under it
-  const setPub = (q: Qos) => { setPub0(q); setTS(END) }
-  const setSub = (q: Qos) => { setSub0(q); setTS(END) }
-  const [depth, setDepth] = useState(DEFAULT_DEPTH)
+  const [depth, setDepth0] = useState(DEFAULT_DEPTH)
+  const [cheer, setCheer] = useState(0), [oops, setOops] = useState(0)
+  const view = (p: Qos, q: Qos, d: number) => ({ ok: challengeOk(p, q, d), linked: connected(p, q) })
+  const react = (p: Qos, q: Qos, d: number) => {
+    const r = qosReaction(view(pub, sub, depth), view(p, q, d))
+    if (r === 'cheer') setCheer((n) => n + 1); else if (r === 'oops') setOops((n) => n + 1)
+  }
+  const setPub = (q: Qos) => { react(q, sub, depth); setPub0(q); setTS(END) }
+  const setSub = (q: Qos) => { react(pub, q, depth); setSub0(q); setTS(END) }
+  const setDepth = (d: number) => { react(pub, sub, d); setDepth0(d) }
+  const lateNow = lateJoinerGets(pub, sub, depth)
   const fs = fates(pub, sub), got = received(pub, sub), ok = challengeOk(pub, sub, depth)
   const side = (q: Qos, set: (q: Qos) => void, label: string, k: string) => (
     <div className="stepper-block" data-k={k}>
@@ -59,6 +69,14 @@ export default function QosChapter({ t }: { t: Strings }) {
             )
           })}
         </svg>
+        {/* the late joiner: after the last scan RViz starts and gets the kept maps (model lateJoinerGets), shown once the run is over; older kept maps are dimmed: only the newest one is the map to use */}
+        <svg className="side graph" viewBox={`0 0 ${W} 44`} aria-hidden="true" data-k="late-row" data-got={now >= END ? lateNow : -1}>
+          <text className="legend" x={X0 - 10} y={28}>RViz</text>
+          {[...Array(MAPS).keys()].map((i) => {
+            const x = X0 + 60 + i * 36, kept = now >= END && i >= MAPS - lateNow // keep last N = the newest N maps
+            return <rect key={i} x={x} y={10} width={24} height={24} rx={5} className={kept ? 'dot' : undefined} fill={kept ? undefined : 'none'} stroke="var(--rule)" strokeWidth={2} strokeDasharray={kept ? undefined : '4 3'} opacity={kept && i < MAPS - 1 ? 0.4 : undefined} data-kept={kept} />
+          })}
+        </svg>
         <Player t={now} setT={setTS} end={END} events={EVENTS} labels={s.anim.steps} speed={1} autoplay={!still()} s={t}
           caption={<span data-k="anim-caption">{s.anim.caption(arrivedBy(fs, now), sentBy(now))}</span>} />
         <p className="runs" data-k="caption">{s.caption(got)}</p>
@@ -78,7 +96,8 @@ export default function QosChapter({ t }: { t: Strings }) {
         </dl>
         <p className="runs">{s.resentNote}</p>
         <p><strong>{s.challenge}</strong></p>
-        <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet} {s.dur[pub.dur]} → {s.dur[sub.dur]}</p>
+        <Mascot cheer={cheer} oops={oops} size={48} label={s.anim.mascot} />
+        <p className={`verdict ${ok ? 'ok' : 'no'}`} data-k="challenge">{ok ? '✓ ' + s.solved : s.notYet} {s.dur[pub.dur]} → {s.dur[sub.dur]} · {s.depth} {depth}</p>
         <p className="note">{s.trap}</p>
         <p className="group-h">{s.words}</p>
         <Gloss items={s.glossary} />
