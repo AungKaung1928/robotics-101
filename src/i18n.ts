@@ -15,6 +15,7 @@ const en = {
   // Words inside the headline values (content/waypoints.ts); the numbers come from the tracked constants.
   wv: { jump: (m: number) => `jump > ${m} m`, obstacles: (n: number) => `${n} obstacles`, cells: (m: number) => `${m} m cells` },
   keys: 'Keys: 1–7 jump to a waypoint, ← → step.',
+  stackOf: 'Example project, its own setup:',
   pathNote: 'Patrol path drawn for this page; obstacles and walls from the Gazebo world file.',
   kind: { config: 'config', formula: 'formula', measured: 'measured' },
   back: 'Back',
@@ -200,6 +201,7 @@ const ja: typeof en = {
   drag: '← ドラッグ →',
   wv: { jump: (m: number) => `ジャンプ > ${m} m`, obstacles: (n: number) => `障害物 ${n} 個`, cells: (m: number) => `${m} m のセル` },
   keys: 'キー: 1–7 でウェイポイントへ、← → で移動。',
+  stackOf: '例のプロジェクト（その環境）：',
   pathNote: '巡回経路はこのページ用の図。障害物と壁は Gazebo のワールドファイルから。',
   kind: { config: '設定値', formula: '式', measured: '実測' },
   back: '戻る',
