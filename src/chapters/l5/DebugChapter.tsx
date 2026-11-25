@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { marks } from '../../scenarios/dbgsuspects'
+import { dbgReaction } from '../../scenarios/dbgmood'
+import Mascot from '../../anim/Mascot'
 import '../../scenarios/dbg.css'
 import { stringsFor, type Strings } from '../../i18n'
 import Gloss from '../l1/Gloss'
@@ -13,10 +15,15 @@ export default function DebugChapter({ t }: { t: Strings }) {
   const [fault, setFault] = useState<Fault>('remap')
   const [used, setUsed] = useState<Tool[]>([])
   const [solo, setSolo] = useState<Record<Fault, Tool[]>>({ sensor: [], remap: [], tf: [] }) // tools that named a fault alone
+  const [cheer, setCheer] = useState(0), [oops, setOops] = useState(0)
   const seen = used.map((tool) => ({ tool, clue: look(fault, tool) }))
   const left = remaining(seen), mk = marks(seen)
   const runTool = (tool: Tool) => {
     setUsed((u) => (u.includes(tool) ? u : [...u, tool])) // functional: two quick clicks must both count
+    if (!used.includes(tool)) {
+      const r = dbgReaction(left.length, remaining([...seen, { tool, clue: look(fault, tool) }]).length)
+      if (r === 'cheer') setCheer((n) => n + 1); else if (r === 'oops') setOops((n) => n + 1)
+    }
     if (remaining([{ tool, clue: look(fault, tool) }]).length === 1) setSolo((x) => ({ ...x, [fault]: [...new Set([...x[fault], tool])] }))
   }
   const allNamedBy = TOOLS.filter((tool) => FAULTS.every((f) => solo[f].includes(tool)))
@@ -39,6 +46,7 @@ export default function DebugChapter({ t }: { t: Strings }) {
         <p className="note">{s.simplified}</p>
         <pre role="log" className="code port-code" data-k="clues">{seen.map(({ tool, clue }) => `$ ${CMD[tool]}\n  ${clue.ok ? '✓' : '✗'} ${s.clues[clue.key as keyof typeof s.clues]}`).join('\n')}</pre>
         <p data-k="used">{s.used}: {used.length}</p>
+        <Mascot cheer={cheer} oops={oops} thinking={used.length > 0 && left.length > 1} size={48} label={s.anim.mascot} />
         <p className={`verdict ${left.length === 1 ? 'ok' : 'no'}`} data-k="named">{left.length === 1 ? '✓ ' + s.named : `${s.left}: ${left.length}`}</p>
         <p><button type="button" data-act="reset" onClick={() => setUsed([])}>{s.reset}</button></p>
         <h2>{s.breakTitle}</h2>
