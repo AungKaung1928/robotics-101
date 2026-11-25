@@ -10,11 +10,11 @@ describe('4.4 patrol mood from the model', () => {
     expect(patrolMood(ev, ev.length)).toEqual({ cheer: reached, oops: 0 })
     expect(patrolMood(ev, 0)).toEqual({ cheer: 0, oops: 0 })
   })
-  it('blocked goal without retry: an oops for the failure and one for the early stop', () => {
+  it('blocked goal without retry: one oops per failure, none extra for the early stop', () => {
     const ev = run({ blocked: 1, loop: false, retry: false })
     const m = patrolMood(ev, ev.length)
     expect(ev.some((e) => e.kind === 'stop' && e.why === 'noRetry')).toBe(true)
-    expect(m.oops).toBe(ev.filter((e) => e.kind === 'failed').length + 1)
+    expect(m.oops).toBe(ev.filter((e) => e.kind === 'failed').length)
   })
   it('counts only rise as the playhead moves forward', () => {
     const ev = run({ blocked: 1, loop: false, retry: true })
