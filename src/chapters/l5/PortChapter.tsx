@@ -1,4 +1,6 @@
-import { useState } from 'react'
+import { useState, type CSSProperties } from 'react'
+import { spokeDeg } from '../../scenarios/portspoke'
+import '../../scenarios/portspoke.css'
 import { stringsFor, type Strings } from '../../i18n'
 import Slider from '../../components/Slider'
 import Gloss from '../l1/Gloss'
@@ -30,7 +32,7 @@ export default function PortChapter({ t }: { t: Strings }) {
     // A wrong prediction clears progress, so trying both buttons on one bearing never solves it.
     setSeen((x) => (agree === same ? { ...x, [same ? 'agree' : 'disagree']: true } : { agree: false, disagree: false }))
   }
-  const [px, py2] = spoke(scan, py, 96), [cx, cy] = spoke(scan, c.idx, 80)
+  const [px, py2] = spoke(scan, py, 96)
   const link = (base: string, p: string) => <a href={`${base}/${p}`}><CiteCode p={p} /></a>
   return (
     <>
@@ -40,7 +42,8 @@ export default function PortChapter({ t }: { t: Strings }) {
           <circle className="body" cx="120" cy="120" r="16" />
           <line className="front" x1="120" y1="120" x2="120" y2="98" />
           <line className="py" x1="120" y1="120" x2={px} y2={py2} />
-          {shown && <line className={`cpp ${same ? '' : 'bad'}`} x1="120" y1="120" x2={cx} y2={cy} />}
+          {shown && <line className={`cpp cpp-rot ${same ? '' : 'bad'}`} x1="120" y1="120" x2="120" y2="40"
+            style={{ '--from': `${spokeDeg(scan, py)}deg`, transform: `rotate(${spokeDeg(scan, c.idx)}deg)` } as CSSProperties} />}
         </svg>
         <p className="note">{s.setup}</p>
       </div>

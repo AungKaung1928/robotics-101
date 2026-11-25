@@ -4,6 +4,8 @@ import Gloss from '../l1/Gloss'
 import { LINES, PUSHES, REAL, RUN, SECONDS, STEPS, run, secondsToVerdict, type Push, type Step } from './ci'
 import { CI_STRINGS } from './ci.strings'
 import CiteCode from './CiteCode'
+import { ciAt, total } from '../../scenarios/cirun'
+import '../../scenarios/cirun.css'
 import './l5.css'
 
 const REPO = 'https://github.com/AungKaung1928/TF-Transform-Explorer'
@@ -15,29 +17,34 @@ export default function CiChapter({ t }: { t: Strings }) {
   const s = stringsFor(CI_STRINGS, t, 'l5.ci.CI_STRINGS')
   const [push, setPush] = useState<Push>('clean')
   const [guess, setGuess] = useState<Step | 'none'>('none')
-  const [shown, setShown] = useState(-1) // steps revealed so far (animation); -1 = not run
+  const [tA, setTA] = useState(-1) // run playhead in screen seconds (scenarios/cirun); -1 = not run
   const [zeroTests, setZeroTests] = useState(false)
   const res = run(push)
   const firstRed = STEPS.find((st) => res[st] === 'failure') ?? 'none'
-  const done = shown >= STEPS.length
+  const end = total(push), done = tA >= end, at = ciAt(push, Math.max(tA, 0))
+  const look = (st: Step) => (tA < 0 ? 'wait' : at[st].look)
   useEffect(() => {
-    if (shown < 0 || done) return
-    const id = setTimeout(() => setShown((n) => n + 1), 350)
-    return () => clearTimeout(id)
-  }, [shown, done])
+    if (tA < 0 || done) return
+    const t0 = performance.now() - tA * 1000
+    let id = requestAnimationFrame(function f(now) { const x = Math.min(end, (now - t0) / 1000); setTA(x); if (x < end) id = requestAnimationFrame(f) })
+    return () => cancelAnimationFrame(id)
+  }, [tA < 0, done, end]) // eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => { if (done && res.build === 'failure' && res.test === 'skipped') setZeroTests(true) }, [done, res.build, res.test])
-  const go = () => setShown(still() ? STEPS.length : 0)
+  const go = () => setTA(still() ? end : 0)
   const real = REAL[push]
   return (
     <>
       <div className="figure">
-        <svg className="ci-bar" viewBox={`0 0 ${STEPS.length * 70} 24`} role="img" aria-label={STEPS.map((st, i) => `${s.step[st]}: ${i < shown || done ? s.result[res[st]] : '·'}`).join(', ')}>
-          {STEPS.map((st, i) => <rect key={st} x={i * 70 + 2} y="2" width="64" height="20" rx="3" className={i < shown || done ? res[st] : 'wait'} />)}
+        <svg className="ci-bar" viewBox={`0 0 ${STEPS.length * 70} 24`} role="img" aria-label={STEPS.map((st) => `${s.step[st]}: ${look(st) === 'wait' || look(st) === 'running' ? '·' : s.result[res[st]]}`).join(', ')}>
+          {STEPS.map((st, i) => <g key={st}>
+            <rect x={i * 70 + 2} y="2" width="64" height="20" rx="3" className={look(st)} />
+            {look(st) === 'running' && <rect className="ci-fill" x={i * 70 + 2} y="2" width={64 * at[st].frac} height="20" rx="3" />}
+          </g>)}
         </svg>
         <ol className="ci-pipe" aria-live="polite">
-          {STEPS.map((st, i) => {
-            const r = i < shown || done ? res[st] : 'wait'
-            return <li key={st} className={`ci-step ${r}`} data-k={`step-${st}`}><span>{s.step[st]}</span> <b>{r === 'wait' ? '·' : s.result[r]}</b></li>
+          {STEPS.map((st) => {
+            const r = look(st)
+            return <li key={st} className={`ci-step ${r}`} data-k={`step-${st}`}><span>{s.step[st]}</span> <b>{r === 'wait' ? '·' : r === 'running' ? `${at[st].realS} s` : s.result[r]}</b></li>
           })}
         </ol>
         <p className="note">{s.setup}</p>
@@ -46,11 +53,11 @@ export default function CiChapter({ t }: { t: Strings }) {
         <p className="learn">{s.learn}</p>
         <h2>{s.pick}</h2>
         <p className="choices">
-          {PUSHES.map((p) => <label key={p} className="pick"><input type="radio" name="ci-push" checked={push === p} onChange={() => { setPush(p); setShown(-1) }} /> {s.push[p]}</label>)}
+          {PUSHES.map((p) => <label key={p} className="pick"><input type="radio" name="ci-push" checked={push === p} onChange={() => { setPush(p); setTA(-1) }} /> {s.push[p]}</label>)}
         </p>
         <h2>{s.predict}</h2>
         <p className="choices">
-          {(['none', 'build', 'test', 'figure'] as const).map((g) => <label key={g} className="pick"><input type="radio" name="ci-guess" checked={guess === g} onChange={() => { setGuess(g); setShown(-1) }} /> {g === 'none' ? s.none : s.step[g]}</label>)}
+          {(['none', 'build', 'test', 'figure'] as const).map((g) => <label key={g} className="pick"><input type="radio" name="ci-guess" checked={guess === g} onChange={() => { setGuess(g); setTA(-1) }} /> {g === 'none' ? s.none : s.step[g]}</label>)}
         </p>
         <p><button type="button" data-act="run" onClick={go}>{s.runBtn}</button></p>
         {done && <>
