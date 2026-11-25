@@ -37,14 +37,14 @@ export default function CiChapter({ t }: { t: Strings }) {
       <div className="figure">
         <svg className="ci-bar" viewBox={`0 0 ${STEPS.length * 70} 24`} role="img" aria-label={STEPS.map((st) => `${s.step[st]}: ${look(st) === 'wait' || look(st) === 'running' ? '·' : s.result[res[st]]}`).join(', ')}>
           {STEPS.map((st, i) => <g key={st}>
-            <rect x={i * 70 + 2} y="2" width="64" height="20" rx="3" className={look(st)} />
+            <rect x={i * 70 + 2} y="2" width="64" height="20" rx="3" className={`ci-run ${look(st)}`} />
             {look(st) === 'running' && <rect className="ci-fill" x={i * 70 + 2} y="2" width={64 * at[st].frac} height="20" rx="3" />}
           </g>)}
         </svg>
         <ol className="ci-pipe" aria-live="polite">
           {STEPS.map((st) => {
             const r = look(st)
-            return <li key={st} className={`ci-step ${r}`} data-k={`step-${st}`}><span>{s.step[st]}</span> <b>{r === 'wait' ? '·' : r === 'running' ? `${at[st].realS} s` : s.result[r]}</b></li>
+            return <li key={st} className={`ci-step ci-live ${r}`} data-k={`step-${st}`}><span>{s.step[st]}</span> <b>{r === 'wait' ? '·' : r === 'running' ? `${at[st].realS} s` : s.result[r]}</b></li>
           })}
         </ol>
         <p className="note">{s.setup}</p>

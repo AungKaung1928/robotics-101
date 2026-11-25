@@ -1,6 +1,6 @@
 /* struck = ruled out by the newest clue: it leaves (nudge + fade into the chapter's .out look); found = last suspect pops */
-.dbg-left li[data-mark='struck'] { animation: dbg-strike 0.4s ease-out both; }
-.dbg-left li[data-mark='found'] { animation: dbg-found 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both; transform-origin: left center; }
+.dbg-mark[data-mark='struck'] { animation: dbg-strike 0.4s ease-out both; }
+.dbg-mark[data-mark='found'] { animation: dbg-found 0.45s cubic-bezier(0.34, 1.56, 0.64, 1) both; transform-origin: left center; }
 @keyframes dbg-strike { from { opacity: 1; transform: translateX(0); } 40% { transform: translateX(8px); } }
 @keyframes dbg-found { 50% { transform: scale(1.08); } }
-@media (prefers-reduced-motion: reduce) { .dbg-left li[data-mark] { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .dbg-mark[data-mark='struck'] { animation: none; } .dbg-mark[data-mark='found'] { animation: none; } }

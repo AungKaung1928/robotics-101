@@ -24,7 +24,7 @@ export default function DebugChapter({ t }: { t: Strings }) {
     <>
       <div className="figure">
         <ul className="dbg-left" aria-live="polite" data-k="left">
-          {FAULTS.map((f) => <li key={`${f}-${used.length}`} className={left.includes(f) ? 'in' : 'out'} data-mark={mk[f]}>{s.faults[f]}</li>)}
+          {FAULTS.map((f) => <li key={`${f}-${used.length}`} className={`${left.includes(f) ? 'in' : 'out'} dbg-mark`} data-mark={mk[f]}>{s.faults[f]}</li>)}
         </ul>
         <p className="note">{s.setup}</p>
       </div>

@@ -9,6 +9,6 @@ describe('5.3 debug suspects', () => {
     expect([...renderToStaticMarkup(<DebugChapter t={STRINGS.en} />).matchAll(/data-mark="(\w+)"/g)].map((m) => m[1])).toEqual(['in', 'in', 'in'])
   })
   it('reduced motion: strike and pop animations off', () => {
-    expect(readFileSync(new URL('./dbg.css', import.meta.url), 'utf8')).toMatch(/prefers-reduced-motion: reduce\) { \.dbg-left li\[data-mark\] { animation: none; } }/)
+    expect(readFileSync(new URL('./dbg.css', import.meta.url), 'utf8')).toMatch(/prefers-reduced-motion: reduce\) { \.dbg-mark\[data-mark='struck'\] { animation: none; } \.dbg-mark\[data-mark='found'\] { animation: none; } }/)
   })
 })

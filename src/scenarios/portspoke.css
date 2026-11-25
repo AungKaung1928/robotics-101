@@ -1,4 +1,4 @@
 /* 5.1: the C++ spoke turns to the ray it reads; on first draw it starts on the Python spoke (--from) */
-.port-ring .cpp-rot { transform-box: view-box; transform-origin: 120px 120px; transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
-@starting-style { .port-ring .cpp-rot { transform: rotate(var(--from)); } }
-@media (prefers-reduced-motion: reduce) { .port-ring .cpp-rot { transition: none; } }
+.cpp-rot { transform-box: view-box; transform-origin: 120px 120px; transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1); }
+@starting-style { .cpp-rot { transform: rotate(var(--from)); } }
+@media (prefers-reduced-motion: reduce) { .cpp-rot { transition: none; } }
