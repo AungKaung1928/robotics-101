@@ -8067,5 +8067,257 @@
   "en": "records topics to a file and plays them back later",
   "my": "topic တွေကို ဖိုင်ထဲ မှတ်တမ်းတင်ပြီး နောက်မှ ပြန်ဖွင့်ပေးတယ်",
   "back": "Records topics into a file and plays them back later"
+ },
+ "l5/ci:learn": {
+  "status": "pass-alt",
+  "en": "You will: follow one push through the CI of TF-Transform-Explorer (the example ROS 2 repo), predict which step turns red for each kind of mistake, and see why a red build hides the tests.",
+  "my": "လုပ်ရမှာက- TF-Transform-Explorer (နမူနာ ROS 2 repo) ရဲ့ CI ထဲမှာ push တစ်ခုကို အစအဆုံး လိုက်ကြည့်ပြီး အမှား အမျိုးအစား တစ်ခုစီအတွက် ဘယ်အဆင့် နီသွားမလဲ ခန့်မှန်းကာ build နီသွားရင် test တွေကို ဘာကြောင့် ဖုံးကွယ်သွားလဲ ကြည့်ပါ။",
+  "back": "What to do: follow one push from start to finish in the CI of TF-Transform-Explorer (a sample ROS 2 repo), predict which stage goes red for each error type, and see why, when the build goes red, the tests are hidden."
+ },
+ "l5/ci:setup": {
+  "status": "pass-alt",
+  "en": "Every push to main and every pull request starts a fresh ros:humble container on a GitHub server. It installs the dependencies, builds, runs every test, then checks the repo's TF tree figure still matches the code.",
+  "my": "main ကို push တိုင်းနဲ့ pull request တိုင်းက GitHub server ပေါ်မှာ ros:humble container အသစ်တစ်ခုကို စတင်ပါတယ်။ အဲဒါက dependency တွေကို install လုပ်၊ build လုပ်၊ test အားလုံးကို run ပြီး repo ရဲ့ TF tree ပုံက ကုဒ်နဲ့ ကိုက်နေသေးလား စစ်ပါတယ်။",
+  "back": "Every push to main and every pull request starts a fresh ros:humble container on a GitHub server. It installs the dependencies, builds, runs all the tests, and checks whether the repo's TF tree diagram still matches the code."
+ },
+ "l5/ci:pick": {
+  "status": "pass-alt",
+  "en": "What does your push do?",
+  "my": "သင့် push က ဘာလုပ်လဲ။",
+  "back": "What does your push do?"
+ },
+ "l5/ci:push.clean": {
+  "status": "pass-alt",
+  "en": "Nothing wrong",
+  "my": "ဘာမှ မမှားဘူး",
+  "back": "Nothing is wrong"
+ },
+ "l5/ci:push.syntax": {
+  "status": "pass-alt",
+  "en": "A C++ typo",
+  "my": "C++ စာလုံးပေါင်း အမှား",
+  "back": "C++ spelling mistake"
+ },
+ "l5/ci:push.test": {
+  "status": "pass-alt",
+  "en": "A test now fails",
+  "my": "test တစ်ခု အခု ကျသွားတယ်",
+  "back": "One test fails now"
+ },
+ "l5/ci:push.figure": {
+  "status": "pass-alt",
+  "en": "Changed the TF tree, forgot the figure",
+  "my": "TF tree ကို ပြောင်းပြီး ပုံကို မေ့သွားတယ်",
+  "back": "Changed the TF tree and forgot the diagram"
+ },
+ "l5/ci:predict": {
+  "status": "pass-alt",
+  "en": "Predict: which step turns red first?",
+  "my": "ခန့်မှန်းပါ- ဘယ်အဆင့်က အရင်ဆုံး နီသွားမလဲ။",
+  "back": "Predict: which stage goes red first?"
+ },
+ "l5/ci:none": {
+  "status": "pass-alt",
+  "en": "none (green)",
+  "my": "မရှိ (စိမ်း)",
+  "back": "None (green)"
+ },
+ "l5/ci:runBtn": {
+  "status": "pass-alt",
+  "en": "Push and run",
+  "my": "Push လုပ်ပြီး run",
+  "back": "Push and run"
+ },
+ "l5/ci:step.container": {
+  "status": "pass-alt",
+  "en": "start ros:humble",
+  "my": "ros:humble စတင်",
+  "back": "start ros:humble"
+ },
+ "l5/ci:step.checkout": {
+  "status": "pass-alt",
+  "en": "checkout",
+  "my": "checkout",
+  "back": "checkout"
+ },
+ "l5/ci:step.rosdep": {
+  "status": "pass-alt",
+  "en": "rosdep install",
+  "my": "rosdep install",
+  "back": "rosdep install"
+ },
+ "l5/ci:step.build": {
+  "status": "pass-alt",
+  "en": "colcon build",
+  "my": "colcon build",
+  "back": "colcon build"
+ },
+ "l5/ci:step.test": {
+  "status": "pass-alt",
+  "en": "colcon test",
+  "my": "colcon test",
+  "back": "colcon test"
+ },
+ "l5/ci:step.figure": {
+  "status": "pass-alt",
+  "en": "figure matches code",
+  "my": "ပုံက ကုဒ်နဲ့ ကိုက်",
+  "back": "diagram matches code"
+ },
+ "l5/ci:result.success": {
+  "status": "pass-alt",
+  "en": "passed",
+  "my": "အောင်",
+  "back": "pass"
+ },
+ "l5/ci:result.failure": {
+  "status": "pass-alt",
+  "en": "FAILED",
+  "my": "FAILED",
+  "back": "FAILED"
+ },
+ "l5/ci:result.skipped": {
+  "status": "pass-alt",
+  "en": "skipped",
+  "my": "ကျော်ခဲ့",
+  "back": "skipped"
+ },
+ "l5/ci:verdictIn": {
+  "status": "pass-alt",
+  "en": "Verdict after",
+  "my": "ရလဒ် ထွက်ချိန်",
+  "back": "time when result comes out"
+ },
+ "l5/ci:sec": {
+  "status": "pass-alt",
+  "en": "s",
+  "my": "s",
+  "back": "s"
+ },
+ "l5/ci:right": {
+  "status": "pass-alt",
+  "en": "Right.",
+  "my": "မှန်ပါတယ်။",
+  "back": "Correct."
+ },
+ "l5/ci:wrong": {
+  "status": "pass-alt",
+  "en": "Not this one. Look at which step first sees the mistake.",
+  "my": "ဒါ မဟုတ်ပါဘူး။ ဘယ်အဆင့်က အမှားကို အရင်ဆုံး မြင်လဲ ကြည့်ပါ။",
+  "back": "This is not it. Look at which stage sees the error first."
+ },
+ "l5/ci:real": {
+  "status": "pass-alt",
+  "en": "Real run on GitHub",
+  "my": "GitHub ပေါ်က တကယ့် run",
+  "back": "A real run on GitHub"
+ },
+ "l5/ci:noReal": {
+  "status": "pass-alt",
+  "en": "No red run of this kind in the repo's history yet.",
+  "my": "repo ရဲ့ မှတ်တမ်းထဲမှာ ဒီအမျိုးအစား နီတဲ့ run မရှိသေးပါဘူး။",
+  "back": "There is no red run of this kind in the repo's history yet."
+ },
+ "l5/ci:timing": {
+  "status": "pass-alt",
+  "en": "Seconds per step are from a green run on c3c3cf2. They add up to 117 s; the whole run took 125 s (the other 8 s are outside these steps). Your laptop is not involved: the same container runs for everyone.",
+  "my": "အဆင့် တစ်ခုစီရဲ့ စက္ကန့်တွေက c3c3cf2 ပေါ်က စိမ်းတဲ့ run တစ်ခုကနေ ယူထားတာပါ။ ပေါင်းလိုက်ရင် 117 s ရပြီး run တစ်ခုလုံးက 125 s ကြာပါတယ် (ကျန်တဲ့ 8 s က ဒီအဆင့်တွေ အပြင်ဘက်မှာပါ)။ သင့် လက်ပ်တော့ မပါဝင်ပါဘူး- container အတူတူက လူတိုင်းအတွက် run ပါတယ်။",
+  "back": "The seconds for each stage are taken from one green run on c3c3cf2. Added up they come to 117 s and the whole run takes 125 s (the remaining 8 s is outside these stages). Your laptop is not involved: the same container runs for everyone."
+ },
+ "l5/ci:breakTitle": {
+  "status": "pass-alt",
+  "en": "Break it",
+  "my": "ဖျက်ကြည့်",
+  "back": "Try breaking it"
+ },
+ "l5/ci:breakNote": {
+  "status": "pass-alt",
+  "en": "Break it: pick pushes and watch which step turns red. A red run does not always mean a test failed. The repo's history has two red runs where no test ran at all (2ed2bd9, 884cc5b).",
+  "my": "ဖျက်ကြည့်- push တွေကို ရွေးပြီး ဘယ်အဆင့် နီသွားလဲ ကြည့်ပါ။ run နီတာက test ကျတယ်လို့ အမြဲ မဆိုလိုပါဘူး။ repo ရဲ့ မှတ်တမ်းထဲမှာ test တစ်ခုမှ မ run ခဲ့တဲ့ နီတဲ့ run 2 ခု ရှိပါတယ် (2ed2bd9, 884cc5b)။",
+  "back": "Try breaking it: pick pushes and see which stage goes red. A red run does not always mean a test failed. In the repo's history there are 2 red runs where not a single test ran (2ed2bd9, 884cc5b)."
+ },
+ "l5/ci:challenge": {
+  "status": "pass-alt",
+  "en": "Challenge: find the push where the run is red but zero tests ran.",
+  "my": "စိန်ခေါ်မှု- run နီပေမဲ့ test 0 ခုပဲ run ခဲ့တဲ့ push ကို ရှာပါ။",
+  "back": "Challenge: find a push where the run is red but 0 tests ran."
+ },
+ "l5/ci:solved": {
+  "status": "pass-alt",
+  "en": "Solved: a build failure skips colcon test. When you read a red run, check which step failed before you look for a bad test.",
+  "my": "အောင်မြင်ပြီ- build ကျရင် colcon test ကို ကျော်သွားပါတယ်။ နီတဲ့ run ကို ဖတ်တဲ့အခါ မှားတဲ့ test ကို မရှာခင် ဘယ်အဆင့် ကျလဲ အရင် စစ်ပါ။",
+  "back": "Success: when the build fails, colcon test is skipped. When reading a red run, first check which stage failed before looking for the failing test."
+ },
+ "l5/ci:notYet": {
+  "status": "pass-alt",
+  "en": "Not yet: run a push and look at the colcon test row.",
+  "my": "မရသေးပါ- push တစ်ခု run ပြီး colcon test အတန်းကို ကြည့်ပါ။",
+  "back": "Not yet: run one push and look at the colcon test row."
+ },
+ "l5/ci:local": {
+  "status": "pass-alt",
+  "en": "Same steps on your laptop: in a ROS 2 Humble shell, first source /opt/ros/humble/setup.bash, then from the workspace root (the folder that holds src/):",
+  "my": "သင့် လက်ပ်တော့ ပေါ်မှာ အဆင့်တွေ အတူတူပါပဲ- ROS 2 Humble shell ထဲမှာ ပထမ source /opt/ros/humble/setup.bash လုပ်ပြီး workspace root (src/ ပါတဲ့ folder) ကနေ-",
+  "back": "On your laptop the steps are the same: in a ROS 2 Humble shell first do source /opt/ros/humble/setup.bash, then from the workspace root (the folder containing src/)-"
+ },
+ "l5/ci:glossary.0.0": {
+  "status": "pass-alt",
+  "en": "CI",
+  "my": "CI",
+  "back": "CI"
+ },
+ "l5/ci:glossary.0.1": {
+  "status": "pass-alt",
+  "en": "continuous integration: a server builds and tests every push automatically",
+  "my": "continuous integration- server က push တိုင်းကို အလိုအလျောက် build လုပ်ပြီး test လုပ်တယ်",
+  "back": "continuous integration: the server automatically builds and tests every push"
+ },
+ "l5/ci:glossary.1.0": {
+  "status": "pass-alt",
+  "en": "container",
+  "my": "container",
+  "back": "container"
+ },
+ "l5/ci:glossary.1.1": {
+  "status": "pass-alt",
+  "en": "a packaged set of files and programs (Ubuntu + ROS) that runs the same on any machine; it shares the host's kernel",
+  "my": "ဘယ်စက်ပေါ်မှာမဆို အတူတူ run တဲ့ ဖိုင်နဲ့ ပရိုဂရမ် အစုံ (Ubuntu + ROS)၊ host ရဲ့ kernel ကို မျှသုံးတယ်",
+  "back": "a set of files and programs that runs the same on any machine (Ubuntu + ROS), sharing the host's kernel"
+ },
+ "l5/ci:glossary.2.0": {
+  "status": "pass-alt",
+  "en": "ros:humble",
+  "my": "ros:humble",
+  "back": "ros:humble"
+ },
+ "l5/ci:glossary.2.1": {
+  "status": "pass-alt",
+  "en": "the official Docker image with ROS 2 Humble on Ubuntu 22.04",
+  "my": "Ubuntu 22.04 ပေါ်က ROS 2 Humble ပါတဲ့ တရားဝင် Docker image",
+  "back": "The official Docker image with ROS 2 Humble on Ubuntu 22.04"
+ },
+ "l5/ci:glossary.3.0": {
+  "status": "pass-alt",
+  "en": "rosdep",
+  "my": "rosdep",
+  "back": "rosdep"
+ },
+ "l5/ci:glossary.3.1": {
+  "status": "pass-alt",
+  "en": "installs the system packages listed in package.xml",
+  "my": "package.xml ထဲမှာ စာရင်းပါတဲ့ system package တွေကို install လုပ်တယ်",
+  "back": "installs the system packages listed in package.xml"
+ },
+ "l5/ci:glossary.4.0": {
+  "status": "pass-alt",
+  "en": "colcon test-result",
+  "my": "colcon test-result",
+  "back": "colcon test-result"
+ },
+ "l5/ci:glossary.4.1": {
+  "status": "pass-alt",
+  "en": "prints the test results and fails if any test failed",
+  "my": "test ရလဒ်တွေကို ပြပြီး test တစ်ခုခု ကျရင် fail ဖြစ်တယ်",
+  "back": "shows the test results and fails if any test failed"
  }
 }
