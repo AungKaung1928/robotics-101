@@ -2,7 +2,7 @@
 export const LIFECYCLE_STRINGS = {
   en: {
     title: 'ROS 2: lifecycle nodes and executors',
-    learn: 'You will learn: a lifecycle (managed) node starts switched off and only works after a supervisor configures and activates it. An executor decides which callback runs when; one slow callback can hold up the others.',
+    learn: 'You will learn: a lifecycle (managed) node starts switched off and only works after a supervisor configures and activates it. It is the act step of sense / think / act, switched on only when everything is ready. A callback is a function ROS runs when a message or timer arrives; an executor decides which callback runs when; one slow callback can hold up the others.',
     everyday: 'Everyday: a shop. Unlock and stock the shelves (configure), open the doors (activate), close for a break (deactivate). With one cashier, one slow customer makes the whole queue wait.',
     stateH: 'Lifecycle: press the transitions', state: 'state', processing: 'processes scans', yes: 'yes', no: 'no',
     states: { unconfigured: 'unconfigured', inactive: 'inactive', active: 'active', finalized: 'finalized', errorprocessing: 'ErrorProcessing' },
@@ -31,7 +31,7 @@ export const LIFECYCLE_STRINGS = {
   },
   ja: {
     title: 'ROS 2：ライフサイクルノードとエグゼキュータ',
-    learn: '学ぶこと：ライフサイクル（管理）ノードは止まった状態で始まり、管理役が configure と activate をして初めて動く。エグゼキュータはどのコールバックをいつ実行するかを決める。遅いコールバック1つが他を止めることがある。',
+    learn: '学ぶこと：ライフサイクル（管理）ノードは止まった状態で始まり、管理役が configure と activate をして初めて動く。sense / think / act の act を、全部の準備ができたときだけ入れる仕組み。コールバックはメッセージやタイマーが来たときに ROS が呼ぶ関数。エグゼキュータはどのコールバックをいつ実行するかを決める。遅いコールバック1つが他を止めることがある。',
     everyday: '身近な例：お店。鍵を開けて棚に並べる（configure）、扉を開ける（activate）、休憩で閉める（deactivate）。レジが1台なら、遅い客1人で列全体が待つ。',
     stateH: 'ライフサイクル：遷移を押してみよう', state: '状態', processing: 'スキャンを処理', yes: 'する', no: 'しない',
     states: { unconfigured: 'unconfigured', inactive: 'inactive', active: 'active', finalized: 'finalized', errorprocessing: 'ErrorProcessing' },
