@@ -1526,11 +1526,11 @@
   "back": "Discarded: older than the newest"
  },
  "ep/late:rDelay": {
-  "status": "needs-human",
+  "status": "pass-alt",
   "en": "every reading used later by",
-  "my": "ဒေတာတိုင်းကို နောက်ကျပြီး သုံးရတဲ့ အချိန်",
-  "back": "Time during which every piece of data has to be used late",
-  "note": "blind back-translation drifted (time vs readings delayed by)"
+  "my": "ဖတ်ချက်တိုင်းကို ဒီလောက် နောက်ကျပြီးမှ သုံးပါတယ်-",
+  "back": "Every reading is used only after being delayed by this much:",
+  "note": "redraft 2026-11-26 after one drift; fresh Sonnet blind check matched"
  },
  "ep/late:rDropped": {
   "status": "pass-alt",
