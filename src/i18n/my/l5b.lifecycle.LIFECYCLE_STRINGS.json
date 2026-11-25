@@ -1,6 +1,6 @@
 {
  "title": "ROS 2: lifecycle node တွေနဲ့ executor တွေ",
- "learn": "သင်ယူရမှာက: lifecycle (managed) node က ပိတ်ထားတဲ့ အခြေအနေကနေ စပြီး၊ supervisor က configure နဲ့ activate လုပ်ပေးမှ အလုပ်လုပ်ပါတယ်။ node ဘာမဆို (sensor၊ planner၊ controller) ကို manage လုပ်နိုင်လို့ အစိတ်အပိုင်း အားလုံး အဆင်သင့် ဖြစ်မှသာ sense / think / act ကွင်းဆက် တစ်ခုလုံး စတင် အလုပ်လုပ်ပါတယ်။ callback ဆိုတာ message ဒါမှမဟုတ် timer ရောက်လာရင် ROS က run တဲ့ function ပါ။ executor က ဘယ် callback ကို ဘယ်အချိန် အလုပ်လုပ်မလဲ ဆုံးဖြတ်ပါတယ်။ callback တစ်ခု နှေးရင် တစ်ခြားတွေကို ပိတ်ထားနိုင်ပါတယ်။",
+ "learn": "သင်ယူရမှာက: lifecycle (managed) node က ပိတ်ထားတဲ့ အခြေအနေကနေ စပြီး၊ supervisor က configure နဲ့ activate လုပ်ပေးမှ အလုပ်လုပ်ပါတယ်။ node ဘာမဆို (ဆင်ဆာ၊ planner၊ controller) ကို manage လုပ်နိုင်လို့ အစိတ်အပိုင်း အားလုံး အဆင်သင့် ဖြစ်မှသာ sense / think / act ကွင်းဆက် တစ်ခုလုံး စတင် အလုပ်လုပ်ပါတယ်။ callback ဆိုတာ message ဒါမှမဟုတ် timer ရောက်လာရင် ROS က run တဲ့ function ပါ။ executor က ဘယ် callback ကို ဘယ်အချိန် အလုပ်လုပ်မလဲ ဆုံးဖြတ်ပါတယ်။ callback တစ်ခု နှေးရင် တစ်ခြားတွေကို ပိတ်ထားနိုင်ပါတယ်။",
  "everyday": "နေ့စဉ်ဘဝ ဥပမာ: ဆိုင်တစ်ဆိုင်။ ဆိုင်ကို စီစဉ်ပြီး စင်ပေါ် ပစ္စည်းထည့်တယ် (configure)၊ တံခါးဖွင့်တယ် (activate)၊ အနားယူဖို့ ပိတ်တယ် (deactivate)။ ငွေကောင်တာ တစ်ခုတည်းဆိုရင် နှေးတဲ့ ဝယ်သူတစ်ယောက်ကြောင့် queue တစ်ခုလုံး စောင့်ရပါတယ်။",
  "stateH": "Lifecycle: transition တွေကို နှိပ်ကြည့်ပါ",
  "state": "အခြေအနေ",
